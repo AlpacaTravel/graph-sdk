@@ -2,7 +2,12 @@
   "name": "@alpaca-travel/graph-sdk-root",
   "private": true,
   "license": "MIT",
+  "scripts": {
+    "test": "bin/test",
+    "coverage:combine": "istanbul report --include \"./packages/**/coverage/coverage-final.json\" lcovonly text-summary"
+  },
   "devDependencies": {
+    "istanbul": "^0.4.5",
     "lerna": "^3.18.3"
   }
 }
