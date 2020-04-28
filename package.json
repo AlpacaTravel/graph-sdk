@@ -7,7 +7,10 @@
     "coverage:combine": "istanbul report --include \"./packages/**/coverage/coverage-final.json\" lcovonly text-summary"
   },
   "devDependencies": {
+    "codecov.io": "^0.1.6",
+    "coveralls": "^3.1.0",
     "istanbul": "^0.4.5",
-    "lerna": "^3.18.3"
+    "lerna": "^3.18.3",
+    "request": "^2.88.2"
   }
 }
