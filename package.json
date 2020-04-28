@@ -1,0 +1,8 @@
+{
+  "name": "@alpaca-travel/graph-sdk-root",
+  "private": true,
+  "license": "MIT",
+  "devDependencies": {
+    "lerna": "^3.18.3"
+  }
+}
