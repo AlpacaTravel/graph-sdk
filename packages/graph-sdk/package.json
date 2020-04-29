@@ -1,6 +1,6 @@
 {
   "name": "@alpaca-travel/graph-sdk",
-  "version": "0.0.1",
+  "version": "0.0.1-alpha.0",
   "description": "Alpaca Travel Graph SDK Client",
   "main": "dist/index.cjs.js",
   "browser": "dist/index.umd.js",
