@@ -1,13 +1,14 @@
 <html>
   <head>
-    <script src="https://cdn.alpaca.dev/@alpaca-travel/graph-sdk@0.0.3-alpha.0/dist/bundle.js"></script>
+    <script src="https://cdn.alpaca.dev/@alpaca-travel/graph-sdk@latest/dist/bundle.js"></script>
   </head>
   <body>
     <script>
       (async () => {
-        const client = window.alpaca.factory();
-        const dummy = await client.get('dummy');
-        console.log('Done');
+        alpaca.apiKey = 'pk.example';
+        const client = new alpaca.Client();
+
+        console.log('Ready! use client.query() to perform a graphQL call');
       })();
     </script>
   </body>
