@@ -15,7 +15,7 @@ describe('Network', () => {
 
     // Add an example query
     const query = `query NumberOfPlacesInItinerary {
-      itinerary(id: "itinerary/XXX") {
+      itinerary(id: $itinerary) {
         root {
           placesCount: descendantsCount(type: ItineraryLocation)
         }
@@ -28,7 +28,7 @@ describe('Network', () => {
     });
 
     // Perform a network call using our default
-    const result = await network.query({ query });
+    const result = await network.query({ query, variables: { itinerary: 'itinerary/XYZ' } });
     expect(result).not.toBeUndefined();
     expect(result.data[0].itinerary.root.placesCount).toBe(22);
   });

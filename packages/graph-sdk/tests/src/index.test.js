@@ -1,7 +1,7 @@
-import alpaca, { Client } from '../..';
+import alpaca, { Client } from '../../src/index';
 import fetchMock from 'fetch-mock';
 
-describe('EJS Module', () => {
+describe('ES Module Source', () => {
   test('exports', () => {
     expect(Client).not.toBeUndefined();
 

@@ -19,9 +19,9 @@ export default class NetworkService {
   }
 
   async query(options = {}) {
-    const { query } = options;
+    const { query, variables, operationName } = options;
 
-    return this.getFetcher().query({ query });
+    return this.getFetcher().query({ operationName, query, variables });
   }
 
   setContainer(container) {

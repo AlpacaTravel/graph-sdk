@@ -32,9 +32,7 @@
     "collectCoverageFrom": [
       "src/**/*.js",
       "dist/**/*.cjs.js",
-      "!<rootDir>/node_modules/",
-      "!<rootDir>/dist/bundle.js",
-      "!<rootDir>/src/index.js"
+      "!<rootDir>/node_modules/"
     ]
   },
   "author": "Cameron Manderson <cam@alpaca.travel>",
