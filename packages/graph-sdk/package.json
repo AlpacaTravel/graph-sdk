@@ -20,6 +20,15 @@
   "files": [
     "dist"
   ],
+  "jest": {
+    "collectCoverageFrom": [
+      "src/**/*.js",
+      "dist/**/*.cjs.js",
+      "!<rootDir>/node_modules/",
+      "!<rootDir>/dist/bundle.js",
+      "!<rootDir>/src/index.js"
+    ]
+  },
   "author": "Cameron Manderson <cam@alpaca.travel>",
   "license": "MIT",
   "devDependencies": {
