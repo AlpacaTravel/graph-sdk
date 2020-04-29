@@ -11,6 +11,18 @@ export default class Container {
     this.getKeys = this.getKeys.bind(this);
   }
 
+  setParent(parent) {
+    this.parent = parent;
+  }
+
+  get apiKey() {
+    return this.getParam('@apiKey');
+  }
+
+  set apiKey(val) {
+    this.setParam('@apiKey', val);
+  }
+
   set(key, value) {
     this[_container][key] = value;
   }
@@ -26,10 +38,20 @@ export default class Container {
       }
     }
 
-    return this[_container][key];
+    const value = this[_container][key];
+    if (typeof value === 'undefined' && this.parent) {
+      return this.parent.get(key);
+    }
+
+    return value;
   }
 
   getParam(key) {
+    const value = this[_container][key];
+    if (typeof value === 'undefined' && this.parent) {
+      return this.parent.getParam(key);
+    }
+
     return this[_container][key];
   }
 

@@ -1,12 +1,15 @@
-import alpaca, { Client } from '../../src/webpack';
+import alpaca, { Client } from '../../dist/index.es';
 import fetchMock from 'fetch-mock';
 
-describe('Webpack Module', () => {
-  test('exports', async () => {
-    const client = new Client();
+describe('ES Module Export', () => {
+  test('exports', () => {
+    expect(Client).not.toBeUndefined();
 
-    const network = await client.get('network');
-    expect(network).not.toBeUndefined();
+    const apiKey = 'pk.123';
+    alpaca.apiKey = apiKey;
+
+    const client = new Client();
+    expect(client.apiKey).toBe(apiKey);
 
     expect(typeof client.query).toBe('function');
   });

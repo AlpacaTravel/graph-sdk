@@ -1,26 +1,21 @@
-import alpaca, { Client } from '../../src/webpack';
+import Network from '../../src/network';
+import Container from '../../src/container';
 import fetchMock from 'fetch-mock';
 
-describe('Webpack Module', () => {
-  test('exports', async () => {
-    const client = new Client();
-
-    const network = await client.get('network');
-    expect(network).not.toBeUndefined();
-
-    expect(typeof client.query).toBe('function');
-  });
-
-  test('Network call', async () => {
+describe('Network', () => {
+  test('Will perform queries through the exposed module', async () => {
     // Configure the local environment
     const endpoint = 'http://localhost/graphql';
     const apiKey = 'pk.123';
-    alpaca.apiKey = apiKey;
-    alpaca.setParam('@endpoint', endpoint);
+    const container = new Container();
+    const network = new Network();
+    network.setContainer(container);
+    container.apiKey = apiKey;
+    container.setParam('@endpoint', endpoint);
 
     // Add an example query
     const query = `query NumberOfPlacesInItinerary {
-      itinerary(id: "itinerary/XXX") {
+      itinerary(id: $itinerary) {
         root {
           placesCount: descendantsCount(type: ItineraryLocation)
         }
@@ -33,8 +28,7 @@ describe('Webpack Module', () => {
     });
 
     // Perform a network call using our default
-    const network = await alpaca.get('network');
-    const result = await network.query({ query });
+    const result = await network.query({ query, variables: { itinerary: 'itinerary/XYZ' } });
     expect(result).not.toBeUndefined();
     expect(result.data[0].itinerary.root.placesCount).toBe(22);
   });

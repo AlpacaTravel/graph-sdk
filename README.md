@@ -18,8 +18,8 @@ Include the JavaScript file in your `<head>` of your HTML file.
 <script src="https://cdn.alpaca.dev/@alpaca-travel/graph-sdk@latest/dist/bundle.js"></script>
 ```
 
-This is served through an Amazon CloudFront instance, and using the bundle version offers
-code splitting to optimise network traffic.
+This is served through an Amazon CloudFront CDN instance, and using the bundle version offers
+code splitting to optimise network traffic. By default, we will send only the minimal code and load code/dependent services on demand as they are needed.
 
 ### Module Bundler
 
@@ -31,7 +31,52 @@ npm install @alpaca-travel/graph-sdk
 
 Use the package through importing/requiring.
 
-```
+```javascript
 import alpaca from '@alpaca-travel/graph-sdk';
 // or "const alpaca = require('@alpaca-travel/graph-sdk');
+```
+
+## Performing a GraphQL query
+
+Using the SDK, first assign your global apiKey, and then create a Client. You can then perform
+network GraphQL operations.
+
+```javascript
+// Configure your API Key
+alpaca.apiKey = 'pk.123';
+
+// Obtain an instance of your client
+const client = new alpaca.Client();
+
+// Perform a query
+const result = await client.query({
+  // Your query operation
+  query: `
+    query NumberOfPlacesInItinerary {
+      itinerary(id: $id) {
+        root {
+          placesCount: descendantsCount(type: ItineraryLocation)
+        }
+      }
+    }
+  `,
+  // Your variables
+  variables: {
+    id: 'itinerary/XXX',
+  },
+});
+```
+
+### Alternative Network Implementation
+
+The default network client is using a lightweight combination of fetchql/isomorphic-fetch. It is possible for you to implement your own preferred network layer by assigning it to the client.
+
+```javascript
+const myNetwork = {
+  query(options) {
+    // ...
+  },
+};
+
+client.set('network', myNetwork);
 ```
