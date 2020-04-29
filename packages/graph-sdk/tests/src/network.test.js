@@ -28,8 +28,8 @@ describe('Network', () => {
     });
 
     // Perform a network call using our default
-    const result = await network.query({ query, variables: { itinerary: 'itinerary/XYZ' } });
-    expect(result).not.toBeUndefined();
-    expect(result.data[0].itinerary.root.placesCount).toBe(22);
+    const data = await network.query({ query, variables: { itinerary: 'itinerary/XYZ' } });
+    expect(data).not.toBeUndefined();
+    expect(data[0].itinerary.root.placesCount).toBe(22);
   });
 });

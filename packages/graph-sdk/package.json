@@ -58,7 +58,6 @@
   },
   "dependencies": {
     "fetch-mock": "^9.4.0",
-    "fetchql": "^3.0.0",
-    "isomorphic-fetch": "^2.2.1"
+    "graphql-request": "^1.8.2"
   }
 }
