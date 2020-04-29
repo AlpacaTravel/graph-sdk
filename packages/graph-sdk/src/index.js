@@ -1,13 +1,21 @@
 import Container from './container';
+import DefaultClient from './client';
+import Resolver from './resolve-local-packages';
+import { ALPACA_GRAPHQL_ENDPOINT } from './config';
 
-const factory = (options = {}) => {
-  const container = new Container();
+const container = new Container();
+container.setParam('@endpoint', ALPACA_GRAPHQL_ENDPOINT);
 
-  if (options && options.resolver) {
-    container.set('resolver', options.resolver);
+// Resolve through a local package loading
+const resolver = new Resolver();
+resolver.setContainer(container);
+container.set('resolver', resolver);
+
+export class Client extends DefaultClient {
+  constructor(...args) {
+    super(...args);
+    this.setParent(container);
   }
+}
 
-  return container;
-};
-
-export default { Container, factory };
+export default container;
