@@ -1,13 +1,17 @@
-import alpaca from '../..';
+import Network from '../../src/network';
+import Container from '../../src/container';
 import fetchMock from 'fetch-mock';
 
 describe('Network', () => {
-  test('Will perform queries', async () => {
+  test('Will perform queries through the exposed module', async () => {
     // Configure the local environment
     const endpoint = 'http://localhost/graphql';
     const apiKey = 'pk.123';
-    alpaca.apiKey = apiKey;
-    alpaca.setParam('@endpoint', endpoint);
+    const container = new Container();
+    const network = new Network();
+    network.setContainer(container);
+    container.apiKey = apiKey;
+    container.setParam('@endpoint', endpoint);
 
     // Add an example query
     const query = `query NumberOfPlacesInItinerary {
@@ -24,7 +28,6 @@ describe('Network', () => {
     });
 
     // Perform a network call using our default
-    const network = await alpaca.get('network');
     const result = await network.query({ query });
     expect(result).not.toBeUndefined();
     expect(result.data[0].itinerary.root.placesCount).toBe(22);
