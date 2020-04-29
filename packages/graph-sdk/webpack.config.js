@@ -1,6 +1,8 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
+const package = require('./package.json');
+
 // Prefix the output with a path
 const prefix = process.env.BUILD_HASH_PREFIX ? `dist/${process.env.BUILD_HASH_PREFIX}/` : '';
 // Create a macro build hash
@@ -33,5 +35,11 @@ const config = {
   },
   plugins: [new HtmlWebpackPlugin()],
 };
+
+if (process.env.PUBLISHED) {
+  const publicPath = `https://cdn.alpaca.dev/@alpaca-travel/graph-sdk@${package.version}/dist/`;
+  config.output.publicPath = publicPath;
+  console.log('Setting the public path to:', publicPath);
+}
 
 module.exports = config;

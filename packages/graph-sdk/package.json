@@ -17,7 +17,9 @@
     "build": "yarn run rollup & yarn run webpack",
     "rollup": "rollup -c",
     "webpack": "webpack",
-    "pretest": "yarn build"
+    "pretest": "yarn build",
+    "postpublish": "yarn release",
+    "release": "PUBLISHED=true yarn build && PUBLISHED=true bin/deploy"
   },
   "env": {
     "jest": true

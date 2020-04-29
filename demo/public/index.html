@@ -1,0 +1,14 @@
+<html>
+  <head>
+    <script src="https://cdn.alpaca.dev/@alpaca-travel/graph-sdk@0.0.3-alpha.0/dist/bundle.js"></script>
+  </head>
+  <body>
+    <script>
+      (async () => {
+        const client = window.alpaca.factory();
+        const dummy = await client.get('dummy');
+        console.log('Done');
+      })();
+    </script>
+  </body>
+</html>
