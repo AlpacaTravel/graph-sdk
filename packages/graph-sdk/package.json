@@ -18,6 +18,7 @@
     "rollup": "rollup -c",
     "webpack": "webpack",
     "pretest": "yarn build",
+    "prepublish": "yarn build",
     "postpublish": "yarn release",
     "release": "PUBLISHED=true yarn build && PUBLISHED=true bin/deploy"
   },
