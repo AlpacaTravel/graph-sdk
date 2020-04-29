@@ -1,8 +1,10 @@
 import Resolver from './resolve-webpack-chunks';
 import Container from './container';
 import DefaultClient from './client';
+import { ALPACA_GRAPHQL_ENDPOINT } from './config';
 
 const container = new Container();
+container.setParam('@endpoint', ALPACA_GRAPHQL_ENDPOINT);
 
 // Resolve through a split loading mechanism
 const resolver = new Resolver();

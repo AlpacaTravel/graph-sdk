@@ -51,6 +51,8 @@
     "webpack-node-externals": "^1.7.2"
   },
   "dependencies": {
-    "fetchql": "^3.0.0"
+    "fetch-mock": "^9.4.0",
+    "fetchql": "^3.0.0",
+    "isomorphic-fetch": "^2.2.1"
   }
 }
