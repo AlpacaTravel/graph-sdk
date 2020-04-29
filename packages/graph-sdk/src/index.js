@@ -1,2 +1,13 @@
+import Container from './container';
 
-module.exports = {};
+const factory = (options = {}) => {
+  const container = new Container();
+
+  if (options && options.resolver) {
+    container.set('resolver', options.resolver);
+  }
+
+  return container;
+};
+
+export default { Container, factory };
