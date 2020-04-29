@@ -2,6 +2,10 @@
   "name": "@alpaca-travel/graph-sdk-root",
   "private": true,
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/AlpacaTravel/graph-sdk.git"
+  },
   "scripts": {
     "test": "bin/test",
     "coverage:combine": "istanbul report --include \"./packages/**/coverage/coverage-final.json\" lcovonly text-summary"

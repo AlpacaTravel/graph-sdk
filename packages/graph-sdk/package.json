@@ -1,7 +1,12 @@
 {
   "name": "@alpaca-travel/graph-sdk",
-  "version": "0.0.1",
+  "version": "0.0.5-alpha.0",
   "description": "Alpaca Travel Graph SDK Client",
+  "homepage": "https://github.com/AlpacaTravel/graph-sdk",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/AlpacaTravel/graph-sdk.git"
+  },
   "main": "dist/index.cjs.js",
   "browser": "dist/index.umd.js",
   "module": "dist/index.es.js",
@@ -12,7 +17,10 @@
     "build": "yarn run rollup & yarn run webpack",
     "rollup": "rollup -c",
     "webpack": "webpack",
-    "pretest": "yarn build"
+    "pretest": "yarn build",
+    "prepublish": "yarn build",
+    "postpublish": "yarn release",
+    "release": "PUBLISHED=true yarn build && PUBLISHED=true bin/deploy"
   },
   "env": {
     "jest": true
