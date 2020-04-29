@@ -1,5 +1,9 @@
-const mod = require('../../src/index');
+import mod from '../..';
 
 test('export', () => {
-  expect(typeof mod).toBe('object');
+  expect(typeof mod.factory).toBe('function');
+
+  const client = mod.factory();
+
+  expect(client).not.toBeUndefined();
 });
