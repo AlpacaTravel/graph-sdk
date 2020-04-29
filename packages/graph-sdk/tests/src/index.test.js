@@ -1,9 +1,13 @@
-import mod from '../..';
+import mod, { Client } from '../..';
 
 test('export', () => {
-  expect(typeof mod.factory).toBe('function');
+  expect(Client).not.toBeUndefined();
 
-  const client = mod.factory();
+  const apiKey = 'pk.123';
+  mod.apiKey = apiKey;
 
-  expect(client).not.toBeUndefined();
+  const client = new Client();
+  expect(client.apiKey).toBe(apiKey);
+
+  expect(typeof client.query).toBe('function');
 });

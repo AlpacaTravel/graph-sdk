@@ -15,6 +15,7 @@ const config = {
     chunkFilename: `${prefix}[name].${chunkHash}js`,
     library: 'alpaca',
     libraryTarget: 'window',
+    libraryExport: 'default',
   },
   module: {
     rules: [

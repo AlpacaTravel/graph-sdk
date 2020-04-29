@@ -1,13 +1,13 @@
 import Container from './container';
+import DefaultClient from './client';
 
-const factory = (options = {}) => {
-  const container = new Container();
+const container = new Container();
 
-  if (options && options.resolver) {
-    container.set('resolver', options.resolver);
+export class Client extends DefaultClient {
+  constructor(...args) {
+    super(...args);
+    this.setParent(container);
   }
+}
 
-  return container;
-};
-
-export default { Container, factory };
+export default container;

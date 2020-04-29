@@ -1,11 +1,11 @@
 export default class ResolveWebpackChunks {
   async resolve(key) {
     switch (key) {
-      case 'dummy': {
-        const { default: DummyService } = await import(
-          /* webpackChunkName: "dummy" */ './dummy-service'
+      case 'network': {
+        const { default: NetworkService } = await import(
+          /* webpackChunkName: "network" */ './network'
         );
-        const service = new DummyService();
+        const service = new NetworkService();
         service.setContainer(this.container);
         return service;
       }

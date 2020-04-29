@@ -1,10 +1,8 @@
-import { factory } from '../../src/webpack';
+import { Client } from '../../src/webpack';
 
 test('export', async () => {
-  const client = factory();
+  const client = new Client();
 
-  expect(client).not.toBeUndefined();
-
-  const dummyService = await client.get('dummy');
-  expect(dummyService).not.toBeUndefined();
+  const network = await client.get('network');
+  expect(network).not.toBeUndefined();
 });

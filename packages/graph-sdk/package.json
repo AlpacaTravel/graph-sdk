@@ -49,5 +49,8 @@
     "webpack": "^4.35.3",
     "webpack-cli": "^3.3.6",
     "webpack-node-externals": "^1.7.2"
+  },
+  "dependencies": {
+    "fetchql": "^3.0.0"
   }
 }
