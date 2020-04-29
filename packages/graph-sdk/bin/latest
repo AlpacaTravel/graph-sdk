@@ -1,0 +1,44 @@
+#!/usr/bin/env node
+const package = require('../package.json');
+const AWS = require('aws-sdk');
+
+if (!process.env.PUBLISHED) {
+  throw new Error('Do not call directly');
+}
+
+(async () => {
+  // Update the @latest accordingly
+  const s3 = new AWS.S3({ apiVersion: '2006-03-01', region: 'ap-southeast-2' });
+
+  const currentConfiguration = await s3.getBucketWebsite({ Bucket: 'cdn.alpaca.dev' }).promise();
+  const { RoutingRules: routingRules } = currentConfiguration;
+
+  const currentRule = routingRules.find(
+    (rul) => rul.Condition && rul.Condition.KeyPrefixEquals === '@alpaca-travel/graph-sdk@latest/',
+  ) || {
+    Condition: { KeyPrefixEquals: '@alpaca-travel/graph-sdk@latest/' },
+    Redirect: {
+      ReplaceKeyPrefixWith: `@alpaca-travel/graph-sdk@${package.version}/`,
+      Protocol: 'https',
+      HttpRedirectCode: '302',
+      HostName: 'cdn.alpaca.dev',
+    },
+  };
+
+  const newRule = JSON.parse(JSON.stringify(currentRule));
+  newRule.Redirect.ReplaceKeyPrefixWith = `@alpaca-travel/graph-sdk@${package.version}/`;
+
+  const newRules = routingRules.filter((r) => r != currentRule).concat([newRule]);
+
+  const websiteConfiguration = Object.assign({}, currentConfiguration, { RoutingRules: newRules });
+  const params = {
+    Bucket: 'cdn.alpaca.dev',
+    WebsiteConfiguration: websiteConfiguration,
+  };
+
+  await s3.putBucketWebsite(params).promise();
+
+  console.log(
+    `Updated https://cdn.alpaca.dev/@alpaca-travel/graph-sdk@latest/ -> https://cdn.alpaca.dev/@alpaca-travel/graph-sdk@${package.version}/`,
+  );
+})();

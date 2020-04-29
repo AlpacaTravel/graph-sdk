@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-const fs = require('fs');
 const path = require('path');
 const { spawn } = require('child_process');
 const package = require('../package.json');
@@ -33,4 +32,9 @@ const exec = (command) => {
   });
 };
 
-exec(cmd);
+(async () => {
+  // Deploy the command line tools
+  await exec(cmd);
+
+  console.log(`Deployed https://cdn.alpaca.dev/@alpaca-travel/graph-sdk@${package.version}/`);
+})();
