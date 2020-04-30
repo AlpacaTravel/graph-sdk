@@ -52,7 +52,7 @@ const client = new alpaca.Client();
 const result = await client.query({
   // Your query operation
   query: `
-    query NumberOfPlacesInItinerary {
+    {
       itinerary(id: $id) {
         root {
           placesCount: descendantsCount(type: ItineraryLocation)
@@ -67,16 +67,16 @@ const result = await client.query({
 });
 ```
 
-### Alternative Network Implementation
+### Network Implementation
 
-The default network client is using a lightweight combination of fetchql/isomorphic-fetch. It is possible for you to implement your own preferred network layer by assigning it to the client.
+The default network client is using a lightweight fetch offered by graphql-request. It is possible for you to implement your own preferred network layer (such as a caching capable client) by assigning it to your client.
 
 ```javascript
-const myNetwork = {
-  query(options) {
+const alternativeNetwork = {
+  query({ query, variables }) {
     // ...
   },
 };
 
-client.set('network', myNetwork);
+client.set('network', alternativeNetwork);
 ```
