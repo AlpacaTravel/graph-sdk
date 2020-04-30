@@ -1,4 +1,4 @@
-import alpaca, { Client } from '../../src/index';
+import { Client } from '../../src/index';
 import fetchMock from 'fetch-mock';
 
 describe('ES Module Source', () => {
@@ -6,9 +6,10 @@ describe('ES Module Source', () => {
     expect(Client).not.toBeUndefined();
 
     const apiKey = 'pk.123';
-    alpaca.apiKey = apiKey;
 
-    const client = new Client();
+    const client = new Client({
+      apiKey,
+    });
     expect(client.apiKey).toBe(apiKey);
 
     expect(typeof client.query).toBe('function');
@@ -18,8 +19,11 @@ describe('ES Module Source', () => {
     // Configure the local environment
     const endpoint = 'http://localhost/graphql';
     const apiKey = 'pk.123';
-    alpaca.apiKey = apiKey;
-    alpaca.setParam('@endpoint', endpoint);
+
+    const client = new Client();
+
+    client.apiKey = apiKey;
+    client.setParam('@endpoint', endpoint);
 
     // Add an example query
     const query = `query NumberOfPlacesInItinerary {
@@ -36,8 +40,7 @@ describe('ES Module Source', () => {
     });
 
     // Perform a network call using our default
-    const network = await alpaca.get('network');
-    const data = await network.query({ query });
+    const data = await client.query({ query });
     expect(data).not.toBeUndefined();
     expect(data[0].itinerary.root.placesCount).toBe(22);
   });

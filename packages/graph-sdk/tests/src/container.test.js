@@ -1,5 +1,4 @@
 import Container from '../../src/container';
-import app, { Client } from '../../';
 
 describe('Container', () => {
   test('Uses resolver for dependency lookup', async () => {
@@ -32,13 +31,6 @@ describe('Container', () => {
     container2.setParent(container);
     expect(container2.getParam('@apiKey')).toBe('pk.123');
     expect(container2.apiKey).toBe('pk.123');
-  });
-
-  test('Module exports parent associations', () => {
-    // Test parent associations
-    app.apiKey = 'pk.234';
-    const client = new Client();
-    expect(client.getParam('@apiKey')).toBe('pk.234');
   });
 
   test('getKeys', () => {
