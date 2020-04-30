@@ -20,7 +20,7 @@ export default class NetworkService {
   async query(options = {}) {
     const { query, variables } = options;
 
-    const data = await this.getClient().request({ query, variables });
+    const data = await this.getClient().request(query, variables);
 
     return data;
   }
