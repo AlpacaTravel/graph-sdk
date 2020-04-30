@@ -5,8 +5,10 @@
   <body>
     <script>
       (async () => {
-        alpaca.apiKey = 'pk.example';
-        const client = new alpaca.Client();
+        // Create a graphql client
+        const client = new alpaca.Client({
+          apiKey: 'pk.example',
+        });
 
         console.log('Ready! use client.query() to perform a graphQL call');
       })();
