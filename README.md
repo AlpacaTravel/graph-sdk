@@ -36,50 +36,6 @@ import alpaca from '@alpaca-travel/graph-sdk';
 // or "const alpaca = require('@alpaca-travel/graph-sdk');
 ```
 
-## Performing a GraphQL query
+## GraphQL Queries
 
-Using the SDK, first assign your global apiKey, and then create a Client. You can then perform
-network GraphQL operations.
-
-```javascript
-// Configure your API Key and obtain a client
-const client = new alpaca.Client({
-  apiKey: 'pk.123',
-});
-
-// Example query: Count the places within an itinerary
-const query = /* GraphQL */ `
-  query NumberOfPlacesInItinerary($id: ID!) {
-    itinerary(id: $id) {
-      root {
-        placesCount: descendantsCount(type: ItineraryLocation)
-      }
-    }
-  }
-`;
-
-const variables = {
-  // Example itinerary
-  id: 'itinerary/97b0cac1-52c3-11ea-96fe-067ec0c7e8f4',
-};
-
-// Perform a query
-const result = await client.query({ query, variables });
-```
-
-### Network Implementation
-
-The default network client is using a lightweight fetch offered by graphql-request. It is possible for you to implement your own preferred network layer (such as a caching capable client) by assigning it to your client.
-
-```javascript
-const alternativeNetwork = {
-  query({ query, variables }) {
-    // ...
-  },
-};
-
-const client = new Client({
-  apiKey: '...',
-  network: alternativeNetwork,
-});
-```
+See [GraphQL](https://github.com/AlpacaTravel/graph-sdk/tree/master/docs/graphql.md)
