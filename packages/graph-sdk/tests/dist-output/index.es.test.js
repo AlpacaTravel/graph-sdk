@@ -37,8 +37,8 @@ describe('ES Module Export', () => {
 
     // Perform a network call using our default
     const network = await alpaca.get('network');
-    const result = await network.query({ query });
-    expect(result).not.toBeUndefined();
-    expect(result.data[0].itinerary.root.placesCount).toBe(22);
+    const data = await network.query({ query });
+    expect(data).not.toBeUndefined();
+    expect(data[0].itinerary.root.placesCount).toBe(22);
   });
 });
