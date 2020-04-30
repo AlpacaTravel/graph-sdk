@@ -4,8 +4,17 @@ export default class Client extends Container {
   constructor(options) {
     super();
 
-    if (options && options.resolver) {
-      this.set('resolver', options.resolver);
+    // Support configuration options
+    if (options) {
+      if (options.resolver) {
+        this.set('resolver', options.resolver);
+      }
+      if (options.apiKey) {
+        this.setParam('@apiKey', options.apiKey);
+      }
+      if (options.network) {
+        this.set('network', options.network);
+      }
     }
   }
 

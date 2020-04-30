@@ -43,8 +43,9 @@ network GraphQL operations.
 
 ```javascript
 // Configure your API Key and obtain a client
-alpaca.apiKey = 'pk.123';
-const client = new alpaca.Client();
+const client = new alpaca.Client({
+  apiKey: 'pk.123',
+});
 
 // Example query: Count the places within an itinerary
 const query = /* GraphQL */ `
@@ -77,5 +78,8 @@ const alternativeNetwork = {
   },
 };
 
-client.set('network', alternativeNetwork);
+const client = new Client({
+  apiKey: '...',
+  network: alternativeNetwork,
+});
 ```
