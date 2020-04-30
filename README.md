@@ -14,7 +14,7 @@ The get started, you need to obtain an API Key.
 
 Include the JavaScript file in your `<head>` of your HTML file.
 
-```javascript
+```html
 <script src="https://cdn.alpaca.dev/@alpaca-travel/graph-sdk@latest/dist/bundle.js"></script>
 ```
 
