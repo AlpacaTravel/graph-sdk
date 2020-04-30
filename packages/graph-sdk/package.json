@@ -31,7 +31,6 @@
   "jest": {
     "collectCoverageFrom": [
       "src/**/*.js",
-      "dist/**/*.cjs.js",
       "!<rootDir>/node_modules/"
     ]
   },
