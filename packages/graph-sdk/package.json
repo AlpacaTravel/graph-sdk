@@ -1,6 +1,6 @@
 {
   "name": "@alpaca-travel/graph-sdk",
-  "version": "0.0.6-alpha.0",
+  "version": "0.0.7-alpha.0",
   "description": "Alpaca Travel Graph SDK Client",
   "homepage": "https://github.com/AlpacaTravel/graph-sdk",
   "repository": {
