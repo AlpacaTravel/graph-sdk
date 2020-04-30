@@ -42,29 +42,28 @@ Using the SDK, first assign your global apiKey, and then create a Client. You ca
 network GraphQL operations.
 
 ```javascript
-// Configure your API Key
+// Configure your API Key and obtain a client
 alpaca.apiKey = 'pk.123';
-
-// Obtain an instance of your client
 const client = new alpaca.Client();
 
-// Perform a query
-const result = await client.query({
-  // Your query operation
-  query: `
-    {
-      itinerary(id: $id) {
-        root {
-          placesCount: descendantsCount(type: ItineraryLocation)
-        }
+// Example query: Count the places within an itinerary
+const query = /* GraphQL */ `
+  query NumberOfPlacesInItinerary($id: ID!) {
+    itinerary(id: $id) {
+      root {
+        placesCount: descendantsCount(type: ItineraryLocation)
       }
     }
-  `,
-  // Your variables
-  variables: {
-    id: 'itinerary/XXX',
-  },
-});
+  }
+`;
+
+const variables = {
+  // Example itinerary
+  id: 'itinerary/97b0cac1-52c3-11ea-96fe-067ec0c7e8f4',
+};
+
+// Perform a query
+const result = await client.query({ query, variables });
 ```
 
 ### Network Implementation
