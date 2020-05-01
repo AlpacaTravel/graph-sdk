@@ -39,3 +39,7 @@ import alpaca from '@alpaca-travel/graph-sdk';
 ## GraphQL Queries
 
 See [GraphQL](https://github.com/AlpacaTravel/graph-sdk/tree/master/docs/graphql.md)
+
+## See more
+
+- [Svelte Demo](https://github.com/AlpacaTravel/graph-sdk-svelte-demo)
