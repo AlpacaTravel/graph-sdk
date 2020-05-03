@@ -1,8 +1,9 @@
-const _container = Symbol('container');
-
 export default class Container {
+  private parent: Container;
+  private store: { [key: string]: any };
+
   constructor() {
-    this[_container] = {};
+    this.store = {};
 
     this.set = this.set.bind(this);
     this.get = this.get.bind(this);
@@ -11,34 +12,34 @@ export default class Container {
     this.getKeys = this.getKeys.bind(this);
   }
 
-  setParent(parent) {
+  setParent(parent: Container) {
     this.parent = parent;
   }
 
-  get apiKey() {
+  get apiKey(): string {
     return this.getParam('@apiKey');
   }
 
-  set apiKey(val) {
+  set apiKey(val: string) {
     this.setParam('@apiKey', val);
   }
 
-  set(key, value) {
-    this[_container][key] = value;
+  set(key: string, value: any) {
+    this.store[key] = value;
   }
 
-  async get(key) {
-    if (!this[_container][key]) {
-      if (this[_container].resolver) {
-        const { resolver } = this[_container];
+  async get(key: string): Promise<any> {
+    if (!this.store[key]) {
+      if (this.store.resolver) {
+        const { resolver } = this.store;
         const service = await resolver.resolve(key);
         if (service) {
-          this[_container][key] = service;
+          this.store[key] = service;
         }
       }
     }
 
-    const value = this[_container][key];
+    const value: any = this.store[key];
     if (typeof value === 'undefined' && this.parent) {
       return this.parent.get(key);
     }
@@ -46,20 +47,20 @@ export default class Container {
     return value;
   }
 
-  getParam(key) {
-    const value = this[_container][key];
+  getParam(key: string): any {
+    const value = this.store[key];
     if (typeof value === 'undefined' && this.parent) {
       return this.parent.getParam(key);
     }
 
-    return this[_container][key];
+    return this.store[key];
   }
 
-  setParam(key, value) {
-    this[_container][key] = value;
+  setParam(key: string, value: any) {
+    this.store[key] = value;
   }
 
-  getKeys() {
-    return Object.keys(this[_container]);
+  getKeys(): string[] {
+    return Object.keys(this.store);
   }
 }

@@ -1,6 +1,7 @@
 // babel.config.js
 module.exports = {
   presets: [
+    '@babel/typescript',
     [
       '@babel/preset-env',
       {
@@ -13,5 +14,5 @@ module.exports = {
       },
     ],
   ],
-  plugins: ['@babel/plugin-transform-runtime'],
+  plugins: ['@babel/plugin-transform-runtime', '@babel/proposal-class-properties'],
 };
