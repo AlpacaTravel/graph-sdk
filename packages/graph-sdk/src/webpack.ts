@@ -1,10 +1,12 @@
+import Resolver from './resolve-webpack-chunks';
 import DefaultClient from './client';
-import Resolver from './resolve-local-packages';
+import ClientOptions from './client-options';
+
 import { ALPACA_GRAPHQL_ENDPOINT } from './config';
 
 export class Client extends DefaultClient {
-  constructor(...args) {
-    super(...args);
+  constructor(options: ClientOptions) {
+    super(options);
     if (!this.getParam('@endpoint')) {
       this.setParam('@endpoint', ALPACA_GRAPHQL_ENDPOINT);
     }
@@ -16,3 +18,7 @@ export class Client extends DefaultClient {
     }
   }
 }
+
+export default {
+  Client,
+};

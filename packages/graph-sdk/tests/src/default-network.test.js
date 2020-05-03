@@ -1,4 +1,4 @@
-import Network from '../../src/network';
+import Network from '../../src/default-network';
 import Container from '../../src/container';
 import fetchMock from 'fetch-mock';
 

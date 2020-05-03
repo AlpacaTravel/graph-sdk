@@ -1,6 +1,11 @@
 import { GraphQLClient } from 'graphql-request';
+import Container from './container';
+import Network from './network';
+import Query from './query';
 
-export default class NetworkService {
+export default class DefaultNetwork implements Network {
+  private container: Container;
+
   constructor() {
     this.setContainer = this.setContainer.bind(this);
     this.getClient = this.getClient.bind(this);
@@ -17,7 +22,7 @@ export default class NetworkService {
     return client;
   }
 
-  async query(options = {}) {
+  async query(options: Query) {
     const { query, variables } = options;
 
     const data = await this.getClient().request(query, variables);
@@ -25,7 +30,7 @@ export default class NetworkService {
     return data;
   }
 
-  setContainer(container) {
+  setContainer(container: Container) {
     this.container = container;
   }
 }
