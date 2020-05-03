@@ -1,13 +1,35 @@
 import operations from './operations';
 
+interface Query {
+  query: string;
+  variables?: Variables;
+}
+
+interface Variables {
+  [key: string]: any;
+}
+
+interface Network {
+  query(query: Query): Promise<any[]>;
+}
+
+interface Container {
+  get(key: string): Promise<any>;
+  getParam(key: string): any;
+}
+
+interface Client {
+  query(query: Query): Promise<any[]>;
+}
+
 export interface QueryOptions {
-  variables: Variables;
+  variables?: Variables;
 }
 
 interface ApiOptions {
-  network: Network;
-  container: Container;
-  client: Client;
+  network?: Network;
+  container?: Container;
+  client?: Client;
 }
 
 export default class Api {
@@ -20,7 +42,7 @@ export default class Api {
     return operations[operationKey];
   }
 
-  constructor(options: ApiOptions) {
+  constructor(options?: ApiOptions) {
     if (options) {
       this.client = options.client;
       this.container = options.container;
