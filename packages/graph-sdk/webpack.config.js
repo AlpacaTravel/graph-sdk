@@ -1,5 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 
 const package = require('./package.json');
 
@@ -10,7 +11,7 @@ const chunkHash = process.env.BUILD_HASH_CHUNK ? `${process.env.BUILD_HASH_CHUNK
 
 const config = {
   mode: 'production',
-  entry: './src/webpack.js',
+  entry: './src/webpack.ts',
   output: {
     path: path.resolve(__dirname, './dist'),
     filename: `${prefix}bundle.${chunkHash}js`,
@@ -22,19 +23,21 @@ const config = {
   module: {
     rules: [
       {
-        test: /\.js$/,
+        test: /\.(ts|js)$/,
         exclude: /(node_modules)/,
-        include: [/node_modules\/@alpaca-travel/],
         use: ['babel-loader'],
       },
     ],
+  },
+  resolve: {
+    extensions: ['.tsx', '.ts', '.js'],
   },
   optimization: {
     splitChunks: {
       chunks: 'all',
     },
   },
-  plugins: [new HtmlWebpackPlugin()],
+  plugins: [new HtmlWebpackPlugin(), new ForkTsCheckerWebpackPlugin()],
 };
 
 if (process.env.PUBLISHED) {

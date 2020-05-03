@@ -1,7 +1,9 @@
 import Container from './container';
+import ClientOptions from './client-options';
+import Query from './query';
 
 export default class Client extends Container {
-  constructor(options) {
+  constructor(options: ClientOptions) {
     super();
 
     // Support configuration options
@@ -18,9 +20,9 @@ export default class Client extends Container {
     }
   }
 
-  async query(...args) {
+  async query(options: Query) {
     const network = await this.get('network');
 
-    return network.query(...args);
+    return network.query(options);
   }
 }
