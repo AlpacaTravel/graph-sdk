@@ -1,13 +1,33 @@
 #!/usr/bin/env node
-const package = require('../package.json');
 const AWS = require('aws-sdk');
+const { spawn } = require('child_process');
+const package = require('../package.json');
 
 if (!process.env.PUBLISHED) {
   throw new Error('Do not call directly');
 }
 
+cmd = `aws cloudfront create-invalidation --distribution-id EE3MHXYLH3AX8 --paths "/@alpaca-travel/graph-sdk@latest" "/@alpaca-travel/graph-sdk@latest/*"`;
+
+const exec = (command) => {
+  console.log('$', command);
+  const subprocess = spawn(command, [], {
+    shell: true,
+  });
+  return new Promise((resolve, reject) => {
+    subprocess.on('close', (code) => {
+      if (code === 0) {
+        resolve(code);
+      } else {
+        reject(code);
+      }
+    });
+  });
+};
+
 (async () => {
   // Update the @latest accordingly
+  console.log('Updating the CDN rules to point to this release');
   const s3 = new AWS.S3({ apiVersion: '2006-03-01', region: 'ap-southeast-2' });
 
   const currentConfiguration = await s3.getBucketWebsite({ Bucket: 'cdn.alpaca.dev' }).promise();
@@ -37,6 +57,9 @@ if (!process.env.PUBLISHED) {
   };
 
   await s3.putBucketWebsite(params).promise();
+
+  console.log('Invalidating the latest to start serving this lib');
+  await exec(cmd);
 
   console.log(
     `Updated https://cdn.alpaca.dev/@alpaca-travel/graph-sdk@latest/ -> https://cdn.alpaca.dev/@alpaca-travel/graph-sdk@${package.version}/`,

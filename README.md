@@ -14,7 +14,7 @@ The get started, you need to obtain an API Key.
 
 Include the JavaScript file in your `<head>` of your HTML file.
 
-```javascript
+```html
 <script src="https://cdn.alpaca.dev/@alpaca-travel/graph-sdk@latest/dist/bundle.js"></script>
 ```
 
@@ -36,47 +36,10 @@ import alpaca from '@alpaca-travel/graph-sdk';
 // or "const alpaca = require('@alpaca-travel/graph-sdk');
 ```
 
-## Performing a GraphQL query
+## GraphQL Queries
 
-Using the SDK, first assign your global apiKey, and then create a Client. You can then perform
-network GraphQL operations.
+See [GraphQL](https://github.com/AlpacaTravel/graph-sdk/tree/master/docs/graphql.md)
 
-```javascript
-// Configure your API Key
-alpaca.apiKey = 'pk.123';
+## See more
 
-// Obtain an instance of your client
-const client = new alpaca.Client();
-
-// Perform a query
-const result = await client.query({
-  // Your query operation
-  query: `
-    query NumberOfPlacesInItinerary {
-      itinerary(id: $id) {
-        root {
-          placesCount: descendantsCount(type: ItineraryLocation)
-        }
-      }
-    }
-  `,
-  // Your variables
-  variables: {
-    id: 'itinerary/XXX',
-  },
-});
-```
-
-### Alternative Network Implementation
-
-The default network client is using a lightweight combination of fetchql/isomorphic-fetch. It is possible for you to implement your own preferred network layer by assigning it to the client.
-
-```javascript
-const myNetwork = {
-  query(options) {
-    // ...
-  },
-};
-
-client.set('network', myNetwork);
-```
+- [Svelte Demo](https://github.com/AlpacaTravel/graph-sdk-svelte-demo)

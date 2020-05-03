@@ -1,27 +1,28 @@
-import 'isomorphic-fetch';
-import FetchQL from 'fetchql';
+import { GraphQLClient } from 'graphql-request';
 
 export default class NetworkService {
   constructor() {
     this.setContainer = this.setContainer.bind(this);
-    this.getFetcher = this.getFetcher.bind(this);
+    this.getClient = this.getClient.bind(this);
     this.query = this.query.bind(this);
   }
 
-  getFetcher() {
+  getClient() {
     const endpoint = this.container.getParam('@endpoint');
     const apiKey = this.container.getParam('@apiKey');
     const url = `${endpoint}?accessToken=${apiKey}`;
 
-    const fetcher = new FetchQL({ url });
+    const client = new GraphQLClient(url);
 
-    return fetcher;
+    return client;
   }
 
   async query(options = {}) {
-    const { query, variables, operationName } = options;
+    const { query, variables } = options;
 
-    return this.getFetcher().query({ operationName, query, variables });
+    const data = await this.getClient().request(query, variables);
+
+    return data;
   }
 
   setContainer(container) {

@@ -1,4 +1,4 @@
-import alpaca, { Client } from '../../src/webpack';
+import { Client } from '../../src/webpack';
 import fetchMock from 'fetch-mock';
 
 describe('Webpack Module', () => {
@@ -15,8 +15,9 @@ describe('Webpack Module', () => {
     // Configure the local environment
     const endpoint = 'http://localhost/graphql';
     const apiKey = 'pk.123';
-    alpaca.apiKey = apiKey;
-    alpaca.setParam('@endpoint', endpoint);
+    const client = new Client();
+    client.apiKey = apiKey;
+    client.setParam('@endpoint', endpoint);
 
     // Add an example query
     const query = `query NumberOfPlacesInItinerary {
@@ -33,9 +34,8 @@ describe('Webpack Module', () => {
     });
 
     // Perform a network call using our default
-    const network = await alpaca.get('network');
-    const result = await network.query({ query });
-    expect(result).not.toBeUndefined();
-    expect(result.data[0].itinerary.root.placesCount).toBe(22);
+    const data = await client.query({ query });
+    expect(data).not.toBeUndefined();
+    expect(data[0].itinerary.root.placesCount).toBe(22);
   });
 });
