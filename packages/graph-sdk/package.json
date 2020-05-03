@@ -52,6 +52,9 @@
     "jest": "^25.5.0",
     "rollup": "^2.7.3",
     "rollup-plugin-terser": "^5.1.1",
+    "rollup-plugin-typescript2": "^0.27.0",
+    "ts-loader": "^7.0.2",
+    "typescript": "^3.8.3",
     "webpack": "^4.35.3",
     "webpack-cli": "^3.3.6",
     "webpack-node-externals": "^1.7.2"
