@@ -12,7 +12,7 @@ The get started, you need to obtain an API Key.
 
 ### Alpaca CDN
 
-Include the JavaScript file in your `<head>` of your HTML file.
+Include the JavaScript file in your `<head>` of your HTML file. This will expose the alpaca library to the `window.alpaca` namespace.
 
 ```html
 <script src="https://cdn.alpaca.dev/@alpaca-travel/graph-sdk@latest/dist/bundle.js"></script>
@@ -32,8 +32,8 @@ npm install @alpaca-travel/graph-sdk
 Use the package through importing/requiring.
 
 ```javascript
-import alpaca from '@alpaca-travel/graph-sdk';
-// or "const alpaca = require('@alpaca-travel/graph-sdk');
+import { Client } from '@alpaca-travel/graph-sdk';
+// or "const { Client } = require('@alpaca-travel/graph-sdk');
 ```
 
 ## GraphQL Queries
