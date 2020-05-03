@@ -2,7 +2,7 @@
   "name": "@alpaca-travel/graph-methods",
   "version": "0.0.14-alpha.0",
   "description": "Simple GraphQL queries and mutations exposed as JS API",
-  "homepage": "https://github.com/AlpacaTravel/graph-methods",
+  "homepage": "https://github.com/AlpacaTravel/graph-sdk",
   "repository": {
     "type": "git",
     "url": "git://github.com/AlpacaTravel/graph-sdk.git"
