@@ -133,8 +133,8 @@ const runProjectTests = async (name, projectPath) => {
     console.log('No tests found');
     return 'noTests';
   } else {
-    const yarnInstallRequired = !projectHasNodeModulesInstalled(projectPath);
-    const command = `${yarnInstallRequired ? 'yarn && ' : ''}yarn test:coverage`;
+    const npmInstallRequired = !projectHasNodeModulesInstalled(projectPath);
+    const command = `${npmInstallRequired ? 'npm install && ' : ''}npm run test:coverage`;
     try {
       await exec(command, { cwd: projectPath });
       return 'passed';

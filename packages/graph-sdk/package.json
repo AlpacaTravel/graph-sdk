@@ -12,17 +12,17 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "type-check": "tsc --noEmit",
-    "type-check:watch": "yarn run type-check -- --watch",
+    "type-check:watch": "npm run type-check -- --watch",
     "test": "jest",
-    "test:coverage": "yarn build & jest --coverage",
+    "test:coverage": "npm run build & jest --coverage",
     "clean": "rm -rf dist",
-    "build": "yarn run build:rollup & yarn run build:webpack",
+    "build": "npm run build:rollup & npm run build:webpack",
     "build:rollup": "rollup -c",
     "build:webpack": "webpack --mode=production",
-    "pretest": "yarn build",
-    "prepublish": "yarn build",
-    "postpublish": "yarn release",
-    "release": "PUBLISHED=true yarn build && PUBLISHED=true bin/deploy"
+    "pretest": "npm run build",
+    "prepublish": "npm run build",
+    "postpublish": "npm run release",
+    "release": "PUBLISHED=true npm run build && PUBLISHED=true bin/deploy"
   },
   "env": {
     "jest": true
@@ -67,6 +67,7 @@
     "webpack-node-externals": "^1.7.2"
   },
   "dependencies": {
+    "@alpaca-travel/graph-methods": "^0.0.14-alpha.0",
     "graphql-request": "^1.8.2"
   }
 }

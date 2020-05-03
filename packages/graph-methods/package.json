@@ -12,14 +12,14 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "type-check": "tsc --noEmit",
-    "type-check:watch": "yarn run type-check -- --watch",
+    "type-check:watch": "npm run type-check -- --watch",
     "test": "jest",
-    "test:coverage": "yarn build & jest --coverage",
+    "test:coverage": "npm run build & jest --coverage",
     "clean": "rm -rf dist",
-    "build": "yarn run build:rollup",
+    "build": "npm run build:rollup",
     "build:rollup": "rollup -c",
-    "pretest": "yarn build",
-    "prepublish": "yarn build"
+    "pretest": "npm run build",
+    "prepublish": "npm run build"
   },
   "env": {
     "jest": true

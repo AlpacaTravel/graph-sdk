@@ -1,3 +1,5 @@
+import { Api } from '@alpaca-travel/graph-methods';
+
 import DefaultNetwork from './default-network';
 import Resolver from './resolver';
 import Container from './container';
@@ -11,6 +13,12 @@ export default class ResolveLocalPackages implements Resolver {
       case 'network': {
         const service: Network = new DefaultNetwork();
         service.setContainer(this.container);
+        return service;
+      }
+      case 'api': {
+        const service = new Api({
+          container: this.container,
+        });
         return service;
       }
       default:
