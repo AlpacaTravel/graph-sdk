@@ -20,7 +20,11 @@ The Alpaca API uses offers authentication through the use of the Access Token qu
 
 You will need to register for the API Keys to use as your access tokens. Alpaca offers 2 API key types; private and public. Public can be used as a READ ONLY scope, while the private API Keys must be protected as they provide access to WRITE.
 
-### Performing a GraphQL query
+## Performing a GraphQL query with @alpaca-travel/graph-sdk
+
+The `@alpaca-travel/graph-sdk` offers a simple query environment for you to perform GraphQL queries and mutations. This is effective for getting started.
+
+Note: This does not contain any caching, and is a fetch only style library.
 
 ```javascript
 // Configure your API Key and obtain a client
@@ -52,6 +56,24 @@ client.query({ query, variables }).then((data) => console.log('Received', data))
 ### Network Implementation
 
 The default network client is using a lightweight fetch offered by graphql-request. It is possible for you to implement your own preferred network layer (such as a caching capable client) by assigning it to your client.
+
+```typescript
+interface Variables {
+  [key: string]: any;
+}
+
+interface Query {
+  query: string;
+  variables: Variables;
+}
+
+interface Network {
+  // Perform the query
+  query(query: Query): Promise<any[]>;
+  // Access to container, to obtain environment params (@apiKey etc)
+  setContainer(container: Container): void;
+}
+```
 
 ```javascript
 // Gist..
