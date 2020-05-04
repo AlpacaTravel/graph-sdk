@@ -67,7 +67,7 @@
     "webpack-node-externals": "^1.7.2"
   },
   "dependencies": {
-    "@alpaca-travel/graph-methods": "^0.0.14-alpha.0",
+    "@alpaca-travel/graph-methods": "^0.0.15-alpha.0",
     "graphql-request": "^1.8.2"
   }
 }
