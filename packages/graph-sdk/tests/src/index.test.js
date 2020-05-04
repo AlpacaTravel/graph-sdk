@@ -2,7 +2,7 @@ import { Client } from '../../src/index';
 import fetchMock from 'fetch-mock';
 
 describe('ES Module Source', () => {
-  test('exports', () => {
+  test('exports', async () => {
     expect(Client).not.toBeUndefined();
 
     const apiKey = 'pk.123';
@@ -13,6 +13,12 @@ describe('ES Module Source', () => {
     expect(client.apiKey).toBe(apiKey);
 
     expect(typeof client.query).toBe('function');
+
+    const api = client.get('api');
+    expect(api).not.toBeUndefined();
+
+    const empty = await client.get('undefined');
+    expect(empty).toBeUndefined();
   });
 
   test('Network call', async () => {

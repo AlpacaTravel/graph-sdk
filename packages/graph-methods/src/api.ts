@@ -23,7 +23,7 @@ interface Client {
 }
 
 export interface QueryOptions {
-  variables: Variables;
+  variables?: Variables;
 }
 
 interface ApiOptions {

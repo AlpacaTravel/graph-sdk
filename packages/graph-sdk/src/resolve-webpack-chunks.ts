@@ -15,6 +15,15 @@ export default class ResolveWebpackChunks implements Resolver {
         service.setContainer(this.container);
         return service;
       }
+      case 'api': {
+        const { Api } = await import(
+          /* webpackChunkName: "graph-methods" */ '@alpaca-travel/graph-methods'
+        );
+        const api = new Api({
+          container: this.container,
+        });
+        return api;
+      }
       default:
         break;
     }
