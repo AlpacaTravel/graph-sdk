@@ -29,3 +29,12 @@ try {
 See: [Getting Started](https://github.com/AlpacaTravel/graph-sdk) in order to install and configure
 
 ## Reference
+
+### createAnonymousItinerary()
+
+Creates an itinerary that is anonymous.
+
+## See Also
+
+- [Example GraphQL Operations](https://github.com/AlpacaTravel/graph-sdk/blob/master/packages/graph-methods/src/operations.ts)
+- [GraphQL](https://github.com/AlpacaTravel/graph-sdk/blob/master/docs/graphql.md)
