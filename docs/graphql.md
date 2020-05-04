@@ -98,3 +98,8 @@ const client = new Client({
   network: alternativeNetwork,
 });
 ```
+
+## See Also
+
+- [Example GraphQL Use Cases](https://github.com/AlpacaTravel/graph-sdk/blob/master/packages/graph-methods/src/operations.ts)
+- [Simple queries API](https://github.com/AlpacaTravel/graph-sdk/blob/master/docs/methods.md)

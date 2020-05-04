@@ -38,8 +38,8 @@ import { Client } from '@alpaca-travel/graph-sdk';
 
 ## GraphQL Queries
 
-See [GraphQL](https://github.com/AlpacaTravel/graph-sdk/tree/master/docs/graphql.md)
+See [GraphQL](https://github.com/AlpacaTravel/graph-sdk/tree/master/docs/graphql.md) to get started with your GraphQL queries, or alternatively if you prefer a simpler API surface, you can use [exposed API functions](https://github.com/AlpacaTravel/graph-sdk/blob/master/docs/methods.md).
 
-## See more
+## See also
 
 - [Svelte Demo](https://github.com/AlpacaTravel/graph-sdk-svelte-demo)
