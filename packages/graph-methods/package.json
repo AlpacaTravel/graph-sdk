@@ -1,6 +1,6 @@
 {
   "name": "@alpaca-travel/graph-methods",
-  "version": "0.0.15-alpha.0",
+  "version": "0.0.16-alpha.0",
   "description": "Simple GraphQL queries and mutations exposed as JS API",
   "homepage": "https://github.com/AlpacaTravel/graph-sdk",
   "repository": {
