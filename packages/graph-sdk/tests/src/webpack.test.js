@@ -8,6 +8,9 @@ describe('Webpack Module', () => {
     const network = await client.get('network');
     expect(network).not.toBeUndefined();
 
+    const api = await client.get('api');
+    expect(api).not.toBeUndefined();
+
     expect(typeof client.query).toBe('function');
   });
 
