@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.com/AlpacaTravel/graph-sdk.svg?branch=master)](https://travis-ci.com/AlpacaTravel/graph-sdk)[![Coverage Status](https://coveralls.io/repos/github/AlpacaTravel/graph-sdk/badge.svg?branch=master)](https://coveralls.io/github/AlpacaTravel/graph-sdk?branch=master)![MIT](https://img.shields.io/npm/l/@alpaca-travel/graph-sdk)
 
-This project is in a WIP.
+This project is currently in a Alpha Preview release.
 
 The Alpaca graph-sdk utilises the GraphQL API to access Alpaca resources. See the GraphQL documentation for information about queries and mutations.
 
