@@ -34,6 +34,8 @@ See: [Getting Started](https://github.com/AlpacaTravel/graph-sdk) in order to in
 
 Creates an itinerary that is anonymous.
 
+Note: You can intercept and maintain references to created itineraries, or alternatively you can use the Alpaca Webhooks which allow you to capture events and process them on your server end-point.
+
 ## See Also
 
 - [Example GraphQL Operations](https://github.com/AlpacaTravel/graph-sdk/blob/master/packages/graph-methods/src/operations.ts)
