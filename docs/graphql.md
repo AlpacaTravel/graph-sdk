@@ -1,4 +1,4 @@
-# GraphQL via @alpaca-travel/graph-sdk
+# Alpaca Travel GraphQL
 
 Alpaca offers a GraphQL API in order to query and mutate travel related content. You can use your own preferred network layer (such as relay, apollo etc) or leverage the `@alpaca-travel/graph-sdk`.
 
