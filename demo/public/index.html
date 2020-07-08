@@ -6,10 +6,94 @@
     <script>
       // Create a graphql client
       const client = new alpaca.Client({
+        // Update with your API Key
         apiKey: 'pk.example',
       });
 
       console.log('Ready! use client.query() to perform a graphQL call');
+
+      // Build a query to obtain some items
+      const myQuery = /* GraphQL */ `
+        query CollectionItemsByHomepageTag {
+          collectionItems(
+            # Obtain the first 5 records
+            first: 5
+            # From the supplied user collection
+            collectionIds: ["collection/4m2hSusvAkPHpLb36NJ5BV"]
+            # Fetching items with the applied tag of 'homepage'
+            tags: ["homepage"]
+          ) {
+            nodes {
+              id
+              # User Supplied Title
+              title
+              # User Supplied Synopsis
+              synopsis
+              # The preferred media to use (will pick uploaded or place)
+              preferredMedia {
+                # Chose a thumbnail that covers the 100x100 width/height
+                thumbnail: source(bestFit: [100, 100]) {
+                  url
+                  width
+                  height
+                }
+              }
+              ... on CollectionLocation {
+                place {
+                  # The source for the place information
+                  contributor
+                  id
+                  # Place Name
+                  name
+                  # Hours, in OSM parseable format
+                  hours
+                  # Address for place
+                  address {
+                    addressLineOne
+                    locality
+                    region
+                  }
+                  # Longitude/Latitude
+                  position
+                  # Place Description
+                  description
+                  # Various contact methods for the place
+                  contact {
+                    facebookUrl
+                    twitterUrl
+                    instagramUrl
+                    bookingsUrl
+                  }
+                  # Required attribution for the place
+                  attribution {
+                    pixel
+                  }
+                  # Place Layers
+                  layers {
+                    name
+                  }
+                  # Wine Varieties
+                  varieties: attr(id: "place/wine-varieties") {
+                    value
+                  }
+                  # Accreditations for Venue
+                  accreditations: attr(id: "place/accreditations") {
+                    value
+                  }
+                }
+              }
+            }
+            # Paginatable results, parse the endCursor as "after" to head query
+            pageInfo {
+              hasNextPage
+              endCursor
+            }
+          }
+        }
+      `;
+
+      // Perform a query
+      client.query({ query: query }).then(console.log);
     </script>
   </body>
 </html>
