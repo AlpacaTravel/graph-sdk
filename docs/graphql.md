@@ -42,7 +42,7 @@ You can develop your query using the [GraphQL Playground](https://withalpaca.com
 ```javascript
 // Using FETCH
 // Update the accessToken with your API Key
-fetch('https://withalpaca.com/api/graphql?accessToken=pk.xxx', {
+fetch('https://withalpaca.com/api/graphql?accessToken=xxx', {
   method: 'POST',
   headers: {
     'Content-Type': 'application/json',
