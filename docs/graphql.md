@@ -152,4 +152,4 @@ export default Example;
 
 A working example is shared on the codesandbox below:
 
-[Simple apollo and react demo](https://codesandbox.io/s/silly-ives-xky2i?file=/src/Items.js)
+[Simple apollo and react demo](https://codesandbox.io/s/alpaca-graphql-with-apollo-boost-xky2i?file=/src/Items.js)
