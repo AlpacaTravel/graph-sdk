@@ -6,6 +6,11 @@ This project is currently in a Alpha Preview release.
 
 The Alpaca graph-sdk utilises the GraphQL API to access Alpaca resources. See the GraphQL documentation for information about queries and mutations.
 
+## [Alpaca Travel GraphQL Documentation](https://github.com/AlpacaTravel/graphql-docs)
+
+This repository does not contain the Alpaca Travel GraphQL Documentation. Please
+[visit the documentation here](https://github.com/AlpacaTravel/graphql-docs).
+
 ## Quickstart
 
 The get started, you need to obtain an API Key.
