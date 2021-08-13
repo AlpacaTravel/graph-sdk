@@ -33,5 +33,5 @@ See [Installation for Stencil Apollo](https://github.com/ardatan/stencil-apollo)
 
 # Further Reading
 
-- [Alpaca GraphQL JavaScript SDK](/)
+- [Alpaca GraphQL JavaScript SDK](/README.md)
 - [Alpaca GraphQL API Documentation](https://github.com/AlpacaTravel/graphql-docs)

@@ -36,5 +36,5 @@ const client = createClient({
 
 # Further Reading
 
-- [Alpaca GraphQL JavaScript SDK](/)
+- [Alpaca GraphQL JavaScript SDK](/README.md)
 - [Alpaca GraphQL API Documentation](https://github.com/AlpacaTravel/graphql-docs)

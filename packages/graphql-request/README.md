@@ -63,5 +63,5 @@ and consider self-hosting for your use case or submitting a pull-request.
 
 # Further Reading
 
-- [Alpaca GraphQL JavaScript SDK](/)
+- [Alpaca GraphQL JavaScript SDK](/README.md)
 - [Alpaca GraphQL API Documentation](https://github.com/AlpacaTravel/graphql-docs)
