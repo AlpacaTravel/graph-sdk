@@ -13,6 +13,7 @@ typescript: &typescript
     exportFragmentSpreadSubTypes: true
 
 # GraphQL Codegen
+# Generate the schema at the top level by running npm run graphql-codegen first!
 schema: '../../graphql.schema.json'
 generates:
   src/graphql.ts:

@@ -65,7 +65,7 @@ const projectHasTestNPMScriptDefined = (projectsPath) => {
   try {
     const packageJsonPath = path.resolve(projectsPath, 'package.json');
     const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf8'));
-    return packageJson.scripts.test != null && packageJson.scripts['test:coverage'] !== null;
+    return packageJson.scripts.test != null && packageJson.scripts['test'] !== null;
   } catch (e) {
     return false;
   }
@@ -134,7 +134,7 @@ const runProjectTests = async (name, projectPath) => {
     return 'noTests';
   } else {
     const npmInstallRequired = !projectHasNodeModulesInstalled(projectPath);
-    const command = `${npmInstallRequired ? 'npm install && ' : ''}npm run test:coverage`;
+    const command = `${npmInstallRequired ? 'npm install && ' : ''}npm run test`;
     try {
       await exec(command, { cwd: projectPath });
       return 'passed';
