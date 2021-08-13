@@ -1,19 +1,40 @@
 #import "./fragments/itinerary-cascaded-changes.graphql"
 
+# Modifies an itinerary to disable the automatic routing feature, which will
+# turn off determining the directions between the sequence of locations that the
+# itinerary contains.
 mutation disableItineraryAutoRoute($id: ID!) {
-  updateItinerary(id: $id, itinerary: { autoRoute: null }) {
+  # We can use the updateItinerary mutation to provide specific fields
+  updateItinerary(
+    # Provide the Itinerary ID
+    id: $id
+    # What we are modifying, in this case specifically
+    itinerary: {
+      # We will modify the auto route
+      autoRoute: {
+        # Change the default mode back to null
+        defaultMode: null
+      }
+    }
+  ) {
+    # Response type
     __typename
 
+    # We will read back what has been affected
     itinerary {
       id
       __typename
 
+      # This value should be cleared out now
       autoRoute {
         defaultMode
       }
     }
 
+    # Read any other affected changes by this action
     cascaded {
+      # This will provide any created/updated or deleted items
+      # Note: See the fragments to see what is selected
       ...ItineraryCascadedChanges
     }
   }

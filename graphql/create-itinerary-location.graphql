@@ -2,25 +2,46 @@
 #import "./fragments/itinerary-locations-count.graphql"
 #import "./fragments/itinerary-location-content.graphql"
 
+# Creates a new Itinerary Location, which can contain place information. The
+# Itinerary Location usually wraps a "place", in which each place created must
+# supply a position coordinate (e.g. lon lat). Places can also reference further
+# information that exists in a platform, such as common Id's. The Location can
+# then be sequenced in an itinerary to represent the movement of a user or their
+# bookmarks for an itinerary.
 mutation createItineraryLocation($itineraryId: ID!, $location: CreateItineraryLocationInput!) {
-  createItineraryLocation(itineraryId: $itineraryId, location: $location) {
+  # Use the createItinerary mutation
+  createItineraryLocation(
+    # Provide the itinerary ID to create the location within
+    itineraryId: $itineraryId
+    # Provide the location information
+    # Includes the { place { position { lon lat } } }
+    location: $location
+  ) {
     __typename
 
+    # Reads back the created location to provide access to the ID
     location {
       id
       __typename
 
+      # Also provides you updated information about the itinerary
       itinerary {
         id
         __typename
 
+        # Provide the locations total count
         ...ItineraryLocationsCount
       }
 
+      # Read the itinerary content (full, useful for caching)
+      # Note: See the fragments to see what is selected
       ...ItineraryLocationContent
     }
 
+    # Read any other affected changes by this action
     cascaded {
+      # This will provide any created/updated or deleted items
+      # Note: See the fragments to see what is selected
       ...ItineraryCascadedChanges
     }
   }

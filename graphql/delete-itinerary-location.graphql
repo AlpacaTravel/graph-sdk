@@ -1,18 +1,33 @@
 #import "./fragments/itinerary-locations-count.graphql"
 #import "./fragments/itinerary-cascaded-changes.graphql"
 
+# Removes an itinerary location from an itinerary. This may cause a rerouting
+# of movement for the user if you are using auto-route features of an itinerary
+# which you can sequence yourself or you could refresh the affected list as a
+# result, depending on your use case.
 mutation deleteItineraryLocation($itineraryLocationId: ID!) {
-  deleteItineraryItem(id: $itineraryLocationId) {
+  # Use the deleteItineraryItem mutation
+  deleteItineraryItem(
+    # Provide the ID of the itinerary location to remove
+    id: $itineraryLocationId
+  ) {
+    # Response of the mutation
     __typename
 
+    # We read back some of the modified itinerary
     itinerary {
       id
       __typename
 
+      # Updated itinerary location
+      # Note: See the fragments to see what is selected
       ...ItineraryLocationsCount
     }
 
+    # Read any other affected changes by this action
     cascaded {
+      # This will provide any created/updated or deleted items
+      # Note: See the fragments to see what is selected
       ...ItineraryCascadedChanges
     }
   }
