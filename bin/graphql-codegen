@@ -8,6 +8,16 @@ const sdkRoot = path.resolve(__dirname, '..');
 const main = async () => {
   let failed = false;
 
+  try {
+    console.log('Starting', sdkRoot);
+    const command = `npm install && npm run graphql-codegen`;
+    await exec(command, { cwd: sdkRoot });
+    console.log('done.');
+  } catch (code) {
+    failed = true;
+    console.error(code);
+  }
+
   for (let package of findPackages()) {
     const { packageName, packageRootDir } = package;
     try {
