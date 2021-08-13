@@ -1,0 +1,10 @@
+#import "./fragments/itinerary-location-partial-content.graphql"
+
+query getPlace($id: ID!) {
+  place(id: $id) {
+    id
+    __typename
+
+    ...PlaceContent
+  }
+}

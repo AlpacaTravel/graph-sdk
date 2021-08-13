@@ -1,0 +1,28 @@
+#import "./fragments/itinerary-content.graphql"
+#import "./fragments/itinerary-locations-count.graphql"
+
+query getItinerary($id: ID!, $mediaImagePreferredBestFit: [Int!]) {
+  itinerary(id: $id) {
+    id
+    __typename
+
+    ...ItineraryContent
+    ...ItineraryLocationsCount
+
+    preferredMedia {
+      resource {
+        id
+        __typename
+        altText
+        ... on MediaImage {
+          source(bestFit: $mediaImagePreferredBestFit) {
+            url
+          }
+          caption
+          copyright
+          attribution
+        }
+      }
+    }
+  }
+}

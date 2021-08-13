@@ -1,0 +1,11 @@
+#import "./fragments/itinerary-cascaded-changes.graphql"
+
+mutation moveItineraryLocationAfter($id: ID!, $siblingId: ID!) {
+  moveItineraryItem(id: $id, positionAfterSibling: { siblingId: $siblingId }) {
+    __typename
+
+    cascaded {
+      ...ItineraryCascadedChanges
+    }
+  }
+}

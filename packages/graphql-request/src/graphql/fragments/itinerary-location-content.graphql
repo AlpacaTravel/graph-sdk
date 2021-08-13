@@ -1,0 +1,23 @@
+#import "./place-content.graphql"
+
+fragment ItineraryLocationContent on ItineraryLocation {
+  title
+  synopsis
+  description
+
+  tags
+
+  optional
+
+  position {
+    lon
+    lat
+  }
+
+  place {
+    id
+    __typename
+
+    ...PlaceContent
+  }
+}

@@ -1,0 +1,72 @@
+#import "./fragments/itinerary-location-partial-content.graphql"
+#import "./fragments/itinerary-directions-partial-content.graphql"
+
+query listItineraryLocations(
+  $id: ID!
+  $first: Int!
+  $after: String
+  $includeRoutePolyline: Boolean!
+  $mediaImagePreferredBestFit: [Int!]
+) {
+  itinerary(id: $id) {
+    id
+    __typename
+
+    locations: children(first: $first, type: ItineraryLocation, after: $after) {
+      edges {
+        location: node {
+          id
+          __typename
+
+          ... on ItineraryLocation {
+            # Include content
+            ...ItineraryLocationPartialContent
+
+            preferredMedia {
+              resource {
+                id
+                __typename
+                altText
+                ... on MediaImage {
+                  source(bestFit: $mediaImagePreferredBestFit) {
+                    url
+                  }
+                  caption
+                  copyright
+                  attribution
+                }
+              }
+            }
+          }
+        }
+        arrival: directions(first: 1, direction: Inbound) {
+          nodes {
+            id
+            __typename
+
+            ...ItineraryDirectionsPartialContent
+
+            route {
+              segments {
+                id
+                __typename
+
+                mode
+                polyline @include(if: $includeRoutePolyline)
+              }
+            }
+          }
+          totalCount
+          pageInfo {
+            endCursor
+          }
+        }
+      }
+      totalCount
+      pageInfo {
+        hasNextPage
+        endCursor
+      }
+    }
+  }
+}

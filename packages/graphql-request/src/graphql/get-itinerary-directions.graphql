@@ -1,0 +1,22 @@
+#import "./fragments/itinerary-directions-content.graphql"
+
+query getItineraryDirections($id: ID!, $includeRoutePolyline: Boolean!) {
+  node(id: $id) {
+    id
+    __typename
+
+    ... on ItineraryDirections {
+      ...ItineraryDirectionsContent
+
+      route {
+        segments {
+          id
+          __typename
+
+          mode
+          polyline @include(if: $includeRoutePolyline)
+        }
+      }
+    }
+  }
+}

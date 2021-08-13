@@ -1,0 +1,19 @@
+#import "./fragments/itinerary-locations-count.graphql"
+#import "./fragments/itinerary-cascaded-changes.graphql"
+
+mutation deleteItineraryLocation($itineraryLocationId: ID!) {
+  deleteItineraryItem(id: $itineraryLocationId) {
+    __typename
+
+    itinerary {
+      id
+      __typename
+
+      ...ItineraryLocationsCount
+    }
+
+    cascaded {
+      ...ItineraryCascadedChanges
+    }
+  }
+}

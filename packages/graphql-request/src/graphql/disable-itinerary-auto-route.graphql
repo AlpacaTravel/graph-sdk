@@ -1,0 +1,20 @@
+#import "./fragments/itinerary-cascaded-changes.graphql"
+
+mutation disableItineraryAutoRoute($id: ID!) {
+  updateItinerary(id: $id, itinerary: { autoRoute: null }) {
+    __typename
+
+    itinerary {
+      id
+      __typename
+
+      autoRoute {
+        defaultMode
+      }
+    }
+
+    cascaded {
+      ...ItineraryCascadedChanges
+    }
+  }
+}

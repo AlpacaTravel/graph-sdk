@@ -1,0 +1,24 @@
+---
+# Anchors
+typescript: &typescript
+  plugins:
+    - jsdoc
+    - typescript
+    - typescript-operations
+    - fragment-matcher
+    - typescript-graphql-request
+  config:
+    preResolveTypes: true
+    flattenGeneratedTypes: true
+    exportFragmentSpreadSubTypes: true
+
+# GraphQL Codegen
+schema: 'https://xsc9966js2.execute-api.ap-southeast-2.amazonaws.com/dev/graphql'
+generates:
+  ./graphql.schema.json:
+    plugins:
+      - introspection
+
+  src/graphql/index.ts:
+    documents: src/graphql/**/*.graphql
+    <<: *typescript

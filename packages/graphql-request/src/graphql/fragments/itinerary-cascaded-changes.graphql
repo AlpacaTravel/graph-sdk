@@ -1,0 +1,11 @@
+fragment ItineraryCascadedChanges on ItineraryItemCascadedChanges {
+  created {
+    __typename
+    id
+  }
+  updated {
+    __typename
+    id
+  }
+  deletedIds
+}

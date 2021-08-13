@@ -1,0 +1,3 @@
+fragment ItineraryDirectionsContent on ItineraryDirections {
+  durationMin
+}

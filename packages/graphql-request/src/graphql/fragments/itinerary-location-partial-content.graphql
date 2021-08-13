@@ -1,0 +1,24 @@
+#import "./place-partial-content.graphql"
+
+fragment ItineraryLocationPartialContent on ItineraryLocation {
+  title
+  synopsis
+
+  tags
+
+  optional
+
+  readMoreUrl
+
+  position {
+    lon
+    lat
+  }
+
+  place {
+    id
+    __typename
+
+    ...PlacePartialContent
+  }
+}

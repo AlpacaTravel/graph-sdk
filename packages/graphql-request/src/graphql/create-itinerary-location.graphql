@@ -1,0 +1,27 @@
+#import "./fragments/itinerary-cascaded-changes.graphql"
+#import "./fragments/itinerary-locations-count.graphql"
+#import "./fragments/itinerary-location-content.graphql"
+
+mutation createItineraryLocation($itineraryId: ID!, $location: CreateItineraryLocationInput!) {
+  createItineraryLocation(itineraryId: $itineraryId, location: $location) {
+    __typename
+
+    location {
+      id
+      __typename
+
+      itinerary {
+        id
+        __typename
+
+        ...ItineraryLocationsCount
+      }
+
+      ...ItineraryLocationContent
+    }
+
+    cascaded {
+      ...ItineraryCascadedChanges
+    }
+  }
+}

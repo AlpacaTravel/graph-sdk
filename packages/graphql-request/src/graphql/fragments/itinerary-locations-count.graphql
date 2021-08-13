@@ -1,0 +1,5 @@
+fragment ItineraryLocationsCount on Itinerary {
+  locations: descendants(first: 0, type: ItineraryLocation) {
+    totalCount
+  }
+}

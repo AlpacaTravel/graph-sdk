@@ -1,0 +1,46 @@
+fragment PlaceContent on Place {
+  name
+
+  synopsis
+  description
+
+  position {
+    lon
+    lat
+  }
+  maki
+
+  address {
+    addressLineOne
+    addressLineTwo
+    addressLineThree
+
+    locality
+    region
+
+    country
+    countryCode
+  }
+
+  contact {
+    phoneNumber
+    emailAddress
+
+    websiteUrl
+    bookingsUrl
+    facebookUrl
+    instagramUrl
+    twitterUrl
+  }
+
+  layers {
+    id
+    __typename
+
+    name
+  }
+
+  hours {
+    osmTag
+  }
+}

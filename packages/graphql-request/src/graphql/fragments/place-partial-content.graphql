@@ -1,0 +1,24 @@
+fragment PlacePartialContent on Place {
+  name
+
+  synopsis
+
+  position {
+    lon
+    lat
+  }
+  maki
+
+  address {
+    locality
+    region
+    country
+  }
+
+  layers {
+    id
+    __typename
+
+    name
+  }
+}

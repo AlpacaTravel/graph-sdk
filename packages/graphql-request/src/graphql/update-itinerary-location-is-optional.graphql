@@ -1,0 +1,18 @@
+#import "./fragments/itinerary-cascaded-changes.graphql"
+
+mutation updateItineraryLocationIsOptional($id: ID!, $optional: Boolean!) {
+  updateItineraryLocation(id: $id, location: { optional: $optional }) {
+    __typename
+
+    location {
+      id
+      __typename
+
+      optional
+    }
+
+    cascaded {
+      ...ItineraryCascadedChanges
+    }
+  }
+}

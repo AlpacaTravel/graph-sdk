@@ -1,0 +1,16 @@
+#import "./fragments/itinerary-content.graphql"
+#import "./fragments/itinerary-locations-count.graphql"
+
+mutation createItinerary($itinerary: CreateItineraryInput!, $profileId: ID) {
+  createItinerary(itinerary: $itinerary, profileId: $profileId) {
+    __typename
+
+    itinerary {
+      id
+      __typename
+
+      ...ItineraryContent
+      ...ItineraryLocationsCount
+    }
+  }
+}

@@ -1,0 +1,21 @@
+#import "./profile-partial-content.graphql"
+
+fragment ItineraryContent on Itinerary {
+  title
+  synopsis
+  description
+  tags
+
+  created
+
+  autoRoute {
+    defaultMode
+  }
+
+  profile {
+    id
+    __typename
+
+    ...ProfilePartialContent
+  }
+}

@@ -1,0 +1,11 @@
+#import "./fragments/itinerary-cascaded-changes.graphql"
+
+mutation moveItineraryLocationToStart($id: ID!) {
+  moveItineraryItem(id: $id, positionAtStart: {}) {
+    __typename
+
+    cascaded {
+      ...ItineraryCascadedChanges
+    }
+  }
+}
