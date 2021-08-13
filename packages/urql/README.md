@@ -8,13 +8,13 @@ Alpaca Travel GraphQL API via urql.
 Via NPM:
 
 ```
-npm install @alpaca-travel/graph-sdk-urql --save
+npm install urql graphql graphql-tag @alpaca-travel/graph-sdk-urql --save
 ```
 
 Via Yarn:
 
 ```
-yarn add @alpaca-travel/graph-sdk-urql
+yarn add urql graphql graphql-tag @alpaca-travel/graph-sdk-urql
 ```
 
 ## Getting Started
@@ -33,3 +33,8 @@ const client = createClient({
   url: `https://withalpaca.com/api/graphql?accessToken={alpacaAccessToken}`,
 });
 ```
+
+# Further Reading
+
+- [Alpaca GraphQL JavaScript SDK](/)
+- [Alpaca GraphQL API Documentation](https://github.com/AlpacaTravel/graphql-docs)

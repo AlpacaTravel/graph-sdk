@@ -1,0 +1,9 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "skipLibCheck": true,
+    "lib": ["dom", "es2017", "esnext.asynciterable"],
+    "outDir": "./dist"
+  },
+  "include": ["./src/**/*", "./tests/**/*"]
+}

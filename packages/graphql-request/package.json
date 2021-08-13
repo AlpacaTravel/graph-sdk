@@ -31,14 +31,16 @@
     "dist"
   ],
   "devDependencies": {
-    "@graphql-codegen/jsdoc": "^2.0.0",
     "@graphql-codegen/cli": "^2.0.1",
     "@graphql-codegen/fragment-matcher": "^3.0.0",
     "@graphql-codegen/introspection": "^2.0.0",
+    "@graphql-codegen/jsdoc": "^2.0.0",
     "@graphql-codegen/typescript": "^2.0.0",
     "@graphql-codegen/typescript-graphql-request": "^4.0.0",
     "@graphql-codegen/typescript-operations": "^2.0.1",
     "@types/jest": "^27.0.0",
+    "graphql": "^15.5.1",
+    "graphql-request": "^3.5.0",
     "jest": "^27.0.6",
     "serve": "^12.0.0",
     "ts-jest": "^27.0.4",
