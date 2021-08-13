@@ -5636,6 +5636,14 @@ export type UpdateProfilePayload = {
   profile?: Maybe<Profile>;
 };
 
+export type CreateItineraryDirectionsMutationVariables = Exact<{
+  itineraryId: Scalars['ID'];
+  directions: CreateItineraryDirectionsInput;
+}>;
+
+
+export type CreateItineraryDirectionsMutation = { __typename?: 'Mutation', createItineraryDirections: { __typename: 'CreateItineraryDirectionsPayload', directions?: Maybe<{ __typename: 'ItineraryDirections', id: string, durationMin?: Maybe<number> }>, cascaded: { __typename?: 'ItineraryItemCascadedChanges', deletedIds: Array<string>, created: Array<{ __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', id: string }>, updated: Array<{ __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', id: string }> } } };
+
 export type CreateItineraryLocationMutationVariables = Exact<{
   itineraryId: Scalars['ID'];
   location: CreateItineraryLocationInput;
@@ -5673,6 +5681,14 @@ export type EnableItineraryAutoRouteMutationVariables = Exact<{
 
 
 export type EnableItineraryAutoRouteMutation = { __typename?: 'Mutation', updateItinerary: { __typename: 'UpdateItineraryPayload', itinerary?: Maybe<{ __typename: 'Itinerary', id: string, autoRoute?: Maybe<{ __typename?: 'ItineraryAutoRoute', defaultMode: RouteMode }> }>, cascaded: { __typename?: 'ItineraryItemCascadedChanges', deletedIds: Array<string>, created: Array<{ __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', id: string }>, updated: Array<{ __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', id: string }> } } };
+
+export type FindItineraryLocationByPlaceIdQueryVariables = Exact<{
+  itineraryId: Scalars['ID'];
+  placeId: Scalars['ID'];
+}>;
+
+
+export type FindItineraryLocationByPlaceIdQuery = { __typename?: 'Query', itinerary?: Maybe<{ __typename?: 'Itinerary', descendants: { __typename?: 'ItineraryItemConnection', totalCount: number, nodes: Array<{ __typename?: 'ItineraryCollection' } | { __typename?: 'ItineraryDirections' } | { __typename: 'ItineraryLocation', id: string }> } }> };
 
 export type GetItineraryDirectionsQueryVariables = Exact<{
   id: Scalars['ID'];
@@ -5929,6 +5945,36 @@ export const ItineraryLocationsCountFragmentDoc = gql`
   }
 }
     `;
+export const CreateItineraryDirectionsDocument = gql`
+    mutation createItineraryDirections($itineraryId: ID!, $directions: CreateItineraryDirectionsInput!) {
+  createItineraryDirections(
+    itineraryId: "itinerary/ABC123"
+    directions: $directions
+  ) {
+    __typename
+    directions {
+      id
+      __typename
+      ...ItineraryDirectionsContent
+    }
+    cascaded {
+      ...ItineraryCascadedChanges
+    }
+  }
+}
+    ${ItineraryDirectionsContentFragmentDoc}
+${ItineraryCascadedChangesFragmentDoc}`;
+
+export type CreateItineraryDirectionsProps = {
+    variables ?: CreateItineraryDirectionsMutationVariables;
+    inlist ?: StencilApollo.MutationRenderer<CreateItineraryDirectionsMutation, CreateItineraryDirectionsMutationVariables>;
+};
+      
+
+export const CreateItineraryDirectionsComponent = (props: CreateItineraryDirectionsProps, children: [StencilApollo.MutationRenderer<CreateItineraryDirectionsMutation, CreateItineraryDirectionsMutationVariables>]) => (
+  <apollo-mutation mutation={ CreateItineraryDirectionsDocument } { ...props } renderer={ children[0] } />
+);
+      
 export const CreateItineraryLocationDocument = gql`
     mutation createItineraryLocation($itineraryId: ID!, $location: CreateItineraryLocationInput!) {
   createItineraryLocation(itineraryId: $itineraryId, location: $location) {
@@ -6068,6 +6114,32 @@ export type EnableItineraryAutoRouteProps = {
 
 export const EnableItineraryAutoRouteComponent = (props: EnableItineraryAutoRouteProps, children: [StencilApollo.MutationRenderer<EnableItineraryAutoRouteMutation, EnableItineraryAutoRouteMutationVariables>]) => (
   <apollo-mutation mutation={ EnableItineraryAutoRouteDocument } { ...props } renderer={ children[0] } />
+);
+      
+export const FindItineraryLocationByPlaceIdDocument = gql`
+    query findItineraryLocationByPlaceId($itineraryId: ID!, $placeId: ID!) {
+  itinerary(id: $itineraryId) {
+    descendants(placeIds: [$placeId], type: ItineraryLocation, first: 1) {
+      nodes {
+        ... on ItineraryLocation {
+          id
+          __typename
+        }
+      }
+      totalCount
+    }
+  }
+}
+    `;
+
+export type FindItineraryLocationByPlaceIdProps = {
+    variables ?: FindItineraryLocationByPlaceIdQueryVariables;
+    inlist ?: StencilApollo.QueryRenderer<FindItineraryLocationByPlaceIdQuery, FindItineraryLocationByPlaceIdQueryVariables>;
+};
+      
+
+export const FindItineraryLocationByPlaceIdComponent = (props: FindItineraryLocationByPlaceIdProps, children: [StencilApollo.QueryRenderer<FindItineraryLocationByPlaceIdQuery, FindItineraryLocationByPlaceIdQueryVariables>]) => (
+  <apollo-query query={ FindItineraryLocationByPlaceIdDocument } { ...props } renderer={ children[0] } />
 );
       
 export const GetItineraryDirectionsDocument = gql`

@@ -8,6 +8,7 @@
 # information that exists in a platform, such as common Id's. The Location can
 # then be sequenced in an itinerary to represent the movement of a user or their
 # bookmarks for an itinerary.
+
 mutation createItineraryLocation($itineraryId: ID!, $location: CreateItineraryLocationInput!) {
   # Use the createItinerary mutation
   createItineraryLocation(

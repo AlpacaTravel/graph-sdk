@@ -7,8 +7,10 @@ test('index exports', () => {
 test('index creates an SDK with a configured client offering the API surface', () => {
   const sdk = alpaca.getSdk({ accessToken: 'example' });
 
-  expect(typeof sdk.createItinerary).toBe('function');
+  expect(typeof sdk.findItineraryLocationByPlaceId).toBe('function');
+  expect(typeof sdk.createItineraryDirections).toBe('function');
   expect(typeof sdk.createItineraryLocation).toBe('function');
+  expect(typeof sdk.createItinerary).toBe('function');
   expect(typeof sdk.deleteItineraryLocation).toBe('function');
   expect(typeof sdk.disableItineraryAutoRoute).toBe('function');
   expect(typeof sdk.enableItineraryAutoRoute).toBe('function');

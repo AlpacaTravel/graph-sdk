@@ -5636,6 +5636,14 @@ export type UpdateProfilePayload = {
   profile?: Maybe<Profile>;
 };
 
+export type CreateItineraryDirectionsMutationVariables = Exact<{
+  itineraryId: Scalars['ID'];
+  directions: CreateItineraryDirectionsInput;
+}>;
+
+
+export type CreateItineraryDirectionsMutation = { __typename?: 'Mutation', createItineraryDirections: { __typename: 'CreateItineraryDirectionsPayload', directions?: Maybe<{ __typename: 'ItineraryDirections', id: string, durationMin?: Maybe<number> }>, cascaded: { __typename?: 'ItineraryItemCascadedChanges', deletedIds: Array<string>, created: Array<{ __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', id: string }>, updated: Array<{ __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', id: string }> } } };
+
 export type CreateItineraryLocationMutationVariables = Exact<{
   itineraryId: Scalars['ID'];
   location: CreateItineraryLocationInput;
@@ -5673,6 +5681,14 @@ export type EnableItineraryAutoRouteMutationVariables = Exact<{
 
 
 export type EnableItineraryAutoRouteMutation = { __typename?: 'Mutation', updateItinerary: { __typename: 'UpdateItineraryPayload', itinerary?: Maybe<{ __typename: 'Itinerary', id: string, autoRoute?: Maybe<{ __typename?: 'ItineraryAutoRoute', defaultMode: RouteMode }> }>, cascaded: { __typename?: 'ItineraryItemCascadedChanges', deletedIds: Array<string>, created: Array<{ __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', id: string }>, updated: Array<{ __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', id: string }> } } };
+
+export type FindItineraryLocationByPlaceIdQueryVariables = Exact<{
+  itineraryId: Scalars['ID'];
+  placeId: Scalars['ID'];
+}>;
+
+
+export type FindItineraryLocationByPlaceIdQuery = { __typename?: 'Query', itinerary?: Maybe<{ __typename?: 'Itinerary', descendants: { __typename?: 'ItineraryItemConnection', totalCount: number, nodes: Array<{ __typename?: 'ItineraryCollection' } | { __typename?: 'ItineraryDirections' } | { __typename: 'ItineraryLocation', id: string }> } }> };
 
 export type GetItineraryDirectionsQueryVariables = Exact<{
   id: Scalars['ID'];
@@ -5928,6 +5944,25 @@ export const ItineraryLocationsCountFragmentDoc = gql`
   }
 }
     `;
+export const CreateItineraryDirectionsDocument = gql`
+    mutation createItineraryDirections($itineraryId: ID!, $directions: CreateItineraryDirectionsInput!) {
+  createItineraryDirections(
+    itineraryId: "itinerary/ABC123"
+    directions: $directions
+  ) {
+    __typename
+    directions {
+      id
+      __typename
+      ...ItineraryDirectionsContent
+    }
+    cascaded {
+      ...ItineraryCascadedChanges
+    }
+  }
+}
+    ${ItineraryDirectionsContentFragmentDoc}
+${ItineraryCascadedChangesFragmentDoc}`;
 export const CreateItineraryLocationDocument = gql`
     mutation createItineraryLocation($itineraryId: ID!, $location: CreateItineraryLocationInput!) {
   createItineraryLocation(itineraryId: $itineraryId, location: $location) {
@@ -6014,6 +6049,21 @@ export const EnableItineraryAutoRouteDocument = gql`
   }
 }
     ${ItineraryCascadedChangesFragmentDoc}`;
+export const FindItineraryLocationByPlaceIdDocument = gql`
+    query findItineraryLocationByPlaceId($itineraryId: ID!, $placeId: ID!) {
+  itinerary(id: $itineraryId) {
+    descendants(placeIds: [$placeId], type: ItineraryLocation, first: 1) {
+      nodes {
+        ... on ItineraryLocation {
+          id
+          __typename
+        }
+      }
+      totalCount
+    }
+  }
+}
+    `;
 export const GetItineraryDirectionsDocument = gql`
     query getItineraryDirections($id: ID!, $includeRoutePolyline: Boolean!) {
   node(id: $id) {
@@ -6202,6 +6252,9 @@ const defaultWrapper: SdkFunctionWrapper = (action, _operationName) => action();
 
 export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = defaultWrapper) {
   return {
+    createItineraryDirections(variables: CreateItineraryDirectionsMutationVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<CreateItineraryDirectionsMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<CreateItineraryDirectionsMutation>(CreateItineraryDirectionsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'createItineraryDirections');
+    },
     createItineraryLocation(variables: CreateItineraryLocationMutationVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<CreateItineraryLocationMutation> {
       return withWrapper((wrappedRequestHeaders) => client.request<CreateItineraryLocationMutation>(CreateItineraryLocationDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'createItineraryLocation');
     },
@@ -6216,6 +6269,9 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     enableItineraryAutoRoute(variables: EnableItineraryAutoRouteMutationVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<EnableItineraryAutoRouteMutation> {
       return withWrapper((wrappedRequestHeaders) => client.request<EnableItineraryAutoRouteMutation>(EnableItineraryAutoRouteDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'enableItineraryAutoRoute');
+    },
+    findItineraryLocationByPlaceId(variables: FindItineraryLocationByPlaceIdQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<FindItineraryLocationByPlaceIdQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<FindItineraryLocationByPlaceIdQuery>(FindItineraryLocationByPlaceIdDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'findItineraryLocationByPlaceId');
     },
     getItineraryDirections(variables: GetItineraryDirectionsQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetItineraryDirectionsQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<GetItineraryDirectionsQuery>(GetItineraryDirectionsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getItineraryDirections');

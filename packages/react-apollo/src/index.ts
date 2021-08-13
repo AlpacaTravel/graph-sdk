@@ -5636,6 +5636,14 @@ export type UpdateProfilePayload = {
   profile?: Maybe<Profile>;
 };
 
+export type CreateItineraryDirectionsMutationVariables = Exact<{
+  itineraryId: Scalars['ID'];
+  directions: CreateItineraryDirectionsInput;
+}>;
+
+
+export type CreateItineraryDirectionsMutation = { __typename?: 'Mutation', createItineraryDirections: { __typename: 'CreateItineraryDirectionsPayload', directions?: Maybe<{ __typename: 'ItineraryDirections', id: string, durationMin?: Maybe<number> }>, cascaded: { __typename?: 'ItineraryItemCascadedChanges', deletedIds: Array<string>, created: Array<{ __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', id: string }>, updated: Array<{ __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', id: string }> } } };
+
 export type CreateItineraryLocationMutationVariables = Exact<{
   itineraryId: Scalars['ID'];
   location: CreateItineraryLocationInput;
@@ -5673,6 +5681,14 @@ export type EnableItineraryAutoRouteMutationVariables = Exact<{
 
 
 export type EnableItineraryAutoRouteMutation = { __typename?: 'Mutation', updateItinerary: { __typename: 'UpdateItineraryPayload', itinerary?: Maybe<{ __typename: 'Itinerary', id: string, autoRoute?: Maybe<{ __typename?: 'ItineraryAutoRoute', defaultMode: RouteMode }> }>, cascaded: { __typename?: 'ItineraryItemCascadedChanges', deletedIds: Array<string>, created: Array<{ __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', id: string }>, updated: Array<{ __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', id: string }> } } };
+
+export type FindItineraryLocationByPlaceIdQueryVariables = Exact<{
+  itineraryId: Scalars['ID'];
+  placeId: Scalars['ID'];
+}>;
+
+
+export type FindItineraryLocationByPlaceIdQuery = { __typename?: 'Query', itinerary?: Maybe<{ __typename?: 'Itinerary', descendants: { __typename?: 'ItineraryItemConnection', totalCount: number, nodes: Array<{ __typename?: 'ItineraryCollection' } | { __typename?: 'ItineraryDirections' } | { __typename: 'ItineraryLocation', id: string }> } }> };
 
 export type GetItineraryDirectionsQueryVariables = Exact<{
   id: Scalars['ID'];
@@ -5928,6 +5944,52 @@ export const ItineraryLocationsCountFragmentDoc = gql`
   }
 }
     `;
+export const CreateItineraryDirectionsDocument = gql`
+    mutation createItineraryDirections($itineraryId: ID!, $directions: CreateItineraryDirectionsInput!) {
+  createItineraryDirections(
+    itineraryId: "itinerary/ABC123"
+    directions: $directions
+  ) {
+    __typename
+    directions {
+      id
+      __typename
+      ...ItineraryDirectionsContent
+    }
+    cascaded {
+      ...ItineraryCascadedChanges
+    }
+  }
+}
+    ${ItineraryDirectionsContentFragmentDoc}
+${ItineraryCascadedChangesFragmentDoc}`;
+export type CreateItineraryDirectionsMutationFn = Apollo.MutationFunction<CreateItineraryDirectionsMutation, CreateItineraryDirectionsMutationVariables>;
+
+/**
+ * __useCreateItineraryDirectionsMutation__
+ *
+ * To run a mutation, you first call `useCreateItineraryDirectionsMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateItineraryDirectionsMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createItineraryDirectionsMutation, { data, loading, error }] = useCreateItineraryDirectionsMutation({
+ *   variables: {
+ *      itineraryId: // value for 'itineraryId'
+ *      directions: // value for 'directions'
+ *   },
+ * });
+ */
+export function useCreateItineraryDirectionsMutation(baseOptions?: Apollo.MutationHookOptions<CreateItineraryDirectionsMutation, CreateItineraryDirectionsMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CreateItineraryDirectionsMutation, CreateItineraryDirectionsMutationVariables>(CreateItineraryDirectionsDocument, options);
+      }
+export type CreateItineraryDirectionsMutationHookResult = ReturnType<typeof useCreateItineraryDirectionsMutation>;
+export type CreateItineraryDirectionsMutationResult = Apollo.MutationResult<CreateItineraryDirectionsMutation>;
+export type CreateItineraryDirectionsMutationOptions = Apollo.BaseMutationOptions<CreateItineraryDirectionsMutation, CreateItineraryDirectionsMutationVariables>;
 export const CreateItineraryLocationDocument = gql`
     mutation createItineraryLocation($itineraryId: ID!, $location: CreateItineraryLocationInput!) {
   createItineraryLocation(itineraryId: $itineraryId, location: $location) {
@@ -6147,6 +6209,50 @@ export function useEnableItineraryAutoRouteMutation(baseOptions?: Apollo.Mutatio
 export type EnableItineraryAutoRouteMutationHookResult = ReturnType<typeof useEnableItineraryAutoRouteMutation>;
 export type EnableItineraryAutoRouteMutationResult = Apollo.MutationResult<EnableItineraryAutoRouteMutation>;
 export type EnableItineraryAutoRouteMutationOptions = Apollo.BaseMutationOptions<EnableItineraryAutoRouteMutation, EnableItineraryAutoRouteMutationVariables>;
+export const FindItineraryLocationByPlaceIdDocument = gql`
+    query findItineraryLocationByPlaceId($itineraryId: ID!, $placeId: ID!) {
+  itinerary(id: $itineraryId) {
+    descendants(placeIds: [$placeId], type: ItineraryLocation, first: 1) {
+      nodes {
+        ... on ItineraryLocation {
+          id
+          __typename
+        }
+      }
+      totalCount
+    }
+  }
+}
+    `;
+
+/**
+ * __useFindItineraryLocationByPlaceIdQuery__
+ *
+ * To run a query within a React component, call `useFindItineraryLocationByPlaceIdQuery` and pass it any options that fit your needs.
+ * When your component renders, `useFindItineraryLocationByPlaceIdQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useFindItineraryLocationByPlaceIdQuery({
+ *   variables: {
+ *      itineraryId: // value for 'itineraryId'
+ *      placeId: // value for 'placeId'
+ *   },
+ * });
+ */
+export function useFindItineraryLocationByPlaceIdQuery(baseOptions: Apollo.QueryHookOptions<FindItineraryLocationByPlaceIdQuery, FindItineraryLocationByPlaceIdQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<FindItineraryLocationByPlaceIdQuery, FindItineraryLocationByPlaceIdQueryVariables>(FindItineraryLocationByPlaceIdDocument, options);
+      }
+export function useFindItineraryLocationByPlaceIdLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<FindItineraryLocationByPlaceIdQuery, FindItineraryLocationByPlaceIdQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<FindItineraryLocationByPlaceIdQuery, FindItineraryLocationByPlaceIdQueryVariables>(FindItineraryLocationByPlaceIdDocument, options);
+        }
+export type FindItineraryLocationByPlaceIdQueryHookResult = ReturnType<typeof useFindItineraryLocationByPlaceIdQuery>;
+export type FindItineraryLocationByPlaceIdLazyQueryHookResult = ReturnType<typeof useFindItineraryLocationByPlaceIdLazyQuery>;
+export type FindItineraryLocationByPlaceIdQueryResult = Apollo.QueryResult<FindItineraryLocationByPlaceIdQuery, FindItineraryLocationByPlaceIdQueryVariables>;
 export const GetItineraryDirectionsDocument = gql`
     query getItineraryDirections($id: ID!, $includeRoutePolyline: Boolean!) {
   node(id: $id) {

@@ -5637,6 +5637,14 @@ export type UpdateProfilePayload = {
   profile?: Maybe<Profile>;
 };
 
+export type CreateItineraryDirectionsMutationVariables = Exact<{
+  itineraryId: Scalars['ID'];
+  directions: CreateItineraryDirectionsInput;
+}>;
+
+
+export type CreateItineraryDirectionsMutation = { __typename?: 'Mutation', createItineraryDirections: { __typename: 'CreateItineraryDirectionsPayload', directions?: Maybe<{ __typename: 'ItineraryDirections', id: string, durationMin?: Maybe<number> }>, cascaded: { __typename?: 'ItineraryItemCascadedChanges', deletedIds: Array<string>, created: Array<{ __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', id: string }>, updated: Array<{ __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', id: string }> } } };
+
 export type CreateItineraryLocationMutationVariables = Exact<{
   itineraryId: Scalars['ID'];
   location: CreateItineraryLocationInput;
@@ -5674,6 +5682,14 @@ export type EnableItineraryAutoRouteMutationVariables = Exact<{
 
 
 export type EnableItineraryAutoRouteMutation = { __typename?: 'Mutation', updateItinerary: { __typename: 'UpdateItineraryPayload', itinerary?: Maybe<{ __typename: 'Itinerary', id: string, autoRoute?: Maybe<{ __typename?: 'ItineraryAutoRoute', defaultMode: RouteMode }> }>, cascaded: { __typename?: 'ItineraryItemCascadedChanges', deletedIds: Array<string>, created: Array<{ __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', id: string }>, updated: Array<{ __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', id: string }> } } };
+
+export type FindItineraryLocationByPlaceIdQueryVariables = Exact<{
+  itineraryId: Scalars['ID'];
+  placeId: Scalars['ID'];
+}>;
+
+
+export type FindItineraryLocationByPlaceIdQuery = { __typename?: 'Query', itinerary?: Maybe<{ __typename?: 'Itinerary', descendants: { __typename?: 'ItineraryItemConnection', totalCount: number, nodes: Array<{ __typename?: 'ItineraryCollection' } | { __typename?: 'ItineraryDirections' } | { __typename: 'ItineraryLocation', id: string }> } }> };
 
 export type GetItineraryDirectionsQueryVariables = Exact<{
   id: Scalars['ID'];
@@ -5929,6 +5945,48 @@ export const ItineraryLocationsCountFragmentDoc = gql`
   }
 }
     `;
+export const CreateItineraryDirectionsDocument = gql`
+    mutation createItineraryDirections($itineraryId: ID!, $directions: CreateItineraryDirectionsInput!) {
+  createItineraryDirections(
+    itineraryId: "itinerary/ABC123"
+    directions: $directions
+  ) {
+    __typename
+    directions {
+      id
+      __typename
+      ...ItineraryDirectionsContent
+    }
+    cascaded {
+      ...ItineraryCascadedChanges
+    }
+  }
+}
+    ${ItineraryDirectionsContentFragmentDoc}
+${ItineraryCascadedChangesFragmentDoc}`;
+
+/**
+ * __useCreateItineraryDirectionsMutation__
+ *
+ * To run a mutation, you first call `useCreateItineraryDirectionsMutation` within a Vue component and pass it any options that fit your needs.
+ * When your component renders, `useCreateItineraryDirectionsMutation` returns an object that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - Several other properties: https://v4.apollo.vuejs.org/api/use-mutation.html#return
+ *
+ * @param options that will be passed into the mutation, supported options are listed on: https://v4.apollo.vuejs.org/guide-composable/mutation.html#options;
+ *
+ * @example
+ * const { mutate, loading, error, onDone } = useCreateItineraryDirectionsMutation({
+ *   variables: {
+ *     itineraryId: // value for 'itineraryId'
+ *     directions: // value for 'directions'
+ *   },
+ * });
+ */
+export function useCreateItineraryDirectionsMutation(options: VueApolloComposable.UseMutationOptions<CreateItineraryDirectionsMutation, CreateItineraryDirectionsMutationVariables> | ReactiveFunction<VueApolloComposable.UseMutationOptions<CreateItineraryDirectionsMutation, CreateItineraryDirectionsMutationVariables>>) {
+  return VueApolloComposable.useMutation<CreateItineraryDirectionsMutation, CreateItineraryDirectionsMutationVariables>(CreateItineraryDirectionsDocument, options);
+}
+export type CreateItineraryDirectionsMutationCompositionFunctionResult = VueApolloComposable.UseMutationReturn<CreateItineraryDirectionsMutation, CreateItineraryDirectionsMutationVariables>;
 export const CreateItineraryLocationDocument = gql`
     mutation createItineraryLocation($itineraryId: ID!, $location: CreateItineraryLocationInput!) {
   createItineraryLocation(itineraryId: $itineraryId, location: $location) {
@@ -6128,6 +6186,42 @@ export function useEnableItineraryAutoRouteMutation(options: VueApolloComposable
   return VueApolloComposable.useMutation<EnableItineraryAutoRouteMutation, EnableItineraryAutoRouteMutationVariables>(EnableItineraryAutoRouteDocument, options);
 }
 export type EnableItineraryAutoRouteMutationCompositionFunctionResult = VueApolloComposable.UseMutationReturn<EnableItineraryAutoRouteMutation, EnableItineraryAutoRouteMutationVariables>;
+export const FindItineraryLocationByPlaceIdDocument = gql`
+    query findItineraryLocationByPlaceId($itineraryId: ID!, $placeId: ID!) {
+  itinerary(id: $itineraryId) {
+    descendants(placeIds: [$placeId], type: ItineraryLocation, first: 1) {
+      nodes {
+        ... on ItineraryLocation {
+          id
+          __typename
+        }
+      }
+      totalCount
+    }
+  }
+}
+    `;
+
+/**
+ * __useFindItineraryLocationByPlaceIdQuery__
+ *
+ * To run a query within a Vue component, call `useFindItineraryLocationByPlaceIdQuery` and pass it any options that fit your needs.
+ * When your component renders, `useFindItineraryLocationByPlaceIdQuery` returns an object from Apollo Client that contains result, loading and error properties
+ * you can use to render your UI.
+ *
+ * @param variables that will be passed into the query
+ * @param options that will be passed into the query, supported options are listed on: https://v4.apollo.vuejs.org/guide-composable/query.html#options;
+ *
+ * @example
+ * const { result, loading, error } = useFindItineraryLocationByPlaceIdQuery({
+ *   itineraryId: // value for 'itineraryId'
+ *   placeId: // value for 'placeId'
+ * });
+ */
+export function useFindItineraryLocationByPlaceIdQuery(variables: FindItineraryLocationByPlaceIdQueryVariables | VueCompositionApi.Ref<FindItineraryLocationByPlaceIdQueryVariables> | ReactiveFunction<FindItineraryLocationByPlaceIdQueryVariables>, options: VueApolloComposable.UseQueryOptions<FindItineraryLocationByPlaceIdQuery, FindItineraryLocationByPlaceIdQueryVariables> | VueCompositionApi.Ref<VueApolloComposable.UseQueryOptions<FindItineraryLocationByPlaceIdQuery, FindItineraryLocationByPlaceIdQueryVariables>> | ReactiveFunction<VueApolloComposable.UseQueryOptions<FindItineraryLocationByPlaceIdQuery, FindItineraryLocationByPlaceIdQueryVariables>> = {}) {
+  return VueApolloComposable.useQuery<FindItineraryLocationByPlaceIdQuery, FindItineraryLocationByPlaceIdQueryVariables>(FindItineraryLocationByPlaceIdDocument, variables, options);
+}
+export type FindItineraryLocationByPlaceIdQueryCompositionFunctionResult = VueApolloComposable.UseQueryReturn<FindItineraryLocationByPlaceIdQuery, FindItineraryLocationByPlaceIdQueryVariables>;
 export const GetItineraryDirectionsDocument = gql`
     query getItineraryDirections($id: ID!, $includeRoutePolyline: Boolean!) {
   node(id: $id) {

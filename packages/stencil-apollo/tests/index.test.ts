@@ -1,6 +1,8 @@
 import * as graphql from '../src/index';
 
 test('index exports', () => {
+  expect(typeof graphql.FindItineraryLocationByPlaceIdComponent).toBe('function');
+  expect(typeof graphql.CreateItineraryDirectionsComponent).toBe('function');
   expect(typeof graphql.CreateItineraryLocationComponent).toBe('function');
   expect(typeof graphql.CreateItineraryComponent).toBe('function');
   expect(typeof graphql.DeleteItineraryLocationComponent).toBe('function');

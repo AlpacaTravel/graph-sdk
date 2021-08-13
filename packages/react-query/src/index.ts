@@ -5654,6 +5654,14 @@ export type UpdateProfilePayload = {
   profile?: Maybe<Profile>;
 };
 
+export type CreateItineraryDirectionsMutationVariables = Exact<{
+  itineraryId: Scalars['ID'];
+  directions: CreateItineraryDirectionsInput;
+}>;
+
+
+export type CreateItineraryDirectionsMutation = { __typename?: 'Mutation', createItineraryDirections: { __typename: 'CreateItineraryDirectionsPayload', directions?: Maybe<{ __typename: 'ItineraryDirections', id: string, durationMin?: Maybe<number> }>, cascaded: { __typename?: 'ItineraryItemCascadedChanges', deletedIds: Array<string>, created: Array<{ __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', id: string }>, updated: Array<{ __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', id: string }> } } };
+
 export type CreateItineraryLocationMutationVariables = Exact<{
   itineraryId: Scalars['ID'];
   location: CreateItineraryLocationInput;
@@ -5691,6 +5699,14 @@ export type EnableItineraryAutoRouteMutationVariables = Exact<{
 
 
 export type EnableItineraryAutoRouteMutation = { __typename?: 'Mutation', updateItinerary: { __typename: 'UpdateItineraryPayload', itinerary?: Maybe<{ __typename: 'Itinerary', id: string, autoRoute?: Maybe<{ __typename?: 'ItineraryAutoRoute', defaultMode: RouteMode }> }>, cascaded: { __typename?: 'ItineraryItemCascadedChanges', deletedIds: Array<string>, created: Array<{ __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', id: string }>, updated: Array<{ __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', id: string }> } } };
+
+export type FindItineraryLocationByPlaceIdQueryVariables = Exact<{
+  itineraryId: Scalars['ID'];
+  placeId: Scalars['ID'];
+}>;
+
+
+export type FindItineraryLocationByPlaceIdQuery = { __typename?: 'Query', itinerary?: Maybe<{ __typename?: 'Itinerary', descendants: { __typename?: 'ItineraryItemConnection', totalCount: number, nodes: Array<{ __typename?: 'ItineraryCollection' } | { __typename?: 'ItineraryDirections' } | { __typename: 'ItineraryLocation', id: string }> } }> };
 
 export type GetItineraryDirectionsQueryVariables = Exact<{
   id: Scalars['ID'];
@@ -5946,6 +5962,36 @@ export const ItineraryLocationsCountFragmentDoc = `
   }
 }
     `;
+export const CreateItineraryDirectionsDocument = `
+    mutation createItineraryDirections($itineraryId: ID!, $directions: CreateItineraryDirectionsInput!) {
+  createItineraryDirections(
+    itineraryId: "itinerary/ABC123"
+    directions: $directions
+  ) {
+    __typename
+    directions {
+      id
+      __typename
+      ...ItineraryDirectionsContent
+    }
+    cascaded {
+      ...ItineraryCascadedChanges
+    }
+  }
+}
+    ${ItineraryDirectionsContentFragmentDoc}
+${ItineraryCascadedChangesFragmentDoc}`;
+export const useCreateItineraryDirectionsMutation = <
+      TError = unknown,
+      TContext = unknown
+    >(
+      dataSource: { endpoint: string, fetchParams?: RequestInit }, 
+      options?: UseMutationOptions<CreateItineraryDirectionsMutation, TError, CreateItineraryDirectionsMutationVariables, TContext>
+    ) => 
+    useMutation<CreateItineraryDirectionsMutation, TError, CreateItineraryDirectionsMutationVariables, TContext>(
+      (variables?: CreateItineraryDirectionsMutationVariables) => fetcher<CreateItineraryDirectionsMutation, CreateItineraryDirectionsMutationVariables>(dataSource.endpoint, dataSource.fetchParams || {}, CreateItineraryDirectionsDocument, variables)(),
+      options
+    );
 export const CreateItineraryLocationDocument = `
     mutation createItineraryLocation($itineraryId: ID!, $location: CreateItineraryLocationInput!) {
   createItineraryLocation(itineraryId: $itineraryId, location: $location) {
@@ -6085,6 +6131,34 @@ export const useEnableItineraryAutoRouteMutation = <
     ) => 
     useMutation<EnableItineraryAutoRouteMutation, TError, EnableItineraryAutoRouteMutationVariables, TContext>(
       (variables?: EnableItineraryAutoRouteMutationVariables) => fetcher<EnableItineraryAutoRouteMutation, EnableItineraryAutoRouteMutationVariables>(dataSource.endpoint, dataSource.fetchParams || {}, EnableItineraryAutoRouteDocument, variables)(),
+      options
+    );
+export const FindItineraryLocationByPlaceIdDocument = `
+    query findItineraryLocationByPlaceId($itineraryId: ID!, $placeId: ID!) {
+  itinerary(id: $itineraryId) {
+    descendants(placeIds: [$placeId], type: ItineraryLocation, first: 1) {
+      nodes {
+        ... on ItineraryLocation {
+          id
+          __typename
+        }
+      }
+      totalCount
+    }
+  }
+}
+    `;
+export const useFindItineraryLocationByPlaceIdQuery = <
+      TData = FindItineraryLocationByPlaceIdQuery,
+      TError = unknown
+    >(
+      dataSource: { endpoint: string, fetchParams?: RequestInit }, 
+      variables: FindItineraryLocationByPlaceIdQueryVariables, 
+      options?: UseQueryOptions<FindItineraryLocationByPlaceIdQuery, TError, TData>
+    ) => 
+    useQuery<FindItineraryLocationByPlaceIdQuery, TError, TData>(
+      ['findItineraryLocationByPlaceId', variables],
+      fetcher<FindItineraryLocationByPlaceIdQuery, FindItineraryLocationByPlaceIdQueryVariables>(dataSource.endpoint, dataSource.fetchParams || {}, FindItineraryLocationByPlaceIdDocument, variables),
       options
     );
 export const GetItineraryDirectionsDocument = `

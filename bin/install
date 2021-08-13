@@ -10,7 +10,7 @@ const main = async () => {
 
   try {
     console.log('Starting', sdkRoot);
-    const command = `npm run graphql-codegen`;
+    const command = `npm install`;
     await exec(command, { cwd: sdkRoot });
     console.log('done.');
   } catch (code) {
@@ -22,7 +22,7 @@ const main = async () => {
     const { packageName, packageRootDir } = package;
     try {
       console.log('Starting', packageName);
-      const command = `npm run graphql-codegen`;
+      const command = `npm install`;
       await exec(command, { cwd: packageRootDir });
       console.log('done.');
     } catch (code) {
