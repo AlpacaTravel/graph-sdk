@@ -54,6 +54,10 @@ or automatically route the user via a number of supported modes of transport.
 | moveItineraryLocationToStart                         | Moves the itinerary location to the first position in the sequence                                                                             |
 | updateItineraryLocationIsOptional                    | Mark the location as 'optional' which will skip directions to this location and move on to next                                                |
 
+The SDK provides these functions for common use cases of the GraphQL API. The
+API does support more complex structuring, custom data and use cases which will
+likely be beyond the scope of this SDK.
+
 ## Requirements
 
 The get started, you need to obtain your API Access Token. This is required
