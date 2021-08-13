@@ -6,7 +6,7 @@ typescript: &typescript
     - typescript
     - typescript-operations
     - fragment-matcher
-    - typescript-graphql-request
+    - typescript-urql
   config:
     preResolveTypes: true
     flattenGeneratedTypes: true
@@ -15,6 +15,6 @@ typescript: &typescript
 # GraphQL Codegen
 schema: 'https://xsc9966js2.execute-api.ap-southeast-2.amazonaws.com/dev/graphql'
 generates:
-  src/graphql.ts:
+  src/index.ts:
     documents: ../../graphql/**/*.graphql
     <<: *typescript

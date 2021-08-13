@@ -1,5 +1,5 @@
 {
-  "name": "@alpaca-travel/graph-sdk-graphql-request",
+  "name": "@alpaca-travel/graph-sdk-urql",
   "version": "1.0.0",
   "author": "Tom Manderson <tom@alpaca.travel>",
   "homepage": "https://github.com/AlpacaTravel/graph-sdk",
@@ -12,7 +12,7 @@
   },
   "scripts": {
     "test": "jest",
-    "build:typedoc": "rm -rf docs && typedoc src/index.ts src/graphql.ts --out docs",
+    "build:typedoc": "rm -rf docs && typedoc src/index.ts --out docs",
     "docs": "yarn build:typedoc && serve docs",
     "build": "tsc",
     "graphql-codegen": "graphql-codegen --config codegen.yml",
@@ -20,24 +20,20 @@
   },
   "peerDependencies": {
     "graphql": "^0.8.0 || ^0.9.0 || ^0.10.0 || ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0",
-    "graphql-request": "^3.4.0",
+    "urql": "^2.0.4",
     "graphql-tag": "^2.0.0"
   },
-  "dependencies": {},
   "env": {
     "jest": true
   },
-  "files": [
-    "dist"
-  ],
   "devDependencies": {
     "@graphql-codegen/jsdoc": "^2.0.0",
     "@graphql-codegen/cli": "^2.0.1",
     "@graphql-codegen/fragment-matcher": "^3.0.0",
     "@graphql-codegen/introspection": "^2.0.0",
     "@graphql-codegen/typescript": "^2.0.0",
-    "@graphql-codegen/typescript-graphql-request": "^4.0.0",
     "@graphql-codegen/typescript-operations": "^2.0.1",
+    "@graphql-codegen/typescript-urql": "^3.0.0",
     "@types/jest": "^27.0.0",
     "jest": "^27.0.6",
     "serve": "^12.0.0",
