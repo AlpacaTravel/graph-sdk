@@ -1,5 +1,5 @@
 {
-  "name": "@alpaca-travel/graphql-request",
+  "name": "@alpaca-travel/graph-sdk-graphql-request",
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
