@@ -5668,7 +5668,7 @@ export type DisableItineraryAutoRouteMutation = { __typename?: 'Mutation', updat
 
 export type EnableItineraryAutoRouteMutationVariables = Exact<{
   id: Scalars['ID'];
-  defaultMode: ItineraryAutoRouteInput;
+  defaultMode: RouteMode;
 }>;
 
 
@@ -6062,7 +6062,7 @@ export type DeleteItineraryLocationMutationResult = Apollo.MutationResult<Delete
 export type DeleteItineraryLocationMutationOptions = Apollo.BaseMutationOptions<DeleteItineraryLocationMutation, DeleteItineraryLocationMutationVariables>;
 export const DisableItineraryAutoRouteDocument = gql`
     mutation disableItineraryAutoRoute($id: ID!) {
-  updateItinerary(id: $id, itinerary: {autoRoute: null}) {
+  updateItinerary(id: $id, itinerary: {autoRoute: {defaultMode: null}}) {
     __typename
     itinerary {
       id
@@ -6104,8 +6104,8 @@ export type DisableItineraryAutoRouteMutationHookResult = ReturnType<typeof useD
 export type DisableItineraryAutoRouteMutationResult = Apollo.MutationResult<DisableItineraryAutoRouteMutation>;
 export type DisableItineraryAutoRouteMutationOptions = Apollo.BaseMutationOptions<DisableItineraryAutoRouteMutation, DisableItineraryAutoRouteMutationVariables>;
 export const EnableItineraryAutoRouteDocument = gql`
-    mutation enableItineraryAutoRoute($id: ID!, $defaultMode: ItineraryAutoRouteInput!) {
-  updateItinerary(id: $id, itinerary: {autoRoute: $defaultMode}) {
+    mutation enableItineraryAutoRoute($id: ID!, $defaultMode: RouteMode!) {
+  updateItinerary(id: $id, itinerary: {autoRoute: {defaultMode: $defaultMode}}) {
     __typename
     itinerary {
       id

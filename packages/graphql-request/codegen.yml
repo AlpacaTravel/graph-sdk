@@ -13,7 +13,7 @@ typescript: &typescript
     exportFragmentSpreadSubTypes: true
 
 # GraphQL Codegen
-schema: 'https://xsc9966js2.execute-api.ap-southeast-2.amazonaws.com/dev/graphql'
+schema: '../../graphql.schema.json'
 generates:
   src/graphql.ts:
     documents: ../../graphql/**/*.graphql

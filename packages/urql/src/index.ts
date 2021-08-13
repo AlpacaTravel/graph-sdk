@@ -5668,7 +5668,7 @@ export type DisableItineraryAutoRouteMutation = { __typename?: 'Mutation', updat
 
 export type EnableItineraryAutoRouteMutationVariables = Exact<{
   id: Scalars['ID'];
-  defaultMode: ItineraryAutoRouteInput;
+  defaultMode: RouteMode;
 }>;
 
 
@@ -5994,7 +5994,7 @@ export function useDeleteItineraryLocationMutation() {
 };
 export const DisableItineraryAutoRouteDocument = gql`
     mutation disableItineraryAutoRoute($id: ID!) {
-  updateItinerary(id: $id, itinerary: {autoRoute: null}) {
+  updateItinerary(id: $id, itinerary: {autoRoute: {defaultMode: null}}) {
     __typename
     itinerary {
       id
@@ -6014,8 +6014,8 @@ export function useDisableItineraryAutoRouteMutation() {
   return Urql.useMutation<DisableItineraryAutoRouteMutation, DisableItineraryAutoRouteMutationVariables>(DisableItineraryAutoRouteDocument);
 };
 export const EnableItineraryAutoRouteDocument = gql`
-    mutation enableItineraryAutoRoute($id: ID!, $defaultMode: ItineraryAutoRouteInput!) {
-  updateItinerary(id: $id, itinerary: {autoRoute: $defaultMode}) {
+    mutation enableItineraryAutoRoute($id: ID!, $defaultMode: RouteMode!) {
+  updateItinerary(id: $id, itinerary: {autoRoute: {defaultMode: $defaultMode}}) {
     __typename
     itinerary {
       id
