@@ -34,29 +34,35 @@ directions services as well as the data management.
 
 ### Itinerary Management
 
-Alpaca offers a way to create itineraries for users. These can be a simple list
-or automatically route the user via a number of supported modes of transport.
+Alpaca offers a way to create itineraries for users. The use cases target adding
+functionality such as travel bookmarking and detailed travel itinerary creation.
 
-| SDK Function                                         | Description                                                                                                                                    |
-| ---------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
-| [createItinerary](/graphql-create-itinerary.graphql) | Creates a new itinerary                                                                                                                        |
-| updateItinerary                                      | Updates the itinerary, supporting various user content and media                                                                               |
-| getItinerary                                         | Retrieves the itinerary, with a total count of the number of locations added                                                                   |
-| enableItineraryAutoRoute                             | Enables automatically adding directions between added locations                                                                                |
-| disableItineraryAutoRoute                            | Disables automatically adding directions between added locations                                                                               |
-| createItineraryLocation                              | Adds a new stop to an itinerary                                                                                                                |
-| updateItineraryLocation                              | Updates the itinerary location, supporting various user content and media                                                                      |
-| getItineraryLocation                                 | Retrieves the itinerary location (and associated place information if avialable)                                                               |
-| getItineraryDirections                               | Retrieves the itinerary directions between locations                                                                                           |
-| deleteItineraryLocation                              | Removes the itinerary location from the itinerary                                                                                              |
-| listItineraryLocations                               | Creates a list of the itinerary locations in sequence, exposing directions between the locations (such as distance and durations or polylines) |
-| moveItineraryLocationAfter                           | Moves the itinerary location after another location in the sequence                                                                            |
-| moveItineraryLocationToStart                         | Moves the itinerary location to the first position in the sequence                                                                             |
-| updateItineraryLocationIsOptional                    | Mark the location as 'optional' which will skip directions to this location and move on to next                                                |
+- [Learn about itinerary management via GraphQL](https://github.com/AlpacaTravel/graphql-docs/tree/develop/topics/itinerary)
+
+| SDK Function                                                                               | Description                                                                                                                                    |
+| ------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| [createItinerary](/graphql/create-itinerary.graphql)                                       | Creates a new itinerary                                                                                                                        |
+| updateItinerary](/graphql/update-itinerary.graphql)                                        | Updates the itinerary, supporting various user content and media                                                                               |
+| getItinerary](/graphql/get-itinerary.graphql)                                              | Retrieves the itinerary, with a total count of the number of locations added                                                                   |
+| enableItineraryAutoRoute](/graphql/enable-itinerary-auto-route.graphql)                    | Enables automatically adding directions between added locations                                                                                |
+| disableItineraryAutoRoute](/graphql/disable-itinerary-auto-route.graphql)                  | Disables automatically adding directions between added locations                                                                               |
+| createItineraryLocation](/graphql/create-itinerary-location.graphql)                       | Adds a new stop to an itinerary                                                                                                                |
+| updateItineraryLocation](/graphql/update-itinerary-location.graphql)                       | Updates the itinerary location, supporting various user content and media                                                                      |
+| getItineraryLocation](/graphql/get-itinerary-location.graphql)                             | Retrieves the itinerary location (and associated place information if avialable)                                                               |
+| getItineraryDirections](/graphql/get-itinerary-directions.graphql)                         | Retrieves the itinerary directions between locations                                                                                           |
+| deleteItineraryLocation](/graphql/delete-itinerary-location.graphql)                       | Removes the itinerary location from the itinerary                                                                                              |
+| listItineraryLocations](/graphql/list-itinerary-locations.graphql)                         | Creates a list of the itinerary locations in sequence, exposing directions between the locations (such as distance and durations or polylines) |
+| moveItineraryLocationAfter](/graphql/move-itinerary-location-after.graphql)                | Moves the itinerary location after another location in the sequence                                                                            |
+| moveItineraryLocationToStart](/graphql/move-itinerary-location-to-start.graphql)           | Moves the itinerary location to the first position in the sequence                                                                             |
+| updateItineraryLocationIsOptional](/graphql/update-itinerary-location-is-optional.graphql) | Mark the location as 'optional' which will skip directions to this location and move on to next                                                |
 
 The SDK provides these functions for common use cases of the GraphQL API. The
 API does support more complex structuring, custom data and use cases which will
 likely be beyond the scope of this SDK.
+
+### Place Information
+
+### Collections (Area Guides, etc)
 
 ## Requirements
 
