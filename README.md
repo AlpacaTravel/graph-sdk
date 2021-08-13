@@ -28,6 +28,32 @@ such as creating and editing itineraries or displaying collections of places.
 The SDK leverages a series of [GraphQL documents](/graphql) that are built
 based on the [Alpaca GraphQL Documentation](https://github.com/AlpacaTravel/graphql-docs).
 
+The SDK leverages the Alpaca GraphQL API which operates as a SaaS platform,
+offering all required services such as place provider integration, route and
+directions services as well as the data management.
+
+### Itinerary Management
+
+Alpaca offers a way to create itineraries for users. These can be a simple list
+or automatically route the user via a number of supported modes of transport.
+
+| SDK Function                                         | Description                                                                                                                                    |
+| ---------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| [createItinerary](/graphql-create-itinerary.graphql) | Creates a new itinerary                                                                                                                        |
+| updateItinerary                                      | Updates the itinerary, supporting various user content and media                                                                               |
+| getItinerary                                         | Retrieves the itinerary, with a total count of the number of locations added                                                                   |
+| enableItineraryAutoRoute                             | Enables automatically adding directions between added locations                                                                                |
+| disableItineraryAutoRoute                            | Disables automatically adding directions between added locations                                                                               |
+| createItineraryLocation                              | Adds a new stop to an itinerary                                                                                                                |
+| updateItineraryLocation                              | Updates the itinerary location, supporting various user content and media                                                                      |
+| getItineraryLocation                                 | Retrieves the itinerary location (and associated place information if avialable)                                                               |
+| getItineraryDirections                               | Retrieves the itinerary directions between locations                                                                                           |
+| deleteItineraryLocation                              | Removes the itinerary location from the itinerary                                                                                              |
+| listItineraryLocations                               | Creates a list of the itinerary locations in sequence, exposing directions between the locations (such as distance and durations or polylines) |
+| moveItineraryLocationAfter                           | Moves the itinerary location after another location in the sequence                                                                            |
+| moveItineraryLocationToStart                         | Moves the itinerary location to the first position in the sequence                                                                             |
+| updateItineraryLocationIsOptional                    | Mark the location as 'optional' which will skip directions to this location and move on to next                                                |
+
 ## Requirements
 
 The get started, you need to obtain your API Access Token. This is required
