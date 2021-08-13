@@ -1,8 +1,7 @@
 {
   "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "skipLibCheck": true,
-    "outDir": "./dist",
+    "outDir": "./dist/esm",
     "jsx": "react",
     "jsxFactory": "h"
   },

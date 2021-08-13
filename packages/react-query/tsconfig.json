@@ -1,9 +1,7 @@
 {
   "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "skipLibCheck": true,
-    "lib": ["DOM"],
-    "outDir": "./dist"
+    "outDir": "./dist/esm"
   },
   "include": ["./src/**/*", "./tests/**/*"]
 }
