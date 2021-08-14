@@ -16,7 +16,7 @@
     "build:typedoc": "rm -rf docs && typedoc src/index.ts src/graphql.ts --out docs",
     "docs": "yarn build:typedoc && serve docs",
     "build": "npm run tsc",
-    "prepublish": "npm run tsc",
+    "prepublishOnly": "npm run tsc",
     "tsc": "tsc -p tsconfig.json && tsc -p tsconfig-cjs.json",
     "graphql-codegen": "graphql-codegen --config codegen.yml",
     "clean": "rm -rf dist && rm -rf docs"

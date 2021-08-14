@@ -2,7 +2,7 @@
 const { run } = require('./lib');
 
 const main = async () => {
-  const failed = await run('npm install', true);
+  const failed = await run('npm run clean', false);
 
   process.exit(failed ? 1 : 0);
 };

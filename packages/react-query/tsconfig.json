@@ -3,5 +3,5 @@
   "compilerOptions": {
     "outDir": "./dist/esm"
   },
-  "include": ["./src/**/*", "./tests/**/*"]
+  "include": ["./src/**/*"]
 }

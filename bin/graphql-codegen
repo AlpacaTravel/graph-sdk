@@ -1,71 +1,10 @@
 #!/usr/bin/env node
-const fs = require('fs');
-const path = require('path');
-const { spawn } = require('child_process');
-
-const sdkRoot = path.resolve(__dirname, '..');
+const { run } = require('./lib');
 
 const main = async () => {
-  let failed = false;
-
-  try {
-    console.log('Starting', sdkRoot);
-    const command = `npm run graphql-codegen`;
-    await exec(command, { cwd: sdkRoot });
-    console.log('done.');
-  } catch (code) {
-    failed = true;
-    console.error(code);
-  }
-
-  for (let package of findPackages()) {
-    const { packageName, packageRootDir } = package;
-    try {
-      console.log('Starting', packageName);
-      const command = `npm run graphql-codegen`;
-      await exec(command, { cwd: packageRootDir });
-      console.log('done.');
-    } catch (code) {
-      failed = true;
-      console.error(code);
-    }
-  }
+  const failed = await run('npm run graphql-codegen', true);
 
   process.exit(failed ? 1 : 0);
-};
-
-// Execute shell command, piping the stdout/stderr to the screen
-const exec = (command, { cwd }) => {
-  console.log(`$ cd ./${path.relative(sdkRoot, cwd)}`);
-  console.log('$', command);
-  const subprocess = spawn(command, [], {
-    cwd,
-    stdio: 'inherit',
-    shell: true,
-  });
-  return new Promise((resolve, reject) => {
-    subprocess.on('close', (code) => {
-      if (code === 0) {
-        resolve(code);
-      } else {
-        reject(code);
-      }
-    });
-  });
-};
-
-// Returns a list of all the packages with name and project root
-const findPackages = () => {
-  const packagesHome = path.resolve(sdkRoot, 'packages');
-  return fs
-    .readdirSync(packagesHome)
-    .map((packageName) => {
-      const packageRootDir = path.resolve(packagesHome, packageName);
-      return { packageRootDir, packageName };
-    })
-    .filter(({ packageRootDir, packageName }) => {
-      return !/^sdk$/.test(packageName) && fs.lstatSync(packageRootDir).isDirectory();
-    });
 };
 
 main().catch(console.error);
