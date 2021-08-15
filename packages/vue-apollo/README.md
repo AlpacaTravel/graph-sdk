@@ -82,11 +82,11 @@ export default defineComponent({
 </script>
 ```
 
-## API Surface for urql
+## API Surface for vue apollo
 
 ```
 // SDK Functions available from the package
-import * as sdk from '@alpaca-travel/graph-sdk-react-apollo';
+import * as sdk from '@alpaca-travel/graph-sdk-vue-apollo';
 
 // sdk.useCreateItineraryQuery(...)
 ```

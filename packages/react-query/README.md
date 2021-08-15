@@ -19,11 +19,11 @@ Via Yarn:
 yarn add react-query graphql @alpaca-travel/graph-sdk-react-query
 ```
 
-## API Surface for urql
+## API Surface for react-query
 
 ```
 // SDK Functions available from the package
-import * as sdk from '@alpaca-travel/graph-sdk-react-apollo';
+import * as sdk from '@alpaca-travel/graph-sdk-react-query';
 
 // sdk.useCreateItineraryQuery(...)
 ```

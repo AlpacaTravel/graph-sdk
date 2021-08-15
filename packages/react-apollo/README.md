@@ -85,7 +85,7 @@ function MyComponent() {
 }
 ```
 
-## API Surface for urql
+## API Surface for React Apollo
 
 ```
 // SDK Functions available from the package
