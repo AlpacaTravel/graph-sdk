@@ -16,6 +16,6 @@ typescript: &typescript
 # Generate the schema at the top level by running npm run graphql-codegen first!
 schema: '../../graphql.schema.json'
 generates:
-  src/graphql.ts:
+  src/index.ts:
     documents: ../../graphql/**/*.graphql
     <<: *typescript

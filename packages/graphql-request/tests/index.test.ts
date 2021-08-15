@@ -1,11 +1,9 @@
-import alpaca from '../src/index';
-
-test('index exports', () => {
-  expect(typeof alpaca.getSdk).toBe('function');
-});
+import { getSdk } from '../src/index';
+import { request, GraphQLClient } from 'graphql-request';
 
 test('index creates an SDK with a configured client offering the API surface', () => {
-  const sdk = alpaca.getSdk({ accessToken: 'example' });
+  const client = new GraphQLClient('https://withalpaca.com/api/graphql?accessToken=XXX');
+  const sdk = getSdk(client);
 
   expect(typeof sdk.findItineraryLocationByPlaceId).toBe('function');
   expect(typeof sdk.createItineraryDirections).toBe('function');

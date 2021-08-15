@@ -29,19 +29,15 @@ The below shows a way to create a SDK instance with a configured graphql-request
 client.
 
 ```javascript
-import alpaca from '@alpaca-travel/graph-sdk-graphql-request';
+import { GraphQLClient } from 'graphql-request';
+import { getSdk } from '@alpaca-travel/graph-sdk-graphql-request';
+
+// Create a graphql-client
+// Note: Substitute your API Access Token
+const client = new GraphQLClient(`https://withalpaca.com/api/graphql?accessToken=xxx`);
 
 // Initialise the SDK
-const sdk = alpaca.getSdk({
-  // Include your Access Token
-  accessToken: 'XXX',
-
-  // Intercept using a wrapper..
-  // withWrapper: myWrapperFunction
-
-  // Provide your own graphql instance..
-  // client: myClient,
-});
+const sdk = getSdk(client);
 ```
 
 ### Example call
@@ -80,6 +76,36 @@ The SDK is driven by a number of [GraphQL documents](/graphql). You can
 fork this project if you wish to extend your own queries and mutations as
 documented on the [GraphQL Documentation](https://github.com/AlpacaTravel/graphql-docs)
 and consider self-hosting for your use case or submitting a pull-request.
+
+### GraphQL Calls via graphql-request
+
+You can craft your own GraphQL queries following the documentation available
+for [Alpaca GraphQL](https://github.com/AlpacaTravel/graphql-docs).
+
+Using graphql-request, you can make your requests as needed;
+
+```javascript
+/**
+ * Make a GraphQL request using the graphql-request client outside of the SDK
+ * capabilities. Needed if you want to extend the SDK capabilities or perform
+ * a specific GraphQL call.
+ */
+
+const query = gql`
+  # My custom Alpaca GraphQL call
+  query getAuthorizedProfiles {
+    query
+    authorizedProfiles(first: 1) {
+      nodes {
+        id
+        name
+      }
+    }
+  }
+`;
+// Perform a query
+client.request(query).then((data) => console.log(data));
+```
 
 # Further Reading
 
