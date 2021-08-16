@@ -1,6 +1,7 @@
 #import "./fragments/profile-content.graphql"
 
 # Obtains the profile by the provided ID.
+
 query getProfile($id: ID!) {
   # Use the profile() query
   profile(id: $id) {

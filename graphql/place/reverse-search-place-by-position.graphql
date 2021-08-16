@@ -1,6 +1,6 @@
 #import "./fragments/place-search-content.graphql"
 
-# Queries a position and returns with matching places
+# Queries a position and returns with matching places.
 
 query reverseSearchPlaceByPosition(
   $focus: PositionInput!

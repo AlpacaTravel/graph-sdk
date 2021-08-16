@@ -1,6 +1,6 @@
 #import "./fragments/media-image-content.graphql"
 
-# Loads information about a media
+# Loads information about a media.
 
 query getMediaImage(
   $id: ID!

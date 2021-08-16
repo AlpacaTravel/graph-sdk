@@ -1,6 +1,6 @@
 #import "./fragments/place-search-content.graphql"
 
-# Searches for places using Autocomplete style search term
+# Searches for places using Autocomplete search term.
 
 query autocompleteSearchPlace($text: String!, $source: PlaceSearchSource!) {
   # Use the placeAutocompleteSearch operation to complex an autocomplete based

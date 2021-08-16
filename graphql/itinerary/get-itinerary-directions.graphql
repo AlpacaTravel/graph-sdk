@@ -1,5 +1,7 @@
 #import "./fragments/itinerary-directions-content.graphql"
 
+# Obtains an itinerary directions item.
+
 query getItineraryDirections($id: ID!, $includeRoutePolyline: Boolean!) {
   node(id: $id) {
     id

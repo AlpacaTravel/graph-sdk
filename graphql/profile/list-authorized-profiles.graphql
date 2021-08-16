@@ -1,6 +1,7 @@
 #import "./fragments/profile-partial-content.graphql"
 
-# Obtains a list of the authorized profiles for the current user.
+# Obtains a list of the authorized profiles for the current access token.
+
 query listAuthorizedProfiles($first: Int!, $after: String) {
   # Use the authorizedProfiles operation
   # first: Number of profiles to return

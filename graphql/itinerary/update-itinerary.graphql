@@ -1,6 +1,8 @@
 #import "./fragments/itinerary-content.graphql"
 #import "./fragments/itinerary-cascaded-changes.graphql"
 
+# Updates an itinerary.
+
 mutation updateItinerary($id: ID!, $itinerary: UpdateItineraryInput!) {
   updateItinerary(id: $id, itinerary: $itinerary) {
     __typename

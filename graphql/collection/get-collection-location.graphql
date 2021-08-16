@@ -1,7 +1,7 @@
 #import "./fragments/collection-location-content.graphql"
 #import "./../place/fragments/place-partial-content.graphql"
 
-# Obtain informationa bout a collection location
+# Obtain informationa bout a collection location.
 
 query getCollectionLocation($id: ID!, $mediaImagePreferredBestFit: [Int!]) {
   collectionItem(

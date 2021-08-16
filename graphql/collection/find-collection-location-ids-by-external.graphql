@@ -1,4 +1,4 @@
-# Find collection location IDs by a specific tag
+# Find collection location IDs by external identifiers.
 
 query findCollectionLocationIdsByExternal(
   $collectionId: [ID!]

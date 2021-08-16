@@ -3,6 +3,7 @@
 # Modifies an itinerary to disable the automatic routing feature, which will
 # turn off determining the directions between the sequence of locations that the
 # itinerary contains.
+
 mutation disableItineraryAutoRoute($id: ID!) {
   # We can use the updateItinerary mutation to provide specific fields
   updateItinerary(

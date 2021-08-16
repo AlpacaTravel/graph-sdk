@@ -1,6 +1,6 @@
 #import "./fragments/collection-location-content.graphql"
 
-# Update the collection location
+# Update the collection location.
 
 mutation updateCollectionLocation($id: ID!, $location: UpdateCollectionLocationInput!) {
   # Use the updateCollectionLocation() mutation to modify a collection location

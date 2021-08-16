@@ -2,7 +2,7 @@
 #import "./../place/fragments/place-content.graphql"
 #import "./../media/fragments/media-image-partial-content.graphql"
 
-# Loads information about an itinerary location
+# Loads information about an itinerary location.
 
 query getItineraryLocation($id: ID!, $mediaImagePreferredBestFit: [Int!]) {
   # Use the node() to query any type

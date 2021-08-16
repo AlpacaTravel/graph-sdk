@@ -1,5 +1,7 @@
 #import "./fragments/itinerary-cascaded-changes.graphql"
 
+# Marks an itinerary location whether it is an optional stop.
+
 mutation updateItineraryLocationIsOptional($id: ID!, $optional: Boolean!) {
   updateItineraryLocation(id: $id, location: { optional: $optional }) {
     __typename

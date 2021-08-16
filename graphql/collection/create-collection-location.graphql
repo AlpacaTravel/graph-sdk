@@ -2,7 +2,7 @@
 #import "./fragments/collection-location-content.graphql"
 #import "./../place/fragments/place-partial-content.graphql"
 
-# Creates an collection location within the provided collection
+# Creates an collection location within the provided collection.
 
 mutation createCollectionLocation($collectionId: ID!, $location: CreateCollectionLocationInput!) {
   # Use the createCollectionLocation mutation operation

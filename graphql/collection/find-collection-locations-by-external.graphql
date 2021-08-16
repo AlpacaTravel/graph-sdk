@@ -1,7 +1,7 @@
 #import "./fragments/collection-location-partial-content.graphql"
 #import "./../place/fragments/place-partial-content.graphql"
 
-# Find collection location IDs by a specific tag
+# Find collection location IDs by an external ID.
 
 query findCollectionLocationsByExternal(
   $collectionId: [ID!]

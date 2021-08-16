@@ -4,6 +4,7 @@
 #import "./../media/fragments/media-image-partial-content.graphql"
 
 # Lists in itinerary locations for a provided Itinerary.
+
 query listItineraryLocations(
   $id: ID!
   $first: Int!

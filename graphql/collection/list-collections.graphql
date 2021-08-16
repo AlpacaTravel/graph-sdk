@@ -1,7 +1,8 @@
 #import "./fragments/collection-partial-content.graphql"
 #import "./fragments/collection-items-count.graphql"
 
-# Obtain a listing of the collections
+# Obtain a listing of the collections for a profile.
+
 query listCollections($profileId: ID!, $first: Int!, $after: String, $discriminator: String) {
   # Use the collections
   collections(

@@ -10,13 +10,15 @@
     "test": "bin/test",
     "build": "bin/build",
     "package-installs": "bin/install",
-    "graphql-codegen": "graphql-codegen --config codegen.yml"
+    "graphql-codegen": "graphql-codegen --config codegen.yml",
+    "generate": "node graphql/generate.js"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "^2.0.1",
     "@graphql-codegen/introspection": "^2.0.0",
     "aws-sdk": "^2.666.0",
     "coveralls": "^3.1.0",
+    "glob": "^7.1.7",
     "graphql": "^15.5.1",
     "istanbul": "^0.4.5"
   },

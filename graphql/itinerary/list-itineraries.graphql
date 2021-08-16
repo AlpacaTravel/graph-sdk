@@ -1,7 +1,7 @@
 #import "./fragments/itinerary-partial-content.graphql"
 #import "./../media/fragments/media-image-partial-content.graphql"
 
-# Query a list of itineraries from an associated profile
+# Query a list of itineraries from an associated profile.
 
 query listItineraries(
   $profileId: ID!
