@@ -24,7 +24,7 @@ to refer to the
 [the urql basics](https://formidable.com/open-source/urql/docs/basics/). You'll
 learn how to setup urql with React/Preact, Vue, Svelte or other.
 
-```
+```javascript
 // Obtain your Alpaca Access Token
 const alpacaAccessToken = 'pk.xxx';
 
@@ -36,7 +36,7 @@ const client = createClient({
 
 ## API Surface for urql
 
-```
+```javascript
 // SDK Functions available from the package
 import * as sdk from '@alpaca-travel/graph-sdk-urql';
 
