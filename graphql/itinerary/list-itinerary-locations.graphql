@@ -1,6 +1,8 @@
 #import "./fragments/itinerary-location-partial-content.graphql"
 #import "./fragments/itinerary-directions-partial-content.graphql"
+#import "./../place/fragments/place-partial-content.graphql"
 
+# Lists in itinerary locations for a provided Itinerary.
 query listItineraryLocations(
   $id: ID!
   $first: Int!
@@ -8,10 +10,16 @@ query listItineraryLocations(
   $includeRoutePolyline: Boolean!
   $mediaImagePreferredBestFit: [Int!]
 ) {
-  itinerary(id: $id) {
+  # Use the itinerary() query operation
+  itinerary(
+    # id: itinerary/XXX
+    id: $id
+  ) {
+    # Response
     id
     __typename
 
+    # Read in the immediate children locations
     locations: children(first: $first, type: ItineraryLocation, after: $after) {
       edges {
         location: node {
@@ -22,6 +30,15 @@ query listItineraryLocations(
             # Include content
             ...ItineraryLocationPartialContent
 
+            # Load the basic information for the place
+            place {
+              id
+              __typename
+
+              ...PlacePartialContent
+            }
+
+            # Load in a preferred media size
             preferredMedia {
               resource {
                 id
@@ -39,8 +56,9 @@ query listItineraryLocations(
             }
           }
         }
+        # Include the directions for how to arrive to this location
         arrival: directions(first: 1, direction: Inbound) {
-          nodes {
+          directions: nodes {
             id
             __typename
 
@@ -56,15 +74,17 @@ query listItineraryLocations(
               }
             }
           }
+          # Indicate if there are more directions to this location
           totalCount
-          pageInfo {
-            endCursor
-          }
         }
       }
+      # Total records
       totalCount
+      # Include information to paginate results
       pageInfo {
+        # Are there more locations in this itinerary
         hasNextPage
+        # Cursor in order to paginate
         endCursor
       }
     }

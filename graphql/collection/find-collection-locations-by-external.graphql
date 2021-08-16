@@ -1,0 +1,51 @@
+#import "./fragments/collection-location-partial-content.graphql"
+#import "./../place/fragments/place-partial-content.graphql"
+
+# Find collection location IDs by a specific tag
+
+query findCollectionLocationsByExternal(
+  $collectionId: [ID!]
+  $externalIds: [ID!]
+  $externalSources: [ID!]
+  $first: Int!
+  $after: String
+) {
+  collectionItems(
+    # Specify the collection ID
+    collectionIds: $collectionId
+    # Specify the tag
+    externalIds: $externalIds
+    externalSources: $externalSources
+    # Pagination
+    first: $first
+    after: $after # Include partials
+  ) {
+    edges {
+      node {
+        id
+        __typename
+
+        ... on CollectionLocation {
+          ...CollectionLocationPartialContent
+          ...CollectionLocationExternalRefs
+
+          place {
+            id
+            __typename
+
+            ...PlacePartialContent
+          }
+        }
+      }
+      cursor
+    }
+    # Obtain the total count
+    totalCount
+    # Obtain the pagination information
+    pageInfo {
+      hasNextPage
+      hasPreviousPage
+      endCursor
+    }
+  }
+}

@@ -1,0 +1,39 @@
+#import "./fragments/collection-partial-content.graphql"
+#import "./fragments/collection-items-count.graphql"
+
+# Obtain a listing of the collections
+query listCollections($profileId: ID!, $first: Int!, $after: String, $discriminator: String) {
+  # Use the collections
+  collections(
+    # Restrict to the profile
+    profileId: $profileId
+
+    # Pagination Controls
+    first: $first
+    after: $after
+
+    # Filtering
+    discriminator: $discriminator
+  ) {
+    # Load the result set in as collections
+    collections: nodes {
+      id
+      __typename
+
+      # Load in partial content about the collection
+      ...CollectionPartialContent
+      ...CollectionItemsCount
+    }
+
+    # Obtain the total count
+    totalCount
+
+    # Pagination controls
+    pageInfo {
+      # Whether there are more results
+      hasNextPage
+      # The end cursor to continue loading results from (pass to $after)
+      endCursor
+    }
+  }
+}

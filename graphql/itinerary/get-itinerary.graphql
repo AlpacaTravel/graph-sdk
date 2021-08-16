@@ -1,14 +1,26 @@
 #import "./fragments/itinerary-content.graphql"
 #import "./fragments/itinerary-locations-count.graphql"
+#import "./../profile/fragments/profile-partial-content.graphql"
 
+# Loads information about an individual itinerary
 query getItinerary($id: ID!, $mediaImagePreferredBestFit: [Int!]) {
   itinerary(id: $id) {
     id
     __typename
 
+    # Load content about the itinerary
     ...ItineraryContent
     ...ItineraryLocationsCount
 
+    # Load information about the profile
+    profile {
+      id
+      __typename
+
+      ...ProfilePartialContent
+    }
+
+    # Select preferred media
     preferredMedia {
       resource {
         id

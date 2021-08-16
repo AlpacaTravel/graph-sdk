@@ -1,0 +1,6 @@
+fragment CollectionItemsCount on Collection {
+  # Count the items
+  items(first: 0) {
+    totalCount
+  }
+}

@@ -1,5 +1,3 @@
-#import "./place-partial-content.graphql"
-
 fragment ItineraryLocationPartialContent on ItineraryLocation {
   title
   synopsis
@@ -13,12 +11,5 @@ fragment ItineraryLocationPartialContent on ItineraryLocation {
   position {
     lon
     lat
-  }
-
-  place {
-    id
-    __typename
-
-    ...PlacePartialContent
   }
 }

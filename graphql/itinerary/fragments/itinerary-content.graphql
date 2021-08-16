@@ -1,5 +1,3 @@
-#import "./profile-partial-content.graphql"
-
 fragment ItineraryContent on Itinerary {
   title
   synopsis
@@ -10,12 +8,5 @@ fragment ItineraryContent on Itinerary {
 
   autoRoute {
     defaultMode
-  }
-
-  profile {
-    id
-    __typename
-
-    ...ProfilePartialContent
   }
 }

@@ -6,7 +6,12 @@
 # offer them to remove it. You can pass the matching itinerary location ID that
 # has this place associated from this query to the deleteItineraryItem operation
 
-query findItineraryLocationByPlaceId($itineraryId: ID!, $placeId: ID!) {
+query findItineraryLocationIdsByPlaceId(
+  $itineraryId: ID!
+  $placeId: ID!
+  $first: Int!
+  $after: String
+) {
   # Use the itinerary query, supplying the itinerary ID to check
   itinerary(id: $itineraryId) {
     # Query the descendants, providing some constraints
@@ -16,17 +21,32 @@ query findItineraryLocationByPlaceId($itineraryId: ID!, $placeId: ID!) {
       # Limit to itinerary location
       type: ItineraryLocation
       # Limit to the first match
-      first: 1
+      first: $first
+      after: $after
     ) {
-      nodes {
-        ... on ItineraryLocation {
+      edges {
+        node {
           id
           __typename
+
+          ... on ItineraryLocation {
+            place {
+              id
+              __typename
+            }
+          }
         }
       }
       # Total Count should be greater than 0, as the place could be added more
       # than once to an itinerary
       totalCount
+      # Include the pagination
+      pageInfo {
+        hasNextPage
+        hasPreviousPage
+        startCursor
+        endCursor
+      }
     }
   }
 }

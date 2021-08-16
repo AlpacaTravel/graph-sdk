@@ -1,0 +1,7 @@
+fragment ProfileContent on Profile {
+  name
+  handle
+  type
+  bio
+  websiteUrl
+}

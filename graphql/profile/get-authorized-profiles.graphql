@@ -1,0 +1,27 @@
+#import "./fragments/profile-partial-content.graphql"
+
+# Obtains a list of the authorized profiles for the current user.
+query getAuthorizedProfiles($first: Int!, $after: String) {
+  # Use the authorizedProfiles operation
+  # first: Number of profiles to return
+  # after: the cursor to continue pagination with
+  authorizedProfiles(first: $first, after: $after) {
+    profiles: nodes {
+      id
+      __typename
+
+      # Load in partial information about the profile
+      ...ProfilePartialContent
+    }
+    # Return the total count of profiles
+    totalCount
+
+    # Obtain the information about paging this set
+    pageInfo {
+      # Whether there are more profiles to obtain
+      hasNextPage
+      # The cursor to pass in as the 'after' value
+      endCursor
+    }
+  }
+}

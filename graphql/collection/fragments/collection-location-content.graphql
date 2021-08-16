@@ -1,0 +1,13 @@
+fragment CollectionLocationContent on CollectionLocation {
+  title
+  synopsis
+  description
+  tags
+  readMoreUrl
+  websiteUrl
+
+  position {
+    lon
+    lat
+  }
+}

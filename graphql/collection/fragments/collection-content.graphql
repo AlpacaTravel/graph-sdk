@@ -1,0 +1,7 @@
+fragment CollectionContent on Collection {
+  # Load the information about the collection
+  title
+  synopsis
+  description
+  discriminator
+}

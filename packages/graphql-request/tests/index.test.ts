@@ -1,5 +1,5 @@
 import { getSdk } from '../src/index';
-import { request, GraphQLClient } from 'graphql-request';
+import { GraphQLClient } from 'graphql-request';
 
 test('index creates an SDK with a configured client offering the API surface', () => {
   const client = new GraphQLClient('https://withalpaca.com/api/graphql?accessToken=XXX');

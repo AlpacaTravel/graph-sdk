@@ -1,0 +1,15 @@
+#import "./fragments/collection-content.graphql"
+#import "./fragments/collection-items-count.graphql"
+
+# Obtains information about a collection
+query getCollection($id: ID!) {
+  # Use thge collection() query to obtain information about a single collection
+  collection(id: $id) {
+    id
+    __typename
+
+    # Load in the content from the collection
+    ...CollectionContent
+    ...CollectionItemsCount
+  }
+}

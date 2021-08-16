@@ -1,5 +1,3 @@
-#import "./place-content.graphql"
-
 fragment ItineraryLocationContent on ItineraryLocation {
   title
   synopsis
@@ -12,12 +10,5 @@ fragment ItineraryLocationContent on ItineraryLocation {
   position {
     lon
     lat
-  }
-
-  place {
-    id
-    __typename
-
-    ...PlaceContent
   }
 }

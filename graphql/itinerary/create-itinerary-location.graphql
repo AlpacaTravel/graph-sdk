@@ -1,6 +1,7 @@
 #import "./fragments/itinerary-cascaded-changes.graphql"
 #import "./fragments/itinerary-locations-count.graphql"
 #import "./fragments/itinerary-location-content.graphql"
+#import "./../place/fragments/place-partial-content.graphql"
 
 # Creates a new Itinerary Location, which can contain place information. The
 # Itinerary Location usually wraps a "place", in which each place created must
@@ -37,6 +38,14 @@ mutation createItineraryLocation($itineraryId: ID!, $location: CreateItineraryLo
       # Read the itinerary content (full, useful for caching)
       # Note: See the fragments to see what is selected
       ...ItineraryLocationContent
+
+      # Read in the place information
+      place {
+        id
+        __typename
+
+        ...PlacePartialContent
+      }
     }
 
     # Read any other affected changes by this action
