@@ -142,7 +142,7 @@ const GET_AUTHORIZED_PROFILES = gql`
 
 function Profiles() {
   const { loading, error, data } = useQuery(GET_AUTHORIZED_PROFILES, {
-    first: 10
+    first: 10,
   });
 
   if (loading) return null;
@@ -150,16 +150,16 @@ function Profiles() {
 
   return (
     <ul>
-      {data.authorizedProfiles.nodes.map(profile => (
+      {data.authorizedProfiles.nodes.map((profile) => (
         <li key={profile.id}>{profile.name}</li>
       ))}
     </ul>
-  )
+  );
 }
-
-- See [Queries](https://www.apollographql.com/docs/react/data/queries/)
-- See [Mutations](https://www.apollographql.com/docs/react/data/mutations/)
 ```
+
+- See [Apollo Queries](https://www.apollographql.com/docs/react/data/queries/)
+- See [Apollo Mutations](https://www.apollographql.com/docs/react/data/mutations/)
 
 #### Using graphql-codegen
 
