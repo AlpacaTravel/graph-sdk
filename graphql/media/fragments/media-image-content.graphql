@@ -1,0 +1,9 @@
+fragment MediaImageContent on MediaImage {
+  provider
+
+  copyright
+  altText
+  attribution
+  caption
+  tags
+}

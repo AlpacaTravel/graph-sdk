@@ -4,4 +4,6 @@ fragment CollectionContent on Collection {
   synopsis
   description
   discriminator
+
+  readMoreUrl
 }

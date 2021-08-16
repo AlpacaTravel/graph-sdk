@@ -5654,6 +5654,96 @@ export type UpdateProfilePayload = {
   profile?: Maybe<Profile>;
 };
 
+export type CreateCollectionLocationMutationVariables = Exact<{
+  collectionId: Scalars['ID'];
+  location: CreateCollectionLocationInput;
+}>;
+
+
+export type CreateCollectionLocationMutation = { __typename?: 'Mutation', createCollectionLocation: { __typename: 'CreateCollectionLocationPayload', location?: Maybe<{ __typename: 'CollectionLocation', id: string, title?: Maybe<string>, synopsis?: Maybe<string>, description?: Maybe<string>, tags: Array<string>, readMoreUrl?: Maybe<string>, websiteUrl?: Maybe<string>, position: { __typename?: 'Position', lon: number, lat: number }, place: { __typename: 'Place', id: string, name?: Maybe<string>, synopsis?: Maybe<string>, maki?: Maybe<string>, position: { __typename?: 'Position', lon: number, lat: number }, address: { __typename?: 'PlaceAddress', addressLineOne?: Maybe<string>, addressLineTwo?: Maybe<string>, addressLineThree?: Maybe<string>, locality?: Maybe<string>, region?: Maybe<string>, regionCode?: Maybe<string>, country?: Maybe<string>, countryCode?: Maybe<string> }, layers: Array<{ __typename: 'PlaceLayer', id: string, name?: Maybe<string> }> } }> } };
+
+export type DeleteCollectionItemMutationVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+
+export type DeleteCollectionItemMutation = { __typename?: 'Mutation', deleteCollectionItem: { __typename: 'DeleteCollectionItemPayload' } };
+
+export type FindCollectionLocationIdsByExternalQueryVariables = Exact<{
+  collectionId?: Maybe<Array<Scalars['ID']> | Scalars['ID']>;
+  externalIds?: Maybe<Array<Scalars['ID']> | Scalars['ID']>;
+  externalSources?: Maybe<Array<Scalars['ID']> | Scalars['ID']>;
+  first: Scalars['Int'];
+  after?: Maybe<Scalars['String']>;
+}>;
+
+
+export type FindCollectionLocationIdsByExternalQuery = { __typename?: 'Query', collectionItems: { __typename: 'CollectionItemConnection', totalCount: number, edges: Array<{ __typename?: 'CollectionItemEdge', cursor: string, node: { __typename: 'CollectionLocation', id: string, place: { __typename: 'Place', id: string } } }>, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: Maybe<string>, endCursor?: Maybe<string> } } };
+
+export type FindCollectionLocationIdsByTagQueryVariables = Exact<{
+  collectionId?: Maybe<Array<Scalars['ID']> | Scalars['ID']>;
+  tags?: Maybe<Array<Scalars['String']> | Scalars['String']>;
+  first: Scalars['Int'];
+  after?: Maybe<Scalars['String']>;
+}>;
+
+
+export type FindCollectionLocationIdsByTagQuery = { __typename?: 'Query', collectionItems: { __typename: 'CollectionItemConnection', totalCount: number, edges: Array<{ __typename?: 'CollectionItemEdge', cursor: string, node: { __typename: 'CollectionLocation', id: string, place: { __typename: 'Place', id: string } } }>, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: Maybe<string>, endCursor?: Maybe<string> } } };
+
+export type FindCollectionLocationsByExternalQueryVariables = Exact<{
+  collectionId?: Maybe<Array<Scalars['ID']> | Scalars['ID']>;
+  externalIds?: Maybe<Array<Scalars['ID']> | Scalars['ID']>;
+  externalSources?: Maybe<Array<Scalars['ID']> | Scalars['ID']>;
+  first: Scalars['Int'];
+  after?: Maybe<Scalars['String']>;
+}>;
+
+
+export type FindCollectionLocationsByExternalQuery = { __typename?: 'Query', collectionItems: { __typename: 'CollectionItemConnection', totalCount: number, edges: Array<{ __typename?: 'CollectionItemEdge', cursor: string, node: { __typename: 'CollectionLocation', title?: Maybe<string>, synopsis?: Maybe<string>, tags: Array<string>, readMoreUrl?: Maybe<string>, id: string, position: { __typename?: 'Position', lon: number, lat: number }, externalId?: Maybe<{ __typename?: 'Attribute', value?: Maybe<any> }>, externalSource?: Maybe<{ __typename?: 'Attribute', value?: Maybe<any> }>, place: { __typename: 'Place', id: string, name?: Maybe<string>, synopsis?: Maybe<string>, maki?: Maybe<string>, position: { __typename?: 'Position', lon: number, lat: number }, address: { __typename?: 'PlaceAddress', addressLineOne?: Maybe<string>, addressLineTwo?: Maybe<string>, addressLineThree?: Maybe<string>, locality?: Maybe<string>, region?: Maybe<string>, regionCode?: Maybe<string>, country?: Maybe<string>, countryCode?: Maybe<string> }, layers: Array<{ __typename: 'PlaceLayer', id: string, name?: Maybe<string> }> } } }>, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: Maybe<string>, endCursor?: Maybe<string> } } };
+
+export type FindCollectionLocationsByTagQueryVariables = Exact<{
+  collectionId?: Maybe<Array<Scalars['ID']> | Scalars['ID']>;
+  tags?: Maybe<Array<Scalars['String']> | Scalars['String']>;
+  first: Scalars['Int'];
+  after?: Maybe<Scalars['String']>;
+}>;
+
+
+export type FindCollectionLocationsByTagQuery = { __typename?: 'Query', collectionItems: { __typename: 'CollectionItemConnection', totalCount: number, edges: Array<{ __typename?: 'CollectionItemEdge', cursor: string, node: { __typename: 'CollectionLocation', title?: Maybe<string>, synopsis?: Maybe<string>, tags: Array<string>, readMoreUrl?: Maybe<string>, id: string, position: { __typename?: 'Position', lon: number, lat: number }, externalId?: Maybe<{ __typename?: 'Attribute', value?: Maybe<any> }>, externalSource?: Maybe<{ __typename?: 'Attribute', value?: Maybe<any> }>, place: { __typename: 'Place', id: string, name?: Maybe<string>, synopsis?: Maybe<string>, maki?: Maybe<string>, position: { __typename?: 'Position', lon: number, lat: number }, address: { __typename?: 'PlaceAddress', addressLineOne?: Maybe<string>, addressLineTwo?: Maybe<string>, addressLineThree?: Maybe<string>, locality?: Maybe<string>, region?: Maybe<string>, regionCode?: Maybe<string>, country?: Maybe<string>, countryCode?: Maybe<string> }, layers: Array<{ __typename: 'PlaceLayer', id: string, name?: Maybe<string> }> } } }>, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: Maybe<string>, endCursor?: Maybe<string> } } };
+
+export type GetCollectionLocationQueryVariables = Exact<{
+  id: Scalars['ID'];
+  mediaImagePreferredBestFit?: Maybe<Array<Scalars['Int']> | Scalars['Int']>;
+}>;
+
+
+export type GetCollectionLocationQuery = { __typename?: 'Query', collectionItem?: Maybe<{ __typename: 'CollectionLocation', title?: Maybe<string>, synopsis?: Maybe<string>, description?: Maybe<string>, tags: Array<string>, readMoreUrl?: Maybe<string>, websiteUrl?: Maybe<string>, id: string, position: { __typename?: 'Position', lon: number, lat: number }, place: { __typename: 'Place', id: string, name?: Maybe<string>, synopsis?: Maybe<string>, maki?: Maybe<string>, position: { __typename?: 'Position', lon: number, lat: number }, address: { __typename?: 'PlaceAddress', addressLineOne?: Maybe<string>, addressLineTwo?: Maybe<string>, addressLineThree?: Maybe<string>, locality?: Maybe<string>, region?: Maybe<string>, regionCode?: Maybe<string>, country?: Maybe<string>, countryCode?: Maybe<string> }, layers: Array<{ __typename: 'PlaceLayer', id: string, name?: Maybe<string> }> }, preferredMedia?: Maybe<{ __typename: 'MediaContainer', id: string, resource: { __typename: 'MediaImage', caption?: Maybe<string>, copyright?: Maybe<string>, attribution?: Maybe<string>, id?: Maybe<string>, altText?: Maybe<string>, source?: Maybe<{ __typename?: 'MediaImageSource', url: string }> } }> }> };
+
+export type GetCollectionQueryVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+
+export type GetCollectionQuery = { __typename?: 'Query', collection?: Maybe<{ __typename: 'Collection', id: string, title?: Maybe<string>, synopsis?: Maybe<string>, description?: Maybe<string>, discriminator: string, readMoreUrl?: Maybe<string>, items: { __typename?: 'CollectionItemConnection', totalCount: number } }> };
+
+export type ListCollectionsQueryVariables = Exact<{
+  profileId: Scalars['ID'];
+  first: Scalars['Int'];
+  after?: Maybe<Scalars['String']>;
+  discriminator?: Maybe<Scalars['String']>;
+}>;
+
+
+export type ListCollectionsQuery = { __typename?: 'Query', collections: { __typename: 'CollectionConnection', totalCount: number, edges: Array<{ __typename?: 'CollectionEdge', node: { __typename: 'Collection', id: string, title?: Maybe<string>, synopsis?: Maybe<string>, readMoreUrl?: Maybe<string>, items: { __typename?: 'CollectionItemConnection', totalCount: number } } }>, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: Maybe<string>, endCursor?: Maybe<string> } } };
+
+export type UpdateCollectionLocationMutationVariables = Exact<{
+  id: Scalars['ID'];
+  location: UpdateCollectionLocationInput;
+}>;
+
+
+export type UpdateCollectionLocationMutation = { __typename?: 'Mutation', updateCollectionLocation: { __typename: 'UpdateCollectionLocationPayload', location?: Maybe<{ __typename: 'CollectionLocation', id: string, title?: Maybe<string>, synopsis?: Maybe<string>, description?: Maybe<string>, tags: Array<string>, readMoreUrl?: Maybe<string>, websiteUrl?: Maybe<string>, position: { __typename?: 'Position', lon: number, lat: number } }> } };
+
 export type CreateItineraryDirectionsMutationVariables = Exact<{
   itineraryId: Scalars['ID'];
   directions: CreateItineraryDirectionsInput;
@@ -5668,7 +5758,7 @@ export type CreateItineraryLocationMutationVariables = Exact<{
 }>;
 
 
-export type CreateItineraryLocationMutation = { __typename?: 'Mutation', createItineraryLocation: { __typename: 'CreateItineraryLocationPayload', location?: Maybe<{ __typename: 'ItineraryLocation', id: string, title?: Maybe<string>, synopsis?: Maybe<string>, description?: Maybe<string>, tags: Array<string>, optional: boolean, itinerary: { __typename: 'Itinerary', id: string, locations: { __typename?: 'ItineraryItemConnection', totalCount: number } }, position: { __typename?: 'Position', lon: number, lat: number }, place: { __typename: 'Place', id: string, name?: Maybe<string>, synopsis?: Maybe<string>, description?: Maybe<string>, maki?: Maybe<string>, position: { __typename?: 'Position', lon: number, lat: number }, address: { __typename?: 'PlaceAddress', addressLineOne?: Maybe<string>, addressLineTwo?: Maybe<string>, addressLineThree?: Maybe<string>, locality?: Maybe<string>, region?: Maybe<string>, country?: Maybe<string>, countryCode?: Maybe<string> }, contact: { __typename?: 'PlaceContact', phoneNumber?: Maybe<string>, emailAddress?: Maybe<string>, websiteUrl?: Maybe<string>, bookingsUrl?: Maybe<string>, facebookUrl?: Maybe<string>, instagramUrl?: Maybe<string>, twitterUrl?: Maybe<string> }, layers: Array<{ __typename: 'PlaceLayer', id: string, name?: Maybe<string> }>, hours?: Maybe<{ __typename?: 'PlaceHours', osmTag: string }> } }>, cascaded: { __typename?: 'ItineraryItemCascadedChanges', deletedIds: Array<string>, created: Array<{ __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', id: string }>, updated: Array<{ __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', id: string }> } } };
+export type CreateItineraryLocationMutation = { __typename?: 'Mutation', createItineraryLocation: { __typename: 'CreateItineraryLocationPayload', location?: Maybe<{ __typename: 'ItineraryLocation', id: string, title?: Maybe<string>, synopsis?: Maybe<string>, description?: Maybe<string>, tags: Array<string>, optional: boolean, readMoreUrl?: Maybe<string>, itinerary: { __typename: 'Itinerary', id: string, locations: { __typename?: 'ItineraryItemConnection', totalCount: number } }, position: { __typename?: 'Position', lon: number, lat: number }, place: { __typename: 'Place', id: string, name?: Maybe<string>, synopsis?: Maybe<string>, maki?: Maybe<string>, position: { __typename?: 'Position', lon: number, lat: number }, address: { __typename?: 'PlaceAddress', addressLineOne?: Maybe<string>, addressLineTwo?: Maybe<string>, addressLineThree?: Maybe<string>, locality?: Maybe<string>, region?: Maybe<string>, regionCode?: Maybe<string>, country?: Maybe<string>, countryCode?: Maybe<string> }, layers: Array<{ __typename: 'PlaceLayer', id: string, name?: Maybe<string> }> } }>, cascaded: { __typename?: 'ItineraryItemCascadedChanges', deletedIds: Array<string>, created: Array<{ __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', id: string }>, updated: Array<{ __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', id: string }> } } };
 
 export type CreateItineraryMutationVariables = Exact<{
   itinerary: CreateItineraryInput;
@@ -5676,14 +5766,21 @@ export type CreateItineraryMutationVariables = Exact<{
 }>;
 
 
-export type CreateItineraryMutation = { __typename?: 'Mutation', createItinerary: { __typename: 'CreateItineraryPayload', itinerary?: Maybe<{ __typename: 'Itinerary', id: string, title?: Maybe<string>, synopsis?: Maybe<string>, description?: Maybe<string>, tags: Array<string>, created?: Maybe<string>, autoRoute?: Maybe<{ __typename?: 'ItineraryAutoRoute', defaultMode: RouteMode }>, profile?: Maybe<{ __typename: 'Profile', id: string, name: string }>, locations: { __typename?: 'ItineraryItemConnection', totalCount: number } }> } };
+export type CreateItineraryMutation = { __typename?: 'Mutation', createItinerary: { __typename: 'CreateItineraryPayload', itinerary?: Maybe<{ __typename: 'Itinerary', id: string, title?: Maybe<string>, synopsis?: Maybe<string>, description?: Maybe<string>, tags: Array<string>, created?: Maybe<string>, autoRoute?: Maybe<{ __typename?: 'ItineraryAutoRoute', defaultMode: RouteMode }>, locations: { __typename?: 'ItineraryItemConnection', totalCount: number } }> } };
 
 export type DeleteItineraryLocationMutationVariables = Exact<{
-  itineraryLocationId: Scalars['ID'];
+  id: Scalars['ID'];
 }>;
 
 
 export type DeleteItineraryLocationMutation = { __typename?: 'Mutation', deleteItineraryItem: { __typename: 'DeleteItineraryItemPayload', itinerary: { __typename: 'Itinerary', id: string, locations: { __typename?: 'ItineraryItemConnection', totalCount: number } }, cascaded: { __typename?: 'ItineraryItemCascadedChanges', deletedIds: Array<string>, created: Array<{ __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', id: string }>, updated: Array<{ __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', id: string }> } } };
+
+export type DeleteItineraryMutationVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+
+export type DeleteItineraryMutation = { __typename?: 'Mutation', deleteItinerary: { __typename: 'DeleteItineraryPayload' } };
 
 export type DisableItineraryAutoRouteMutationVariables = Exact<{
   id: Scalars['ID'];
@@ -5700,13 +5797,25 @@ export type EnableItineraryAutoRouteMutationVariables = Exact<{
 
 export type EnableItineraryAutoRouteMutation = { __typename?: 'Mutation', updateItinerary: { __typename: 'UpdateItineraryPayload', itinerary?: Maybe<{ __typename: 'Itinerary', id: string, autoRoute?: Maybe<{ __typename?: 'ItineraryAutoRoute', defaultMode: RouteMode }> }>, cascaded: { __typename?: 'ItineraryItemCascadedChanges', deletedIds: Array<string>, created: Array<{ __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', id: string }>, updated: Array<{ __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', id: string }> } } };
 
-export type FindItineraryLocationByPlaceIdQueryVariables = Exact<{
+export type FindItineraryLocationIdsByPlaceIdQueryVariables = Exact<{
   itineraryId: Scalars['ID'];
   placeId: Scalars['ID'];
+  first: Scalars['Int'];
+  after?: Maybe<Scalars['String']>;
 }>;
 
 
-export type FindItineraryLocationByPlaceIdQuery = { __typename?: 'Query', itinerary?: Maybe<{ __typename?: 'Itinerary', descendants: { __typename?: 'ItineraryItemConnection', totalCount: number, nodes: Array<{ __typename?: 'ItineraryCollection' } | { __typename?: 'ItineraryDirections' } | { __typename: 'ItineraryLocation', id: string }> } }> };
+export type FindItineraryLocationIdsByPlaceIdQuery = { __typename?: 'Query', itinerary?: Maybe<{ __typename?: 'Itinerary', descendants: { __typename: 'ItineraryItemConnection', totalCount: number, edges: Array<{ __typename?: 'ItineraryItemEdge', node: { __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', id: string, place: { __typename: 'Place', id: string } } }>, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: Maybe<string>, endCursor?: Maybe<string> } } }> };
+
+export type FindItineraryLocationsByPlaceIdQueryVariables = Exact<{
+  itineraryId: Scalars['ID'];
+  placeId: Scalars['ID'];
+  first: Scalars['Int'];
+  after?: Maybe<Scalars['String']>;
+}>;
+
+
+export type FindItineraryLocationsByPlaceIdQuery = { __typename?: 'Query', itinerary?: Maybe<{ __typename?: 'Itinerary', descendants: { __typename: 'ItineraryItemConnection', totalCount: number, edges: Array<{ __typename?: 'ItineraryItemEdge', node: { __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', title?: Maybe<string>, synopsis?: Maybe<string>, tags: Array<string>, optional: boolean, readMoreUrl?: Maybe<string>, id: string, position: { __typename?: 'Position', lon: number, lat: number }, place: { __typename: 'Place', id: string, name?: Maybe<string>, synopsis?: Maybe<string>, maki?: Maybe<string>, position: { __typename?: 'Position', lon: number, lat: number }, address: { __typename?: 'PlaceAddress', addressLineOne?: Maybe<string>, addressLineTwo?: Maybe<string>, addressLineThree?: Maybe<string>, locality?: Maybe<string>, region?: Maybe<string>, regionCode?: Maybe<string>, country?: Maybe<string>, countryCode?: Maybe<string> }, layers: Array<{ __typename: 'PlaceLayer', id: string, name?: Maybe<string> }> } } }>, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: Maybe<string>, endCursor?: Maybe<string> } } }> };
 
 export type GetItineraryDirectionsQueryVariables = Exact<{
   id: Scalars['ID'];
@@ -5716,20 +5825,31 @@ export type GetItineraryDirectionsQueryVariables = Exact<{
 
 export type GetItineraryDirectionsQuery = { __typename?: 'Query', node?: Maybe<{ __typename: 'Collection', id: string } | { __typename: 'CollectionLocation', id: string } | { __typename: 'ConnectedApp', id: string } | { __typename: 'Itinerary', id: string } | { __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', durationMin?: Maybe<number>, id: string, route: { __typename?: 'Route', segments: Array<{ __typename: 'RouteSegment', id: string, mode: RouteMode, polyline?: Maybe<string> }> } } | { __typename: 'ItineraryLocation', id: string } | { __typename: 'Place', id: string } | { __typename: 'Profile', id: string }> };
 
+export type GetItineraryLocationQueryVariables = Exact<{
+  id: Scalars['ID'];
+  mediaImagePreferredBestFit?: Maybe<Array<Scalars['Int']> | Scalars['Int']>;
+}>;
+
+
+export type GetItineraryLocationQuery = { __typename?: 'Query', node?: Maybe<{ __typename: 'Collection', id: string } | { __typename: 'CollectionLocation', id: string } | { __typename: 'ConnectedApp', id: string } | { __typename: 'Itinerary', id: string } | { __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', title?: Maybe<string>, synopsis?: Maybe<string>, description?: Maybe<string>, tags: Array<string>, optional: boolean, readMoreUrl?: Maybe<string>, id: string, position: { __typename?: 'Position', lon: number, lat: number }, place: { __typename: 'Place', id: string, name?: Maybe<string>, synopsis?: Maybe<string>, description?: Maybe<string>, maki?: Maybe<string>, position: { __typename?: 'Position', lon: number, lat: number }, address: { __typename?: 'PlaceAddress', addressLineOne?: Maybe<string>, addressLineTwo?: Maybe<string>, addressLineThree?: Maybe<string>, locality?: Maybe<string>, region?: Maybe<string>, regionCode?: Maybe<string>, country?: Maybe<string>, countryCode?: Maybe<string> }, contact: { __typename?: 'PlaceContact', phoneNumber?: Maybe<string>, emailAddress?: Maybe<string>, websiteUrl?: Maybe<string>, bookingsUrl?: Maybe<string>, facebookUrl?: Maybe<string>, instagramUrl?: Maybe<string>, twitterUrl?: Maybe<string> }, layers: Array<{ __typename: 'PlaceLayer', id: string, name?: Maybe<string> }>, hours?: Maybe<{ __typename?: 'PlaceHours', osmTag: string }> }, preferredMedia?: Maybe<{ __typename: 'MediaContainer', id: string, resource: { __typename: 'MediaImage', provider: string, copyright?: Maybe<string>, altText?: Maybe<string>, attribution?: Maybe<string>, caption?: Maybe<string>, tags: Array<string>, id?: Maybe<string>, source?: Maybe<{ __typename?: 'MediaImageSource', url: string }> } }> } | { __typename: 'Place', id: string } | { __typename: 'Profile', id: string }> };
+
 export type GetItineraryQueryVariables = Exact<{
   id: Scalars['ID'];
   mediaImagePreferredBestFit?: Maybe<Array<Scalars['Int']> | Scalars['Int']>;
 }>;
 
 
-export type GetItineraryQuery = { __typename?: 'Query', itinerary?: Maybe<{ __typename: 'Itinerary', id: string, title?: Maybe<string>, synopsis?: Maybe<string>, description?: Maybe<string>, tags: Array<string>, created?: Maybe<string>, autoRoute?: Maybe<{ __typename?: 'ItineraryAutoRoute', defaultMode: RouteMode }>, profile?: Maybe<{ __typename: 'Profile', id: string, name: string }>, locations: { __typename?: 'ItineraryItemConnection', totalCount: number }, preferredMedia?: Maybe<{ __typename?: 'MediaContainer', resource: { __typename: 'MediaImage', caption?: Maybe<string>, copyright?: Maybe<string>, attribution?: Maybe<string>, id?: Maybe<string>, altText?: Maybe<string>, source?: Maybe<{ __typename?: 'MediaImageSource', url: string }> } }> }> };
+export type GetItineraryQuery = { __typename?: 'Query', itinerary?: Maybe<{ __typename: 'Itinerary', id: string, title?: Maybe<string>, synopsis?: Maybe<string>, description?: Maybe<string>, tags: Array<string>, created?: Maybe<string>, autoRoute?: Maybe<{ __typename?: 'ItineraryAutoRoute', defaultMode: RouteMode }>, locations: { __typename?: 'ItineraryItemConnection', totalCount: number }, profile?: Maybe<{ __typename: 'Profile', id: string, name: string, handle?: Maybe<string> }>, preferredMedia?: Maybe<{ __typename: 'MediaContainer', id: string, resource: { __typename: 'MediaImage', provider: string, copyright?: Maybe<string>, altText?: Maybe<string>, attribution?: Maybe<string>, caption?: Maybe<string>, tags: Array<string>, id?: Maybe<string>, source?: Maybe<{ __typename?: 'MediaImageSource', url: string }> } }> }> };
 
-export type GetPlaceQueryVariables = Exact<{
-  id: Scalars['ID'];
+export type ListItinerariesQueryVariables = Exact<{
+  profileId: Scalars['ID'];
+  first: Scalars['Int'];
+  after?: Maybe<Scalars['String']>;
+  mediaImagePreferredBestFit?: Maybe<Array<Scalars['Int']> | Scalars['Int']>;
 }>;
 
 
-export type GetPlaceQuery = { __typename?: 'Query', place?: Maybe<{ __typename: 'Place', id: string, name?: Maybe<string>, synopsis?: Maybe<string>, description?: Maybe<string>, maki?: Maybe<string>, position: { __typename?: 'Position', lon: number, lat: number }, address: { __typename?: 'PlaceAddress', addressLineOne?: Maybe<string>, addressLineTwo?: Maybe<string>, addressLineThree?: Maybe<string>, locality?: Maybe<string>, region?: Maybe<string>, country?: Maybe<string>, countryCode?: Maybe<string> }, contact: { __typename?: 'PlaceContact', phoneNumber?: Maybe<string>, emailAddress?: Maybe<string>, websiteUrl?: Maybe<string>, bookingsUrl?: Maybe<string>, facebookUrl?: Maybe<string>, instagramUrl?: Maybe<string>, twitterUrl?: Maybe<string> }, layers: Array<{ __typename: 'PlaceLayer', id: string, name?: Maybe<string> }>, hours?: Maybe<{ __typename?: 'PlaceHours', osmTag: string }> }> };
+export type ListItinerariesQuery = { __typename?: 'Query', itineraries: { __typename: 'ItineraryConnection', totalCount: number, edges: Array<{ __typename?: 'ItineraryEdge', node: { __typename: 'Itinerary', id: string, title?: Maybe<string>, synopsis?: Maybe<string>, tags: Array<string>, created?: Maybe<string>, preferredMedia?: Maybe<{ __typename: 'MediaContainer', id: string, resource: { __typename: 'MediaImage', provider: string, copyright?: Maybe<string>, altText?: Maybe<string>, attribution?: Maybe<string>, caption?: Maybe<string>, tags: Array<string>, id?: Maybe<string>, source?: Maybe<{ __typename?: 'MediaImageSource', url: string }> } }> } }>, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: Maybe<string>, endCursor?: Maybe<string> } } };
 
 export type ListItineraryLocationsQueryVariables = Exact<{
   id: Scalars['ID'];
@@ -5740,7 +5860,7 @@ export type ListItineraryLocationsQueryVariables = Exact<{
 }>;
 
 
-export type ListItineraryLocationsQuery = { __typename?: 'Query', itinerary?: Maybe<{ __typename: 'Itinerary', id: string, locations: { __typename?: 'ItineraryItemConnection', totalCount: number, edges: Array<{ __typename?: 'ItineraryItemEdge', location: { __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', title?: Maybe<string>, synopsis?: Maybe<string>, tags: Array<string>, optional: boolean, readMoreUrl?: Maybe<string>, id: string, position: { __typename?: 'Position', lon: number, lat: number }, place: { __typename: 'Place', id: string, name?: Maybe<string>, synopsis?: Maybe<string>, maki?: Maybe<string>, position: { __typename?: 'Position', lon: number, lat: number }, address: { __typename?: 'PlaceAddress', locality?: Maybe<string>, region?: Maybe<string>, country?: Maybe<string> }, layers: Array<{ __typename: 'PlaceLayer', id: string, name?: Maybe<string> }> }, preferredMedia?: Maybe<{ __typename?: 'MediaContainer', resource: { __typename: 'MediaImage', caption?: Maybe<string>, copyright?: Maybe<string>, attribution?: Maybe<string>, id?: Maybe<string>, altText?: Maybe<string>, source?: Maybe<{ __typename?: 'MediaImageSource', url: string }> } }> }, arrival: { __typename?: 'ItineraryDirectionsConnection', totalCount: number, nodes: Array<{ __typename: 'ItineraryDirections', id: string, durationMin?: Maybe<number>, route: { __typename?: 'Route', segments: Array<{ __typename: 'RouteSegment', id: string, mode: RouteMode, polyline?: Maybe<string> }> } }>, pageInfo: { __typename?: 'PageInfo', endCursor?: Maybe<string> } } }>, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, endCursor?: Maybe<string> } } }> };
+export type ListItineraryLocationsQuery = { __typename?: 'Query', itinerary?: Maybe<{ __typename: 'Itinerary', id: string, locations: { __typename?: 'ItineraryItemConnection', totalCount: number, edges: Array<{ __typename?: 'ItineraryItemEdge', location: { __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', title?: Maybe<string>, synopsis?: Maybe<string>, tags: Array<string>, optional: boolean, readMoreUrl?: Maybe<string>, id: string, position: { __typename?: 'Position', lon: number, lat: number }, place: { __typename: 'Place', id: string, name?: Maybe<string>, synopsis?: Maybe<string>, maki?: Maybe<string>, position: { __typename?: 'Position', lon: number, lat: number }, address: { __typename?: 'PlaceAddress', addressLineOne?: Maybe<string>, addressLineTwo?: Maybe<string>, addressLineThree?: Maybe<string>, locality?: Maybe<string>, region?: Maybe<string>, regionCode?: Maybe<string>, country?: Maybe<string>, countryCode?: Maybe<string> }, layers: Array<{ __typename: 'PlaceLayer', id: string, name?: Maybe<string> }> }, preferredMedia?: Maybe<{ __typename: 'MediaContainer', id: string, resource: { __typename: 'MediaImage', provider: string, copyright?: Maybe<string>, altText?: Maybe<string>, attribution?: Maybe<string>, caption?: Maybe<string>, tags: Array<string>, id?: Maybe<string>, source?: Maybe<{ __typename?: 'MediaImageSource', url: string }> } }> }, arrival: { __typename?: 'ItineraryDirectionsConnection', totalCount: number, directions: Array<{ __typename: 'ItineraryDirections', id: string, durationMin?: Maybe<number>, route: { __typename?: 'Route', segments: Array<{ __typename: 'RouteSegment', id: string, mode: RouteMode, polyline?: Maybe<string> }> } }> } }>, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: Maybe<string>, endCursor?: Maybe<string> } } }> };
 
 export type MoveItineraryLocationAfterMutationVariables = Exact<{
   id: Scalars['ID'];
@@ -5771,7 +5891,7 @@ export type UpdateItineraryLocationMutationVariables = Exact<{
 }>;
 
 
-export type UpdateItineraryLocationMutation = { __typename?: 'Mutation', updateItineraryLocation: { __typename: 'UpdateItineraryLocationPayload', location?: Maybe<{ __typename: 'ItineraryLocation', id: string, title?: Maybe<string>, synopsis?: Maybe<string>, description?: Maybe<string>, tags: Array<string>, optional: boolean, position: { __typename?: 'Position', lon: number, lat: number }, place: { __typename: 'Place', id: string, name?: Maybe<string>, synopsis?: Maybe<string>, description?: Maybe<string>, maki?: Maybe<string>, position: { __typename?: 'Position', lon: number, lat: number }, address: { __typename?: 'PlaceAddress', addressLineOne?: Maybe<string>, addressLineTwo?: Maybe<string>, addressLineThree?: Maybe<string>, locality?: Maybe<string>, region?: Maybe<string>, country?: Maybe<string>, countryCode?: Maybe<string> }, contact: { __typename?: 'PlaceContact', phoneNumber?: Maybe<string>, emailAddress?: Maybe<string>, websiteUrl?: Maybe<string>, bookingsUrl?: Maybe<string>, facebookUrl?: Maybe<string>, instagramUrl?: Maybe<string>, twitterUrl?: Maybe<string> }, layers: Array<{ __typename: 'PlaceLayer', id: string, name?: Maybe<string> }>, hours?: Maybe<{ __typename?: 'PlaceHours', osmTag: string }> } }>, cascaded: { __typename?: 'ItineraryItemCascadedChanges', deletedIds: Array<string>, created: Array<{ __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', id: string }>, updated: Array<{ __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', id: string }> } } };
+export type UpdateItineraryLocationMutation = { __typename?: 'Mutation', updateItineraryLocation: { __typename: 'UpdateItineraryLocationPayload', location?: Maybe<{ __typename: 'ItineraryLocation', id: string, title?: Maybe<string>, synopsis?: Maybe<string>, description?: Maybe<string>, tags: Array<string>, optional: boolean, readMoreUrl?: Maybe<string>, position: { __typename?: 'Position', lon: number, lat: number } }>, cascaded: { __typename?: 'ItineraryItemCascadedChanges', deletedIds: Array<string>, created: Array<{ __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', id: string }>, updated: Array<{ __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', id: string }> } } };
 
 export type UpdateItineraryMutationVariables = Exact<{
   id: Scalars['ID'];
@@ -5779,7 +5899,67 @@ export type UpdateItineraryMutationVariables = Exact<{
 }>;
 
 
-export type UpdateItineraryMutation = { __typename?: 'Mutation', updateItinerary: { __typename: 'UpdateItineraryPayload', itinerary?: Maybe<{ __typename: 'Itinerary', id: string, title?: Maybe<string>, synopsis?: Maybe<string>, description?: Maybe<string>, tags: Array<string>, created?: Maybe<string>, autoRoute?: Maybe<{ __typename?: 'ItineraryAutoRoute', defaultMode: RouteMode }>, profile?: Maybe<{ __typename: 'Profile', id: string, name: string }> }>, cascaded: { __typename?: 'ItineraryItemCascadedChanges', deletedIds: Array<string>, created: Array<{ __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', id: string }>, updated: Array<{ __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', id: string }> } } };
+export type UpdateItineraryMutation = { __typename?: 'Mutation', updateItinerary: { __typename: 'UpdateItineraryPayload', itinerary?: Maybe<{ __typename: 'Itinerary', id: string, title?: Maybe<string>, synopsis?: Maybe<string>, description?: Maybe<string>, tags: Array<string>, created?: Maybe<string>, autoRoute?: Maybe<{ __typename?: 'ItineraryAutoRoute', defaultMode: RouteMode }> }>, cascaded: { __typename?: 'ItineraryItemCascadedChanges', deletedIds: Array<string>, created: Array<{ __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', id: string }>, updated: Array<{ __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', id: string }> } } };
+
+export type GetMediaImageQueryVariables = Exact<{
+  id: Scalars['ID'];
+  smallBestFit?: Maybe<Array<Scalars['Int']> | Scalars['Int']>;
+  mediumBestFit?: Maybe<Array<Scalars['Int']> | Scalars['Int']>;
+  largeBestFit?: Maybe<Array<Scalars['Int']> | Scalars['Int']>;
+}>;
+
+
+export type GetMediaImageQuery = { __typename?: 'Query', mediaResource?: Maybe<{ __typename: 'MediaImage', provider: string, copyright?: Maybe<string>, altText?: Maybe<string>, attribution?: Maybe<string>, caption?: Maybe<string>, tags: Array<string>, id?: Maybe<string>, small?: Maybe<{ __typename?: 'MediaImageSource', url: string }>, medium?: Maybe<{ __typename?: 'MediaImageSource', url: string }>, large?: Maybe<{ __typename?: 'MediaImageSource', url: string }> }> };
+
+export type AutocompleteSearchPlaceQueryVariables = Exact<{
+  text: Scalars['String'];
+  source: PlaceSearchSource;
+}>;
+
+
+export type AutocompleteSearchPlaceQuery = { __typename?: 'Query', placeAutocompleteSearch: { __typename: 'PlaceSearchConnection', edges: Array<{ __typename?: 'PlaceSearchEdge', node: { __typename: 'PlaceSearchNode', id: string, name?: Maybe<string>, maki?: Maybe<string>, position: { __typename?: 'Position', lon: number, lat: number }, address: { __typename?: 'PlaceAddress', addressLineOne?: Maybe<string>, addressLineTwo?: Maybe<string>, addressLineThree?: Maybe<string>, locality?: Maybe<string>, region?: Maybe<string>, regionCode?: Maybe<string>, country?: Maybe<string>, countryCode?: Maybe<string> }, layers: Array<{ __typename: 'PlaceLayer', id: string, name?: Maybe<string> }> }, main: { __typename?: 'TextSearchResult', label: string, matches: Array<{ __typename?: 'TextSearchResultMatch', offset: number, length: number }> }, secondary: { __typename?: 'TextSearchResult', label: string, matches: Array<{ __typename?: 'TextSearchResultMatch', offset: number, length: number }> } }> } };
+
+export type GetPlaceQueryVariables = Exact<{
+  id: Scalars['ID'];
+  mediaImagePreferredBestFit?: Maybe<Array<Scalars['Int']> | Scalars['Int']>;
+}>;
+
+
+export type GetPlaceQuery = { __typename?: 'Query', place?: Maybe<{ __typename: 'Place', id: string, name?: Maybe<string>, synopsis?: Maybe<string>, description?: Maybe<string>, maki?: Maybe<string>, position: { __typename?: 'Position', lon: number, lat: number }, address: { __typename?: 'PlaceAddress', addressLineOne?: Maybe<string>, addressLineTwo?: Maybe<string>, addressLineThree?: Maybe<string>, locality?: Maybe<string>, region?: Maybe<string>, regionCode?: Maybe<string>, country?: Maybe<string>, countryCode?: Maybe<string> }, contact: { __typename?: 'PlaceContact', phoneNumber?: Maybe<string>, emailAddress?: Maybe<string>, websiteUrl?: Maybe<string>, bookingsUrl?: Maybe<string>, facebookUrl?: Maybe<string>, instagramUrl?: Maybe<string>, twitterUrl?: Maybe<string> }, layers: Array<{ __typename: 'PlaceLayer', id: string, name?: Maybe<string> }>, hours?: Maybe<{ __typename?: 'PlaceHours', osmTag: string }>, preferredMedia?: Maybe<{ __typename: 'MediaContainer', id: string, resource: { __typename: 'MediaImage', provider: string, copyright?: Maybe<string>, altText?: Maybe<string>, attribution?: Maybe<string>, caption?: Maybe<string>, tags: Array<string>, id?: Maybe<string>, source?: Maybe<{ __typename?: 'MediaImageSource', url: string }> } }> }> };
+
+export type ReverseSearchPlaceByPositionQueryVariables = Exact<{
+  focus: PositionInput;
+  sources: Array<PlaceSearchSource> | PlaceSearchSource;
+  first: Scalars['Int'];
+}>;
+
+
+export type ReverseSearchPlaceByPositionQuery = { __typename?: 'Query', placeReverseSearch: { __typename: 'PlaceSearchConnection', places: Array<{ __typename: 'PlaceSearchNode', id: string, name?: Maybe<string>, maki?: Maybe<string>, position: { __typename?: 'Position', lon: number, lat: number }, address: { __typename?: 'PlaceAddress', addressLineOne?: Maybe<string>, addressLineTwo?: Maybe<string>, addressLineThree?: Maybe<string>, locality?: Maybe<string>, region?: Maybe<string>, regionCode?: Maybe<string>, country?: Maybe<string>, countryCode?: Maybe<string> }, layers: Array<{ __typename: 'PlaceLayer', id: string, name?: Maybe<string> }> }> } };
+
+export type GetProfileQueryVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+
+export type GetProfileQuery = { __typename?: 'Query', profile?: Maybe<{ __typename: 'Profile', id: string, name: string, handle?: Maybe<string>, type: ProfileType, bio?: Maybe<string>, websiteUrl?: Maybe<string> }> };
+
+export type ListAuthorizedProfilesQueryVariables = Exact<{
+  first: Scalars['Int'];
+  after?: Maybe<Scalars['String']>;
+}>;
+
+
+export type ListAuthorizedProfilesQuery = { __typename?: 'Query', authorizedProfiles: { __typename: 'ProfileConnection', totalCount: number, profiles: Array<{ __typename: 'Profile', id: string, name: string, handle?: Maybe<string> }>, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: Maybe<string>, endCursor?: Maybe<string> } } };
+
+export type SearchRoutesBetweenPositionsQueryVariables = Exact<{
+  mode: RouteSearchableMode;
+  positions: Array<PositionInput> | PositionInput;
+  first: Scalars['Int'];
+  includeRoutePolyline: Scalars['Boolean'];
+}>;
+
+
+export type SearchRoutesBetweenPositionsQuery = { __typename?: 'Query', routes: { __typename: 'RouteConnection', routes: Array<{ __typename?: 'Route', segments: Array<{ __typename?: 'RouteSegment', distance?: Maybe<number>, duration?: Maybe<number>, polyline?: Maybe<string> }> }> } };
 
 
       export interface PossibleTypesResultData {
@@ -5815,6 +5995,65 @@ export type UpdateItineraryMutation = { __typename?: 'Mutation', updateItinerary
 };
       export default result;
     
+export const CollectionContentFragmentDoc = `
+    fragment CollectionContent on Collection {
+  title
+  synopsis
+  description
+  discriminator
+  readMoreUrl
+}
+    `;
+export const CollectionItemsCountFragmentDoc = `
+    fragment CollectionItemsCount on Collection {
+  items(first: 0) {
+    totalCount
+  }
+}
+    `;
+export const CollectionLocationContentFragmentDoc = `
+    fragment CollectionLocationContent on CollectionLocation {
+  title
+  synopsis
+  description
+  tags
+  readMoreUrl
+  websiteUrl
+  position {
+    lon
+    lat
+  }
+}
+    `;
+export const CollectionLocationExternalRefsFragmentDoc = `
+    fragment CollectionLocationExternalRefs on CollectionLocation {
+  externalId: attr(id: "custom://external-ref") {
+    value
+  }
+  externalSource: attr(id: "custom://external-source") {
+    value
+  }
+}
+    `;
+export const CollectionLocationPartialContentFragmentDoc = `
+    fragment CollectionLocationPartialContent on CollectionLocation {
+  title
+  synopsis
+  tags
+  position {
+    lon
+    lat
+  }
+  readMoreUrl
+}
+    `;
+export const CollectionPartialContentFragmentDoc = `
+    fragment CollectionPartialContent on Collection {
+  title
+  synopsis
+  readMoreUrl
+}
+    `;
 export const ItineraryCascadedChangesFragmentDoc = `
     fragment ItineraryCascadedChanges on ItineraryItemCascadedChanges {
   created {
@@ -5828,11 +6067,6 @@ export const ItineraryCascadedChangesFragmentDoc = `
   deletedIds
 }
     `;
-export const ProfilePartialContentFragmentDoc = `
-    fragment ProfilePartialContent on Profile {
-  name
-}
-    `;
 export const ItineraryContentFragmentDoc = `
     fragment ItineraryContent on Itinerary {
   title
@@ -5843,13 +6077,8 @@ export const ItineraryContentFragmentDoc = `
   autoRoute {
     defaultMode
   }
-  profile {
-    id
-    __typename
-    ...ProfilePartialContent
-  }
 }
-    ${ProfilePartialContentFragmentDoc}`;
+    `;
 export const ItineraryDirectionsContentFragmentDoc = `
     fragment ItineraryDirectionsContent on ItineraryDirections {
   durationMin
@@ -5858,6 +6087,68 @@ export const ItineraryDirectionsContentFragmentDoc = `
 export const ItineraryDirectionsPartialContentFragmentDoc = `
     fragment ItineraryDirectionsPartialContent on ItineraryDirections {
   durationMin
+}
+    `;
+export const ItineraryLocationContentFragmentDoc = `
+    fragment ItineraryLocationContent on ItineraryLocation {
+  title
+  synopsis
+  description
+  tags
+  optional
+  readMoreUrl
+  position {
+    lon
+    lat
+  }
+}
+    `;
+export const ItineraryLocationPartialContentFragmentDoc = `
+    fragment ItineraryLocationPartialContent on ItineraryLocation {
+  title
+  synopsis
+  tags
+  optional
+  readMoreUrl
+  position {
+    lon
+    lat
+  }
+}
+    `;
+export const ItineraryLocationsCountFragmentDoc = `
+    fragment ItineraryLocationsCount on Itinerary {
+  locations: descendants(first: 0, type: ItineraryLocation) {
+    totalCount
+  }
+}
+    `;
+export const ItineraryPartialContentFragmentDoc = `
+    fragment ItineraryPartialContent on Itinerary {
+  title
+  synopsis
+  tags
+  created
+}
+    `;
+export const MediaImageContentFragmentDoc = `
+    fragment MediaImageContent on MediaImage {
+  provider
+  copyright
+  altText
+  attribution
+  caption
+  tags
+}
+    `;
+export const MediaImagePartialContentFragmentDoc = `
+    fragment MediaImagePartialContent on MediaImage {
+  provider
+  copyright
+  altText
+  attribution
+  caption
+  tags
 }
     `;
 export const PlaceContentFragmentDoc = `
@@ -5876,6 +6167,7 @@ export const PlaceContentFragmentDoc = `
     addressLineThree
     locality
     region
+    regionCode
     country
     countryCode
   }
@@ -5898,24 +6190,6 @@ export const PlaceContentFragmentDoc = `
   }
 }
     `;
-export const ItineraryLocationContentFragmentDoc = `
-    fragment ItineraryLocationContent on ItineraryLocation {
-  title
-  synopsis
-  description
-  tags
-  optional
-  position {
-    lon
-    lat
-  }
-  place {
-    id
-    __typename
-    ...PlaceContent
-  }
-}
-    ${PlaceContentFragmentDoc}`;
 export const PlacePartialContentFragmentDoc = `
     fragment PlacePartialContent on Place {
   name
@@ -5926,9 +6200,14 @@ export const PlacePartialContentFragmentDoc = `
   }
   maki
   address {
+    addressLineOne
+    addressLineTwo
+    addressLineThree
     locality
     region
+    regionCode
     country
+    countryCode
   }
   layers {
     id
@@ -5937,31 +6216,420 @@ export const PlacePartialContentFragmentDoc = `
   }
 }
     `;
-export const ItineraryLocationPartialContentFragmentDoc = `
-    fragment ItineraryLocationPartialContent on ItineraryLocation {
-  title
-  synopsis
-  tags
-  optional
-  readMoreUrl
+export const PlaceSearchContentFragmentDoc = `
+    fragment PlaceSearchContent on PlaceSearchNode {
+  name
   position {
     lon
     lat
   }
-  place {
+  address {
+    addressLineOne
+    addressLineTwo
+    addressLineThree
+    locality
+    region
+    regionCode
+    country
+    countryCode
+  }
+  maki
+  layers {
     id
     __typename
-    ...PlacePartialContent
-  }
-}
-    ${PlacePartialContentFragmentDoc}`;
-export const ItineraryLocationsCountFragmentDoc = `
-    fragment ItineraryLocationsCount on Itinerary {
-  locations: descendants(first: 0, type: ItineraryLocation) {
-    totalCount
+    name
   }
 }
     `;
+export const ProfileContentFragmentDoc = `
+    fragment ProfileContent on Profile {
+  name
+  handle
+  type
+  bio
+  websiteUrl
+}
+    `;
+export const ProfilePartialContentFragmentDoc = `
+    fragment ProfilePartialContent on Profile {
+  name
+  handle
+}
+    `;
+export const CreateCollectionLocationDocument = `
+    mutation createCollectionLocation($collectionId: ID!, $location: CreateCollectionLocationInput!) {
+  createCollectionLocation(collectionId: $collectionId, location: $location) {
+    __typename
+    location {
+      id
+      __typename
+      ...CollectionLocationContent
+      place {
+        id
+        __typename
+        ...PlacePartialContent
+      }
+    }
+  }
+}
+    ${CollectionLocationContentFragmentDoc}
+${PlacePartialContentFragmentDoc}`;
+export const useCreateCollectionLocationMutation = <
+      TError = unknown,
+      TContext = unknown
+    >(
+      dataSource: { endpoint: string, fetchParams?: RequestInit }, 
+      options?: UseMutationOptions<CreateCollectionLocationMutation, TError, CreateCollectionLocationMutationVariables, TContext>
+    ) => 
+    useMutation<CreateCollectionLocationMutation, TError, CreateCollectionLocationMutationVariables, TContext>(
+      (variables?: CreateCollectionLocationMutationVariables) => fetcher<CreateCollectionLocationMutation, CreateCollectionLocationMutationVariables>(dataSource.endpoint, dataSource.fetchParams || {}, CreateCollectionLocationDocument, variables)(),
+      options
+    );
+export const DeleteCollectionItemDocument = `
+    mutation deleteCollectionItem($id: ID!) {
+  deleteCollectionItem(id: $id) {
+    __typename
+  }
+}
+    `;
+export const useDeleteCollectionItemMutation = <
+      TError = unknown,
+      TContext = unknown
+    >(
+      dataSource: { endpoint: string, fetchParams?: RequestInit }, 
+      options?: UseMutationOptions<DeleteCollectionItemMutation, TError, DeleteCollectionItemMutationVariables, TContext>
+    ) => 
+    useMutation<DeleteCollectionItemMutation, TError, DeleteCollectionItemMutationVariables, TContext>(
+      (variables?: DeleteCollectionItemMutationVariables) => fetcher<DeleteCollectionItemMutation, DeleteCollectionItemMutationVariables>(dataSource.endpoint, dataSource.fetchParams || {}, DeleteCollectionItemDocument, variables)(),
+      options
+    );
+export const FindCollectionLocationIdsByExternalDocument = `
+    query findCollectionLocationIdsByExternal($collectionId: [ID!], $externalIds: [ID!], $externalSources: [ID!], $first: Int!, $after: String) {
+  collectionItems(
+    collectionIds: $collectionId
+    externalIds: $externalIds
+    externalSources: $externalSources
+    first: $first
+    after: $after
+  ) {
+    __typename
+    edges {
+      node {
+        id
+        __typename
+        ... on CollectionLocation {
+          place {
+            id
+            __typename
+          }
+        }
+      }
+      cursor
+    }
+    totalCount
+    pageInfo {
+      hasNextPage
+      hasPreviousPage
+      startCursor
+      endCursor
+    }
+  }
+}
+    `;
+export const useFindCollectionLocationIdsByExternalQuery = <
+      TData = FindCollectionLocationIdsByExternalQuery,
+      TError = unknown
+    >(
+      dataSource: { endpoint: string, fetchParams?: RequestInit }, 
+      variables: FindCollectionLocationIdsByExternalQueryVariables, 
+      options?: UseQueryOptions<FindCollectionLocationIdsByExternalQuery, TError, TData>
+    ) => 
+    useQuery<FindCollectionLocationIdsByExternalQuery, TError, TData>(
+      ['findCollectionLocationIdsByExternal', variables],
+      fetcher<FindCollectionLocationIdsByExternalQuery, FindCollectionLocationIdsByExternalQueryVariables>(dataSource.endpoint, dataSource.fetchParams || {}, FindCollectionLocationIdsByExternalDocument, variables),
+      options
+    );
+export const FindCollectionLocationIdsByTagDocument = `
+    query findCollectionLocationIdsByTag($collectionId: [ID!], $tags: [String!], $first: Int!, $after: String) {
+  collectionItems(
+    collectionIds: $collectionId
+    tags: $tags
+    first: $first
+    after: $after
+  ) {
+    __typename
+    edges {
+      node {
+        id
+        __typename
+        ... on CollectionLocation {
+          place {
+            id
+            __typename
+          }
+        }
+      }
+      cursor
+    }
+    totalCount
+    pageInfo {
+      hasNextPage
+      hasPreviousPage
+      startCursor
+      endCursor
+    }
+  }
+}
+    `;
+export const useFindCollectionLocationIdsByTagQuery = <
+      TData = FindCollectionLocationIdsByTagQuery,
+      TError = unknown
+    >(
+      dataSource: { endpoint: string, fetchParams?: RequestInit }, 
+      variables: FindCollectionLocationIdsByTagQueryVariables, 
+      options?: UseQueryOptions<FindCollectionLocationIdsByTagQuery, TError, TData>
+    ) => 
+    useQuery<FindCollectionLocationIdsByTagQuery, TError, TData>(
+      ['findCollectionLocationIdsByTag', variables],
+      fetcher<FindCollectionLocationIdsByTagQuery, FindCollectionLocationIdsByTagQueryVariables>(dataSource.endpoint, dataSource.fetchParams || {}, FindCollectionLocationIdsByTagDocument, variables),
+      options
+    );
+export const FindCollectionLocationsByExternalDocument = `
+    query findCollectionLocationsByExternal($collectionId: [ID!], $externalIds: [ID!], $externalSources: [ID!], $first: Int!, $after: String) {
+  collectionItems(
+    collectionIds: $collectionId
+    externalIds: $externalIds
+    externalSources: $externalSources
+    first: $first
+    after: $after
+  ) {
+    __typename
+    edges {
+      node {
+        id
+        __typename
+        ... on CollectionLocation {
+          ...CollectionLocationPartialContent
+          ...CollectionLocationExternalRefs
+          place {
+            id
+            __typename
+            ...PlacePartialContent
+          }
+        }
+      }
+      cursor
+    }
+    totalCount
+    pageInfo {
+      hasNextPage
+      hasPreviousPage
+      startCursor
+      endCursor
+    }
+  }
+}
+    ${CollectionLocationPartialContentFragmentDoc}
+${CollectionLocationExternalRefsFragmentDoc}
+${PlacePartialContentFragmentDoc}`;
+export const useFindCollectionLocationsByExternalQuery = <
+      TData = FindCollectionLocationsByExternalQuery,
+      TError = unknown
+    >(
+      dataSource: { endpoint: string, fetchParams?: RequestInit }, 
+      variables: FindCollectionLocationsByExternalQueryVariables, 
+      options?: UseQueryOptions<FindCollectionLocationsByExternalQuery, TError, TData>
+    ) => 
+    useQuery<FindCollectionLocationsByExternalQuery, TError, TData>(
+      ['findCollectionLocationsByExternal', variables],
+      fetcher<FindCollectionLocationsByExternalQuery, FindCollectionLocationsByExternalQueryVariables>(dataSource.endpoint, dataSource.fetchParams || {}, FindCollectionLocationsByExternalDocument, variables),
+      options
+    );
+export const FindCollectionLocationsByTagDocument = `
+    query findCollectionLocationsByTag($collectionId: [ID!], $tags: [String!], $first: Int!, $after: String) {
+  collectionItems(
+    collectionIds: $collectionId
+    tags: $tags
+    first: $first
+    after: $after
+  ) {
+    __typename
+    edges {
+      node {
+        id
+        __typename
+        ... on CollectionLocation {
+          ...CollectionLocationPartialContent
+          ...CollectionLocationExternalRefs
+          place {
+            id
+            __typename
+            ...PlacePartialContent
+          }
+        }
+      }
+      cursor
+    }
+    totalCount
+    pageInfo {
+      hasNextPage
+      hasPreviousPage
+      startCursor
+      endCursor
+    }
+  }
+}
+    ${CollectionLocationPartialContentFragmentDoc}
+${CollectionLocationExternalRefsFragmentDoc}
+${PlacePartialContentFragmentDoc}`;
+export const useFindCollectionLocationsByTagQuery = <
+      TData = FindCollectionLocationsByTagQuery,
+      TError = unknown
+    >(
+      dataSource: { endpoint: string, fetchParams?: RequestInit }, 
+      variables: FindCollectionLocationsByTagQueryVariables, 
+      options?: UseQueryOptions<FindCollectionLocationsByTagQuery, TError, TData>
+    ) => 
+    useQuery<FindCollectionLocationsByTagQuery, TError, TData>(
+      ['findCollectionLocationsByTag', variables],
+      fetcher<FindCollectionLocationsByTagQuery, FindCollectionLocationsByTagQueryVariables>(dataSource.endpoint, dataSource.fetchParams || {}, FindCollectionLocationsByTagDocument, variables),
+      options
+    );
+export const GetCollectionLocationDocument = `
+    query getCollectionLocation($id: ID!, $mediaImagePreferredBestFit: [Int!]) {
+  collectionItem(id: $id) {
+    id
+    __typename
+    ... on CollectionLocation {
+      ...CollectionLocationContent
+      place {
+        id
+        __typename
+        ...PlacePartialContent
+      }
+      preferredMedia {
+        id
+        __typename
+        resource {
+          id
+          __typename
+          altText
+          ... on MediaImage {
+            source(bestFit: $mediaImagePreferredBestFit) {
+              url
+            }
+            caption
+            copyright
+            attribution
+          }
+        }
+      }
+    }
+  }
+}
+    ${CollectionLocationContentFragmentDoc}
+${PlacePartialContentFragmentDoc}`;
+export const useGetCollectionLocationQuery = <
+      TData = GetCollectionLocationQuery,
+      TError = unknown
+    >(
+      dataSource: { endpoint: string, fetchParams?: RequestInit }, 
+      variables: GetCollectionLocationQueryVariables, 
+      options?: UseQueryOptions<GetCollectionLocationQuery, TError, TData>
+    ) => 
+    useQuery<GetCollectionLocationQuery, TError, TData>(
+      ['getCollectionLocation', variables],
+      fetcher<GetCollectionLocationQuery, GetCollectionLocationQueryVariables>(dataSource.endpoint, dataSource.fetchParams || {}, GetCollectionLocationDocument, variables),
+      options
+    );
+export const GetCollectionDocument = `
+    query getCollection($id: ID!) {
+  collection(id: $id) {
+    id
+    __typename
+    ...CollectionContent
+    ...CollectionItemsCount
+  }
+}
+    ${CollectionContentFragmentDoc}
+${CollectionItemsCountFragmentDoc}`;
+export const useGetCollectionQuery = <
+      TData = GetCollectionQuery,
+      TError = unknown
+    >(
+      dataSource: { endpoint: string, fetchParams?: RequestInit }, 
+      variables: GetCollectionQueryVariables, 
+      options?: UseQueryOptions<GetCollectionQuery, TError, TData>
+    ) => 
+    useQuery<GetCollectionQuery, TError, TData>(
+      ['getCollection', variables],
+      fetcher<GetCollectionQuery, GetCollectionQueryVariables>(dataSource.endpoint, dataSource.fetchParams || {}, GetCollectionDocument, variables),
+      options
+    );
+export const ListCollectionsDocument = `
+    query listCollections($profileId: ID!, $first: Int!, $after: String, $discriminator: String) {
+  collections(
+    profileId: $profileId
+    first: $first
+    after: $after
+    discriminator: $discriminator
+  ) {
+    __typename
+    edges {
+      node {
+        id
+        __typename
+        ...CollectionPartialContent
+        ...CollectionItemsCount
+      }
+    }
+    totalCount
+    pageInfo {
+      hasNextPage
+      hasPreviousPage
+      startCursor
+      endCursor
+    }
+  }
+}
+    ${CollectionPartialContentFragmentDoc}
+${CollectionItemsCountFragmentDoc}`;
+export const useListCollectionsQuery = <
+      TData = ListCollectionsQuery,
+      TError = unknown
+    >(
+      dataSource: { endpoint: string, fetchParams?: RequestInit }, 
+      variables: ListCollectionsQueryVariables, 
+      options?: UseQueryOptions<ListCollectionsQuery, TError, TData>
+    ) => 
+    useQuery<ListCollectionsQuery, TError, TData>(
+      ['listCollections', variables],
+      fetcher<ListCollectionsQuery, ListCollectionsQueryVariables>(dataSource.endpoint, dataSource.fetchParams || {}, ListCollectionsDocument, variables),
+      options
+    );
+export const UpdateCollectionLocationDocument = `
+    mutation updateCollectionLocation($id: ID!, $location: UpdateCollectionLocationInput!) {
+  updateCollectionLocation(id: $id, location: $location) {
+    __typename
+    location {
+      id
+      __typename
+      ...CollectionLocationContent
+    }
+  }
+}
+    ${CollectionLocationContentFragmentDoc}`;
+export const useUpdateCollectionLocationMutation = <
+      TError = unknown,
+      TContext = unknown
+    >(
+      dataSource: { endpoint: string, fetchParams?: RequestInit }, 
+      options?: UseMutationOptions<UpdateCollectionLocationMutation, TError, UpdateCollectionLocationMutationVariables, TContext>
+    ) => 
+    useMutation<UpdateCollectionLocationMutation, TError, UpdateCollectionLocationMutationVariables, TContext>(
+      (variables?: UpdateCollectionLocationMutationVariables) => fetcher<UpdateCollectionLocationMutation, UpdateCollectionLocationMutationVariables>(dataSource.endpoint, dataSource.fetchParams || {}, UpdateCollectionLocationDocument, variables)(),
+      options
+    );
 export const CreateItineraryDirectionsDocument = `
     mutation createItineraryDirections($itineraryId: ID!, $directions: CreateItineraryDirectionsInput!) {
   createItineraryDirections(
@@ -6005,6 +6673,11 @@ export const CreateItineraryLocationDocument = `
         ...ItineraryLocationsCount
       }
       ...ItineraryLocationContent
+      place {
+        id
+        __typename
+        ...PlacePartialContent
+      }
     }
     cascaded {
       ...ItineraryCascadedChanges
@@ -6013,6 +6686,7 @@ export const CreateItineraryLocationDocument = `
 }
     ${ItineraryLocationsCountFragmentDoc}
 ${ItineraryLocationContentFragmentDoc}
+${PlacePartialContentFragmentDoc}
 ${ItineraryCascadedChangesFragmentDoc}`;
 export const useCreateItineraryLocationMutation = <
       TError = unknown,
@@ -6051,8 +6725,8 @@ export const useCreateItineraryMutation = <
       options
     );
 export const DeleteItineraryLocationDocument = `
-    mutation deleteItineraryLocation($itineraryLocationId: ID!) {
-  deleteItineraryItem(id: $itineraryLocationId) {
+    mutation deleteItineraryLocation($id: ID!) {
+  deleteItineraryItem(id: $id) {
     __typename
     itinerary {
       id
@@ -6075,6 +6749,24 @@ export const useDeleteItineraryLocationMutation = <
     ) => 
     useMutation<DeleteItineraryLocationMutation, TError, DeleteItineraryLocationMutationVariables, TContext>(
       (variables?: DeleteItineraryLocationMutationVariables) => fetcher<DeleteItineraryLocationMutation, DeleteItineraryLocationMutationVariables>(dataSource.endpoint, dataSource.fetchParams || {}, DeleteItineraryLocationDocument, variables)(),
+      options
+    );
+export const DeleteItineraryDocument = `
+    mutation deleteItinerary($id: ID!) {
+  deleteItinerary(id: $id) {
+    __typename
+  }
+}
+    `;
+export const useDeleteItineraryMutation = <
+      TError = unknown,
+      TContext = unknown
+    >(
+      dataSource: { endpoint: string, fetchParams?: RequestInit }, 
+      options?: UseMutationOptions<DeleteItineraryMutation, TError, DeleteItineraryMutationVariables, TContext>
+    ) => 
+    useMutation<DeleteItineraryMutation, TError, DeleteItineraryMutationVariables, TContext>(
+      (variables?: DeleteItineraryMutationVariables) => fetcher<DeleteItineraryMutation, DeleteItineraryMutationVariables>(dataSource.endpoint, dataSource.fetchParams || {}, DeleteItineraryDocument, variables)(),
       options
     );
 export const DisableItineraryAutoRouteDocument = `
@@ -6133,32 +6825,99 @@ export const useEnableItineraryAutoRouteMutation = <
       (variables?: EnableItineraryAutoRouteMutationVariables) => fetcher<EnableItineraryAutoRouteMutation, EnableItineraryAutoRouteMutationVariables>(dataSource.endpoint, dataSource.fetchParams || {}, EnableItineraryAutoRouteDocument, variables)(),
       options
     );
-export const FindItineraryLocationByPlaceIdDocument = `
-    query findItineraryLocationByPlaceId($itineraryId: ID!, $placeId: ID!) {
+export const FindItineraryLocationIdsByPlaceIdDocument = `
+    query findItineraryLocationIdsByPlaceId($itineraryId: ID!, $placeId: ID!, $first: Int!, $after: String) {
   itinerary(id: $itineraryId) {
-    descendants(placeIds: [$placeId], type: ItineraryLocation, first: 1) {
-      nodes {
-        ... on ItineraryLocation {
+    descendants(
+      placeIds: [$placeId]
+      type: ItineraryLocation
+      first: $first
+      after: $after
+    ) {
+      __typename
+      edges {
+        node {
           id
           __typename
+          ... on ItineraryLocation {
+            place {
+              id
+              __typename
+            }
+          }
         }
       }
       totalCount
+      pageInfo {
+        hasNextPage
+        hasPreviousPage
+        startCursor
+        endCursor
+      }
     }
   }
 }
     `;
-export const useFindItineraryLocationByPlaceIdQuery = <
-      TData = FindItineraryLocationByPlaceIdQuery,
+export const useFindItineraryLocationIdsByPlaceIdQuery = <
+      TData = FindItineraryLocationIdsByPlaceIdQuery,
       TError = unknown
     >(
       dataSource: { endpoint: string, fetchParams?: RequestInit }, 
-      variables: FindItineraryLocationByPlaceIdQueryVariables, 
-      options?: UseQueryOptions<FindItineraryLocationByPlaceIdQuery, TError, TData>
+      variables: FindItineraryLocationIdsByPlaceIdQueryVariables, 
+      options?: UseQueryOptions<FindItineraryLocationIdsByPlaceIdQuery, TError, TData>
     ) => 
-    useQuery<FindItineraryLocationByPlaceIdQuery, TError, TData>(
-      ['findItineraryLocationByPlaceId', variables],
-      fetcher<FindItineraryLocationByPlaceIdQuery, FindItineraryLocationByPlaceIdQueryVariables>(dataSource.endpoint, dataSource.fetchParams || {}, FindItineraryLocationByPlaceIdDocument, variables),
+    useQuery<FindItineraryLocationIdsByPlaceIdQuery, TError, TData>(
+      ['findItineraryLocationIdsByPlaceId', variables],
+      fetcher<FindItineraryLocationIdsByPlaceIdQuery, FindItineraryLocationIdsByPlaceIdQueryVariables>(dataSource.endpoint, dataSource.fetchParams || {}, FindItineraryLocationIdsByPlaceIdDocument, variables),
+      options
+    );
+export const FindItineraryLocationsByPlaceIdDocument = `
+    query findItineraryLocationsByPlaceId($itineraryId: ID!, $placeId: ID!, $first: Int!, $after: String) {
+  itinerary(id: $itineraryId) {
+    descendants(
+      placeIds: [$placeId]
+      type: ItineraryLocation
+      first: $first
+      after: $after
+    ) {
+      __typename
+      edges {
+        node {
+          id
+          __typename
+          ... on ItineraryLocation {
+            ...ItineraryLocationPartialContent
+            place {
+              id
+              __typename
+              ...PlacePartialContent
+            }
+          }
+        }
+      }
+      totalCount
+      pageInfo {
+        hasNextPage
+        hasPreviousPage
+        startCursor
+        endCursor
+      }
+    }
+  }
+}
+    ${ItineraryLocationPartialContentFragmentDoc}
+${PlacePartialContentFragmentDoc}`;
+export const useFindItineraryLocationsByPlaceIdQuery = <
+      TData = FindItineraryLocationsByPlaceIdQuery,
+      TError = unknown
+    >(
+      dataSource: { endpoint: string, fetchParams?: RequestInit }, 
+      variables: FindItineraryLocationsByPlaceIdQueryVariables, 
+      options?: UseQueryOptions<FindItineraryLocationsByPlaceIdQuery, TError, TData>
+    ) => 
+    useQuery<FindItineraryLocationsByPlaceIdQuery, TError, TData>(
+      ['findItineraryLocationsByPlaceId', variables],
+      fetcher<FindItineraryLocationsByPlaceIdQuery, FindItineraryLocationsByPlaceIdQueryVariables>(dataSource.endpoint, dataSource.fetchParams || {}, FindItineraryLocationsByPlaceIdDocument, variables),
       options
     );
 export const GetItineraryDirectionsDocument = `
@@ -6193,6 +6952,51 @@ export const useGetItineraryDirectionsQuery = <
       fetcher<GetItineraryDirectionsQuery, GetItineraryDirectionsQueryVariables>(dataSource.endpoint, dataSource.fetchParams || {}, GetItineraryDirectionsDocument, variables),
       options
     );
+export const GetItineraryLocationDocument = `
+    query getItineraryLocation($id: ID!, $mediaImagePreferredBestFit: [Int!]) {
+  node(id: $id) {
+    id
+    __typename
+    ... on ItineraryLocation {
+      ...ItineraryLocationContent
+      place {
+        id
+        __typename
+        ...PlaceContent
+      }
+      preferredMedia {
+        id
+        __typename
+        resource {
+          id
+          __typename
+          ... on MediaImage {
+            source(bestFit: $mediaImagePreferredBestFit) {
+              url
+            }
+            ...MediaImagePartialContent
+          }
+        }
+      }
+    }
+  }
+}
+    ${ItineraryLocationContentFragmentDoc}
+${PlaceContentFragmentDoc}
+${MediaImagePartialContentFragmentDoc}`;
+export const useGetItineraryLocationQuery = <
+      TData = GetItineraryLocationQuery,
+      TError = unknown
+    >(
+      dataSource: { endpoint: string, fetchParams?: RequestInit }, 
+      variables: GetItineraryLocationQueryVariables, 
+      options?: UseQueryOptions<GetItineraryLocationQuery, TError, TData>
+    ) => 
+    useQuery<GetItineraryLocationQuery, TError, TData>(
+      ['getItineraryLocation', variables],
+      fetcher<GetItineraryLocationQuery, GetItineraryLocationQueryVariables>(dataSource.endpoint, dataSource.fetchParams || {}, GetItineraryLocationDocument, variables),
+      options
+    );
 export const GetItineraryDocument = `
     query getItinerary($id: ID!, $mediaImagePreferredBestFit: [Int!]) {
   itinerary(id: $id) {
@@ -6200,25 +7004,31 @@ export const GetItineraryDocument = `
     __typename
     ...ItineraryContent
     ...ItineraryLocationsCount
+    profile {
+      id
+      __typename
+      ...ProfilePartialContent
+    }
     preferredMedia {
+      id
+      __typename
       resource {
         id
         __typename
-        altText
         ... on MediaImage {
           source(bestFit: $mediaImagePreferredBestFit) {
             url
           }
-          caption
-          copyright
-          attribution
+          ...MediaImagePartialContent
         }
       }
     }
   }
 }
     ${ItineraryContentFragmentDoc}
-${ItineraryLocationsCountFragmentDoc}`;
+${ItineraryLocationsCountFragmentDoc}
+${ProfilePartialContentFragmentDoc}
+${MediaImagePartialContentFragmentDoc}`;
 export const useGetItineraryQuery = <
       TData = GetItineraryQuery,
       TError = unknown
@@ -6232,26 +7042,53 @@ export const useGetItineraryQuery = <
       fetcher<GetItineraryQuery, GetItineraryQueryVariables>(dataSource.endpoint, dataSource.fetchParams || {}, GetItineraryDocument, variables),
       options
     );
-export const GetPlaceDocument = `
-    query getPlace($id: ID!) {
-  place(id: $id) {
-    id
+export const ListItinerariesDocument = `
+    query listItineraries($profileId: ID!, $first: Int!, $after: String, $mediaImagePreferredBestFit: [Int!]) {
+  itineraries(profileId: $profileId, first: $first, after: $after) {
     __typename
-    ...PlaceContent
+    edges {
+      node {
+        id
+        __typename
+        ...ItineraryPartialContent
+        preferredMedia {
+          id
+          __typename
+          resource {
+            id
+            __typename
+            ... on MediaImage {
+              source(bestFit: $mediaImagePreferredBestFit) {
+                url
+              }
+              ...MediaImagePartialContent
+            }
+          }
+        }
+      }
+    }
+    totalCount
+    pageInfo {
+      hasNextPage
+      hasPreviousPage
+      startCursor
+      endCursor
+    }
   }
 }
-    ${PlaceContentFragmentDoc}`;
-export const useGetPlaceQuery = <
-      TData = GetPlaceQuery,
+    ${ItineraryPartialContentFragmentDoc}
+${MediaImagePartialContentFragmentDoc}`;
+export const useListItinerariesQuery = <
+      TData = ListItinerariesQuery,
       TError = unknown
     >(
       dataSource: { endpoint: string, fetchParams?: RequestInit }, 
-      variables: GetPlaceQueryVariables, 
-      options?: UseQueryOptions<GetPlaceQuery, TError, TData>
+      variables: ListItinerariesQueryVariables, 
+      options?: UseQueryOptions<ListItinerariesQuery, TError, TData>
     ) => 
-    useQuery<GetPlaceQuery, TError, TData>(
-      ['getPlace', variables],
-      fetcher<GetPlaceQuery, GetPlaceQueryVariables>(dataSource.endpoint, dataSource.fetchParams || {}, GetPlaceDocument, variables),
+    useQuery<ListItinerariesQuery, TError, TData>(
+      ['listItineraries', variables],
+      fetcher<ListItinerariesQuery, ListItinerariesQueryVariables>(dataSource.endpoint, dataSource.fetchParams || {}, ListItinerariesDocument, variables),
       options
     );
 export const ListItineraryLocationsDocument = `
@@ -6266,25 +7103,29 @@ export const ListItineraryLocationsDocument = `
           __typename
           ... on ItineraryLocation {
             ...ItineraryLocationPartialContent
+            place {
+              id
+              __typename
+              ...PlacePartialContent
+            }
             preferredMedia {
+              id
+              __typename
               resource {
                 id
                 __typename
-                altText
                 ... on MediaImage {
                   source(bestFit: $mediaImagePreferredBestFit) {
                     url
                   }
-                  caption
-                  copyright
-                  attribution
+                  ...MediaImagePartialContent
                 }
               }
             }
           }
         }
         arrival: directions(first: 1, direction: Inbound) {
-          nodes {
+          directions: nodes {
             id
             __typename
             ...ItineraryDirectionsPartialContent
@@ -6298,20 +7139,21 @@ export const ListItineraryLocationsDocument = `
             }
           }
           totalCount
-          pageInfo {
-            endCursor
-          }
         }
       }
       totalCount
       pageInfo {
         hasNextPage
+        hasPreviousPage
+        startCursor
         endCursor
       }
     }
   }
 }
     ${ItineraryLocationPartialContentFragmentDoc}
+${PlacePartialContentFragmentDoc}
+${MediaImagePartialContentFragmentDoc}
 ${ItineraryDirectionsPartialContentFragmentDoc}`;
 export const useListItineraryLocationsQuery = <
       TData = ListItineraryLocationsQuery,
@@ -6446,5 +7288,222 @@ export const useUpdateItineraryMutation = <
     ) => 
     useMutation<UpdateItineraryMutation, TError, UpdateItineraryMutationVariables, TContext>(
       (variables?: UpdateItineraryMutationVariables) => fetcher<UpdateItineraryMutation, UpdateItineraryMutationVariables>(dataSource.endpoint, dataSource.fetchParams || {}, UpdateItineraryDocument, variables)(),
+      options
+    );
+export const GetMediaImageDocument = `
+    query getMediaImage($id: ID!, $smallBestFit: [Int!], $mediumBestFit: [Int!], $largeBestFit: [Int!]) {
+  mediaResource(id: $id) {
+    id
+    __typename
+    ... on MediaImage {
+      ...MediaImageContent
+      small: source(bestFit: $smallBestFit) {
+        url
+      }
+      medium: source(bestFit: $mediumBestFit) {
+        url
+      }
+      large: source(bestFit: $largeBestFit) {
+        url
+      }
+    }
+  }
+}
+    ${MediaImageContentFragmentDoc}`;
+export const useGetMediaImageQuery = <
+      TData = GetMediaImageQuery,
+      TError = unknown
+    >(
+      dataSource: { endpoint: string, fetchParams?: RequestInit }, 
+      variables: GetMediaImageQueryVariables, 
+      options?: UseQueryOptions<GetMediaImageQuery, TError, TData>
+    ) => 
+    useQuery<GetMediaImageQuery, TError, TData>(
+      ['getMediaImage', variables],
+      fetcher<GetMediaImageQuery, GetMediaImageQueryVariables>(dataSource.endpoint, dataSource.fetchParams || {}, GetMediaImageDocument, variables),
+      options
+    );
+export const AutocompleteSearchPlaceDocument = `
+    query autocompleteSearchPlace($text: String!, $source: PlaceSearchSource!) {
+  placeAutocompleteSearch(text: $text, sources: [$source], first: 10) {
+    __typename
+    edges {
+      node {
+        id
+        __typename
+        ...PlaceSearchContent
+      }
+      main {
+        label
+        matches {
+          offset
+          length
+        }
+      }
+      secondary {
+        label
+        matches {
+          offset
+          length
+        }
+      }
+    }
+  }
+}
+    ${PlaceSearchContentFragmentDoc}`;
+export const useAutocompleteSearchPlaceQuery = <
+      TData = AutocompleteSearchPlaceQuery,
+      TError = unknown
+    >(
+      dataSource: { endpoint: string, fetchParams?: RequestInit }, 
+      variables: AutocompleteSearchPlaceQueryVariables, 
+      options?: UseQueryOptions<AutocompleteSearchPlaceQuery, TError, TData>
+    ) => 
+    useQuery<AutocompleteSearchPlaceQuery, TError, TData>(
+      ['autocompleteSearchPlace', variables],
+      fetcher<AutocompleteSearchPlaceQuery, AutocompleteSearchPlaceQueryVariables>(dataSource.endpoint, dataSource.fetchParams || {}, AutocompleteSearchPlaceDocument, variables),
+      options
+    );
+export const GetPlaceDocument = `
+    query getPlace($id: ID!, $mediaImagePreferredBestFit: [Int!]) {
+  place(id: $id) {
+    id
+    __typename
+    ...PlaceContent
+    preferredMedia {
+      id
+      __typename
+      resource {
+        id
+        __typename
+        ... on MediaImage {
+          source(bestFit: $mediaImagePreferredBestFit) {
+            url
+          }
+          ...MediaImagePartialContent
+        }
+      }
+    }
+  }
+}
+    ${PlaceContentFragmentDoc}
+${MediaImagePartialContentFragmentDoc}`;
+export const useGetPlaceQuery = <
+      TData = GetPlaceQuery,
+      TError = unknown
+    >(
+      dataSource: { endpoint: string, fetchParams?: RequestInit }, 
+      variables: GetPlaceQueryVariables, 
+      options?: UseQueryOptions<GetPlaceQuery, TError, TData>
+    ) => 
+    useQuery<GetPlaceQuery, TError, TData>(
+      ['getPlace', variables],
+      fetcher<GetPlaceQuery, GetPlaceQueryVariables>(dataSource.endpoint, dataSource.fetchParams || {}, GetPlaceDocument, variables),
+      options
+    );
+export const ReverseSearchPlaceByPositionDocument = `
+    query reverseSearchPlaceByPosition($focus: PositionInput!, $sources: [PlaceSearchSource!]!, $first: Int!) {
+  placeReverseSearch(focus: $focus, sources: $sources, first: $first) {
+    __typename
+    places: nodes {
+      id
+      __typename
+      ...PlaceSearchContent
+    }
+  }
+}
+    ${PlaceSearchContentFragmentDoc}`;
+export const useReverseSearchPlaceByPositionQuery = <
+      TData = ReverseSearchPlaceByPositionQuery,
+      TError = unknown
+    >(
+      dataSource: { endpoint: string, fetchParams?: RequestInit }, 
+      variables: ReverseSearchPlaceByPositionQueryVariables, 
+      options?: UseQueryOptions<ReverseSearchPlaceByPositionQuery, TError, TData>
+    ) => 
+    useQuery<ReverseSearchPlaceByPositionQuery, TError, TData>(
+      ['reverseSearchPlaceByPosition', variables],
+      fetcher<ReverseSearchPlaceByPositionQuery, ReverseSearchPlaceByPositionQueryVariables>(dataSource.endpoint, dataSource.fetchParams || {}, ReverseSearchPlaceByPositionDocument, variables),
+      options
+    );
+export const GetProfileDocument = `
+    query getProfile($id: ID!) {
+  profile(id: $id) {
+    id
+    __typename
+    ...ProfileContent
+  }
+}
+    ${ProfileContentFragmentDoc}`;
+export const useGetProfileQuery = <
+      TData = GetProfileQuery,
+      TError = unknown
+    >(
+      dataSource: { endpoint: string, fetchParams?: RequestInit }, 
+      variables: GetProfileQueryVariables, 
+      options?: UseQueryOptions<GetProfileQuery, TError, TData>
+    ) => 
+    useQuery<GetProfileQuery, TError, TData>(
+      ['getProfile', variables],
+      fetcher<GetProfileQuery, GetProfileQueryVariables>(dataSource.endpoint, dataSource.fetchParams || {}, GetProfileDocument, variables),
+      options
+    );
+export const ListAuthorizedProfilesDocument = `
+    query listAuthorizedProfiles($first: Int!, $after: String) {
+  authorizedProfiles(first: $first, after: $after) {
+    __typename
+    profiles: nodes {
+      id
+      __typename
+      ...ProfilePartialContent
+    }
+    totalCount
+    pageInfo {
+      hasNextPage
+      hasPreviousPage
+      startCursor
+      endCursor
+    }
+  }
+}
+    ${ProfilePartialContentFragmentDoc}`;
+export const useListAuthorizedProfilesQuery = <
+      TData = ListAuthorizedProfilesQuery,
+      TError = unknown
+    >(
+      dataSource: { endpoint: string, fetchParams?: RequestInit }, 
+      variables: ListAuthorizedProfilesQueryVariables, 
+      options?: UseQueryOptions<ListAuthorizedProfilesQuery, TError, TData>
+    ) => 
+    useQuery<ListAuthorizedProfilesQuery, TError, TData>(
+      ['listAuthorizedProfiles', variables],
+      fetcher<ListAuthorizedProfilesQuery, ListAuthorizedProfilesQueryVariables>(dataSource.endpoint, dataSource.fetchParams || {}, ListAuthorizedProfilesDocument, variables),
+      options
+    );
+export const SearchRoutesBetweenPositionsDocument = `
+    query searchRoutesBetweenPositions($mode: RouteSearchableMode!, $positions: [PositionInput!]!, $first: Int!, $includeRoutePolyline: Boolean!) {
+  routes(mode: $mode, positions: $positions, first: $first) {
+    __typename
+    routes: nodes {
+      segments {
+        distance(unit: Kilometers)
+        duration(unit: Minutes)
+        polyline @include(if: $includeRoutePolyline)
+      }
+    }
+  }
+}
+    `;
+export const useSearchRoutesBetweenPositionsQuery = <
+      TData = SearchRoutesBetweenPositionsQuery,
+      TError = unknown
+    >(
+      dataSource: { endpoint: string, fetchParams?: RequestInit }, 
+      variables: SearchRoutesBetweenPositionsQueryVariables, 
+      options?: UseQueryOptions<SearchRoutesBetweenPositionsQuery, TError, TData>
+    ) => 
+    useQuery<SearchRoutesBetweenPositionsQuery, TError, TData>(
+      ['searchRoutesBetweenPositions', variables],
+      fetcher<SearchRoutesBetweenPositionsQuery, SearchRoutesBetweenPositionsQueryVariables>(dataSource.endpoint, dataSource.fetchParams || {}, SearchRoutesBetweenPositionsDocument, variables),
       options
     );

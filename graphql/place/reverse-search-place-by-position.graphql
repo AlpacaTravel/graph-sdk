@@ -1,0 +1,21 @@
+#import "./fragments/place-search-content.graphql"
+
+# Queries a position and returns with matching places
+
+query reverseSearchPlaceByPosition(
+  $focus: PositionInput!
+  $sources: [PlaceSearchSource!]!
+  $first: Int!
+) {
+  placeReverseSearch(focus: $focus, sources: $sources, first: $first) {
+    __typename
+
+    # Query back the matching nodes
+    places: nodes {
+      id
+      __typename
+
+      ...PlaceSearchContent
+    }
+  }
+}

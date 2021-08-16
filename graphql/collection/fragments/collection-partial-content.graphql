@@ -2,4 +2,6 @@ fragment CollectionPartialContent on Collection {
   # Partial/list content
   title
   synopsis
+
+  readMoreUrl
 }

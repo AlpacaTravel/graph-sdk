@@ -1,14 +1,10 @@
-fragment PlaceContent on Place {
+fragment PlaceSearchContent on PlaceSearchNode {
   name
-
-  synopsis
-  description
 
   position {
     lon
     lat
   }
-  maki
 
   address {
     addressLineOne
@@ -21,25 +17,12 @@ fragment PlaceContent on Place {
     countryCode
   }
 
-  contact {
-    phoneNumber
-    emailAddress
-
-    websiteUrl
-    bookingsUrl
-    facebookUrl
-    instagramUrl
-    twitterUrl
-  }
+  maki
 
   layers {
     id
     __typename
 
     name
-  }
-
-  hours {
-    osmTag
   }
 }

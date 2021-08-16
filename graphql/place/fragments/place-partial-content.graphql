@@ -10,9 +10,14 @@ fragment PlacePartialContent on Place {
   maki
 
   address {
+    addressLineOne
+    addressLineTwo
+    addressLineThree
     locality
     region
+    regionCode
     country
+    countryCode
   }
 
   layers {

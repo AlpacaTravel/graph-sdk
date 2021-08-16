@@ -5637,6 +5637,96 @@ export type UpdateProfilePayload = {
   profile?: Maybe<Profile>;
 };
 
+export type CreateCollectionLocationMutationVariables = Exact<{
+  collectionId: Scalars['ID'];
+  location: CreateCollectionLocationInput;
+}>;
+
+
+export type CreateCollectionLocationMutation = { __typename?: 'Mutation', createCollectionLocation: { __typename: 'CreateCollectionLocationPayload', location?: Maybe<{ __typename: 'CollectionLocation', id: string, title?: Maybe<string>, synopsis?: Maybe<string>, description?: Maybe<string>, tags: Array<string>, readMoreUrl?: Maybe<string>, websiteUrl?: Maybe<string>, position: { __typename?: 'Position', lon: number, lat: number }, place: { __typename: 'Place', id: string, name?: Maybe<string>, synopsis?: Maybe<string>, maki?: Maybe<string>, position: { __typename?: 'Position', lon: number, lat: number }, address: { __typename?: 'PlaceAddress', addressLineOne?: Maybe<string>, addressLineTwo?: Maybe<string>, addressLineThree?: Maybe<string>, locality?: Maybe<string>, region?: Maybe<string>, regionCode?: Maybe<string>, country?: Maybe<string>, countryCode?: Maybe<string> }, layers: Array<{ __typename: 'PlaceLayer', id: string, name?: Maybe<string> }> } }> } };
+
+export type DeleteCollectionItemMutationVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+
+export type DeleteCollectionItemMutation = { __typename?: 'Mutation', deleteCollectionItem: { __typename: 'DeleteCollectionItemPayload' } };
+
+export type FindCollectionLocationIdsByExternalQueryVariables = Exact<{
+  collectionId?: Maybe<Array<Scalars['ID']> | Scalars['ID']>;
+  externalIds?: Maybe<Array<Scalars['ID']> | Scalars['ID']>;
+  externalSources?: Maybe<Array<Scalars['ID']> | Scalars['ID']>;
+  first: Scalars['Int'];
+  after?: Maybe<Scalars['String']>;
+}>;
+
+
+export type FindCollectionLocationIdsByExternalQuery = { __typename?: 'Query', collectionItems: { __typename: 'CollectionItemConnection', totalCount: number, edges: Array<{ __typename?: 'CollectionItemEdge', cursor: string, node: { __typename: 'CollectionLocation', id: string, place: { __typename: 'Place', id: string } } }>, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: Maybe<string>, endCursor?: Maybe<string> } } };
+
+export type FindCollectionLocationIdsByTagQueryVariables = Exact<{
+  collectionId?: Maybe<Array<Scalars['ID']> | Scalars['ID']>;
+  tags?: Maybe<Array<Scalars['String']> | Scalars['String']>;
+  first: Scalars['Int'];
+  after?: Maybe<Scalars['String']>;
+}>;
+
+
+export type FindCollectionLocationIdsByTagQuery = { __typename?: 'Query', collectionItems: { __typename: 'CollectionItemConnection', totalCount: number, edges: Array<{ __typename?: 'CollectionItemEdge', cursor: string, node: { __typename: 'CollectionLocation', id: string, place: { __typename: 'Place', id: string } } }>, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: Maybe<string>, endCursor?: Maybe<string> } } };
+
+export type FindCollectionLocationsByExternalQueryVariables = Exact<{
+  collectionId?: Maybe<Array<Scalars['ID']> | Scalars['ID']>;
+  externalIds?: Maybe<Array<Scalars['ID']> | Scalars['ID']>;
+  externalSources?: Maybe<Array<Scalars['ID']> | Scalars['ID']>;
+  first: Scalars['Int'];
+  after?: Maybe<Scalars['String']>;
+}>;
+
+
+export type FindCollectionLocationsByExternalQuery = { __typename?: 'Query', collectionItems: { __typename: 'CollectionItemConnection', totalCount: number, edges: Array<{ __typename?: 'CollectionItemEdge', cursor: string, node: { __typename: 'CollectionLocation', title?: Maybe<string>, synopsis?: Maybe<string>, tags: Array<string>, readMoreUrl?: Maybe<string>, id: string, position: { __typename?: 'Position', lon: number, lat: number }, externalId?: Maybe<{ __typename?: 'Attribute', value?: Maybe<any> }>, externalSource?: Maybe<{ __typename?: 'Attribute', value?: Maybe<any> }>, place: { __typename: 'Place', id: string, name?: Maybe<string>, synopsis?: Maybe<string>, maki?: Maybe<string>, position: { __typename?: 'Position', lon: number, lat: number }, address: { __typename?: 'PlaceAddress', addressLineOne?: Maybe<string>, addressLineTwo?: Maybe<string>, addressLineThree?: Maybe<string>, locality?: Maybe<string>, region?: Maybe<string>, regionCode?: Maybe<string>, country?: Maybe<string>, countryCode?: Maybe<string> }, layers: Array<{ __typename: 'PlaceLayer', id: string, name?: Maybe<string> }> } } }>, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: Maybe<string>, endCursor?: Maybe<string> } } };
+
+export type FindCollectionLocationsByTagQueryVariables = Exact<{
+  collectionId?: Maybe<Array<Scalars['ID']> | Scalars['ID']>;
+  tags?: Maybe<Array<Scalars['String']> | Scalars['String']>;
+  first: Scalars['Int'];
+  after?: Maybe<Scalars['String']>;
+}>;
+
+
+export type FindCollectionLocationsByTagQuery = { __typename?: 'Query', collectionItems: { __typename: 'CollectionItemConnection', totalCount: number, edges: Array<{ __typename?: 'CollectionItemEdge', cursor: string, node: { __typename: 'CollectionLocation', title?: Maybe<string>, synopsis?: Maybe<string>, tags: Array<string>, readMoreUrl?: Maybe<string>, id: string, position: { __typename?: 'Position', lon: number, lat: number }, externalId?: Maybe<{ __typename?: 'Attribute', value?: Maybe<any> }>, externalSource?: Maybe<{ __typename?: 'Attribute', value?: Maybe<any> }>, place: { __typename: 'Place', id: string, name?: Maybe<string>, synopsis?: Maybe<string>, maki?: Maybe<string>, position: { __typename?: 'Position', lon: number, lat: number }, address: { __typename?: 'PlaceAddress', addressLineOne?: Maybe<string>, addressLineTwo?: Maybe<string>, addressLineThree?: Maybe<string>, locality?: Maybe<string>, region?: Maybe<string>, regionCode?: Maybe<string>, country?: Maybe<string>, countryCode?: Maybe<string> }, layers: Array<{ __typename: 'PlaceLayer', id: string, name?: Maybe<string> }> } } }>, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: Maybe<string>, endCursor?: Maybe<string> } } };
+
+export type GetCollectionLocationQueryVariables = Exact<{
+  id: Scalars['ID'];
+  mediaImagePreferredBestFit?: Maybe<Array<Scalars['Int']> | Scalars['Int']>;
+}>;
+
+
+export type GetCollectionLocationQuery = { __typename?: 'Query', collectionItem?: Maybe<{ __typename: 'CollectionLocation', title?: Maybe<string>, synopsis?: Maybe<string>, description?: Maybe<string>, tags: Array<string>, readMoreUrl?: Maybe<string>, websiteUrl?: Maybe<string>, id: string, position: { __typename?: 'Position', lon: number, lat: number }, place: { __typename: 'Place', id: string, name?: Maybe<string>, synopsis?: Maybe<string>, maki?: Maybe<string>, position: { __typename?: 'Position', lon: number, lat: number }, address: { __typename?: 'PlaceAddress', addressLineOne?: Maybe<string>, addressLineTwo?: Maybe<string>, addressLineThree?: Maybe<string>, locality?: Maybe<string>, region?: Maybe<string>, regionCode?: Maybe<string>, country?: Maybe<string>, countryCode?: Maybe<string> }, layers: Array<{ __typename: 'PlaceLayer', id: string, name?: Maybe<string> }> }, preferredMedia?: Maybe<{ __typename: 'MediaContainer', id: string, resource: { __typename: 'MediaImage', caption?: Maybe<string>, copyright?: Maybe<string>, attribution?: Maybe<string>, id?: Maybe<string>, altText?: Maybe<string>, source?: Maybe<{ __typename?: 'MediaImageSource', url: string }> } }> }> };
+
+export type GetCollectionQueryVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+
+export type GetCollectionQuery = { __typename?: 'Query', collection?: Maybe<{ __typename: 'Collection', id: string, title?: Maybe<string>, synopsis?: Maybe<string>, description?: Maybe<string>, discriminator: string, readMoreUrl?: Maybe<string>, items: { __typename?: 'CollectionItemConnection', totalCount: number } }> };
+
+export type ListCollectionsQueryVariables = Exact<{
+  profileId: Scalars['ID'];
+  first: Scalars['Int'];
+  after?: Maybe<Scalars['String']>;
+  discriminator?: Maybe<Scalars['String']>;
+}>;
+
+
+export type ListCollectionsQuery = { __typename?: 'Query', collections: { __typename: 'CollectionConnection', totalCount: number, edges: Array<{ __typename?: 'CollectionEdge', node: { __typename: 'Collection', id: string, title?: Maybe<string>, synopsis?: Maybe<string>, readMoreUrl?: Maybe<string>, items: { __typename?: 'CollectionItemConnection', totalCount: number } } }>, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: Maybe<string>, endCursor?: Maybe<string> } } };
+
+export type UpdateCollectionLocationMutationVariables = Exact<{
+  id: Scalars['ID'];
+  location: UpdateCollectionLocationInput;
+}>;
+
+
+export type UpdateCollectionLocationMutation = { __typename?: 'Mutation', updateCollectionLocation: { __typename: 'UpdateCollectionLocationPayload', location?: Maybe<{ __typename: 'CollectionLocation', id: string, title?: Maybe<string>, synopsis?: Maybe<string>, description?: Maybe<string>, tags: Array<string>, readMoreUrl?: Maybe<string>, websiteUrl?: Maybe<string>, position: { __typename?: 'Position', lon: number, lat: number } }> } };
+
 export type CreateItineraryDirectionsMutationVariables = Exact<{
   itineraryId: Scalars['ID'];
   directions: CreateItineraryDirectionsInput;
@@ -5651,7 +5741,7 @@ export type CreateItineraryLocationMutationVariables = Exact<{
 }>;
 
 
-export type CreateItineraryLocationMutation = { __typename?: 'Mutation', createItineraryLocation: { __typename: 'CreateItineraryLocationPayload', location?: Maybe<{ __typename: 'ItineraryLocation', id: string, title?: Maybe<string>, synopsis?: Maybe<string>, description?: Maybe<string>, tags: Array<string>, optional: boolean, itinerary: { __typename: 'Itinerary', id: string, locations: { __typename?: 'ItineraryItemConnection', totalCount: number } }, position: { __typename?: 'Position', lon: number, lat: number }, place: { __typename: 'Place', id: string, name?: Maybe<string>, synopsis?: Maybe<string>, description?: Maybe<string>, maki?: Maybe<string>, position: { __typename?: 'Position', lon: number, lat: number }, address: { __typename?: 'PlaceAddress', addressLineOne?: Maybe<string>, addressLineTwo?: Maybe<string>, addressLineThree?: Maybe<string>, locality?: Maybe<string>, region?: Maybe<string>, country?: Maybe<string>, countryCode?: Maybe<string> }, contact: { __typename?: 'PlaceContact', phoneNumber?: Maybe<string>, emailAddress?: Maybe<string>, websiteUrl?: Maybe<string>, bookingsUrl?: Maybe<string>, facebookUrl?: Maybe<string>, instagramUrl?: Maybe<string>, twitterUrl?: Maybe<string> }, layers: Array<{ __typename: 'PlaceLayer', id: string, name?: Maybe<string> }>, hours?: Maybe<{ __typename?: 'PlaceHours', osmTag: string }> } }>, cascaded: { __typename?: 'ItineraryItemCascadedChanges', deletedIds: Array<string>, created: Array<{ __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', id: string }>, updated: Array<{ __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', id: string }> } } };
+export type CreateItineraryLocationMutation = { __typename?: 'Mutation', createItineraryLocation: { __typename: 'CreateItineraryLocationPayload', location?: Maybe<{ __typename: 'ItineraryLocation', id: string, title?: Maybe<string>, synopsis?: Maybe<string>, description?: Maybe<string>, tags: Array<string>, optional: boolean, readMoreUrl?: Maybe<string>, itinerary: { __typename: 'Itinerary', id: string, locations: { __typename?: 'ItineraryItemConnection', totalCount: number } }, position: { __typename?: 'Position', lon: number, lat: number }, place: { __typename: 'Place', id: string, name?: Maybe<string>, synopsis?: Maybe<string>, maki?: Maybe<string>, position: { __typename?: 'Position', lon: number, lat: number }, address: { __typename?: 'PlaceAddress', addressLineOne?: Maybe<string>, addressLineTwo?: Maybe<string>, addressLineThree?: Maybe<string>, locality?: Maybe<string>, region?: Maybe<string>, regionCode?: Maybe<string>, country?: Maybe<string>, countryCode?: Maybe<string> }, layers: Array<{ __typename: 'PlaceLayer', id: string, name?: Maybe<string> }> } }>, cascaded: { __typename?: 'ItineraryItemCascadedChanges', deletedIds: Array<string>, created: Array<{ __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', id: string }>, updated: Array<{ __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', id: string }> } } };
 
 export type CreateItineraryMutationVariables = Exact<{
   itinerary: CreateItineraryInput;
@@ -5659,14 +5749,21 @@ export type CreateItineraryMutationVariables = Exact<{
 }>;
 
 
-export type CreateItineraryMutation = { __typename?: 'Mutation', createItinerary: { __typename: 'CreateItineraryPayload', itinerary?: Maybe<{ __typename: 'Itinerary', id: string, title?: Maybe<string>, synopsis?: Maybe<string>, description?: Maybe<string>, tags: Array<string>, created?: Maybe<string>, autoRoute?: Maybe<{ __typename?: 'ItineraryAutoRoute', defaultMode: RouteMode }>, profile?: Maybe<{ __typename: 'Profile', id: string, name: string }>, locations: { __typename?: 'ItineraryItemConnection', totalCount: number } }> } };
+export type CreateItineraryMutation = { __typename?: 'Mutation', createItinerary: { __typename: 'CreateItineraryPayload', itinerary?: Maybe<{ __typename: 'Itinerary', id: string, title?: Maybe<string>, synopsis?: Maybe<string>, description?: Maybe<string>, tags: Array<string>, created?: Maybe<string>, autoRoute?: Maybe<{ __typename?: 'ItineraryAutoRoute', defaultMode: RouteMode }>, locations: { __typename?: 'ItineraryItemConnection', totalCount: number } }> } };
 
 export type DeleteItineraryLocationMutationVariables = Exact<{
-  itineraryLocationId: Scalars['ID'];
+  id: Scalars['ID'];
 }>;
 
 
 export type DeleteItineraryLocationMutation = { __typename?: 'Mutation', deleteItineraryItem: { __typename: 'DeleteItineraryItemPayload', itinerary: { __typename: 'Itinerary', id: string, locations: { __typename?: 'ItineraryItemConnection', totalCount: number } }, cascaded: { __typename?: 'ItineraryItemCascadedChanges', deletedIds: Array<string>, created: Array<{ __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', id: string }>, updated: Array<{ __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', id: string }> } } };
+
+export type DeleteItineraryMutationVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+
+export type DeleteItineraryMutation = { __typename?: 'Mutation', deleteItinerary: { __typename: 'DeleteItineraryPayload' } };
 
 export type DisableItineraryAutoRouteMutationVariables = Exact<{
   id: Scalars['ID'];
@@ -5683,13 +5780,25 @@ export type EnableItineraryAutoRouteMutationVariables = Exact<{
 
 export type EnableItineraryAutoRouteMutation = { __typename?: 'Mutation', updateItinerary: { __typename: 'UpdateItineraryPayload', itinerary?: Maybe<{ __typename: 'Itinerary', id: string, autoRoute?: Maybe<{ __typename?: 'ItineraryAutoRoute', defaultMode: RouteMode }> }>, cascaded: { __typename?: 'ItineraryItemCascadedChanges', deletedIds: Array<string>, created: Array<{ __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', id: string }>, updated: Array<{ __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', id: string }> } } };
 
-export type FindItineraryLocationByPlaceIdQueryVariables = Exact<{
+export type FindItineraryLocationIdsByPlaceIdQueryVariables = Exact<{
   itineraryId: Scalars['ID'];
   placeId: Scalars['ID'];
+  first: Scalars['Int'];
+  after?: Maybe<Scalars['String']>;
 }>;
 
 
-export type FindItineraryLocationByPlaceIdQuery = { __typename?: 'Query', itinerary?: Maybe<{ __typename?: 'Itinerary', descendants: { __typename?: 'ItineraryItemConnection', totalCount: number, nodes: Array<{ __typename?: 'ItineraryCollection' } | { __typename?: 'ItineraryDirections' } | { __typename: 'ItineraryLocation', id: string }> } }> };
+export type FindItineraryLocationIdsByPlaceIdQuery = { __typename?: 'Query', itinerary?: Maybe<{ __typename?: 'Itinerary', descendants: { __typename: 'ItineraryItemConnection', totalCount: number, edges: Array<{ __typename?: 'ItineraryItemEdge', node: { __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', id: string, place: { __typename: 'Place', id: string } } }>, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: Maybe<string>, endCursor?: Maybe<string> } } }> };
+
+export type FindItineraryLocationsByPlaceIdQueryVariables = Exact<{
+  itineraryId: Scalars['ID'];
+  placeId: Scalars['ID'];
+  first: Scalars['Int'];
+  after?: Maybe<Scalars['String']>;
+}>;
+
+
+export type FindItineraryLocationsByPlaceIdQuery = { __typename?: 'Query', itinerary?: Maybe<{ __typename?: 'Itinerary', descendants: { __typename: 'ItineraryItemConnection', totalCount: number, edges: Array<{ __typename?: 'ItineraryItemEdge', node: { __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', title?: Maybe<string>, synopsis?: Maybe<string>, tags: Array<string>, optional: boolean, readMoreUrl?: Maybe<string>, id: string, position: { __typename?: 'Position', lon: number, lat: number }, place: { __typename: 'Place', id: string, name?: Maybe<string>, synopsis?: Maybe<string>, maki?: Maybe<string>, position: { __typename?: 'Position', lon: number, lat: number }, address: { __typename?: 'PlaceAddress', addressLineOne?: Maybe<string>, addressLineTwo?: Maybe<string>, addressLineThree?: Maybe<string>, locality?: Maybe<string>, region?: Maybe<string>, regionCode?: Maybe<string>, country?: Maybe<string>, countryCode?: Maybe<string> }, layers: Array<{ __typename: 'PlaceLayer', id: string, name?: Maybe<string> }> } } }>, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: Maybe<string>, endCursor?: Maybe<string> } } }> };
 
 export type GetItineraryDirectionsQueryVariables = Exact<{
   id: Scalars['ID'];
@@ -5699,20 +5808,31 @@ export type GetItineraryDirectionsQueryVariables = Exact<{
 
 export type GetItineraryDirectionsQuery = { __typename?: 'Query', node?: Maybe<{ __typename: 'Collection', id: string } | { __typename: 'CollectionLocation', id: string } | { __typename: 'ConnectedApp', id: string } | { __typename: 'Itinerary', id: string } | { __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', durationMin?: Maybe<number>, id: string, route: { __typename?: 'Route', segments: Array<{ __typename: 'RouteSegment', id: string, mode: RouteMode, polyline?: Maybe<string> }> } } | { __typename: 'ItineraryLocation', id: string } | { __typename: 'Place', id: string } | { __typename: 'Profile', id: string }> };
 
+export type GetItineraryLocationQueryVariables = Exact<{
+  id: Scalars['ID'];
+  mediaImagePreferredBestFit?: Maybe<Array<Scalars['Int']> | Scalars['Int']>;
+}>;
+
+
+export type GetItineraryLocationQuery = { __typename?: 'Query', node?: Maybe<{ __typename: 'Collection', id: string } | { __typename: 'CollectionLocation', id: string } | { __typename: 'ConnectedApp', id: string } | { __typename: 'Itinerary', id: string } | { __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', title?: Maybe<string>, synopsis?: Maybe<string>, description?: Maybe<string>, tags: Array<string>, optional: boolean, readMoreUrl?: Maybe<string>, id: string, position: { __typename?: 'Position', lon: number, lat: number }, place: { __typename: 'Place', id: string, name?: Maybe<string>, synopsis?: Maybe<string>, description?: Maybe<string>, maki?: Maybe<string>, position: { __typename?: 'Position', lon: number, lat: number }, address: { __typename?: 'PlaceAddress', addressLineOne?: Maybe<string>, addressLineTwo?: Maybe<string>, addressLineThree?: Maybe<string>, locality?: Maybe<string>, region?: Maybe<string>, regionCode?: Maybe<string>, country?: Maybe<string>, countryCode?: Maybe<string> }, contact: { __typename?: 'PlaceContact', phoneNumber?: Maybe<string>, emailAddress?: Maybe<string>, websiteUrl?: Maybe<string>, bookingsUrl?: Maybe<string>, facebookUrl?: Maybe<string>, instagramUrl?: Maybe<string>, twitterUrl?: Maybe<string> }, layers: Array<{ __typename: 'PlaceLayer', id: string, name?: Maybe<string> }>, hours?: Maybe<{ __typename?: 'PlaceHours', osmTag: string }> }, preferredMedia?: Maybe<{ __typename: 'MediaContainer', id: string, resource: { __typename: 'MediaImage', provider: string, copyright?: Maybe<string>, altText?: Maybe<string>, attribution?: Maybe<string>, caption?: Maybe<string>, tags: Array<string>, id?: Maybe<string>, source?: Maybe<{ __typename?: 'MediaImageSource', url: string }> } }> } | { __typename: 'Place', id: string } | { __typename: 'Profile', id: string }> };
+
 export type GetItineraryQueryVariables = Exact<{
   id: Scalars['ID'];
   mediaImagePreferredBestFit?: Maybe<Array<Scalars['Int']> | Scalars['Int']>;
 }>;
 
 
-export type GetItineraryQuery = { __typename?: 'Query', itinerary?: Maybe<{ __typename: 'Itinerary', id: string, title?: Maybe<string>, synopsis?: Maybe<string>, description?: Maybe<string>, tags: Array<string>, created?: Maybe<string>, autoRoute?: Maybe<{ __typename?: 'ItineraryAutoRoute', defaultMode: RouteMode }>, profile?: Maybe<{ __typename: 'Profile', id: string, name: string }>, locations: { __typename?: 'ItineraryItemConnection', totalCount: number }, preferredMedia?: Maybe<{ __typename?: 'MediaContainer', resource: { __typename: 'MediaImage', caption?: Maybe<string>, copyright?: Maybe<string>, attribution?: Maybe<string>, id?: Maybe<string>, altText?: Maybe<string>, source?: Maybe<{ __typename?: 'MediaImageSource', url: string }> } }> }> };
+export type GetItineraryQuery = { __typename?: 'Query', itinerary?: Maybe<{ __typename: 'Itinerary', id: string, title?: Maybe<string>, synopsis?: Maybe<string>, description?: Maybe<string>, tags: Array<string>, created?: Maybe<string>, autoRoute?: Maybe<{ __typename?: 'ItineraryAutoRoute', defaultMode: RouteMode }>, locations: { __typename?: 'ItineraryItemConnection', totalCount: number }, profile?: Maybe<{ __typename: 'Profile', id: string, name: string, handle?: Maybe<string> }>, preferredMedia?: Maybe<{ __typename: 'MediaContainer', id: string, resource: { __typename: 'MediaImage', provider: string, copyright?: Maybe<string>, altText?: Maybe<string>, attribution?: Maybe<string>, caption?: Maybe<string>, tags: Array<string>, id?: Maybe<string>, source?: Maybe<{ __typename?: 'MediaImageSource', url: string }> } }> }> };
 
-export type GetPlaceQueryVariables = Exact<{
-  id: Scalars['ID'];
+export type ListItinerariesQueryVariables = Exact<{
+  profileId: Scalars['ID'];
+  first: Scalars['Int'];
+  after?: Maybe<Scalars['String']>;
+  mediaImagePreferredBestFit?: Maybe<Array<Scalars['Int']> | Scalars['Int']>;
 }>;
 
 
-export type GetPlaceQuery = { __typename?: 'Query', place?: Maybe<{ __typename: 'Place', id: string, name?: Maybe<string>, synopsis?: Maybe<string>, description?: Maybe<string>, maki?: Maybe<string>, position: { __typename?: 'Position', lon: number, lat: number }, address: { __typename?: 'PlaceAddress', addressLineOne?: Maybe<string>, addressLineTwo?: Maybe<string>, addressLineThree?: Maybe<string>, locality?: Maybe<string>, region?: Maybe<string>, country?: Maybe<string>, countryCode?: Maybe<string> }, contact: { __typename?: 'PlaceContact', phoneNumber?: Maybe<string>, emailAddress?: Maybe<string>, websiteUrl?: Maybe<string>, bookingsUrl?: Maybe<string>, facebookUrl?: Maybe<string>, instagramUrl?: Maybe<string>, twitterUrl?: Maybe<string> }, layers: Array<{ __typename: 'PlaceLayer', id: string, name?: Maybe<string> }>, hours?: Maybe<{ __typename?: 'PlaceHours', osmTag: string }> }> };
+export type ListItinerariesQuery = { __typename?: 'Query', itineraries: { __typename: 'ItineraryConnection', totalCount: number, edges: Array<{ __typename?: 'ItineraryEdge', node: { __typename: 'Itinerary', id: string, title?: Maybe<string>, synopsis?: Maybe<string>, tags: Array<string>, created?: Maybe<string>, preferredMedia?: Maybe<{ __typename: 'MediaContainer', id: string, resource: { __typename: 'MediaImage', provider: string, copyright?: Maybe<string>, altText?: Maybe<string>, attribution?: Maybe<string>, caption?: Maybe<string>, tags: Array<string>, id?: Maybe<string>, source?: Maybe<{ __typename?: 'MediaImageSource', url: string }> } }> } }>, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: Maybe<string>, endCursor?: Maybe<string> } } };
 
 export type ListItineraryLocationsQueryVariables = Exact<{
   id: Scalars['ID'];
@@ -5723,7 +5843,7 @@ export type ListItineraryLocationsQueryVariables = Exact<{
 }>;
 
 
-export type ListItineraryLocationsQuery = { __typename?: 'Query', itinerary?: Maybe<{ __typename: 'Itinerary', id: string, locations: { __typename?: 'ItineraryItemConnection', totalCount: number, edges: Array<{ __typename?: 'ItineraryItemEdge', location: { __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', title?: Maybe<string>, synopsis?: Maybe<string>, tags: Array<string>, optional: boolean, readMoreUrl?: Maybe<string>, id: string, position: { __typename?: 'Position', lon: number, lat: number }, place: { __typename: 'Place', id: string, name?: Maybe<string>, synopsis?: Maybe<string>, maki?: Maybe<string>, position: { __typename?: 'Position', lon: number, lat: number }, address: { __typename?: 'PlaceAddress', locality?: Maybe<string>, region?: Maybe<string>, country?: Maybe<string> }, layers: Array<{ __typename: 'PlaceLayer', id: string, name?: Maybe<string> }> }, preferredMedia?: Maybe<{ __typename?: 'MediaContainer', resource: { __typename: 'MediaImage', caption?: Maybe<string>, copyright?: Maybe<string>, attribution?: Maybe<string>, id?: Maybe<string>, altText?: Maybe<string>, source?: Maybe<{ __typename?: 'MediaImageSource', url: string }> } }> }, arrival: { __typename?: 'ItineraryDirectionsConnection', totalCount: number, nodes: Array<{ __typename: 'ItineraryDirections', id: string, durationMin?: Maybe<number>, route: { __typename?: 'Route', segments: Array<{ __typename: 'RouteSegment', id: string, mode: RouteMode, polyline?: Maybe<string> }> } }>, pageInfo: { __typename?: 'PageInfo', endCursor?: Maybe<string> } } }>, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, endCursor?: Maybe<string> } } }> };
+export type ListItineraryLocationsQuery = { __typename?: 'Query', itinerary?: Maybe<{ __typename: 'Itinerary', id: string, locations: { __typename?: 'ItineraryItemConnection', totalCount: number, edges: Array<{ __typename?: 'ItineraryItemEdge', location: { __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', title?: Maybe<string>, synopsis?: Maybe<string>, tags: Array<string>, optional: boolean, readMoreUrl?: Maybe<string>, id: string, position: { __typename?: 'Position', lon: number, lat: number }, place: { __typename: 'Place', id: string, name?: Maybe<string>, synopsis?: Maybe<string>, maki?: Maybe<string>, position: { __typename?: 'Position', lon: number, lat: number }, address: { __typename?: 'PlaceAddress', addressLineOne?: Maybe<string>, addressLineTwo?: Maybe<string>, addressLineThree?: Maybe<string>, locality?: Maybe<string>, region?: Maybe<string>, regionCode?: Maybe<string>, country?: Maybe<string>, countryCode?: Maybe<string> }, layers: Array<{ __typename: 'PlaceLayer', id: string, name?: Maybe<string> }> }, preferredMedia?: Maybe<{ __typename: 'MediaContainer', id: string, resource: { __typename: 'MediaImage', provider: string, copyright?: Maybe<string>, altText?: Maybe<string>, attribution?: Maybe<string>, caption?: Maybe<string>, tags: Array<string>, id?: Maybe<string>, source?: Maybe<{ __typename?: 'MediaImageSource', url: string }> } }> }, arrival: { __typename?: 'ItineraryDirectionsConnection', totalCount: number, directions: Array<{ __typename: 'ItineraryDirections', id: string, durationMin?: Maybe<number>, route: { __typename?: 'Route', segments: Array<{ __typename: 'RouteSegment', id: string, mode: RouteMode, polyline?: Maybe<string> }> } }> } }>, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: Maybe<string>, endCursor?: Maybe<string> } } }> };
 
 export type MoveItineraryLocationAfterMutationVariables = Exact<{
   id: Scalars['ID'];
@@ -5754,7 +5874,7 @@ export type UpdateItineraryLocationMutationVariables = Exact<{
 }>;
 
 
-export type UpdateItineraryLocationMutation = { __typename?: 'Mutation', updateItineraryLocation: { __typename: 'UpdateItineraryLocationPayload', location?: Maybe<{ __typename: 'ItineraryLocation', id: string, title?: Maybe<string>, synopsis?: Maybe<string>, description?: Maybe<string>, tags: Array<string>, optional: boolean, position: { __typename?: 'Position', lon: number, lat: number }, place: { __typename: 'Place', id: string, name?: Maybe<string>, synopsis?: Maybe<string>, description?: Maybe<string>, maki?: Maybe<string>, position: { __typename?: 'Position', lon: number, lat: number }, address: { __typename?: 'PlaceAddress', addressLineOne?: Maybe<string>, addressLineTwo?: Maybe<string>, addressLineThree?: Maybe<string>, locality?: Maybe<string>, region?: Maybe<string>, country?: Maybe<string>, countryCode?: Maybe<string> }, contact: { __typename?: 'PlaceContact', phoneNumber?: Maybe<string>, emailAddress?: Maybe<string>, websiteUrl?: Maybe<string>, bookingsUrl?: Maybe<string>, facebookUrl?: Maybe<string>, instagramUrl?: Maybe<string>, twitterUrl?: Maybe<string> }, layers: Array<{ __typename: 'PlaceLayer', id: string, name?: Maybe<string> }>, hours?: Maybe<{ __typename?: 'PlaceHours', osmTag: string }> } }>, cascaded: { __typename?: 'ItineraryItemCascadedChanges', deletedIds: Array<string>, created: Array<{ __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', id: string }>, updated: Array<{ __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', id: string }> } } };
+export type UpdateItineraryLocationMutation = { __typename?: 'Mutation', updateItineraryLocation: { __typename: 'UpdateItineraryLocationPayload', location?: Maybe<{ __typename: 'ItineraryLocation', id: string, title?: Maybe<string>, synopsis?: Maybe<string>, description?: Maybe<string>, tags: Array<string>, optional: boolean, readMoreUrl?: Maybe<string>, position: { __typename?: 'Position', lon: number, lat: number } }>, cascaded: { __typename?: 'ItineraryItemCascadedChanges', deletedIds: Array<string>, created: Array<{ __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', id: string }>, updated: Array<{ __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', id: string }> } } };
 
 export type UpdateItineraryMutationVariables = Exact<{
   id: Scalars['ID'];
@@ -5762,7 +5882,67 @@ export type UpdateItineraryMutationVariables = Exact<{
 }>;
 
 
-export type UpdateItineraryMutation = { __typename?: 'Mutation', updateItinerary: { __typename: 'UpdateItineraryPayload', itinerary?: Maybe<{ __typename: 'Itinerary', id: string, title?: Maybe<string>, synopsis?: Maybe<string>, description?: Maybe<string>, tags: Array<string>, created?: Maybe<string>, autoRoute?: Maybe<{ __typename?: 'ItineraryAutoRoute', defaultMode: RouteMode }>, profile?: Maybe<{ __typename: 'Profile', id: string, name: string }> }>, cascaded: { __typename?: 'ItineraryItemCascadedChanges', deletedIds: Array<string>, created: Array<{ __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', id: string }>, updated: Array<{ __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', id: string }> } } };
+export type UpdateItineraryMutation = { __typename?: 'Mutation', updateItinerary: { __typename: 'UpdateItineraryPayload', itinerary?: Maybe<{ __typename: 'Itinerary', id: string, title?: Maybe<string>, synopsis?: Maybe<string>, description?: Maybe<string>, tags: Array<string>, created?: Maybe<string>, autoRoute?: Maybe<{ __typename?: 'ItineraryAutoRoute', defaultMode: RouteMode }> }>, cascaded: { __typename?: 'ItineraryItemCascadedChanges', deletedIds: Array<string>, created: Array<{ __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', id: string }>, updated: Array<{ __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', id: string }> } } };
+
+export type GetMediaImageQueryVariables = Exact<{
+  id: Scalars['ID'];
+  smallBestFit?: Maybe<Array<Scalars['Int']> | Scalars['Int']>;
+  mediumBestFit?: Maybe<Array<Scalars['Int']> | Scalars['Int']>;
+  largeBestFit?: Maybe<Array<Scalars['Int']> | Scalars['Int']>;
+}>;
+
+
+export type GetMediaImageQuery = { __typename?: 'Query', mediaResource?: Maybe<{ __typename: 'MediaImage', provider: string, copyright?: Maybe<string>, altText?: Maybe<string>, attribution?: Maybe<string>, caption?: Maybe<string>, tags: Array<string>, id?: Maybe<string>, small?: Maybe<{ __typename?: 'MediaImageSource', url: string }>, medium?: Maybe<{ __typename?: 'MediaImageSource', url: string }>, large?: Maybe<{ __typename?: 'MediaImageSource', url: string }> }> };
+
+export type AutocompleteSearchPlaceQueryVariables = Exact<{
+  text: Scalars['String'];
+  source: PlaceSearchSource;
+}>;
+
+
+export type AutocompleteSearchPlaceQuery = { __typename?: 'Query', placeAutocompleteSearch: { __typename: 'PlaceSearchConnection', edges: Array<{ __typename?: 'PlaceSearchEdge', node: { __typename: 'PlaceSearchNode', id: string, name?: Maybe<string>, maki?: Maybe<string>, position: { __typename?: 'Position', lon: number, lat: number }, address: { __typename?: 'PlaceAddress', addressLineOne?: Maybe<string>, addressLineTwo?: Maybe<string>, addressLineThree?: Maybe<string>, locality?: Maybe<string>, region?: Maybe<string>, regionCode?: Maybe<string>, country?: Maybe<string>, countryCode?: Maybe<string> }, layers: Array<{ __typename: 'PlaceLayer', id: string, name?: Maybe<string> }> }, main: { __typename?: 'TextSearchResult', label: string, matches: Array<{ __typename?: 'TextSearchResultMatch', offset: number, length: number }> }, secondary: { __typename?: 'TextSearchResult', label: string, matches: Array<{ __typename?: 'TextSearchResultMatch', offset: number, length: number }> } }> } };
+
+export type GetPlaceQueryVariables = Exact<{
+  id: Scalars['ID'];
+  mediaImagePreferredBestFit?: Maybe<Array<Scalars['Int']> | Scalars['Int']>;
+}>;
+
+
+export type GetPlaceQuery = { __typename?: 'Query', place?: Maybe<{ __typename: 'Place', id: string, name?: Maybe<string>, synopsis?: Maybe<string>, description?: Maybe<string>, maki?: Maybe<string>, position: { __typename?: 'Position', lon: number, lat: number }, address: { __typename?: 'PlaceAddress', addressLineOne?: Maybe<string>, addressLineTwo?: Maybe<string>, addressLineThree?: Maybe<string>, locality?: Maybe<string>, region?: Maybe<string>, regionCode?: Maybe<string>, country?: Maybe<string>, countryCode?: Maybe<string> }, contact: { __typename?: 'PlaceContact', phoneNumber?: Maybe<string>, emailAddress?: Maybe<string>, websiteUrl?: Maybe<string>, bookingsUrl?: Maybe<string>, facebookUrl?: Maybe<string>, instagramUrl?: Maybe<string>, twitterUrl?: Maybe<string> }, layers: Array<{ __typename: 'PlaceLayer', id: string, name?: Maybe<string> }>, hours?: Maybe<{ __typename?: 'PlaceHours', osmTag: string }>, preferredMedia?: Maybe<{ __typename: 'MediaContainer', id: string, resource: { __typename: 'MediaImage', provider: string, copyright?: Maybe<string>, altText?: Maybe<string>, attribution?: Maybe<string>, caption?: Maybe<string>, tags: Array<string>, id?: Maybe<string>, source?: Maybe<{ __typename?: 'MediaImageSource', url: string }> } }> }> };
+
+export type ReverseSearchPlaceByPositionQueryVariables = Exact<{
+  focus: PositionInput;
+  sources: Array<PlaceSearchSource> | PlaceSearchSource;
+  first: Scalars['Int'];
+}>;
+
+
+export type ReverseSearchPlaceByPositionQuery = { __typename?: 'Query', placeReverseSearch: { __typename: 'PlaceSearchConnection', places: Array<{ __typename: 'PlaceSearchNode', id: string, name?: Maybe<string>, maki?: Maybe<string>, position: { __typename?: 'Position', lon: number, lat: number }, address: { __typename?: 'PlaceAddress', addressLineOne?: Maybe<string>, addressLineTwo?: Maybe<string>, addressLineThree?: Maybe<string>, locality?: Maybe<string>, region?: Maybe<string>, regionCode?: Maybe<string>, country?: Maybe<string>, countryCode?: Maybe<string> }, layers: Array<{ __typename: 'PlaceLayer', id: string, name?: Maybe<string> }> }> } };
+
+export type GetProfileQueryVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+
+export type GetProfileQuery = { __typename?: 'Query', profile?: Maybe<{ __typename: 'Profile', id: string, name: string, handle?: Maybe<string>, type: ProfileType, bio?: Maybe<string>, websiteUrl?: Maybe<string> }> };
+
+export type ListAuthorizedProfilesQueryVariables = Exact<{
+  first: Scalars['Int'];
+  after?: Maybe<Scalars['String']>;
+}>;
+
+
+export type ListAuthorizedProfilesQuery = { __typename?: 'Query', authorizedProfiles: { __typename: 'ProfileConnection', totalCount: number, profiles: Array<{ __typename: 'Profile', id: string, name: string, handle?: Maybe<string> }>, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: Maybe<string>, endCursor?: Maybe<string> } } };
+
+export type SearchRoutesBetweenPositionsQueryVariables = Exact<{
+  mode: RouteSearchableMode;
+  positions: Array<PositionInput> | PositionInput;
+  first: Scalars['Int'];
+  includeRoutePolyline: Scalars['Boolean'];
+}>;
+
+
+export type SearchRoutesBetweenPositionsQuery = { __typename?: 'Query', routes: { __typename: 'RouteConnection', routes: Array<{ __typename?: 'Route', segments: Array<{ __typename?: 'RouteSegment', distance?: Maybe<number>, duration?: Maybe<number>, polyline?: Maybe<string> }> }> } };
 
 
       export interface PossibleTypesResultData {
@@ -5798,6 +5978,65 @@ export type UpdateItineraryMutation = { __typename?: 'Mutation', updateItinerary
 };
       export default result;
     
+export const CollectionContentFragmentDoc = gql`
+    fragment CollectionContent on Collection {
+  title
+  synopsis
+  description
+  discriminator
+  readMoreUrl
+}
+    `;
+export const CollectionItemsCountFragmentDoc = gql`
+    fragment CollectionItemsCount on Collection {
+  items(first: 0) {
+    totalCount
+  }
+}
+    `;
+export const CollectionLocationContentFragmentDoc = gql`
+    fragment CollectionLocationContent on CollectionLocation {
+  title
+  synopsis
+  description
+  tags
+  readMoreUrl
+  websiteUrl
+  position {
+    lon
+    lat
+  }
+}
+    `;
+export const CollectionLocationExternalRefsFragmentDoc = gql`
+    fragment CollectionLocationExternalRefs on CollectionLocation {
+  externalId: attr(id: "custom://external-ref") {
+    value
+  }
+  externalSource: attr(id: "custom://external-source") {
+    value
+  }
+}
+    `;
+export const CollectionLocationPartialContentFragmentDoc = gql`
+    fragment CollectionLocationPartialContent on CollectionLocation {
+  title
+  synopsis
+  tags
+  position {
+    lon
+    lat
+  }
+  readMoreUrl
+}
+    `;
+export const CollectionPartialContentFragmentDoc = gql`
+    fragment CollectionPartialContent on Collection {
+  title
+  synopsis
+  readMoreUrl
+}
+    `;
 export const ItineraryCascadedChangesFragmentDoc = gql`
     fragment ItineraryCascadedChanges on ItineraryItemCascadedChanges {
   created {
@@ -5811,11 +6050,6 @@ export const ItineraryCascadedChangesFragmentDoc = gql`
   deletedIds
 }
     `;
-export const ProfilePartialContentFragmentDoc = gql`
-    fragment ProfilePartialContent on Profile {
-  name
-}
-    `;
 export const ItineraryContentFragmentDoc = gql`
     fragment ItineraryContent on Itinerary {
   title
@@ -5826,13 +6060,8 @@ export const ItineraryContentFragmentDoc = gql`
   autoRoute {
     defaultMode
   }
-  profile {
-    id
-    __typename
-    ...ProfilePartialContent
-  }
 }
-    ${ProfilePartialContentFragmentDoc}`;
+    `;
 export const ItineraryDirectionsContentFragmentDoc = gql`
     fragment ItineraryDirectionsContent on ItineraryDirections {
   durationMin
@@ -5841,6 +6070,68 @@ export const ItineraryDirectionsContentFragmentDoc = gql`
 export const ItineraryDirectionsPartialContentFragmentDoc = gql`
     fragment ItineraryDirectionsPartialContent on ItineraryDirections {
   durationMin
+}
+    `;
+export const ItineraryLocationContentFragmentDoc = gql`
+    fragment ItineraryLocationContent on ItineraryLocation {
+  title
+  synopsis
+  description
+  tags
+  optional
+  readMoreUrl
+  position {
+    lon
+    lat
+  }
+}
+    `;
+export const ItineraryLocationPartialContentFragmentDoc = gql`
+    fragment ItineraryLocationPartialContent on ItineraryLocation {
+  title
+  synopsis
+  tags
+  optional
+  readMoreUrl
+  position {
+    lon
+    lat
+  }
+}
+    `;
+export const ItineraryLocationsCountFragmentDoc = gql`
+    fragment ItineraryLocationsCount on Itinerary {
+  locations: descendants(first: 0, type: ItineraryLocation) {
+    totalCount
+  }
+}
+    `;
+export const ItineraryPartialContentFragmentDoc = gql`
+    fragment ItineraryPartialContent on Itinerary {
+  title
+  synopsis
+  tags
+  created
+}
+    `;
+export const MediaImageContentFragmentDoc = gql`
+    fragment MediaImageContent on MediaImage {
+  provider
+  copyright
+  altText
+  attribution
+  caption
+  tags
+}
+    `;
+export const MediaImagePartialContentFragmentDoc = gql`
+    fragment MediaImagePartialContent on MediaImage {
+  provider
+  copyright
+  altText
+  attribution
+  caption
+  tags
 }
     `;
 export const PlaceContentFragmentDoc = gql`
@@ -5859,6 +6150,7 @@ export const PlaceContentFragmentDoc = gql`
     addressLineThree
     locality
     region
+    regionCode
     country
     countryCode
   }
@@ -5881,24 +6173,6 @@ export const PlaceContentFragmentDoc = gql`
   }
 }
     `;
-export const ItineraryLocationContentFragmentDoc = gql`
-    fragment ItineraryLocationContent on ItineraryLocation {
-  title
-  synopsis
-  description
-  tags
-  optional
-  position {
-    lon
-    lat
-  }
-  place {
-    id
-    __typename
-    ...PlaceContent
-  }
-}
-    ${PlaceContentFragmentDoc}`;
 export const PlacePartialContentFragmentDoc = gql`
     fragment PlacePartialContent on Place {
   name
@@ -5909,9 +6183,14 @@ export const PlacePartialContentFragmentDoc = gql`
   }
   maki
   address {
+    addressLineOne
+    addressLineTwo
+    addressLineThree
     locality
     region
+    regionCode
     country
+    countryCode
   }
   layers {
     id
@@ -5920,31 +6199,522 @@ export const PlacePartialContentFragmentDoc = gql`
   }
 }
     `;
-export const ItineraryLocationPartialContentFragmentDoc = gql`
-    fragment ItineraryLocationPartialContent on ItineraryLocation {
-  title
-  synopsis
-  tags
-  optional
-  readMoreUrl
+export const PlaceSearchContentFragmentDoc = gql`
+    fragment PlaceSearchContent on PlaceSearchNode {
+  name
   position {
     lon
     lat
   }
-  place {
+  address {
+    addressLineOne
+    addressLineTwo
+    addressLineThree
+    locality
+    region
+    regionCode
+    country
+    countryCode
+  }
+  maki
+  layers {
     id
     __typename
-    ...PlacePartialContent
-  }
-}
-    ${PlacePartialContentFragmentDoc}`;
-export const ItineraryLocationsCountFragmentDoc = gql`
-    fragment ItineraryLocationsCount on Itinerary {
-  locations: descendants(first: 0, type: ItineraryLocation) {
-    totalCount
+    name
   }
 }
     `;
+export const ProfileContentFragmentDoc = gql`
+    fragment ProfileContent on Profile {
+  name
+  handle
+  type
+  bio
+  websiteUrl
+}
+    `;
+export const ProfilePartialContentFragmentDoc = gql`
+    fragment ProfilePartialContent on Profile {
+  name
+  handle
+}
+    `;
+export const CreateCollectionLocationDocument = gql`
+    mutation createCollectionLocation($collectionId: ID!, $location: CreateCollectionLocationInput!) {
+  createCollectionLocation(collectionId: $collectionId, location: $location) {
+    __typename
+    location {
+      id
+      __typename
+      ...CollectionLocationContent
+      place {
+        id
+        __typename
+        ...PlacePartialContent
+      }
+    }
+  }
+}
+    ${CollectionLocationContentFragmentDoc}
+${PlacePartialContentFragmentDoc}`;
+
+/**
+ * __useCreateCollectionLocationMutation__
+ *
+ * To run a mutation, you first call `useCreateCollectionLocationMutation` within a Vue component and pass it any options that fit your needs.
+ * When your component renders, `useCreateCollectionLocationMutation` returns an object that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - Several other properties: https://v4.apollo.vuejs.org/api/use-mutation.html#return
+ *
+ * @param options that will be passed into the mutation, supported options are listed on: https://v4.apollo.vuejs.org/guide-composable/mutation.html#options;
+ *
+ * @example
+ * const { mutate, loading, error, onDone } = useCreateCollectionLocationMutation({
+ *   variables: {
+ *     collectionId: // value for 'collectionId'
+ *     location: // value for 'location'
+ *   },
+ * });
+ */
+export function useCreateCollectionLocationMutation(options: VueApolloComposable.UseMutationOptions<CreateCollectionLocationMutation, CreateCollectionLocationMutationVariables> | ReactiveFunction<VueApolloComposable.UseMutationOptions<CreateCollectionLocationMutation, CreateCollectionLocationMutationVariables>>) {
+  return VueApolloComposable.useMutation<CreateCollectionLocationMutation, CreateCollectionLocationMutationVariables>(CreateCollectionLocationDocument, options);
+}
+export type CreateCollectionLocationMutationCompositionFunctionResult = VueApolloComposable.UseMutationReturn<CreateCollectionLocationMutation, CreateCollectionLocationMutationVariables>;
+export const DeleteCollectionItemDocument = gql`
+    mutation deleteCollectionItem($id: ID!) {
+  deleteCollectionItem(id: $id) {
+    __typename
+  }
+}
+    `;
+
+/**
+ * __useDeleteCollectionItemMutation__
+ *
+ * To run a mutation, you first call `useDeleteCollectionItemMutation` within a Vue component and pass it any options that fit your needs.
+ * When your component renders, `useDeleteCollectionItemMutation` returns an object that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - Several other properties: https://v4.apollo.vuejs.org/api/use-mutation.html#return
+ *
+ * @param options that will be passed into the mutation, supported options are listed on: https://v4.apollo.vuejs.org/guide-composable/mutation.html#options;
+ *
+ * @example
+ * const { mutate, loading, error, onDone } = useDeleteCollectionItemMutation({
+ *   variables: {
+ *     id: // value for 'id'
+ *   },
+ * });
+ */
+export function useDeleteCollectionItemMutation(options: VueApolloComposable.UseMutationOptions<DeleteCollectionItemMutation, DeleteCollectionItemMutationVariables> | ReactiveFunction<VueApolloComposable.UseMutationOptions<DeleteCollectionItemMutation, DeleteCollectionItemMutationVariables>>) {
+  return VueApolloComposable.useMutation<DeleteCollectionItemMutation, DeleteCollectionItemMutationVariables>(DeleteCollectionItemDocument, options);
+}
+export type DeleteCollectionItemMutationCompositionFunctionResult = VueApolloComposable.UseMutationReturn<DeleteCollectionItemMutation, DeleteCollectionItemMutationVariables>;
+export const FindCollectionLocationIdsByExternalDocument = gql`
+    query findCollectionLocationIdsByExternal($collectionId: [ID!], $externalIds: [ID!], $externalSources: [ID!], $first: Int!, $after: String) {
+  collectionItems(
+    collectionIds: $collectionId
+    externalIds: $externalIds
+    externalSources: $externalSources
+    first: $first
+    after: $after
+  ) {
+    __typename
+    edges {
+      node {
+        id
+        __typename
+        ... on CollectionLocation {
+          place {
+            id
+            __typename
+          }
+        }
+      }
+      cursor
+    }
+    totalCount
+    pageInfo {
+      hasNextPage
+      hasPreviousPage
+      startCursor
+      endCursor
+    }
+  }
+}
+    `;
+
+/**
+ * __useFindCollectionLocationIdsByExternalQuery__
+ *
+ * To run a query within a Vue component, call `useFindCollectionLocationIdsByExternalQuery` and pass it any options that fit your needs.
+ * When your component renders, `useFindCollectionLocationIdsByExternalQuery` returns an object from Apollo Client that contains result, loading and error properties
+ * you can use to render your UI.
+ *
+ * @param variables that will be passed into the query
+ * @param options that will be passed into the query, supported options are listed on: https://v4.apollo.vuejs.org/guide-composable/query.html#options;
+ *
+ * @example
+ * const { result, loading, error } = useFindCollectionLocationIdsByExternalQuery({
+ *   collectionId: // value for 'collectionId'
+ *   externalIds: // value for 'externalIds'
+ *   externalSources: // value for 'externalSources'
+ *   first: // value for 'first'
+ *   after: // value for 'after'
+ * });
+ */
+export function useFindCollectionLocationIdsByExternalQuery(variables: FindCollectionLocationIdsByExternalQueryVariables | VueCompositionApi.Ref<FindCollectionLocationIdsByExternalQueryVariables> | ReactiveFunction<FindCollectionLocationIdsByExternalQueryVariables>, options: VueApolloComposable.UseQueryOptions<FindCollectionLocationIdsByExternalQuery, FindCollectionLocationIdsByExternalQueryVariables> | VueCompositionApi.Ref<VueApolloComposable.UseQueryOptions<FindCollectionLocationIdsByExternalQuery, FindCollectionLocationIdsByExternalQueryVariables>> | ReactiveFunction<VueApolloComposable.UseQueryOptions<FindCollectionLocationIdsByExternalQuery, FindCollectionLocationIdsByExternalQueryVariables>> = {}) {
+  return VueApolloComposable.useQuery<FindCollectionLocationIdsByExternalQuery, FindCollectionLocationIdsByExternalQueryVariables>(FindCollectionLocationIdsByExternalDocument, variables, options);
+}
+export type FindCollectionLocationIdsByExternalQueryCompositionFunctionResult = VueApolloComposable.UseQueryReturn<FindCollectionLocationIdsByExternalQuery, FindCollectionLocationIdsByExternalQueryVariables>;
+export const FindCollectionLocationIdsByTagDocument = gql`
+    query findCollectionLocationIdsByTag($collectionId: [ID!], $tags: [String!], $first: Int!, $after: String) {
+  collectionItems(
+    collectionIds: $collectionId
+    tags: $tags
+    first: $first
+    after: $after
+  ) {
+    __typename
+    edges {
+      node {
+        id
+        __typename
+        ... on CollectionLocation {
+          place {
+            id
+            __typename
+          }
+        }
+      }
+      cursor
+    }
+    totalCount
+    pageInfo {
+      hasNextPage
+      hasPreviousPage
+      startCursor
+      endCursor
+    }
+  }
+}
+    `;
+
+/**
+ * __useFindCollectionLocationIdsByTagQuery__
+ *
+ * To run a query within a Vue component, call `useFindCollectionLocationIdsByTagQuery` and pass it any options that fit your needs.
+ * When your component renders, `useFindCollectionLocationIdsByTagQuery` returns an object from Apollo Client that contains result, loading and error properties
+ * you can use to render your UI.
+ *
+ * @param variables that will be passed into the query
+ * @param options that will be passed into the query, supported options are listed on: https://v4.apollo.vuejs.org/guide-composable/query.html#options;
+ *
+ * @example
+ * const { result, loading, error } = useFindCollectionLocationIdsByTagQuery({
+ *   collectionId: // value for 'collectionId'
+ *   tags: // value for 'tags'
+ *   first: // value for 'first'
+ *   after: // value for 'after'
+ * });
+ */
+export function useFindCollectionLocationIdsByTagQuery(variables: FindCollectionLocationIdsByTagQueryVariables | VueCompositionApi.Ref<FindCollectionLocationIdsByTagQueryVariables> | ReactiveFunction<FindCollectionLocationIdsByTagQueryVariables>, options: VueApolloComposable.UseQueryOptions<FindCollectionLocationIdsByTagQuery, FindCollectionLocationIdsByTagQueryVariables> | VueCompositionApi.Ref<VueApolloComposable.UseQueryOptions<FindCollectionLocationIdsByTagQuery, FindCollectionLocationIdsByTagQueryVariables>> | ReactiveFunction<VueApolloComposable.UseQueryOptions<FindCollectionLocationIdsByTagQuery, FindCollectionLocationIdsByTagQueryVariables>> = {}) {
+  return VueApolloComposable.useQuery<FindCollectionLocationIdsByTagQuery, FindCollectionLocationIdsByTagQueryVariables>(FindCollectionLocationIdsByTagDocument, variables, options);
+}
+export type FindCollectionLocationIdsByTagQueryCompositionFunctionResult = VueApolloComposable.UseQueryReturn<FindCollectionLocationIdsByTagQuery, FindCollectionLocationIdsByTagQueryVariables>;
+export const FindCollectionLocationsByExternalDocument = gql`
+    query findCollectionLocationsByExternal($collectionId: [ID!], $externalIds: [ID!], $externalSources: [ID!], $first: Int!, $after: String) {
+  collectionItems(
+    collectionIds: $collectionId
+    externalIds: $externalIds
+    externalSources: $externalSources
+    first: $first
+    after: $after
+  ) {
+    __typename
+    edges {
+      node {
+        id
+        __typename
+        ... on CollectionLocation {
+          ...CollectionLocationPartialContent
+          ...CollectionLocationExternalRefs
+          place {
+            id
+            __typename
+            ...PlacePartialContent
+          }
+        }
+      }
+      cursor
+    }
+    totalCount
+    pageInfo {
+      hasNextPage
+      hasPreviousPage
+      startCursor
+      endCursor
+    }
+  }
+}
+    ${CollectionLocationPartialContentFragmentDoc}
+${CollectionLocationExternalRefsFragmentDoc}
+${PlacePartialContentFragmentDoc}`;
+
+/**
+ * __useFindCollectionLocationsByExternalQuery__
+ *
+ * To run a query within a Vue component, call `useFindCollectionLocationsByExternalQuery` and pass it any options that fit your needs.
+ * When your component renders, `useFindCollectionLocationsByExternalQuery` returns an object from Apollo Client that contains result, loading and error properties
+ * you can use to render your UI.
+ *
+ * @param variables that will be passed into the query
+ * @param options that will be passed into the query, supported options are listed on: https://v4.apollo.vuejs.org/guide-composable/query.html#options;
+ *
+ * @example
+ * const { result, loading, error } = useFindCollectionLocationsByExternalQuery({
+ *   collectionId: // value for 'collectionId'
+ *   externalIds: // value for 'externalIds'
+ *   externalSources: // value for 'externalSources'
+ *   first: // value for 'first'
+ *   after: // value for 'after'
+ * });
+ */
+export function useFindCollectionLocationsByExternalQuery(variables: FindCollectionLocationsByExternalQueryVariables | VueCompositionApi.Ref<FindCollectionLocationsByExternalQueryVariables> | ReactiveFunction<FindCollectionLocationsByExternalQueryVariables>, options: VueApolloComposable.UseQueryOptions<FindCollectionLocationsByExternalQuery, FindCollectionLocationsByExternalQueryVariables> | VueCompositionApi.Ref<VueApolloComposable.UseQueryOptions<FindCollectionLocationsByExternalQuery, FindCollectionLocationsByExternalQueryVariables>> | ReactiveFunction<VueApolloComposable.UseQueryOptions<FindCollectionLocationsByExternalQuery, FindCollectionLocationsByExternalQueryVariables>> = {}) {
+  return VueApolloComposable.useQuery<FindCollectionLocationsByExternalQuery, FindCollectionLocationsByExternalQueryVariables>(FindCollectionLocationsByExternalDocument, variables, options);
+}
+export type FindCollectionLocationsByExternalQueryCompositionFunctionResult = VueApolloComposable.UseQueryReturn<FindCollectionLocationsByExternalQuery, FindCollectionLocationsByExternalQueryVariables>;
+export const FindCollectionLocationsByTagDocument = gql`
+    query findCollectionLocationsByTag($collectionId: [ID!], $tags: [String!], $first: Int!, $after: String) {
+  collectionItems(
+    collectionIds: $collectionId
+    tags: $tags
+    first: $first
+    after: $after
+  ) {
+    __typename
+    edges {
+      node {
+        id
+        __typename
+        ... on CollectionLocation {
+          ...CollectionLocationPartialContent
+          ...CollectionLocationExternalRefs
+          place {
+            id
+            __typename
+            ...PlacePartialContent
+          }
+        }
+      }
+      cursor
+    }
+    totalCount
+    pageInfo {
+      hasNextPage
+      hasPreviousPage
+      startCursor
+      endCursor
+    }
+  }
+}
+    ${CollectionLocationPartialContentFragmentDoc}
+${CollectionLocationExternalRefsFragmentDoc}
+${PlacePartialContentFragmentDoc}`;
+
+/**
+ * __useFindCollectionLocationsByTagQuery__
+ *
+ * To run a query within a Vue component, call `useFindCollectionLocationsByTagQuery` and pass it any options that fit your needs.
+ * When your component renders, `useFindCollectionLocationsByTagQuery` returns an object from Apollo Client that contains result, loading and error properties
+ * you can use to render your UI.
+ *
+ * @param variables that will be passed into the query
+ * @param options that will be passed into the query, supported options are listed on: https://v4.apollo.vuejs.org/guide-composable/query.html#options;
+ *
+ * @example
+ * const { result, loading, error } = useFindCollectionLocationsByTagQuery({
+ *   collectionId: // value for 'collectionId'
+ *   tags: // value for 'tags'
+ *   first: // value for 'first'
+ *   after: // value for 'after'
+ * });
+ */
+export function useFindCollectionLocationsByTagQuery(variables: FindCollectionLocationsByTagQueryVariables | VueCompositionApi.Ref<FindCollectionLocationsByTagQueryVariables> | ReactiveFunction<FindCollectionLocationsByTagQueryVariables>, options: VueApolloComposable.UseQueryOptions<FindCollectionLocationsByTagQuery, FindCollectionLocationsByTagQueryVariables> | VueCompositionApi.Ref<VueApolloComposable.UseQueryOptions<FindCollectionLocationsByTagQuery, FindCollectionLocationsByTagQueryVariables>> | ReactiveFunction<VueApolloComposable.UseQueryOptions<FindCollectionLocationsByTagQuery, FindCollectionLocationsByTagQueryVariables>> = {}) {
+  return VueApolloComposable.useQuery<FindCollectionLocationsByTagQuery, FindCollectionLocationsByTagQueryVariables>(FindCollectionLocationsByTagDocument, variables, options);
+}
+export type FindCollectionLocationsByTagQueryCompositionFunctionResult = VueApolloComposable.UseQueryReturn<FindCollectionLocationsByTagQuery, FindCollectionLocationsByTagQueryVariables>;
+export const GetCollectionLocationDocument = gql`
+    query getCollectionLocation($id: ID!, $mediaImagePreferredBestFit: [Int!]) {
+  collectionItem(id: $id) {
+    id
+    __typename
+    ... on CollectionLocation {
+      ...CollectionLocationContent
+      place {
+        id
+        __typename
+        ...PlacePartialContent
+      }
+      preferredMedia {
+        id
+        __typename
+        resource {
+          id
+          __typename
+          altText
+          ... on MediaImage {
+            source(bestFit: $mediaImagePreferredBestFit) {
+              url
+            }
+            caption
+            copyright
+            attribution
+          }
+        }
+      }
+    }
+  }
+}
+    ${CollectionLocationContentFragmentDoc}
+${PlacePartialContentFragmentDoc}`;
+
+/**
+ * __useGetCollectionLocationQuery__
+ *
+ * To run a query within a Vue component, call `useGetCollectionLocationQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetCollectionLocationQuery` returns an object from Apollo Client that contains result, loading and error properties
+ * you can use to render your UI.
+ *
+ * @param variables that will be passed into the query
+ * @param options that will be passed into the query, supported options are listed on: https://v4.apollo.vuejs.org/guide-composable/query.html#options;
+ *
+ * @example
+ * const { result, loading, error } = useGetCollectionLocationQuery({
+ *   id: // value for 'id'
+ *   mediaImagePreferredBestFit: // value for 'mediaImagePreferredBestFit'
+ * });
+ */
+export function useGetCollectionLocationQuery(variables: GetCollectionLocationQueryVariables | VueCompositionApi.Ref<GetCollectionLocationQueryVariables> | ReactiveFunction<GetCollectionLocationQueryVariables>, options: VueApolloComposable.UseQueryOptions<GetCollectionLocationQuery, GetCollectionLocationQueryVariables> | VueCompositionApi.Ref<VueApolloComposable.UseQueryOptions<GetCollectionLocationQuery, GetCollectionLocationQueryVariables>> | ReactiveFunction<VueApolloComposable.UseQueryOptions<GetCollectionLocationQuery, GetCollectionLocationQueryVariables>> = {}) {
+  return VueApolloComposable.useQuery<GetCollectionLocationQuery, GetCollectionLocationQueryVariables>(GetCollectionLocationDocument, variables, options);
+}
+export type GetCollectionLocationQueryCompositionFunctionResult = VueApolloComposable.UseQueryReturn<GetCollectionLocationQuery, GetCollectionLocationQueryVariables>;
+export const GetCollectionDocument = gql`
+    query getCollection($id: ID!) {
+  collection(id: $id) {
+    id
+    __typename
+    ...CollectionContent
+    ...CollectionItemsCount
+  }
+}
+    ${CollectionContentFragmentDoc}
+${CollectionItemsCountFragmentDoc}`;
+
+/**
+ * __useGetCollectionQuery__
+ *
+ * To run a query within a Vue component, call `useGetCollectionQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetCollectionQuery` returns an object from Apollo Client that contains result, loading and error properties
+ * you can use to render your UI.
+ *
+ * @param variables that will be passed into the query
+ * @param options that will be passed into the query, supported options are listed on: https://v4.apollo.vuejs.org/guide-composable/query.html#options;
+ *
+ * @example
+ * const { result, loading, error } = useGetCollectionQuery({
+ *   id: // value for 'id'
+ * });
+ */
+export function useGetCollectionQuery(variables: GetCollectionQueryVariables | VueCompositionApi.Ref<GetCollectionQueryVariables> | ReactiveFunction<GetCollectionQueryVariables>, options: VueApolloComposable.UseQueryOptions<GetCollectionQuery, GetCollectionQueryVariables> | VueCompositionApi.Ref<VueApolloComposable.UseQueryOptions<GetCollectionQuery, GetCollectionQueryVariables>> | ReactiveFunction<VueApolloComposable.UseQueryOptions<GetCollectionQuery, GetCollectionQueryVariables>> = {}) {
+  return VueApolloComposable.useQuery<GetCollectionQuery, GetCollectionQueryVariables>(GetCollectionDocument, variables, options);
+}
+export type GetCollectionQueryCompositionFunctionResult = VueApolloComposable.UseQueryReturn<GetCollectionQuery, GetCollectionQueryVariables>;
+export const ListCollectionsDocument = gql`
+    query listCollections($profileId: ID!, $first: Int!, $after: String, $discriminator: String) {
+  collections(
+    profileId: $profileId
+    first: $first
+    after: $after
+    discriminator: $discriminator
+  ) {
+    __typename
+    edges {
+      node {
+        id
+        __typename
+        ...CollectionPartialContent
+        ...CollectionItemsCount
+      }
+    }
+    totalCount
+    pageInfo {
+      hasNextPage
+      hasPreviousPage
+      startCursor
+      endCursor
+    }
+  }
+}
+    ${CollectionPartialContentFragmentDoc}
+${CollectionItemsCountFragmentDoc}`;
+
+/**
+ * __useListCollectionsQuery__
+ *
+ * To run a query within a Vue component, call `useListCollectionsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useListCollectionsQuery` returns an object from Apollo Client that contains result, loading and error properties
+ * you can use to render your UI.
+ *
+ * @param variables that will be passed into the query
+ * @param options that will be passed into the query, supported options are listed on: https://v4.apollo.vuejs.org/guide-composable/query.html#options;
+ *
+ * @example
+ * const { result, loading, error } = useListCollectionsQuery({
+ *   profileId: // value for 'profileId'
+ *   first: // value for 'first'
+ *   after: // value for 'after'
+ *   discriminator: // value for 'discriminator'
+ * });
+ */
+export function useListCollectionsQuery(variables: ListCollectionsQueryVariables | VueCompositionApi.Ref<ListCollectionsQueryVariables> | ReactiveFunction<ListCollectionsQueryVariables>, options: VueApolloComposable.UseQueryOptions<ListCollectionsQuery, ListCollectionsQueryVariables> | VueCompositionApi.Ref<VueApolloComposable.UseQueryOptions<ListCollectionsQuery, ListCollectionsQueryVariables>> | ReactiveFunction<VueApolloComposable.UseQueryOptions<ListCollectionsQuery, ListCollectionsQueryVariables>> = {}) {
+  return VueApolloComposable.useQuery<ListCollectionsQuery, ListCollectionsQueryVariables>(ListCollectionsDocument, variables, options);
+}
+export type ListCollectionsQueryCompositionFunctionResult = VueApolloComposable.UseQueryReturn<ListCollectionsQuery, ListCollectionsQueryVariables>;
+export const UpdateCollectionLocationDocument = gql`
+    mutation updateCollectionLocation($id: ID!, $location: UpdateCollectionLocationInput!) {
+  updateCollectionLocation(id: $id, location: $location) {
+    __typename
+    location {
+      id
+      __typename
+      ...CollectionLocationContent
+    }
+  }
+}
+    ${CollectionLocationContentFragmentDoc}`;
+
+/**
+ * __useUpdateCollectionLocationMutation__
+ *
+ * To run a mutation, you first call `useUpdateCollectionLocationMutation` within a Vue component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateCollectionLocationMutation` returns an object that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - Several other properties: https://v4.apollo.vuejs.org/api/use-mutation.html#return
+ *
+ * @param options that will be passed into the mutation, supported options are listed on: https://v4.apollo.vuejs.org/guide-composable/mutation.html#options;
+ *
+ * @example
+ * const { mutate, loading, error, onDone } = useUpdateCollectionLocationMutation({
+ *   variables: {
+ *     id: // value for 'id'
+ *     location: // value for 'location'
+ *   },
+ * });
+ */
+export function useUpdateCollectionLocationMutation(options: VueApolloComposable.UseMutationOptions<UpdateCollectionLocationMutation, UpdateCollectionLocationMutationVariables> | ReactiveFunction<VueApolloComposable.UseMutationOptions<UpdateCollectionLocationMutation, UpdateCollectionLocationMutationVariables>>) {
+  return VueApolloComposable.useMutation<UpdateCollectionLocationMutation, UpdateCollectionLocationMutationVariables>(UpdateCollectionLocationDocument, options);
+}
+export type UpdateCollectionLocationMutationCompositionFunctionResult = VueApolloComposable.UseMutationReturn<UpdateCollectionLocationMutation, UpdateCollectionLocationMutationVariables>;
 export const CreateItineraryDirectionsDocument = gql`
     mutation createItineraryDirections($itineraryId: ID!, $directions: CreateItineraryDirectionsInput!) {
   createItineraryDirections(
@@ -6000,6 +6770,11 @@ export const CreateItineraryLocationDocument = gql`
         ...ItineraryLocationsCount
       }
       ...ItineraryLocationContent
+      place {
+        id
+        __typename
+        ...PlacePartialContent
+      }
     }
     cascaded {
       ...ItineraryCascadedChanges
@@ -6008,6 +6783,7 @@ export const CreateItineraryLocationDocument = gql`
 }
     ${ItineraryLocationsCountFragmentDoc}
 ${ItineraryLocationContentFragmentDoc}
+${PlacePartialContentFragmentDoc}
 ${ItineraryCascadedChangesFragmentDoc}`;
 
 /**
@@ -6070,8 +6846,8 @@ export function useCreateItineraryMutation(options: VueApolloComposable.UseMutat
 }
 export type CreateItineraryMutationCompositionFunctionResult = VueApolloComposable.UseMutationReturn<CreateItineraryMutation, CreateItineraryMutationVariables>;
 export const DeleteItineraryLocationDocument = gql`
-    mutation deleteItineraryLocation($itineraryLocationId: ID!) {
-  deleteItineraryItem(id: $itineraryLocationId) {
+    mutation deleteItineraryLocation($id: ID!) {
+  deleteItineraryItem(id: $id) {
     __typename
     itinerary {
       id
@@ -6099,7 +6875,7 @@ ${ItineraryCascadedChangesFragmentDoc}`;
  * @example
  * const { mutate, loading, error, onDone } = useDeleteItineraryLocationMutation({
  *   variables: {
- *     itineraryLocationId: // value for 'itineraryLocationId'
+ *     id: // value for 'id'
  *   },
  * });
  */
@@ -6107,6 +6883,35 @@ export function useDeleteItineraryLocationMutation(options: VueApolloComposable.
   return VueApolloComposable.useMutation<DeleteItineraryLocationMutation, DeleteItineraryLocationMutationVariables>(DeleteItineraryLocationDocument, options);
 }
 export type DeleteItineraryLocationMutationCompositionFunctionResult = VueApolloComposable.UseMutationReturn<DeleteItineraryLocationMutation, DeleteItineraryLocationMutationVariables>;
+export const DeleteItineraryDocument = gql`
+    mutation deleteItinerary($id: ID!) {
+  deleteItinerary(id: $id) {
+    __typename
+  }
+}
+    `;
+
+/**
+ * __useDeleteItineraryMutation__
+ *
+ * To run a mutation, you first call `useDeleteItineraryMutation` within a Vue component and pass it any options that fit your needs.
+ * When your component renders, `useDeleteItineraryMutation` returns an object that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - Several other properties: https://v4.apollo.vuejs.org/api/use-mutation.html#return
+ *
+ * @param options that will be passed into the mutation, supported options are listed on: https://v4.apollo.vuejs.org/guide-composable/mutation.html#options;
+ *
+ * @example
+ * const { mutate, loading, error, onDone } = useDeleteItineraryMutation({
+ *   variables: {
+ *     id: // value for 'id'
+ *   },
+ * });
+ */
+export function useDeleteItineraryMutation(options: VueApolloComposable.UseMutationOptions<DeleteItineraryMutation, DeleteItineraryMutationVariables> | ReactiveFunction<VueApolloComposable.UseMutationOptions<DeleteItineraryMutation, DeleteItineraryMutationVariables>>) {
+  return VueApolloComposable.useMutation<DeleteItineraryMutation, DeleteItineraryMutationVariables>(DeleteItineraryDocument, options);
+}
+export type DeleteItineraryMutationCompositionFunctionResult = VueApolloComposable.UseMutationReturn<DeleteItineraryMutation, DeleteItineraryMutationVariables>;
 export const DisableItineraryAutoRouteDocument = gql`
     mutation disableItineraryAutoRoute($id: ID!) {
   updateItinerary(id: $id, itinerary: {autoRoute: {defaultMode: null}}) {
@@ -6186,42 +6991,121 @@ export function useEnableItineraryAutoRouteMutation(options: VueApolloComposable
   return VueApolloComposable.useMutation<EnableItineraryAutoRouteMutation, EnableItineraryAutoRouteMutationVariables>(EnableItineraryAutoRouteDocument, options);
 }
 export type EnableItineraryAutoRouteMutationCompositionFunctionResult = VueApolloComposable.UseMutationReturn<EnableItineraryAutoRouteMutation, EnableItineraryAutoRouteMutationVariables>;
-export const FindItineraryLocationByPlaceIdDocument = gql`
-    query findItineraryLocationByPlaceId($itineraryId: ID!, $placeId: ID!) {
+export const FindItineraryLocationIdsByPlaceIdDocument = gql`
+    query findItineraryLocationIdsByPlaceId($itineraryId: ID!, $placeId: ID!, $first: Int!, $after: String) {
   itinerary(id: $itineraryId) {
-    descendants(placeIds: [$placeId], type: ItineraryLocation, first: 1) {
-      nodes {
-        ... on ItineraryLocation {
+    descendants(
+      placeIds: [$placeId]
+      type: ItineraryLocation
+      first: $first
+      after: $after
+    ) {
+      __typename
+      edges {
+        node {
           id
           __typename
+          ... on ItineraryLocation {
+            place {
+              id
+              __typename
+            }
+          }
         }
       }
       totalCount
+      pageInfo {
+        hasNextPage
+        hasPreviousPage
+        startCursor
+        endCursor
+      }
     }
   }
 }
     `;
 
 /**
- * __useFindItineraryLocationByPlaceIdQuery__
+ * __useFindItineraryLocationIdsByPlaceIdQuery__
  *
- * To run a query within a Vue component, call `useFindItineraryLocationByPlaceIdQuery` and pass it any options that fit your needs.
- * When your component renders, `useFindItineraryLocationByPlaceIdQuery` returns an object from Apollo Client that contains result, loading and error properties
+ * To run a query within a Vue component, call `useFindItineraryLocationIdsByPlaceIdQuery` and pass it any options that fit your needs.
+ * When your component renders, `useFindItineraryLocationIdsByPlaceIdQuery` returns an object from Apollo Client that contains result, loading and error properties
  * you can use to render your UI.
  *
  * @param variables that will be passed into the query
  * @param options that will be passed into the query, supported options are listed on: https://v4.apollo.vuejs.org/guide-composable/query.html#options;
  *
  * @example
- * const { result, loading, error } = useFindItineraryLocationByPlaceIdQuery({
+ * const { result, loading, error } = useFindItineraryLocationIdsByPlaceIdQuery({
  *   itineraryId: // value for 'itineraryId'
  *   placeId: // value for 'placeId'
+ *   first: // value for 'first'
+ *   after: // value for 'after'
  * });
  */
-export function useFindItineraryLocationByPlaceIdQuery(variables: FindItineraryLocationByPlaceIdQueryVariables | VueCompositionApi.Ref<FindItineraryLocationByPlaceIdQueryVariables> | ReactiveFunction<FindItineraryLocationByPlaceIdQueryVariables>, options: VueApolloComposable.UseQueryOptions<FindItineraryLocationByPlaceIdQuery, FindItineraryLocationByPlaceIdQueryVariables> | VueCompositionApi.Ref<VueApolloComposable.UseQueryOptions<FindItineraryLocationByPlaceIdQuery, FindItineraryLocationByPlaceIdQueryVariables>> | ReactiveFunction<VueApolloComposable.UseQueryOptions<FindItineraryLocationByPlaceIdQuery, FindItineraryLocationByPlaceIdQueryVariables>> = {}) {
-  return VueApolloComposable.useQuery<FindItineraryLocationByPlaceIdQuery, FindItineraryLocationByPlaceIdQueryVariables>(FindItineraryLocationByPlaceIdDocument, variables, options);
+export function useFindItineraryLocationIdsByPlaceIdQuery(variables: FindItineraryLocationIdsByPlaceIdQueryVariables | VueCompositionApi.Ref<FindItineraryLocationIdsByPlaceIdQueryVariables> | ReactiveFunction<FindItineraryLocationIdsByPlaceIdQueryVariables>, options: VueApolloComposable.UseQueryOptions<FindItineraryLocationIdsByPlaceIdQuery, FindItineraryLocationIdsByPlaceIdQueryVariables> | VueCompositionApi.Ref<VueApolloComposable.UseQueryOptions<FindItineraryLocationIdsByPlaceIdQuery, FindItineraryLocationIdsByPlaceIdQueryVariables>> | ReactiveFunction<VueApolloComposable.UseQueryOptions<FindItineraryLocationIdsByPlaceIdQuery, FindItineraryLocationIdsByPlaceIdQueryVariables>> = {}) {
+  return VueApolloComposable.useQuery<FindItineraryLocationIdsByPlaceIdQuery, FindItineraryLocationIdsByPlaceIdQueryVariables>(FindItineraryLocationIdsByPlaceIdDocument, variables, options);
 }
-export type FindItineraryLocationByPlaceIdQueryCompositionFunctionResult = VueApolloComposable.UseQueryReturn<FindItineraryLocationByPlaceIdQuery, FindItineraryLocationByPlaceIdQueryVariables>;
+export type FindItineraryLocationIdsByPlaceIdQueryCompositionFunctionResult = VueApolloComposable.UseQueryReturn<FindItineraryLocationIdsByPlaceIdQuery, FindItineraryLocationIdsByPlaceIdQueryVariables>;
+export const FindItineraryLocationsByPlaceIdDocument = gql`
+    query findItineraryLocationsByPlaceId($itineraryId: ID!, $placeId: ID!, $first: Int!, $after: String) {
+  itinerary(id: $itineraryId) {
+    descendants(
+      placeIds: [$placeId]
+      type: ItineraryLocation
+      first: $first
+      after: $after
+    ) {
+      __typename
+      edges {
+        node {
+          id
+          __typename
+          ... on ItineraryLocation {
+            ...ItineraryLocationPartialContent
+            place {
+              id
+              __typename
+              ...PlacePartialContent
+            }
+          }
+        }
+      }
+      totalCount
+      pageInfo {
+        hasNextPage
+        hasPreviousPage
+        startCursor
+        endCursor
+      }
+    }
+  }
+}
+    ${ItineraryLocationPartialContentFragmentDoc}
+${PlacePartialContentFragmentDoc}`;
+
+/**
+ * __useFindItineraryLocationsByPlaceIdQuery__
+ *
+ * To run a query within a Vue component, call `useFindItineraryLocationsByPlaceIdQuery` and pass it any options that fit your needs.
+ * When your component renders, `useFindItineraryLocationsByPlaceIdQuery` returns an object from Apollo Client that contains result, loading and error properties
+ * you can use to render your UI.
+ *
+ * @param variables that will be passed into the query
+ * @param options that will be passed into the query, supported options are listed on: https://v4.apollo.vuejs.org/guide-composable/query.html#options;
+ *
+ * @example
+ * const { result, loading, error } = useFindItineraryLocationsByPlaceIdQuery({
+ *   itineraryId: // value for 'itineraryId'
+ *   placeId: // value for 'placeId'
+ *   first: // value for 'first'
+ *   after: // value for 'after'
+ * });
+ */
+export function useFindItineraryLocationsByPlaceIdQuery(variables: FindItineraryLocationsByPlaceIdQueryVariables | VueCompositionApi.Ref<FindItineraryLocationsByPlaceIdQueryVariables> | ReactiveFunction<FindItineraryLocationsByPlaceIdQueryVariables>, options: VueApolloComposable.UseQueryOptions<FindItineraryLocationsByPlaceIdQuery, FindItineraryLocationsByPlaceIdQueryVariables> | VueCompositionApi.Ref<VueApolloComposable.UseQueryOptions<FindItineraryLocationsByPlaceIdQuery, FindItineraryLocationsByPlaceIdQueryVariables>> | ReactiveFunction<VueApolloComposable.UseQueryOptions<FindItineraryLocationsByPlaceIdQuery, FindItineraryLocationsByPlaceIdQueryVariables>> = {}) {
+  return VueApolloComposable.useQuery<FindItineraryLocationsByPlaceIdQuery, FindItineraryLocationsByPlaceIdQueryVariables>(FindItineraryLocationsByPlaceIdDocument, variables, options);
+}
+export type FindItineraryLocationsByPlaceIdQueryCompositionFunctionResult = VueApolloComposable.UseQueryReturn<FindItineraryLocationsByPlaceIdQuery, FindItineraryLocationsByPlaceIdQueryVariables>;
 export const GetItineraryDirectionsDocument = gql`
     query getItineraryDirections($id: ID!, $includeRoutePolyline: Boolean!) {
   node(id: $id) {
@@ -6262,6 +7146,59 @@ export function useGetItineraryDirectionsQuery(variables: GetItineraryDirections
   return VueApolloComposable.useQuery<GetItineraryDirectionsQuery, GetItineraryDirectionsQueryVariables>(GetItineraryDirectionsDocument, variables, options);
 }
 export type GetItineraryDirectionsQueryCompositionFunctionResult = VueApolloComposable.UseQueryReturn<GetItineraryDirectionsQuery, GetItineraryDirectionsQueryVariables>;
+export const GetItineraryLocationDocument = gql`
+    query getItineraryLocation($id: ID!, $mediaImagePreferredBestFit: [Int!]) {
+  node(id: $id) {
+    id
+    __typename
+    ... on ItineraryLocation {
+      ...ItineraryLocationContent
+      place {
+        id
+        __typename
+        ...PlaceContent
+      }
+      preferredMedia {
+        id
+        __typename
+        resource {
+          id
+          __typename
+          ... on MediaImage {
+            source(bestFit: $mediaImagePreferredBestFit) {
+              url
+            }
+            ...MediaImagePartialContent
+          }
+        }
+      }
+    }
+  }
+}
+    ${ItineraryLocationContentFragmentDoc}
+${PlaceContentFragmentDoc}
+${MediaImagePartialContentFragmentDoc}`;
+
+/**
+ * __useGetItineraryLocationQuery__
+ *
+ * To run a query within a Vue component, call `useGetItineraryLocationQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetItineraryLocationQuery` returns an object from Apollo Client that contains result, loading and error properties
+ * you can use to render your UI.
+ *
+ * @param variables that will be passed into the query
+ * @param options that will be passed into the query, supported options are listed on: https://v4.apollo.vuejs.org/guide-composable/query.html#options;
+ *
+ * @example
+ * const { result, loading, error } = useGetItineraryLocationQuery({
+ *   id: // value for 'id'
+ *   mediaImagePreferredBestFit: // value for 'mediaImagePreferredBestFit'
+ * });
+ */
+export function useGetItineraryLocationQuery(variables: GetItineraryLocationQueryVariables | VueCompositionApi.Ref<GetItineraryLocationQueryVariables> | ReactiveFunction<GetItineraryLocationQueryVariables>, options: VueApolloComposable.UseQueryOptions<GetItineraryLocationQuery, GetItineraryLocationQueryVariables> | VueCompositionApi.Ref<VueApolloComposable.UseQueryOptions<GetItineraryLocationQuery, GetItineraryLocationQueryVariables>> | ReactiveFunction<VueApolloComposable.UseQueryOptions<GetItineraryLocationQuery, GetItineraryLocationQueryVariables>> = {}) {
+  return VueApolloComposable.useQuery<GetItineraryLocationQuery, GetItineraryLocationQueryVariables>(GetItineraryLocationDocument, variables, options);
+}
+export type GetItineraryLocationQueryCompositionFunctionResult = VueApolloComposable.UseQueryReturn<GetItineraryLocationQuery, GetItineraryLocationQueryVariables>;
 export const GetItineraryDocument = gql`
     query getItinerary($id: ID!, $mediaImagePreferredBestFit: [Int!]) {
   itinerary(id: $id) {
@@ -6269,25 +7206,31 @@ export const GetItineraryDocument = gql`
     __typename
     ...ItineraryContent
     ...ItineraryLocationsCount
+    profile {
+      id
+      __typename
+      ...ProfilePartialContent
+    }
     preferredMedia {
+      id
+      __typename
       resource {
         id
         __typename
-        altText
         ... on MediaImage {
           source(bestFit: $mediaImagePreferredBestFit) {
             url
           }
-          caption
-          copyright
-          attribution
+          ...MediaImagePartialContent
         }
       }
     }
   }
 }
     ${ItineraryContentFragmentDoc}
-${ItineraryLocationsCountFragmentDoc}`;
+${ItineraryLocationsCountFragmentDoc}
+${ProfilePartialContentFragmentDoc}
+${MediaImagePartialContentFragmentDoc}`;
 
 /**
  * __useGetItineraryQuery__
@@ -6309,35 +7252,65 @@ export function useGetItineraryQuery(variables: GetItineraryQueryVariables | Vue
   return VueApolloComposable.useQuery<GetItineraryQuery, GetItineraryQueryVariables>(GetItineraryDocument, variables, options);
 }
 export type GetItineraryQueryCompositionFunctionResult = VueApolloComposable.UseQueryReturn<GetItineraryQuery, GetItineraryQueryVariables>;
-export const GetPlaceDocument = gql`
-    query getPlace($id: ID!) {
-  place(id: $id) {
-    id
+export const ListItinerariesDocument = gql`
+    query listItineraries($profileId: ID!, $first: Int!, $after: String, $mediaImagePreferredBestFit: [Int!]) {
+  itineraries(profileId: $profileId, first: $first, after: $after) {
     __typename
-    ...PlaceContent
+    edges {
+      node {
+        id
+        __typename
+        ...ItineraryPartialContent
+        preferredMedia {
+          id
+          __typename
+          resource {
+            id
+            __typename
+            ... on MediaImage {
+              source(bestFit: $mediaImagePreferredBestFit) {
+                url
+              }
+              ...MediaImagePartialContent
+            }
+          }
+        }
+      }
+    }
+    totalCount
+    pageInfo {
+      hasNextPage
+      hasPreviousPage
+      startCursor
+      endCursor
+    }
   }
 }
-    ${PlaceContentFragmentDoc}`;
+    ${ItineraryPartialContentFragmentDoc}
+${MediaImagePartialContentFragmentDoc}`;
 
 /**
- * __useGetPlaceQuery__
+ * __useListItinerariesQuery__
  *
- * To run a query within a Vue component, call `useGetPlaceQuery` and pass it any options that fit your needs.
- * When your component renders, `useGetPlaceQuery` returns an object from Apollo Client that contains result, loading and error properties
+ * To run a query within a Vue component, call `useListItinerariesQuery` and pass it any options that fit your needs.
+ * When your component renders, `useListItinerariesQuery` returns an object from Apollo Client that contains result, loading and error properties
  * you can use to render your UI.
  *
  * @param variables that will be passed into the query
  * @param options that will be passed into the query, supported options are listed on: https://v4.apollo.vuejs.org/guide-composable/query.html#options;
  *
  * @example
- * const { result, loading, error } = useGetPlaceQuery({
- *   id: // value for 'id'
+ * const { result, loading, error } = useListItinerariesQuery({
+ *   profileId: // value for 'profileId'
+ *   first: // value for 'first'
+ *   after: // value for 'after'
+ *   mediaImagePreferredBestFit: // value for 'mediaImagePreferredBestFit'
  * });
  */
-export function useGetPlaceQuery(variables: GetPlaceQueryVariables | VueCompositionApi.Ref<GetPlaceQueryVariables> | ReactiveFunction<GetPlaceQueryVariables>, options: VueApolloComposable.UseQueryOptions<GetPlaceQuery, GetPlaceQueryVariables> | VueCompositionApi.Ref<VueApolloComposable.UseQueryOptions<GetPlaceQuery, GetPlaceQueryVariables>> | ReactiveFunction<VueApolloComposable.UseQueryOptions<GetPlaceQuery, GetPlaceQueryVariables>> = {}) {
-  return VueApolloComposable.useQuery<GetPlaceQuery, GetPlaceQueryVariables>(GetPlaceDocument, variables, options);
+export function useListItinerariesQuery(variables: ListItinerariesQueryVariables | VueCompositionApi.Ref<ListItinerariesQueryVariables> | ReactiveFunction<ListItinerariesQueryVariables>, options: VueApolloComposable.UseQueryOptions<ListItinerariesQuery, ListItinerariesQueryVariables> | VueCompositionApi.Ref<VueApolloComposable.UseQueryOptions<ListItinerariesQuery, ListItinerariesQueryVariables>> | ReactiveFunction<VueApolloComposable.UseQueryOptions<ListItinerariesQuery, ListItinerariesQueryVariables>> = {}) {
+  return VueApolloComposable.useQuery<ListItinerariesQuery, ListItinerariesQueryVariables>(ListItinerariesDocument, variables, options);
 }
-export type GetPlaceQueryCompositionFunctionResult = VueApolloComposable.UseQueryReturn<GetPlaceQuery, GetPlaceQueryVariables>;
+export type ListItinerariesQueryCompositionFunctionResult = VueApolloComposable.UseQueryReturn<ListItinerariesQuery, ListItinerariesQueryVariables>;
 export const ListItineraryLocationsDocument = gql`
     query listItineraryLocations($id: ID!, $first: Int!, $after: String, $includeRoutePolyline: Boolean!, $mediaImagePreferredBestFit: [Int!]) {
   itinerary(id: $id) {
@@ -6350,25 +7323,29 @@ export const ListItineraryLocationsDocument = gql`
           __typename
           ... on ItineraryLocation {
             ...ItineraryLocationPartialContent
+            place {
+              id
+              __typename
+              ...PlacePartialContent
+            }
             preferredMedia {
+              id
+              __typename
               resource {
                 id
                 __typename
-                altText
                 ... on MediaImage {
                   source(bestFit: $mediaImagePreferredBestFit) {
                     url
                   }
-                  caption
-                  copyright
-                  attribution
+                  ...MediaImagePartialContent
                 }
               }
             }
           }
         }
         arrival: directions(first: 1, direction: Inbound) {
-          nodes {
+          directions: nodes {
             id
             __typename
             ...ItineraryDirectionsPartialContent
@@ -6382,20 +7359,21 @@ export const ListItineraryLocationsDocument = gql`
             }
           }
           totalCount
-          pageInfo {
-            endCursor
-          }
         }
       }
       totalCount
       pageInfo {
         hasNextPage
+        hasPreviousPage
+        startCursor
         endCursor
       }
     }
   }
 }
     ${ItineraryLocationPartialContentFragmentDoc}
+${PlacePartialContentFragmentDoc}
+${MediaImagePartialContentFragmentDoc}
 ${ItineraryDirectionsPartialContentFragmentDoc}`;
 
 /**
@@ -6602,3 +7580,280 @@ export function useUpdateItineraryMutation(options: VueApolloComposable.UseMutat
   return VueApolloComposable.useMutation<UpdateItineraryMutation, UpdateItineraryMutationVariables>(UpdateItineraryDocument, options);
 }
 export type UpdateItineraryMutationCompositionFunctionResult = VueApolloComposable.UseMutationReturn<UpdateItineraryMutation, UpdateItineraryMutationVariables>;
+export const GetMediaImageDocument = gql`
+    query getMediaImage($id: ID!, $smallBestFit: [Int!], $mediumBestFit: [Int!], $largeBestFit: [Int!]) {
+  mediaResource(id: $id) {
+    id
+    __typename
+    ... on MediaImage {
+      ...MediaImageContent
+      small: source(bestFit: $smallBestFit) {
+        url
+      }
+      medium: source(bestFit: $mediumBestFit) {
+        url
+      }
+      large: source(bestFit: $largeBestFit) {
+        url
+      }
+    }
+  }
+}
+    ${MediaImageContentFragmentDoc}`;
+
+/**
+ * __useGetMediaImageQuery__
+ *
+ * To run a query within a Vue component, call `useGetMediaImageQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetMediaImageQuery` returns an object from Apollo Client that contains result, loading and error properties
+ * you can use to render your UI.
+ *
+ * @param variables that will be passed into the query
+ * @param options that will be passed into the query, supported options are listed on: https://v4.apollo.vuejs.org/guide-composable/query.html#options;
+ *
+ * @example
+ * const { result, loading, error } = useGetMediaImageQuery({
+ *   id: // value for 'id'
+ *   smallBestFit: // value for 'smallBestFit'
+ *   mediumBestFit: // value for 'mediumBestFit'
+ *   largeBestFit: // value for 'largeBestFit'
+ * });
+ */
+export function useGetMediaImageQuery(variables: GetMediaImageQueryVariables | VueCompositionApi.Ref<GetMediaImageQueryVariables> | ReactiveFunction<GetMediaImageQueryVariables>, options: VueApolloComposable.UseQueryOptions<GetMediaImageQuery, GetMediaImageQueryVariables> | VueCompositionApi.Ref<VueApolloComposable.UseQueryOptions<GetMediaImageQuery, GetMediaImageQueryVariables>> | ReactiveFunction<VueApolloComposable.UseQueryOptions<GetMediaImageQuery, GetMediaImageQueryVariables>> = {}) {
+  return VueApolloComposable.useQuery<GetMediaImageQuery, GetMediaImageQueryVariables>(GetMediaImageDocument, variables, options);
+}
+export type GetMediaImageQueryCompositionFunctionResult = VueApolloComposable.UseQueryReturn<GetMediaImageQuery, GetMediaImageQueryVariables>;
+export const AutocompleteSearchPlaceDocument = gql`
+    query autocompleteSearchPlace($text: String!, $source: PlaceSearchSource!) {
+  placeAutocompleteSearch(text: $text, sources: [$source], first: 10) {
+    __typename
+    edges {
+      node {
+        id
+        __typename
+        ...PlaceSearchContent
+      }
+      main {
+        label
+        matches {
+          offset
+          length
+        }
+      }
+      secondary {
+        label
+        matches {
+          offset
+          length
+        }
+      }
+    }
+  }
+}
+    ${PlaceSearchContentFragmentDoc}`;
+
+/**
+ * __useAutocompleteSearchPlaceQuery__
+ *
+ * To run a query within a Vue component, call `useAutocompleteSearchPlaceQuery` and pass it any options that fit your needs.
+ * When your component renders, `useAutocompleteSearchPlaceQuery` returns an object from Apollo Client that contains result, loading and error properties
+ * you can use to render your UI.
+ *
+ * @param variables that will be passed into the query
+ * @param options that will be passed into the query, supported options are listed on: https://v4.apollo.vuejs.org/guide-composable/query.html#options;
+ *
+ * @example
+ * const { result, loading, error } = useAutocompleteSearchPlaceQuery({
+ *   text: // value for 'text'
+ *   source: // value for 'source'
+ * });
+ */
+export function useAutocompleteSearchPlaceQuery(variables: AutocompleteSearchPlaceQueryVariables | VueCompositionApi.Ref<AutocompleteSearchPlaceQueryVariables> | ReactiveFunction<AutocompleteSearchPlaceQueryVariables>, options: VueApolloComposable.UseQueryOptions<AutocompleteSearchPlaceQuery, AutocompleteSearchPlaceQueryVariables> | VueCompositionApi.Ref<VueApolloComposable.UseQueryOptions<AutocompleteSearchPlaceQuery, AutocompleteSearchPlaceQueryVariables>> | ReactiveFunction<VueApolloComposable.UseQueryOptions<AutocompleteSearchPlaceQuery, AutocompleteSearchPlaceQueryVariables>> = {}) {
+  return VueApolloComposable.useQuery<AutocompleteSearchPlaceQuery, AutocompleteSearchPlaceQueryVariables>(AutocompleteSearchPlaceDocument, variables, options);
+}
+export type AutocompleteSearchPlaceQueryCompositionFunctionResult = VueApolloComposable.UseQueryReturn<AutocompleteSearchPlaceQuery, AutocompleteSearchPlaceQueryVariables>;
+export const GetPlaceDocument = gql`
+    query getPlace($id: ID!, $mediaImagePreferredBestFit: [Int!]) {
+  place(id: $id) {
+    id
+    __typename
+    ...PlaceContent
+    preferredMedia {
+      id
+      __typename
+      resource {
+        id
+        __typename
+        ... on MediaImage {
+          source(bestFit: $mediaImagePreferredBestFit) {
+            url
+          }
+          ...MediaImagePartialContent
+        }
+      }
+    }
+  }
+}
+    ${PlaceContentFragmentDoc}
+${MediaImagePartialContentFragmentDoc}`;
+
+/**
+ * __useGetPlaceQuery__
+ *
+ * To run a query within a Vue component, call `useGetPlaceQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetPlaceQuery` returns an object from Apollo Client that contains result, loading and error properties
+ * you can use to render your UI.
+ *
+ * @param variables that will be passed into the query
+ * @param options that will be passed into the query, supported options are listed on: https://v4.apollo.vuejs.org/guide-composable/query.html#options;
+ *
+ * @example
+ * const { result, loading, error } = useGetPlaceQuery({
+ *   id: // value for 'id'
+ *   mediaImagePreferredBestFit: // value for 'mediaImagePreferredBestFit'
+ * });
+ */
+export function useGetPlaceQuery(variables: GetPlaceQueryVariables | VueCompositionApi.Ref<GetPlaceQueryVariables> | ReactiveFunction<GetPlaceQueryVariables>, options: VueApolloComposable.UseQueryOptions<GetPlaceQuery, GetPlaceQueryVariables> | VueCompositionApi.Ref<VueApolloComposable.UseQueryOptions<GetPlaceQuery, GetPlaceQueryVariables>> | ReactiveFunction<VueApolloComposable.UseQueryOptions<GetPlaceQuery, GetPlaceQueryVariables>> = {}) {
+  return VueApolloComposable.useQuery<GetPlaceQuery, GetPlaceQueryVariables>(GetPlaceDocument, variables, options);
+}
+export type GetPlaceQueryCompositionFunctionResult = VueApolloComposable.UseQueryReturn<GetPlaceQuery, GetPlaceQueryVariables>;
+export const ReverseSearchPlaceByPositionDocument = gql`
+    query reverseSearchPlaceByPosition($focus: PositionInput!, $sources: [PlaceSearchSource!]!, $first: Int!) {
+  placeReverseSearch(focus: $focus, sources: $sources, first: $first) {
+    __typename
+    places: nodes {
+      id
+      __typename
+      ...PlaceSearchContent
+    }
+  }
+}
+    ${PlaceSearchContentFragmentDoc}`;
+
+/**
+ * __useReverseSearchPlaceByPositionQuery__
+ *
+ * To run a query within a Vue component, call `useReverseSearchPlaceByPositionQuery` and pass it any options that fit your needs.
+ * When your component renders, `useReverseSearchPlaceByPositionQuery` returns an object from Apollo Client that contains result, loading and error properties
+ * you can use to render your UI.
+ *
+ * @param variables that will be passed into the query
+ * @param options that will be passed into the query, supported options are listed on: https://v4.apollo.vuejs.org/guide-composable/query.html#options;
+ *
+ * @example
+ * const { result, loading, error } = useReverseSearchPlaceByPositionQuery({
+ *   focus: // value for 'focus'
+ *   sources: // value for 'sources'
+ *   first: // value for 'first'
+ * });
+ */
+export function useReverseSearchPlaceByPositionQuery(variables: ReverseSearchPlaceByPositionQueryVariables | VueCompositionApi.Ref<ReverseSearchPlaceByPositionQueryVariables> | ReactiveFunction<ReverseSearchPlaceByPositionQueryVariables>, options: VueApolloComposable.UseQueryOptions<ReverseSearchPlaceByPositionQuery, ReverseSearchPlaceByPositionQueryVariables> | VueCompositionApi.Ref<VueApolloComposable.UseQueryOptions<ReverseSearchPlaceByPositionQuery, ReverseSearchPlaceByPositionQueryVariables>> | ReactiveFunction<VueApolloComposable.UseQueryOptions<ReverseSearchPlaceByPositionQuery, ReverseSearchPlaceByPositionQueryVariables>> = {}) {
+  return VueApolloComposable.useQuery<ReverseSearchPlaceByPositionQuery, ReverseSearchPlaceByPositionQueryVariables>(ReverseSearchPlaceByPositionDocument, variables, options);
+}
+export type ReverseSearchPlaceByPositionQueryCompositionFunctionResult = VueApolloComposable.UseQueryReturn<ReverseSearchPlaceByPositionQuery, ReverseSearchPlaceByPositionQueryVariables>;
+export const GetProfileDocument = gql`
+    query getProfile($id: ID!) {
+  profile(id: $id) {
+    id
+    __typename
+    ...ProfileContent
+  }
+}
+    ${ProfileContentFragmentDoc}`;
+
+/**
+ * __useGetProfileQuery__
+ *
+ * To run a query within a Vue component, call `useGetProfileQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetProfileQuery` returns an object from Apollo Client that contains result, loading and error properties
+ * you can use to render your UI.
+ *
+ * @param variables that will be passed into the query
+ * @param options that will be passed into the query, supported options are listed on: https://v4.apollo.vuejs.org/guide-composable/query.html#options;
+ *
+ * @example
+ * const { result, loading, error } = useGetProfileQuery({
+ *   id: // value for 'id'
+ * });
+ */
+export function useGetProfileQuery(variables: GetProfileQueryVariables | VueCompositionApi.Ref<GetProfileQueryVariables> | ReactiveFunction<GetProfileQueryVariables>, options: VueApolloComposable.UseQueryOptions<GetProfileQuery, GetProfileQueryVariables> | VueCompositionApi.Ref<VueApolloComposable.UseQueryOptions<GetProfileQuery, GetProfileQueryVariables>> | ReactiveFunction<VueApolloComposable.UseQueryOptions<GetProfileQuery, GetProfileQueryVariables>> = {}) {
+  return VueApolloComposable.useQuery<GetProfileQuery, GetProfileQueryVariables>(GetProfileDocument, variables, options);
+}
+export type GetProfileQueryCompositionFunctionResult = VueApolloComposable.UseQueryReturn<GetProfileQuery, GetProfileQueryVariables>;
+export const ListAuthorizedProfilesDocument = gql`
+    query listAuthorizedProfiles($first: Int!, $after: String) {
+  authorizedProfiles(first: $first, after: $after) {
+    __typename
+    profiles: nodes {
+      id
+      __typename
+      ...ProfilePartialContent
+    }
+    totalCount
+    pageInfo {
+      hasNextPage
+      hasPreviousPage
+      startCursor
+      endCursor
+    }
+  }
+}
+    ${ProfilePartialContentFragmentDoc}`;
+
+/**
+ * __useListAuthorizedProfilesQuery__
+ *
+ * To run a query within a Vue component, call `useListAuthorizedProfilesQuery` and pass it any options that fit your needs.
+ * When your component renders, `useListAuthorizedProfilesQuery` returns an object from Apollo Client that contains result, loading and error properties
+ * you can use to render your UI.
+ *
+ * @param variables that will be passed into the query
+ * @param options that will be passed into the query, supported options are listed on: https://v4.apollo.vuejs.org/guide-composable/query.html#options;
+ *
+ * @example
+ * const { result, loading, error } = useListAuthorizedProfilesQuery({
+ *   first: // value for 'first'
+ *   after: // value for 'after'
+ * });
+ */
+export function useListAuthorizedProfilesQuery(variables: ListAuthorizedProfilesQueryVariables | VueCompositionApi.Ref<ListAuthorizedProfilesQueryVariables> | ReactiveFunction<ListAuthorizedProfilesQueryVariables>, options: VueApolloComposable.UseQueryOptions<ListAuthorizedProfilesQuery, ListAuthorizedProfilesQueryVariables> | VueCompositionApi.Ref<VueApolloComposable.UseQueryOptions<ListAuthorizedProfilesQuery, ListAuthorizedProfilesQueryVariables>> | ReactiveFunction<VueApolloComposable.UseQueryOptions<ListAuthorizedProfilesQuery, ListAuthorizedProfilesQueryVariables>> = {}) {
+  return VueApolloComposable.useQuery<ListAuthorizedProfilesQuery, ListAuthorizedProfilesQueryVariables>(ListAuthorizedProfilesDocument, variables, options);
+}
+export type ListAuthorizedProfilesQueryCompositionFunctionResult = VueApolloComposable.UseQueryReturn<ListAuthorizedProfilesQuery, ListAuthorizedProfilesQueryVariables>;
+export const SearchRoutesBetweenPositionsDocument = gql`
+    query searchRoutesBetweenPositions($mode: RouteSearchableMode!, $positions: [PositionInput!]!, $first: Int!, $includeRoutePolyline: Boolean!) {
+  routes(mode: $mode, positions: $positions, first: $first) {
+    __typename
+    routes: nodes {
+      segments {
+        distance(unit: Kilometers)
+        duration(unit: Minutes)
+        polyline @include(if: $includeRoutePolyline)
+      }
+    }
+  }
+}
+    `;
+
+/**
+ * __useSearchRoutesBetweenPositionsQuery__
+ *
+ * To run a query within a Vue component, call `useSearchRoutesBetweenPositionsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useSearchRoutesBetweenPositionsQuery` returns an object from Apollo Client that contains result, loading and error properties
+ * you can use to render your UI.
+ *
+ * @param variables that will be passed into the query
+ * @param options that will be passed into the query, supported options are listed on: https://v4.apollo.vuejs.org/guide-composable/query.html#options;
+ *
+ * @example
+ * const { result, loading, error } = useSearchRoutesBetweenPositionsQuery({
+ *   mode: // value for 'mode'
+ *   positions: // value for 'positions'
+ *   first: // value for 'first'
+ *   includeRoutePolyline: // value for 'includeRoutePolyline'
+ * });
+ */
+export function useSearchRoutesBetweenPositionsQuery(variables: SearchRoutesBetweenPositionsQueryVariables | VueCompositionApi.Ref<SearchRoutesBetweenPositionsQueryVariables> | ReactiveFunction<SearchRoutesBetweenPositionsQueryVariables>, options: VueApolloComposable.UseQueryOptions<SearchRoutesBetweenPositionsQuery, SearchRoutesBetweenPositionsQueryVariables> | VueCompositionApi.Ref<VueApolloComposable.UseQueryOptions<SearchRoutesBetweenPositionsQuery, SearchRoutesBetweenPositionsQueryVariables>> | ReactiveFunction<VueApolloComposable.UseQueryOptions<SearchRoutesBetweenPositionsQuery, SearchRoutesBetweenPositionsQueryVariables>> = {}) {
+  return VueApolloComposable.useQuery<SearchRoutesBetweenPositionsQuery, SearchRoutesBetweenPositionsQueryVariables>(SearchRoutesBetweenPositionsDocument, variables, options);
+}
+export type SearchRoutesBetweenPositionsQueryCompositionFunctionResult = VueApolloComposable.UseQueryReturn<SearchRoutesBetweenPositionsQuery, SearchRoutesBetweenPositionsQueryVariables>;

@@ -1,6 +1,7 @@
 #import "./fragments/itinerary-location-partial-content.graphql"
 #import "./fragments/itinerary-directions-partial-content.graphql"
 #import "./../place/fragments/place-partial-content.graphql"
+#import "./../media/fragments/media-image-partial-content.graphql"
 
 # Lists in itinerary locations for a provided Itinerary.
 query listItineraryLocations(
@@ -40,17 +41,19 @@ query listItineraryLocations(
 
             # Load in a preferred media size
             preferredMedia {
+              id
+              __typename
+
               resource {
                 id
                 __typename
-                altText
+
                 ... on MediaImage {
                   source(bestFit: $mediaImagePreferredBestFit) {
                     url
                   }
-                  caption
-                  copyright
-                  attribution
+
+                  ...MediaImagePartialContent
                 }
               }
             }

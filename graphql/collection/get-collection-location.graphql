@@ -25,6 +25,9 @@ query getCollectionLocation($id: ID!, $mediaImagePreferredBestFit: [Int!]) {
 
       # Select preferred media
       preferredMedia {
+        id
+        __typename
+
         resource {
           id
           __typename

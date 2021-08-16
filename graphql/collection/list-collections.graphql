@@ -15,6 +15,9 @@ query listCollections($profileId: ID!, $first: Int!, $after: String, $discrimina
     # Filtering
     discriminator: $discriminator
   ) {
+    # Reponse type
+    __typename
+
     # Load the result set in as collections
     edges {
       node {

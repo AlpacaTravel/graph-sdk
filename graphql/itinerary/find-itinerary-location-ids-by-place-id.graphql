@@ -24,6 +24,10 @@ query findItineraryLocationIdsByPlaceId(
       first: $first
       after: $after
     ) {
+      # Reponse type
+      __typename
+
+      # Edges
       edges {
         node {
           id

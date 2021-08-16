@@ -5,11 +5,11 @@
 # of movement for the user if you are using auto-route features of an itinerary
 # which you can sequence yourself or you could refresh the affected list as a
 # result, depending on your use case.
-mutation deleteItineraryLocation($itineraryLocationId: ID!) {
+mutation deleteItineraryLocation($id: ID!) {
   # Use the deleteItineraryItem mutation
   deleteItineraryItem(
     # Provide the ID of the itinerary location to remove
-    id: $itineraryLocationId
+    id: $id
   ) {
     # Response of the mutation
     __typename

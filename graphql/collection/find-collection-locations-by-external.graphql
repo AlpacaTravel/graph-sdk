@@ -20,6 +20,10 @@ query findCollectionLocationsByExternal(
     first: $first
     after: $after # Include partials
   ) {
+    # Reponse type
+    __typename
+
+    # Edges
     edges {
       node {
         id

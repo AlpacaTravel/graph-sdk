@@ -5636,6 +5636,96 @@ export type UpdateProfilePayload = {
   profile?: Maybe<Profile>;
 };
 
+export type CreateCollectionLocationMutationVariables = Exact<{
+  collectionId: Scalars['ID'];
+  location: CreateCollectionLocationInput;
+}>;
+
+
+export type CreateCollectionLocationMutation = { __typename?: 'Mutation', createCollectionLocation: { __typename: 'CreateCollectionLocationPayload', location?: Maybe<{ __typename: 'CollectionLocation', id: string, title?: Maybe<string>, synopsis?: Maybe<string>, description?: Maybe<string>, tags: Array<string>, readMoreUrl?: Maybe<string>, websiteUrl?: Maybe<string>, position: { __typename?: 'Position', lon: number, lat: number }, place: { __typename: 'Place', id: string, name?: Maybe<string>, synopsis?: Maybe<string>, maki?: Maybe<string>, position: { __typename?: 'Position', lon: number, lat: number }, address: { __typename?: 'PlaceAddress', addressLineOne?: Maybe<string>, addressLineTwo?: Maybe<string>, addressLineThree?: Maybe<string>, locality?: Maybe<string>, region?: Maybe<string>, regionCode?: Maybe<string>, country?: Maybe<string>, countryCode?: Maybe<string> }, layers: Array<{ __typename: 'PlaceLayer', id: string, name?: Maybe<string> }> } }> } };
+
+export type DeleteCollectionItemMutationVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+
+export type DeleteCollectionItemMutation = { __typename?: 'Mutation', deleteCollectionItem: { __typename: 'DeleteCollectionItemPayload' } };
+
+export type FindCollectionLocationIdsByExternalQueryVariables = Exact<{
+  collectionId?: Maybe<Array<Scalars['ID']> | Scalars['ID']>;
+  externalIds?: Maybe<Array<Scalars['ID']> | Scalars['ID']>;
+  externalSources?: Maybe<Array<Scalars['ID']> | Scalars['ID']>;
+  first: Scalars['Int'];
+  after?: Maybe<Scalars['String']>;
+}>;
+
+
+export type FindCollectionLocationIdsByExternalQuery = { __typename?: 'Query', collectionItems: { __typename: 'CollectionItemConnection', totalCount: number, edges: Array<{ __typename?: 'CollectionItemEdge', cursor: string, node: { __typename: 'CollectionLocation', id: string, place: { __typename: 'Place', id: string } } }>, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: Maybe<string>, endCursor?: Maybe<string> } } };
+
+export type FindCollectionLocationIdsByTagQueryVariables = Exact<{
+  collectionId?: Maybe<Array<Scalars['ID']> | Scalars['ID']>;
+  tags?: Maybe<Array<Scalars['String']> | Scalars['String']>;
+  first: Scalars['Int'];
+  after?: Maybe<Scalars['String']>;
+}>;
+
+
+export type FindCollectionLocationIdsByTagQuery = { __typename?: 'Query', collectionItems: { __typename: 'CollectionItemConnection', totalCount: number, edges: Array<{ __typename?: 'CollectionItemEdge', cursor: string, node: { __typename: 'CollectionLocation', id: string, place: { __typename: 'Place', id: string } } }>, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: Maybe<string>, endCursor?: Maybe<string> } } };
+
+export type FindCollectionLocationsByExternalQueryVariables = Exact<{
+  collectionId?: Maybe<Array<Scalars['ID']> | Scalars['ID']>;
+  externalIds?: Maybe<Array<Scalars['ID']> | Scalars['ID']>;
+  externalSources?: Maybe<Array<Scalars['ID']> | Scalars['ID']>;
+  first: Scalars['Int'];
+  after?: Maybe<Scalars['String']>;
+}>;
+
+
+export type FindCollectionLocationsByExternalQuery = { __typename?: 'Query', collectionItems: { __typename: 'CollectionItemConnection', totalCount: number, edges: Array<{ __typename?: 'CollectionItemEdge', cursor: string, node: { __typename: 'CollectionLocation', title?: Maybe<string>, synopsis?: Maybe<string>, tags: Array<string>, readMoreUrl?: Maybe<string>, id: string, position: { __typename?: 'Position', lon: number, lat: number }, externalId?: Maybe<{ __typename?: 'Attribute', value?: Maybe<any> }>, externalSource?: Maybe<{ __typename?: 'Attribute', value?: Maybe<any> }>, place: { __typename: 'Place', id: string, name?: Maybe<string>, synopsis?: Maybe<string>, maki?: Maybe<string>, position: { __typename?: 'Position', lon: number, lat: number }, address: { __typename?: 'PlaceAddress', addressLineOne?: Maybe<string>, addressLineTwo?: Maybe<string>, addressLineThree?: Maybe<string>, locality?: Maybe<string>, region?: Maybe<string>, regionCode?: Maybe<string>, country?: Maybe<string>, countryCode?: Maybe<string> }, layers: Array<{ __typename: 'PlaceLayer', id: string, name?: Maybe<string> }> } } }>, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: Maybe<string>, endCursor?: Maybe<string> } } };
+
+export type FindCollectionLocationsByTagQueryVariables = Exact<{
+  collectionId?: Maybe<Array<Scalars['ID']> | Scalars['ID']>;
+  tags?: Maybe<Array<Scalars['String']> | Scalars['String']>;
+  first: Scalars['Int'];
+  after?: Maybe<Scalars['String']>;
+}>;
+
+
+export type FindCollectionLocationsByTagQuery = { __typename?: 'Query', collectionItems: { __typename: 'CollectionItemConnection', totalCount: number, edges: Array<{ __typename?: 'CollectionItemEdge', cursor: string, node: { __typename: 'CollectionLocation', title?: Maybe<string>, synopsis?: Maybe<string>, tags: Array<string>, readMoreUrl?: Maybe<string>, id: string, position: { __typename?: 'Position', lon: number, lat: number }, externalId?: Maybe<{ __typename?: 'Attribute', value?: Maybe<any> }>, externalSource?: Maybe<{ __typename?: 'Attribute', value?: Maybe<any> }>, place: { __typename: 'Place', id: string, name?: Maybe<string>, synopsis?: Maybe<string>, maki?: Maybe<string>, position: { __typename?: 'Position', lon: number, lat: number }, address: { __typename?: 'PlaceAddress', addressLineOne?: Maybe<string>, addressLineTwo?: Maybe<string>, addressLineThree?: Maybe<string>, locality?: Maybe<string>, region?: Maybe<string>, regionCode?: Maybe<string>, country?: Maybe<string>, countryCode?: Maybe<string> }, layers: Array<{ __typename: 'PlaceLayer', id: string, name?: Maybe<string> }> } } }>, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: Maybe<string>, endCursor?: Maybe<string> } } };
+
+export type GetCollectionLocationQueryVariables = Exact<{
+  id: Scalars['ID'];
+  mediaImagePreferredBestFit?: Maybe<Array<Scalars['Int']> | Scalars['Int']>;
+}>;
+
+
+export type GetCollectionLocationQuery = { __typename?: 'Query', collectionItem?: Maybe<{ __typename: 'CollectionLocation', title?: Maybe<string>, synopsis?: Maybe<string>, description?: Maybe<string>, tags: Array<string>, readMoreUrl?: Maybe<string>, websiteUrl?: Maybe<string>, id: string, position: { __typename?: 'Position', lon: number, lat: number }, place: { __typename: 'Place', id: string, name?: Maybe<string>, synopsis?: Maybe<string>, maki?: Maybe<string>, position: { __typename?: 'Position', lon: number, lat: number }, address: { __typename?: 'PlaceAddress', addressLineOne?: Maybe<string>, addressLineTwo?: Maybe<string>, addressLineThree?: Maybe<string>, locality?: Maybe<string>, region?: Maybe<string>, regionCode?: Maybe<string>, country?: Maybe<string>, countryCode?: Maybe<string> }, layers: Array<{ __typename: 'PlaceLayer', id: string, name?: Maybe<string> }> }, preferredMedia?: Maybe<{ __typename: 'MediaContainer', id: string, resource: { __typename: 'MediaImage', caption?: Maybe<string>, copyright?: Maybe<string>, attribution?: Maybe<string>, id?: Maybe<string>, altText?: Maybe<string>, source?: Maybe<{ __typename?: 'MediaImageSource', url: string }> } }> }> };
+
+export type GetCollectionQueryVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+
+export type GetCollectionQuery = { __typename?: 'Query', collection?: Maybe<{ __typename: 'Collection', id: string, title?: Maybe<string>, synopsis?: Maybe<string>, description?: Maybe<string>, discriminator: string, readMoreUrl?: Maybe<string>, items: { __typename?: 'CollectionItemConnection', totalCount: number } }> };
+
+export type ListCollectionsQueryVariables = Exact<{
+  profileId: Scalars['ID'];
+  first: Scalars['Int'];
+  after?: Maybe<Scalars['String']>;
+  discriminator?: Maybe<Scalars['String']>;
+}>;
+
+
+export type ListCollectionsQuery = { __typename?: 'Query', collections: { __typename: 'CollectionConnection', totalCount: number, edges: Array<{ __typename?: 'CollectionEdge', node: { __typename: 'Collection', id: string, title?: Maybe<string>, synopsis?: Maybe<string>, readMoreUrl?: Maybe<string>, items: { __typename?: 'CollectionItemConnection', totalCount: number } } }>, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: Maybe<string>, endCursor?: Maybe<string> } } };
+
+export type UpdateCollectionLocationMutationVariables = Exact<{
+  id: Scalars['ID'];
+  location: UpdateCollectionLocationInput;
+}>;
+
+
+export type UpdateCollectionLocationMutation = { __typename?: 'Mutation', updateCollectionLocation: { __typename: 'UpdateCollectionLocationPayload', location?: Maybe<{ __typename: 'CollectionLocation', id: string, title?: Maybe<string>, synopsis?: Maybe<string>, description?: Maybe<string>, tags: Array<string>, readMoreUrl?: Maybe<string>, websiteUrl?: Maybe<string>, position: { __typename?: 'Position', lon: number, lat: number } }> } };
+
 export type CreateItineraryDirectionsMutationVariables = Exact<{
   itineraryId: Scalars['ID'];
   directions: CreateItineraryDirectionsInput;
@@ -5650,7 +5740,7 @@ export type CreateItineraryLocationMutationVariables = Exact<{
 }>;
 
 
-export type CreateItineraryLocationMutation = { __typename?: 'Mutation', createItineraryLocation: { __typename: 'CreateItineraryLocationPayload', location?: Maybe<{ __typename: 'ItineraryLocation', id: string, title?: Maybe<string>, synopsis?: Maybe<string>, description?: Maybe<string>, tags: Array<string>, optional: boolean, itinerary: { __typename: 'Itinerary', id: string, locations: { __typename?: 'ItineraryItemConnection', totalCount: number } }, position: { __typename?: 'Position', lon: number, lat: number }, place: { __typename: 'Place', id: string, name?: Maybe<string>, synopsis?: Maybe<string>, description?: Maybe<string>, maki?: Maybe<string>, position: { __typename?: 'Position', lon: number, lat: number }, address: { __typename?: 'PlaceAddress', addressLineOne?: Maybe<string>, addressLineTwo?: Maybe<string>, addressLineThree?: Maybe<string>, locality?: Maybe<string>, region?: Maybe<string>, country?: Maybe<string>, countryCode?: Maybe<string> }, contact: { __typename?: 'PlaceContact', phoneNumber?: Maybe<string>, emailAddress?: Maybe<string>, websiteUrl?: Maybe<string>, bookingsUrl?: Maybe<string>, facebookUrl?: Maybe<string>, instagramUrl?: Maybe<string>, twitterUrl?: Maybe<string> }, layers: Array<{ __typename: 'PlaceLayer', id: string, name?: Maybe<string> }>, hours?: Maybe<{ __typename?: 'PlaceHours', osmTag: string }> } }>, cascaded: { __typename?: 'ItineraryItemCascadedChanges', deletedIds: Array<string>, created: Array<{ __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', id: string }>, updated: Array<{ __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', id: string }> } } };
+export type CreateItineraryLocationMutation = { __typename?: 'Mutation', createItineraryLocation: { __typename: 'CreateItineraryLocationPayload', location?: Maybe<{ __typename: 'ItineraryLocation', id: string, title?: Maybe<string>, synopsis?: Maybe<string>, description?: Maybe<string>, tags: Array<string>, optional: boolean, readMoreUrl?: Maybe<string>, itinerary: { __typename: 'Itinerary', id: string, locations: { __typename?: 'ItineraryItemConnection', totalCount: number } }, position: { __typename?: 'Position', lon: number, lat: number }, place: { __typename: 'Place', id: string, name?: Maybe<string>, synopsis?: Maybe<string>, maki?: Maybe<string>, position: { __typename?: 'Position', lon: number, lat: number }, address: { __typename?: 'PlaceAddress', addressLineOne?: Maybe<string>, addressLineTwo?: Maybe<string>, addressLineThree?: Maybe<string>, locality?: Maybe<string>, region?: Maybe<string>, regionCode?: Maybe<string>, country?: Maybe<string>, countryCode?: Maybe<string> }, layers: Array<{ __typename: 'PlaceLayer', id: string, name?: Maybe<string> }> } }>, cascaded: { __typename?: 'ItineraryItemCascadedChanges', deletedIds: Array<string>, created: Array<{ __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', id: string }>, updated: Array<{ __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', id: string }> } } };
 
 export type CreateItineraryMutationVariables = Exact<{
   itinerary: CreateItineraryInput;
@@ -5658,14 +5748,21 @@ export type CreateItineraryMutationVariables = Exact<{
 }>;
 
 
-export type CreateItineraryMutation = { __typename?: 'Mutation', createItinerary: { __typename: 'CreateItineraryPayload', itinerary?: Maybe<{ __typename: 'Itinerary', id: string, title?: Maybe<string>, synopsis?: Maybe<string>, description?: Maybe<string>, tags: Array<string>, created?: Maybe<string>, autoRoute?: Maybe<{ __typename?: 'ItineraryAutoRoute', defaultMode: RouteMode }>, profile?: Maybe<{ __typename: 'Profile', id: string, name: string }>, locations: { __typename?: 'ItineraryItemConnection', totalCount: number } }> } };
+export type CreateItineraryMutation = { __typename?: 'Mutation', createItinerary: { __typename: 'CreateItineraryPayload', itinerary?: Maybe<{ __typename: 'Itinerary', id: string, title?: Maybe<string>, synopsis?: Maybe<string>, description?: Maybe<string>, tags: Array<string>, created?: Maybe<string>, autoRoute?: Maybe<{ __typename?: 'ItineraryAutoRoute', defaultMode: RouteMode }>, locations: { __typename?: 'ItineraryItemConnection', totalCount: number } }> } };
 
 export type DeleteItineraryLocationMutationVariables = Exact<{
-  itineraryLocationId: Scalars['ID'];
+  id: Scalars['ID'];
 }>;
 
 
 export type DeleteItineraryLocationMutation = { __typename?: 'Mutation', deleteItineraryItem: { __typename: 'DeleteItineraryItemPayload', itinerary: { __typename: 'Itinerary', id: string, locations: { __typename?: 'ItineraryItemConnection', totalCount: number } }, cascaded: { __typename?: 'ItineraryItemCascadedChanges', deletedIds: Array<string>, created: Array<{ __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', id: string }>, updated: Array<{ __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', id: string }> } } };
+
+export type DeleteItineraryMutationVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+
+export type DeleteItineraryMutation = { __typename?: 'Mutation', deleteItinerary: { __typename: 'DeleteItineraryPayload' } };
 
 export type DisableItineraryAutoRouteMutationVariables = Exact<{
   id: Scalars['ID'];
@@ -5682,13 +5779,25 @@ export type EnableItineraryAutoRouteMutationVariables = Exact<{
 
 export type EnableItineraryAutoRouteMutation = { __typename?: 'Mutation', updateItinerary: { __typename: 'UpdateItineraryPayload', itinerary?: Maybe<{ __typename: 'Itinerary', id: string, autoRoute?: Maybe<{ __typename?: 'ItineraryAutoRoute', defaultMode: RouteMode }> }>, cascaded: { __typename?: 'ItineraryItemCascadedChanges', deletedIds: Array<string>, created: Array<{ __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', id: string }>, updated: Array<{ __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', id: string }> } } };
 
-export type FindItineraryLocationByPlaceIdQueryVariables = Exact<{
+export type FindItineraryLocationIdsByPlaceIdQueryVariables = Exact<{
   itineraryId: Scalars['ID'];
   placeId: Scalars['ID'];
+  first: Scalars['Int'];
+  after?: Maybe<Scalars['String']>;
 }>;
 
 
-export type FindItineraryLocationByPlaceIdQuery = { __typename?: 'Query', itinerary?: Maybe<{ __typename?: 'Itinerary', descendants: { __typename?: 'ItineraryItemConnection', totalCount: number, nodes: Array<{ __typename?: 'ItineraryCollection' } | { __typename?: 'ItineraryDirections' } | { __typename: 'ItineraryLocation', id: string }> } }> };
+export type FindItineraryLocationIdsByPlaceIdQuery = { __typename?: 'Query', itinerary?: Maybe<{ __typename?: 'Itinerary', descendants: { __typename: 'ItineraryItemConnection', totalCount: number, edges: Array<{ __typename?: 'ItineraryItemEdge', node: { __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', id: string, place: { __typename: 'Place', id: string } } }>, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: Maybe<string>, endCursor?: Maybe<string> } } }> };
+
+export type FindItineraryLocationsByPlaceIdQueryVariables = Exact<{
+  itineraryId: Scalars['ID'];
+  placeId: Scalars['ID'];
+  first: Scalars['Int'];
+  after?: Maybe<Scalars['String']>;
+}>;
+
+
+export type FindItineraryLocationsByPlaceIdQuery = { __typename?: 'Query', itinerary?: Maybe<{ __typename?: 'Itinerary', descendants: { __typename: 'ItineraryItemConnection', totalCount: number, edges: Array<{ __typename?: 'ItineraryItemEdge', node: { __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', title?: Maybe<string>, synopsis?: Maybe<string>, tags: Array<string>, optional: boolean, readMoreUrl?: Maybe<string>, id: string, position: { __typename?: 'Position', lon: number, lat: number }, place: { __typename: 'Place', id: string, name?: Maybe<string>, synopsis?: Maybe<string>, maki?: Maybe<string>, position: { __typename?: 'Position', lon: number, lat: number }, address: { __typename?: 'PlaceAddress', addressLineOne?: Maybe<string>, addressLineTwo?: Maybe<string>, addressLineThree?: Maybe<string>, locality?: Maybe<string>, region?: Maybe<string>, regionCode?: Maybe<string>, country?: Maybe<string>, countryCode?: Maybe<string> }, layers: Array<{ __typename: 'PlaceLayer', id: string, name?: Maybe<string> }> } } }>, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: Maybe<string>, endCursor?: Maybe<string> } } }> };
 
 export type GetItineraryDirectionsQueryVariables = Exact<{
   id: Scalars['ID'];
@@ -5698,20 +5807,31 @@ export type GetItineraryDirectionsQueryVariables = Exact<{
 
 export type GetItineraryDirectionsQuery = { __typename?: 'Query', node?: Maybe<{ __typename: 'Collection', id: string } | { __typename: 'CollectionLocation', id: string } | { __typename: 'ConnectedApp', id: string } | { __typename: 'Itinerary', id: string } | { __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', durationMin?: Maybe<number>, id: string, route: { __typename?: 'Route', segments: Array<{ __typename: 'RouteSegment', id: string, mode: RouteMode, polyline?: Maybe<string> }> } } | { __typename: 'ItineraryLocation', id: string } | { __typename: 'Place', id: string } | { __typename: 'Profile', id: string }> };
 
+export type GetItineraryLocationQueryVariables = Exact<{
+  id: Scalars['ID'];
+  mediaImagePreferredBestFit?: Maybe<Array<Scalars['Int']> | Scalars['Int']>;
+}>;
+
+
+export type GetItineraryLocationQuery = { __typename?: 'Query', node?: Maybe<{ __typename: 'Collection', id: string } | { __typename: 'CollectionLocation', id: string } | { __typename: 'ConnectedApp', id: string } | { __typename: 'Itinerary', id: string } | { __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', title?: Maybe<string>, synopsis?: Maybe<string>, description?: Maybe<string>, tags: Array<string>, optional: boolean, readMoreUrl?: Maybe<string>, id: string, position: { __typename?: 'Position', lon: number, lat: number }, place: { __typename: 'Place', id: string, name?: Maybe<string>, synopsis?: Maybe<string>, description?: Maybe<string>, maki?: Maybe<string>, position: { __typename?: 'Position', lon: number, lat: number }, address: { __typename?: 'PlaceAddress', addressLineOne?: Maybe<string>, addressLineTwo?: Maybe<string>, addressLineThree?: Maybe<string>, locality?: Maybe<string>, region?: Maybe<string>, regionCode?: Maybe<string>, country?: Maybe<string>, countryCode?: Maybe<string> }, contact: { __typename?: 'PlaceContact', phoneNumber?: Maybe<string>, emailAddress?: Maybe<string>, websiteUrl?: Maybe<string>, bookingsUrl?: Maybe<string>, facebookUrl?: Maybe<string>, instagramUrl?: Maybe<string>, twitterUrl?: Maybe<string> }, layers: Array<{ __typename: 'PlaceLayer', id: string, name?: Maybe<string> }>, hours?: Maybe<{ __typename?: 'PlaceHours', osmTag: string }> }, preferredMedia?: Maybe<{ __typename: 'MediaContainer', id: string, resource: { __typename: 'MediaImage', provider: string, copyright?: Maybe<string>, altText?: Maybe<string>, attribution?: Maybe<string>, caption?: Maybe<string>, tags: Array<string>, id?: Maybe<string>, source?: Maybe<{ __typename?: 'MediaImageSource', url: string }> } }> } | { __typename: 'Place', id: string } | { __typename: 'Profile', id: string }> };
+
 export type GetItineraryQueryVariables = Exact<{
   id: Scalars['ID'];
   mediaImagePreferredBestFit?: Maybe<Array<Scalars['Int']> | Scalars['Int']>;
 }>;
 
 
-export type GetItineraryQuery = { __typename?: 'Query', itinerary?: Maybe<{ __typename: 'Itinerary', id: string, title?: Maybe<string>, synopsis?: Maybe<string>, description?: Maybe<string>, tags: Array<string>, created?: Maybe<string>, autoRoute?: Maybe<{ __typename?: 'ItineraryAutoRoute', defaultMode: RouteMode }>, profile?: Maybe<{ __typename: 'Profile', id: string, name: string }>, locations: { __typename?: 'ItineraryItemConnection', totalCount: number }, preferredMedia?: Maybe<{ __typename?: 'MediaContainer', resource: { __typename: 'MediaImage', caption?: Maybe<string>, copyright?: Maybe<string>, attribution?: Maybe<string>, id?: Maybe<string>, altText?: Maybe<string>, source?: Maybe<{ __typename?: 'MediaImageSource', url: string }> } }> }> };
+export type GetItineraryQuery = { __typename?: 'Query', itinerary?: Maybe<{ __typename: 'Itinerary', id: string, title?: Maybe<string>, synopsis?: Maybe<string>, description?: Maybe<string>, tags: Array<string>, created?: Maybe<string>, autoRoute?: Maybe<{ __typename?: 'ItineraryAutoRoute', defaultMode: RouteMode }>, locations: { __typename?: 'ItineraryItemConnection', totalCount: number }, profile?: Maybe<{ __typename: 'Profile', id: string, name: string, handle?: Maybe<string> }>, preferredMedia?: Maybe<{ __typename: 'MediaContainer', id: string, resource: { __typename: 'MediaImage', provider: string, copyright?: Maybe<string>, altText?: Maybe<string>, attribution?: Maybe<string>, caption?: Maybe<string>, tags: Array<string>, id?: Maybe<string>, source?: Maybe<{ __typename?: 'MediaImageSource', url: string }> } }> }> };
 
-export type GetPlaceQueryVariables = Exact<{
-  id: Scalars['ID'];
+export type ListItinerariesQueryVariables = Exact<{
+  profileId: Scalars['ID'];
+  first: Scalars['Int'];
+  after?: Maybe<Scalars['String']>;
+  mediaImagePreferredBestFit?: Maybe<Array<Scalars['Int']> | Scalars['Int']>;
 }>;
 
 
-export type GetPlaceQuery = { __typename?: 'Query', place?: Maybe<{ __typename: 'Place', id: string, name?: Maybe<string>, synopsis?: Maybe<string>, description?: Maybe<string>, maki?: Maybe<string>, position: { __typename?: 'Position', lon: number, lat: number }, address: { __typename?: 'PlaceAddress', addressLineOne?: Maybe<string>, addressLineTwo?: Maybe<string>, addressLineThree?: Maybe<string>, locality?: Maybe<string>, region?: Maybe<string>, country?: Maybe<string>, countryCode?: Maybe<string> }, contact: { __typename?: 'PlaceContact', phoneNumber?: Maybe<string>, emailAddress?: Maybe<string>, websiteUrl?: Maybe<string>, bookingsUrl?: Maybe<string>, facebookUrl?: Maybe<string>, instagramUrl?: Maybe<string>, twitterUrl?: Maybe<string> }, layers: Array<{ __typename: 'PlaceLayer', id: string, name?: Maybe<string> }>, hours?: Maybe<{ __typename?: 'PlaceHours', osmTag: string }> }> };
+export type ListItinerariesQuery = { __typename?: 'Query', itineraries: { __typename: 'ItineraryConnection', totalCount: number, edges: Array<{ __typename?: 'ItineraryEdge', node: { __typename: 'Itinerary', id: string, title?: Maybe<string>, synopsis?: Maybe<string>, tags: Array<string>, created?: Maybe<string>, preferredMedia?: Maybe<{ __typename: 'MediaContainer', id: string, resource: { __typename: 'MediaImage', provider: string, copyright?: Maybe<string>, altText?: Maybe<string>, attribution?: Maybe<string>, caption?: Maybe<string>, tags: Array<string>, id?: Maybe<string>, source?: Maybe<{ __typename?: 'MediaImageSource', url: string }> } }> } }>, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: Maybe<string>, endCursor?: Maybe<string> } } };
 
 export type ListItineraryLocationsQueryVariables = Exact<{
   id: Scalars['ID'];
@@ -5722,7 +5842,7 @@ export type ListItineraryLocationsQueryVariables = Exact<{
 }>;
 
 
-export type ListItineraryLocationsQuery = { __typename?: 'Query', itinerary?: Maybe<{ __typename: 'Itinerary', id: string, locations: { __typename?: 'ItineraryItemConnection', totalCount: number, edges: Array<{ __typename?: 'ItineraryItemEdge', location: { __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', title?: Maybe<string>, synopsis?: Maybe<string>, tags: Array<string>, optional: boolean, readMoreUrl?: Maybe<string>, id: string, position: { __typename?: 'Position', lon: number, lat: number }, place: { __typename: 'Place', id: string, name?: Maybe<string>, synopsis?: Maybe<string>, maki?: Maybe<string>, position: { __typename?: 'Position', lon: number, lat: number }, address: { __typename?: 'PlaceAddress', locality?: Maybe<string>, region?: Maybe<string>, country?: Maybe<string> }, layers: Array<{ __typename: 'PlaceLayer', id: string, name?: Maybe<string> }> }, preferredMedia?: Maybe<{ __typename?: 'MediaContainer', resource: { __typename: 'MediaImage', caption?: Maybe<string>, copyright?: Maybe<string>, attribution?: Maybe<string>, id?: Maybe<string>, altText?: Maybe<string>, source?: Maybe<{ __typename?: 'MediaImageSource', url: string }> } }> }, arrival: { __typename?: 'ItineraryDirectionsConnection', totalCount: number, nodes: Array<{ __typename: 'ItineraryDirections', id: string, durationMin?: Maybe<number>, route: { __typename?: 'Route', segments: Array<{ __typename: 'RouteSegment', id: string, mode: RouteMode, polyline?: Maybe<string> }> } }>, pageInfo: { __typename?: 'PageInfo', endCursor?: Maybe<string> } } }>, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, endCursor?: Maybe<string> } } }> };
+export type ListItineraryLocationsQuery = { __typename?: 'Query', itinerary?: Maybe<{ __typename: 'Itinerary', id: string, locations: { __typename?: 'ItineraryItemConnection', totalCount: number, edges: Array<{ __typename?: 'ItineraryItemEdge', location: { __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', title?: Maybe<string>, synopsis?: Maybe<string>, tags: Array<string>, optional: boolean, readMoreUrl?: Maybe<string>, id: string, position: { __typename?: 'Position', lon: number, lat: number }, place: { __typename: 'Place', id: string, name?: Maybe<string>, synopsis?: Maybe<string>, maki?: Maybe<string>, position: { __typename?: 'Position', lon: number, lat: number }, address: { __typename?: 'PlaceAddress', addressLineOne?: Maybe<string>, addressLineTwo?: Maybe<string>, addressLineThree?: Maybe<string>, locality?: Maybe<string>, region?: Maybe<string>, regionCode?: Maybe<string>, country?: Maybe<string>, countryCode?: Maybe<string> }, layers: Array<{ __typename: 'PlaceLayer', id: string, name?: Maybe<string> }> }, preferredMedia?: Maybe<{ __typename: 'MediaContainer', id: string, resource: { __typename: 'MediaImage', provider: string, copyright?: Maybe<string>, altText?: Maybe<string>, attribution?: Maybe<string>, caption?: Maybe<string>, tags: Array<string>, id?: Maybe<string>, source?: Maybe<{ __typename?: 'MediaImageSource', url: string }> } }> }, arrival: { __typename?: 'ItineraryDirectionsConnection', totalCount: number, directions: Array<{ __typename: 'ItineraryDirections', id: string, durationMin?: Maybe<number>, route: { __typename?: 'Route', segments: Array<{ __typename: 'RouteSegment', id: string, mode: RouteMode, polyline?: Maybe<string> }> } }> } }>, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: Maybe<string>, endCursor?: Maybe<string> } } }> };
 
 export type MoveItineraryLocationAfterMutationVariables = Exact<{
   id: Scalars['ID'];
@@ -5753,7 +5873,7 @@ export type UpdateItineraryLocationMutationVariables = Exact<{
 }>;
 
 
-export type UpdateItineraryLocationMutation = { __typename?: 'Mutation', updateItineraryLocation: { __typename: 'UpdateItineraryLocationPayload', location?: Maybe<{ __typename: 'ItineraryLocation', id: string, title?: Maybe<string>, synopsis?: Maybe<string>, description?: Maybe<string>, tags: Array<string>, optional: boolean, position: { __typename?: 'Position', lon: number, lat: number }, place: { __typename: 'Place', id: string, name?: Maybe<string>, synopsis?: Maybe<string>, description?: Maybe<string>, maki?: Maybe<string>, position: { __typename?: 'Position', lon: number, lat: number }, address: { __typename?: 'PlaceAddress', addressLineOne?: Maybe<string>, addressLineTwo?: Maybe<string>, addressLineThree?: Maybe<string>, locality?: Maybe<string>, region?: Maybe<string>, country?: Maybe<string>, countryCode?: Maybe<string> }, contact: { __typename?: 'PlaceContact', phoneNumber?: Maybe<string>, emailAddress?: Maybe<string>, websiteUrl?: Maybe<string>, bookingsUrl?: Maybe<string>, facebookUrl?: Maybe<string>, instagramUrl?: Maybe<string>, twitterUrl?: Maybe<string> }, layers: Array<{ __typename: 'PlaceLayer', id: string, name?: Maybe<string> }>, hours?: Maybe<{ __typename?: 'PlaceHours', osmTag: string }> } }>, cascaded: { __typename?: 'ItineraryItemCascadedChanges', deletedIds: Array<string>, created: Array<{ __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', id: string }>, updated: Array<{ __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', id: string }> } } };
+export type UpdateItineraryLocationMutation = { __typename?: 'Mutation', updateItineraryLocation: { __typename: 'UpdateItineraryLocationPayload', location?: Maybe<{ __typename: 'ItineraryLocation', id: string, title?: Maybe<string>, synopsis?: Maybe<string>, description?: Maybe<string>, tags: Array<string>, optional: boolean, readMoreUrl?: Maybe<string>, position: { __typename?: 'Position', lon: number, lat: number } }>, cascaded: { __typename?: 'ItineraryItemCascadedChanges', deletedIds: Array<string>, created: Array<{ __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', id: string }>, updated: Array<{ __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', id: string }> } } };
 
 export type UpdateItineraryMutationVariables = Exact<{
   id: Scalars['ID'];
@@ -5761,7 +5881,67 @@ export type UpdateItineraryMutationVariables = Exact<{
 }>;
 
 
-export type UpdateItineraryMutation = { __typename?: 'Mutation', updateItinerary: { __typename: 'UpdateItineraryPayload', itinerary?: Maybe<{ __typename: 'Itinerary', id: string, title?: Maybe<string>, synopsis?: Maybe<string>, description?: Maybe<string>, tags: Array<string>, created?: Maybe<string>, autoRoute?: Maybe<{ __typename?: 'ItineraryAutoRoute', defaultMode: RouteMode }>, profile?: Maybe<{ __typename: 'Profile', id: string, name: string }> }>, cascaded: { __typename?: 'ItineraryItemCascadedChanges', deletedIds: Array<string>, created: Array<{ __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', id: string }>, updated: Array<{ __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', id: string }> } } };
+export type UpdateItineraryMutation = { __typename?: 'Mutation', updateItinerary: { __typename: 'UpdateItineraryPayload', itinerary?: Maybe<{ __typename: 'Itinerary', id: string, title?: Maybe<string>, synopsis?: Maybe<string>, description?: Maybe<string>, tags: Array<string>, created?: Maybe<string>, autoRoute?: Maybe<{ __typename?: 'ItineraryAutoRoute', defaultMode: RouteMode }> }>, cascaded: { __typename?: 'ItineraryItemCascadedChanges', deletedIds: Array<string>, created: Array<{ __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', id: string }>, updated: Array<{ __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', id: string }> } } };
+
+export type GetMediaImageQueryVariables = Exact<{
+  id: Scalars['ID'];
+  smallBestFit?: Maybe<Array<Scalars['Int']> | Scalars['Int']>;
+  mediumBestFit?: Maybe<Array<Scalars['Int']> | Scalars['Int']>;
+  largeBestFit?: Maybe<Array<Scalars['Int']> | Scalars['Int']>;
+}>;
+
+
+export type GetMediaImageQuery = { __typename?: 'Query', mediaResource?: Maybe<{ __typename: 'MediaImage', provider: string, copyright?: Maybe<string>, altText?: Maybe<string>, attribution?: Maybe<string>, caption?: Maybe<string>, tags: Array<string>, id?: Maybe<string>, small?: Maybe<{ __typename?: 'MediaImageSource', url: string }>, medium?: Maybe<{ __typename?: 'MediaImageSource', url: string }>, large?: Maybe<{ __typename?: 'MediaImageSource', url: string }> }> };
+
+export type AutocompleteSearchPlaceQueryVariables = Exact<{
+  text: Scalars['String'];
+  source: PlaceSearchSource;
+}>;
+
+
+export type AutocompleteSearchPlaceQuery = { __typename?: 'Query', placeAutocompleteSearch: { __typename: 'PlaceSearchConnection', edges: Array<{ __typename?: 'PlaceSearchEdge', node: { __typename: 'PlaceSearchNode', id: string, name?: Maybe<string>, maki?: Maybe<string>, position: { __typename?: 'Position', lon: number, lat: number }, address: { __typename?: 'PlaceAddress', addressLineOne?: Maybe<string>, addressLineTwo?: Maybe<string>, addressLineThree?: Maybe<string>, locality?: Maybe<string>, region?: Maybe<string>, regionCode?: Maybe<string>, country?: Maybe<string>, countryCode?: Maybe<string> }, layers: Array<{ __typename: 'PlaceLayer', id: string, name?: Maybe<string> }> }, main: { __typename?: 'TextSearchResult', label: string, matches: Array<{ __typename?: 'TextSearchResultMatch', offset: number, length: number }> }, secondary: { __typename?: 'TextSearchResult', label: string, matches: Array<{ __typename?: 'TextSearchResultMatch', offset: number, length: number }> } }> } };
+
+export type GetPlaceQueryVariables = Exact<{
+  id: Scalars['ID'];
+  mediaImagePreferredBestFit?: Maybe<Array<Scalars['Int']> | Scalars['Int']>;
+}>;
+
+
+export type GetPlaceQuery = { __typename?: 'Query', place?: Maybe<{ __typename: 'Place', id: string, name?: Maybe<string>, synopsis?: Maybe<string>, description?: Maybe<string>, maki?: Maybe<string>, position: { __typename?: 'Position', lon: number, lat: number }, address: { __typename?: 'PlaceAddress', addressLineOne?: Maybe<string>, addressLineTwo?: Maybe<string>, addressLineThree?: Maybe<string>, locality?: Maybe<string>, region?: Maybe<string>, regionCode?: Maybe<string>, country?: Maybe<string>, countryCode?: Maybe<string> }, contact: { __typename?: 'PlaceContact', phoneNumber?: Maybe<string>, emailAddress?: Maybe<string>, websiteUrl?: Maybe<string>, bookingsUrl?: Maybe<string>, facebookUrl?: Maybe<string>, instagramUrl?: Maybe<string>, twitterUrl?: Maybe<string> }, layers: Array<{ __typename: 'PlaceLayer', id: string, name?: Maybe<string> }>, hours?: Maybe<{ __typename?: 'PlaceHours', osmTag: string }>, preferredMedia?: Maybe<{ __typename: 'MediaContainer', id: string, resource: { __typename: 'MediaImage', provider: string, copyright?: Maybe<string>, altText?: Maybe<string>, attribution?: Maybe<string>, caption?: Maybe<string>, tags: Array<string>, id?: Maybe<string>, source?: Maybe<{ __typename?: 'MediaImageSource', url: string }> } }> }> };
+
+export type ReverseSearchPlaceByPositionQueryVariables = Exact<{
+  focus: PositionInput;
+  sources: Array<PlaceSearchSource> | PlaceSearchSource;
+  first: Scalars['Int'];
+}>;
+
+
+export type ReverseSearchPlaceByPositionQuery = { __typename?: 'Query', placeReverseSearch: { __typename: 'PlaceSearchConnection', places: Array<{ __typename: 'PlaceSearchNode', id: string, name?: Maybe<string>, maki?: Maybe<string>, position: { __typename?: 'Position', lon: number, lat: number }, address: { __typename?: 'PlaceAddress', addressLineOne?: Maybe<string>, addressLineTwo?: Maybe<string>, addressLineThree?: Maybe<string>, locality?: Maybe<string>, region?: Maybe<string>, regionCode?: Maybe<string>, country?: Maybe<string>, countryCode?: Maybe<string> }, layers: Array<{ __typename: 'PlaceLayer', id: string, name?: Maybe<string> }> }> } };
+
+export type GetProfileQueryVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+
+export type GetProfileQuery = { __typename?: 'Query', profile?: Maybe<{ __typename: 'Profile', id: string, name: string, handle?: Maybe<string>, type: ProfileType, bio?: Maybe<string>, websiteUrl?: Maybe<string> }> };
+
+export type ListAuthorizedProfilesQueryVariables = Exact<{
+  first: Scalars['Int'];
+  after?: Maybe<Scalars['String']>;
+}>;
+
+
+export type ListAuthorizedProfilesQuery = { __typename?: 'Query', authorizedProfiles: { __typename: 'ProfileConnection', totalCount: number, profiles: Array<{ __typename: 'Profile', id: string, name: string, handle?: Maybe<string> }>, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: Maybe<string>, endCursor?: Maybe<string> } } };
+
+export type SearchRoutesBetweenPositionsQueryVariables = Exact<{
+  mode: RouteSearchableMode;
+  positions: Array<PositionInput> | PositionInput;
+  first: Scalars['Int'];
+  includeRoutePolyline: Scalars['Boolean'];
+}>;
+
+
+export type SearchRoutesBetweenPositionsQuery = { __typename?: 'Query', routes: { __typename: 'RouteConnection', routes: Array<{ __typename?: 'Route', segments: Array<{ __typename?: 'RouteSegment', distance?: Maybe<number>, duration?: Maybe<number>, polyline?: Maybe<string> }> }> } };
 
 
       export interface PossibleTypesResultData {
@@ -5797,6 +5977,65 @@ export type UpdateItineraryMutation = { __typename?: 'Mutation', updateItinerary
 };
       export default result;
     
+export const CollectionContentFragmentDoc = gql`
+    fragment CollectionContent on Collection {
+  title
+  synopsis
+  description
+  discriminator
+  readMoreUrl
+}
+    `;
+export const CollectionItemsCountFragmentDoc = gql`
+    fragment CollectionItemsCount on Collection {
+  items(first: 0) {
+    totalCount
+  }
+}
+    `;
+export const CollectionLocationContentFragmentDoc = gql`
+    fragment CollectionLocationContent on CollectionLocation {
+  title
+  synopsis
+  description
+  tags
+  readMoreUrl
+  websiteUrl
+  position {
+    lon
+    lat
+  }
+}
+    `;
+export const CollectionLocationExternalRefsFragmentDoc = gql`
+    fragment CollectionLocationExternalRefs on CollectionLocation {
+  externalId: attr(id: "custom://external-ref") {
+    value
+  }
+  externalSource: attr(id: "custom://external-source") {
+    value
+  }
+}
+    `;
+export const CollectionLocationPartialContentFragmentDoc = gql`
+    fragment CollectionLocationPartialContent on CollectionLocation {
+  title
+  synopsis
+  tags
+  position {
+    lon
+    lat
+  }
+  readMoreUrl
+}
+    `;
+export const CollectionPartialContentFragmentDoc = gql`
+    fragment CollectionPartialContent on Collection {
+  title
+  synopsis
+  readMoreUrl
+}
+    `;
 export const ItineraryCascadedChangesFragmentDoc = gql`
     fragment ItineraryCascadedChanges on ItineraryItemCascadedChanges {
   created {
@@ -5810,11 +6049,6 @@ export const ItineraryCascadedChangesFragmentDoc = gql`
   deletedIds
 }
     `;
-export const ProfilePartialContentFragmentDoc = gql`
-    fragment ProfilePartialContent on Profile {
-  name
-}
-    `;
 export const ItineraryContentFragmentDoc = gql`
     fragment ItineraryContent on Itinerary {
   title
@@ -5825,13 +6059,8 @@ export const ItineraryContentFragmentDoc = gql`
   autoRoute {
     defaultMode
   }
-  profile {
-    id
-    __typename
-    ...ProfilePartialContent
-  }
 }
-    ${ProfilePartialContentFragmentDoc}`;
+    `;
 export const ItineraryDirectionsContentFragmentDoc = gql`
     fragment ItineraryDirectionsContent on ItineraryDirections {
   durationMin
@@ -5840,6 +6069,68 @@ export const ItineraryDirectionsContentFragmentDoc = gql`
 export const ItineraryDirectionsPartialContentFragmentDoc = gql`
     fragment ItineraryDirectionsPartialContent on ItineraryDirections {
   durationMin
+}
+    `;
+export const ItineraryLocationContentFragmentDoc = gql`
+    fragment ItineraryLocationContent on ItineraryLocation {
+  title
+  synopsis
+  description
+  tags
+  optional
+  readMoreUrl
+  position {
+    lon
+    lat
+  }
+}
+    `;
+export const ItineraryLocationPartialContentFragmentDoc = gql`
+    fragment ItineraryLocationPartialContent on ItineraryLocation {
+  title
+  synopsis
+  tags
+  optional
+  readMoreUrl
+  position {
+    lon
+    lat
+  }
+}
+    `;
+export const ItineraryLocationsCountFragmentDoc = gql`
+    fragment ItineraryLocationsCount on Itinerary {
+  locations: descendants(first: 0, type: ItineraryLocation) {
+    totalCount
+  }
+}
+    `;
+export const ItineraryPartialContentFragmentDoc = gql`
+    fragment ItineraryPartialContent on Itinerary {
+  title
+  synopsis
+  tags
+  created
+}
+    `;
+export const MediaImageContentFragmentDoc = gql`
+    fragment MediaImageContent on MediaImage {
+  provider
+  copyright
+  altText
+  attribution
+  caption
+  tags
+}
+    `;
+export const MediaImagePartialContentFragmentDoc = gql`
+    fragment MediaImagePartialContent on MediaImage {
+  provider
+  copyright
+  altText
+  attribution
+  caption
+  tags
 }
     `;
 export const PlaceContentFragmentDoc = gql`
@@ -5858,6 +6149,7 @@ export const PlaceContentFragmentDoc = gql`
     addressLineThree
     locality
     region
+    regionCode
     country
     countryCode
   }
@@ -5880,24 +6172,6 @@ export const PlaceContentFragmentDoc = gql`
   }
 }
     `;
-export const ItineraryLocationContentFragmentDoc = gql`
-    fragment ItineraryLocationContent on ItineraryLocation {
-  title
-  synopsis
-  description
-  tags
-  optional
-  position {
-    lon
-    lat
-  }
-  place {
-    id
-    __typename
-    ...PlaceContent
-  }
-}
-    ${PlaceContentFragmentDoc}`;
 export const PlacePartialContentFragmentDoc = gql`
     fragment PlacePartialContent on Place {
   name
@@ -5908,9 +6182,14 @@ export const PlacePartialContentFragmentDoc = gql`
   }
   maki
   address {
+    addressLineOne
+    addressLineTwo
+    addressLineThree
     locality
     region
+    regionCode
     country
+    countryCode
   }
   layers {
     id
@@ -5919,31 +6198,590 @@ export const PlacePartialContentFragmentDoc = gql`
   }
 }
     `;
-export const ItineraryLocationPartialContentFragmentDoc = gql`
-    fragment ItineraryLocationPartialContent on ItineraryLocation {
-  title
-  synopsis
-  tags
-  optional
-  readMoreUrl
+export const PlaceSearchContentFragmentDoc = gql`
+    fragment PlaceSearchContent on PlaceSearchNode {
+  name
   position {
     lon
     lat
   }
-  place {
+  address {
+    addressLineOne
+    addressLineTwo
+    addressLineThree
+    locality
+    region
+    regionCode
+    country
+    countryCode
+  }
+  maki
+  layers {
     id
     __typename
-    ...PlacePartialContent
-  }
-}
-    ${PlacePartialContentFragmentDoc}`;
-export const ItineraryLocationsCountFragmentDoc = gql`
-    fragment ItineraryLocationsCount on Itinerary {
-  locations: descendants(first: 0, type: ItineraryLocation) {
-    totalCount
+    name
   }
 }
     `;
+export const ProfileContentFragmentDoc = gql`
+    fragment ProfileContent on Profile {
+  name
+  handle
+  type
+  bio
+  websiteUrl
+}
+    `;
+export const ProfilePartialContentFragmentDoc = gql`
+    fragment ProfilePartialContent on Profile {
+  name
+  handle
+}
+    `;
+export const CreateCollectionLocationDocument = gql`
+    mutation createCollectionLocation($collectionId: ID!, $location: CreateCollectionLocationInput!) {
+  createCollectionLocation(collectionId: $collectionId, location: $location) {
+    __typename
+    location {
+      id
+      __typename
+      ...CollectionLocationContent
+      place {
+        id
+        __typename
+        ...PlacePartialContent
+      }
+    }
+  }
+}
+    ${CollectionLocationContentFragmentDoc}
+${PlacePartialContentFragmentDoc}`;
+export type CreateCollectionLocationMutationFn = Apollo.MutationFunction<CreateCollectionLocationMutation, CreateCollectionLocationMutationVariables>;
+
+/**
+ * __useCreateCollectionLocationMutation__
+ *
+ * To run a mutation, you first call `useCreateCollectionLocationMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateCollectionLocationMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createCollectionLocationMutation, { data, loading, error }] = useCreateCollectionLocationMutation({
+ *   variables: {
+ *      collectionId: // value for 'collectionId'
+ *      location: // value for 'location'
+ *   },
+ * });
+ */
+export function useCreateCollectionLocationMutation(baseOptions?: Apollo.MutationHookOptions<CreateCollectionLocationMutation, CreateCollectionLocationMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CreateCollectionLocationMutation, CreateCollectionLocationMutationVariables>(CreateCollectionLocationDocument, options);
+      }
+export type CreateCollectionLocationMutationHookResult = ReturnType<typeof useCreateCollectionLocationMutation>;
+export type CreateCollectionLocationMutationResult = Apollo.MutationResult<CreateCollectionLocationMutation>;
+export type CreateCollectionLocationMutationOptions = Apollo.BaseMutationOptions<CreateCollectionLocationMutation, CreateCollectionLocationMutationVariables>;
+export const DeleteCollectionItemDocument = gql`
+    mutation deleteCollectionItem($id: ID!) {
+  deleteCollectionItem(id: $id) {
+    __typename
+  }
+}
+    `;
+export type DeleteCollectionItemMutationFn = Apollo.MutationFunction<DeleteCollectionItemMutation, DeleteCollectionItemMutationVariables>;
+
+/**
+ * __useDeleteCollectionItemMutation__
+ *
+ * To run a mutation, you first call `useDeleteCollectionItemMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useDeleteCollectionItemMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [deleteCollectionItemMutation, { data, loading, error }] = useDeleteCollectionItemMutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useDeleteCollectionItemMutation(baseOptions?: Apollo.MutationHookOptions<DeleteCollectionItemMutation, DeleteCollectionItemMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<DeleteCollectionItemMutation, DeleteCollectionItemMutationVariables>(DeleteCollectionItemDocument, options);
+      }
+export type DeleteCollectionItemMutationHookResult = ReturnType<typeof useDeleteCollectionItemMutation>;
+export type DeleteCollectionItemMutationResult = Apollo.MutationResult<DeleteCollectionItemMutation>;
+export type DeleteCollectionItemMutationOptions = Apollo.BaseMutationOptions<DeleteCollectionItemMutation, DeleteCollectionItemMutationVariables>;
+export const FindCollectionLocationIdsByExternalDocument = gql`
+    query findCollectionLocationIdsByExternal($collectionId: [ID!], $externalIds: [ID!], $externalSources: [ID!], $first: Int!, $after: String) {
+  collectionItems(
+    collectionIds: $collectionId
+    externalIds: $externalIds
+    externalSources: $externalSources
+    first: $first
+    after: $after
+  ) {
+    __typename
+    edges {
+      node {
+        id
+        __typename
+        ... on CollectionLocation {
+          place {
+            id
+            __typename
+          }
+        }
+      }
+      cursor
+    }
+    totalCount
+    pageInfo {
+      hasNextPage
+      hasPreviousPage
+      startCursor
+      endCursor
+    }
+  }
+}
+    `;
+
+/**
+ * __useFindCollectionLocationIdsByExternalQuery__
+ *
+ * To run a query within a React component, call `useFindCollectionLocationIdsByExternalQuery` and pass it any options that fit your needs.
+ * When your component renders, `useFindCollectionLocationIdsByExternalQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useFindCollectionLocationIdsByExternalQuery({
+ *   variables: {
+ *      collectionId: // value for 'collectionId'
+ *      externalIds: // value for 'externalIds'
+ *      externalSources: // value for 'externalSources'
+ *      first: // value for 'first'
+ *      after: // value for 'after'
+ *   },
+ * });
+ */
+export function useFindCollectionLocationIdsByExternalQuery(baseOptions: Apollo.QueryHookOptions<FindCollectionLocationIdsByExternalQuery, FindCollectionLocationIdsByExternalQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<FindCollectionLocationIdsByExternalQuery, FindCollectionLocationIdsByExternalQueryVariables>(FindCollectionLocationIdsByExternalDocument, options);
+      }
+export function useFindCollectionLocationIdsByExternalLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<FindCollectionLocationIdsByExternalQuery, FindCollectionLocationIdsByExternalQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<FindCollectionLocationIdsByExternalQuery, FindCollectionLocationIdsByExternalQueryVariables>(FindCollectionLocationIdsByExternalDocument, options);
+        }
+export type FindCollectionLocationIdsByExternalQueryHookResult = ReturnType<typeof useFindCollectionLocationIdsByExternalQuery>;
+export type FindCollectionLocationIdsByExternalLazyQueryHookResult = ReturnType<typeof useFindCollectionLocationIdsByExternalLazyQuery>;
+export type FindCollectionLocationIdsByExternalQueryResult = Apollo.QueryResult<FindCollectionLocationIdsByExternalQuery, FindCollectionLocationIdsByExternalQueryVariables>;
+export const FindCollectionLocationIdsByTagDocument = gql`
+    query findCollectionLocationIdsByTag($collectionId: [ID!], $tags: [String!], $first: Int!, $after: String) {
+  collectionItems(
+    collectionIds: $collectionId
+    tags: $tags
+    first: $first
+    after: $after
+  ) {
+    __typename
+    edges {
+      node {
+        id
+        __typename
+        ... on CollectionLocation {
+          place {
+            id
+            __typename
+          }
+        }
+      }
+      cursor
+    }
+    totalCount
+    pageInfo {
+      hasNextPage
+      hasPreviousPage
+      startCursor
+      endCursor
+    }
+  }
+}
+    `;
+
+/**
+ * __useFindCollectionLocationIdsByTagQuery__
+ *
+ * To run a query within a React component, call `useFindCollectionLocationIdsByTagQuery` and pass it any options that fit your needs.
+ * When your component renders, `useFindCollectionLocationIdsByTagQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useFindCollectionLocationIdsByTagQuery({
+ *   variables: {
+ *      collectionId: // value for 'collectionId'
+ *      tags: // value for 'tags'
+ *      first: // value for 'first'
+ *      after: // value for 'after'
+ *   },
+ * });
+ */
+export function useFindCollectionLocationIdsByTagQuery(baseOptions: Apollo.QueryHookOptions<FindCollectionLocationIdsByTagQuery, FindCollectionLocationIdsByTagQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<FindCollectionLocationIdsByTagQuery, FindCollectionLocationIdsByTagQueryVariables>(FindCollectionLocationIdsByTagDocument, options);
+      }
+export function useFindCollectionLocationIdsByTagLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<FindCollectionLocationIdsByTagQuery, FindCollectionLocationIdsByTagQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<FindCollectionLocationIdsByTagQuery, FindCollectionLocationIdsByTagQueryVariables>(FindCollectionLocationIdsByTagDocument, options);
+        }
+export type FindCollectionLocationIdsByTagQueryHookResult = ReturnType<typeof useFindCollectionLocationIdsByTagQuery>;
+export type FindCollectionLocationIdsByTagLazyQueryHookResult = ReturnType<typeof useFindCollectionLocationIdsByTagLazyQuery>;
+export type FindCollectionLocationIdsByTagQueryResult = Apollo.QueryResult<FindCollectionLocationIdsByTagQuery, FindCollectionLocationIdsByTagQueryVariables>;
+export const FindCollectionLocationsByExternalDocument = gql`
+    query findCollectionLocationsByExternal($collectionId: [ID!], $externalIds: [ID!], $externalSources: [ID!], $first: Int!, $after: String) {
+  collectionItems(
+    collectionIds: $collectionId
+    externalIds: $externalIds
+    externalSources: $externalSources
+    first: $first
+    after: $after
+  ) {
+    __typename
+    edges {
+      node {
+        id
+        __typename
+        ... on CollectionLocation {
+          ...CollectionLocationPartialContent
+          ...CollectionLocationExternalRefs
+          place {
+            id
+            __typename
+            ...PlacePartialContent
+          }
+        }
+      }
+      cursor
+    }
+    totalCount
+    pageInfo {
+      hasNextPage
+      hasPreviousPage
+      startCursor
+      endCursor
+    }
+  }
+}
+    ${CollectionLocationPartialContentFragmentDoc}
+${CollectionLocationExternalRefsFragmentDoc}
+${PlacePartialContentFragmentDoc}`;
+
+/**
+ * __useFindCollectionLocationsByExternalQuery__
+ *
+ * To run a query within a React component, call `useFindCollectionLocationsByExternalQuery` and pass it any options that fit your needs.
+ * When your component renders, `useFindCollectionLocationsByExternalQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useFindCollectionLocationsByExternalQuery({
+ *   variables: {
+ *      collectionId: // value for 'collectionId'
+ *      externalIds: // value for 'externalIds'
+ *      externalSources: // value for 'externalSources'
+ *      first: // value for 'first'
+ *      after: // value for 'after'
+ *   },
+ * });
+ */
+export function useFindCollectionLocationsByExternalQuery(baseOptions: Apollo.QueryHookOptions<FindCollectionLocationsByExternalQuery, FindCollectionLocationsByExternalQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<FindCollectionLocationsByExternalQuery, FindCollectionLocationsByExternalQueryVariables>(FindCollectionLocationsByExternalDocument, options);
+      }
+export function useFindCollectionLocationsByExternalLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<FindCollectionLocationsByExternalQuery, FindCollectionLocationsByExternalQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<FindCollectionLocationsByExternalQuery, FindCollectionLocationsByExternalQueryVariables>(FindCollectionLocationsByExternalDocument, options);
+        }
+export type FindCollectionLocationsByExternalQueryHookResult = ReturnType<typeof useFindCollectionLocationsByExternalQuery>;
+export type FindCollectionLocationsByExternalLazyQueryHookResult = ReturnType<typeof useFindCollectionLocationsByExternalLazyQuery>;
+export type FindCollectionLocationsByExternalQueryResult = Apollo.QueryResult<FindCollectionLocationsByExternalQuery, FindCollectionLocationsByExternalQueryVariables>;
+export const FindCollectionLocationsByTagDocument = gql`
+    query findCollectionLocationsByTag($collectionId: [ID!], $tags: [String!], $first: Int!, $after: String) {
+  collectionItems(
+    collectionIds: $collectionId
+    tags: $tags
+    first: $first
+    after: $after
+  ) {
+    __typename
+    edges {
+      node {
+        id
+        __typename
+        ... on CollectionLocation {
+          ...CollectionLocationPartialContent
+          ...CollectionLocationExternalRefs
+          place {
+            id
+            __typename
+            ...PlacePartialContent
+          }
+        }
+      }
+      cursor
+    }
+    totalCount
+    pageInfo {
+      hasNextPage
+      hasPreviousPage
+      startCursor
+      endCursor
+    }
+  }
+}
+    ${CollectionLocationPartialContentFragmentDoc}
+${CollectionLocationExternalRefsFragmentDoc}
+${PlacePartialContentFragmentDoc}`;
+
+/**
+ * __useFindCollectionLocationsByTagQuery__
+ *
+ * To run a query within a React component, call `useFindCollectionLocationsByTagQuery` and pass it any options that fit your needs.
+ * When your component renders, `useFindCollectionLocationsByTagQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useFindCollectionLocationsByTagQuery({
+ *   variables: {
+ *      collectionId: // value for 'collectionId'
+ *      tags: // value for 'tags'
+ *      first: // value for 'first'
+ *      after: // value for 'after'
+ *   },
+ * });
+ */
+export function useFindCollectionLocationsByTagQuery(baseOptions: Apollo.QueryHookOptions<FindCollectionLocationsByTagQuery, FindCollectionLocationsByTagQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<FindCollectionLocationsByTagQuery, FindCollectionLocationsByTagQueryVariables>(FindCollectionLocationsByTagDocument, options);
+      }
+export function useFindCollectionLocationsByTagLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<FindCollectionLocationsByTagQuery, FindCollectionLocationsByTagQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<FindCollectionLocationsByTagQuery, FindCollectionLocationsByTagQueryVariables>(FindCollectionLocationsByTagDocument, options);
+        }
+export type FindCollectionLocationsByTagQueryHookResult = ReturnType<typeof useFindCollectionLocationsByTagQuery>;
+export type FindCollectionLocationsByTagLazyQueryHookResult = ReturnType<typeof useFindCollectionLocationsByTagLazyQuery>;
+export type FindCollectionLocationsByTagQueryResult = Apollo.QueryResult<FindCollectionLocationsByTagQuery, FindCollectionLocationsByTagQueryVariables>;
+export const GetCollectionLocationDocument = gql`
+    query getCollectionLocation($id: ID!, $mediaImagePreferredBestFit: [Int!]) {
+  collectionItem(id: $id) {
+    id
+    __typename
+    ... on CollectionLocation {
+      ...CollectionLocationContent
+      place {
+        id
+        __typename
+        ...PlacePartialContent
+      }
+      preferredMedia {
+        id
+        __typename
+        resource {
+          id
+          __typename
+          altText
+          ... on MediaImage {
+            source(bestFit: $mediaImagePreferredBestFit) {
+              url
+            }
+            caption
+            copyright
+            attribution
+          }
+        }
+      }
+    }
+  }
+}
+    ${CollectionLocationContentFragmentDoc}
+${PlacePartialContentFragmentDoc}`;
+
+/**
+ * __useGetCollectionLocationQuery__
+ *
+ * To run a query within a React component, call `useGetCollectionLocationQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetCollectionLocationQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetCollectionLocationQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *      mediaImagePreferredBestFit: // value for 'mediaImagePreferredBestFit'
+ *   },
+ * });
+ */
+export function useGetCollectionLocationQuery(baseOptions: Apollo.QueryHookOptions<GetCollectionLocationQuery, GetCollectionLocationQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetCollectionLocationQuery, GetCollectionLocationQueryVariables>(GetCollectionLocationDocument, options);
+      }
+export function useGetCollectionLocationLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetCollectionLocationQuery, GetCollectionLocationQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetCollectionLocationQuery, GetCollectionLocationQueryVariables>(GetCollectionLocationDocument, options);
+        }
+export type GetCollectionLocationQueryHookResult = ReturnType<typeof useGetCollectionLocationQuery>;
+export type GetCollectionLocationLazyQueryHookResult = ReturnType<typeof useGetCollectionLocationLazyQuery>;
+export type GetCollectionLocationQueryResult = Apollo.QueryResult<GetCollectionLocationQuery, GetCollectionLocationQueryVariables>;
+export const GetCollectionDocument = gql`
+    query getCollection($id: ID!) {
+  collection(id: $id) {
+    id
+    __typename
+    ...CollectionContent
+    ...CollectionItemsCount
+  }
+}
+    ${CollectionContentFragmentDoc}
+${CollectionItemsCountFragmentDoc}`;
+
+/**
+ * __useGetCollectionQuery__
+ *
+ * To run a query within a React component, call `useGetCollectionQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetCollectionQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetCollectionQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useGetCollectionQuery(baseOptions: Apollo.QueryHookOptions<GetCollectionQuery, GetCollectionQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetCollectionQuery, GetCollectionQueryVariables>(GetCollectionDocument, options);
+      }
+export function useGetCollectionLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetCollectionQuery, GetCollectionQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetCollectionQuery, GetCollectionQueryVariables>(GetCollectionDocument, options);
+        }
+export type GetCollectionQueryHookResult = ReturnType<typeof useGetCollectionQuery>;
+export type GetCollectionLazyQueryHookResult = ReturnType<typeof useGetCollectionLazyQuery>;
+export type GetCollectionQueryResult = Apollo.QueryResult<GetCollectionQuery, GetCollectionQueryVariables>;
+export const ListCollectionsDocument = gql`
+    query listCollections($profileId: ID!, $first: Int!, $after: String, $discriminator: String) {
+  collections(
+    profileId: $profileId
+    first: $first
+    after: $after
+    discriminator: $discriminator
+  ) {
+    __typename
+    edges {
+      node {
+        id
+        __typename
+        ...CollectionPartialContent
+        ...CollectionItemsCount
+      }
+    }
+    totalCount
+    pageInfo {
+      hasNextPage
+      hasPreviousPage
+      startCursor
+      endCursor
+    }
+  }
+}
+    ${CollectionPartialContentFragmentDoc}
+${CollectionItemsCountFragmentDoc}`;
+
+/**
+ * __useListCollectionsQuery__
+ *
+ * To run a query within a React component, call `useListCollectionsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useListCollectionsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useListCollectionsQuery({
+ *   variables: {
+ *      profileId: // value for 'profileId'
+ *      first: // value for 'first'
+ *      after: // value for 'after'
+ *      discriminator: // value for 'discriminator'
+ *   },
+ * });
+ */
+export function useListCollectionsQuery(baseOptions: Apollo.QueryHookOptions<ListCollectionsQuery, ListCollectionsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<ListCollectionsQuery, ListCollectionsQueryVariables>(ListCollectionsDocument, options);
+      }
+export function useListCollectionsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ListCollectionsQuery, ListCollectionsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<ListCollectionsQuery, ListCollectionsQueryVariables>(ListCollectionsDocument, options);
+        }
+export type ListCollectionsQueryHookResult = ReturnType<typeof useListCollectionsQuery>;
+export type ListCollectionsLazyQueryHookResult = ReturnType<typeof useListCollectionsLazyQuery>;
+export type ListCollectionsQueryResult = Apollo.QueryResult<ListCollectionsQuery, ListCollectionsQueryVariables>;
+export const UpdateCollectionLocationDocument = gql`
+    mutation updateCollectionLocation($id: ID!, $location: UpdateCollectionLocationInput!) {
+  updateCollectionLocation(id: $id, location: $location) {
+    __typename
+    location {
+      id
+      __typename
+      ...CollectionLocationContent
+    }
+  }
+}
+    ${CollectionLocationContentFragmentDoc}`;
+export type UpdateCollectionLocationMutationFn = Apollo.MutationFunction<UpdateCollectionLocationMutation, UpdateCollectionLocationMutationVariables>;
+
+/**
+ * __useUpdateCollectionLocationMutation__
+ *
+ * To run a mutation, you first call `useUpdateCollectionLocationMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateCollectionLocationMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateCollectionLocationMutation, { data, loading, error }] = useUpdateCollectionLocationMutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *      location: // value for 'location'
+ *   },
+ * });
+ */
+export function useUpdateCollectionLocationMutation(baseOptions?: Apollo.MutationHookOptions<UpdateCollectionLocationMutation, UpdateCollectionLocationMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UpdateCollectionLocationMutation, UpdateCollectionLocationMutationVariables>(UpdateCollectionLocationDocument, options);
+      }
+export type UpdateCollectionLocationMutationHookResult = ReturnType<typeof useUpdateCollectionLocationMutation>;
+export type UpdateCollectionLocationMutationResult = Apollo.MutationResult<UpdateCollectionLocationMutation>;
+export type UpdateCollectionLocationMutationOptions = Apollo.BaseMutationOptions<UpdateCollectionLocationMutation, UpdateCollectionLocationMutationVariables>;
 export const CreateItineraryDirectionsDocument = gql`
     mutation createItineraryDirections($itineraryId: ID!, $directions: CreateItineraryDirectionsInput!) {
   createItineraryDirections(
@@ -6003,6 +6841,11 @@ export const CreateItineraryLocationDocument = gql`
         ...ItineraryLocationsCount
       }
       ...ItineraryLocationContent
+      place {
+        id
+        __typename
+        ...PlacePartialContent
+      }
     }
     cascaded {
       ...ItineraryCascadedChanges
@@ -6011,6 +6854,7 @@ export const CreateItineraryLocationDocument = gql`
 }
     ${ItineraryLocationsCountFragmentDoc}
 ${ItineraryLocationContentFragmentDoc}
+${PlacePartialContentFragmentDoc}
 ${ItineraryCascadedChangesFragmentDoc}`;
 export type CreateItineraryLocationMutationFn = Apollo.MutationFunction<CreateItineraryLocationMutation, CreateItineraryLocationMutationVariables>;
 
@@ -6081,8 +6925,8 @@ export type CreateItineraryMutationHookResult = ReturnType<typeof useCreateItine
 export type CreateItineraryMutationResult = Apollo.MutationResult<CreateItineraryMutation>;
 export type CreateItineraryMutationOptions = Apollo.BaseMutationOptions<CreateItineraryMutation, CreateItineraryMutationVariables>;
 export const DeleteItineraryLocationDocument = gql`
-    mutation deleteItineraryLocation($itineraryLocationId: ID!) {
-  deleteItineraryItem(id: $itineraryLocationId) {
+    mutation deleteItineraryLocation($id: ID!) {
+  deleteItineraryItem(id: $id) {
     __typename
     itinerary {
       id
@@ -6111,7 +6955,7 @@ export type DeleteItineraryLocationMutationFn = Apollo.MutationFunction<DeleteIt
  * @example
  * const [deleteItineraryLocationMutation, { data, loading, error }] = useDeleteItineraryLocationMutation({
  *   variables: {
- *      itineraryLocationId: // value for 'itineraryLocationId'
+ *      id: // value for 'id'
  *   },
  * });
  */
@@ -6122,6 +6966,39 @@ export function useDeleteItineraryLocationMutation(baseOptions?: Apollo.Mutation
 export type DeleteItineraryLocationMutationHookResult = ReturnType<typeof useDeleteItineraryLocationMutation>;
 export type DeleteItineraryLocationMutationResult = Apollo.MutationResult<DeleteItineraryLocationMutation>;
 export type DeleteItineraryLocationMutationOptions = Apollo.BaseMutationOptions<DeleteItineraryLocationMutation, DeleteItineraryLocationMutationVariables>;
+export const DeleteItineraryDocument = gql`
+    mutation deleteItinerary($id: ID!) {
+  deleteItinerary(id: $id) {
+    __typename
+  }
+}
+    `;
+export type DeleteItineraryMutationFn = Apollo.MutationFunction<DeleteItineraryMutation, DeleteItineraryMutationVariables>;
+
+/**
+ * __useDeleteItineraryMutation__
+ *
+ * To run a mutation, you first call `useDeleteItineraryMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useDeleteItineraryMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [deleteItineraryMutation, { data, loading, error }] = useDeleteItineraryMutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useDeleteItineraryMutation(baseOptions?: Apollo.MutationHookOptions<DeleteItineraryMutation, DeleteItineraryMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<DeleteItineraryMutation, DeleteItineraryMutationVariables>(DeleteItineraryDocument, options);
+      }
+export type DeleteItineraryMutationHookResult = ReturnType<typeof useDeleteItineraryMutation>;
+export type DeleteItineraryMutationResult = Apollo.MutationResult<DeleteItineraryMutation>;
+export type DeleteItineraryMutationOptions = Apollo.BaseMutationOptions<DeleteItineraryMutation, DeleteItineraryMutationVariables>;
 export const DisableItineraryAutoRouteDocument = gql`
     mutation disableItineraryAutoRoute($id: ID!) {
   updateItinerary(id: $id, itinerary: {autoRoute: {defaultMode: null}}) {
@@ -6209,50 +7086,137 @@ export function useEnableItineraryAutoRouteMutation(baseOptions?: Apollo.Mutatio
 export type EnableItineraryAutoRouteMutationHookResult = ReturnType<typeof useEnableItineraryAutoRouteMutation>;
 export type EnableItineraryAutoRouteMutationResult = Apollo.MutationResult<EnableItineraryAutoRouteMutation>;
 export type EnableItineraryAutoRouteMutationOptions = Apollo.BaseMutationOptions<EnableItineraryAutoRouteMutation, EnableItineraryAutoRouteMutationVariables>;
-export const FindItineraryLocationByPlaceIdDocument = gql`
-    query findItineraryLocationByPlaceId($itineraryId: ID!, $placeId: ID!) {
+export const FindItineraryLocationIdsByPlaceIdDocument = gql`
+    query findItineraryLocationIdsByPlaceId($itineraryId: ID!, $placeId: ID!, $first: Int!, $after: String) {
   itinerary(id: $itineraryId) {
-    descendants(placeIds: [$placeId], type: ItineraryLocation, first: 1) {
-      nodes {
-        ... on ItineraryLocation {
+    descendants(
+      placeIds: [$placeId]
+      type: ItineraryLocation
+      first: $first
+      after: $after
+    ) {
+      __typename
+      edges {
+        node {
           id
           __typename
+          ... on ItineraryLocation {
+            place {
+              id
+              __typename
+            }
+          }
         }
       }
       totalCount
+      pageInfo {
+        hasNextPage
+        hasPreviousPage
+        startCursor
+        endCursor
+      }
     }
   }
 }
     `;
 
 /**
- * __useFindItineraryLocationByPlaceIdQuery__
+ * __useFindItineraryLocationIdsByPlaceIdQuery__
  *
- * To run a query within a React component, call `useFindItineraryLocationByPlaceIdQuery` and pass it any options that fit your needs.
- * When your component renders, `useFindItineraryLocationByPlaceIdQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `useFindItineraryLocationIdsByPlaceIdQuery` and pass it any options that fit your needs.
+ * When your component renders, `useFindItineraryLocationIdsByPlaceIdQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = useFindItineraryLocationByPlaceIdQuery({
+ * const { data, loading, error } = useFindItineraryLocationIdsByPlaceIdQuery({
  *   variables: {
  *      itineraryId: // value for 'itineraryId'
  *      placeId: // value for 'placeId'
+ *      first: // value for 'first'
+ *      after: // value for 'after'
  *   },
  * });
  */
-export function useFindItineraryLocationByPlaceIdQuery(baseOptions: Apollo.QueryHookOptions<FindItineraryLocationByPlaceIdQuery, FindItineraryLocationByPlaceIdQueryVariables>) {
+export function useFindItineraryLocationIdsByPlaceIdQuery(baseOptions: Apollo.QueryHookOptions<FindItineraryLocationIdsByPlaceIdQuery, FindItineraryLocationIdsByPlaceIdQueryVariables>) {
         const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<FindItineraryLocationByPlaceIdQuery, FindItineraryLocationByPlaceIdQueryVariables>(FindItineraryLocationByPlaceIdDocument, options);
+        return Apollo.useQuery<FindItineraryLocationIdsByPlaceIdQuery, FindItineraryLocationIdsByPlaceIdQueryVariables>(FindItineraryLocationIdsByPlaceIdDocument, options);
       }
-export function useFindItineraryLocationByPlaceIdLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<FindItineraryLocationByPlaceIdQuery, FindItineraryLocationByPlaceIdQueryVariables>) {
+export function useFindItineraryLocationIdsByPlaceIdLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<FindItineraryLocationIdsByPlaceIdQuery, FindItineraryLocationIdsByPlaceIdQueryVariables>) {
           const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<FindItineraryLocationByPlaceIdQuery, FindItineraryLocationByPlaceIdQueryVariables>(FindItineraryLocationByPlaceIdDocument, options);
+          return Apollo.useLazyQuery<FindItineraryLocationIdsByPlaceIdQuery, FindItineraryLocationIdsByPlaceIdQueryVariables>(FindItineraryLocationIdsByPlaceIdDocument, options);
         }
-export type FindItineraryLocationByPlaceIdQueryHookResult = ReturnType<typeof useFindItineraryLocationByPlaceIdQuery>;
-export type FindItineraryLocationByPlaceIdLazyQueryHookResult = ReturnType<typeof useFindItineraryLocationByPlaceIdLazyQuery>;
-export type FindItineraryLocationByPlaceIdQueryResult = Apollo.QueryResult<FindItineraryLocationByPlaceIdQuery, FindItineraryLocationByPlaceIdQueryVariables>;
+export type FindItineraryLocationIdsByPlaceIdQueryHookResult = ReturnType<typeof useFindItineraryLocationIdsByPlaceIdQuery>;
+export type FindItineraryLocationIdsByPlaceIdLazyQueryHookResult = ReturnType<typeof useFindItineraryLocationIdsByPlaceIdLazyQuery>;
+export type FindItineraryLocationIdsByPlaceIdQueryResult = Apollo.QueryResult<FindItineraryLocationIdsByPlaceIdQuery, FindItineraryLocationIdsByPlaceIdQueryVariables>;
+export const FindItineraryLocationsByPlaceIdDocument = gql`
+    query findItineraryLocationsByPlaceId($itineraryId: ID!, $placeId: ID!, $first: Int!, $after: String) {
+  itinerary(id: $itineraryId) {
+    descendants(
+      placeIds: [$placeId]
+      type: ItineraryLocation
+      first: $first
+      after: $after
+    ) {
+      __typename
+      edges {
+        node {
+          id
+          __typename
+          ... on ItineraryLocation {
+            ...ItineraryLocationPartialContent
+            place {
+              id
+              __typename
+              ...PlacePartialContent
+            }
+          }
+        }
+      }
+      totalCount
+      pageInfo {
+        hasNextPage
+        hasPreviousPage
+        startCursor
+        endCursor
+      }
+    }
+  }
+}
+    ${ItineraryLocationPartialContentFragmentDoc}
+${PlacePartialContentFragmentDoc}`;
+
+/**
+ * __useFindItineraryLocationsByPlaceIdQuery__
+ *
+ * To run a query within a React component, call `useFindItineraryLocationsByPlaceIdQuery` and pass it any options that fit your needs.
+ * When your component renders, `useFindItineraryLocationsByPlaceIdQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useFindItineraryLocationsByPlaceIdQuery({
+ *   variables: {
+ *      itineraryId: // value for 'itineraryId'
+ *      placeId: // value for 'placeId'
+ *      first: // value for 'first'
+ *      after: // value for 'after'
+ *   },
+ * });
+ */
+export function useFindItineraryLocationsByPlaceIdQuery(baseOptions: Apollo.QueryHookOptions<FindItineraryLocationsByPlaceIdQuery, FindItineraryLocationsByPlaceIdQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<FindItineraryLocationsByPlaceIdQuery, FindItineraryLocationsByPlaceIdQueryVariables>(FindItineraryLocationsByPlaceIdDocument, options);
+      }
+export function useFindItineraryLocationsByPlaceIdLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<FindItineraryLocationsByPlaceIdQuery, FindItineraryLocationsByPlaceIdQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<FindItineraryLocationsByPlaceIdQuery, FindItineraryLocationsByPlaceIdQueryVariables>(FindItineraryLocationsByPlaceIdDocument, options);
+        }
+export type FindItineraryLocationsByPlaceIdQueryHookResult = ReturnType<typeof useFindItineraryLocationsByPlaceIdQuery>;
+export type FindItineraryLocationsByPlaceIdLazyQueryHookResult = ReturnType<typeof useFindItineraryLocationsByPlaceIdLazyQuery>;
+export type FindItineraryLocationsByPlaceIdQueryResult = Apollo.QueryResult<FindItineraryLocationsByPlaceIdQuery, FindItineraryLocationsByPlaceIdQueryVariables>;
 export const GetItineraryDirectionsDocument = gql`
     query getItineraryDirections($id: ID!, $includeRoutePolyline: Boolean!) {
   node(id: $id) {
@@ -6301,6 +7265,67 @@ export function useGetItineraryDirectionsLazyQuery(baseOptions?: Apollo.LazyQuer
 export type GetItineraryDirectionsQueryHookResult = ReturnType<typeof useGetItineraryDirectionsQuery>;
 export type GetItineraryDirectionsLazyQueryHookResult = ReturnType<typeof useGetItineraryDirectionsLazyQuery>;
 export type GetItineraryDirectionsQueryResult = Apollo.QueryResult<GetItineraryDirectionsQuery, GetItineraryDirectionsQueryVariables>;
+export const GetItineraryLocationDocument = gql`
+    query getItineraryLocation($id: ID!, $mediaImagePreferredBestFit: [Int!]) {
+  node(id: $id) {
+    id
+    __typename
+    ... on ItineraryLocation {
+      ...ItineraryLocationContent
+      place {
+        id
+        __typename
+        ...PlaceContent
+      }
+      preferredMedia {
+        id
+        __typename
+        resource {
+          id
+          __typename
+          ... on MediaImage {
+            source(bestFit: $mediaImagePreferredBestFit) {
+              url
+            }
+            ...MediaImagePartialContent
+          }
+        }
+      }
+    }
+  }
+}
+    ${ItineraryLocationContentFragmentDoc}
+${PlaceContentFragmentDoc}
+${MediaImagePartialContentFragmentDoc}`;
+
+/**
+ * __useGetItineraryLocationQuery__
+ *
+ * To run a query within a React component, call `useGetItineraryLocationQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetItineraryLocationQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetItineraryLocationQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *      mediaImagePreferredBestFit: // value for 'mediaImagePreferredBestFit'
+ *   },
+ * });
+ */
+export function useGetItineraryLocationQuery(baseOptions: Apollo.QueryHookOptions<GetItineraryLocationQuery, GetItineraryLocationQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetItineraryLocationQuery, GetItineraryLocationQueryVariables>(GetItineraryLocationDocument, options);
+      }
+export function useGetItineraryLocationLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetItineraryLocationQuery, GetItineraryLocationQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetItineraryLocationQuery, GetItineraryLocationQueryVariables>(GetItineraryLocationDocument, options);
+        }
+export type GetItineraryLocationQueryHookResult = ReturnType<typeof useGetItineraryLocationQuery>;
+export type GetItineraryLocationLazyQueryHookResult = ReturnType<typeof useGetItineraryLocationLazyQuery>;
+export type GetItineraryLocationQueryResult = Apollo.QueryResult<GetItineraryLocationQuery, GetItineraryLocationQueryVariables>;
 export const GetItineraryDocument = gql`
     query getItinerary($id: ID!, $mediaImagePreferredBestFit: [Int!]) {
   itinerary(id: $id) {
@@ -6308,25 +7333,31 @@ export const GetItineraryDocument = gql`
     __typename
     ...ItineraryContent
     ...ItineraryLocationsCount
+    profile {
+      id
+      __typename
+      ...ProfilePartialContent
+    }
     preferredMedia {
+      id
+      __typename
       resource {
         id
         __typename
-        altText
         ... on MediaImage {
           source(bestFit: $mediaImagePreferredBestFit) {
             url
           }
-          caption
-          copyright
-          attribution
+          ...MediaImagePartialContent
         }
       }
     }
   }
 }
     ${ItineraryContentFragmentDoc}
-${ItineraryLocationsCountFragmentDoc}`;
+${ItineraryLocationsCountFragmentDoc}
+${ProfilePartialContentFragmentDoc}
+${MediaImagePartialContentFragmentDoc}`;
 
 /**
  * __useGetItineraryQuery__
@@ -6356,43 +7387,73 @@ export function useGetItineraryLazyQuery(baseOptions?: Apollo.LazyQueryHookOptio
 export type GetItineraryQueryHookResult = ReturnType<typeof useGetItineraryQuery>;
 export type GetItineraryLazyQueryHookResult = ReturnType<typeof useGetItineraryLazyQuery>;
 export type GetItineraryQueryResult = Apollo.QueryResult<GetItineraryQuery, GetItineraryQueryVariables>;
-export const GetPlaceDocument = gql`
-    query getPlace($id: ID!) {
-  place(id: $id) {
-    id
+export const ListItinerariesDocument = gql`
+    query listItineraries($profileId: ID!, $first: Int!, $after: String, $mediaImagePreferredBestFit: [Int!]) {
+  itineraries(profileId: $profileId, first: $first, after: $after) {
     __typename
-    ...PlaceContent
+    edges {
+      node {
+        id
+        __typename
+        ...ItineraryPartialContent
+        preferredMedia {
+          id
+          __typename
+          resource {
+            id
+            __typename
+            ... on MediaImage {
+              source(bestFit: $mediaImagePreferredBestFit) {
+                url
+              }
+              ...MediaImagePartialContent
+            }
+          }
+        }
+      }
+    }
+    totalCount
+    pageInfo {
+      hasNextPage
+      hasPreviousPage
+      startCursor
+      endCursor
+    }
   }
 }
-    ${PlaceContentFragmentDoc}`;
+    ${ItineraryPartialContentFragmentDoc}
+${MediaImagePartialContentFragmentDoc}`;
 
 /**
- * __useGetPlaceQuery__
+ * __useListItinerariesQuery__
  *
- * To run a query within a React component, call `useGetPlaceQuery` and pass it any options that fit your needs.
- * When your component renders, `useGetPlaceQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `useListItinerariesQuery` and pass it any options that fit your needs.
+ * When your component renders, `useListItinerariesQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = useGetPlaceQuery({
+ * const { data, loading, error } = useListItinerariesQuery({
  *   variables: {
- *      id: // value for 'id'
+ *      profileId: // value for 'profileId'
+ *      first: // value for 'first'
+ *      after: // value for 'after'
+ *      mediaImagePreferredBestFit: // value for 'mediaImagePreferredBestFit'
  *   },
  * });
  */
-export function useGetPlaceQuery(baseOptions: Apollo.QueryHookOptions<GetPlaceQuery, GetPlaceQueryVariables>) {
+export function useListItinerariesQuery(baseOptions: Apollo.QueryHookOptions<ListItinerariesQuery, ListItinerariesQueryVariables>) {
         const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<GetPlaceQuery, GetPlaceQueryVariables>(GetPlaceDocument, options);
+        return Apollo.useQuery<ListItinerariesQuery, ListItinerariesQueryVariables>(ListItinerariesDocument, options);
       }
-export function useGetPlaceLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetPlaceQuery, GetPlaceQueryVariables>) {
+export function useListItinerariesLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ListItinerariesQuery, ListItinerariesQueryVariables>) {
           const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<GetPlaceQuery, GetPlaceQueryVariables>(GetPlaceDocument, options);
+          return Apollo.useLazyQuery<ListItinerariesQuery, ListItinerariesQueryVariables>(ListItinerariesDocument, options);
         }
-export type GetPlaceQueryHookResult = ReturnType<typeof useGetPlaceQuery>;
-export type GetPlaceLazyQueryHookResult = ReturnType<typeof useGetPlaceLazyQuery>;
-export type GetPlaceQueryResult = Apollo.QueryResult<GetPlaceQuery, GetPlaceQueryVariables>;
+export type ListItinerariesQueryHookResult = ReturnType<typeof useListItinerariesQuery>;
+export type ListItinerariesLazyQueryHookResult = ReturnType<typeof useListItinerariesLazyQuery>;
+export type ListItinerariesQueryResult = Apollo.QueryResult<ListItinerariesQuery, ListItinerariesQueryVariables>;
 export const ListItineraryLocationsDocument = gql`
     query listItineraryLocations($id: ID!, $first: Int!, $after: String, $includeRoutePolyline: Boolean!, $mediaImagePreferredBestFit: [Int!]) {
   itinerary(id: $id) {
@@ -6405,25 +7466,29 @@ export const ListItineraryLocationsDocument = gql`
           __typename
           ... on ItineraryLocation {
             ...ItineraryLocationPartialContent
+            place {
+              id
+              __typename
+              ...PlacePartialContent
+            }
             preferredMedia {
+              id
+              __typename
               resource {
                 id
                 __typename
-                altText
                 ... on MediaImage {
                   source(bestFit: $mediaImagePreferredBestFit) {
                     url
                   }
-                  caption
-                  copyright
-                  attribution
+                  ...MediaImagePartialContent
                 }
               }
             }
           }
         }
         arrival: directions(first: 1, direction: Inbound) {
-          nodes {
+          directions: nodes {
             id
             __typename
             ...ItineraryDirectionsPartialContent
@@ -6437,20 +7502,21 @@ export const ListItineraryLocationsDocument = gql`
             }
           }
           totalCount
-          pageInfo {
-            endCursor
-          }
         }
       }
       totalCount
       pageInfo {
         hasNextPage
+        hasPreviousPage
+        startCursor
         endCursor
       }
     }
   }
 }
     ${ItineraryLocationPartialContentFragmentDoc}
+${PlacePartialContentFragmentDoc}
+${MediaImagePartialContentFragmentDoc}
 ${ItineraryDirectionsPartialContentFragmentDoc}`;
 
 /**
@@ -6685,3 +7751,336 @@ export function useUpdateItineraryMutation(baseOptions?: Apollo.MutationHookOpti
 export type UpdateItineraryMutationHookResult = ReturnType<typeof useUpdateItineraryMutation>;
 export type UpdateItineraryMutationResult = Apollo.MutationResult<UpdateItineraryMutation>;
 export type UpdateItineraryMutationOptions = Apollo.BaseMutationOptions<UpdateItineraryMutation, UpdateItineraryMutationVariables>;
+export const GetMediaImageDocument = gql`
+    query getMediaImage($id: ID!, $smallBestFit: [Int!], $mediumBestFit: [Int!], $largeBestFit: [Int!]) {
+  mediaResource(id: $id) {
+    id
+    __typename
+    ... on MediaImage {
+      ...MediaImageContent
+      small: source(bestFit: $smallBestFit) {
+        url
+      }
+      medium: source(bestFit: $mediumBestFit) {
+        url
+      }
+      large: source(bestFit: $largeBestFit) {
+        url
+      }
+    }
+  }
+}
+    ${MediaImageContentFragmentDoc}`;
+
+/**
+ * __useGetMediaImageQuery__
+ *
+ * To run a query within a React component, call `useGetMediaImageQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetMediaImageQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetMediaImageQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *      smallBestFit: // value for 'smallBestFit'
+ *      mediumBestFit: // value for 'mediumBestFit'
+ *      largeBestFit: // value for 'largeBestFit'
+ *   },
+ * });
+ */
+export function useGetMediaImageQuery(baseOptions: Apollo.QueryHookOptions<GetMediaImageQuery, GetMediaImageQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetMediaImageQuery, GetMediaImageQueryVariables>(GetMediaImageDocument, options);
+      }
+export function useGetMediaImageLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetMediaImageQuery, GetMediaImageQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetMediaImageQuery, GetMediaImageQueryVariables>(GetMediaImageDocument, options);
+        }
+export type GetMediaImageQueryHookResult = ReturnType<typeof useGetMediaImageQuery>;
+export type GetMediaImageLazyQueryHookResult = ReturnType<typeof useGetMediaImageLazyQuery>;
+export type GetMediaImageQueryResult = Apollo.QueryResult<GetMediaImageQuery, GetMediaImageQueryVariables>;
+export const AutocompleteSearchPlaceDocument = gql`
+    query autocompleteSearchPlace($text: String!, $source: PlaceSearchSource!) {
+  placeAutocompleteSearch(text: $text, sources: [$source], first: 10) {
+    __typename
+    edges {
+      node {
+        id
+        __typename
+        ...PlaceSearchContent
+      }
+      main {
+        label
+        matches {
+          offset
+          length
+        }
+      }
+      secondary {
+        label
+        matches {
+          offset
+          length
+        }
+      }
+    }
+  }
+}
+    ${PlaceSearchContentFragmentDoc}`;
+
+/**
+ * __useAutocompleteSearchPlaceQuery__
+ *
+ * To run a query within a React component, call `useAutocompleteSearchPlaceQuery` and pass it any options that fit your needs.
+ * When your component renders, `useAutocompleteSearchPlaceQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useAutocompleteSearchPlaceQuery({
+ *   variables: {
+ *      text: // value for 'text'
+ *      source: // value for 'source'
+ *   },
+ * });
+ */
+export function useAutocompleteSearchPlaceQuery(baseOptions: Apollo.QueryHookOptions<AutocompleteSearchPlaceQuery, AutocompleteSearchPlaceQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<AutocompleteSearchPlaceQuery, AutocompleteSearchPlaceQueryVariables>(AutocompleteSearchPlaceDocument, options);
+      }
+export function useAutocompleteSearchPlaceLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AutocompleteSearchPlaceQuery, AutocompleteSearchPlaceQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<AutocompleteSearchPlaceQuery, AutocompleteSearchPlaceQueryVariables>(AutocompleteSearchPlaceDocument, options);
+        }
+export type AutocompleteSearchPlaceQueryHookResult = ReturnType<typeof useAutocompleteSearchPlaceQuery>;
+export type AutocompleteSearchPlaceLazyQueryHookResult = ReturnType<typeof useAutocompleteSearchPlaceLazyQuery>;
+export type AutocompleteSearchPlaceQueryResult = Apollo.QueryResult<AutocompleteSearchPlaceQuery, AutocompleteSearchPlaceQueryVariables>;
+export const GetPlaceDocument = gql`
+    query getPlace($id: ID!, $mediaImagePreferredBestFit: [Int!]) {
+  place(id: $id) {
+    id
+    __typename
+    ...PlaceContent
+    preferredMedia {
+      id
+      __typename
+      resource {
+        id
+        __typename
+        ... on MediaImage {
+          source(bestFit: $mediaImagePreferredBestFit) {
+            url
+          }
+          ...MediaImagePartialContent
+        }
+      }
+    }
+  }
+}
+    ${PlaceContentFragmentDoc}
+${MediaImagePartialContentFragmentDoc}`;
+
+/**
+ * __useGetPlaceQuery__
+ *
+ * To run a query within a React component, call `useGetPlaceQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetPlaceQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetPlaceQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *      mediaImagePreferredBestFit: // value for 'mediaImagePreferredBestFit'
+ *   },
+ * });
+ */
+export function useGetPlaceQuery(baseOptions: Apollo.QueryHookOptions<GetPlaceQuery, GetPlaceQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetPlaceQuery, GetPlaceQueryVariables>(GetPlaceDocument, options);
+      }
+export function useGetPlaceLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetPlaceQuery, GetPlaceQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetPlaceQuery, GetPlaceQueryVariables>(GetPlaceDocument, options);
+        }
+export type GetPlaceQueryHookResult = ReturnType<typeof useGetPlaceQuery>;
+export type GetPlaceLazyQueryHookResult = ReturnType<typeof useGetPlaceLazyQuery>;
+export type GetPlaceQueryResult = Apollo.QueryResult<GetPlaceQuery, GetPlaceQueryVariables>;
+export const ReverseSearchPlaceByPositionDocument = gql`
+    query reverseSearchPlaceByPosition($focus: PositionInput!, $sources: [PlaceSearchSource!]!, $first: Int!) {
+  placeReverseSearch(focus: $focus, sources: $sources, first: $first) {
+    __typename
+    places: nodes {
+      id
+      __typename
+      ...PlaceSearchContent
+    }
+  }
+}
+    ${PlaceSearchContentFragmentDoc}`;
+
+/**
+ * __useReverseSearchPlaceByPositionQuery__
+ *
+ * To run a query within a React component, call `useReverseSearchPlaceByPositionQuery` and pass it any options that fit your needs.
+ * When your component renders, `useReverseSearchPlaceByPositionQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useReverseSearchPlaceByPositionQuery({
+ *   variables: {
+ *      focus: // value for 'focus'
+ *      sources: // value for 'sources'
+ *      first: // value for 'first'
+ *   },
+ * });
+ */
+export function useReverseSearchPlaceByPositionQuery(baseOptions: Apollo.QueryHookOptions<ReverseSearchPlaceByPositionQuery, ReverseSearchPlaceByPositionQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<ReverseSearchPlaceByPositionQuery, ReverseSearchPlaceByPositionQueryVariables>(ReverseSearchPlaceByPositionDocument, options);
+      }
+export function useReverseSearchPlaceByPositionLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ReverseSearchPlaceByPositionQuery, ReverseSearchPlaceByPositionQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<ReverseSearchPlaceByPositionQuery, ReverseSearchPlaceByPositionQueryVariables>(ReverseSearchPlaceByPositionDocument, options);
+        }
+export type ReverseSearchPlaceByPositionQueryHookResult = ReturnType<typeof useReverseSearchPlaceByPositionQuery>;
+export type ReverseSearchPlaceByPositionLazyQueryHookResult = ReturnType<typeof useReverseSearchPlaceByPositionLazyQuery>;
+export type ReverseSearchPlaceByPositionQueryResult = Apollo.QueryResult<ReverseSearchPlaceByPositionQuery, ReverseSearchPlaceByPositionQueryVariables>;
+export const GetProfileDocument = gql`
+    query getProfile($id: ID!) {
+  profile(id: $id) {
+    id
+    __typename
+    ...ProfileContent
+  }
+}
+    ${ProfileContentFragmentDoc}`;
+
+/**
+ * __useGetProfileQuery__
+ *
+ * To run a query within a React component, call `useGetProfileQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetProfileQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetProfileQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useGetProfileQuery(baseOptions: Apollo.QueryHookOptions<GetProfileQuery, GetProfileQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetProfileQuery, GetProfileQueryVariables>(GetProfileDocument, options);
+      }
+export function useGetProfileLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetProfileQuery, GetProfileQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetProfileQuery, GetProfileQueryVariables>(GetProfileDocument, options);
+        }
+export type GetProfileQueryHookResult = ReturnType<typeof useGetProfileQuery>;
+export type GetProfileLazyQueryHookResult = ReturnType<typeof useGetProfileLazyQuery>;
+export type GetProfileQueryResult = Apollo.QueryResult<GetProfileQuery, GetProfileQueryVariables>;
+export const ListAuthorizedProfilesDocument = gql`
+    query listAuthorizedProfiles($first: Int!, $after: String) {
+  authorizedProfiles(first: $first, after: $after) {
+    __typename
+    profiles: nodes {
+      id
+      __typename
+      ...ProfilePartialContent
+    }
+    totalCount
+    pageInfo {
+      hasNextPage
+      hasPreviousPage
+      startCursor
+      endCursor
+    }
+  }
+}
+    ${ProfilePartialContentFragmentDoc}`;
+
+/**
+ * __useListAuthorizedProfilesQuery__
+ *
+ * To run a query within a React component, call `useListAuthorizedProfilesQuery` and pass it any options that fit your needs.
+ * When your component renders, `useListAuthorizedProfilesQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useListAuthorizedProfilesQuery({
+ *   variables: {
+ *      first: // value for 'first'
+ *      after: // value for 'after'
+ *   },
+ * });
+ */
+export function useListAuthorizedProfilesQuery(baseOptions: Apollo.QueryHookOptions<ListAuthorizedProfilesQuery, ListAuthorizedProfilesQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<ListAuthorizedProfilesQuery, ListAuthorizedProfilesQueryVariables>(ListAuthorizedProfilesDocument, options);
+      }
+export function useListAuthorizedProfilesLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ListAuthorizedProfilesQuery, ListAuthorizedProfilesQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<ListAuthorizedProfilesQuery, ListAuthorizedProfilesQueryVariables>(ListAuthorizedProfilesDocument, options);
+        }
+export type ListAuthorizedProfilesQueryHookResult = ReturnType<typeof useListAuthorizedProfilesQuery>;
+export type ListAuthorizedProfilesLazyQueryHookResult = ReturnType<typeof useListAuthorizedProfilesLazyQuery>;
+export type ListAuthorizedProfilesQueryResult = Apollo.QueryResult<ListAuthorizedProfilesQuery, ListAuthorizedProfilesQueryVariables>;
+export const SearchRoutesBetweenPositionsDocument = gql`
+    query searchRoutesBetweenPositions($mode: RouteSearchableMode!, $positions: [PositionInput!]!, $first: Int!, $includeRoutePolyline: Boolean!) {
+  routes(mode: $mode, positions: $positions, first: $first) {
+    __typename
+    routes: nodes {
+      segments {
+        distance(unit: Kilometers)
+        duration(unit: Minutes)
+        polyline @include(if: $includeRoutePolyline)
+      }
+    }
+  }
+}
+    `;
+
+/**
+ * __useSearchRoutesBetweenPositionsQuery__
+ *
+ * To run a query within a React component, call `useSearchRoutesBetweenPositionsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useSearchRoutesBetweenPositionsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useSearchRoutesBetweenPositionsQuery({
+ *   variables: {
+ *      mode: // value for 'mode'
+ *      positions: // value for 'positions'
+ *      first: // value for 'first'
+ *      includeRoutePolyline: // value for 'includeRoutePolyline'
+ *   },
+ * });
+ */
+export function useSearchRoutesBetweenPositionsQuery(baseOptions: Apollo.QueryHookOptions<SearchRoutesBetweenPositionsQuery, SearchRoutesBetweenPositionsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<SearchRoutesBetweenPositionsQuery, SearchRoutesBetweenPositionsQueryVariables>(SearchRoutesBetweenPositionsDocument, options);
+      }
+export function useSearchRoutesBetweenPositionsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<SearchRoutesBetweenPositionsQuery, SearchRoutesBetweenPositionsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<SearchRoutesBetweenPositionsQuery, SearchRoutesBetweenPositionsQueryVariables>(SearchRoutesBetweenPositionsDocument, options);
+        }
+export type SearchRoutesBetweenPositionsQueryHookResult = ReturnType<typeof useSearchRoutesBetweenPositionsQuery>;
+export type SearchRoutesBetweenPositionsLazyQueryHookResult = ReturnType<typeof useSearchRoutesBetweenPositionsLazyQuery>;
+export type SearchRoutesBetweenPositionsQueryResult = Apollo.QueryResult<SearchRoutesBetweenPositionsQuery, SearchRoutesBetweenPositionsQueryVariables>;

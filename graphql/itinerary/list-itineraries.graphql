@@ -1,0 +1,63 @@
+#import "./fragments/itinerary-partial-content.graphql"
+#import "./../media/fragments/media-image-partial-content.graphql"
+
+# Query a list of itineraries from an associated profile
+
+query listItineraries(
+  $profileId: ID!
+  $first: Int!
+  $after: String
+  $mediaImagePreferredBestFit: [Int!]
+) {
+  itineraries(
+    # Supply the associated profile ID
+    profileId: $profileId
+    # Pagination controls
+    first: $first
+    after: $after
+  ) {
+    # Reponse type
+    __typename
+
+    # Edges
+    edges {
+      node {
+        id
+        __typename
+
+        ...ItineraryPartialContent
+
+        # Select preferred media
+        preferredMedia {
+          id
+          __typename
+
+          resource {
+            id
+            __typename
+
+            ... on MediaImage {
+              source(bestFit: $mediaImagePreferredBestFit) {
+                url
+              }
+
+              ...MediaImagePartialContent
+            }
+          }
+        }
+      }
+    }
+
+    # Total records
+    totalCount
+    # Include information to paginate results
+    pageInfo {
+      # Are there more locations in this itinerary
+      hasNextPage
+      hasPreviousPage
+      # Cursor in order to paginate
+      startCursor
+      endCursor
+    }
+  }
+}

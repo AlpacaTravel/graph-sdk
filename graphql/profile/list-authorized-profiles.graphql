@@ -6,6 +6,9 @@ query listAuthorizedProfiles($first: Int!, $after: String) {
   # first: Number of profiles to return
   # after: the cursor to continue pagination with
   authorizedProfiles(first: $first, after: $after) {
+    # Reponse type
+    __typename
+
     profiles: nodes {
       id
       __typename
