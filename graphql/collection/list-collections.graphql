@@ -16,13 +16,15 @@ query listCollections($profileId: ID!, $first: Int!, $after: String, $discrimina
     discriminator: $discriminator
   ) {
     # Load the result set in as collections
-    collections: nodes {
-      id
-      __typename
+    edges {
+      node {
+        id
+        __typename
 
-      # Load in partial content about the collection
-      ...CollectionPartialContent
-      ...CollectionItemsCount
+        # Load in partial content about the collection
+        ...CollectionPartialContent
+        ...CollectionItemsCount
+      }
     }
 
     # Obtain the total count
@@ -32,7 +34,9 @@ query listCollections($profileId: ID!, $first: Int!, $after: String, $discrimina
     pageInfo {
       # Whether there are more results
       hasNextPage
+      hasPreviousPage
       # The end cursor to continue loading results from (pass to $after)
+      startCursor
       endCursor
     }
   }

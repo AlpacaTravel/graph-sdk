@@ -35,8 +35,11 @@ query findCollectionLocationIdsByExternal(
     totalCount
     # Obtain the pagination information
     pageInfo {
+      # Whether there are more results
       hasNextPage
       hasPreviousPage
+      # The end cursor to continue loading results from (pass to $after)
+      startCursor
       endCursor
     }
   }

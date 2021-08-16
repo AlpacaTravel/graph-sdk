@@ -40,10 +40,12 @@ query findItineraryLocationIdsByPlaceId(
       # Total Count should be greater than 0, as the place could be added more
       # than once to an itinerary
       totalCount
-      # Include the pagination
+      # Obtain the pagination information
       pageInfo {
+        # Whether there are more results
         hasNextPage
         hasPreviousPage
+        # The end cursor to continue loading results from (pass to $after)
         startCursor
         endCursor
       }

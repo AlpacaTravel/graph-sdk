@@ -84,7 +84,9 @@ query listItineraryLocations(
       pageInfo {
         # Are there more locations in this itinerary
         hasNextPage
+        hasPreviousPage
         # Cursor in order to paginate
+        startCursor
         endCursor
       }
     }
