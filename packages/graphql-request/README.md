@@ -77,7 +77,7 @@ fork this project if you wish to extend your own queries and mutations as
 documented on the [GraphQL Documentation](https://github.com/AlpacaTravel/graphql-docs)
 and consider self-hosting for your use case or submitting a pull-request.
 
-### GraphQL Calls via graphql-request
+#### GraphQL Calls via graphql-request
 
 You can craft your own GraphQL queries following the documentation available
 for [Alpaca GraphQL](https://github.com/AlpacaTravel/graphql-docs).
@@ -106,6 +106,18 @@ const query = gql`
 // Perform a query
 client.request(query).then((data) => console.log(data));
 ```
+
+#### Using graphql-codegen
+
+You can leverage the tool `graphql-codegen` in order to generate additional
+hooks and capability for your application.
+
+See the [graphql-codegen configuration](./codegen.yml) for an example of
+the configuration used for generating out the SDK.
+
+The benefit of using graphql-codegen is that your Typescript types will be
+created, as well as providing the API surface for you to call without embedding
+your GraphQL queries/mutations within the component.
 
 # Further Reading
 

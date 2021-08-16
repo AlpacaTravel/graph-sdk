@@ -166,8 +166,12 @@ function Profiles() {
 You can leverage the tool `graphql-codegen` in order to generate additional
 hooks and capability for your application.
 
-See the [graphql-codegen configuration](./codegen.yaml) for an example of
+See the [graphql-codegen configuration](./codegen.yml) for an example of
 the configuration used for generating out the SDK.
+
+The benefit of using graphql-codegen is that your Typescript types will be
+created, as well as providing the API surface for you to call without embedding
+your GraphQL queries/mutations within the component.
 
 # Further Reading
 
