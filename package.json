@@ -11,7 +11,7 @@
     "build": "bin/build",
     "package-installs": "bin/install",
     "graphql-codegen": "graphql-codegen --config codegen.yml",
-    "generate": "node graphql/generate.js"
+    "generate": "cd graphql && node ./generate.js && cd -"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "^2.0.1",
