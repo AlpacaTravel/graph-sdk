@@ -116,9 +116,58 @@ import * as sdk from '@alpaca-travel/graph-sdk-react-apollo';
 
 You have options on how you would like extend your queries.
 
-- Use the `useQuery` statements and review the [provided GraphQL documents](/graphql) (simple)
+- Use the `useQuery` or `useMutation` hooks review the [provided GraphQL documents](/graphql) (simple)
 - Write your GraphQL documents and leverage `graphql-codegen` to generate your apollo hooks
 - Fork the SDK and modify as suits (more advanced, but can simply modify graphql docs and then rerun the code generation)
+
+#### Using Apollo `useQuery`
+
+Apollo makes it easy for you to create your own GraphQL documents that connect
+to Alpaca and then execute your queries and mutations.
+
+```javascript
+import { gql, useQuery } from '@apollo/client';
+
+const GET_AUTHORIZED_PROFILES = gql`
+  query getAuthorizedProfiles($first: Int!) {
+    authorizedProfiles(first: $first) {
+      nodes {
+        id
+        __typename
+        name
+      }
+    }
+  }
+`;
+
+function Profiles() {
+  const { loading, error, data } = useQuery(GET_AUTHORIZED_PROFILES, {
+    first: 10
+  });
+
+  if (loading) return null;
+  if (error) return `Error! ${error}`;
+
+  return (
+    <ul>
+      {data.authorizedProfiles.nodes.map(profile => (
+        <li key={profile.id}>{profile.name}</li>
+      ))}
+    </ul>
+  )
+}
+
+- See [Queries](https://www.apollographql.com/docs/react/data/queries/)
+- See [Mutations](https://www.apollographql.com/docs/react/data/mutations/)
+```
+
+#### Using graphql-codegen
+
+You can leverage the tool `graphql-codegen` in order to generate additional
+hooks and capability for your application.
+
+See the [graphql-codegen configuration](./codegen.yaml) for an example of
+the configuration used for generating out the SDK.
 
 # Further Reading
 
