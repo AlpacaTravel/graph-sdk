@@ -75,7 +75,7 @@ function info(input) {
   // Target the comments at the start of the graphql query
   const contents = fs.readFileSync(path.resolve(__dirname, input), 'utf-8');
   const [pre] = contents.split(/(query|mutation) (\w+) ?{/);
-  const isQuery = /query (\w+) {/.test(contents);
+  const isQuery = /\nquery /.test(contents);
   const comment = pre
     .replace(/#import.+\n/g, '')
     .replace(/\n/g, '')
