@@ -58,165 +58,115 @@
 	<div class="row">
 		<div class="col-8 col-content">
 			<div class="tsd-panel tsd-typography">
-				<a href="#alpaca-travel-graphql-sdk-for-vue-with-apollo-composition-api" id="alpaca-travel-graphql-sdk-for-vue-with-apollo-composition-api" style="color: inherit; text-decoration: none;">
-					<h1>Alpaca Travel GraphQL SDK for Vue with Apollo (Composition API)</h1>
+				<a href="#api-documentation" id="api-documentation" style="color: inherit; text-decoration: none;">
+					<h1>API Documentation</h1>
 				</a>
-				<p>This package assist with a basic SDK for developing applications on top of
-				Alpaca Travel GraphQL API via Vue Apollo using the Composition API.</p>
-				<a href="#installation" id="installation" style="color: inherit; text-decoration: none;">
-					<h2>Installation</h2>
-				</a>
-				<p>Via NPM:</p>
-				<pre><code><span style="color: #001080">npm</span><span style="color: #000000"> </span><span style="color: #001080">install</span><span style="color: #000000"> @</span><span style="color: #001080">apollo</span><span style="color: #000000">/</span><span style="color: #001080">client</span><span style="color: #000000"> </span><span style="color: #001080">graphql</span><span style="color: #000000"> </span><span style="color: #001080">graphql</span><span style="color: #000000">-</span><span style="color: #001080">tag</span><span style="color: #000000"> @</span><span style="color: #001080">alpaca</span><span style="color: #000000">-</span><span style="color: #001080">travel</span><span style="color: #000000">/</span><span style="color: #001080">graph</span><span style="color: #000000">-</span><span style="color: #001080">sdk</span><span style="color: #000000">-</span><span style="color: #001080">vue</span><span style="color: #000000">-</span><span style="color: #001080">apollo</span><span style="color: #000000"> --</span><span style="color: #001080">save</span>
-</code></pre>
-				<p>Via Yarn:</p>
-				<pre><code><span style="color: #001080">yarn</span><span style="color: #000000"> </span><span style="color: #001080">add</span><span style="color: #000000"> @</span><span style="color: #001080">apollo</span><span style="color: #000000">/</span><span style="color: #001080">client</span><span style="color: #000000"> </span><span style="color: #001080">graphql</span><span style="color: #000000"> </span><span style="color: #001080">graphql</span><span style="color: #000000">-</span><span style="color: #001080">tag</span><span style="color: #000000"> @</span><span style="color: #001080">alpaca</span><span style="color: #000000">-</span><span style="color: #001080">travel</span><span style="color: #000000">/</span><span style="color: #001080">graph</span><span style="color: #000000">-</span><span style="color: #001080">sdk</span><span style="color: #000000">-</span><span style="color: #001080">vue</span><span style="color: #000000">-</span><span style="color: #001080">apollo</span>
-</code></pre>
-				<a href="#getting-started" id="getting-started" style="color: inherit; text-decoration: none;">
-					<h2>Getting Started</h2>
-				</a>
-				<p>See <a href="https://v4.apollo.vuejs.org/guide/installation.html">Installation for Vue Apollo</a></p>
-				<a href="#queries" id="queries" style="color: inherit; text-decoration: none;">
-					<h2>Queries</h2>
-				</a>
-				<a href="#basic-query" id="basic-query" style="color: inherit; text-decoration: none;">
-					<h3>Basic Query</h3>
-				</a>
-				<pre><code><span style="color: #000000">&lt;</span><span style="color: #267F99">template</span><span style="color: #000000">&gt;</span>
-<span style="color: #000000">  &lt;</span><span style="color: #267F99">div</span><span style="color: #000000">&gt;</span>
-<span style="color: #000000">    &lt;</span><span style="color: #001080">div</span><span style="color: #000000"> </span><span style="color: #001080">v</span><span style="color: #000000">-</span><span style="color: #AF00DB">if</span><span style="color: #000000">=</span><span style="color: #A31515">&quot;loading&quot;</span><span style="color: #000000">&gt;</span><span style="color: #001080">Loading</span><span style="color: #000000">...&lt;/</span><span style="color: #001080">div</span><span style="color: #000000">&gt;</span>
-<span style="color: #000000">    &lt;</span><span style="color: #001080">div</span><span style="color: #000000"> </span><span style="color: #001080">v</span><span style="color: #000000">-</span><span style="color: #AF00DB">else</span><span style="color: #000000">&gt;{{ result.itinerary.</span><span style="color: #001080">title</span><span style="color: #000000"> }}&lt;/</span><span style="color: #001080">div</span><span style="color: #000000">&gt;</span>
-<span style="color: #000000">  &lt;/</span><span style="color: #001080">div</span><span style="color: #000000">&gt;</span>
-<span style="color: #000000">&lt;/</span><span style="color: #001080">template</span><span style="color: #000000">&gt;</span>
-
-<span style="color: #000000">&lt;</span><span style="color: #001080">script</span><span style="color: #000000"> </span><span style="color: #001080">lang</span><span style="color: #000000">=</span><span style="color: #A31515">&quot;ts&quot;</span><span style="color: #000000">&gt;</span>
-<span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">defineComponent</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;@vue/composition-api&quot;</span>
-<span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">useGetItineraryQuery</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;@alpaca-travel/graph-sdk-vue-apollo&quot;</span>
-
-<span style="color: #AF00DB">export</span><span style="color: #000000"> </span><span style="color: #AF00DB">default</span><span style="color: #000000"> </span><span style="color: #795E26">defineComponent</span><span style="color: #000000">({</span>
-<span style="color: #000000">  </span><span style="color: #795E26">setup</span><span style="color: #000000">() {</span>
-<span style="color: #000000">    </span><span style="color: #0000FF">const</span><span style="color: #000000"> { </span><span style="color: #0070C1">result</span><span style="color: #000000">, </span><span style="color: #0070C1">loading</span><span style="color: #000000"> } = </span><span style="color: #795E26">useGetItineraryQuery</span><span style="color: #000000">({ </span><span style="color: #001080">id:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;itinerary/123&quot;</span><span style="color: #000000">})</span>
-<span style="color: #000000">    </span><span style="color: #AF00DB">return</span><span style="color: #000000"> { </span><span style="color: #001080">result</span><span style="color: #000000">, </span><span style="color: #001080">loading</span><span style="color: #000000"> }</span>
-<span style="color: #000000">  }</span>
-<span style="color: #000000">})</span>
-<span style="color: #000000">&lt;/</span><span style="color: #001080">script</span><span style="color: #000000">&gt;</span>
-</code></pre>
-				<a href="#single-property-with-useresult-and-add-an-error-message" id="single-property-with-useresult-and-add-an-error-message" style="color: inherit; text-decoration: none;">
-					<h3>Single Property with useResult and add an error message</h3>
-				</a>
-				<p>The below example obtains the property of <code>edges</code> for an itinerary and
-					can loop through the individual locations/arrival directions or display a
-				loading/error message as required.</p>
-				<pre><code><span style="color: #000000">&lt;</span><span style="color: #267F99">template</span><span style="color: #000000">&gt;</span>
-<span style="color: #000000">  &lt;</span><span style="color: #267F99">div</span><span style="color: #000000">&gt;</span>
-<span style="color: #000000">    &lt;</span><span style="color: #001080">div</span><span style="color: #000000"> </span><span style="color: #001080">v</span><span style="color: #000000">-</span><span style="color: #AF00DB">if</span><span style="color: #000000">=</span><span style="color: #A31515">&quot;loading&quot;</span><span style="color: #000000">&gt;</span><span style="color: #001080">Loading</span><span style="color: #000000">...&lt;/</span><span style="color: #001080">div</span><span style="color: #000000">&gt;</span>
-<span style="color: #000000">    &lt;</span><span style="color: #001080">div</span><span style="color: #000000"> </span><span style="color: #001080">v</span><span style="color: #000000">-</span><span style="color: #AF00DB">else</span><span style="color: #000000">-</span><span style="color: #AF00DB">if</span><span style="color: #000000">=</span><span style="color: #A31515">&quot;error&quot;</span><span style="color: #000000">&gt;Error: {{ </span><span style="color: #001080">error</span><span style="color: #000000">.</span><span style="color: #001080">message</span><span style="color: #000000"> }}&lt;/</span><span style="color: #001080">div</span><span style="color: #000000">&gt;</span>
-<span style="color: #000000">    &lt;</span><span style="color: #001080">div</span><span style="color: #000000"> </span><span style="color: #001080">v</span><span style="color: #000000">-</span><span style="color: #AF00DB">else</span><span style="color: #000000">-</span><span style="color: #AF00DB">if</span><span style="color: #000000">=</span><span style="color: #A31515">&quot;edges&quot;</span><span style="color: #000000">&gt;</span>
-<span style="color: #000000">      &lt;</span><span style="color: #001080">div</span><span style="color: #000000"> </span><span style="color: #001080">v</span><span style="color: #000000">-</span><span style="color: #001080">for</span><span style="color: #000000">=</span><span style="color: #A31515">&quot;edge in edges&quot;</span><span style="color: #000000"> :</span><span style="color: #001080">key</span><span style="color: #000000">=</span><span style="color: #A31515">&quot;edge.location.id&quot;</span><span style="color: #000000">&gt;</span>
-<span style="color: #000000">        {{ </span><span style="color: #001080">edge</span><span style="color: #000000">.</span><span style="color: #001080">location</span><span style="color: #000000">.</span><span style="color: #001080">id</span><span style="color: #000000"> }} {{ </span><span style="color: #001080">edge</span><span style="color: #000000">.</span><span style="color: #001080">location</span><span style="color: #000000">.</span><span style="color: #001080">title</span><span style="color: #000000"> }}</span>
-<span style="color: #000000">      &lt;/</span><span style="color: #001080">div</span><span style="color: #000000">&gt;</span>
-<span style="color: #000000">    &lt;/</span><span style="color: #001080">div</span><span style="color: #000000">&gt;</span>
-<span style="color: #000000">  &lt;/</span><span style="color: #001080">div</span><span style="color: #000000">&gt;</span>
-<span style="color: #000000">&lt;/</span><span style="color: #001080">template</span><span style="color: #000000">&gt;</span>
-
-<span style="color: #000000">&lt;</span><span style="color: #001080">script</span><span style="color: #000000"> </span><span style="color: #001080">lang</span><span style="color: #000000">=</span><span style="color: #A31515">&quot;ts&quot;</span><span style="color: #000000">&gt;</span>
-<span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">defineComponent</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;@vue/composition-api&quot;</span>
-<span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">useResult</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;@vue/apollo-composable&#039;</span>
-<span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">useListItineraryLocationsQuery</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;@alpaca-travel/graph-sdk-vue-apollo&quot;</span>
-
-<span style="color: #AF00DB">export</span><span style="color: #000000"> </span><span style="color: #AF00DB">default</span><span style="color: #000000"> </span><span style="color: #795E26">defineComponent</span><span style="color: #000000">({</span>
-<span style="color: #000000">  </span><span style="color: #795E26">setup</span><span style="color: #000000">() {</span>
-<span style="color: #000000">    </span><span style="color: #008000">// Alpaca SDK Call</span>
-<span style="color: #000000">    </span><span style="color: #0000FF">const</span><span style="color: #000000"> { </span><span style="color: #0070C1">result</span><span style="color: #000000">, </span><span style="color: #0070C1">loading</span><span style="color: #000000">, </span><span style="color: #0070C1">error</span><span style="color: #000000"> } = </span><span style="color: #795E26">useListItineraryLocationsQuery</span><span style="color: #000000">({ </span><span style="color: #001080">id:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;itinerary/123&quot;</span><span style="color: #000000">, </span><span style="color: #001080">first:</span><span style="color: #000000"> </span><span style="color: #098658">5</span><span style="color: #000000">, </span><span style="color: #001080">includeRoutePolyline:</span><span style="color: #000000"> </span><span style="color: #0000FF">false</span><span style="color: #000000"> })</span>
-<span style="color: #000000">    </span><span style="color: #008000">// Only select the property &#039;edges&#039; for use in the template</span>
-<span style="color: #000000">    </span><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">edges</span><span style="color: #000000"> = </span><span style="color: #795E26">useResult</span><span style="color: #000000">(</span><span style="color: #001080">result</span><span style="color: #000000">, </span><span style="color: #0000FF">null</span><span style="color: #000000">, (</span><span style="color: #001080">data</span><span style="color: #000000">) </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> </span><span style="color: #001080">data</span><span style="color: #000000">.</span><span style="color: #001080">itinerary</span><span style="color: #000000">.</span><span style="color: #001080">locations</span><span style="color: #000000">.</span><span style="color: #001080">edges</span><span style="color: #000000">)</span>
-<span style="color: #000000">    </span><span style="color: #AF00DB">return</span><span style="color: #000000"> { </span><span style="color: #001080">edges</span><span style="color: #000000">, </span><span style="color: #001080">loading</span><span style="color: #000000">, </span><span style="color: #001080">error</span><span style="color: #000000"> }</span>
-<span style="color: #000000">  }</span>
-<span style="color: #000000">})</span>
-<span style="color: #000000">&lt;/</span><span style="color: #001080">script</span><span style="color: #000000">&gt;</span>
-</code></pre>
-				<a href="#api-surface-for-vue-apollo" id="api-surface-for-vue-apollo" style="color: inherit; text-decoration: none;">
-					<h2>API Surface for vue apollo</h2>
-				</a>
-				<pre><code><span style="color: #008000">// SDK Functions available from the package</span>
-<span style="color: #AF00DB">import</span><span style="color: #000000"> </span><span style="color: #0000FF">*</span><span style="color: #000000"> </span><span style="color: #AF00DB">as</span><span style="color: #000000"> </span><span style="color: #001080">sdk</span><span style="color: #000000"> </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;@alpaca-travel/graph-sdk-vue-apollo&#039;</span><span style="color: #000000">;</span>
-
-<span style="color: #008000">// sdk.useCreateItineraryQuery(...)</span>
-</code></pre>
-				<table>
-					<thead>
-						<tr>
-							<th>SDK Function</th>
-							<th>Description</th>
-						</tr>
-					</thead>
-					<tbody><tr>
-							<td><a href="/graphql/create-itinerary.graphql">useCreateItineraryQuery</a></td>
-							<td>Creates a new itinerary</td>
-						</tr>
-						<tr>
-							<td><a href="/graphql/update-itinerary.graphql">useUpdateItineraryMutation</a></td>
-							<td>Updates the itinerary, supporting various user content and media</td>
-						</tr>
-						<tr>
-							<td><a href="/graphql/get-itinerary.graphql">useGetItineraryQuery</a></td>
-							<td>Retrieves the itinerary, with a total count of the number of locations added</td>
-						</tr>
-						<tr>
-							<td><a href="/graphql/enable-itinerary-auto-route.graphql">useEnableItineraryAutoRouteMutation</a></td>
-							<td>Enables automatically adding directions between added locations</td>
-						</tr>
-						<tr>
-							<td><a href="/graphql/disable-itinerary-auto-route.graphql">useDisableItineraryAutoRouteMutation</a></td>
-							<td>Disables automatically adding directions between added locations</td>
-						</tr>
-						<tr>
-							<td><a href="/graphql/find-itinerary-location-by-place-id.graphql">useFindItineraryLocationByPlaceIdQuery</a></td>
-							<td>Finds an itinerary location in the supplied itinerary having a matching place ID</td>
-						</tr>
-						<tr>
-							<td><a href="/graphql/create-itinerary-location.graphql">useCreateItineraryLocationMutation</a></td>
-							<td>Adds a new stop to an itinerary</td>
-						</tr>
-						<tr>
-							<td><a href="/graphql/update-itinerary-location.graphql">useUpdateItineraryLocationMutation</a></td>
-							<td>Updates the itinerary location, supporting various user content and media</td>
-						</tr>
-						<tr>
-							<td><a href="/graphql/get-itinerary-location.graphql">useGetItineraryLocationQuery</a></td>
-							<td>Retrieves the itinerary location (and associated place information if avialable)</td>
-						</tr>
-						<tr>
-							<td><a href="/graphql/get-itinerary-directions.graphql">useGetItineraryDirectionsQuery</a></td>
-							<td>Retrieves the itinerary directions between locations</td>
-						</tr>
-						<tr>
-							<td><a href="/graphql/delete-itinerary-location.graphql">useDeleteItineraryLocationMutation</a></td>
-							<td>Removes the itinerary location from the itinerary</td>
-						</tr>
-						<tr>
-							<td><a href="/graphql/list-itinerary-locations.graphql">useListItineraryLocationsQuery</a></td>
-							<td>Creates a list of the itinerary locations in sequence, exposing directions between the locations (such as distance and durations or polylines)</td>
-						</tr>
-						<tr>
-							<td><a href="/graphql/move-itinerary-location-after.graphql">useMoveItineraryLocationAfterMutation</a></td>
-							<td>Moves the itinerary location after another location in the sequence</td>
-						</tr>
-						<tr>
-							<td><a href="/graphql/move-itinerary-location-to-start.graphql">useMoveItineraryLocationToStartMutation</a></td>
-							<td>Moves the itinerary location to the first position in the sequence</td>
-						</tr>
-						<tr>
-							<td><a href="/graphql/update-itinerary-location-is-optional.graphql">useUpdateItineraryLocationIsOptionalMutation</a></td>
-							<td>Mark the location as &#39;optional&#39; which will skip directions to this location and move on to next</td>
-						</tr>
-				</tbody></table>
-				<a href="#further-reading" id="further-reading" style="color: inherit; text-decoration: none;">
-					<h1>Further Reading</h1>
+				<p>Welcome to the API Documentation for the Alpaca Travel GraphQL JavaScript SDK
+				for use with Apollo and Vue.</p>
+				<ul>
+					<li>See <a href="https://alpacatravel.github.io/graph-sdk/packages/vue-apollo/">Installation and Getting Started</a></li>
+				</ul>
+				<a href="#collection" id="collection" style="color: inherit; text-decoration: none;">
+					<h2>Collection</h2>
 				</a>
 				<ul>
-					<li><a href="/README.md">Alpaca GraphQL JavaScript SDK</a></li>
-					<li><a href="https://github.com/AlpacaTravel/graphql-docs">Alpaca GraphQL API Documentation</a></li>
+					<li><strong><a href="https://alpacatravel.github.io/graph-sdk/packages/vue-apollo/docs/modules.html#useCreateCollectionLocationMutation">useCreateCollectionLocationMutation</a></strong>
+					Creates an collection location within the provided collection</li>
+					<li><strong><a href="https://alpacatravel.github.io/graph-sdk/packages/vue-apollo/docs/modules.html#useDeleteCollectionLocationMutation">useDeleteCollectionLocationMutation</a></strong>
+					Removes a collection location from a collection</li>
+					<li><strong><a href="https://alpacatravel.github.io/graph-sdk/packages/vue-apollo/docs/modules.html#useFindCollectionLocationIdsByExternalQuery">useFindCollectionLocationIdsByExternalQuery</a></strong>
+					Find collection location IDs by external identifiers</li>
+					<li><strong><a href="https://alpacatravel.github.io/graph-sdk/packages/vue-apollo/docs/modules.html#useFindCollectionLocationIdsByTagQuery">useFindCollectionLocationIdsByTagQuery</a></strong>
+					Find collection location IDs by a specific tag</li>
+					<li><strong><a href="https://alpacatravel.github.io/graph-sdk/packages/vue-apollo/docs/modules.html#useFindCollectionLocationsByExternalQuery">useFindCollectionLocationsByExternalQuery</a></strong>
+					Find collection location IDs by an external ID</li>
+					<li><strong><a href="https://alpacatravel.github.io/graph-sdk/packages/vue-apollo/docs/modules.html#useFindCollectionLocationsByTagQuery">useFindCollectionLocationsByTagQuery</a></strong>
+					Find collection locations by a specific tag</li>
+					<li><strong><a href="https://alpacatravel.github.io/graph-sdk/packages/vue-apollo/docs/modules.html#useGetCollectionLocationQuery">useGetCollectionLocationQuery</a></strong>
+					Obtain informationa bout a collection location</li>
+					<li><strong><a href="https://alpacatravel.github.io/graph-sdk/packages/vue-apollo/docs/modules.html#useGetCollectionQuery">useGetCollectionQuery</a></strong>
+					Obtains information about a collection</li>
+					<li><strong><a href="https://alpacatravel.github.io/graph-sdk/packages/vue-apollo/docs/modules.html#useListCollectionsQuery">useListCollectionsQuery</a></strong>
+					Obtain a listing of the collections for a profile</li>
+					<li><strong><a href="https://alpacatravel.github.io/graph-sdk/packages/vue-apollo/docs/modules.html#useUpdateCollectionLocationMutation">useUpdateCollectionLocationMutation</a></strong>
+					Update the collection location</li>
+				</ul>
+				<a href="#itinerary" id="itinerary" style="color: inherit; text-decoration: none;">
+					<h2>Itinerary</h2>
+				</a>
+				<ul>
+					<li><strong><a href="https://alpacatravel.github.io/graph-sdk/packages/vue-apollo/docs/modules.html#useCreateItineraryDirectionsMutation">useCreateItineraryDirectionsMutation</a></strong>
+					Creates itinerary directions for between locations in an itinerary manually</li>
+					<li><strong><a href="https://alpacatravel.github.io/graph-sdk/packages/vue-apollo/docs/modules.html#useCreateItineraryLocationMutation">useCreateItineraryLocationMutation</a></strong>
+					Creates a new Itinerary Location, which can contain place information</li>
+					<li><strong><a href="https://alpacatravel.github.io/graph-sdk/packages/vue-apollo/docs/modules.html#useCreateItineraryMutation">useCreateItineraryMutation</a></strong>
+					Creates a new Itinerary data structure for organising an itinerary</li>
+					<li><strong><a href="https://alpacatravel.github.io/graph-sdk/packages/vue-apollo/docs/modules.html#useDeleteItineraryLocationMutation">useDeleteItineraryLocationMutation</a></strong>
+					Removes an itinerary location from an itinerary</li>
+					<li><strong><a href="https://alpacatravel.github.io/graph-sdk/packages/vue-apollo/docs/modules.html#useDeleteItineraryMutation">useDeleteItineraryMutation</a></strong>
+					Removes an itinerary</li>
+					<li><strong><a href="https://alpacatravel.github.io/graph-sdk/packages/vue-apollo/docs/modules.html#useDisableItineraryAutoRouteMutation">useDisableItineraryAutoRouteMutation</a></strong>
+					Modifies an itinerary to disable the automatic routing feature, which will turn off determining the directions between the sequence of locations that the itinerary contains</li>
+					<li><strong><a href="https://alpacatravel.github.io/graph-sdk/packages/vue-apollo/docs/modules.html#useEnableItineraryAutoRouteMutation">useEnableItineraryAutoRouteMutation</a></strong>
+					Modifies an itinerary to enable a feature that will automatically determine directions between a sequence of itinerary locations at the top level</li>
+					<li><strong><a href="https://alpacatravel.github.io/graph-sdk/packages/vue-apollo/docs/modules.html#useFindItineraryLocationIdsByPlaceIdQuery">useFindItineraryLocationIdsByPlaceIdQuery</a></strong>
+					Checks whether a place has been added to an itinerary, for creating a button state on an &quot;Add to Itinerary&quot; button</li>
+					<li><strong><a href="https://alpacatravel.github.io/graph-sdk/packages/vue-apollo/docs/modules.html#useFindItineraryLocationsByPlaceIdQuery">useFindItineraryLocationsByPlaceIdQuery</a></strong>
+					Checks whether a place has been added to an itinerary, for creating a button state on an &quot;Add to Itinerary&quot; button</li>
+					<li><strong><a href="https://alpacatravel.github.io/graph-sdk/packages/vue-apollo/docs/modules.html#useGetItineraryDirectionsQuery">useGetItineraryDirectionsQuery</a></strong>
+					Obtains an itinerary directions item</li>
+					<li><strong><a href="https://alpacatravel.github.io/graph-sdk/packages/vue-apollo/docs/modules.html#useGetItineraryLocationQuery">useGetItineraryLocationQuery</a></strong>
+					Loads information about an itinerary location</li>
+					<li><strong><a href="https://alpacatravel.github.io/graph-sdk/packages/vue-apollo/docs/modules.html#useGetItineraryQuery">useGetItineraryQuery</a></strong>
+					Loads information about an individual itinerary</li>
+					<li><strong><a href="https://alpacatravel.github.io/graph-sdk/packages/vue-apollo/docs/modules.html#useListItinerariesQuery">useListItinerariesQuery</a></strong>
+					Query a list of itineraries from an associated profile</li>
+					<li><strong><a href="https://alpacatravel.github.io/graph-sdk/packages/vue-apollo/docs/modules.html#useListItineraryLocationsQuery">useListItineraryLocationsQuery</a></strong>
+					Lists in itinerary locations for a provided Itinerary</li>
+					<li><strong><a href="https://alpacatravel.github.io/graph-sdk/packages/vue-apollo/docs/modules.html#useMoveItineraryLocationAfterMutation">useMoveItineraryLocationAfterMutation</a></strong>
+					Moves an itinerary location after another itinerary location</li>
+					<li><strong><a href="https://alpacatravel.github.io/graph-sdk/packages/vue-apollo/docs/modules.html#useMoveItineraryLocationToStartMutation">useMoveItineraryLocationToStartMutation</a></strong>
+					Moves an itinerary location ahead of other itinerary locations</li>
+					<li><strong><a href="https://alpacatravel.github.io/graph-sdk/packages/vue-apollo/docs/modules.html#useUpdateItineraryLocationIsOptionalMutation">useUpdateItineraryLocationIsOptionalMutation</a></strong>
+					Marks an itinerary location whether it is an optional stop</li>
+					<li><strong><a href="https://alpacatravel.github.io/graph-sdk/packages/vue-apollo/docs/modules.html#useUpdateItineraryLocationMutation">useUpdateItineraryLocationMutation</a></strong>
+					Updates the itinerary location</li>
+					<li><strong><a href="https://alpacatravel.github.io/graph-sdk/packages/vue-apollo/docs/modules.html#useUpdateItineraryMutation">useUpdateItineraryMutation</a></strong>
+					Updates an itinerary</li>
+				</ul>
+				<a href="#media" id="media" style="color: inherit; text-decoration: none;">
+					<h2>Media</h2>
+				</a>
+				<ul>
+					<li><strong><a href="https://alpacatravel.github.io/graph-sdk/packages/vue-apollo/docs/modules.html#useGetMediaImageQuery">useGetMediaImageQuery</a></strong>
+					Loads information about a media</li>
+				</ul>
+				<a href="#place" id="place" style="color: inherit; text-decoration: none;">
+					<h2>Place</h2>
+				</a>
+				<ul>
+					<li><strong><a href="https://alpacatravel.github.io/graph-sdk/packages/vue-apollo/docs/modules.html#useAutocompleteSearchPlaceQuery">useAutocompleteSearchPlaceQuery</a></strong>
+					Searches for places using Autocomplete search term</li>
+					<li><strong><a href="https://alpacatravel.github.io/graph-sdk/packages/vue-apollo/docs/modules.html#useGetPlaceQuery">useGetPlaceQuery</a></strong>
+					Gets a place based on the provided place ID</li>
+					<li><strong><a href="https://alpacatravel.github.io/graph-sdk/packages/vue-apollo/docs/modules.html#useReverseSearchPlaceByPositionQuery">useReverseSearchPlaceByPositionQuery</a></strong>
+					Queries a position and returns with matching places</li>
+				</ul>
+				<a href="#profile" id="profile" style="color: inherit; text-decoration: none;">
+					<h2>Profile</h2>
+				</a>
+				<ul>
+					<li><strong><a href="https://alpacatravel.github.io/graph-sdk/packages/vue-apollo/docs/modules.html#useGetProfileQuery">useGetProfileQuery</a></strong>
+					Obtains the profile by the provided ID</li>
+					<li><strong><a href="https://alpacatravel.github.io/graph-sdk/packages/vue-apollo/docs/modules.html#useListAuthorizedProfilesQuery">useListAuthorizedProfilesQuery</a></strong>
+					Obtains a list of the authorized profiles for the current access token</li>
+				</ul>
+				<a href="#route" id="route" style="color: inherit; text-decoration: none;">
+					<h2>Route</h2>
+				</a>
+				<ul>
+					<li><strong><a href="https://alpacatravel.github.io/graph-sdk/packages/vue-apollo/docs/modules.html#useSearchRoutesBetweenPositionsQuery">useSearchRoutesBetweenPositionsQuery</a></strong>
+					Searches for routes between provided positions</li>
 				</ul>
 			</div>
 		</div>
