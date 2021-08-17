@@ -2,7 +2,7 @@
   "name": "@alpaca-travel/graph-sdk-react-apollo",
   "version": "1.0.0",
   "author": "Tom Manderson <tom@alpaca.travel>",
-  "homepage": "https://github.com/AlpacaTravel/graph-sdk",
+  "homepage": "https://alpacatravel.github.io/graph-sdk/packages/react-apollo/",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
   "types": "dist/esm/index.d.ts",
