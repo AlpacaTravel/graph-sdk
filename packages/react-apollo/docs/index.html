@@ -58,226 +58,110 @@
 	<div class="row">
 		<div class="col-8 col-content">
 			<div class="tsd-panel tsd-typography">
-				<a href="#alpaca-travel-graphql-sdk-for-react-with-apollo" id="alpaca-travel-graphql-sdk-for-react-with-apollo" style="color: inherit; text-decoration: none;">
-					<h1>Alpaca Travel GraphQL SDK for React with Apollo</h1>
+				<a href="#apollo-hooks" id="apollo-hooks" style="color: inherit; text-decoration: none;">
+					<h1>Apollo Hooks</h1>
 				</a>
-				<p>This package assist with a basic SDK for developing applications on top of
-				Alpaca Travel GraphQL API via React/Apollo.</p>
-				<a href="#installation" id="installation" style="color: inherit; text-decoration: none;">
-					<h2>Installation</h2>
+				<a href="#collection" id="collection" style="color: inherit; text-decoration: none;">
+					<h2>Collection</h2>
 				</a>
-				<p>Via NPM:</p>
-				<pre><code><span style="color: #001080">npm</span><span style="color: #000000"> </span><span style="color: #001080">install</span><span style="color: #000000"> @</span><span style="color: #001080">apollo</span><span style="color: #000000">/</span><span style="color: #001080">client</span><span style="color: #000000"> </span><span style="color: #001080">graphql</span><span style="color: #000000"> @</span><span style="color: #001080">alpaca</span><span style="color: #000000">-</span><span style="color: #001080">travel</span><span style="color: #000000">/</span><span style="color: #001080">graph</span><span style="color: #000000">-</span><span style="color: #001080">sdk</span><span style="color: #000000">-</span><span style="color: #001080">react</span><span style="color: #000000">-</span><span style="color: #001080">apollo</span><span style="color: #000000"> --</span><span style="color: #001080">save</span>
-</code></pre>
-				<p>Via Yarn:</p>
-				<pre><code><span style="color: #001080">yarn</span><span style="color: #000000"> </span><span style="color: #001080">add</span><span style="color: #000000"> @</span><span style="color: #001080">apollo</span><span style="color: #000000">/</span><span style="color: #001080">client</span><span style="color: #000000"> </span><span style="color: #001080">graphql</span><span style="color: #000000"> @</span><span style="color: #001080">alpaca</span><span style="color: #000000">-</span><span style="color: #001080">travel</span><span style="color: #000000">/</span><span style="color: #001080">graph</span><span style="color: #000000">-</span><span style="color: #001080">sdk</span><span style="color: #000000">-</span><span style="color: #001080">react</span><span style="color: #000000">-</span><span style="color: #001080">apollo</span>
-</code></pre>
-				<a href="#getting-started" id="getting-started" style="color: inherit; text-decoration: none;">
-					<h2>Getting Started</h2>
-				</a>
-				<p>You&#39;ll need to establish your client and provide it to the application.</p>
-				<pre><code class="language-javascript"><span style="color: #AF00DB">import</span><span style="color: #000000"> </span><span style="color: #001080">React</span><span style="color: #000000"> </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;react&#039;</span><span style="color: #000000">;</span>
-<span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">render</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;react-dom&#039;</span><span style="color: #000000">;</span>
-<span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">ApolloClient</span><span style="color: #000000">, </span><span style="color: #001080">InMemoryCache</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;@apollo/client&#039;</span><span style="color: #000000">;</span>
-
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">client</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">ApolloClient</span><span style="color: #000000">({</span>
-<span style="color: #000000">  </span><span style="color: #008000">// Substitute in your API Key</span>
-<span style="color: #000000">  </span><span style="color: #001080">uri:</span><span style="color: #000000"> </span><span style="color: #A31515">`https://withalpaca.com/api/graphql?accessToken=xxx`</span><span style="color: #000000">,</span>
-<span style="color: #000000">  </span><span style="color: #001080">cache:</span><span style="color: #000000"> </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">InMemoryCache</span><span style="color: #000000">(),</span>
-<span style="color: #000000">});</span>
-
-<span style="color: #0000FF">function</span><span style="color: #000000"> </span><span style="color: #795E26">App</span><span style="color: #000000">() {</span>
-<span style="color: #000000">  </span><span style="color: #AF00DB">return</span><span style="color: #000000"> (</span>
-<span style="color: #000000">    </span><span style="color: #800000">&lt;div&gt;</span>
-<span style="color: #000000">      </span><span style="color: #800000">&lt;h2&gt;</span><span style="color: #000000">My first Apollo app 🚀</span><span style="color: #800000">&lt;/h2&gt;</span>
-<span style="color: #000000">    </span><span style="color: #800000">&lt;/div&gt;</span>
-<span style="color: #000000">  );</span>
-<span style="color: #000000">}</span>
-
-<span style="color: #795E26">render</span><span style="color: #000000">(</span>
-<span style="color: #000000">  </span><span style="color: #800000">&lt;</span><span style="color: #267F99">ApolloProvider</span><span style="color: #000000"> </span><span style="color: #FF0000">client</span><span style="color: #000000">=</span><span style="color: #0000FF">{</span><span style="color: #001080">client</span><span style="color: #0000FF">}</span><span style="color: #800000">&gt;</span>
-<span style="color: #000000">    </span><span style="color: #800000">&lt;</span><span style="color: #267F99">App</span><span style="color: #000000"> </span><span style="color: #800000">/&gt;</span>
-<span style="color: #000000">  </span><span style="color: #800000">&lt;/</span><span style="color: #267F99">ApolloProvider</span><span style="color: #800000">&gt;</span><span style="color: #000000">,</span>
-<span style="color: #000000">  </span><span style="color: #001080">document</span><span style="color: #000000">.</span><span style="color: #795E26">getElementById</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;root&#039;</span><span style="color: #000000">),</span>
-<span style="color: #000000">);</span>
-</code></pre>
-				<blockquote>
-					<p><a href="https://www.apollographql.com/docs/react/">Getting Started with Apollo Client</a></p>
-				</blockquote>
-				<a href="#using-a-sdk-function" id="using-a-sdk-function" style="color: inherit; text-decoration: none;">
-					<h3>Using a SDK Function</h3>
-				</a>
-				<p>The below provides an example of using the &#39;getItinerary&#39; SDK query, which
-					is exposed as <code>useGetItineraryQuery</code>. You also have access to variations, such
-				as lazy loading.</p>
-				<pre><code class="language-javascript"><span style="color: #AF00DB">import</span><span style="color: #000000"> </span><span style="color: #001080">React</span><span style="color: #000000"> </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;react&#039;</span><span style="color: #000000">;</span>
-<span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">render</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;react-dom&#039;</span><span style="color: #000000">;</span>
-<span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">useGetItineraryQuery</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;@alpaca-travel/graph-sdk-react-apollo&#039;</span><span style="color: #000000">;</span>
-
-<span style="color: #0000FF">function</span><span style="color: #000000"> </span><span style="color: #795E26">MyComponent</span><span style="color: #000000">() {</span>
-<span style="color: #000000">  </span><span style="color: #008000">// Leverage an SDK function as a hook</span>
-<span style="color: #000000">  </span><span style="color: #0000FF">const</span><span style="color: #000000"> [</span><span style="color: #0070C1">data</span><span style="color: #000000">, </span><span style="color: #0070C1">loading</span><span style="color: #000000">, </span><span style="color: #0070C1">error</span><span style="color: #000000">] = </span><span style="color: #795E26">useGetItineraryQuery</span><span style="color: #000000">({ </span><span style="color: #001080">id:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;itinerary/123&#039;</span><span style="color: #000000"> });</span>
-
-<span style="color: #000000">  </span><span style="color: #008000">// Loading state...</span>
-<span style="color: #000000">  </span><span style="color: #AF00DB">if</span><span style="color: #000000"> (</span><span style="color: #001080">loading</span><span style="color: #000000">) {</span>
-<span style="color: #000000">    </span><span style="color: #AF00DB">return</span><span style="color: #000000"> </span><span style="color: #800000">&lt;&gt;</span><span style="color: #000000">Loading...</span><span style="color: #800000">&lt;/&gt;</span><span style="color: #000000">;</span>
-<span style="color: #000000">  }</span>
-
-<span style="color: #000000">  </span><span style="color: #008000">// Use Error Boundary for error handling</span>
-<span style="color: #000000">  </span><span style="color: #AF00DB">if</span><span style="color: #000000"> (</span><span style="color: #001080">error</span><span style="color: #000000">) {</span>
-<span style="color: #000000">    </span><span style="color: #AF00DB">throw</span><span style="color: #000000"> </span><span style="color: #001080">error</span><span style="color: #000000">;</span>
-<span style="color: #000000">  }</span>
-
-<span style="color: #000000">  </span><span style="color: #008000">// Use the data how you want</span>
-<span style="color: #000000">  </span><span style="color: #AF00DB">return</span><span style="color: #000000"> (</span>
-<span style="color: #000000">    </span><span style="color: #800000">&lt;&gt;</span>
-<span style="color: #000000">      </span><span style="color: #800000">&lt;h3&gt;</span><span style="color: #0000FF">{</span><span style="color: #001080">data</span><span style="color: #000000FF">.</span><span style="color: #001080">itinerary</span><span style="color: #000000FF">.</span><span style="color: #001080">title</span><span style="color: #0000FF">}</span><span style="color: #800000">&lt;/h3&gt;</span>
-<span style="color: #000000">      </span><span style="color: #800000">&lt;p&gt;</span><span style="color: #000000">Locations: </span><span style="color: #0000FF">{</span><span style="color: #001080">data</span><span style="color: #000000FF">.</span><span style="color: #001080">itinerary</span><span style="color: #000000FF">.</span><span style="color: #001080">locations</span><span style="color: #000000FF">.</span><span style="color: #001080">totalCount</span><span style="color: #0000FF">}</span><span style="color: #800000">&lt;/p&gt;</span>
-<span style="color: #000000">    </span><span style="color: #800000">&lt;/&gt;</span>
-<span style="color: #000000">  );</span>
-<span style="color: #000000">}</span>
-</code></pre>
-				<a href="#api-surface-for-react-apollo" id="api-surface-for-react-apollo" style="color: inherit; text-decoration: none;">
-					<h2>API Surface for React Apollo</h2>
-				</a>
-				<pre><code><span style="color: #008000">// SDK Functions available from the package</span>
-<span style="color: #AF00DB">import</span><span style="color: #000000"> </span><span style="color: #0000FF">*</span><span style="color: #000000"> </span><span style="color: #AF00DB">as</span><span style="color: #000000"> </span><span style="color: #001080">sdk</span><span style="color: #000000"> </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;@alpaca-travel/graph-sdk-react-apollo&#039;</span><span style="color: #000000">;</span>
-
-<span style="color: #008000">// sdk.useCreateItineraryQuery(...)</span>
-</code></pre>
-				<table>
-					<thead>
-						<tr>
-							<th>SDK Function</th>
-							<th>Description</th>
-						</tr>
-					</thead>
-					<tbody><tr>
-							<td><a href="/graphql/create-itinerary.graphql">useCreateItineraryQuery</a></td>
-							<td>Creates a new itinerary</td>
-						</tr>
-						<tr>
-							<td><a href="/graphql/update-itinerary.graphql">useUpdateItineraryMutation</a></td>
-							<td>Updates the itinerary, supporting various user content and media</td>
-						</tr>
-						<tr>
-							<td><a href="/graphql/get-itinerary.graphql">useGetItineraryQuery</a></td>
-							<td>Retrieves the itinerary, with a total count of the number of locations added</td>
-						</tr>
-						<tr>
-							<td><a href="/graphql/enable-itinerary-auto-route.graphql">useEnableItineraryAutoRouteMutation</a></td>
-							<td>Enables automatically adding directions between added locations</td>
-						</tr>
-						<tr>
-							<td><a href="/graphql/disable-itinerary-auto-route.graphql">useDisableItineraryAutoRouteMutation</a></td>
-							<td>Disables automatically adding directions between added locations</td>
-						</tr>
-						<tr>
-							<td><a href="/graphql/find-itinerary-location-by-place-id.graphql">useFindItineraryLocationByPlaceIdQuery</a></td>
-							<td>Finds an itinerary location in the supplied itinerary having a matching place ID</td>
-						</tr>
-						<tr>
-							<td><a href="/graphql/create-itinerary-location.graphql">useCreateItineraryLocationMutation</a></td>
-							<td>Adds a new stop to an itinerary</td>
-						</tr>
-						<tr>
-							<td><a href="/graphql/update-itinerary-location.graphql">useUpdateItineraryLocationMutation</a></td>
-							<td>Updates the itinerary location, supporting various user content and media</td>
-						</tr>
-						<tr>
-							<td><a href="/graphql/get-itinerary-location.graphql">useGetItineraryLocationQuery</a></td>
-							<td>Retrieves the itinerary location (and associated place information if avialable)</td>
-						</tr>
-						<tr>
-							<td><a href="/graphql/get-itinerary-directions.graphql">useGetItineraryDirectionsQuery</a></td>
-							<td>Retrieves the itinerary directions between locations</td>
-						</tr>
-						<tr>
-							<td><a href="/graphql/delete-itinerary-location.graphql">useDeleteItineraryLocationMutation</a></td>
-							<td>Removes the itinerary location from the itinerary</td>
-						</tr>
-						<tr>
-							<td><a href="/graphql/list-itinerary-locations.graphql">useListItineraryLocationsQuery</a></td>
-							<td>Creates a list of the itinerary locations in sequence, exposing directions between the locations (such as distance and durations or polylines)</td>
-						</tr>
-						<tr>
-							<td><a href="/graphql/move-itinerary-location-after.graphql">useMoveItineraryLocationAfterMutation</a></td>
-							<td>Moves the itinerary location after another location in the sequence</td>
-						</tr>
-						<tr>
-							<td><a href="/graphql/move-itinerary-location-to-start.graphql">useMoveItineraryLocationToStartMutation</a></td>
-							<td>Moves the itinerary location to the first position in the sequence</td>
-						</tr>
-						<tr>
-							<td><a href="/graphql/update-itinerary-location-is-optional.graphql">useUpdateItineraryLocationIsOptionalMutation</a></td>
-							<td>Mark the location as &#39;optional&#39; which will skip directions to this location and move on to next</td>
-						</tr>
-				</tbody></table>
-				<a href="#extending-using-your-own-graphql-queries" id="extending-using-your-own-graphql-queries" style="color: inherit; text-decoration: none;">
-					<h3>Extending using your own GraphQL Queries</h3>
-				</a>
-				<p>You have options on how you would like extend your queries.</p>
 				<ul>
-					<li>Use the <code>useQuery</code> or <code>useMutation</code> hooks review the <a href="/graphql">provided GraphQL documents</a> (simple)</li>
-					<li>Write your GraphQL documents and leverage <code>graphql-codegen</code> to generate your apollo hooks</li>
-					<li>Fork the SDK and modify as suits (more advanced, but can simply modify graphql docs and then rerun the code generation)</li>
+					<li><strong><a href="https://alpacatravel.github.io/graph-sdk/packages/react-apollo/docs/modules.html#useCreateCollectionLocationMutation">useCreateCollectionLocationMutation</a></strong>
+					Creates an collection location within the provided collection</li>
+					<li><strong><a href="https://alpacatravel.github.io/graph-sdk/packages/react-apollo/docs/modules.html#useDeleteCollectionLocationMutation">useDeleteCollectionLocationMutation</a></strong>
+					Removes a collection location from a collection</li>
+					<li><strong><a href="https://alpacatravel.github.io/graph-sdk/packages/react-apollo/docs/modules.html#useFindCollectionLocationIdsByExternalMutation">useFindCollectionLocationIdsByExternalMutation</a></strong>
+					Find collection location IDs by external identifiers</li>
+					<li><strong><a href="https://alpacatravel.github.io/graph-sdk/packages/react-apollo/docs/modules.html#useFindCollectionLocationIdsByTagMutation">useFindCollectionLocationIdsByTagMutation</a></strong>
+					Find collection location IDs by a specific tag</li>
+					<li><strong><a href="https://alpacatravel.github.io/graph-sdk/packages/react-apollo/docs/modules.html#useFindCollectionLocationsByExternalMutation">useFindCollectionLocationsByExternalMutation</a></strong>
+					Find collection location IDs by an external ID</li>
+					<li><strong><a href="https://alpacatravel.github.io/graph-sdk/packages/react-apollo/docs/modules.html#useFindCollectionLocationsByTagMutation">useFindCollectionLocationsByTagMutation</a></strong>
+					Find collection locations by a specific tag</li>
+					<li><strong><a href="https://alpacatravel.github.io/graph-sdk/packages/react-apollo/docs/modules.html#useGetCollectionLocationMutation">useGetCollectionLocationMutation</a></strong>
+					Obtain informationa bout a collection location</li>
+					<li><strong><a href="https://alpacatravel.github.io/graph-sdk/packages/react-apollo/docs/modules.html#useGetCollectionMutation">useGetCollectionMutation</a></strong>
+					Obtains information about a collection</li>
+					<li><strong><a href="https://alpacatravel.github.io/graph-sdk/packages/react-apollo/docs/modules.html#useListCollectionsMutation">useListCollectionsMutation</a></strong>
+					Obtain a listing of the collections for a profile</li>
+					<li><strong><a href="https://alpacatravel.github.io/graph-sdk/packages/react-apollo/docs/modules.html#useUpdateCollectionLocationMutation">useUpdateCollectionLocationMutation</a></strong>
+					Update the collection location</li>
 				</ul>
-				<a href="#using-apollo-usequery" id="using-apollo-usequery" style="color: inherit; text-decoration: none;">
-					<h4>Using Apollo <code>useQuery</code></h4>
+				<a href="#itinerary" id="itinerary" style="color: inherit; text-decoration: none;">
+					<h2>Itinerary</h2>
 				</a>
-				<p>Apollo makes it easy for you to create your own GraphQL documents that connect
-				to Alpaca and then execute your queries and mutations.</p>
-				<pre><code class="language-javascript"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">gql</span><span style="color: #000000">, </span><span style="color: #001080">useQuery</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;@apollo/client&#039;</span><span style="color: #000000">;</span>
-
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">GET_AUTHORIZED_PROFILES</span><span style="color: #000000"> = </span><span style="color: #795E26">gql</span><span style="color: #A31515">`</span>
-<span style="color: #A31515">  query getAuthorizedProfiles($first: Int!) {</span>
-<span style="color: #A31515">    authorizedProfiles(first: $first) {</span>
-<span style="color: #A31515">      nodes {</span>
-<span style="color: #A31515">        id</span>
-<span style="color: #A31515">        __typename</span>
-<span style="color: #A31515">        name</span>
-<span style="color: #A31515">      }</span>
-<span style="color: #A31515">    }</span>
-<span style="color: #A31515">  }</span>
-<span style="color: #A31515">`</span><span style="color: #000000">;</span>
-
-<span style="color: #0000FF">function</span><span style="color: #000000"> </span><span style="color: #795E26">Profiles</span><span style="color: #000000">() {</span>
-<span style="color: #000000">  </span><span style="color: #0000FF">const</span><span style="color: #000000"> { </span><span style="color: #0070C1">loading</span><span style="color: #000000">, </span><span style="color: #0070C1">error</span><span style="color: #000000">, </span><span style="color: #0070C1">data</span><span style="color: #000000"> } = </span><span style="color: #795E26">useQuery</span><span style="color: #000000">(</span><span style="color: #0070C1">GET_AUTHORIZED_PROFILES</span><span style="color: #000000">, {</span>
-<span style="color: #000000">    </span><span style="color: #001080">first:</span><span style="color: #000000"> </span><span style="color: #098658">10</span><span style="color: #000000">,</span>
-<span style="color: #000000">  });</span>
-
-<span style="color: #000000">  </span><span style="color: #AF00DB">if</span><span style="color: #000000"> (</span><span style="color: #001080">loading</span><span style="color: #000000">) </span><span style="color: #AF00DB">return</span><span style="color: #000000"> </span><span style="color: #0000FF">null</span><span style="color: #000000">;</span>
-<span style="color: #000000">  </span><span style="color: #AF00DB">if</span><span style="color: #000000"> (</span><span style="color: #001080">error</span><span style="color: #000000">) </span><span style="color: #AF00DB">return</span><span style="color: #000000"> </span><span style="color: #A31515">`Error! </span><span style="color: #0000FF">${</span><span style="color: #001080">error</span><span style="color: #0000FF">}</span><span style="color: #A31515">`</span><span style="color: #000000">;</span>
-
-<span style="color: #000000">  </span><span style="color: #AF00DB">return</span><span style="color: #000000"> (</span>
-<span style="color: #000000">    </span><span style="color: #800000">&lt;ul&gt;</span>
-<span style="color: #000000">      </span><span style="color: #0000FF">{</span><span style="color: #001080">data</span><span style="color: #000000FF">.</span><span style="color: #001080">authorizedProfiles</span><span style="color: #000000FF">.</span><span style="color: #001080">nodes</span><span style="color: #000000FF">.</span><span style="color: #795E26">map</span><span style="color: #000000FF">((</span><span style="color: #001080">profile</span><span style="color: #000000FF">) </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000FF"> (</span>
-<span style="color: #000000FF">        </span><span style="color: #800000">&lt;li</span><span style="color: #000000FF"> </span><span style="color: #FF0000">key</span><span style="color: #000000">=</span><span style="color: #0000FF">{</span><span style="color: #001080">profile</span><span style="color: #000000FF">.</span><span style="color: #001080">id</span><span style="color: #0000FF">}</span><span style="color: #800000">&gt;</span><span style="color: #0000FF">{</span><span style="color: #001080">profile</span><span style="color: #000000FF">.</span><span style="color: #001080">name</span><span style="color: #0000FF">}</span><span style="color: #800000">&lt;/li&gt;</span>
-<span style="color: #000000FF">      ))</span><span style="color: #0000FF">}</span>
-<span style="color: #000000">    </span><span style="color: #800000">&lt;/ul&gt;</span>
-<span style="color: #000000">  );</span>
-<span style="color: #000000">}</span>
-</code></pre>
 				<ul>
-					<li>See <a href="https://www.apollographql.com/docs/react/data/queries/">Apollo Queries</a></li>
-					<li>See <a href="https://www.apollographql.com/docs/react/data/mutations/">Apollo Mutations</a></li>
+					<li><strong><a href="https://alpacatravel.github.io/graph-sdk/packages/react-apollo/docs/modules.html#useCreateItineraryDirectionsMutation">useCreateItineraryDirectionsMutation</a></strong>
+					Creates itinerary directions for between locations in an itinerary manually</li>
+					<li><strong><a href="https://alpacatravel.github.io/graph-sdk/packages/react-apollo/docs/modules.html#useCreateItineraryLocationMutation">useCreateItineraryLocationMutation</a></strong>
+					Creates a new Itinerary Location, which can contain place information</li>
+					<li><strong><a href="https://alpacatravel.github.io/graph-sdk/packages/react-apollo/docs/modules.html#useCreateItineraryMutation">useCreateItineraryMutation</a></strong>
+					Creates a new Itinerary data structure for organising an itinerary</li>
+					<li><strong><a href="https://alpacatravel.github.io/graph-sdk/packages/react-apollo/docs/modules.html#useDeleteItineraryLocationMutation">useDeleteItineraryLocationMutation</a></strong>
+					Removes an itinerary location from an itinerary</li>
+					<li><strong><a href="https://alpacatravel.github.io/graph-sdk/packages/react-apollo/docs/modules.html#useDeleteItineraryMutation">useDeleteItineraryMutation</a></strong>
+					Removes an itinerary</li>
+					<li><strong><a href="https://alpacatravel.github.io/graph-sdk/packages/react-apollo/docs/modules.html#useDisableItineraryAutoRouteMutation">useDisableItineraryAutoRouteMutation</a></strong>
+					Modifies an itinerary to disable the automatic routing feature, which will turn off determining the directions between the sequence of locations that the itinerary contains</li>
+					<li><strong><a href="https://alpacatravel.github.io/graph-sdk/packages/react-apollo/docs/modules.html#useEnableItineraryAutoRouteMutation">useEnableItineraryAutoRouteMutation</a></strong>
+					Modifies an itinerary to enable a feature that will automatically determine directions between a sequence of itinerary locations at the top level</li>
+					<li><strong><a href="https://alpacatravel.github.io/graph-sdk/packages/react-apollo/docs/modules.html#useFindItineraryLocationIdsByPlaceIdMutation">useFindItineraryLocationIdsByPlaceIdMutation</a></strong>
+					Checks whether a place has been added to an itinerary, for creating a button state on an &quot;Add to Itinerary&quot; button</li>
+					<li><strong><a href="https://alpacatravel.github.io/graph-sdk/packages/react-apollo/docs/modules.html#useFindItineraryLocationsByPlaceIdMutation">useFindItineraryLocationsByPlaceIdMutation</a></strong>
+					Checks whether a place has been added to an itinerary, for creating a button state on an &quot;Add to Itinerary&quot; button</li>
+					<li><strong><a href="https://alpacatravel.github.io/graph-sdk/packages/react-apollo/docs/modules.html#useGetItineraryDirectionsMutation">useGetItineraryDirectionsMutation</a></strong>
+					Obtains an itinerary directions item</li>
+					<li><strong><a href="https://alpacatravel.github.io/graph-sdk/packages/react-apollo/docs/modules.html#useGetItineraryLocationMutation">useGetItineraryLocationMutation</a></strong>
+					Loads information about an itinerary location</li>
+					<li><strong><a href="https://alpacatravel.github.io/graph-sdk/packages/react-apollo/docs/modules.html#useGetItineraryMutation">useGetItineraryMutation</a></strong>
+					Loads information about an individual itinerary</li>
+					<li><strong><a href="https://alpacatravel.github.io/graph-sdk/packages/react-apollo/docs/modules.html#useListItinerariesMutation">useListItinerariesMutation</a></strong>
+					Query a list of itineraries from an associated profile</li>
+					<li><strong><a href="https://alpacatravel.github.io/graph-sdk/packages/react-apollo/docs/modules.html#useListItineraryLocationsMutation">useListItineraryLocationsMutation</a></strong>
+					Lists in itinerary locations for a provided Itinerary</li>
+					<li><strong><a href="https://alpacatravel.github.io/graph-sdk/packages/react-apollo/docs/modules.html#useMoveItineraryLocationAfterMutation">useMoveItineraryLocationAfterMutation</a></strong>
+					Moves an itinerary location after another itinerary location</li>
+					<li><strong><a href="https://alpacatravel.github.io/graph-sdk/packages/react-apollo/docs/modules.html#useMoveItineraryLocationToStartMutation">useMoveItineraryLocationToStartMutation</a></strong>
+					Moves an itinerary location ahead of other itinerary locations</li>
+					<li><strong><a href="https://alpacatravel.github.io/graph-sdk/packages/react-apollo/docs/modules.html#useUpdateItineraryLocationIsOptionalMutation">useUpdateItineraryLocationIsOptionalMutation</a></strong>
+					Marks an itinerary location whether it is an optional stop</li>
+					<li><strong><a href="https://alpacatravel.github.io/graph-sdk/packages/react-apollo/docs/modules.html#useUpdateItineraryLocationMutation">useUpdateItineraryLocationMutation</a></strong>
+					Updates the itinerary location</li>
+					<li><strong><a href="https://alpacatravel.github.io/graph-sdk/packages/react-apollo/docs/modules.html#useUpdateItineraryMutation">useUpdateItineraryMutation</a></strong>
+					Updates an itinerary</li>
 				</ul>
-				<a href="#using-graphql-codegen" id="using-graphql-codegen" style="color: inherit; text-decoration: none;">
-					<h4>Using graphql-codegen</h4>
-				</a>
-				<p>You can leverage the tool <code>graphql-codegen</code> in order to generate additional
-				hooks and capability for your application.</p>
-				<p>See the <a href="./codegen.yml">graphql-codegen configuration</a> for an example of
-				the configuration used for generating out the SDK.</p>
-				<p>The benefit of using graphql-codegen is that your Typescript types will be
-					created, as well as providing the API surface for you to call without embedding
-				your GraphQL queries/mutations within the component.</p>
-				<a href="#further-reading" id="further-reading" style="color: inherit; text-decoration: none;">
-					<h1>Further Reading</h1>
+				<a href="#media" id="media" style="color: inherit; text-decoration: none;">
+					<h2>Media</h2>
 				</a>
 				<ul>
-					<li><a href="/README.md">Alpaca GraphQL JavaScript SDK</a></li>
-					<li><a href="https://github.com/AlpacaTravel/graphql-docs">Alpaca GraphQL API Documentation</a></li>
+					<li><strong><a href="https://alpacatravel.github.io/graph-sdk/packages/react-apollo/docs/modules.html#useGetMediaImageMutation">useGetMediaImageMutation</a></strong>
+					Loads information about a media</li>
+				</ul>
+				<a href="#place" id="place" style="color: inherit; text-decoration: none;">
+					<h2>Place</h2>
+				</a>
+				<ul>
+					<li><strong><a href="https://alpacatravel.github.io/graph-sdk/packages/react-apollo/docs/modules.html#useAutocompleteSearchPlaceMutation">useAutocompleteSearchPlaceMutation</a></strong>
+					Searches for places using Autocomplete search term</li>
+					<li><strong><a href="https://alpacatravel.github.io/graph-sdk/packages/react-apollo/docs/modules.html#useGetPlaceMutation">useGetPlaceMutation</a></strong>
+					Gets a place based on the provided place ID</li>
+					<li><strong><a href="https://alpacatravel.github.io/graph-sdk/packages/react-apollo/docs/modules.html#useReverseSearchPlaceByPositionMutation">useReverseSearchPlaceByPositionMutation</a></strong>
+					Queries a position and returns with matching places</li>
+				</ul>
+				<a href="#profile" id="profile" style="color: inherit; text-decoration: none;">
+					<h2>Profile</h2>
+				</a>
+				<ul>
+					<li><strong><a href="https://alpacatravel.github.io/graph-sdk/packages/react-apollo/docs/modules.html#useGetProfileMutation">useGetProfileMutation</a></strong>
+					Obtains the profile by the provided ID</li>
+					<li><strong><a href="https://alpacatravel.github.io/graph-sdk/packages/react-apollo/docs/modules.html#useListAuthorizedProfilesMutation">useListAuthorizedProfilesMutation</a></strong>
+					Obtains a list of the authorized profiles for the current access token</li>
+				</ul>
+				<a href="#route" id="route" style="color: inherit; text-decoration: none;">
+					<h2>Route</h2>
+				</a>
+				<ul>
+					<li><strong><a href="https://alpacatravel.github.io/graph-sdk/packages/react-apollo/docs/modules.html#useSearchRoutesBetweenPositionsMutation">useSearchRoutesBetweenPositionsMutation</a></strong>
+					Searches for routes between provided positions</li>
 				</ul>
 			</div>
 		</div>
