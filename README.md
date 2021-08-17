@@ -32,11 +32,6 @@ The SDK leverages the Alpaca GraphQL API which operates as a SaaS platform,
 offering all required services such as place provider integration, route and
 directions services as well as the data management.
 
-### Requirements
-
-The get started, you need to obtain your API Access Token. This is required
-in order to make requests on the GraphQL end-point.
-
 ### SDK Client Options
 
 GraphQL is not opinionated with the client you want to use, and as such, Alpaca
