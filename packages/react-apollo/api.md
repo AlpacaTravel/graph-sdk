@@ -1,4 +1,10 @@
-# Apollo Hooks
+# API Documentation
+
+Welcome to the API Documentation for the Alpaca Travel GraphQL JavaScript SDK
+for use with Apollo and React.
+
+- See [Installation and Getting Started](https://alpacatravel.github.io/graph-sdk/packages/react-apollo/)
+  
 
 ## Collection
 

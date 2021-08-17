@@ -85,9 +85,11 @@ function MyComponent() {
 }
 ```
 
-## Documentation
+## API Documentation
 
-See [API Docs](https://alpacatravel.github.io/graph-sdk/packages/react-apollo/docs) |
+The capabilities of the API are documented using typedoc.
+
+See [API Documentation](https://alpacatravel.github.io/graph-sdk/packages/react-apollo/docs)
 
 ### Extending using your own GraphQL Queries
 
