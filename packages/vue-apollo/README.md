@@ -1,7 +1,11 @@
 # Alpaca Travel GraphQL SDK for Vue with Apollo (Composition API)
 
-This package assist with a basic SDK for developing applications on top of
-Alpaca Travel GraphQL API via Vue Apollo using the Composition API.
+> This package assist with a basic SDK for developing applications on top of
+> Alpaca Travel GraphQL API via Vue Apollo using the Composition API.
+
+- [SDK API Documentation](https://alpacatravel.github.io/graph-sdk/packages/vue-apollo/docs)
+- [Alpaca Travel GraphQL Documentation](https://github.com/AlpacaTravel/graphql-docs)
+- [Alternative SDK Versions](/README.md)
 
 ## Installation
 

@@ -3,7 +3,9 @@
 > This package assist with a basic SDK for developing applications on top of
 > Alpaca Travel GraphQL API via graphql-request.
 
-See [alternative SDK versions](/packages) available or review the [GraphQL documentation](https://github.com/AlpacaTravel/graphql-docs).
+- [SDK API Documentation](https://alpacatravel.github.io/graph-sdk/packages/graphql-request/docs)
+- [Alpaca Travel GraphQL Documentation](https://github.com/AlpacaTravel/graphql-docs)
+- [Alternative SDK Versions](/README.md)
 
 ## Installation
 
@@ -50,7 +52,7 @@ const data = await sdk.getItinerary({ id: 'itinerary/123' });
 console.log(data.itinerary.locations.totalCount);
 ```
 
-## Documentation
+## API Documentation
 
 See [API Docs](https://alpacatravel.github.io/graph-sdk/packages/graphql-request/docs)
 

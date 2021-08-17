@@ -1,7 +1,11 @@
 # Alpaca Travel GraphQL SDK for urql
 
-This package assist with a basic SDK for developing applications on top of
-Alpaca Travel GraphQL API via urql.
+> This package assist with a basic SDK for developing applications on top of
+> Alpaca Travel GraphQL API via urql.
+
+- [SDK API Documentation](https://alpacatravel.github.io/graph-sdk/packages/urql/docs)
+- [Alpaca Travel GraphQL Documentation](https://github.com/AlpacaTravel/graphql-docs)
+- [Alternative SDK Versions](/README.md)
 
 ## Installation
 

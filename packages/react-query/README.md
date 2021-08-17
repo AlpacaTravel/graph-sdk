@@ -3,7 +3,9 @@
 > This package assist with a basic SDK for developing applications on top of
 > Alpaca Travel GraphQL API via react-query.
 
-See alternative SDK versions available or review the GraphQL documentation.
+- [SDK API Documentation](https://alpacatravel.github.io/graph-sdk/packages/react-query/docs)
+- [Alpaca Travel GraphQL Documentation](https://github.com/AlpacaTravel/graphql-docs)
+- [Alternative SDK Versions](/README.md)
 
 ## Installation
 
