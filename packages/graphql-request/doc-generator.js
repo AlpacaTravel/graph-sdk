@@ -95,7 +95,7 @@ function info(input) {
     .replace(/# /g, ' ')
     .replace(/\..+/, '');
 
-  const link = `https://alpacatravel.github.com/graph-sdk/packages/graphql-codegen/docs/modules.html#getSdk`;
+  const link = `https://alpacatravel.github.io/graph-sdk/packages/graphql-request/docs/modules.html#getSdk`;
 
   return {
     dirParent: dir[0],
