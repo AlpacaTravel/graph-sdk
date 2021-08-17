@@ -13,7 +13,7 @@
   },
   "scripts": {
     "test": "jest",
-    "build:typedoc": "rm -rf docs && typedoc src/index.ts src/graphql.ts --out docs",
+    "build:typedoc": "rm -rf docs && typedoc src/index.ts --out docs",
     "docs": "yarn build:typedoc && serve docs",
     "build": "npm run tsc",
     "prepublishOnly": "npm run tsc",
