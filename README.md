@@ -2,7 +2,7 @@
   <img alt="Developer Documentation" src="https://developer.alpacamaps.com/_media/logo.svg" height="75" width=75 />
 </div>
 
-# Alpaca GraphQL JavaScript SDK
+## Alpaca Travel GraphQL JavaScript SDK
 
 > [Alpaca Travel](https://alpaca.travel) offers an SDK to assist developers
 > with building travel applications and websites. The SDK provides some 'out of
@@ -20,7 +20,7 @@ preferences of developers.
 
 - [Alpaca GraphQL API Documentation](https://github.com/AlpacaTravel/graphql-docs)
 
-## Capabilites of SDK
+### Capabilites of SDK
 
 The SDK offers a set of basic capabilities for working with common use cases,
 such as creating and editing itineraries or displaying collections of places.
@@ -32,48 +32,16 @@ The SDK leverages the Alpaca GraphQL API which operates as a SaaS platform,
 offering all required services such as place provider integration, route and
 directions services as well as the data management.
 
-### Itinerary Management
-
-Alpaca offers a way to create itineraries for users. The use cases target adding
-functionality such as travel bookmarking and detailed travel itinerary creation.
-
-- [Learn about itinerary management via GraphQL](https://github.com/AlpacaTravel/graphql-docs/tree/develop/topics/itinerary)
-
-| SDK Function                                                                                | Description                                                                                                                                    |
-| ------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
-| [createItinerary](/graphql/create-itinerary.graphql)                                        | Creates a new itinerary                                                                                                                        |
-| [updateItinerary](/graphql/update-itinerary.graphql)                                        | Updates the itinerary, supporting various user content and media                                                                               |
-| [getItinerary](/graphql/get-itinerary.graphql)                                              | Retrieves the itinerary, with a total count of the number of locations added                                                                   |
-| [enableItineraryAutoRoute](/graphql/enable-itinerary-auto-route.graphql)                    | Enables automatically adding directions between added locations                                                                                |
-| [disableItineraryAutoRoute](/graphql/disable-itinerary-auto-route.graphql)                  | Disables automatically adding directions between added locations                                                                               |
-| [findItineraryLocationByPlaceIdQuery](/graphql/find-itinerary-location-by-place-id.graphql) | Finds an itinerary location in the supplied itinerary having a matching place ID                                                               |
-| [createItineraryLocation](/graphql/create-itinerary-location.graphql)                       | Adds a new stop to an itinerary                                                                                                                |
-| [updateItineraryLocation](/graphql/update-itinerary-location.graphql)                       | Updates the itinerary location, supporting various user content and media                                                                      |
-| [getItineraryLocation](/graphql/get-itinerary-location.graphql)                             | Retrieves the itinerary location (and associated place information if avialable)                                                               |
-| [getItineraryDirections](/graphql/get-itinerary-directions.graphql)                         | Retrieves the itinerary directions between locations                                                                                           |
-| [deleteItineraryLocation](/graphql/delete-itinerary-location.graphql)                       | Removes the itinerary location from the itinerary                                                                                              |
-| [listItineraryLocations](/graphql/list-itinerary-locations.graphql)                         | Creates a list of the itinerary locations in sequence, exposing directions between the locations (such as distance and durations or polylines) |
-| [moveItineraryLocationAfter](/graphql/move-itinerary-location-after.graphql)                | Moves the itinerary location after another location in the sequence                                                                            |
-| [moveItineraryLocationToStart](/graphql/move-itinerary-location-to-start.graphql)           | Moves the itinerary location to the first position in the sequence                                                                             |
-| [updateItineraryLocationIsOptional](/graphql/update-itinerary-location-is-optional.graphql) | Mark the location as 'optional' which will skip directions to this location and move on to next                                                |
-
-The SDK provides these functions for common use cases of the GraphQL API. The
-API does support more complex structuring, custom data and use cases which will
-likely be beyond the scope of this SDK.
-
-### Place Information
-
-### Collections (Area Guides, etc)
-
-## Requirements
+### Requirements
 
 The get started, you need to obtain your API Access Token. This is required
 in order to make requests on the GraphQL end-point.
 
-## SDK Client Options
+### SDK Client Options
 
-Alpaca offers several versions of the JavaScript SDK to suit the preferred
-development environment and various developer preferences.
+GraphQL is not opinionated with the client you want to use, and as such, Alpaca
+have provided a number of SDK options to suit the common development platforms
+developers use.
 
 | GraphQL Client                                            |                                                                                                      |
 | --------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
@@ -84,7 +52,7 @@ development environment and various developer preferences.
 | [vue-apollo](packages/vue-apollo)                         | Full featured GraphQL development client including powerful caching and state management for Vue     |
 | [stencil-apollo](packages/stencil-apollo)                 | Full featured GraphQL development client including powerful caching and state management for Stencil |
 
-### Something Else?
+#### Using Something Else?
 
 Let us know what your preferences are and we will see if we are able to support
 any other alternatives.
