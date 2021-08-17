@@ -9,7 +9,7 @@ typescript: &typescript
     - typescript-react-query
   config:
     preResolveTypes: true
-    flattenGeneratedTypes: true
+    flattenGeneratedTypes: false
     exportFragmentSpreadSubTypes: true
 
 # GraphQL Codegen

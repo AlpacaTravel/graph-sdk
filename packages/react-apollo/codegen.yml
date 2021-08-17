@@ -8,8 +8,9 @@ typescript: &typescript
     - fragment-matcher
     - typescript-react-apollo
   config:
+    withRefetchQuery: true
     preResolveTypes: true
-    flattenGeneratedTypes: true
+    flattenGeneratedTypes: false
     exportFragmentSpreadSubTypes: true
 
 # GraphQL Codegen

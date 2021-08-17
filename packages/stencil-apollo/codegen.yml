@@ -8,10 +8,11 @@ typescript: &typescript
     - fragment-matcher
     - typescript-stencil-apollo
   config:
-    preResolveTypes: true
-    flattenGeneratedTypes: true
-    exportFragmentSpreadSubTypes: true
+    withRefetchQuery: true
     addDocBlocks: true
+    preResolveTypes: true
+    flattenGeneratedTypes: false
+    exportFragmentSpreadSubTypes: true
 
 # GraphQL Codegen
 # Generate the schema at the top level by running npm run graphql-codegen first!

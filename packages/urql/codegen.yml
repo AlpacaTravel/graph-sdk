@@ -9,7 +9,7 @@ typescript: &typescript
     - typescript-urql
   config:
     preResolveTypes: true
-    flattenGeneratedTypes: true
+    flattenGeneratedTypes: false
     exportFragmentSpreadSubTypes: true
 
 # GraphQL Codegen
