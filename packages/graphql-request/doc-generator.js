@@ -49,7 +49,7 @@ const sdk = getSdk(client);
     footer,
   ].join('\n\n');
 
-  fs.writeFileSync(path.resolve(__dirname, './docs/index.md'), doc);
+  fs.writeFileSync(path.resolve(__dirname, './api.md'), doc);
 });
 
 function section(key, structures) {
@@ -95,7 +95,7 @@ function info(input) {
     .replace(/# /g, ' ')
     .replace(/\..+/, '');
 
-  const link = `/packages/graphql-codegen/docs/modules.html#getSdk`;
+  const link = `https://alpacatravel.github.com/graph-sdk/packages/graphql-codegen/docs/modules.html#getSdk`;
 
   return {
     dirParent: dir[0],

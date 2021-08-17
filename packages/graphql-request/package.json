@@ -13,7 +13,7 @@
   },
   "scripts": {
     "test": "jest",
-    "build:typedoc": "rm -rf docs && typedoc src/index.ts --out docs",
+    "build:typedoc": "rm -rf docs && node doc-generator.js && typedoc src/index.ts --readme api.md --out docs",
     "docs": "yarn build:typedoc",
     "build": "npm run tsc",
     "prepublishOnly": "npm run tsc",

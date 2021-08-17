@@ -58,172 +58,120 @@
 	<div class="row">
 		<div class="col-8 col-content">
 			<div class="tsd-panel tsd-typography">
-				<a href="#alpaca-travel-graphql-sdk-for-graphql-request" id="alpaca-travel-graphql-sdk-for-graphql-request" style="color: inherit; text-decoration: none;">
-					<h1>Alpaca Travel GraphQL SDK for graphql-request</h1>
+				<a href="#api-summary" id="api-summary" style="color: inherit; text-decoration: none;">
+					<h1>API Summary</h1>
 				</a>
-				<blockquote>
-					<p>This package assist with a basic SDK for developing applications on top of
-					Alpaca Travel GraphQL API via graphql-request.</p>
-				</blockquote>
-				<p>See <a href="/packages">alternative SDK versions</a> available or review the <a href="https://github.com/AlpacaTravel/graphql-docs">GraphQL documentation</a>.</p>
-				<a href="#installation" id="installation" style="color: inherit; text-decoration: none;">
-					<h2>Installation</h2>
-				</a>
-				<p>Via NPM:</p>
-				<pre><code><span style="color: #001080">npm</span><span style="color: #000000"> </span><span style="color: #001080">install</span><span style="color: #000000"> </span><span style="color: #001080">graphql</span><span style="color: #000000">-</span><span style="color: #001080">request</span><span style="color: #000000"> </span><span style="color: #001080">graphql</span><span style="color: #000000"> </span><span style="color: #001080">graphql</span><span style="color: #000000">-</span><span style="color: #001080">tag</span><span style="color: #000000"> @</span><span style="color: #001080">alpaca</span><span style="color: #000000">-</span><span style="color: #001080">travel</span><span style="color: #000000">/</span><span style="color: #001080">graph</span><span style="color: #000000">-</span><span style="color: #001080">sdk</span><span style="color: #000000">-</span><span style="color: #001080">graphql</span><span style="color: #000000">-</span><span style="color: #001080">request</span><span style="color: #000000"> --</span><span style="color: #001080">save</span>
-</code></pre>
-				<p>Via Yarn:</p>
-				<pre><code><span style="color: #001080">yarn</span><span style="color: #000000"> </span><span style="color: #001080">add</span><span style="color: #000000"> </span><span style="color: #001080">graphql</span><span style="color: #000000">-</span><span style="color: #001080">request</span><span style="color: #000000"> </span><span style="color: #001080">graphql</span><span style="color: #000000"> </span><span style="color: #001080">graphql</span><span style="color: #000000">-</span><span style="color: #001080">tag</span><span style="color: #000000"> @</span><span style="color: #001080">alpaca</span><span style="color: #000000">-</span><span style="color: #001080">travel</span><span style="color: #000000">/</span><span style="color: #001080">graph</span><span style="color: #000000">-</span><span style="color: #001080">sdk</span><span style="color: #000000">-</span><span style="color: #001080">graphql</span><span style="color: #000000">-</span><span style="color: #001080">request</span>
-</code></pre>
-				<a href="#typescript-types" id="typescript-types" style="color: inherit; text-decoration: none;">
-					<h2>Typescript Types</h2>
-				</a>
-				<p>The SDK includes typescript types to assist you in working with data responses.</p>
-				<a href="#getting-started" id="getting-started" style="color: inherit; text-decoration: none;">
-					<h2>Getting Started</h2>
-				</a>
-				<p>The below shows a way to create a SDK instance with a configured graphql-request
-				client.</p>
 				<pre><code class="language-javascript"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">GraphQLClient</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;graphql-request&#039;</span><span style="color: #000000">;</span>
 <span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">getSdk</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;@alpaca-travel/graph-sdk-graphql-request&#039;</span><span style="color: #000000">;</span>
 
 <span style="color: #008000">// Create a graphql-client</span>
 <span style="color: #008000">// Note: Substitute your API Access Token</span>
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">client</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">GraphQLClient</span><span style="color: #000000">(</span><span style="color: #A31515">`https://withalpaca.com/api/graphql?accessToken=xxx`</span><span style="color: #000000">);</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">client</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">GraphQLClient</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;https://withalpaca.com/api/graphql?accessToken=xxx&#039;</span><span style="color: #000000">);</span>
 
 <span style="color: #008000">// Initialise the SDK</span>
 <span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">sdk</span><span style="color: #000000"> = </span><span style="color: #795E26">getSdk</span><span style="color: #000000">(</span><span style="color: #001080">client</span><span style="color: #000000">);</span>
 </code></pre>
-				<a href="#example-call" id="example-call" style="color: inherit; text-decoration: none;">
-					<h3>Example call</h3>
-				</a>
-				<pre><code class="language-javascript"><span style="color: #008000">// Call in an itinerary</span>
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">data</span><span style="color: #000000"> = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">sdk</span><span style="color: #000000">.</span><span style="color: #795E26">getItinerary</span><span style="color: #000000">({ </span><span style="color: #001080">id:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;itinerary/123&#039;</span><span style="color: #000000"> });</span>
-
-<span style="color: #008000">// Console log the total count</span>
-<span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">log</span><span style="color: #000000">(</span><span style="color: #001080">data</span><span style="color: #000000">.</span><span style="color: #001080">itinerary</span><span style="color: #000000">.</span><span style="color: #001080">locations</span><span style="color: #000000">.</span><span style="color: #001080">totalCount</span><span style="color: #000000">);</span>
-</code></pre>
-				<a href="#api-surface-for-graphql-request" id="api-surface-for-graphql-request" style="color: inherit; text-decoration: none;">
-					<h2>API Surface for graphql-request</h2>
-				</a>
-				<table>
-					<thead>
-						<tr>
-							<th>SDK Function</th>
-							<th>Description</th>
-						</tr>
-					</thead>
-					<tbody><tr>
-							<td><a href="/graphql/create-itinerary.graphql">createItinerary</a></td>
-							<td>Creates a new itinerary</td>
-						</tr>
-						<tr>
-							<td><a href="/graphql/update-itinerary.graphql">updateItinerary</a></td>
-							<td>Updates the itinerary, supporting various user content and media</td>
-						</tr>
-						<tr>
-							<td><a href="/graphql/get-itinerary.graphql">getItinerary</a></td>
-							<td>Retrieves the itinerary, with a total count of the number of locations added</td>
-						</tr>
-						<tr>
-							<td><a href="/graphql/enable-itinerary-auto-route.graphql">enableItineraryAutoRoute</a></td>
-							<td>Enables automatically adding directions between added locations</td>
-						</tr>
-						<tr>
-							<td><a href="/graphql/disable-itinerary-auto-route.graphql">disableItineraryAutoRoute</a></td>
-							<td>Disables automatically adding directions between added locations</td>
-						</tr>
-						<tr>
-							<td><a href="/graphql/find-itinerary-location-by-place-id.graphql">findItineraryLocationByPlaceIdQuery</a></td>
-							<td>Finds an itinerary location in the supplied itinerary having a matching place ID</td>
-						</tr>
-						<tr>
-							<td><a href="/graphql/create-itinerary-location.graphql">createItineraryLocation</a></td>
-							<td>Adds a new stop to an itinerary</td>
-						</tr>
-						<tr>
-							<td><a href="/graphql/update-itinerary-location.graphql">updateItineraryLocation</a></td>
-							<td>Updates the itinerary location, supporting various user content and media</td>
-						</tr>
-						<tr>
-							<td><a href="/graphql/get-itinerary-location.graphql">getItineraryLocation</a></td>
-							<td>Retrieves the itinerary location (and associated place information if avialable)</td>
-						</tr>
-						<tr>
-							<td><a href="/graphql/get-itinerary-directions.graphql">getItineraryDirections</a></td>
-							<td>Retrieves the itinerary directions between locations</td>
-						</tr>
-						<tr>
-							<td><a href="/graphql/delete-itinerary-location.graphql">deleteItineraryLocation</a></td>
-							<td>Removes the itinerary location from the itinerary</td>
-						</tr>
-						<tr>
-							<td><a href="/graphql/list-itinerary-locations.graphql">listItineraryLocations</a></td>
-							<td>Creates a list of the itinerary locations in sequence, exposing directions between the locations (such as distance and durations or polylines)</td>
-						</tr>
-						<tr>
-							<td><a href="/graphql/move-itinerary-location-after.graphql">moveItineraryLocationAfter</a></td>
-							<td>Moves the itinerary location after another location in the sequence</td>
-						</tr>
-						<tr>
-							<td><a href="/graphql/move-itinerary-location-to-start.graphql">moveItineraryLocationToStart</a></td>
-							<td>Moves the itinerary location to the first position in the sequence</td>
-						</tr>
-						<tr>
-							<td><a href="/graphql/update-itinerary-location-is-optional.graphql">updateItineraryLocationIsOptional</a></td>
-							<td>Mark the location as &#39;optional&#39; which will skip directions to this location and move on to next</td>
-						</tr>
-				</tbody></table>
-				<a href="#extending-functionality" id="extending-functionality" style="color: inherit; text-decoration: none;">
-					<h3>Extending Functionality</h3>
-				</a>
-				<p>The SDK is driven by a number of <a href="/graphql">GraphQL documents</a>. You can
-					fork this project if you wish to extend your own queries and mutations as
-					documented on the <a href="https://github.com/AlpacaTravel/graphql-docs">GraphQL Documentation</a>
-				and consider self-hosting for your use case or submitting a pull-request.</p>
-				<a href="#graphql-calls-via-graphql-request" id="graphql-calls-via-graphql-request" style="color: inherit; text-decoration: none;">
-					<h4>GraphQL Calls via graphql-request</h4>
-				</a>
-				<p>You can craft your own GraphQL queries following the documentation available
-				for <a href="https://github.com/AlpacaTravel/graphql-docs">Alpaca GraphQL</a>.</p>
-				<p>Using graphql-request, you can make your requests as needed;</p>
-				<pre><code class="language-javascript"><span style="color: #008000">/**</span>
-<span style="color: #008000"> * Make a GraphQL request using the graphql-request client outside of the SDK</span>
-<span style="color: #008000"> * capabilities. Needed if you want to extend the SDK capabilities or perform</span>
-<span style="color: #008000"> * a specific GraphQL call.</span>
-<span style="color: #008000"> */</span>
-
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">query</span><span style="color: #000000"> = </span><span style="color: #795E26">gql</span><span style="color: #A31515">`</span>
-<span style="color: #A31515">  # My custom Alpaca GraphQL call</span>
-<span style="color: #A31515">  query getAuthorizedProfiles {</span>
-<span style="color: #A31515">    query</span>
-<span style="color: #A31515">    authorizedProfiles(first: 1) {</span>
-<span style="color: #A31515">      nodes {</span>
-<span style="color: #A31515">        id</span>
-<span style="color: #A31515">        name</span>
-<span style="color: #A31515">      }</span>
-<span style="color: #A31515">    }</span>
-<span style="color: #A31515">  }</span>
-<span style="color: #A31515">`</span><span style="color: #000000">;</span>
-<span style="color: #008000">// Perform a query</span>
-<span style="color: #001080">client</span><span style="color: #000000">.</span><span style="color: #795E26">request</span><span style="color: #000000">(</span><span style="color: #001080">query</span><span style="color: #000000">).</span><span style="color: #795E26">then</span><span style="color: #000000">((</span><span style="color: #001080">data</span><span style="color: #000000">) </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> </span><span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">log</span><span style="color: #000000">(</span><span style="color: #001080">data</span><span style="color: #000000">));</span>
-</code></pre>
-				<a href="#using-graphql-codegen" id="using-graphql-codegen" style="color: inherit; text-decoration: none;">
-					<h4>Using graphql-codegen</h4>
-				</a>
-				<p>You can leverage the tool <code>graphql-codegen</code> in order to generate additional
-				hooks and capability for your application.</p>
-				<p>See the <a href="./codegen.yml">graphql-codegen configuration</a> for an example of
-				the configuration used for generating out the SDK.</p>
-				<p>The benefit of using graphql-codegen is that your Typescript types will be
-					created, as well as providing the API surface for you to call without embedding
-				your GraphQL queries/mutations within the component.</p>
-				<a href="#further-reading" id="further-reading" style="color: inherit; text-decoration: none;">
-					<h1>Further Reading</h1>
+				<a href="#collection" id="collection" style="color: inherit; text-decoration: none;">
+					<h2>Collection</h2>
 				</a>
 				<ul>
-					<li><a href="/README.md">Alpaca GraphQL JavaScript SDK</a></li>
-					<li><a href="https://github.com/AlpacaTravel/graphql-docs">Alpaca GraphQL API Documentation</a></li>
+					<li><strong><a href="https://alpacatravel.github.com/graph-sdk/packages/graphql-codegen/docs/modules.html#getSdk">sdk.createCollectionLocation(...)</a></strong>
+					Creates an collection location within the provided collection</li>
+					<li><strong><a href="https://alpacatravel.github.com/graph-sdk/packages/graphql-codegen/docs/modules.html#getSdk">sdk.deleteCollectionLocation(...)</a></strong>
+					Removes a collection location from a collection</li>
+					<li><strong><a href="https://alpacatravel.github.com/graph-sdk/packages/graphql-codegen/docs/modules.html#getSdk">sdk.findCollectionLocationIdsByExternal(...)</a></strong>
+					Find collection location IDs by external identifiers</li>
+					<li><strong><a href="https://alpacatravel.github.com/graph-sdk/packages/graphql-codegen/docs/modules.html#getSdk">sdk.findCollectionLocationIdsByTag(...)</a></strong>
+					Find collection location IDs by a specific tag</li>
+					<li><strong><a href="https://alpacatravel.github.com/graph-sdk/packages/graphql-codegen/docs/modules.html#getSdk">sdk.findCollectionLocationsByExternal(...)</a></strong>
+					Find collection location IDs by an external ID</li>
+					<li><strong><a href="https://alpacatravel.github.com/graph-sdk/packages/graphql-codegen/docs/modules.html#getSdk">sdk.findCollectionLocationsByTag(...)</a></strong>
+					Find collection locations by a specific tag</li>
+					<li><strong><a href="https://alpacatravel.github.com/graph-sdk/packages/graphql-codegen/docs/modules.html#getSdk">sdk.getCollectionLocation(...)</a></strong>
+					Obtain informationa bout a collection location</li>
+					<li><strong><a href="https://alpacatravel.github.com/graph-sdk/packages/graphql-codegen/docs/modules.html#getSdk">sdk.getCollection(...)</a></strong>
+					Obtains information about a collection</li>
+					<li><strong><a href="https://alpacatravel.github.com/graph-sdk/packages/graphql-codegen/docs/modules.html#getSdk">sdk.listCollections(...)</a></strong>
+					Obtain a listing of the collections for a profile</li>
+					<li><strong><a href="https://alpacatravel.github.com/graph-sdk/packages/graphql-codegen/docs/modules.html#getSdk">sdk.updateCollectionLocation(...)</a></strong>
+					Update the collection location</li>
+				</ul>
+				<a href="#itinerary" id="itinerary" style="color: inherit; text-decoration: none;">
+					<h2>Itinerary</h2>
+				</a>
+				<ul>
+					<li><strong><a href="https://alpacatravel.github.com/graph-sdk/packages/graphql-codegen/docs/modules.html#getSdk">sdk.createItineraryDirections(...)</a></strong>
+					Creates itinerary directions for between locations in an itinerary manually</li>
+					<li><strong><a href="https://alpacatravel.github.com/graph-sdk/packages/graphql-codegen/docs/modules.html#getSdk">sdk.createItineraryLocation(...)</a></strong>
+					Creates a new Itinerary Location, which can contain place information</li>
+					<li><strong><a href="https://alpacatravel.github.com/graph-sdk/packages/graphql-codegen/docs/modules.html#getSdk">sdk.createItinerary(...)</a></strong>
+					Creates a new Itinerary data structure for organising an itinerary</li>
+					<li><strong><a href="https://alpacatravel.github.com/graph-sdk/packages/graphql-codegen/docs/modules.html#getSdk">sdk.deleteItineraryLocation(...)</a></strong>
+					Removes an itinerary location from an itinerary</li>
+					<li><strong><a href="https://alpacatravel.github.com/graph-sdk/packages/graphql-codegen/docs/modules.html#getSdk">sdk.deleteItinerary(...)</a></strong>
+					Removes an itinerary</li>
+					<li><strong><a href="https://alpacatravel.github.com/graph-sdk/packages/graphql-codegen/docs/modules.html#getSdk">sdk.disableItineraryAutoRoute(...)</a></strong>
+					Modifies an itinerary to disable the automatic routing feature, which will turn off determining the directions between the sequence of locations that the itinerary contains</li>
+					<li><strong><a href="https://alpacatravel.github.com/graph-sdk/packages/graphql-codegen/docs/modules.html#getSdk">sdk.enableItineraryAutoRoute(...)</a></strong>
+					Modifies an itinerary to enable a feature that will automatically determine directions between a sequence of itinerary locations at the top level</li>
+					<li><strong><a href="https://alpacatravel.github.com/graph-sdk/packages/graphql-codegen/docs/modules.html#getSdk">sdk.findItineraryLocationIdsByPlaceId(...)</a></strong>
+					Checks whether a place has been added to an itinerary, for creating a button state on an &quot;Add to Itinerary&quot; button</li>
+					<li><strong><a href="https://alpacatravel.github.com/graph-sdk/packages/graphql-codegen/docs/modules.html#getSdk">sdk.findItineraryLocationsByPlaceId(...)</a></strong>
+					Checks whether a place has been added to an itinerary, for creating a button state on an &quot;Add to Itinerary&quot; button</li>
+					<li><strong><a href="https://alpacatravel.github.com/graph-sdk/packages/graphql-codegen/docs/modules.html#getSdk">sdk.getItineraryDirections(...)</a></strong>
+					Obtains an itinerary directions item</li>
+					<li><strong><a href="https://alpacatravel.github.com/graph-sdk/packages/graphql-codegen/docs/modules.html#getSdk">sdk.getItineraryLocation(...)</a></strong>
+					Loads information about an itinerary location</li>
+					<li><strong><a href="https://alpacatravel.github.com/graph-sdk/packages/graphql-codegen/docs/modules.html#getSdk">sdk.getItinerary(...)</a></strong>
+					Loads information about an individual itinerary</li>
+					<li><strong><a href="https://alpacatravel.github.com/graph-sdk/packages/graphql-codegen/docs/modules.html#getSdk">sdk.listItineraries(...)</a></strong>
+					Query a list of itineraries from an associated profile</li>
+					<li><strong><a href="https://alpacatravel.github.com/graph-sdk/packages/graphql-codegen/docs/modules.html#getSdk">sdk.listItineraryLocations(...)</a></strong>
+					Lists in itinerary locations for a provided Itinerary</li>
+					<li><strong><a href="https://alpacatravel.github.com/graph-sdk/packages/graphql-codegen/docs/modules.html#getSdk">sdk.moveItineraryLocationAfter(...)</a></strong>
+					Moves an itinerary location after another itinerary location</li>
+					<li><strong><a href="https://alpacatravel.github.com/graph-sdk/packages/graphql-codegen/docs/modules.html#getSdk">sdk.moveItineraryLocationToStart(...)</a></strong>
+					Moves an itinerary location ahead of other itinerary locations</li>
+					<li><strong><a href="https://alpacatravel.github.com/graph-sdk/packages/graphql-codegen/docs/modules.html#getSdk">sdk.updateItineraryLocationIsOptional(...)</a></strong>
+					Marks an itinerary location whether it is an optional stop</li>
+					<li><strong><a href="https://alpacatravel.github.com/graph-sdk/packages/graphql-codegen/docs/modules.html#getSdk">sdk.updateItineraryLocation(...)</a></strong>
+					Updates the itinerary location</li>
+					<li><strong><a href="https://alpacatravel.github.com/graph-sdk/packages/graphql-codegen/docs/modules.html#getSdk">sdk.updateItinerary(...)</a></strong>
+					Updates an itinerary</li>
+				</ul>
+				<a href="#media" id="media" style="color: inherit; text-decoration: none;">
+					<h2>Media</h2>
+				</a>
+				<ul>
+					<li><strong><a href="https://alpacatravel.github.com/graph-sdk/packages/graphql-codegen/docs/modules.html#getSdk">sdk.getMediaImage(...)</a></strong>
+					Loads information about a media</li>
+				</ul>
+				<a href="#place" id="place" style="color: inherit; text-decoration: none;">
+					<h2>Place</h2>
+				</a>
+				<ul>
+					<li><strong><a href="https://alpacatravel.github.com/graph-sdk/packages/graphql-codegen/docs/modules.html#getSdk">sdk.autocompleteSearchPlace(...)</a></strong>
+					Searches for places using Autocomplete search term</li>
+					<li><strong><a href="https://alpacatravel.github.com/graph-sdk/packages/graphql-codegen/docs/modules.html#getSdk">sdk.getPlace(...)</a></strong>
+					Gets a place based on the provided place ID</li>
+					<li><strong><a href="https://alpacatravel.github.com/graph-sdk/packages/graphql-codegen/docs/modules.html#getSdk">sdk.reverseSearchPlaceByPosition(...)</a></strong>
+					Queries a position and returns with matching places</li>
+				</ul>
+				<a href="#profile" id="profile" style="color: inherit; text-decoration: none;">
+					<h2>Profile</h2>
+				</a>
+				<ul>
+					<li><strong><a href="https://alpacatravel.github.com/graph-sdk/packages/graphql-codegen/docs/modules.html#getSdk">sdk.getProfile(...)</a></strong>
+					Obtains the profile by the provided ID</li>
+					<li><strong><a href="https://alpacatravel.github.com/graph-sdk/packages/graphql-codegen/docs/modules.html#getSdk">sdk.listAuthorizedProfiles(...)</a></strong>
+					Obtains a list of the authorized profiles for the current access token</li>
+				</ul>
+				<a href="#route" id="route" style="color: inherit; text-decoration: none;">
+					<h2>Route</h2>
+				</a>
+				<ul>
+					<li><strong><a href="https://alpacatravel.github.com/graph-sdk/packages/graphql-codegen/docs/modules.html#getSdk">sdk.searchRoutesBetweenPositions(...)</a></strong>
+					Searches for routes between provided positions</li>
 				</ul>
 			</div>
 		</div>

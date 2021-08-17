@@ -50,9 +50,9 @@ const data = await sdk.getItinerary({ id: 'itinerary/123' });
 console.log(data.itinerary.locations.totalCount);
 ```
 
-## Documentation and API Capabilities
+## Documentation
 
-See [API Docs](docs/index.md)
+See [API Docs](https://alpacatravel.github.io/graph-sdk/packages/graphql-request/docs)
 
 ### Extending Functionality
 
