@@ -1,0 +1,10 @@
+# Changelog
+
+## September, 2021
+
+Releases a series of target SDK's for interacting with the Alpaca Travel
+GraphQL end-point to integrate into JavaScript applications.
+
+Retires old strategy and instead leverages a universal capability of queries
+and mutations across several target isomorphic SDK's.
+

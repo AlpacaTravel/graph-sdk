@@ -240,9 +240,9 @@ export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Mayb
  * @typedef {Object} ConnectedApp
  * @property {string} id - The Globally Unique ID of the object.
  * @property {Profile} [profile] - The profile associated with this connected app
- * @property {ConnectedAppType} [type] - A key to describe the type of connection to the application
- * @property {ConnectedAppServiceKey} serviceKey - This is the key relating to the service - it identifies the "App" we are connecting to
- * @property {ConnectedAppAuthType} [authType] - Depending on the authentication method, this can highlight the authenticated application method (e.g. OAuth)
+ * @property {ConnectedAppTypes} [type] - A key to describe the type of connection to the application
+ * @property {ConnectedAppServiceKeys} serviceKey - This is the key relating to the service, such as "atdw" or "crowdriff-api" - it identifies the "App" we are connecting to
+ * @property {ConnectedAppAuthTypes} [authType] - Depending on the authentication method, this can highlight the authenticated application method (e.g. OAuth)
  * @property {string} [scope] - Any specific scope that has been granted to the 3rd party application
  * @property {JSON} [configuration] - Encrypted JSON
  * @property {string} [thirdPartyId] - A 3rd party ID or Account ID, this does not affect any of the Alpaca ID naming - for instance, if we are connecting to an Identity in OAUTH, this is the OAUTH Identity ID - This is just a place to store data
@@ -250,7 +250,7 @@ export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Mayb
 
 /**
  * Possible auth types for a ConnectedApp
- * @typedef {("Tokens"|"Oauth"|"Credentials")} ConnectedAppAuthType
+ * @typedef {("Tokens"|"Oauth"|"Credentials")} ConnectedAppAuthTypes
  */
 
 /**
@@ -271,12 +271,12 @@ export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Mayb
 
 /**
  * The key of the service for a ConnectedApp
- * @typedef {("AustralianTourismDataWarehouse"|"CrowdriffApi"|"ShopifyApi")} ConnectedAppServiceKey
+ * @typedef {("Atdw"|"CrowdriffApi"|"ShopifyApi")} ConnectedAppServiceKeys
  */
 
 /**
  * Possible types of ConnectedApp
- * @typedef {("Configuration"|"Credentials"|"Api")} ConnectedAppType
+ * @typedef {("Configuration"|"Credentials"|"Api")} ConnectedAppTypes
  */
 
 /**
@@ -326,10 +326,10 @@ export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Mayb
 /**
  * Create a new ConnectedApp
  * @typedef {Object} CreateConnectedAppInput
- * @property {ConnectedAppType} [type] - The type of the connected-app
- * @property {ConnectedAppServiceKey} serviceKey - Identifies the service being connected to
+ * @property {ConnectedAppTypes} [type] - The type of the connected-app
+ * @property {ConnectedAppServiceKeys} serviceKey - Identifies the service being connected to
  * @property {string} [scope] - Any specific scope that has been granted to the 3rd party application
- * @property {ConnectedAppAuthType} [authType] - The authenticated application method
+ * @property {ConnectedAppAuthTypes} [authType] - The authenticated application method
  * @property {JSON} [configuration] - Encrypted JSON
  * @property {string} [thirdPartyId] - 3rd party ID or account ID
  */
@@ -1516,7 +1516,7 @@ export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Mayb
 /**
  * Updates a connected app
  * @typedef {Object} UpdateConnectedAppInput
- * @property {ConnectedAppAuthType} [authType] - The type of the connected-app
+ * @property {ConnectedAppAuthTypes} [authType] - The type of the connected-app
  * @property {string} [scope] - Any specific scope that has been granted to the 3rd party application
  * @property {string} [thirdPartyId] - 3rd party ID or account ID
  * @property {string} [configuration] - Encrypted JSON
@@ -2245,11 +2245,11 @@ export type ConnectedApp = Node & {
   /** The profile associated with this connected app */
   profile?: Maybe<Profile>;
   /** A key to describe the type of connection to the application */
-  type?: Maybe<ConnectedAppType>;
-  /** This is the key relating to the service - it identifies the "App" we are connecting to */
-  serviceKey: ConnectedAppServiceKey;
+  type?: Maybe<ConnectedAppTypes>;
+  /** This is the key relating to the service, such as "atdw" or "crowdriff-api" - it identifies the "App" we are connecting to */
+  serviceKey: ConnectedAppServiceKeys;
   /** Depending on the authentication method, this can highlight the authenticated application method (e.g. OAuth) */
-  authType?: Maybe<ConnectedAppAuthType>;
+  authType?: Maybe<ConnectedAppAuthTypes>;
   /** Any specific scope that has been granted to the 3rd party application */
   scope?: Maybe<Scalars['String']>;
   /** Encrypted JSON */
@@ -2259,7 +2259,7 @@ export type ConnectedApp = Node & {
 };
 
 /** Possible auth types for a ConnectedApp */
-export enum ConnectedAppAuthType {
+export enum ConnectedAppAuthTypes {
   Tokens = 'Tokens',
   Oauth = 'Oauth',
   Credentials = 'Credentials'
@@ -2288,14 +2288,14 @@ export type ConnectedAppEdge = {
 };
 
 /** The key of the service for a ConnectedApp */
-export enum ConnectedAppServiceKey {
-  AustralianTourismDataWarehouse = 'AustralianTourismDataWarehouse',
+export enum ConnectedAppServiceKeys {
+  Atdw = 'Atdw',
   CrowdriffApi = 'CrowdriffApi',
   ShopifyApi = 'ShopifyApi'
 }
 
 /** Possible types of ConnectedApp */
-export enum ConnectedAppType {
+export enum ConnectedAppTypes {
   Configuration = 'Configuration',
   Credentials = 'Credentials',
   Api = 'Api'
@@ -2370,13 +2370,13 @@ export type CreateCollectionPayload = {
 /** Create a new ConnectedApp */
 export type CreateConnectedAppInput = {
   /** The type of the connected-app */
-  type?: Maybe<ConnectedAppType>;
+  type?: Maybe<ConnectedAppTypes>;
   /** Identifies the service being connected to */
-  serviceKey: ConnectedAppServiceKey;
+  serviceKey: ConnectedAppServiceKeys;
   /** Any specific scope that has been granted to the 3rd party application */
   scope?: Maybe<Scalars['String']>;
   /** The authenticated application method */
-  authType?: Maybe<ConnectedAppAuthType>;
+  authType?: Maybe<ConnectedAppAuthTypes>;
   /** Encrypted JSON */
   configuration?: Maybe<Scalars['JSON']>;
   /** 3rd party ID or account ID */
@@ -5024,9 +5024,9 @@ export type QueryConnectedAppsArgs = {
   profileId?: Maybe<Scalars['ID']>;
   deleted?: Maybe<Scalars['Boolean']>;
   expired?: Maybe<Scalars['Boolean']>;
-  type?: Maybe<ConnectedAppType>;
-  authType?: Maybe<ConnectedAppAuthType>;
-  serviceKey?: Maybe<ConnectedAppServiceKey>;
+  type?: Maybe<ConnectedAppTypes>;
+  authType?: Maybe<ConnectedAppAuthTypes>;
+  serviceKey?: Maybe<ConnectedAppServiceKeys>;
 };
 
 
@@ -5396,7 +5396,7 @@ export type UpdateCollectionPayload = {
 /** Updates a connected app */
 export type UpdateConnectedAppInput = {
   /** The type of the connected-app */
-  authType?: Maybe<ConnectedAppAuthType>;
+  authType?: Maybe<ConnectedAppAuthTypes>;
   /** Any specific scope that has been granted to the 3rd party application */
   scope?: Maybe<Scalars['String']>;
   /** 3rd party ID or account ID */
