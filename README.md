@@ -60,9 +60,6 @@ implementation.
 
 These libraries are licensed under MIT and are community supported.
 
-### Extending Functionality
+## Legal Statement
 
-The SDK is driven by a number of [GraphQL documents](/graphql). You can
-fork this project if you wish to extend your own queries and mutations as
-documented on the [GraphQL Documentation](https://github.com/AlpacaTravel/graphql-docs)
-and consider self-hosting for your use case or submitting a pull-request.
+Copyright © 2020-2021 Alpaca Travel. All right reserved.
