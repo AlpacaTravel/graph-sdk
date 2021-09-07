@@ -1,5 +1,3 @@
-#import "./fragments/itinerary-location-partial-content.graphql"
-
 # Checks whether a place has been added to an itinerary, for creating a button
 # state on an "Add to Itinerary" button. If a result is returned, you may then
 # want to indicate to the user it is already present in their itinerary, or

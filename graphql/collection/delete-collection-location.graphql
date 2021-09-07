@@ -1,6 +1,6 @@
 # Removes a collection location from a collection.
 
-mutation deleteCollectionItem($id: ID!) {
+mutation deleteCollectionLocation($id: ID!) {
   # Use the deleteCollectionItem() mutation to remove a record
   deleteCollectionItem(
     # Supply the collection location id
