@@ -1,0 +1,7 @@
+---
+# GraphQL Codegen
+schema: 'https://withalpaca.com/api/graphql'
+generates:
+  ./graphql.schema.json:
+    plugins:
+      - introspection

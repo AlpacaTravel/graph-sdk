@@ -1,0 +1,21 @@
+---
+# Anchors
+typescript: &typescript
+  plugins:
+    - jsdoc
+    - typescript
+    - typescript-operations
+    - fragment-matcher
+    - typescript-urql
+  config:
+    preResolveTypes: true
+    flattenGeneratedTypes: false
+    exportFragmentSpreadSubTypes: true
+
+# GraphQL Codegen
+# Generate the schema at the top level by running npm run graphql-codegen first!
+schema: '../../graphql.schema.json'
+generates:
+  src/index.ts:
+    documents: ../../graphql/**/*.graphql
+    <<: *typescript

@@ -1,0 +1,98 @@
+#import "./fragments/itinerary-location-partial-content.graphql"
+#import "./fragments/itinerary-directions-partial-content.graphql"
+#import "./../place/fragments/place-partial-content.graphql"
+#import "./../media/fragments/media-image-partial-content.graphql"
+
+# Lists in itinerary locations for a provided Itinerary.
+
+query listItineraryLocations(
+  $id: ID!
+  $first: Int!
+  $after: String
+  $includeRoutePolyline: Boolean!
+  $mediaImagePreferredBestFit: [Int!]
+) {
+  # Use the itinerary() query operation
+  itinerary(
+    # id: itinerary/XXX
+    id: $id
+  ) {
+    # Response
+    id
+    __typename
+
+    # Read in the immediate children locations
+    locations: children(first: $first, type: ItineraryLocation, after: $after) {
+      edges {
+        location: node {
+          id
+          __typename
+
+          ... on ItineraryLocation {
+            # Include content
+            ...ItineraryLocationPartialContent
+
+            # Load the basic information for the place
+            place {
+              id
+              __typename
+
+              ...PlacePartialContent
+            }
+
+            # Load in a preferred media size
+            preferredMedia {
+              id
+              __typename
+
+              resource {
+                id
+                __typename
+
+                ... on MediaImage {
+                  source(bestFit: $mediaImagePreferredBestFit) {
+                    url
+                  }
+
+                  ...MediaImagePartialContent
+                }
+              }
+            }
+          }
+        }
+        # Include the directions for how to arrive to this location
+        arrival: directions(first: 1, direction: Inbound) {
+          directions: nodes {
+            id
+            __typename
+
+            ...ItineraryDirectionsPartialContent
+
+            route {
+              segments {
+                id
+                __typename
+
+                mode
+                polyline @include(if: $includeRoutePolyline)
+              }
+            }
+          }
+          # Indicate if there are more directions to this location
+          totalCount
+        }
+      }
+      # Total records
+      totalCount
+      # Include information to paginate results
+      pageInfo {
+        # Are there more locations in this itinerary
+        hasNextPage
+        hasPreviousPage
+        # Cursor in order to paginate
+        startCursor
+        endCursor
+      }
+    }
+  }
+}

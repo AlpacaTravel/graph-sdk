@@ -1,0 +1,25 @@
+#import "./fragments/collection-location-content.graphql"
+
+# Update the collection location.
+
+mutation updateCollectionLocation($id: ID!, $location: UpdateCollectionLocationInput!) {
+  # Use the updateCollectionLocation() mutation to modify a collection location
+  updateCollectionLocation(
+    # The item location to update
+    id: $id
+    # The updated location
+    location: $location
+  ) {
+    # The response type
+    __typename
+
+    # The location
+    location {
+      id
+      __typename
+
+      # Load the information about the collection location
+      ...CollectionLocationContent
+    }
+  }
+}

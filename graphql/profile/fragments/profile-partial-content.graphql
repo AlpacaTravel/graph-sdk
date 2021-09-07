@@ -1,0 +1,4 @@
+fragment ProfilePartialContent on Profile {
+  name
+  handle
+}

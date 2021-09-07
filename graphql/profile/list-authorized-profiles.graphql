@@ -1,0 +1,33 @@
+#import "./fragments/profile-partial-content.graphql"
+
+# Obtains a list of the authorized profiles for the current access token.
+
+query listAuthorizedProfiles($first: Int!, $after: String) {
+  # Use the authorizedProfiles operation
+  # first: Number of profiles to return
+  # after: the cursor to continue pagination with
+  authorizedProfiles(first: $first, after: $after) {
+    # Reponse type
+    __typename
+
+    profiles: nodes {
+      id
+      __typename
+
+      # Load in partial information about the profile
+      ...ProfilePartialContent
+    }
+    # Return the total count of profiles
+    totalCount
+
+    # Obtain the pagination information
+    pageInfo {
+      # Whether there are more results
+      hasNextPage
+      hasPreviousPage
+      # The end cursor to continue loading results from (pass to $after)
+      startCursor
+      endCursor
+    }
+  }
+}

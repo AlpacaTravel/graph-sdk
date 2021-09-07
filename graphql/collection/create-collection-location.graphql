@@ -1,0 +1,31 @@
+#import "./fragments/collection-items-count.graphql"
+#import "./fragments/collection-location-content.graphql"
+#import "./../place/fragments/place-partial-content.graphql"
+
+# Creates an collection location within the provided collection.
+
+mutation createCollectionLocation($collectionId: ID!, $location: CreateCollectionLocationInput!) {
+  # Use the createCollectionLocation mutation operation
+  createCollectionLocation(collectionId: $collectionId, location: $location) {
+    # Response type
+    __typename
+
+    # The location
+    location {
+      id
+      __typename
+
+      # Load the information about the collection location
+      ...CollectionLocationContent
+
+      # Load the place within the collection location
+      place {
+        id
+        __typename
+
+        # Partial details
+        ...PlacePartialContent
+      }
+    }
+  }
+}

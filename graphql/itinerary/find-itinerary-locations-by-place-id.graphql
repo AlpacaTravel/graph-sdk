@@ -1,0 +1,65 @@
+#import "./fragments/itinerary-location-partial-content.graphql"
+#import "./../place/fragments/place-partial-content.graphql"
+
+# Checks whether a place has been added to an itinerary, for creating a button
+# state on an "Add to Itinerary" button. If a result is returned, you may then
+# want to indicate to the user it is already present in their itinerary, or
+# offer them to remove it. You can pass the matching itinerary location ID that
+# has this place associated from this query to the deleteItineraryItem operation
+
+query findItineraryLocationsByPlaceId(
+  $itineraryId: ID!
+  $placeId: ID!
+  $first: Int!
+  $after: String
+) {
+  # Use the itinerary query, supplying the itinerary ID to check
+  itinerary(id: $itineraryId) {
+    # Query the descendants, providing some constraints
+    descendants(
+      # Provide the place identifiers to check
+      placeIds: [$placeId]
+      # Limit to itinerary location
+      type: ItineraryLocation
+      # Limit to the first match
+      first: $first
+      after: $after
+    ) {
+      # Reponse type
+      __typename
+
+      # Edges
+      edges {
+        node {
+          id
+          __typename
+
+          ... on ItineraryLocation {
+            # Include the itinerary location partial
+            ...ItineraryLocationPartialContent
+
+            place {
+              id
+              __typename
+
+              # Include the place partial content
+              ...PlacePartialContent
+            }
+          }
+        }
+      }
+      # Total Count should be greater than 0, as the place could be added more
+      # than once to an itinerary
+      totalCount
+      # Obtain the pagination information
+      pageInfo {
+        # Whether there are more results
+        hasNextPage
+        hasPreviousPage
+        # The end cursor to continue loading results from (pass to $after)
+        startCursor
+        endCursor
+      }
+    }
+  }
+}

@@ -1,0 +1,28 @@
+fragment PlaceSearchContent on PlaceSearchNode {
+  name
+
+  position {
+    lon
+    lat
+  }
+
+  address {
+    addressLineOne
+    addressLineTwo
+    addressLineThree
+    locality
+    region
+    regionCode
+    country
+    countryCode
+  }
+
+  maki
+
+  layers {
+    id
+    __typename
+
+    name
+  }
+}

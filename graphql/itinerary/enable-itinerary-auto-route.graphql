@@ -1,0 +1,36 @@
+#import "./fragments/itinerary-cascaded-changes.graphql"
+
+# Modifies an itinerary to enable a feature that will automatically determine
+# directions between a sequence of itinerary locations at the top level. It will
+# bypass optional locations, and create directions to move the user around.
+
+mutation enableItineraryAutoRoute($id: ID!, $defaultMode: RouteMode!) {
+  # Use the updateItinerary mutation here to modify a property of the itinerary
+  updateItinerary(
+    # The itinerary ID
+    id: $id
+    # The specific fields to update, which in this case is the default
+    itinerary: { autoRoute: { defaultMode: $defaultMode } }
+  ) {
+    # Response type
+    __typename
+
+    # We will read back what has been affected
+    itinerary {
+      id
+      __typename
+
+      # This value should be cleared out now
+      autoRoute {
+        defaultMode
+      }
+    }
+
+    # Read any other affected changes by this action
+    cascaded {
+      # This will provide any created/updated or deleted items
+      # Note: See the fragments to see what is selected
+      ...ItineraryCascadedChanges
+    }
+  }
+}

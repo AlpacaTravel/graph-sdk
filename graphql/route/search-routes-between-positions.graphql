@@ -1,0 +1,33 @@
+# Searches for routes between provided positions. Provide minimum of 2 positions
+# and any additional received will route between those first and last through
+# the middle supplied positions as waypoints
+
+query searchRoutesBetweenPositions(
+  $mode: RouteSearchableMode!
+  $positions: [PositionInput!]!
+  $first: Int!
+  $includeRoutePolyline: Boolean!
+) {
+  # Use the routes() query to query routes between supplied positions
+  routes(
+    # Supports profiles like: Car, Bike, Foot, Hike, etc
+    mode: $mode
+    # Supply waypoints (max 50)
+    positions: $positions
+    # Provide 1 route
+    first: $first
+  ) {
+    # Reponse type
+    __typename
+
+    routes: nodes {
+      segments {
+        # Access some information about the distance/duration
+        distance(unit: Kilometers)
+        duration(unit: Minutes)
+        # Map Data, can be GeoJSON. Map data can also be simplified
+        polyline @include(if: $includeRoutePolyline)
+      }
+    }
+  }
+}

@@ -1,0 +1,47 @@
+#import "./fragments/collection-location-content.graphql"
+#import "./../place/fragments/place-partial-content.graphql"
+
+# Obtain informationa bout a collection location.
+
+query getCollectionLocation($id: ID!, $mediaImagePreferredBestFit: [Int!]) {
+  collectionItem(
+    # Provide the individual collection item ID
+    id: $id
+  ) {
+    id
+    __typename
+
+    ... on CollectionLocation {
+      # Load the information about the collection location
+      ...CollectionLocationContent
+
+      # Load information about the place
+      place {
+        id
+        __typename
+
+        ...PlacePartialContent
+      }
+
+      # Select preferred media
+      preferredMedia {
+        id
+        __typename
+
+        resource {
+          id
+          __typename
+          altText
+          ... on MediaImage {
+            source(bestFit: $mediaImagePreferredBestFit) {
+              url
+            }
+            caption
+            copyright
+            attribution
+          }
+        }
+      }
+    }
+  }
+}

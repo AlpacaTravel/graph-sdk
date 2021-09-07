@@ -1,0 +1,12 @@
+fragment CollectionLocationPartialContent on CollectionLocation {
+  title
+  synopsis
+  tags
+
+  position {
+    lon
+    lat
+  }
+
+  readMoreUrl
+}

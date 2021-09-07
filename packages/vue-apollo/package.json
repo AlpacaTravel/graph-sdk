@@ -1,0 +1,54 @@
+{
+  "name": "@alpaca-travel/graph-sdk-vue-apollo",
+  "version": "1.0.0",
+  "author": "Tom Manderson <tom@alpaca.travel>",
+  "homepage": "https://alpacatravel.github.io/graph-sdk/packages/vue-apollo/",
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
+  "types": "dist/esm/index.d.ts",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/AlpacaTravel/graph-sdk.git"
+  },
+  "scripts": {
+    "test": "jest",
+    "build:typedoc": "rm -rf docs && node doc-generator.js && typedoc src/index.ts --readme api.md --out docs",
+    "docs": "yarn build:typedoc",
+    "build": "npm run tsc",
+    "prepublishOnly": "npm run tsc",
+    "tsc": "tsc -p tsconfig.json && tsc -p tsconfig-cjs.json",
+    "graphql-codegen": "graphql-codegen --config codegen.yml",
+    "clean": "rm -rf dist && rm -rf docs"
+  },
+  "peerDependencies": {
+    "graphql": "^0.8.0 || ^0.9.0 || ^0.10.0 || ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0",
+    "graphql-tag": "^2.0.0",
+    "@apollo/client": "^3.4.7",
+    "@vue/apollo-composable": "^4.0.0-alpha.14",
+    "@vue/composition-api": "^1.1.0"
+  },
+  "env": {
+    "jest": true
+  },
+  "devDependencies": {
+    "@apollo/client": "^3.4.7",
+    "@graphql-codegen/cli": "^2.0.1",
+    "@graphql-codegen/fragment-matcher": "^3.0.0",
+    "@graphql-codegen/introspection": "^2.0.0",
+    "@graphql-codegen/jsdoc": "^2.0.0",
+    "@graphql-codegen/typescript": "^2.0.0",
+    "@graphql-codegen/typescript-operations": "^2.0.1",
+    "@graphql-codegen/typescript-vue-apollo": "^3.0.0",
+    "@types/jest": "^27.0.0",
+    "@vue/apollo-composable": "^4.0.0-alpha.14",
+    "@vue/composition-api": "^1.1.0",
+    "graphql": "^15.5.1",
+    "jest": "^27.0.6",
+    "ts-jest": "^27.0.4",
+    "typedoc": "^0.21.5",
+    "typescript": "^4.3.5",
+    "vue": "^2.6.14"
+  },
+  "dependencies": {}
+}

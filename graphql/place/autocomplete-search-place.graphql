@@ -1,0 +1,48 @@
+#import "./fragments/place-search-content.graphql"
+
+# Searches for places using Autocomplete search term.
+
+query autocompleteSearchPlace($text: String!, $source: PlaceSearchSource!) {
+  # Use the placeAutocompleteSearch operation to complex an autocomplete based
+  # search
+  placeAutocompleteSearch(
+    # Text to match
+    text: $text
+    # Source service, such as AustralianTourismDataWarehouse or Facebook
+    sources: [$source]
+    # Limit autocomplete to first set of results
+    first: 10
+  ) {
+    # Reponse type
+    __typename
+
+    # Search Results
+    edges {
+      # Place
+      node {
+        id
+        __typename
+
+        ...PlaceSearchContent
+      }
+      # Main label..
+      main {
+        label
+        # For highlighting match
+        matches {
+          offset
+          length
+        }
+      }
+      # Second label..
+      secondary {
+        label
+        # For highlighting match
+        matches {
+          offset
+          length
+        }
+      }
+    }
+  }
+}

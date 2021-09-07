@@ -1,0 +1,34 @@
+#import "./fragments/place-content.graphql"
+#import "./../media/fragments/media-image-partial-content.graphql"
+
+# Gets a place based on the provided place ID.
+
+query getPlace($id: ID!, $mediaImagePreferredBestFit: [Int!]) {
+  # Load places using the place() query
+  place(id: $id) {
+    id
+    __typename
+
+    # Load in information about the place
+    ...PlaceContent
+
+    # Select preferred media
+    preferredMedia {
+      id
+      __typename
+
+      resource {
+        id
+        __typename
+
+        ... on MediaImage {
+          source(bestFit: $mediaImagePreferredBestFit) {
+            url
+          }
+
+          ...MediaImagePartialContent
+        }
+      }
+    }
+  }
+}

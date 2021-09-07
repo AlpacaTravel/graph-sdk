@@ -1,0 +1,13 @@
+#import "./fragments/itinerary-cascaded-changes.graphql"
+
+# Moves an itinerary location ahead of other itinerary locations.
+
+mutation moveItineraryLocationToStart($id: ID!) {
+  moveItineraryItem(id: $id, positionAtStart: {}) {
+    __typename
+
+    cascaded {
+      ...ItineraryCascadedChanges
+    }
+  }
+}

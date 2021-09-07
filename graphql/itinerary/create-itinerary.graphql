@@ -1,0 +1,37 @@
+#import "./fragments/itinerary-content.graphql"
+#import "./fragments/itinerary-locations-count.graphql"
+
+# Creates a new Itinerary data structure for organising an itinerary. An itinerary
+# data structure predominantly contains Locations which represents assocations
+# to physical places in the real world that the itinerary may direct the user
+# to. Itineraries can be a sequence of places that can have directions between
+# them to help the user determine travel times from various locations.
+mutation createItinerary($itinerary: CreateItineraryInput!, $profileId: ID) {
+  # Use the createItinerary mutation to create itineraries
+  createItinerary(
+    # Information about the itinerary
+    # Supports content elements, such as title, synopsis, tags, etc
+    itinerary: $itinerary
+    # Can be associated to a profile of a user (with sufficient priveledges)
+    # or can be left null, which creates a pseudo-anonymous itinerary that can
+    # be edited by anyone with the itinerary reference
+    profileId: $profileId
+  ) {
+    # The response type
+    __typename
+
+    # Read information about the itinerary
+    itinerary {
+      # The new ID for future calls to manage the itinerary
+      id
+      __typename
+
+      # Read back any content created (such as to store in the cache)
+      # Note: See the fragments to see what is selected
+      ...ItineraryContent
+      # Read back the initial locations count (presumeably 0 locations initially)
+      # Note: See the fragments to see what is selected
+      ...ItineraryLocationsCount
+    }
+  }
+}

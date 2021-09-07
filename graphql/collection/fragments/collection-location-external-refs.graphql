@@ -1,0 +1,9 @@
+fragment CollectionLocationExternalRefs on CollectionLocation {
+  # Obtain the values for the external refs
+  externalId: attr(id: "custom://external-ref") {
+    value
+  }
+  externalSource: attr(id: "custom://external-source") {
+    value
+  }
+}

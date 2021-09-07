@@ -1,0 +1,15 @@
+fragment ItineraryLocationPartialContent on ItineraryLocation {
+  title
+  synopsis
+
+  tags
+
+  optional
+
+  readMoreUrl
+
+  position {
+    lon
+    lat
+  }
+}

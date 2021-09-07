@@ -1,0 +1,48 @@
+# Find collection location IDs by a specific tag.
+
+query findCollectionLocationIdsByTag(
+  $collectionId: [ID!]
+  $tags: [String!]
+  $first: Int!
+  $after: String
+) {
+  collectionItems(
+    # Specify the collection ID
+    collectionIds: $collectionId
+    # Specify the tag
+    tags: $tags
+    # Pagination
+    first: $first
+    after: $after # Include partials
+  ) {
+    # Reponse type
+    __typename
+
+    # Edges
+    edges {
+      node {
+        id
+        __typename
+
+        ... on CollectionLocation {
+          place {
+            id
+            __typename
+          }
+        }
+      }
+      cursor
+    }
+    # Obtain the total count
+    totalCount
+    # Obtain the pagination information
+    pageInfo {
+      # Whether there are more results
+      hasNextPage
+      hasPreviousPage
+      # The end cursor to continue loading results from (pass to $after)
+      startCursor
+      endCursor
+    }
+  }
+}

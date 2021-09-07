@@ -1,0 +1,21 @@
+#import "./fragments/itinerary-cascaded-changes.graphql"
+#import "./fragments/itinerary-location-content.graphql"
+
+# Updates the itinerary location.
+
+mutation updateItineraryLocation($id: ID!, $location: UpdateItineraryLocationInput!) {
+  updateItineraryLocation(id: $id, location: $location) {
+    __typename
+
+    location {
+      id
+      __typename
+
+      ...ItineraryLocationContent
+    }
+
+    cascaded {
+      ...ItineraryCascadedChanges
+    }
+  }
+}

@@ -1,0 +1,7 @@
+fragment ItineraryPartialContent on Itinerary {
+  title
+  synopsis
+  tags
+
+  created
+}

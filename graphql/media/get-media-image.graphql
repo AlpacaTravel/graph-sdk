@@ -1,0 +1,32 @@
+#import "./fragments/media-image-content.graphql"
+
+# Loads information about a media.
+
+query getMediaImage(
+  $id: ID!
+  $smallBestFit: [Int!]
+  $mediumBestFit: [Int!]
+  $largeBestFit: [Int!]
+) {
+  # Use the mediaResource query to be able to load information about a media image
+  mediaResource(id: $id) {
+    id
+    __typename
+
+    ... on MediaImage {
+      ...MediaImageContent
+
+      small: source(bestFit: $smallBestFit) {
+        url
+      }
+
+      medium: source(bestFit: $mediumBestFit) {
+        url
+      }
+
+      large: source(bestFit: $largeBestFit) {
+        url
+      }
+    }
+  }
+}

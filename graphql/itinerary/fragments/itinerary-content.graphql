@@ -1,0 +1,12 @@
+fragment ItineraryContent on Itinerary {
+  title
+  synopsis
+  description
+  tags
+
+  created
+
+  autoRoute {
+    defaultMode
+  }
+}

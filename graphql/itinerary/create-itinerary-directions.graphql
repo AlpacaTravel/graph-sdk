@@ -1,0 +1,40 @@
+#import "./fragments/itinerary-cascaded-changes.graphql"
+#import "./fragments/itinerary-directions-content.graphql"
+
+# Creates itinerary directions for between locations in an itinerary manually.
+# Can be used to create directions instead of using the Itinerary autoRoute
+# method or for where the itinerary is to contain multiple ways to move between
+# locations (alternative modes of transport between locations) or to provide
+# optional route options that may bypass specific locations in a sequence.
+
+mutation createItineraryDirections(
+  $itineraryId: ID!
+  $directions: CreateItineraryDirectionsInput!
+) {
+  # use createItineraryDirections to create directions in an itinerary
+  createItineraryDirections(
+    # Supply the itinerary ID
+    itineraryId: "itinerary/ABC123"
+    # Provide the model for directions
+    directions: $directions
+  ) {
+    __typename
+
+    # Read back the
+    directions {
+      id
+      __typename
+
+      # Read the itinerary content (full, useful for caching)
+      # Note: See the fragments to see what is selected
+      ...ItineraryDirectionsContent
+    }
+
+    # Read any other affected changes by this action
+    cascaded {
+      # This will provide any created/updated or deleted items
+      # Note: See the fragments to see what is selected
+      ...ItineraryCascadedChanges
+    }
+  }
+}
