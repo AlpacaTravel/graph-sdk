@@ -240,9 +240,9 @@ const defaultOptions =  {}
  * @typedef {Object} ConnectedApp
  * @property {string} id - The Globally Unique ID of the object.
  * @property {Profile} [profile] - The profile associated with this connected app
- * @property {ConnectedAppTypes} [type] - A key to describe the type of connection to the application
- * @property {ConnectedAppServiceKeys} serviceKey - This is the key relating to the service, such as "atdw" or "crowdriff-api" - it identifies the "App" we are connecting to
- * @property {ConnectedAppAuthTypes} [authType] - Depending on the authentication method, this can highlight the authenticated application method (e.g. OAuth)
+ * @property {ConnectedAppType} [type] - A key to describe the type of connection to the application
+ * @property {ConnectedAppServiceKey} serviceKey - This is the key relating to the service - it identifies the "App" we are connecting to
+ * @property {ConnectedAppAuthType} [authType] - Depending on the authentication method, this can highlight the authenticated application method (e.g. OAuth)
  * @property {string} [scope] - Any specific scope that has been granted to the 3rd party application
  * @property {JSON} [configuration] - Encrypted JSON
  * @property {string} [thirdPartyId] - A 3rd party ID or Account ID, this does not affect any of the Alpaca ID naming - for instance, if we are connecting to an Identity in OAUTH, this is the OAUTH Identity ID - This is just a place to store data
@@ -250,7 +250,7 @@ const defaultOptions =  {}
 
 /**
  * Possible auth types for a ConnectedApp
- * @typedef {("Tokens"|"Oauth"|"Credentials")} ConnectedAppAuthTypes
+ * @typedef {("Tokens"|"Oauth"|"Credentials")} ConnectedAppAuthType
  */
 
 /**
@@ -271,12 +271,12 @@ const defaultOptions =  {}
 
 /**
  * The key of the service for a ConnectedApp
- * @typedef {("Atdw"|"CrowdriffApi"|"ShopifyApi")} ConnectedAppServiceKeys
+ * @typedef {("AustralianTourismDataWarehouse"|"CrowdriffApi"|"ShopifyApi")} ConnectedAppServiceKey
  */
 
 /**
  * Possible types of ConnectedApp
- * @typedef {("Configuration"|"Credentials"|"Api")} ConnectedAppTypes
+ * @typedef {("Configuration"|"Credentials"|"Api")} ConnectedAppType
  */
 
 /**
@@ -326,10 +326,10 @@ const defaultOptions =  {}
 /**
  * Create a new ConnectedApp
  * @typedef {Object} CreateConnectedAppInput
- * @property {ConnectedAppTypes} [type] - The type of the connected-app
- * @property {ConnectedAppServiceKeys} serviceKey - Identifies the service being connected to
+ * @property {ConnectedAppType} [type] - The type of the connected-app
+ * @property {ConnectedAppServiceKey} serviceKey - Identifies the service being connected to
  * @property {string} [scope] - Any specific scope that has been granted to the 3rd party application
- * @property {ConnectedAppAuthTypes} [authType] - The authenticated application method
+ * @property {ConnectedAppAuthType} [authType] - The authenticated application method
  * @property {JSON} [configuration] - Encrypted JSON
  * @property {string} [thirdPartyId] - 3rd party ID or account ID
  */
@@ -1357,6 +1357,7 @@ const defaultOptions =  {}
  * @property {RouteConnection} routes - Look up routes for traveling along the given positions
  * @property {MediaResource} [mediaResource] - Retrieve a MediaResource by id
  * @property {Place} [place] - Get a place by id
+ * @property {Array<(Place|null|undefined)>} places - Get multiple places by id
  * @property {PlaceSearchConnection} placeSearch - Search for places
  * @property {PlaceSearchConnection} placeAutocompleteSearch - Autocomplete for place search
  * @property {PlaceSearchConnection} placeAddressSearch - Search for places based on address details
@@ -1516,7 +1517,7 @@ const defaultOptions =  {}
 /**
  * Updates a connected app
  * @typedef {Object} UpdateConnectedAppInput
- * @property {ConnectedAppAuthTypes} [authType] - The type of the connected-app
+ * @property {ConnectedAppAuthType} [authType] - The type of the connected-app
  * @property {string} [scope] - Any specific scope that has been granted to the 3rd party application
  * @property {string} [thirdPartyId] - 3rd party ID or account ID
  * @property {string} [configuration] - Encrypted JSON
@@ -2245,11 +2246,11 @@ export type ConnectedApp = Node & {
   /** The profile associated with this connected app */
   profile?: Maybe<Profile>;
   /** A key to describe the type of connection to the application */
-  type?: Maybe<ConnectedAppTypes>;
-  /** This is the key relating to the service, such as "atdw" or "crowdriff-api" - it identifies the "App" we are connecting to */
-  serviceKey: ConnectedAppServiceKeys;
+  type?: Maybe<ConnectedAppType>;
+  /** This is the key relating to the service - it identifies the "App" we are connecting to */
+  serviceKey: ConnectedAppServiceKey;
   /** Depending on the authentication method, this can highlight the authenticated application method (e.g. OAuth) */
-  authType?: Maybe<ConnectedAppAuthTypes>;
+  authType?: Maybe<ConnectedAppAuthType>;
   /** Any specific scope that has been granted to the 3rd party application */
   scope?: Maybe<Scalars['String']>;
   /** Encrypted JSON */
@@ -2259,7 +2260,7 @@ export type ConnectedApp = Node & {
 };
 
 /** Possible auth types for a ConnectedApp */
-export enum ConnectedAppAuthTypes {
+export enum ConnectedAppAuthType {
   Tokens = 'Tokens',
   Oauth = 'Oauth',
   Credentials = 'Credentials'
@@ -2288,14 +2289,14 @@ export type ConnectedAppEdge = {
 };
 
 /** The key of the service for a ConnectedApp */
-export enum ConnectedAppServiceKeys {
-  Atdw = 'Atdw',
+export enum ConnectedAppServiceKey {
+  AustralianTourismDataWarehouse = 'AustralianTourismDataWarehouse',
   CrowdriffApi = 'CrowdriffApi',
   ShopifyApi = 'ShopifyApi'
 }
 
 /** Possible types of ConnectedApp */
-export enum ConnectedAppTypes {
+export enum ConnectedAppType {
   Configuration = 'Configuration',
   Credentials = 'Credentials',
   Api = 'Api'
@@ -2370,13 +2371,13 @@ export type CreateCollectionPayload = {
 /** Create a new ConnectedApp */
 export type CreateConnectedAppInput = {
   /** The type of the connected-app */
-  type?: Maybe<ConnectedAppTypes>;
+  type?: Maybe<ConnectedAppType>;
   /** Identifies the service being connected to */
-  serviceKey: ConnectedAppServiceKeys;
+  serviceKey: ConnectedAppServiceKey;
   /** Any specific scope that has been granted to the 3rd party application */
   scope?: Maybe<Scalars['String']>;
   /** The authenticated application method */
-  authType?: Maybe<ConnectedAppAuthTypes>;
+  authType?: Maybe<ConnectedAppAuthType>;
   /** Encrypted JSON */
   configuration?: Maybe<Scalars['JSON']>;
   /** 3rd party ID or account ID */
@@ -4241,26 +4242,26 @@ export type MutationUpdateMediaResourceArgs = {
 
 
 export type MutationFollowProfileArgs = {
-  fromProfile: Scalars['ID'];
-  toProfile: Scalars['ID'];
+  fromProfileId: Scalars['ID'];
+  toProfileId: Scalars['ID'];
 };
 
 
 export type MutationUnfollowProfileArgs = {
-  fromProfile: Scalars['ID'];
-  toProfile: Scalars['ID'];
+  fromProfileId: Scalars['ID'];
+  toProfileId: Scalars['ID'];
 };
 
 
 export type MutationApproveProfileFollowArgs = {
-  fromProfile: Scalars['ID'];
-  toProfile: Scalars['ID'];
+  fromProfileId: Scalars['ID'];
+  toProfileId: Scalars['ID'];
 };
 
 
 export type MutationDenyProfileFollowArgs = {
-  fromProfile: Scalars['ID'];
-  toProfile: Scalars['ID'];
+  fromProfileId: Scalars['ID'];
+  toProfileId: Scalars['ID'];
 };
 
 
@@ -4954,6 +4955,8 @@ export type Query = {
   mediaResource?: Maybe<MediaResource>;
   /** Get a place by id */
   place?: Maybe<Place>;
+  /** Get multiple places by id */
+  places: Array<Maybe<Place>>;
   /** Search for places */
   placeSearch: PlaceSearchConnection;
   /** Autocomplete for place search */
@@ -5024,9 +5027,9 @@ export type QueryConnectedAppsArgs = {
   profileId?: Maybe<Scalars['ID']>;
   deleted?: Maybe<Scalars['Boolean']>;
   expired?: Maybe<Scalars['Boolean']>;
-  type?: Maybe<ConnectedAppTypes>;
-  authType?: Maybe<ConnectedAppAuthTypes>;
-  serviceKey?: Maybe<ConnectedAppServiceKeys>;
+  type?: Maybe<ConnectedAppType>;
+  authType?: Maybe<ConnectedAppAuthType>;
+  serviceKey?: Maybe<ConnectedAppServiceKey>;
 };
 
 
@@ -5066,6 +5069,11 @@ export type QueryMediaResourceArgs = {
 
 export type QueryPlaceArgs = {
   id: Scalars['ID'];
+};
+
+
+export type QueryPlacesArgs = {
+  ids: Array<Scalars['ID']>;
 };
 
 
@@ -5396,7 +5404,7 @@ export type UpdateCollectionPayload = {
 /** Updates a connected app */
 export type UpdateConnectedAppInput = {
   /** The type of the connected-app */
-  authType?: Maybe<ConnectedAppAuthTypes>;
+  authType?: Maybe<ConnectedAppAuthType>;
   /** Any specific scope that has been granted to the 3rd party application */
   scope?: Maybe<Scalars['String']>;
   /** 3rd party ID or account ID */
