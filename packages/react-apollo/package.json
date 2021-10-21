@@ -14,7 +14,7 @@
   "scripts": {
     "test": "jest",
     "build:typedoc": "rm -rf docs && node doc-generator.js && typedoc src/index.ts --readme api.md --out docs",
-    "docs": "yarn build:typedoc",
+    "docs": "npm run build:typedoc",
     "build": "npm run tsc",
     "prepublishOnly": "npm run tsc",
     "tsc": "tsc -p tsconfig.json && tsc -p tsconfig-cjs.json",
