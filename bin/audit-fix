@@ -1,0 +1,10 @@
+#!/usr/bin/env node
+const { run } = require('./lib');
+
+const main = async () => {
+  const failed = await run('npm audit fix', true);
+
+  process.exit(failed ? 1 : 0);
+};
+
+main().catch(console.error);
