@@ -2,6 +2,7 @@ import { GraphQLClient } from 'graphql-request';
 import * as Dom from 'graphql-request/dist/types.dom';
 import gql from 'graphql-tag';
 export type Maybe<T> = T | null;
+export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
 export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
 export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
@@ -14,22 +15,24 @@ export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Mayb
  * Result of approving a follow request
  * @typedef {Object} ApproveProfileFollowPayload
  * @property {Profile} fromProfile - The follower profile
- * @property {Profile} toProfile - The profile being followed
  * @property {ProfileFollowStatus} [status] - The status of the follow request
+ * @property {Profile} toProfile - The profile being followed
  */
 
 /**
  * Additional data defined on a resource
  * @typedef {Object} Attribute
- * @property {string} id - The attribute identifier
+ * @property {string} id - 
+ * The attribute identifier
  * 
  * Has the form "{{resource_type}}/{{attribute_name}}"
  * eg: The "title" attribute on an item will have the id: "item/title"
  * 
  * Custom attributes have the form "custom/{{attribute_name}}"
- * @property {JSON} [value] - The attribute value, can be any JSON-serialisable type
- * @property {JSON} [meta] - Optional attribute metadata, can be any JSON-serialisable type
+ * 
  * @property {string} [locale] - Optional string representing the locale of the attribute value
+ * @property {JSON} [meta] - Optional attribute metadata, can be any JSON-serialisable type
+ * @property {JSON} [value] - The attribute value, can be any JSON-serialisable type
  */
 
 /**
@@ -59,22 +62,148 @@ export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Mayb
  * Defines an attribute
  * @typedef {Object} AttributeInput
  * @property {string} id - The attribute identifier
- * @property {JSON} value - The attribute value, can be any JSON-serialisable type
- * @property {JSON} [meta] - Optional attribute metadata, can be any JSON-serialisable type
  * @property {string} [locale] - Optional string representing the locale of the attribute value
+ * @property {JSON} [meta] - Optional attribute metadata, can be any JSON-serialisable type
+ * @property {JSON} value - The attribute value, can be any JSON-serialisable type
+ */
+
+/**
+ * The address field of a BillingDetails object
+ * @typedef {Object} BillingAddress
+ * @property {string} addressLineOne
+ * @property {string} [addressLineTwo]
+ * @property {string} countryCode
+ * @property {string} locality
+ * @property {string} [postalCode]
+ * @property {string} region
+ */
+
+/**
+ * Fields for update billing address field
+ * @typedef {Object} BillingAddressInput
+ * @property {string} addressLineOne
+ * @property {string} [addressLineTwo]
+ * @property {string} countryCode
+ * @property {string} locality
+ * @property {string} [postalCode]
+ * @property {string} region
+ */
+
+/**
+ * Billing details associated with a profile
+ * @typedef {Object} BillingDetails
+ * @property {BillingAddress} address - The billing address
+ * @property {string} emailAddress - The email address
+ * @property {string} familyName - The family name
+ * @property {string} givenName - The given name
+ * @property {string} [organization] - The optional organization name
+ * @property {Profile} profile - Profile that these billing details apply to
+ */
+
+/**
+ * A billing plan
+ * @typedef {Object} BillingPlan
+ * @property {string} id - The identifier for this plan
+ * @property {BillingPrice} [price] - The price of this plan
+ * @property {number} quantity - The quantity
+ */
+
+/**
+ * A price available for a billing plan
+ * @typedef {Object} BillingPrice
+ * @property {number} amount - The amount of this price
+ * @property {string} currency - The currency used for this price
+ * @property {string} id - The unique id for this price
+ * @property {BillingProduct} product - The product corres
+ * @property {BillingPriceRecurring} recurring - Recurrence details of the price
+ */
+
+/**
+ * Connection of BillingPrices
+ * @typedef {Object} BillingPriceConnection
+ * @property {Array<BillingPriceEdge>} edges - All the edges in this page of the connection
+ * @property {Array<BillingPrice>} nodes - Shortcut for edges[].node
+ * @property {PageInfo} pageInfo - Details regarding the current page of the connnection
+ * @property {number} totalCount - The total number of items in the connection (in all pages)
+ */
+
+/**
+ * Edge containing a BillingPrice
+ * @typedef {Object} BillingPriceEdge
+ * @property {string} cursor - The cursor string pointing to this item
+ * @property {BillingPrice} node - The item
+ */
+
+/**
+ * The billing price to use
+ * @typedef {Object} BillingPriceInput
+ * @property {string} priceId - The ID of a BillingPrice
+ * @property {number} [quantity] - The quantity, defaults to 1
+ */
+
+/**
+ * The recurrence details for a BillingPrice
+ * @typedef {Object} BillingPriceRecurring
+ * @property {number} count - The number of interval per recurrence
+ * @property {BillingPriceRecurringInterval} interval - The interval type
+ */
+
+/**
+ * The interval type
+ * @typedef {("Day"|"Month"|"Week"|"Year")} BillingPriceRecurringInterval
+ */
+
+/**
+ * A product corresponding to a price
+ * @typedef {Object} BillingProduct
+ * @property {string} [description] - The description for this product
+ * @property {string} id - The unique id for this product
+ * @property {string} name - The name of this product
+ */
+
+/**
+ * A billing subscription
+ * @typedef {Object} BillingSubscription
+ * @property {string} created - The date when the subscription was created
+ * @property {string} id - The unique id for this subscription
+ * @property {string} modified - The date when the subscription was last modified
+ * @property {Array<BillingPlan>} plans - The plans attached to this subscription
+ * @property {Profile} profile - Profile that this billing subscription belongs to
+ * @property {BillingSubscriptionStatus} status - The current status of this subscription
+ */
+
+/**
+ * Connection of BillingSubscriptions
+ * @typedef {Object} BillingSubscriptionConnection
+ * @property {Array<BillingSubscriptionEdge>} edges - All the edges in this page of the connection
+ * @property {Array<BillingSubscription>} nodes - Shortcut for edges[].node
+ * @property {PageInfo} pageInfo - Details regarding the current page of the connnection
+ * @property {number} totalCount - The total number of items in the connection (in all pages)
+ */
+
+/**
+ * Edge containing a BillingSubscription
+ * @typedef {Object} BillingSubscriptionEdge
+ * @property {string} cursor - The cursor string pointing to this item
+ * @property {BillingSubscription} node - The item
+ */
+
+/**
+ * The status of a BillingSubscription
+ * @typedef {("Active"|"Cancelled"|"Expired"|"Inactive")} BillingSubscriptionStatus
  */
 
 /**
  * A bounding box on a map defined by two positions (opposite corners of the box)
  * @typedef {Object} Bounds
- * @property {number} w - The west-most longitude of the bounding box
- * @property {number} s - The south-most latitude of the bounding box
  * @property {number} e - The east-most longitude of the bounding box
- * @property {number} n - The north-most latitude of the bounding box
- * @property {Array<number>} ws - The south-west point of the bounding box in the form: [west, south]
  * @property {Array<number>} en - The north-east point of the bounding box in the form: [east, north]
- * @property {Array<number>} wsen - The south-west and north-east points of the bounding box in the form: [west, south, east, north]
  * @property {Array<Array<number>>} minMax - The minimum and maximum points of the bounding box in the form: [minimum, maximum]
+ * @property {number} n - The north-most latitude of the bounding box
+ * @property {number} s - The south-most latitude of the bounding box
+ * @property {number} w - The west-most longitude of the bounding box
+ * @property {Array<number>} ws - The south-west point of the bounding box in the form: [west, south]
+ * @property {Array<number>} wsen - The south-west and north-east points of the bounding box in the form: [west, south, east, north]
  */
 
 /**
@@ -87,10 +216,22 @@ export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Mayb
 /**
  * A bounding box on a map defined by two positions (opposite corners of the box)
  * @typedef {Object} BoundsInput
- * @property {number} n - The north-most latitude of the bounding box
  * @property {number} e - The east-most longitude of the bounding box
+ * @property {number} n - The north-most latitude of the bounding box
  * @property {number} s - The south-most latitude of the bounding box
  * @property {number} w - The west-most longitude of the bounding box
+ */
+
+/**
+ * The result of Mutation.captureMarketingInformation
+ * @typedef {Object} CaptureMarketingInformationPayload
+ * @property {string} [profileId] - The ID of the profile that the information is associated against
+ */
+
+/**
+ * Response to Mutation.changeItineraryDefaultLocale
+ * @typedef {Object} ChangeItineraryDefaultLocalePayload
+ * @property {Itinerary} [itinerary] - The changed itinerary
  */
 
 /**
@@ -102,26 +243,25 @@ export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Mayb
 /**
  * A collection type is used to group together a unordered set of items
  * @typedef {Object} Collection
- * @property {string} id - The Globally Unique ID of the object.
- * @property {Profile} profile - Profile that owns this collection
- * @property {string} [created] - The date when the collection was created
- * @property {string} [modified] - The date when the collection was last modified
- * @property {string} [title] - A supplied title for this collection
- * @property {string} [synopsis] - A short text summary
- * @property {string} [description] - A longer text description
- * @property {Array<string>} tags - A series of strings applied to label this item
- * @property {Array<MediaContainer>} media - List of MediaContainers containing images or other media
- * @property {MediaContainer} [preferredMedia] - A single MediaContainer representing the preferred media to use
- * @property {string} [readMoreUrl] - Alias for the read-more attribute
- * @property {string} [websiteUrl] - Alias for the website-url attribute
  * @property {Attribute} [attr] - Arbitrary JSON value stored on this resource, keyed by an id
  * @property {JSON} [attrValue] - Shortcut for the attr.value, returns null if the attribute doesn't exist
- * @property {Array<(Attribute|null|undefined)>} attrs - Query multiple attributes by id and optionally locale
- * @property {AttributeConnection} allAttrs - Return all attributes on the resource
- * @property {AttributeConnection} attrsById - Query multiple attributes with the same id and optionally locale
+ * @property {AttributeConnection} attrs - Query multiple attributes optionally filtering by id and/or locale
+ * @property {string} [created] - The date when the collection was created
+ * @property {string} [description] - A longer text description
  * @property {string} discriminator - A label used to differentiate types of collections
- * @property {CollectionItem} [item] - Returns an item belonging to this collection by id
+ * @property {string} id - The Globally Unique ID of the object.
+ * @property {CollectionItemEmbedded} [item] - Returns an item belonging to this collection by id
  * @property {CollectionItemConnection} items - Retrieve multiple collection-items belonging to this collection
+ * @property {Array<MediaContainer>} media - List of MediaContainers containing images or other media - DEPRECATED: use mediaContainers instead
+ * @property {MediaContainerConnection} mediaContainers - List of MediaContainers containing images or other media
+ * @property {string} [modified] - The date when the collection was last modified
+ * @property {MediaContainer} [preferredMedia] - A single MediaContainer representing the preferred media to use
+ * @property {Profile} profile - Profile that owns this collection
+ * @property {string} [readMoreUrl] - Alias for the read-more attribute
+ * @property {string} [synopsis] - A short text summary
+ * @property {Array<string>} tags - A series of strings applied to label this item
+ * @property {string} [title] - A supplied title for this collection
+ * @property {string} [websiteUrl] - Alias for the website-url attribute
  */
 
 /**
@@ -148,26 +288,25 @@ export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Mayb
 /**
  * A collection item contains data about a single entity and is assigned within a collection
  * @typedef {Object} CollectionItem
- * @property {string} id - The unique identifier, taking the shape of item/XYZ
- * @property {Profile} profile - The associated profile owner
- * @property {string} [created] - The date when the collection-item was created
- * @property {string} [modified] - The date when the collection-item was last modified
- * @property {string} [title] - The supplied title
- * @property {string} [synopsis] - A short text summary
- * @property {string} [description] - A longer text description
- * @property {Array<string>} tags - A series of strings applied to label this item
- * @property {Array<MediaContainer>} media - List of MediaContainers containing images or other media
- * @property {MediaContainer} [preferredMedia] - The preferred MediaContainer to use
- * @property {string} [readMoreUrl] - Alias for the read-more attribute
- * @property {string} [websiteUrl] - Alias for the website-url attribute
- * @property {Array<string>} sectionIds - One or more sections this item belongs to
- * @property {string} [externalId] - Identifier from an external source this item is associated with
- * @property {string} [externalSource] - The source of the item's externalId
  * @property {Attribute} [attr] - Arbitrary JSON value stored on this resource, keyed by an id
  * @property {JSON} [attrValue] - Shortcut for the attr.value, returns null if the attribute doesn't exist
- * @property {Array<(Attribute|null|undefined)>} attrs - Query multiple attributes by id and optionally locale
- * @property {AttributeConnection} allAttrs - Return all attributes on the resource
- * @property {AttributeConnection} attrsById - Query multiple attributes with the same id and optionally locale
+ * @property {AttributeConnection} attrs - Query multiple attributes optionally filtering by id and/or locale
+ * @property {string} [created] - The date when the collection-item was created
+ * @property {string} [description] - A longer text description
+ * @property {string} [externalId] - Identifier from an external source this item is associated with
+ * @property {string} [externalSource] - The source of the item's externalId
+ * @property {string} id - The unique identifier, taking the shape of item/XYZ
+ * @property {Array<MediaContainer>} media - List of MediaContainers containing images or other media - DEPRECATED: use mediaContainers instead
+ * @property {MediaContainerConnection} mediaContainers - List of MediaContainers containing images or other media
+ * @property {string} [modified] - The date when the collection-item was last modified
+ * @property {MediaContainer} [preferredMedia] - The preferred MediaContainer to use
+ * @property {Profile} profile - The associated profile owner
+ * @property {string} [readMoreUrl] - Alias for the read-more attribute
+ * @property {Array<string>} sectionIds - One or more sections this item belongs to
+ * @property {string} [synopsis] - A short text summary
+ * @property {Array<string>} tags - A series of strings applied to label this item
+ * @property {string} [title] - The supplied title
+ * @property {string} [websiteUrl] - Alias for the website-url attribute
  */
 
 /**
@@ -187,6 +326,17 @@ export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Mayb
  */
 
 /**
+ * A CollectionItem that's embedded in another resource
+ * @typedef {(CollectionItemFailedToLoad|CollectionLocation)} CollectionItemEmbedded
+ */
+
+/**
+ * Represents an embedded CollectionItem that failed to load
+ * @typedef {Object} CollectionItemFailedToLoad
+ * @property {string} id - The Globally Unique ID of the object.
+ */
+
+/**
  * Determine how to sort CollectionItems when listing
  * @typedef {Object} CollectionItemsSort
  * @property {SortDirection} [created] - Sort by the created date
@@ -197,29 +347,30 @@ export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Mayb
 /**
  * A CollectionItem used to represents a single location association to a place.
  * @typedef {Object} CollectionLocation
- * @property {string} id - The unique identifier, taking the shape of item/XYZ
- * @property {Profile} profile - The associated profile owner
- * @property {string} [created] - The date when the collection-item was created
- * @property {string} [modified] - The date when the collection-item was last modified
- * @property {string} [title] - The supplied title
- * @property {string} [synopsis] - A short text summary
- * @property {string} [description] - A longer text description
- * @property {Array<string>} tags - A series of strings applied to label this item
- * @property {Array<MediaContainer>} media - List of MediaContainers containing images or other media
- * @property {MediaContainer} [preferredMedia] - The preferred MediaContainer to use
- * @property {string} [readMoreUrl] - Alias for the read-more attribute
- * @property {string} [websiteUrl] - Alias for the website-url attribute
- * @property {Array<string>} sectionIds - One or more sections this item belongs to
- * @property {string} [externalId] - Identifier from an external source this item is associated with
- * @property {string} [externalSource] - The source of the item's externalId
+ * @property {PlaceAddress} address - Address information for the collection location
  * @property {Attribute} [attr] - Arbitrary JSON value stored on this resource, keyed by an id
  * @property {JSON} [attrValue] - Shortcut for the attr.value, returns null if the attribute doesn't exist
- * @property {Array<(Attribute|null|undefined)>} attrs - Query multiple attributes by id and optionally locale
- * @property {AttributeConnection} allAttrs - Return all attributes on the resource
- * @property {AttributeConnection} attrsById - Query multiple attributes with the same id and optionally locale
+ * @property {AttributeConnection} attrs - Query multiple attributes optionally filtering by id and/or locale
+ * @property {Bounds} [bounds] - The bounding box around the collection-location (derived from place if not overridden)
+ * @property {PlaceContact} contact - Contact information for the collection location
+ * @property {string} [created] - The date when the collection-item was created
+ * @property {string} [description] - A longer text description
+ * @property {string} [externalId] - Identifier from an external source this item is associated with
+ * @property {string} [externalSource] - The source of the item's externalId
+ * @property {string} id - The unique identifier, taking the shape of item/XYZ
+ * @property {Array<MediaContainer>} media - List of MediaContainers containing images or other media - DEPRECATED: use mediaContainers instead
+ * @property {MediaContainerConnection} mediaContainers - List of MediaContainers containing images or other media
+ * @property {string} [modified] - The date when the collection-item was last modified
  * @property {Place} place - The associated place information for this location
  * @property {Position} position - The position of the collection-location (derived from place if not overridden)
- * @property {Bounds} [bounds] - The bounding box around the collection-location (derived from place if not overridden)
+ * @property {MediaContainer} [preferredMedia] - The preferred MediaContainer to use
+ * @property {Profile} profile - The associated profile owner
+ * @property {string} [readMoreUrl] - Alias for the read-more attribute
+ * @property {Array<string>} sectionIds - One or more sections this item belongs to
+ * @property {string} [synopsis] - A short text summary
+ * @property {Array<string>} tags - A series of strings applied to label this item
+ * @property {string} [title] - The supplied title
+ * @property {string} [websiteUrl] - Alias for the website-url attribute
  */
 
 /**
@@ -232,25 +383,25 @@ export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Mayb
 
 /**
  * Points on the compass rose
- * @typedef {("N"|"NE"|"E"|"SE"|"S"|"SW"|"W"|"NW")} CompassPoint
+ * @typedef {("E"|"N"|"NE"|"NW"|"S"|"SE"|"SW"|"W")} CompassPoint
  */
 
 /**
  * Connected apps stored in the profile
  * @typedef {Object} ConnectedApp
- * @property {string} id - The Globally Unique ID of the object.
- * @property {Profile} [profile] - The profile associated with this connected app
- * @property {ConnectedAppType} [type] - A key to describe the type of connection to the application
- * @property {ConnectedAppServiceKey} serviceKey - This is the key relating to the service - it identifies the "App" we are connecting to
  * @property {ConnectedAppAuthType} [authType] - Depending on the authentication method, this can highlight the authenticated application method (e.g. OAuth)
+ * @property {string} id - The Globally Unique ID of the object.
+ * @property {JSON} [privateConfiguration] - Private configuration information as encrypted JSON
+ * @property {Profile} [profile] - The profile associated with this connected app
+ * @property {string} [publicId] - A 3rd party ID or Account ID, this does not affect any of the Alpaca ID naming - for instance, if we are connecting to an Identity in OAUTH, this is the OAUTH Identity ID - This is just a place to store data
  * @property {string} [scope] - Any specific scope that has been granted to the 3rd party application
- * @property {JSON} [configuration] - Encrypted JSON
- * @property {string} [thirdPartyId] - A 3rd party ID or Account ID, this does not affect any of the Alpaca ID naming - for instance, if we are connecting to an Identity in OAUTH, this is the OAUTH Identity ID - This is just a place to store data
+ * @property {ConnectedAppServiceKey} serviceKey - This is the key relating to the service - it identifies the "App" we are connecting to
+ * @property {ConnectedAppType} [type] - A key to describe the type of connection to the application
  */
 
 /**
  * Possible auth types for a ConnectedApp
- * @typedef {("Tokens"|"Oauth"|"Credentials")} ConnectedAppAuthType
+ * @typedef {("Credentials"|"Oauth"|"Tokens")} ConnectedAppAuthType
  */
 
 /**
@@ -271,44 +422,56 @@ export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Mayb
 
 /**
  * The key of the service for a ConnectedApp
- * @typedef {("AustralianTourismDataWarehouse"|"CrowdriffApi"|"ShopifyApi")} ConnectedAppServiceKey
+ * @typedef {("AlpacaLegacy"|"AustralianTourismDataWarehouse"|"CrowdriffApi"|"GoogleAnalytics4"|"ShopifyApi")} ConnectedAppServiceKey
  */
 
 /**
  * Possible types of ConnectedApp
- * @typedef {("Configuration"|"Credentials"|"Api")} ConnectedAppType
+ * @typedef {("Api"|"Configuration"|"Credentials")} ConnectedAppType
+ */
+
+/**
+ * The output after creating a billing checkout session
+ * @typedef {Object} CreateBillingCheckoutSessionOutput
+ * @property {string} url - The url for the checkout session
+ */
+
+/**
+ * The output after creating a billing portal session
+ * @typedef {Object} CreateBillingPortalSessionOutput
+ * @property {string} url - The url for the portal session
  */
 
 /**
  * Creates a collection
  * @typedef {Object} CreateCollectionInput
- * @property {CollectionDiscriminator} discriminator - A label used to differentiate types of collections
- * @property {string} [title] - Title of the collection
- * @property {string} [synopsis] - A short text summary
- * @property {string} [description] - A longer text description
- * @property {Array<string>} [tags] - A series of strings applied to label the collection
- * @property {string} [readMoreUrl] - Alias for the read-more attribute
- * @property {string} [websiteUrl] - Alias for the website-url attribute
  * @property {Array<AttributeInput>} [attrs] - Additional data defined on the collection
+ * @property {string} [description] - A longer text description
+ * @property {CollectionDiscriminator} discriminator - A label used to differentiate types of collections
  * @property {Array<CreateMediaContainerInput>} [media] - The list of MediaContainers to add to the new Collection
+ * @property {string} [readMoreUrl] - Alias for the read-more attribute
+ * @property {string} [synopsis] - A short text summary
+ * @property {Array<string>} [tags] - A series of strings applied to label the collection
+ * @property {string} [title] - Title of the collection
+ * @property {string} [websiteUrl] - Alias for the website-url attribute
  */
 
 /**
  * The input to create a collection location
  * @typedef {Object} CreateCollectionLocationInput
- * @property {string} [title] - Title for the new item
- * @property {string} [synopsis] - A short summary text content for the new item
+ * @property {Array<AttributeInput>} [attrs] - Additional data defined on this CollectionLocation
  * @property {string} [description] - A longer description content for the new item
- * @property {Array<string>} [tags] - A collection of strings used to label the new item
- * @property {string} [readMoreUrl] - Alias for the read-more attribute
- * @property {string} [websiteUrl] - Alias for the website-url attribute
- * @property {Array<string>} [sectionIds] - One or more sections for this new item
  * @property {string} [externalId] - Identifier from an external source this new item is associated with
  * @property {string} [externalSource] - The source of this item's externalId
- * @property {Array<AttributeInput>} [attrs] - Additional data defined on this CollectionLocation
  * @property {Array<CreateMediaContainerInput>} [media] - The list of MediaContainers to add to the new CollectionLocation
  * @property {PlaceInput} place - The associated place record for this location
  * @property {PositionInput} [position] - Override for the place's position
+ * @property {string} [readMoreUrl] - Alias for the read-more attribute
+ * @property {Array<string>} [sectionIds] - One or more sections for this new item
+ * @property {string} [synopsis] - A short summary text content for the new item
+ * @property {Array<string>} [tags] - A collection of strings used to label the new item
+ * @property {string} [title] - Title for the new item
+ * @property {string} [websiteUrl] - Alias for the website-url attribute
  */
 
 /**
@@ -326,12 +489,12 @@ export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Mayb
 /**
  * Create a new ConnectedApp
  * @typedef {Object} CreateConnectedAppInput
- * @property {ConnectedAppType} [type] - The type of the connected-app
- * @property {ConnectedAppServiceKey} serviceKey - Identifies the service being connected to
- * @property {string} [scope] - Any specific scope that has been granted to the 3rd party application
  * @property {ConnectedAppAuthType} [authType] - The authenticated application method
- * @property {JSON} [configuration] - Encrypted JSON
- * @property {string} [thirdPartyId] - 3rd party ID or account ID
+ * @property {JSON} [privateConfiguration] - Encrypted JSON
+ * @property {string} [publicId] - 3rd party ID or account ID
+ * @property {string} [scope] - Any specific scope that has been granted to the 3rd party application
+ * @property {ConnectedAppServiceKey} serviceKey - Identifies the service being connected to
+ * @property {ConnectedAppType} [type] - The type of the connected-app
  */
 
 /**
@@ -341,104 +504,134 @@ export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Mayb
  */
 
 /**
+ * Create an IconComposition
+ * @typedef {Object} CreateIconCompositionInput
+ * @property {string} [iconFill] - Optional fill color for the icon
+ * @property {string} name - A name for this IconComposition, should be unique across the itinerary
+ * @property {string} resourceId - ID to the Icon used by this IconComposition
+ * @property {string} [shieldFill] - Optional fill color for the shield
+ * @property {string} [shieldKey] - Indicates which shield to use
+ * @property {string} [shieldStroke] - Optional stroke color for the shield
+ */
+
+/**
+ * Fields for a new IconSilhouette
+ * @typedef {Object} CreateIconSilhouetteInput
+ * @property {Array<AttributeInput>} [attrs] - Additional data defined on the icon
+ * @property {string} name - The name of the icon, key will be generated from this value and so should be unique across the profile
+ * @property {Array<string>} paths - SVG path data for this icon, eg: "M 100 .."
+ * @property {string} [viewBox] - Optional SVG viewBox for this icon
+ */
+
+/**
+ * The response after creating an IconSilhouette
+ * @typedef {Object} CreateIconSilhouettePayload
+ * @property {IconSilhouette} [icon] - The newly created IconSilhouette
+ */
+
+/**
  * Creates an itinerary item collection type
  * @typedef {Object} CreateItineraryCollectionInput
- * @property {string} [title] - The title for the new itinerary-collection
- * @property {string} [synopsis] - The synopsis for the new itinerary-collection
- * @property {string} [description] - The description for the new itinerary-collection
- * @property {Array<string>} [tags] - The tags for the new itinerary-collection
- * @property {string} [readMoreUrl] - Alias for the read-more attribute
- * @property {string} [websiteUrl] - Alias for the website-url attribute
  * @property {Array<AttributeInput>} [attrs] - Additional data defined on the collection
+ * @property {string} [description] - The description for the new itinerary-collection
  * @property {Array<CreateMediaContainerInput>} [media] - The list of MediaContainers to add to the new ItineraryCollection
- * @property {ItineraryItemPositionAtStart} [positionAtStart] - Creates the item positioned before all its siblings
- * @property {ItineraryItemPositionAtEnd} [positionAtEnd] - Creates the item positioned after all its siblings
  * @property {ItineraryItemPositionAfterSibling} [positionAfterSibling] - Create the item positioned after the given sibling
+ * @property {ItineraryItemPositionAtEnd} [positionAtEnd] - Creates the item positioned after all its siblings
+ * @property {ItineraryItemPositionAtStart} [positionAtStart] - Creates the item positioned before all its siblings
  * @property {ItineraryItemPositionBeforeSibling} [positionBeforeSibling] - Create the item positioned before the given sibling
  * @property {ItineraryItemPositionOnLastCollection} [positionOnLastCollection] - Create the item at last position of the last itinerary-collection item
+ * @property {string} [readMoreUrl] - Alias for the read-more attribute
+ * @property {string} [synopsis] - The synopsis for the new itinerary-collection
+ * @property {Array<string>} [tags] - The tags for the new itinerary-collection
+ * @property {string} [title] - The title for the new itinerary-collection
+ * @property {string} [websiteUrl] - Alias for the website-url attribute
  */
 
 /**
  * The fields available after creating an itinerary collection
  * @typedef {Object} CreateItineraryCollectionPayload
+ * @property {ItineraryItemCascadedChanges} cascaded - Other changes to the itinerary caused by the creation of the itinerary-collection
  * @property {ItineraryCollection} [collection] - The created itinerary collection
  * @property {Itinerary} itinerary - The modified itinerary
- * @property {ItineraryItemCascadedChanges} cascaded - Other changes to the itinerary caused by the creation of the itinerary-collection
  */
 
 /**
  * The input fields to creating new itinerary directions items
  * @typedef {Object} CreateItineraryDirectionsInput
- * @property {string} [title] - The title for the new itinerary-directions
- * @property {string} [synopsis] - The synopsis for the new itinerary-directions
- * @property {string} [description] - The description for the new itinerary-directions
- * @property {Array<string>} [tags] - The tags for the new itinerary-directions
- * @property {string} [readMoreUrl] - Alias for the read-more attribute
- * @property {string} [websiteUrl] - Alias for the website-url attribute
  * @property {Array<AttributeInput>} [attrs] - Additional data on the new itinerary
+ * @property {string} [description] - The description for the new itinerary-directions
+ * @property {number} [distance] - The distance of the new itinerary-directions
+ * @property {Array<ItineraryDirectionsDurationsInput>} [durations] - The duration details of the new itinerary-directions
+ * @property {ElevationInput} [elevation] - The elevation details of the new itinerary-directions
  * @property {Array<CreateMediaContainerInput>} [media] - The list of MediaContainers to add to the new ItineraryDirections
  * @property {string} [originId] - The origin itinerary location item, in the form of item/XYZ
- * @property {RouteInput} route - The route of this item, must include at least one route segment
- * @property {Array<ItineraryDirectionsDurationsInput>} [durations] - The duration details of the new itinerary-directions
- * @property {number} [distance] - The distance of the new itinerary-directions
- * @property {ElevationInput} [elevation] - The elevation details of the new itinerary-directions
- * @property {ItineraryItemPositionAtStart} [positionAtStart] - Creates the itinerary-directions to be before all its siblings
- * @property {ItineraryItemPositionAtEnd} [positionAtEnd] - Creates the itinerary-directions to be after all its siblings
  * @property {ItineraryItemPositionAfterSibling} [positionAfterSibling] - Creates the itinerary-directions after the given sibling
+ * @property {ItineraryItemPositionAtEnd} [positionAtEnd] - Creates the itinerary-directions to be after all its siblings
+ * @property {ItineraryItemPositionAtStart} [positionAtStart] - Creates the itinerary-directions to be before all its siblings
  * @property {ItineraryItemPositionBeforeSibling} [positionBeforeSibling] - Creates the itinerary-directions before the given sibling
  * @property {ItineraryItemPositionOnLastCollection} [positionOnLastCollection] - Creates the itinerary-directions at the last position of the last itinerary-collection item
+ * @property {string} [readMoreUrl] - Alias for the read-more attribute
+ * @property {RouteInput} route - The route of this item, must include at least one route segment
+ * @property {string} [synopsis] - The synopsis for the new itinerary-directions
+ * @property {Array<string>} [tags] - The tags for the new itinerary-directions
+ * @property {string} [title] - The title for the new itinerary-directions
+ * @property {string} [websiteUrl] - Alias for the website-url attribute
  */
 
 /**
  * The itinerary directions return fields available after creating the itinerary directions
  * @typedef {Object} CreateItineraryDirectionsPayload
+ * @property {ItineraryItemCascadedChanges} cascaded - Other changes to the itinerary caused by the creation of the itinerary-directions
  * @property {ItineraryDirections} [directions] - The created itinerary directions item
  * @property {Itinerary} itinerary - The modified itinerary
- * @property {ItineraryItemCascadedChanges} cascaded - Other changes to the itinerary caused by the creation of the itinerary-directions
  */
 
 /**
  * Creates a itinerary
  * @typedef {Object} CreateItineraryInput
- * @property {string} [title] - The title for the new itinerary
- * @property {string} [synopsis] - The synopsis for the new itinerary
- * @property {string} [description] - The description for the new itinerary
- * @property {Array<string>} [tags] - The tags for the new itinerary
- * @property {string} [readMoreUrl] - Alias for the read-more attribute
- * @property {string} [websiteUrl] - Alias for the website-url attribute
  * @property {Array<AttributeInput>} [attrs] - Additional data on the new itinerary
  * @property {ItineraryAutoRouteInput} [autoRoute] - Enable auto routing, or set to null to disable
+ * @property {string} [defaultLocale] - The default locale of this itinerary's content
+ * @property {string} [description] - The description for the new itinerary
  * @property {ElevationInput} [elevation] - Elevation data of the new itinerary
+ * @property {Array<CreateIconCompositionInput>} [icons] - The list of IconCompositions to add to the new Itinerary
  * @property {Array<CreateMediaContainerInput>} [media] - The list of MediaContainers to add to the new Itinerary
+ * @property {string} [readMoreUrl] - Alias for the read-more attribute
+ * @property {string} [synopsis] - The synopsis for the new itinerary
+ * @property {Array<string>} [tags] - The tags for the new itinerary
+ * @property {string} [title] - The title for the new itinerary
+ * @property {string} [websiteUrl] - Alias for the website-url attribute
  */
 
 /**
  * The fields to create an itinerary location
  * @typedef {Object} CreateItineraryLocationInput
- * @property {string} [title] - The title for the new itinerary-location
- * @property {string} [synopsis] - The synopsis for the new itinerary-location
- * @property {string} [description] - The description for the new itinerary-location
- * @property {Array<string>} [tags] - The tags for the new itinerary-location
- * @property {string} [readMoreUrl] - Alias for the read-more attribute
- * @property {string} [websiteUrl] - Alias for the website-url attribute
  * @property {Array<AttributeInput>} [attrs] - Additional data defined on the collection
+ * @property {BoundsInput} [bounds] - The bounds of the itinerary-location
+ * @property {string} [description] - The description for the new itinerary-location
+ * @property {string} [icon] - Set the optional icon, passed ID must exist in the Itinerary.icons
  * @property {Array<CreateMediaContainerInput>} [media] - The list of MediaContainers to add to the new ItineraryLocation
- * @property {PositionInput} [position] - The position of the itinerary-location
- * @property {PlaceInput} place - The place for this new itinerary-location
  * @property {boolean} [optional] - Whether this is an optional location on the itinerary
- * @property {ItineraryItemPositionAtStart} [positionAtStart] - Creates the item positioned before all its siblings
- * @property {ItineraryItemPositionAtEnd} [positionAtEnd] - Creates the item positioned after all its siblings
+ * @property {PlaceInput} place - The place for this new itinerary-location
+ * @property {PositionInput} [position] - The position of the itinerary-location
  * @property {ItineraryItemPositionAfterSibling} [positionAfterSibling] - Create the item positioned after the given sibling
+ * @property {ItineraryItemPositionAtEnd} [positionAtEnd] - Creates the item positioned after all its siblings
+ * @property {ItineraryItemPositionAtStart} [positionAtStart] - Creates the item positioned before all its siblings
  * @property {ItineraryItemPositionBeforeSibling} [positionBeforeSibling] - Create the item positioned before the given sibling
  * @property {ItineraryItemPositionOnLastCollection} [positionOnLastCollection] - Create the item at last position of the last itinerary-collection item
+ * @property {string} [readMoreUrl] - Alias for the read-more attribute
+ * @property {string} [synopsis] - The synopsis for the new itinerary-location
+ * @property {Array<string>} [tags] - The tags for the new itinerary-location
+ * @property {string} [title] - The title for the new itinerary-location
+ * @property {string} [websiteUrl] - Alias for the website-url attribute
  */
 
 /**
  * The fields available after creating an itinerary location
  * @typedef {Object} CreateItineraryLocationPayload
- * @property {ItineraryLocation} [location] - The itinerary location that was created
- * @property {Itinerary} itinerary - The modified itinerary
  * @property {ItineraryItemCascadedChanges} cascaded - Other changes to the itinerary caused by the creation of the itinerary-location
+ * @property {Itinerary} itinerary - The modified itinerary
+ * @property {ItineraryLocation} [location] - The itinerary location that was created
  */
 
 /**
@@ -448,25 +641,55 @@ export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Mayb
  */
 
 /**
- * Create a MediaContainer
+ * Create a MediaContainer in a MediaContainer list
  * @typedef {Object} CreateMediaContainerInput
- * @property {string} resourceId - ID to a MediaResource to contain
- * @property {MediaContainerPositionBefore} [positionBefore] - Add the MediaContainer before another container in the list
  * @property {MediaContainerPositionAfter} [positionAfter] - Add the MediaContainer after another container in the list
- * @property {MediaContainerPositionAtStart} [positionAtStart] - Add the MediaContainer at the start of the list
  * @property {MediaContainerPositionAtEnd} [positionAtEnd] - Add the MediaContainer at the end of the list
+ * @property {MediaContainerPositionAtStart} [positionAtStart] - Add the MediaContainer at the start of the list
+ * @property {MediaContainerPositionBefore} [positionBefore] - Add the MediaContainer before another container in the list
+ * @property {string} resourceId - ID to a MediaResource to contain
+ */
+
+/**
+ * Input object to Mutation.createProfile
+ * @typedef {Object} CreateProfileInput
+ * @property {Array<AttributeInput>} [attrs] - Additional data defined on the profile
+ * @property {boolean} [autoApproveFollows] - If follow requests should be automatically approved for this profile
+ * @property {MediaContainerInput} [avatar] - The avatar image
+ * @property {string} [bio] - A short biography
+ * @property {string} name - The name of the profile
+ * @property {ProfileType} type - The type of profile
+ * @property {string} [websiteUrl] - The website url
+ */
+
+/**
+ * Response payload to Mutation.createProfile
+ * @typedef {Object} CreateProfilePayload
+ * @property {Profile} [profile] - The newly created profile
+ */
+
+/**
+ * Input object to Mutation.createUserAgreement
+ * @typedef {Object} CreateUserAgreementInput
+ * @property {string} type - The type of agreement
+ */
+
+/**
+ * The return fields available after creating a user agreement
+ * @typedef {Object} CreateUserAgreementPayload
+ * @property {UserAgreement} [userAgreement] - The newly created user agreement
  */
 
 /**
  * An offset in date and/or time represented as integer differences for each datetime field
  * @typedef {Object} DatetimeOffset
- * @property {number} [years] - Positive or negative difference for years
- * @property {number} [months] - Positive or negative difference for months
- * @property {number} [weeks] - Positive or negative difference for weeks
  * @property {number} [days] - Positive or negative difference for days
  * @property {number} [hours] - Positive or negative difference for hours
  * @property {number} [minutes] - Positive or negative difference for minutes
+ * @property {number} [months] - Positive or negative difference for months
  * @property {number} [seconds] - Positive or negative difference for seconds
+ * @property {number} [weeks] - Positive or negative difference for weeks
+ * @property {number} [years] - Positive or negative difference for years
  */
 
 /**
@@ -488,11 +711,17 @@ export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Mayb
  */
 
 /**
+ * The response after deleting an icon
+ * @typedef {Object} DeleteIconResourcePayload
+ * @property {string} [id] - The ID of the deleted icon
+ */
+
+/**
  * Deletes a itinerary item
  * @typedef {Object} DeleteItineraryItemPayload
+ * @property {ItineraryItemCascadedChanges} cascaded - Other changes to the itinerary that caused by deleting the itinerary-item
  * @property {string} [id] - The itinerary item identifier, in the form of item/XYZ
  * @property {Itinerary} itinerary - The modified itinerary
- * @property {ItineraryItemCascadedChanges} cascaded - Other changes to the itinerary that caused by deleting the itinerary-item
  */
 
 /**
@@ -502,21 +731,33 @@ export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Mayb
  */
 
 /**
+ * The result of deleting a profile
+ * @typedef {Object} DeleteProfilePayload
+ * @property {string} [id] - The ID of the profile itinerary
+ */
+
+/**
  * Result of denying a follow request
  * @typedef {Object} DenyProfileFollowPayload
  * @property {Profile} fromProfile - The follower profile
- * @property {Profile} toProfile - The profile being followed
  * @property {ProfileFollowStatus} [status] - The status of the follow request
+ * @property {Profile} toProfile - The profile being followed
  */
 
 /**
  * Distance unit
- * @typedef {("Kilometers"|"Feet"|"Miles"|"Meters")} DistanceUnit
+ * @typedef {("Feet"|"Kilometers"|"Meters"|"Miles")} DistanceUnit
+ */
+
+/**
+ * Response to Mutation.duplicateItinerary
+ * @typedef {Object} DuplicateItineraryPayload
+ * @property {Itinerary} [itinerary] - The newly duplicated itinerary
  */
 
 /**
  * Duration unit
- * @typedef {("Seconds"|"Minutes"|"Hours")} DurationUnit
+ * @typedef {("Hours"|"Minutes"|"Seconds")} DurationUnit
  */
 
 /**
@@ -524,8 +765,8 @@ export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Mayb
  * @typedef {Object} Elevation
  * @property {number} [gain] - The cumulative elevation gain
  * @property {number} [loss] - The cumulative elevation loss
- * @property {number} [min] - The minimum elevation
  * @property {number} [max] - The maximum elevation
+ * @property {number} [min] - The minimum elevation
  */
 
 /**
@@ -533,33 +774,33 @@ export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Mayb
  * @typedef {Object} ElevationInput
  * @property {number} [gain] - The cumulative elevation gain
  * @property {number} [loss] - The cumulative elevation loss
- * @property {number} [min] - The minimum elevation
  * @property {number} [max] - The maximum elevation
+ * @property {number} [min] - The minimum elevation
  */
 
 /**
  * Uploads a media resource
  * @typedef {Object} FinalizeMediaUploadInput
- * @property {Array<string>} [tags] - List of labels to apply to the new media-resource
  * @property {string} [attribution] - Text attribution for the source of the new media-resource
+ * @property {Array<AttributeInput>} [attrs] - Additional data to define on the new media-resource
  * @property {string} [caption] - Text caption for the new media-resource
  * @property {string} [copyright] - Copyright details of the new media-resource
- * @property {Array<AttributeInput>} [attrs] - Additional data to define on the new media-resource
+ * @property {Array<string>} [tags] - List of labels to apply to the new media-resource
  */
 
 /**
  * Result of finalizing a media upload
  * @typedef {Object} FinalizeMediaUploadPayload
- * @property {MediaUploadStatus} status - The status of this media upload
  * @property {MediaResource} [resource] - The newly created media-resource
+ * @property {MediaUploadStatus} status - The status of this media upload
  */
 
 /**
  * Result of creating a follow request
  * @typedef {Object} FollowProfilePayload
  * @property {Profile} fromProfile - The follower profile
- * @property {Profile} toProfile - The profile being followed
  * @property {ProfileFollowStatus} [status] - The status of the follow request
+ * @property {Profile} toProfile - The profile being followed
  */
 
 /**
@@ -571,23 +812,111 @@ export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Mayb
 /**
  * The Ramer-Douglas-Peucker algorithm
  * @typedef {Object} GeoJsonSimplificationRamerDouglasPeucker
- * @property {number} [tolerance] - The amount of application applied, higher values result in more simplification
  * @property {boolean} [highQuality] - Modify the algorithm to be slower by produce higher quality results
+ * @property {number} [tolerance] - The amount of application applied, higher values result in more simplification
+ */
+
+/**
+ * An icon with styles for use in an Itinerary
+ * @typedef {Object} IconComposition
+ * @property {string} created - The date when the IconComposition was created
+ * @property {string} [iconFill] - Optional fill color for the icon
+ * @property {string} id - The Globally Unique ID of the object.
+ * @property {string} key - A key for this IconComposition. Derived from the name
+ * @property {string} modified - The date when the IconComposition was last modified
+ * @property {string} name - A name for this IconComposition, should be unique across the itinerary
+ * @property {IconResourceEmbedded} resource - The Icon used by this IconComposition
+ * @property {string} [shieldFill] - Optional fill color for the shield
+ * @property {string} [shieldKey] - Indicates which shield to use
+ * @property {string} [shieldStroke] - Optional stroke color for the shield
+ */
+
+/**
+ * Connection of IconCompositions
+ * @typedef {Object} IconCompositionConnection
+ * @property {Array<IconCompositionEdge>} edges - All the edges in this page of the connection
+ * @property {Array<IconComposition>} nodes - Shortcut for edges[].node
+ * @property {PageInfo} pageInfo - Details regarding the current page of the connnection
+ * @property {number} totalCount - The total number of items in the connection (in all pages)
+ */
+
+/**
+ * Edge containing a IconComposition
+ * @typedef {Object} IconCompositionEdge
+ * @property {string} cursor - The cursor string pointing to this item
+ * @property {IconComposition} node - The item
+ */
+
+/**
+ * An icon for use in the UI or Map
+ * @typedef {Object} IconResource
+ * @property {Attribute} [attr] - Arbitrary JSON value stored on this resource, keyed by an id
+ * @property {JSON} [attrValue] - Shortcut for the attr.value, returns null if the attribute doesn't exist
+ * @property {AttributeConnection} attrs - Query multiple attributes optionally filtering by id and/or locale
+ * @property {string} [created] - The date when the icon was created
+ * @property {string} id - The Globally Unique ID of the object.
+ * @property {string} key - The key of the icon, unique across the profile
+ * @property {string} [modified] - The date when the icon was last modified
+ * @property {string} name - The supplied name for this icon
+ * @property {Profile} profile - The profile associated with this icon
+ */
+
+/**
+ * Connection of IconResources
+ * @typedef {Object} IconResourceConnection
+ * @property {Array<IconResourceEdge>} edges - All the edges in this page of the connection
+ * @property {Array<IconResource>} nodes - Shortcut for edges[].node
+ * @property {PageInfo} pageInfo - Details regarding the current page of the connnection
+ * @property {number} totalCount - The total number of items in the connection (in all pages)
+ */
+
+/**
+ * Edge containing a IconResource
+ * @typedef {Object} IconResourceEdge
+ * @property {string} cursor - The cursor string pointing to this item
+ * @property {IconResource} node - The item
+ */
+
+/**
+ * A IconResource embedded in another resource
+ * @typedef {(IconResourceFailedToLoad|IconSilhouette)} IconResourceEmbedded
+ */
+
+/**
+ * Represents an embedded IconResource that failed to load
+ * @typedef {Object} IconResourceFailedToLoad
+ * @property {string} id - The Globally Unique ID of the object.
+ */
+
+/**
+ * SVG path based IconResource
+ * @typedef {Object} IconSilhouette
+ * @property {Attribute} [attr] - Arbitrary JSON value stored on this resource, keyed by an id
+ * @property {JSON} [attrValue] - Shortcut for the attr.value, returns null if the attribute doesn't exist
+ * @property {AttributeConnection} attrs - Query multiple attributes optionally filtering by id and/or locale
+ * @property {string} [created] - The date when the icon was created
+ * @property {string} id - The Globally Unique ID of the object.
+ * @property {string} key - The key of the icon, unique across the profile
+ * @property {string} [modified] - The date when the icon was last modified
+ * @property {string} name - The supplied name for this icon
+ * @property {Array<string>} paths - SVG path data for this icon, eg: "M 100 .."
+ * @property {Profile} profile - The profile associated with this icon
+ * @property {string} [viewBox] - Optional SVG viewBox for this icon
  */
 
 /**
  * Isochrone for the given position with duration and vehicle
  * @typedef {Object} Isochrone
- * @property {number} [duration] - The duration of the isochrone
- * @property {Array<string>} copyrights - Copyright details of the isochrone
- * @property {IsochroneMode} mode - The mode of transport of the isochrone
  * @property {Bounds} bounds - A bounding box around the isochrone
+ * @property {Array<string>} copyrights - Copyright details of the isochrone
+ * @property {number} [duration] - The duration of the isochrone
+ * @property {IsochroneMode} mode - The mode of transport of the isochrone
  * @property {JSON} polygon - The isochrone as a geojson polygon
  */
 
 /**
  * Mode of transport for an isochrone
- * @typedef {("Car"|"Bike"|"Foot")} IsochroneMode
+ * @typedef {("Bike"|"Car"|"Foot")} IsochroneMode
  */
 
 /**
@@ -601,29 +930,33 @@ export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Mayb
 /**
  * An itinerary type is used to structure a series of items representing a travel itinerary
  * @typedef {Object} Itinerary
- * @property {string} id - The Globally Unique ID of the object.
- * @property {Profile} [profile] - Profile that owns this itinerary
- * @property {string} [created] - The date when the itinerary was created
- * @property {string} [modified] - The date when the itinerary was last modified
- * @property {ItineraryItem} [item] - Returns a single item from this itinerary by id
- * @property {ItineraryAutoRoute} [autoRoute] - If true, itinerary-directions will be created to automatically route between itinerary-locations
- * @property {string} [title] - The supplied title
- * @property {string} [synopsis] - A short text summary
- * @property {string} [description] - A longer text description
- * @property {Array<string>} tags - A series of strings applied to label this item
- * @property {Array<MediaContainer>} media - List of MediaContainers containing images or other media
- * @property {MediaContainer} [preferredMedia] - The preferred MediaContainer to use
- * @property {string} [readMoreUrl] - Alias for the read-more attribute
- * @property {string} [websiteUrl] - Alias for the website-url attribute
- * @property {ItineraryItemConnection} descendants - The descending items within this itinerary item
- * @property {ItineraryItemConnection} children - The immediate associated children itinerary items
  * @property {Attribute} [attr] - Arbitrary JSON value stored on this resource, keyed by an id
  * @property {JSON} [attrValue] - Shortcut for the attr.value, returns null if the attribute doesn't exist
- * @property {Array<(Attribute|null|undefined)>} attrs - Query multiple attributes by id and optionally locale
- * @property {AttributeConnection} attrsById - Query multiple attributes with the same id and optionally locale
- * @property {AttributeConnection} allAttrs - Return all attributes on the resource
+ * @property {AttributeConnection} attrs - Query multiple attributes optionally filtering by id and/or locale
+ * @property {ItineraryAutoRoute} [autoRoute] - If true, itinerary-directions will be created to automatically route between itinerary-locations
  * @property {Bounds} [bounds] - Bounds for the itinerary item
+ * @property {ItineraryItemConnection} children - The immediate associated children itinerary items
+ * @property {string} [created] - The date when the itinerary was created
+ * @property {string} [defaultLocale] - The default locale of this itinerary's content
+ * @property {ItineraryItemConnection} descendants - The descending items within this itinerary item
+ * @property {string} [description] - A longer text description
  * @property {Elevation} elevation - Elevation data of the itinerary
+ * @property {IconCompositionConnection} icons - Icons that are used in this itinerary
+ * @property {string} id - The Globally Unique ID of the object.
+ * @property {ItineraryItem} [item] - Returns a single item from this itinerary by id
+ * @property {string} [lastDraft] - The date when the draft version was last modified
+ * @property {string} [lastPublished] - The date when the itinerary was last published
+ * @property {Array<MediaContainer>} media - List of MediaContainers containing images or other media - DEPRECATED: use mediaContainers instead
+ * @property {MediaContainerConnection} mediaContainers - List of MediaContainers containing images or other media
+ * @property {string} [modified] - The date when the itinerary was last modified
+ * @property {MediaContainer} [preferredMedia] - The preferred MediaContainer to use
+ * @property {Profile} [profile] - Profile that owns this itinerary
+ * @property {string} [published] - The date when this itinerary was last published. Will be null on draft versions
+ * @property {string} [readMoreUrl] - Alias for the read-more attribute
+ * @property {string} [synopsis] - A short text summary
+ * @property {Array<string>} tags - A series of strings applied to label this item
+ * @property {string} [title] - The supplied title
+ * @property {string} [websiteUrl] - Alias for the website-url attribute
  */
 
 /**
@@ -641,72 +974,63 @@ export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Mayb
 /**
  * An itinerary item representing a collection of other itinerary items
  * @typedef {Object} ItineraryCollection
- * @property {string} id - Unique identifier for the itinerary-item
- * @property {string} [title] - The supplied title
- * @property {string} [synopsis] - A short text summary
- * @property {string} [description] - A longer text description
- * @property {Array<string>} tags - A series of strings applied to label this item
- * @property {Array<MediaContainer>} media - List of MediaContainers containing images or other media
- * @property {MediaContainer} [preferredMedia] - The preferred MediaContainer to use
- * @property {string} [readMoreUrl] - Alias for the read-more attribute
- * @property {string} [websiteUrl] - Alias for the website-url attribute
- * @property {Itinerary} itinerary - The itinerary this item belongs to
- * @property {ItineraryItem} [before] - The sibling item that comes before this item
  * @property {ItineraryItem} [after] - The sibling item that comes after this item
- * @property {ItineraryItem} [parent] - The parent item of this item
  * @property {ItineraryItemConnection} ancestors - All ancestors of the itinerary-item
- * @property {ItineraryItemConnection} descendants - All the descendants of the itinerary-item in depth-first-search order
- * @property {ItineraryItemConnection} children - All the direct children of the itinerary-item
  * @property {Attribute} [attr] - Arbitrary JSON value stored on this resource, keyed by an id
  * @property {JSON} [attrValue] - Shortcut for the attr.value, returns null if the attribute doesn't exist
- * @property {Array<(Attribute|null|undefined)>} attrs - Query multiple attributes by id and optionally locale
- * @property {AttributeConnection} attrsById - Query multiple attributes with the same id and optionally locale
- * @property {AttributeConnection} allAttrs - Return all attributes on the resource
+ * @property {AttributeConnection} attrs - Query multiple attributes optionally filtering by id and/or locale
+ * @property {ItineraryItem} [before] - The sibling item that comes before this item
  * @property {Bounds} [bounds] - Bounds for the itinerary item
- */
-
-/**
- * Connection of Itinerarys
- * @typedef {Object} ItineraryConnection
- * @property {Array<ItineraryEdge>} edges - All the edges in this page of the connection
- * @property {Array<Itinerary>} nodes - Shortcut for edges[].node
- * @property {PageInfo} pageInfo - Details regarding the current page of the connnection
- * @property {number} totalCount - The total number of items in the connection (in all pages)
+ * @property {ItineraryItemConnection} children - All the direct children of the itinerary-item
+ * @property {ItineraryItemConnection} descendants - All the descendants of the itinerary-item in depth-first-search order
+ * @property {string} [description] - A longer text description
+ * @property {string} id - Unique identifier for the itinerary-item
+ * @property {Itinerary} itinerary - The itinerary this item belongs to
+ * @property {Array<MediaContainer>} media - List of MediaContainers containing images or other media - DEPRECATED: use mediaContainers instead
+ * @property {MediaContainerConnection} mediaContainers - List of MediaContainers containing images or other media
+ * @property {ItineraryItem} [parent] - The parent item of this item
+ * @property {MediaContainer} [preferredMedia] - The preferred MediaContainer to use
+ * @property {string} [readMoreUrl] - Alias for the read-more attribute
+ * @property {number} [siblingPositionNumber] - A number corresponding to the item's position compared to it's siblings.
+ * @property {string} [synopsis] - A short text summary
+ * @property {Array<string>} tags - A series of strings applied to label this item
+ * @property {string} [title] - The supplied title
+ * @property {string} [websiteUrl] - Alias for the website-url attribute
  */
 
 /**
  * An itinerary item representing directions from an origin location to the parent location. This item encapsulates modes of transport and routes.
  * @typedef {Object} ItineraryDirections
- * @property {string} id - Unique identifier for the itinerary-item
- * @property {string} [title] - The supplied title
- * @property {string} [synopsis] - A short text summary
- * @property {string} [description] - A longer text description
- * @property {Array<string>} tags - A series of strings applied to label this item
- * @property {Array<MediaContainer>} media - List of MediaContainers containing images or other media
- * @property {MediaContainer} [preferredMedia] - The preferred MediaContainer to use
- * @property {string} [readMoreUrl] - Alias for the read-more attribute
- * @property {string} [websiteUrl] - Alias for the website-url attribute
- * @property {Itinerary} itinerary - The itinerary this item belongs to
- * @property {ItineraryItem} [before] - The sibling item that comes before this item
  * @property {ItineraryItem} [after] - The sibling item that comes after this item
- * @property {ItineraryItem} [parent] - The parent item of this item
  * @property {ItineraryItemConnection} ancestors - All ancestors of the itinerary-item
- * @property {ItineraryItemConnection} descendants - All the descendants of the itinerary-item in depth-first-search order
- * @property {ItineraryItemConnection} children - All the direct children of the itinerary-item
  * @property {Attribute} [attr] - Arbitrary JSON value stored on this resource, keyed by an id
  * @property {JSON} [attrValue] - Shortcut for the attr.value, returns null if the attribute doesn't exist
- * @property {Array<(Attribute|null|undefined)>} attrs - Query multiple attributes by id and optionally locale
- * @property {AttributeConnection} attrsById - Query multiple attributes with the same id and optionally locale
- * @property {AttributeConnection} allAttrs - Return all attributes on the resource
+ * @property {AttributeConnection} attrs - Query multiple attributes optionally filtering by id and/or locale
+ * @property {ItineraryItem} [before] - The sibling item that comes before this item
  * @property {Bounds} [bounds] - Bounds for the itinerary-directions and it's descendants
- * @property {ItineraryLocation} [origin] - The itinerary-location that is the starting point of the directions
+ * @property {ItineraryItemConnection} children - All the direct children of the itinerary-item
+ * @property {ItineraryItemConnection} descendants - All the descendants of the itinerary-item in depth-first-search order
+ * @property {string} [description] - A longer text description
  * @property {ItineraryLocation} [destination] - The itinerary-location that is the ending point of the directions
- * @property {Route} route - The route details of this directions item
- * @property {Array<ItineraryDirectionsDurations>} durations - The duration of this itinerary-directions
- * @property {number} [durationMin] - The minimum duration of this itinerary-directions
- * @property {number} [durationMax] - The maximum duration of this itinerary-directions
  * @property {number} [distance] - The estimated distance of this itinerary-directions
+ * @property {number} [durationMax] - The maximum duration of this itinerary-directions
+ * @property {number} [durationMin] - The minimum duration of this itinerary-directions
+ * @property {Array<ItineraryDirectionsDurations>} durations - The duration of this itinerary-directions
  * @property {Elevation} elevation - The elevation details of this itinerary-directions
+ * @property {string} id - Unique identifier for the itinerary-item
+ * @property {Itinerary} itinerary - The itinerary this item belongs to
+ * @property {Array<MediaContainer>} media - List of MediaContainers containing images or other media - DEPRECATED: use mediaContainers instead
+ * @property {MediaContainerConnection} mediaContainers - List of MediaContainers containing images or other media
+ * @property {ItineraryLocation} [origin] - The itinerary-location that is the starting point of the directions
+ * @property {ItineraryItem} [parent] - The parent item of this item
+ * @property {MediaContainer} [preferredMedia] - The preferred MediaContainer to use
+ * @property {string} [readMoreUrl] - Alias for the read-more attribute
+ * @property {Route} route - The route details of this directions item
+ * @property {number} [siblingPositionNumber] - A number corresponding to the item's position compared to it's siblings.
+ * @property {string} [synopsis] - A short text summary
+ * @property {Array<string>} tags - A series of strings applied to label this item
+ * @property {string} [title] - The supplied title
+ * @property {string} [websiteUrl] - Alias for the website-url attribute
  */
 
 /**
@@ -731,8 +1055,8 @@ export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Mayb
 /**
  * An itinerary-directions duration value
  * @typedef {Object} ItineraryDirectionsDurations
- * @property {string} id - Unique identifier for this duration
  * @property {number} duration - The duration value
+ * @property {string} id - Unique identifier for this duration
  * @property {string} [label] - Label for the duration
  */
 
@@ -747,8 +1071,8 @@ export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Mayb
  * Edge containing a ItineraryDirections
  * @typedef {Object} ItineraryDirectionsEdge
  * @property {string} cursor - The cursor string pointing to this item
- * @property {ItineraryDirections} node - The item
  * @property {ItineraryDirectionsDirection} direction - Whether this itinerary-directions is inbound or outbound from the itinerary-location
+ * @property {ItineraryDirections} node - The item
  */
 
 /**
@@ -757,44 +1081,37 @@ export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Mayb
  */
 
 /**
- * Edge containing a Itinerary
- * @typedef {Object} ItineraryEdge
- * @property {string} cursor - The cursor string pointing to this item
- * @property {Itinerary} node - The item
- */
-
-/**
  * An item in an itinerary as part of the tree
  * @typedef {Object} ItineraryItem
- * @property {string} id - Unique identifier for the itinerary-item
- * @property {string} [title] - The supplied title
- * @property {string} [synopsis] - A short text summary
- * @property {string} [description] - A longer text description
- * @property {Array<string>} tags - A series of strings applied to label this item
- * @property {Array<MediaContainer>} media - List of MediaContainers containing images or other media
- * @property {MediaContainer} [preferredMedia] - The preferred MediaContainer to use
- * @property {string} [readMoreUrl] - Alias for the read-more attribute
- * @property {string} [websiteUrl] - Alias for the website-url attribute
- * @property {Itinerary} itinerary - The itinerary this item belongs to
- * @property {ItineraryItem} [before] - The sibling item that comes before this item
  * @property {ItineraryItem} [after] - The sibling item that comes after this item
- * @property {ItineraryItem} [parent] - The parent item of this item
  * @property {ItineraryItemConnection} ancestors - All ancestors of the itinerary-item
- * @property {ItineraryItemConnection} descendants - All the descendants of the itinerary-item in depth-first-search order
- * @property {ItineraryItemConnection} children - All the direct children of the itinerary-item
  * @property {Attribute} [attr] - Arbitrary JSON value stored on this resource, keyed by an id
  * @property {JSON} [attrValue] - Shortcut for the attr.value, returns null if the attribute doesn't exist
- * @property {Array<(Attribute|null|undefined)>} attrs - Query multiple attributes by id and optionally locale
- * @property {AttributeConnection} attrsById - Query multiple attributes with the same id and optionally locale
- * @property {AttributeConnection} allAttrs - Return all attributes on the resource
+ * @property {AttributeConnection} attrs - Query multiple attributes optionally filtering by id and/or locale
+ * @property {ItineraryItem} [before] - The sibling item that comes before this item
  * @property {Bounds} [bounds] - Bounds for the itinerary item
+ * @property {ItineraryItemConnection} children - All the direct children of the itinerary-item
+ * @property {ItineraryItemConnection} descendants - All the descendants of the itinerary-item in depth-first-search order
+ * @property {string} [description] - A longer text description
+ * @property {string} id - Unique identifier for the itinerary-item
+ * @property {Itinerary} itinerary - The itinerary this item belongs to
+ * @property {Array<MediaContainer>} media - List of MediaContainers containing images or other media - DEPRECATED: use mediaContainers instead
+ * @property {MediaContainerConnection} mediaContainers - List of MediaContainers containing images or other media
+ * @property {ItineraryItem} [parent] - The parent item of this item
+ * @property {MediaContainer} [preferredMedia] - The preferred MediaContainer to use
+ * @property {string} [readMoreUrl] - Alias for the read-more attribute
+ * @property {number} [siblingPositionNumber] - A number corresponding to the item's position compared to it's siblings.
+ * @property {string} [synopsis] - A short text summary
+ * @property {Array<string>} tags - A series of strings applied to label this item
+ * @property {string} [title] - The supplied title
+ * @property {string} [websiteUrl] - Alias for the website-url attribute
  */
 
 /**
  * Changes to an itinerary caused by a mutation
  * @typedef {Object} ItineraryItemCascadedChanges
- * @property {Array<string>} deletedIds - Itinerary-items that were deleted due to the mutation
  * @property {Array<ItineraryItem>} created - Itinerary-items that were created due to the mutation
+ * @property {Array<string>} deletedIds - Itinerary-items that were deleted due to the mutation
  * @property {Array<ItineraryItem>} updated - Itinerary-items that were updated due to the mutation
  */
 
@@ -811,8 +1128,9 @@ export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Mayb
  * Edge containing a ItineraryItem
  * @typedef {Object} ItineraryItemEdge
  * @property {string} cursor - The cursor string pointing to this item
- * @property {ItineraryItem} node - The item
  * @property {ItineraryDirectionsConnection} directions - List itinerary-directions connecting this node to other nodes in the connection
+ * @property {number} [edgePositionNumber] - A number corresponding to the item's position in the connection.
+ * @property {ItineraryItem} node - The item
  */
 
 /**
@@ -847,39 +1165,83 @@ export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Mayb
 
 /**
  * Possible types of ItineraryItem
- * @typedef {("ItineraryCollection"|"ItineraryLocation"|"ItineraryDirections")} ItineraryItemType
+ * @typedef {("ItineraryCollection"|"ItineraryDirections"|"ItineraryLocation")} ItineraryItemType
  */
 
 /**
  * An itinerary item representing a location with an associated place in the itinerary
  * @typedef {Object} ItineraryLocation
- * @property {string} id - Unique identifier for the itinerary-item
- * @property {string} [title] - The supplied title
- * @property {string} [synopsis] - A short text summary
- * @property {string} [description] - A longer text description
- * @property {Array<string>} tags - A series of strings applied to label this item
- * @property {Array<MediaContainer>} media - List of MediaContainers containing images or other media
- * @property {MediaContainer} [preferredMedia] - The preferred MediaContainer to use
- * @property {string} [readMoreUrl] - Alias for the read-more attribute
- * @property {string} [websiteUrl] - Alias for the website-url attribute
- * @property {Itinerary} itinerary - The itinerary this item belongs to
- * @property {ItineraryItem} [before] - The sibling item that comes before this item
+ * @property {PlaceAddress} address - Address information for the itinerary location
  * @property {ItineraryItem} [after] - The sibling item that comes after this item
- * @property {ItineraryItem} [parent] - The parent item of this item
  * @property {ItineraryItemConnection} ancestors - All ancestors of the itinerary-item
- * @property {ItineraryItemConnection} descendants - All the descendants of the itinerary-item in depth-first-search order
- * @property {ItineraryItemConnection} children - All the direct children of the itinerary-item
  * @property {Attribute} [attr] - Arbitrary JSON value stored on this resource, keyed by an id
  * @property {JSON} [attrValue] - Shortcut for the attr.value, returns null if the attribute doesn't exist
- * @property {Array<(Attribute|null|undefined)>} attrs - Query multiple attributes by id and optionally locale
- * @property {AttributeConnection} attrsById - Query multiple attributes with the same id and optionally locale
- * @property {AttributeConnection} allAttrs - Return all attributes on the resource
- * @property {Bounds} bounds - Bounds for the itinerary-location and it's descendants
+ * @property {AttributeConnection} attrs - Query multiple attributes optionally filtering by id and/or locale
+ * @property {ItineraryItem} [before] - The sibling item that comes before this item
+ * @property {Bounds} [bounds] - Bounds for the itinerary-location and it's descendants
+ * @property {ItineraryItemConnection} children - All the direct children of the itinerary-item
+ * @property {PlaceContact} contact - Contact information for the itinerary location
+ * @property {ItineraryItemConnection} descendants - All the descendants of the itinerary-item in depth-first-search order
+ * @property {string} [description] - A longer text description
+ * @property {ItineraryDirectionsConnection} directions - Retrieves itinerary-directions associated with this itinerary-location
+ * @property {IconComposition} [icon] - The IconComposition used by the this ItineraryLocation
+ * @property {string} id - Unique identifier for the itinerary-item
+ * @property {Itinerary} itinerary - The itinerary this item belongs to
+ * @property {Array<MediaContainer>} media - List of MediaContainers containing images or other media - DEPRECATED: use mediaContainers instead
+ * @property {MediaContainerConnection} mediaContainers - List of MediaContainers containing images or other media
+ * @property {boolean} optional - Whether the location is an optional stop
+ * @property {ItineraryItem} [parent] - The parent item of this item
  * @property {Place} place - The place details of this location
  * @property {Position} position - The position of the collection-location (derived from place if not overridden)
- * @property {JSON} geoJson - The representation of a location, as a GeoJSON FeatureCollection
- * @property {boolean} optional - Whether the location is an optional stop
- * @property {ItineraryDirectionsConnection} directions - Retrieves itinerary-directions associated with this itinerary-location
+ * @property {MediaContainer} [preferredMedia] - The preferred MediaContainer to use
+ * @property {string} [readMoreUrl] - Alias for the read-more attribute
+ * @property {number} [siblingPositionNumber] - A number corresponding to the item's position compared to it's siblings.
+ * @property {string} [synopsis] - A short text summary
+ * @property {Array<string>} tags - A series of strings applied to label this item
+ * @property {string} [title] - The supplied title
+ * @property {string} [websiteUrl] - Alias for the website-url attribute
+ */
+
+/**
+ * Connection of ItinerarySearchs
+ * @typedef {Object} ItinerarySearchConnection
+ * @property {Array<ItinerarySearchEdge>} edges - All the edges in this page of the connection
+ * @property {Array<ItinerarySearchNode>} nodes - Shortcut for edges[].node
+ * @property {PageInfo} pageInfo - Details regarding the current page of the connnection
+ * @property {number} totalCount - The total number of items in the connection (in all pages)
+ */
+
+/**
+ * Edge containing a ItinerarySearch
+ * @typedef {Object} ItinerarySearchEdge
+ * @property {string} cursor - The cursor string pointing to this item
+ * @property {ItinerarySearchNode} node - The item
+ */
+
+/**
+ * A result from an itinerary search
+ * @typedef {Object} ItinerarySearchNode
+ * @property {Bounds} [bounds] - Bounds for the itinerary item
+ * @property {string} [created] - The date when the itinerary was created
+ * @property {string} [defaultLocale] - The default locale of this itinerary's content
+ * @property {string} [description] - A longer text description
+ * @property {string} [externalId] - Identifier from an external source this itinerary is associated with
+ * @property {string} [externalSource] - The source of this itinerary's externalId
+ * @property {Array<string>} [genres] - The genres of this Itinerary
+ * @property {string} id - The Globally Unique ID of the itinerary.
+ * @property {Itinerary} itinerary - The full itinerary
+ * @property {string} [lastDraft] - The date when the draft version was last modified
+ * @property {string} [lastPublished] - The date when the itinerary was last published
+ * @property {boolean} [listed] - Whether this itinerary is publically listed
+ * @property {string} [modified] - The date when the itinerary was last modified
+ * @property {MediaContainer} [preferredMedia] - The preferred MediaContainer to use
+ * @property {Profile} [profile] - Profile that owns this itinerary
+ * @property {string} [published] - The date when this itinerary was last published. Will be null on draft versions
+ * @property {string} [synopsis] - A short text summary
+ * @property {Array<string>} tags - A series of strings applied to label this item
+ * @property {string} [title] - The supplied title
+ * @property {number} totalLocations - Total number of ItineraryLocations inside this Itinerary
+ * @property {string} [type] - The type of itinerary
  */
 
 /**
@@ -891,7 +1253,29 @@ export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Mayb
  * A container for a MediaResource
  * @typedef {Object} MediaContainer
  * @property {string} id - Unique identifier for this container
- * @property {MediaResource} resource - The MediaResource inside this container
+ * @property {MediaResourceEmbedded} resource - The MediaResource inside this container
+ */
+
+/**
+ * Connection of MediaContainers
+ * @typedef {Object} MediaContainerConnection
+ * @property {Array<MediaContainerEdge>} edges - All the edges in this page of the connection
+ * @property {Array<MediaContainer>} nodes - Shortcut for edges[].node
+ * @property {PageInfo} pageInfo - Details regarding the current page of the connnection
+ * @property {number} totalCount - The total number of items in the connection (in all pages)
+ */
+
+/**
+ * Edge containing a MediaContainer
+ * @typedef {Object} MediaContainerEdge
+ * @property {string} cursor - The cursor string pointing to this item
+ * @property {MediaContainer} node - The item
+ */
+
+/**
+ * Set a singular MediaContainer
+ * @typedef {Object} MediaContainerInput
+ * @property {string} resourceId - ID to a MediaResource to contain
  */
 
 /**
@@ -921,25 +1305,24 @@ export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Mayb
 /**
  * A MediaResource representing an image
  * @typedef {Object} MediaImage
- * @property {string} [id] - Unique identifier for the media-resource
- * @property {Profile} [profile] - The associated profile owner
- * @property {string} provider - The provider for the media
- * @property {string} [caption] - Text caption for the media-resource
- * @property {string} [attribution] - Text attribution for the source of the media-resource
- * @property {string} [copyright] - Copyright details of the media-resource
  * @property {string} [altText] - Alternative text for the media-resource
- * @property {Array<string>} tags - A series of strings representing applied labels to the media
  * @property {Attribute} [attr] - Arbitrary JSON value stored on this resource, keyed by an id
  * @property {JSON} [attrValue] - Shortcut for the attr.value, returns null if the attribute doesn't exist
- * @property {Array<(Attribute|null|undefined)>} attrs - Query multiple attributes by id and optionally locale
- * @property {AttributeConnection} allAttrs - Return all attributes on the resource
- * @property {AttributeConnection} attrsById - Query multiple attributes with the same id and optionally locale
+ * @property {string} [attribution] - Text attribution for the source of the media-resource
+ * @property {AttributeConnection} attrs - Query multiple attributes optionally filtering by id and/or locale
+ * @property {string} [caption] - Text caption for the media-resource
+ * @property {string} [copyright] - Copyright details of the media-resource
+ * @property {MediaImageExif} [exif] - Look up one exif value in this media-image by id
+ * @property {Array<string>} exifIds - Ids of all exif data in this media-image
+ * @property {boolean} hasContent - Will be true if the resource has a caption, attribution or copyright
+ * @property {string} [id] - Unique identifier for the media-resource
  * @property {Array<number>} [originalSize] - The original width and height of the image
- * @property {string} [url] - Provides the URL of the media
+ * @property {Profile} [profile] - The associated profile owner
+ * @property {string} provider - The provider for the media
  * @property {MediaImageSource} [source] - Provides a specific source for the media, based often on different encoding or different sizing
  * @property {Array<MediaImageSource>} sources - A collection of sources for the media
- * @property {Array<string>} exifIds - Ids of all exif data in this media-image
- * @property {MediaImageExif} [exif] - Look up one exif value in this media-image by id
+ * @property {Array<string>} tags - A series of strings representing applied labels to the media
+ * @property {string} [url] - Provides the URL of the media
  */
 
 /**
@@ -952,85 +1335,108 @@ export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Mayb
 /**
  * An source for a media image
  * @typedef {Object} MediaImageSource
+ * @property {number} [height] - The height of the media
  * @property {string} [id] - A optional identifier for the source
  * @property {string} type - The content-type of the media source
  * @property {string} url - The URL to the media source
  * @property {number} [width] - The width of the media
- * @property {number} [height] - The height of the media
  */
 
 /**
  * Representing media such as images/photos as well as other types such as video or audio
  * @typedef {Object} MediaResource
+ * @property {string} [altText] - Alternative text for the media-resource
+ * @property {Attribute} [attr] - Arbitrary JSON value stored on this resource, keyed by an id
+ * @property {JSON} [attrValue] - Shortcut for the attr.value, returns null if the attribute doesn't exist
+ * @property {string} [attribution] - Text attribution for the source of the media-resource
+ * @property {AttributeConnection} attrs - Query multiple attributes optionally filtering by id and/or locale
+ * @property {string} [caption] - Text caption for the media-resource
+ * @property {string} [copyright] - Copyright details of the media-resource
+ * @property {boolean} hasContent - Will be true if the resource has a caption, attribution or copyright
  * @property {string} [id] - Unique identifier for the media-resource
  * @property {Profile} [profile] - The associated profile owner
  * @property {string} provider - The provider for the media
- * @property {string} [caption] - Text caption for the media-resource
- * @property {string} [attribution] - Text attribution for the source of the media-resource
- * @property {string} [copyright] - Copyright details of the media-resource
- * @property {string} [altText] - Alternative text for the media-resource
  * @property {Array<string>} tags - A series of strings representing applied labels to the media
- * @property {Attribute} [attr] - Arbitrary JSON value stored on this resource, keyed by an id
- * @property {JSON} [attrValue] - Shortcut for the attr.value, returns null if the attribute doesn't exist
- * @property {Array<(Attribute|null|undefined)>} attrs - Query multiple attributes by id and optionally locale
- * @property {AttributeConnection} allAttrs - Return all attributes on the resource
- * @property {AttributeConnection} attrsById - Query multiple attributes with the same id and optionally locale
+ */
+
+/**
+ * A MediaResource embedded in another resource
+ * @typedef {(MediaImage|MediaResourceFailedToLoad)} MediaResourceEmbedded
+ */
+
+/**
+ * Represents an embedded MediaResource that failed to load
+ * @typedef {Object} MediaResourceFailedToLoad
+ * @property {string} id - The Globally Unique ID of the object.
  */
 
 /**
  * The status of a Media upload process
- * @typedef {("AwaitingUpload"|"Processing"|"Complete"|"ProcessingFailed")} MediaUploadStatus
+ * @typedef {("AwaitingUpload"|"Complete"|"Processing"|"ProcessingFailed")} MediaUploadStatus
  */
 
 /**
  * Moves the itinerary item
  * @typedef {Object} MoveItineraryItemPayload
+ * @property {ItineraryItemCascadedChanges} cascaded - Other changes to the itinerary that caused by moving the itinerary-item
  * @property {ItineraryItem} [item] - The fields for the item
  * @property {Itinerary} itinerary - The modified itinerary
- * @property {ItineraryItemCascadedChanges} cascaded - Other changes to the itinerary that caused by moving the itinerary-item
  */
 
 /**
  * Move a MediaContainer within a list, exactly one of the position arguments is required.
  * @typedef {Object} MoveMediaContainerInput
  * @property {string} id - ID to the Container to update
- * @property {MediaContainerPositionBefore} [positionBefore] - Move the MediaContainer before another container in the list
  * @property {MediaContainerPositionAfter} [positionAfter] - Move the MediaContainer after another container in the list
- * @property {MediaContainerPositionAtStart} [positionAtStart] - Move the MediaContainer at the start of the list
  * @property {MediaContainerPositionAtEnd} [positionAtEnd] - Move the MediaContainer at the end of the list
+ * @property {MediaContainerPositionAtStart} [positionAtStart] - Move the MediaContainer at the start of the list
+ * @property {MediaContainerPositionBefore} [positionBefore] - Move the MediaContainer before another container in the list
  */
 
 /**
  * @typedef {Object} Mutation
+ * @property {ApproveProfileFollowPayload} approveProfileFollow - Approve a follow request between two profiles
+ * @property {CaptureMarketingInformationPayload} captureMarketingInformation - Capture marketing information against the given profile
+ * @property {DuplicateItineraryPayload} changeItineraryDefaultLocale - Change the itinerary's default-locale as well the locale of attributes with the previous default-locale
+ * @property {ClaimProfileHandlePayload} claimProfileHandle - Claim an unclaimed handle for the given profile
+ * @property {CreateBillingCheckoutSessionOutput} createBillingCheckoutSession - Create a billing checkout session
+ * @property {CreateBillingPortalSessionOutput} createBillingPortalSession - Create a billing portal session
  * @property {CreateCollectionPayload} createCollection - The return fields available after creating a collection
- * @property {UpdateCollectionPayload} updateCollection - Updates a collection
+ * @property {CreateCollectionLocationPayload} createCollectionLocation - Create a new collection-location under the given collection
+ * @property {CreateConnectedAppPayload} createConnectedApp - The return fields available after creating a connected app
+ * @property {CreateIconSilhouettePayload} createIconSilhouette - Creates a new icon
+ * @property {CreateItineraryPayload} createItinerary - Create a new itinerary
+ * @property {CreateItineraryCollectionPayload} createItineraryCollection - Create a new ItineraryCollection item inside the given itinerary
+ * @property {CreateItineraryDirectionsPayload} createItineraryDirections - Create a new ItineraryDirections item inside the given itinerary
+ * @property {CreateItineraryLocationPayload} createItineraryLocation - Create a new ItineraryLocation item inside the given itinerary
+ * @property {CreateProfilePayload} createProfile - Creates a new profile with the given fields. Can only be called with a bearer token.
+ * @property {CreateUserAgreementPayload} createUserAgreement - The return fields available after creating a user agreement
  * @property {DeleteCollectionPayload} deleteCollection - Delete an collection
  * @property {DeleteCollectionItemPayload} deleteCollectionItem - The fields available after the collection is deleted
- * @property {CreateCollectionLocationPayload} createCollectionLocation - Create a new collection-location under the given collection
- * @property {UpdateCollectionLocationPayload} updateCollectionLocation - The fields avaialble after updating the collection location
- * @property {CreateConnectedAppPayload} createConnectedApp - The return fields available after creating a connected app
- * @property {UpdateConnectedAppPayload} updateConnectedApp - Update a connected app
  * @property {DeleteConnectedAppPayload} deleteConnectedApp - Deleted a connected app
- * @property {MoveItineraryItemPayload} moveItineraryItem - Move an ItineraryItem
- * @property {DeleteItineraryItemPayload} deleteItineraryItem - Delete an ItineraryItem
- * @property {CreateItineraryPayload} createItinerary - Create a new itinerary
- * @property {UpdateItineraryPayload} updateItinerary - Updates a itinerary
+ * @property {DeleteIconResourcePayload} deleteIconResource - Delete an icon
  * @property {DeleteItineraryPayload} deleteItinerary - Delete an itinerary
- * @property {PublishItineraryPayload} publishItinerary - Publish an itinerary making it publically accessible
- * @property {CreateItineraryCollectionPayload} createItineraryCollection - Create a new ItineraryCollection item inside the given itinerary
- * @property {UpdateItineraryCollectionPayload} updateItineraryCollection - Update an ItineraryCollection
- * @property {CreateItineraryLocationPayload} createItineraryLocation - Create a new ItineraryLocation item inside the given itinerary
- * @property {UpdateItineraryLocationPayload} updateItineraryLocation - Update an ItineraryLocation
- * @property {CreateItineraryDirectionsPayload} createItineraryDirections - Create a new ItineraryDirections item inside the given itinerary
- * @property {UpdateItineraryDirectionsPayload} updateItineraryDirections - Update an ItineraryDirections
- * @property {StartMediaUploadPayload} startMediaUpload - Start a media upload
- * @property {FinalizeMediaUploadPayload} finalizeMediaUpload - Finalize the media upload by creating a media-resource
- * @property {UpdateMediaResourcePayload} updateMediaResource - Update a media resource with updated properties
- * @property {FollowProfilePayload} followProfile - Create a follow request between two profiles
- * @property {UnfollowProfilePayload} unfollowProfile - Remove the follow between two profiles
- * @property {ApproveProfileFollowPayload} approveProfileFollow - Approve a follow request between two profiles
+ * @property {DeleteItineraryItemPayload} deleteItineraryItem - Delete an ItineraryItem
+ * @property {DeleteProfilePayload} deleteProfile - Delete a profile
  * @property {DenyProfileFollowPayload} denyProfileFollow - Deny a follow request between two profiles
- * @property {ClaimProfileHandlePayload} claimProfileHandle - Claim an unclaimed handle for the given profile
+ * @property {DuplicateItineraryPayload} duplicateItinerary - Duplicate an itinerary, creating copy with a new id
+ * @property {FinalizeMediaUploadPayload} finalizeMediaUpload - Finalize the media upload by creating a media-resource
+ * @property {FollowProfilePayload} followProfile - Create a follow request between two profiles
+ * @property {MoveItineraryItemPayload} moveItineraryItem - Move an ItineraryItem
+ * @property {PublishItineraryPayload} publishItinerary - Publish an itinerary making it publically accessible
+ * @property {PublishItineraryPayload} revertItinerary - Revert the draft version of an itinerary to last published version
+ * @property {StartMediaUploadPayload} startMediaUpload - Start a media upload
+ * @property {UnfollowProfilePayload} unfollowProfile - Remove the follow between two profiles
+ * @property {UpdateBillingDetailsOutput} updateBillingDetails - Update the billing details associated with a profile
+ * @property {UpdateCollectionPayload} updateCollection - Updates a collection
+ * @property {UpdateCollectionLocationPayload} updateCollectionLocation - The fields avaialble after updating the collection location
+ * @property {UpdateConnectedAppPayload} updateConnectedApp - Update a connected app
+ * @property {UpdateIconSilhouettePayload} updateIconSilhouette - Updates a icon
+ * @property {UpdateItineraryPayload} updateItinerary - Updates a itinerary
+ * @property {UpdateItineraryCollectionPayload} updateItineraryCollection - Update an ItineraryCollection
+ * @property {UpdateItineraryDirectionsPayload} updateItineraryDirections - Update an ItineraryDirections
+ * @property {UpdateItineraryLocationPayload} updateItineraryLocation - Update an ItineraryLocation
+ * @property {UpdateMediaResourcePayload} updateMediaResource - Update a media resource with updated properties
  * @property {UpdateProfilePayload} updateProfile - Updates the specified profile with the given fields
  */
 
@@ -1043,42 +1449,41 @@ export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Mayb
 /**
  * Details regarding a page in a connnection
  * @typedef {Object} PageInfo
- * @property {boolean} hasPreviousPage - True if there is a page before this one
- * @property {boolean} hasNextPage - True if there is a page after this one
- * @property {string} [startCursor] - The cursor of the first edge in this page
  * @property {string} [endCursor] - The cursor of the last edge in this page
+ * @property {boolean} hasNextPage - True if there is a page after this one
+ * @property {boolean} hasPreviousPage - True if there is a page before this one
+ * @property {string} [startCursor] - The cursor of the first edge in this page
  */
 
 /**
  * A defined location in the world
  * @typedef {Object} Place
- * @property {string} id - The Globally Unique ID of the object.
- * @property {PlaceResolutionError} [resolutionError] - If non-null, an error occured while resolving this place and only a subset of data will be accessible
- * @property {string} [title] - Alias for `Place.name`
- * @property {string} [name] - The name of the place
- * @property {string} [synopsis] - A short summary
- * @property {string} [description] - A longer description
- * @property {Array<string>} tags - A collection of strings used to label this place
  * @property {PlaceAddress} address - The address of the place
- * @property {Position} position - The position of the place
- * @property {Bounds} [bounds] - The bounding box around the place
- * @property {PlaceHours} [hours] - The operating hours for this place, as encoded in OpenStreetMap hours specification
- * @property {string} [maki] - The maki icon for this place
- * @property {string} [contributor] - Source of the place data
  * @property {Attribute} [attr] - Arbitrary JSON value stored on this resource, keyed by an id
  * @property {JSON} [attrValue] - Shortcut for the attr.value, returns null if the attribute doesn't exist
- * @property {Array<(Attribute|null|undefined)>} attrs - Query multiple attributes by id and optionally locale
- * @property {AttributeConnection} allAttrs - Return all attributes on the resource
- * @property {AttributeConnection} attrsById - Query multiple attributes with the same id and optionally locale
  * @property {Array<PlaceAttribution>} attribution - The required attribution required when using this place information
+ * @property {AttributeConnection} attrs - Query multiple attributes optionally filtering by id and/or locale
+ * @property {Bounds} [bounds] - The bounding box around the place
  * @property {PlaceContact} contact - Contact information supplied for this place
+ * @property {string} [contributor] - Source of the place data
+ * @property {string} [description] - A longer description
+ * @property {PlaceHours} [hours] - The operating hours for this place, as encoded in OpenStreetMap hours specification
+ * @property {string} id - The Globally Unique ID of the object.
  * @property {Array<PlaceLayer>} layers - Layers associated to this place
- * @property {Array<MediaContainer>} media - List of MediaContainers supplied with the place information, such as images of the places
+ * @property {string} [maki] - The maki icon for this place
+ * @property {Array<MediaContainer>} media - List of MediaContainers supplied with the place information, such as images of the places - DEPRECATED: use mediaContainers instead
+ * @property {MediaContainerConnection} mediaContainers - List of MediaContainers supplied with the place information, such as images of the places
+ * @property {string} [name] - The name of the place
+ * @property {string} navigationUrl - A url displaying how to navigate to this place
+ * @property {Position} position - The position of the place
  * @property {MediaContainer} [preferredMedia] - The preferred MediaContainer to use
  * @property {string} [readMoreUrl] - Alias for the read-more attribute
- * @property {string} [websiteUrl] - Alias for the website-url attribute
- * @property {string} navigationUrl - A url displaying how to navigate to this place
+ * @property {ResolutionError} [resolutionError] - If non-null, an error occured while resolving this place and only a subset of data will be accessible
+ * @property {string} [synopsis] - A short summary
+ * @property {Array<string>} tags - A collection of strings used to label this place
+ * @property {string} [title] - Alias for `Place.name`
  * @property {Array<PlaceTowards>} towards - Calculate distance and bearing information from the specified positions to this place
+ * @property {string} [websiteUrl] - Alias for the website-url attribute
  */
 
 /**
@@ -1101,38 +1506,38 @@ export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Mayb
 /**
  * Describes the attribution requirements associated with the place.
  * @typedef {Object} PlaceAttribution
- * @property {string} [text] - Text Attribution required for this place
- * @property {string} [link] - A link required for this place
  * @property {string} [license] - Specific licensing information for this place if known
+ * @property {string} [link] - A link required for this place
+ * @property {MediaResourceEmbedded} [mediaResource] - Any media to be used in attribution, such as watermarks
  * @property {string} [pixel] - The required tracking pixel
- * @property {MediaResource} [mediaResource] - Any media to be used in attribution, such as watermarks
+ * @property {string} [text] - Text Attribution required for this place
  */
 
 /**
  * Contact information for a Place
  * @typedef {Object} PlaceContact
- * @property {string} [websiteUrl] - Contact website for this place
- * @property {string} [phoneNumber] - Phone number for this place
+ * @property {string} [bookingUrl] - Booking url for this place
  * @property {string} [emailAddress] - Email address for this place
- * @property {string} [bookingsUrl] - Bookings url for this place
  * @property {string} [facebookUrl] - Facebook page for this place
- * @property {string} [twitterUrl] - Twitter for this place
  * @property {string} [instagramUrl] - Instagram for this place
+ * @property {string} [phoneNumber] - Phone number for this place
+ * @property {string} [twitterUrl] - Twitter for this place
+ * @property {string} [websiteUrl] - Contact website for this place
  */
 
 /**
  * The opening hours for a place
  * @typedef {Object} PlaceHours
- * @property {string} osmTag - The opening hours formatted in the OpenStreetMap opening_hours tag format.
- * 
- * See: <https://wiki.openstreetmap.org/wiki/Key:opening_hours/specification>
- * @property {boolean} weekStable - Whether or not the hours are the same each week.
- * @property {PlaceHoursStatus} status - Look up the open/closed status of the place for the current time or a given datetime.
  * @property {string} [comment] - Look up the place hours comment (if any) for the current time or a given datetime.
- * @property {PlaceHoursIntervalConnection} intervals - Look up intervals where the opening hours status/comment for the place changes
  * @property {Array<PlaceHoursForDay>} forDays - Look up the opening hours for a specific day. Days are calculated according to the local time of the place.
  * 
  * Will return a maximum of 90 days.
+ * @property {PlaceHoursIntervalConnection} intervals - Look up intervals where the opening hours status/comment for the place changes
+ * @property {string} osmTag - The opening hours formatted in the OpenStreetMap opening_hours tag format.
+ * 
+ * See: <https://wiki.openstreetmap.org/wiki/Key:opening_hours/specification>
+ * @property {PlaceHoursStatus} status - Look up the open/closed status of the place for the current time or a given datetime.
+ * @property {boolean} weekStable - Whether or not the hours are the same each week.
  */
 
 /**
@@ -1147,13 +1552,13 @@ export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Mayb
 /**
  * The opening hours for a place during the interval between two datetimes
  * @typedef {Object} PlaceHoursInterval
- * @property {string} from - The starting datetime of this interval
- * @property {string} [to] - The ending datetime of this interval, will be null if there is no following interval and the status/comment will no longer change
- * @property {PlaceHoursStatus} status - The open/closed status of the place during this interval
  * @property {string} [comment] - The place hours comment (if any) during this interval
+ * @property {string} from - The starting datetime of this interval
  * @property {Array<PlaceHoursIntervalHoliday>} publicHolidays - The holidays that occur during this interval
  * 
  * Note: Will return holidays up to a maximum of one year from the "from" date
+ * @property {PlaceHoursStatus} status - The open/closed status of the place during this interval
+ * @property {string} [to] - The ending datetime of this interval, will be null if there is no following interval and the status/comment will no longer change
  */
 
 /**
@@ -1181,7 +1586,7 @@ export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Mayb
 
 /**
  * Whether a place is open/closed or if the status is unknown
- * @typedef {("Open"|"Closed"|"Unknown")} PlaceHoursStatus
+ * @typedef {("Closed"|"Open"|"Unknown")} PlaceHoursStatus
  */
 
 /**
@@ -1200,13 +1605,7 @@ export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Mayb
 
 /**
  * Navigation service provider
- * @typedef {("Google"|"Apple")} PlaceNavigationUrlProvider
- */
-
-/**
- * Error which occured while resolving a Place ID
- * @typedef {Object} PlaceResolutionError
- * @property {string} message - Human readable error message
+ * @typedef {("Apple"|"Google")} PlaceNavigationUrlProvider
  */
 
 /**
@@ -1221,76 +1620,81 @@ export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Mayb
  * Edge containing a PlaceSearch
  * @typedef {Object} PlaceSearchEdge
  * @property {string} cursor - The cursor string pointing to this item
- * @property {PlaceSearchNode} node - The item
- * @property {TextSearchResult} single - The one line text search result
  * @property {TextSearchResult} main - The main line of the two line search result
+ * @property {PlaceSearchNode} node - The item
  * @property {TextSearchResult} secondary - The secondary line of the two line search result
+ * @property {TextSearchResult} single - The one line text search result
  */
 
 /**
  * A result from a place search
  * @typedef {Object} PlaceSearchNode
- * @property {string} id - The Globally Unique ID of the place.
- * @property {Position} position - The position of the place
- * @property {string} [title] - Alias for `Place.name`
- * @property {string} [name] - The name of the place
- * @property {string} [synopsis] - A short summary
- * @property {string} [description] - A longer description
  * @property {PlaceAddress} address - The address of the place
- * @property {string} [maki] - The maki icon for this place
- * @property {Array<PlaceLayer>} layers - Layers associated to this place
  * @property {string} [contributor] - Source of the place data
+ * @property {string} [description] - A longer description
+ * @property {string} id - The Globally Unique ID of the place.
+ * @property {Array<PlaceLayer>} layers - Layers associated to this place
+ * @property {string} [maki] - The maki icon for this place
+ * @property {string} [name] - The name of the place
+ * @property {Position} position - The position of the place
+ * @property {string} [synopsis] - A short summary
+ * @property {string} [title] - Alias for `Place.name`
  */
 
 /**
  * Where to search for place information
- * @typedef {("OpenStreetMap"|"Facebook"|"OpenAddresses"|"Geonames"|"Yelp"|"AustralianTourismDataWarehouse"|"Zomato"|"TripAdvisor"|"WhosOnFirst")} PlaceSearchSource
+ * @typedef {("AustralianTourismDataWarehouse"|"Facebook"|"Geonames"|"OpenAddresses"|"OpenStreetMap"|"TripAdvisor"|"WhosOnFirst"|"Yelp"|"Zomato")} PlaceSearchSource
  */
 
 /**
  * Place bearing and distance information towards point
  * @typedef {Object} PlaceTowards
- * @property {Position} position - The point
  * @property {number} bearing - The bearing angle from the place to the point
- * @property {number} distance - The distance from the place to the point
  * @property {CompassPoint} compass - Compass point towards given point
+ * @property {number} distance - The distance from the place to the point
+ * @property {Position} position - The point
  */
 
 /**
  * A position on a map with a longitude and latitude
  * @typedef {Object} Position
- * @property {Array<number>} lonLat - The position in the form: [longitude, latitude]
- * @property {Array<number>} latLon - The position in the form: [latitude, longitude]
- * @property {number} lat - The position's latitude
- * @property {number} lon - The position's longitude
- * @property {string} id - Identifier for the Position type useful for client-side caching
- * @property {Array<PlaceLayer>} layers - PlaceLayers associated to this position
  * @property {Attribute} [attr] - Arbitrary JSON value stored on this resource, keyed by an id
  * @property {JSON} [attrValue] - Shortcut for the attr.value, returns null if the attribute doesn't exist
- * @property {Array<(Attribute|null|undefined)>} attrs - Query multiple attributes by id and optionally locale
- * @property {AttributeConnection} allAttrs - Return all attributes on the resource
- * @property {AttributeConnection} attrsById - Query multiple attributes with the same id and optionally locale
+ * @property {AttributeConnection} attrs - Query multiple attributes optionally filtering by id and/or locale
+ * @property {string} id - Identifier for the Position type useful for client-side caching
+ * @property {number} lat - The position's latitude
+ * @property {Array<number>} latLon - The position in the form: [latitude, longitude]
+ * @property {Array<PlaceLayer>} layers - PlaceLayers associated to this position
+ * @property {number} lon - The position's longitude
+ * @property {Array<number>} lonLat - The position in the form: [longitude, latitude]
  */
 
 /**
  * A position on a map with a longitude and latitude
  * @typedef {Object} PositionInput
- * @property {number} lon - The longitude
  * @property {number} lat - The latitude
+ * @property {number} lon - The longitude
  */
 
 /**
  * Profile
  * @typedef {Object} Profile
+ * @property {Attribute} [attr] - Arbitrary JSON value stored on this resource, keyed by an id
+ * @property {JSON} [attrValue] - Shortcut for the attr.value, returns null if the attribute doesn't exist
+ * @property {AttributeConnection} attrs - Query multiple attributes optionally filtering by id and/or locale
+ * @property {boolean} autoApproveFollows - Indicates if follows on this profile are automatically approved
+ * @property {MediaContainer} [avatar] - The avatar
+ * @property {BillingDetails} [billingDetails] - Fetch billing details associated with this profile
+ * @property {BillingSubscriptionConnection} billingSubscriptions - Fetch billing subscriptions associated with a profile
+ * @property {string} [bio] - A short biography
+ * @property {ConnectedAppConnection} connectedApps - Fetch connected-apps associated with this profile
+ * @property {ProfileFollowConnection} followers - Profiles that follow this profile
+ * @property {ProfileFollowConnection} following - Profiles that this profile follows
+ * @property {string} [handle] - The (optional) unique handle of the profile
  * @property {string} id - The Globally Unique ID of the object.
  * @property {string} name - The name of the profile
  * @property {ProfileType} type - The type of the profile
- * @property {boolean} autoApproveFollows - Indicates if follows on this profile are automatically approved
- * @property {string} [handle] - The (optional) unique handle of the profile
- * @property {string} [bio] - A short biography
  * @property {string} [websiteUrl] - The Website URL
- * @property {ProfileFollowConnection} followers - Profiles that follow this profile
- * @property {ProfileFollowConnection} following - Profiles that this profile follows
  */
 
 /**
@@ -1328,7 +1732,7 @@ export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Mayb
 
 /**
  * Profile follow status
- * @typedef {("Pending"|"Approved"|"Denied")} ProfileFollowStatus
+ * @typedef {("Approved"|"Denied"|"Pending")} ProfileFollowStatus
  */
 
 /**
@@ -1344,32 +1748,53 @@ export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Mayb
 
 /**
  * @typedef {Object} Query
- * @property {Node} [node] - Get a resource that implements Node by id
+ * @property {ProfileConnection} authorizedProfiles - Look up all authorised profiles
+ * @property {BillingDetails} [billingDetails] - Fetch billing details associated with a profile
+ * @property {BillingPriceConnection} billingPrices - List of available billing prices
+ * @property {BillingSubscriptionConnection} billingSubscriptions - Fetch billing subscriptions associated with a profile
  * @property {Collection} [collection] - Retrieve a collection by id
- * @property {CollectionConnection} collections - Retrieve multiple collections
  * @property {CollectionItem} [collectionItem] - Retrieve a collection item by id
  * @property {CollectionItemConnection} collectionItems - Retrieve multiple collection items filtered by different criteria
+ * @property {CollectionConnection} collections - Retrieve multiple collections
  * @property {ConnectedApp} [connectedApp] - Obtains a connected app by a provided id
  * @property {ConnectedAppConnection} connectedApps - Search connected apps
+ * @property {IconResource} [iconResource] - Obtains an IconResource with a provided id
+ * @property {IconResourceConnection} iconResources - Retrieve multiple IconResources under a profile
  * @property {Array<Isochrone>} isochrone - Query for fetching isochrone
+ * @property {ItinerarySearchConnection} itineraries - Query itineraries that belong to a profile
  * @property {Itinerary} [itinerary] - Get an itinerary by id
- * @property {ItineraryConnection} itineraries - Query itineraries that belong to a profile
- * @property {RouteConnection} routes - Look up routes for traveling along the given positions
+ * @property {MediaContainer} [mediaContainer] - Retrieve a MediaContainer by id
  * @property {MediaResource} [mediaResource] - Retrieve a MediaResource by id
+ * @property {Node} [node] - Get a resource that implements Node by id
  * @property {Place} [place] - Get a place by id
- * @property {Array<(Place|null|undefined)>} places - Get multiple places by id
- * @property {PlaceSearchConnection} placeSearch - Search for places
- * @property {PlaceSearchConnection} placeAutocompleteSearch - Autocomplete for place search
  * @property {PlaceSearchConnection} placeAddressSearch - Search for places based on address details
+ * @property {PlaceSearchConnection} placeAutocompleteSearch - Autocomplete for place search
  * @property {PlaceSearchConnection} placeReverseSearch - Search for places by location
+ * @property {PlaceSearchConnection} placeSearch - Search for places
+ * @property {Array<(Place|null|undefined)>} places - Get multiple places by id
  * @property {Profile} [profile] - Obtains a profile by a provided id
- * @property {ProfileConnection} authorizedProfiles - Look up all authorised profiles
+ * @property {Profile} [profileByHandle] - Obtains a profile with the provided handle
  * @property {ProfileConnection} profiles - Search profiles
+ * @property {RouteConnection} routes - Look up routes for traveling along the given positions
+ * @property {UserAgreementConnection} userAgreements - Query for fetching agreements made by this user
+ */
+
+/**
+ * Error which occurred while resolving an ID
+ * @typedef {Object} ResolutionError
+ * @property {string} message - Human readable error message
+ */
+
+/**
+ * Response to Mutation.revertItinerary
+ * @typedef {Object} RevertItineraryPayload
+ * @property {Itinerary} [itinerary] - The reverted itinerary
  */
 
 /**
  * The representation of a route path taken
  * @typedef {Object} Route
+ * @property {Array<RouteMode>} modes - The set of all RouteModes used by all the segments
  * @property {Array<RouteSegment>} segments - The segments of this route
  */
 
@@ -1396,36 +1821,36 @@ export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Mayb
 
 /**
  * Modes of transport
- * @typedef {("Bike"|"Boat"|"Bus"|"Car"|"Cruise"|"DogSled"|"Foot"|"Hike"|"Kayak"|"Motorcycle"|"MountainBike"|"Plane"|"Train"|"Transit")} RouteMode
+ * @typedef {("Abseiling"|"AdventureBike"|"AerialLift"|"AlpineSki"|"BackcountrySki"|"Barge"|"Bike"|"Boat"|"Bus"|"CableCar"|"Camel"|"Canoe"|"Car"|"Caving"|"Chairlift"|"CrossCountrySky"|"Cruise"|"Cycling"|"Dirtbike"|"Dive"|"DogSled"|"ElectricCar"|"ElectricMotorbike"|"Ferry"|"Foot"|"FourWheelDriving"|"Funicular"|"Geocaching"|"Glider"|"Golfcar"|"Gondola"|"HandGliding"|"Handcycle"|"Helicopter"|"Hike"|"Hitchhiking"|"Horse"|"HorseAndCart"|"HotAirBaloon"|"IceSkate"|"InlineSkate"|"JetBoat"|"Jetski"|"Kayak"|"Kitesurf"|"LightAircraft"|"LightRail"|"Minibus"|"Monorail"|"Motorcycle"|"MountainBike"|"Mountaineering"|"NordicSki"|"NordicWalking"|"Orienteering"|"Plane"|"Quadbike"|"Rickshaw"|"RockClimbing"|"Row"|"Rowboat"|"Run"|"Sail"|"Scooter"|"Skateboarding"|"Skydive"|"Snorkel"|"Snowboard"|"Snowshoe"|"StandUpPaddleBoard"|"Surf"|"Swim"|"TaxiOrRideshare"|"TrailRun"|"Train"|"Transit"|"Trekking"|"Tubing"|"WalkOrRide"|"WaterSki"|"WaterTaxi"|"Wheelchair"|"WhiteWaterRafting"|"Windsurf"|"ZipLine")} RouteMode
  */
 
 /**
  * Subset of RouteModes supporting route search
- * @typedef {("Bike"|"Bus"|"Car"|"Foot"|"Hike"|"Motorcycle"|"MountainBike"|"Transit")} RouteSearchableMode
+ * @typedef {("Bike"|"Bus"|"Camel"|"Car"|"Cycling"|"ElectricCar"|"ElectricMotorbike"|"Foot"|"FourWheelDriving"|"Hike"|"Hitchhiking"|"Horse"|"HorseAndCart"|"InlineSkate"|"Minibus"|"Motorcycle"|"MountainBike"|"NordicWalking"|"Rickshaw"|"Run"|"Scooter"|"Snowshoe"|"TaxiOrRideshare"|"TrailRun"|"Trekking"|"WalkOrRide"|"Wheelchair")} RouteSearchableMode
  */
 
 /**
  * One segment of a Route
  * @typedef {Object} RouteSegment
+ * @property {number} [distance] - The estimated distance for this path
+ * @property {number} [duration] - The estimated duration for this path
+ * @property {Elevation} elevation - The estimated elevation details of this route
+ * @property {JSON} [geoJson] - The representation of this path as encoded as geojson FeatureCollection type
  * @property {string} id - WARNING: this ID is unstable, modifying the route might change the ID
  * @property {RouteMode} mode - The mode of transport to be taken. eg: car, walk, kayak, etc
+ * @property {string} [polyline] - The path representation as encoded as a polyline format
  * @property {Array<Position>} [positions] - The way positions along this route
  * @property {boolean} useRouteSearching - Whether this route was searched for
- * @property {JSON} [geoJson] - The representation of this path as encoded as geojson FeatureCollection type
- * @property {number} [duration] - The estimated duration for this path
- * @property {number} [distance] - The estimated distance for this path
- * @property {Elevation} elevation - The estimated elevation details of this route
- * @property {string} [polyline] - The path representation as encoded as a polyline format
  */
 
 /**
  * Create a RouteSegment
  * @typedef {Object} RouteSegmentInput
+ * @property {number} [distance] - The distance for this route segment
+ * @property {number} [duration] - The duration for this route segment
  * @property {RouteMode} [mode] - The mode of transport to be taken on this segment, defaults to Car
  * @property {Array<PositionInput>} [positions] - The way positions along this route
  * @property {boolean} [useRouteSearching] - Whether to plan out a route using the positions. Defaults to true if the mode is searchable and otherwise will be set to false
- * @property {number} [distance] - The distance for this route segment
- * @property {number} [duration] - The duration for this route segment
  */
 
 /**
@@ -1436,9 +1861,9 @@ export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Mayb
 /**
  * Result of starting a media upload
  * @typedef {Object} StartMediaUploadPayload
+ * @property {JSON} fields - Data to pass with the upload
  * @property {string} token - The upload token, required when finalising the upload
  * @property {string} url - The url to upload media to (via HTTP POST)
- * @property {JSON} fields - Data to pass with the upload
  */
 
 /**
@@ -1451,55 +1876,71 @@ export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Mayb
 /**
  * A details of a single result from a text search
  * @typedef {Object} TextSearchResultMatch
- * @property {number} offset - Start of the match
  * @property {number} length - Length of the match
+ * @property {number} offset - Start of the match
  */
 
 /**
  * Result of unfollowing a profile
  * @typedef {Object} UnfollowProfilePayload
  * @property {Profile} fromProfile - The follower profile
- * @property {Profile} toProfile - The profile being followed
  * @property {ProfileFollowStatus} [status] - The status of the follow request
+ * @property {Profile} toProfile - The profile being followed
+ */
+
+/**
+ * The fields to change when updating the billing details
+ * @typedef {Object} UpdateBillingDetailsInput
+ * @property {BillingAddressInput} address - The billing address
+ * @property {string} emailAddress - The email address
+ * @property {string} familyName - The family name
+ * @property {string} givenName - The given name
+ * @property {string} [organization] - The optional organization name
+ */
+
+/**
+ * The output after updating the billing details
+ * @typedef {Object} UpdateBillingDetailsOutput
+ * @property {BillingDetails} billingDetails - The updated billing details
  */
 
 /**
  * Updates a collection
  * @typedef {Object} UpdateCollectionInput
- * @property {string} [title] - The title for the collection
- * @property {string} [synopsis] - The synopsis for the collection
- * @property {string} [description] - The description for the collection
- * @property {Array<string>} [tags] - The tags for the collection
- * @property {string} [readMoreUrl] - Alias for the read-more attribute
- * @property {string} [websiteUrl] - Alias for the website-url attribute
- * @property {Array<AttributeInput>} [upsertAttrs] - Insert or update attributes to the collection
- * @property {Array<AttributeIdentifierInput>} [deleteAttrs] - Delete attributes to the collection
  * @property {Array<CreateMediaContainerInput>} [createMedia] - Add multiple Media with MediaResources
- * @property {Array<MoveMediaContainerInput>} [moveMedia] - Move one or move MediaContainers
- * @property {Array<UpdateMediaContainerInput>} [updateMedia] - Update one or move MediaContainers
+ * @property {Array<AttributeIdentifierInput>} [deleteAttrs] - Delete attributes to the collection
  * @property {Array<string>} [deleteMedia] - Delete one or move MediaContainers
+ * @property {string} [description] - The description for the collection
+ * @property {Array<MoveMediaContainerInput>} [moveMedia] - Move one or move MediaContainers
+ * @property {string} [readMoreUrl] - Alias for the read-more attribute
+ * @property {string} [synopsis] - The synopsis for the collection
+ * @property {Array<string>} [tags] - The tags for the collection
+ * @property {string} [title] - The title for the collection
+ * @property {Array<UpdateMediaContainerInput>} [updateMedia] - Update one or move MediaContainers
+ * @property {Array<AttributeInput>} [upsertAttrs] - Insert or update attributes to the collection
+ * @property {string} [websiteUrl] - Alias for the website-url attribute
  */
 
 /**
  * The fields for the collection location to update
  * @typedef {Object} UpdateCollectionLocationInput
- * @property {string} [title] - Title for this item
- * @property {string} [synopsis] - A longer description content for this item
+ * @property {Array<CreateMediaContainerInput>} [createMedia] - Add multiple Media with MediaResources
+ * @property {Array<AttributeIdentifierInput>} [deleteAttrs] - Delete attributes to the collection
+ * @property {Array<string>} [deleteMedia] - Delete one or move MediaContainers
  * @property {string} [description] - A longer description content for this item
- * @property {Array<string>} [tags] - A collection of strings used to label this item
- * @property {string} [readMoreUrl] - Shortcut for setting the read-more attribute
- * @property {string} [websiteUrl] - Shortcut for setting the website-url attribute
- * @property {Array<string>} [sectionIds] - One or more sections for this item
  * @property {string} [externalId] - Identifier from an external source this item is associated with
  * @property {string} [externalSource] - The source of this item's externalId
+ * @property {Array<MoveMediaContainerInput>} [moveMedia] - Move one or move MediaContainers
  * @property {PlaceInput} [place] - The associated place information for this item
  * @property {PositionInput} [position] - Override for the place's position
- * @property {Array<AttributeInput>} [upsertAttrs] - Insert or update attributes to the collection
- * @property {Array<AttributeIdentifierInput>} [deleteAttrs] - Delete attributes to the collection
- * @property {Array<CreateMediaContainerInput>} [createMedia] - Add multiple Media with MediaResources
- * @property {Array<MoveMediaContainerInput>} [moveMedia] - Move one or move MediaContainers
+ * @property {string} [readMoreUrl] - Shortcut for setting the read-more attribute
+ * @property {Array<string>} [sectionIds] - One or more sections for this item
+ * @property {string} [synopsis] - A longer description content for this item
+ * @property {Array<string>} [tags] - A collection of strings used to label this item
+ * @property {string} [title] - Title for this item
  * @property {Array<UpdateMediaContainerInput>} [updateMedia] - Update one or move MediaContainers
- * @property {Array<string>} [deleteMedia] - Delete one or move MediaContainers
+ * @property {Array<AttributeInput>} [upsertAttrs] - Insert or update attributes to the collection
+ * @property {string} [websiteUrl] - Shortcut for setting the website-url attribute
  */
 
 /**
@@ -1518,9 +1959,9 @@ export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Mayb
  * Updates a connected app
  * @typedef {Object} UpdateConnectedAppInput
  * @property {ConnectedAppAuthType} [authType] - The type of the connected-app
+ * @property {string} [privateConfiguration] - Encrypted JSON
+ * @property {string} [publicId] - 3rd party ID or account ID
  * @property {string} [scope] - Any specific scope that has been granted to the 3rd party application
- * @property {string} [thirdPartyId] - 3rd party ID or account ID
- * @property {string} [configuration] - Encrypted JSON
  */
 
 /**
@@ -1530,116 +1971,151 @@ export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Mayb
  */
 
 /**
+ * Update an IconComposition
+ * @typedef {Object} UpdateIconCompositionInput
+ * @property {string} [iconFill] - Change the fill color for the icon, set to null to remove the fill
+ * @property {string} id - ID of the IconComposition to update
+ * @property {string} [name] - Change the name
+ * @property {string} [resourceId] - Change the Icon used by this IconComposition
+ * @property {string} [shieldFill] - Change the fill color for the shield, set to null to remove the fill
+ * @property {string} [shieldKey] - Change which shield to use for the icon, set to null to clear the shieldFill and shieldStroke as well
+ * @property {string} [shieldStroke] - Change the stroke color for the shield, set to null to remove the stroke
+ */
+
+/**
+ * Fields for updating an IconSilhouette
+ * @typedef {Object} UpdateIconSilhouetteInput
+ * @property {Array<AttributeIdentifierInput>} [deleteAttrs] - Delete attributes to the icon
+ * @property {string} [name] - Change the name of this icon
+ * @property {Array<string>} [paths] - SVG path data for this icon, eg: "M 100 .."
+ * @property {Array<AttributeInput>} [upsertAttrs] - Insert or update attributes to the icon
+ * @property {string} [viewBox] - Optional SVG viewBox for this icon
+ */
+
+/**
+ * The response after updating an icon
+ * @typedef {Object} UpdateIconSilhouettePayload
+ * @property {IconSilhouette} [icon] - The updated icon
+ */
+
+/**
  * The intinerary collection fields to update
  * @typedef {Object} UpdateItineraryCollectionInput
- * @property {string} [title] - The title for the itinerary-collection
- * @property {string} [synopsis] - The synopsis for the itinerary-collection
- * @property {string} [description] - The description for the itinerary-collection
- * @property {Array<string>} [tags] - The tags for the itinerary-collection
- * @property {string} [readMoreUrl] - Alias for the read-more attribute
- * @property {string} [websiteUrl] - Alias for the website-url attribute
- * @property {Array<AttributeInput>} [upsertAttrs] - Insert or update attributes to the itinerary-collection
- * @property {Array<AttributeIdentifierInput>} [deleteAttrs] - Delete attributes to the itinerary-collection
  * @property {Array<CreateMediaContainerInput>} [createMedia] - Add multiple Media with MediaResources
- * @property {Array<MoveMediaContainerInput>} [moveMedia] - Move one or move MediaContainers
- * @property {Array<UpdateMediaContainerInput>} [updateMedia] - Update one or move MediaContainers
+ * @property {Array<AttributeIdentifierInput>} [deleteAttrs] - Delete attributes to the itinerary-collection
  * @property {Array<string>} [deleteMedia] - Delete one or move MediaContainers
+ * @property {string} [description] - The description for the itinerary-collection
+ * @property {Array<MoveMediaContainerInput>} [moveMedia] - Move one or move MediaContainers
+ * @property {string} [readMoreUrl] - Alias for the read-more attribute
+ * @property {string} [synopsis] - The synopsis for the itinerary-collection
+ * @property {Array<string>} [tags] - The tags for the itinerary-collection
+ * @property {string} [title] - The title for the itinerary-collection
+ * @property {Array<UpdateMediaContainerInput>} [updateMedia] - Update one or move MediaContainers
+ * @property {Array<AttributeInput>} [upsertAttrs] - Insert or update attributes to the itinerary-collection
+ * @property {string} [websiteUrl] - Alias for the website-url attribute
  */
 
 /**
  * The fields available after updating the itinerary collection
  * @typedef {Object} UpdateItineraryCollectionPayload
+ * @property {ItineraryItemCascadedChanges} cascaded - Other changes to the itinerary that caused by deleting the itinerary-item
  * @property {ItineraryCollection} [collection] - The itinerary collection that was created
  * @property {Itinerary} itinerary - The modified itinerary
- * @property {ItineraryItemCascadedChanges} cascaded - Other changes to the itinerary that caused by deleting the itinerary-item
  */
 
 /**
  * The input fields to update the itinerary directions
  * @typedef {Object} UpdateItineraryDirectionsInput
- * @property {string} [title] - The title for the itinerary directions
- * @property {string} [synopsis] - The synopsis for the itinerary-directions
- * @property {string} [description] - The description for the itinerary-directions
- * @property {Array<string>} [tags] - The tags for the itinerary-directions
- * @property {string} [readMoreUrl] - Alias for the read-more attribute
- * @property {string} [websiteUrl] - Alias for the website-url attribute
- * @property {Array<AttributeInput>} [upsertAttrs] - Insert or update attributes to the collection
- * @property {Array<AttributeIdentifierInput>} [deleteAttrs] - Delete attributes to the collection
  * @property {Array<CreateMediaContainerInput>} [createMedia] - Add multiple Media with MediaResources
- * @property {Array<MoveMediaContainerInput>} [moveMedia] - Move one or move MediaContainers
- * @property {Array<UpdateMediaContainerInput>} [updateMedia] - Update one or move MediaContainers
+ * @property {Array<AttributeIdentifierInput>} [deleteAttrs] - Delete attributes to the collection
  * @property {Array<string>} [deleteMedia] - Delete one or move MediaContainers
- * @property {string} [originId] - The origin/starting itinerary location item, in the form of item/XYZ
- * @property {RouteInput} [route] - The route of this item, must include at least one route segment
+ * @property {string} [description] - The description for the itinerary-directions
  * @property {number} [distance] - The distance of the itinerary-directions
  * @property {Array<ItineraryDirectionsDurationsInput>} [durations] - The duration details of the new itinerary-directions
  * @property {ElevationInput} [elevation] - The elevation details of the new itinerary-directions
+ * @property {Array<MoveMediaContainerInput>} [moveMedia] - Move one or move MediaContainers
+ * @property {string} [originId] - The origin/starting itinerary location item, in the form of item/XYZ
+ * @property {string} [readMoreUrl] - Alias for the read-more attribute
+ * @property {RouteInput} [route] - The route of this item, must include at least one route segment
+ * @property {string} [synopsis] - The synopsis for the itinerary-directions
+ * @property {Array<string>} [tags] - The tags for the itinerary-directions
+ * @property {string} [title] - The title for the itinerary directions
+ * @property {Array<UpdateMediaContainerInput>} [updateMedia] - Update one or move MediaContainers
+ * @property {Array<AttributeInput>} [upsertAttrs] - Insert or update attributes to the collection
+ * @property {string} [websiteUrl] - Alias for the website-url attribute
  */
 
 /**
  * The fields available after updating the itinerary directions item
  * @typedef {Object} UpdateItineraryDirectionsPayload
+ * @property {ItineraryItemCascadedChanges} cascaded - Other changes to the itinerary that caused by deleting the itinerary-item
  * @property {ItineraryDirections} [directions] - The updated itinerary directions item
  * @property {Itinerary} itinerary - The modified itinerary
- * @property {ItineraryItemCascadedChanges} cascaded - Other changes to the itinerary that caused by deleting the itinerary-item
  */
 
 /**
  * Updates a itinerary
  * @typedef {Object} UpdateItineraryInput
- * @property {string} [title] - The title for the itinerary
- * @property {string} [synopsis] - The synopsis for the itinerary
- * @property {string} [description] - The description for the itinerary
- * @property {Array<string>} [tags] - The tags for the itinerary
- * @property {string} [readMoreUrl] - Alias for the read-more attribute
- * @property {string} [websiteUrl] - Alias for the website-url attribute
- * @property {Array<AttributeInput>} [upsertAttrs] - Insert or update attributes to the collection
- * @property {Array<AttributeIdentifierInput>} [deleteAttrs] - Delete attributes to the collection
- * @property {Array<CreateMediaContainerInput>} [createMedia] - Add multiple Media with MediaResources
- * @property {Array<MoveMediaContainerInput>} [moveMedia] - Move one or move MediaContainers
- * @property {Array<UpdateMediaContainerInput>} [updateMedia] - Update one or move MediaContainers
- * @property {Array<string>} [deleteMedia] - Delete one or move MediaContainers
  * @property {ItineraryAutoRouteInput} [autoRoute] - Enable auto routing, or set to null to disable
+ * @property {boolean} [autoRouteRemoveExisting] - Remove any routes that were created with auto routing
+ * @property {Array<CreateIconCompositionInput>} [createIcons] - Add new IconCompositions to the itinerary
+ * @property {Array<CreateMediaContainerInput>} [createMedia] - Add multiple Media with MediaResources
+ * @property {string} [defaultLocale] - The default locale of this itinerary's content
+ * @property {Array<AttributeIdentifierInput>} [deleteAttrs] - Delete attributes to the collection
+ * @property {Array<string>} [deleteIcons] - Delete one or move IconCompositions
+ * @property {Array<string>} [deleteMedia] - Delete one or move MediaContainers
+ * @property {string} [description] - The description for the itinerary
  * @property {ElevationInput} [elevation] - Elevation data of the new itinerary
+ * @property {Array<MoveMediaContainerInput>} [moveMedia] - Move one or move MediaContainers
+ * @property {string} [readMoreUrl] - Alias for the read-more attribute
+ * @property {string} [synopsis] - The synopsis for the itinerary
+ * @property {Array<string>} [tags] - The tags for the itinerary
+ * @property {string} [title] - The title for the itinerary
+ * @property {Array<UpdateIconCompositionInput>} [updateIcons] - Update IconCompositions in the itinerary
+ * @property {Array<UpdateMediaContainerInput>} [updateMedia] - Update one or move MediaContainers
+ * @property {Array<AttributeInput>} [upsertAttrs] - Insert or update attributes to the collection
+ * @property {string} [websiteUrl] - Alias for the website-url attribute
  */
 
 /**
  * The fields to update on an itinerary location
  * @typedef {Object} UpdateItineraryLocationInput
- * @property {string} [title] - The title for the itinerary-location
- * @property {string} [synopsis] - The synopsis for the itinerary-location
- * @property {string} [description] - The description for the itinerary-location
- * @property {Array<string>} [tags] - The tags for the itinerary-location
- * @property {string} [readMoreUrl] - Alias for the read-more attribute
- * @property {string} [websiteUrl] - Alias for the website-url attribute
- * @property {Array<AttributeInput>} [upsertAttrs] - Insert or update attributes to the itinerary-collection
- * @property {Array<AttributeIdentifierInput>} [deleteAttrs] - Delete attributes to the itinerary-collection
+ * @property {BoundsInput} [bounds] - The bounds of the itinerary-location
  * @property {Array<CreateMediaContainerInput>} [createMedia] - Add multiple Media with MediaResources
- * @property {Array<MoveMediaContainerInput>} [moveMedia] - Move one or move MediaContainers
- * @property {Array<UpdateMediaContainerInput>} [updateMedia] - Update one or move MediaContainers
+ * @property {Array<AttributeIdentifierInput>} [deleteAttrs] - Delete attributes to the itinerary-collection
  * @property {Array<string>} [deleteMedia] - Delete one or move MediaContainers
- * @property {PositionInput} [position] - The place for this itinerary-location
- * @property {PlaceInput} [place] - The place for this itinerary-location
+ * @property {string} [description] - The description for the itinerary-location
+ * @property {string} [icon] - Set or remove the optional icon, passed ID must exist in the Itinerary.icons
+ * @property {Array<MoveMediaContainerInput>} [moveMedia] - Move one or move MediaContainers
  * @property {boolean} [optional] - Whether the location specified is optional on the itinerary
+ * @property {PlaceInput} [place] - The place for this itinerary-location
+ * @property {PositionInput} [position] - The place for this itinerary-location
+ * @property {string} [readMoreUrl] - Alias for the read-more attribute
+ * @property {string} [synopsis] - The synopsis for the itinerary-location
+ * @property {Array<string>} [tags] - The tags for the itinerary-location
+ * @property {string} [title] - The title for the itinerary-location
+ * @property {Array<UpdateMediaContainerInput>} [updateMedia] - Update one or move MediaContainers
+ * @property {Array<AttributeInput>} [upsertAttrs] - Insert or update attributes to the itinerary-collection
+ * @property {string} [websiteUrl] - Alias for the website-url attribute
  */
 
 /**
  * The fields available after updating a location
  * @typedef {Object} UpdateItineraryLocationPayload
- * @property {ItineraryLocation} [location] - The updated itinerary location
- * @property {Itinerary} itinerary - The modified itinerary
  * @property {ItineraryItemCascadedChanges} cascaded - Other changes to the itinerary that caused by deleting the itinerary-item
+ * @property {Itinerary} itinerary - The modified itinerary
+ * @property {ItineraryLocation} [location] - The updated itinerary location
  */
 
 /**
  * The available fields after updating a itinerary
  * @typedef {Object} UpdateItineraryPayload
- * @property {Itinerary} [itinerary] - The updated itinerary
  * @property {ItineraryItemCascadedChanges} cascaded - Other changes to the itinerary that caused by updating the itinerary
+ * @property {Itinerary} [itinerary] - The updated itinerary
  */
 
 /**
- * Update a MediaContainer
+ * Update a MediaContainer in a MediaContainer list
  * @typedef {Object} UpdateMediaContainerInput
  * @property {string} id - ID to the MediaContainer to update
  * @property {string} [resourceId] - ID to a MediaResource
@@ -1648,12 +2124,12 @@ export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Mayb
 /**
  * Updates a media resource
  * @typedef {Object} UpdateMediaResourceInput
- * @property {Array<string>} [tags] - List of labels to apply to the media-resource
  * @property {string} [attribution] - Text attribution for the source of the media-resource
  * @property {string} [caption] - Text caption for the media-resource
  * @property {string} [copyright] - Copyright details of the media-resource
- * @property {Array<AttributeInput>} [upsertAttrs] - Insert or update attributes to the media-resource
  * @property {Array<AttributeIdentifierInput>} [deleteAttrs] - Delete attributes to the media-resource
+ * @property {Array<string>} [tags] - List of labels to apply to the media-resource
+ * @property {Array<AttributeInput>} [upsertAttrs] - Insert or update attributes to the media-resource
  */
 
 /**
@@ -1665,16 +2141,45 @@ export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Mayb
 /**
  * Input object to Mutation.updateProfile
  * @typedef {Object} UpdateProfileInput
- * @property {string} [name] - The name of the profile
- * @property {string} [bio] - A short biography
- * @property {string} [websiteUrl] - The website url
  * @property {boolean} [autoApproveFollows] - If follow requests should be automatically approved for this profile
+ * @property {MediaContainerInput} [avatar] - The avatar image
+ * @property {string} [bio] - A short biography
+ * @property {Array<AttributeIdentifierInput>} [deleteAttrs] - Delete attributes to the profile
+ * @property {string} [name] - The name of the profile
+ * @property {ProfileType} [type] - The type of profile
+ * @property {Array<AttributeInput>} [upsertAttrs] - Insert or update attributes to the profile
+ * @property {string} [websiteUrl] - The website url
  */
 
 /**
  * Response payload to Mutation.updateProfile
  * @typedef {Object} UpdateProfilePayload
  * @property {Profile} [profile] - The updated profile
+ */
+
+/**
+ * An agreement made by a user
+ * @typedef {Object} UserAgreement
+ * @property {string} [date] - The date when the agreement was made
+ * @property {string} id - The Globally Unique ID of the object.
+ * @property {Profile} [profile] - Profile that associated with this agreement
+ * @property {string} type - The type of agreement
+ */
+
+/**
+ * Connection of UserAgreements
+ * @typedef {Object} UserAgreementConnection
+ * @property {Array<UserAgreementEdge>} edges - All the edges in this page of the connection
+ * @property {Array<UserAgreement>} nodes - Shortcut for edges[].node
+ * @property {PageInfo} pageInfo - Details regarding the current page of the connnection
+ * @property {number} totalCount - The total number of items in the connection (in all pages)
+ */
+
+/**
+ * Edge containing a UserAgreement
+ * @typedef {Object} UserAgreementEdge
+ * @property {string} cursor - The cursor string pointing to this item
+ * @property {UserAgreement} node - The item
  */
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
@@ -1683,7 +2188,6 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
-  /** The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf). */
   JSON: any;
 };
 
@@ -1698,30 +2202,32 @@ export type ApproveProfileFollowPayload = {
   __typename?: 'ApproveProfileFollowPayload';
   /** The follower profile */
   fromProfile: Profile;
-  /** The profile being followed */
-  toProfile: Profile;
   /** The status of the follow request */
   status?: Maybe<ProfileFollowStatus>;
+  /** The profile being followed */
+  toProfile: Profile;
 };
 
 /** Additional data defined on a resource */
 export type Attribute = {
   __typename?: 'Attribute';
   /**
+   *
    * The attribute identifier
    *
    * Has the form "{{resource_type}}/{{attribute_name}}"
    * eg: The "title" attribute on an item will have the id: "item/title"
    *
    * Custom attributes have the form "custom/{{attribute_name}}"
+   *
    */
   id: Scalars['ID'];
-  /** The attribute value, can be any JSON-serialisable type */
-  value?: Maybe<Scalars['JSON']>;
-  /** Optional attribute metadata, can be any JSON-serialisable type */
-  meta?: Maybe<Scalars['JSON']>;
   /** Optional string representing the locale of the attribute value */
   locale?: Maybe<Scalars['String']>;
+  /** Optional attribute metadata, can be any JSON-serialisable type */
+  meta?: Maybe<Scalars['JSON']>;
+  /** The attribute value, can be any JSON-serialisable type */
+  value?: Maybe<Scalars['JSON']>;
 };
 
 /** Connection of Attributes */
@@ -1751,40 +2257,227 @@ export type AttributeIdentifierInput = {
   /** The attribute identifier */
   id: Scalars['ID'];
   /** The locale of the attribute */
-  locale?: Maybe<Scalars['String']>;
+  locale?: InputMaybe<Scalars['String']>;
 };
 
 /** Defines an attribute */
 export type AttributeInput = {
   /** The attribute identifier */
   id: Scalars['ID'];
+  /** Optional string representing the locale of the attribute value */
+  locale?: InputMaybe<Scalars['String']>;
+  /** Optional attribute metadata, can be any JSON-serialisable type */
+  meta?: InputMaybe<Scalars['JSON']>;
   /** The attribute value, can be any JSON-serialisable type */
   value: Scalars['JSON'];
-  /** Optional attribute metadata, can be any JSON-serialisable type */
-  meta?: Maybe<Scalars['JSON']>;
-  /** Optional string representing the locale of the attribute value */
-  locale?: Maybe<Scalars['String']>;
 };
+
+/** The address field of a BillingDetails object */
+export type BillingAddress = {
+  __typename?: 'BillingAddress';
+  addressLineOne: Scalars['String'];
+  addressLineTwo?: Maybe<Scalars['String']>;
+  countryCode: Scalars['String'];
+  locality: Scalars['String'];
+  postalCode?: Maybe<Scalars['String']>;
+  region: Scalars['String'];
+};
+
+/** Fields for update billing address field */
+export type BillingAddressInput = {
+  addressLineOne: Scalars['String'];
+  addressLineTwo?: InputMaybe<Scalars['String']>;
+  countryCode: Scalars['String'];
+  locality: Scalars['String'];
+  postalCode?: InputMaybe<Scalars['String']>;
+  region: Scalars['String'];
+};
+
+/** Billing details associated with a profile */
+export type BillingDetails = {
+  __typename?: 'BillingDetails';
+  /** The billing address */
+  address: BillingAddress;
+  /** The email address */
+  emailAddress: Scalars['String'];
+  /** The family name */
+  familyName: Scalars['String'];
+  /** The given name */
+  givenName: Scalars['String'];
+  /** The optional organization name */
+  organization?: Maybe<Scalars['String']>;
+  /** Profile that these billing details apply to */
+  profile: Profile;
+};
+
+/** A billing plan */
+export type BillingPlan = {
+  __typename?: 'BillingPlan';
+  /** The identifier for this plan */
+  id: Scalars['ID'];
+  /** The price of this plan */
+  price?: Maybe<BillingPrice>;
+  /** The quantity */
+  quantity: Scalars['Int'];
+};
+
+/** A price available for a billing plan */
+export type BillingPrice = {
+  __typename?: 'BillingPrice';
+  /** The amount of this price */
+  amount: Scalars['Int'];
+  /** The currency used for this price */
+  currency: Scalars['String'];
+  /** The unique id for this price */
+  id: Scalars['ID'];
+  /** The product corres */
+  product: BillingProduct;
+  /** Recurrence details of the price */
+  recurring: BillingPriceRecurring;
+};
+
+/** Connection of BillingPrices */
+export type BillingPriceConnection = {
+  __typename?: 'BillingPriceConnection';
+  /** All the edges in this page of the connection */
+  edges: Array<BillingPriceEdge>;
+  /** Shortcut for edges[].node */
+  nodes: Array<BillingPrice>;
+  /** Details regarding the current page of the connnection */
+  pageInfo: PageInfo;
+  /** The total number of items in the connection (in all pages) */
+  totalCount: Scalars['Int'];
+};
+
+/** Edge containing a BillingPrice */
+export type BillingPriceEdge = {
+  __typename?: 'BillingPriceEdge';
+  /** The cursor string pointing to this item */
+  cursor: Scalars['String'];
+  /** The item */
+  node: BillingPrice;
+};
+
+/** The billing price to use */
+export type BillingPriceInput = {
+  /** The ID of a BillingPrice */
+  priceId: Scalars['String'];
+  /** The quantity, defaults to 1 */
+  quantity?: InputMaybe<Scalars['Int']>;
+};
+
+/** The recurrence details for a BillingPrice */
+export type BillingPriceRecurring = {
+  __typename?: 'BillingPriceRecurring';
+  /** The number of interval per recurrence */
+  count: Scalars['Int'];
+  /** The interval type */
+  interval: BillingPriceRecurringInterval;
+};
+
+/** The interval type */
+export enum BillingPriceRecurringInterval {
+  Day = 'Day',
+  Month = 'Month',
+  Week = 'Week',
+  Year = 'Year'
+}
+
+/** A product corresponding to a price */
+export type BillingProduct = {
+  __typename?: 'BillingProduct';
+  /** The description for this product */
+  description?: Maybe<Scalars['String']>;
+  /** The unique id for this product */
+  id: Scalars['ID'];
+  /** The name of this product */
+  name: Scalars['String'];
+};
+
+/** A billing subscription */
+export type BillingSubscription = {
+  __typename?: 'BillingSubscription';
+  /** The date when the subscription was created */
+  created: Scalars['String'];
+  /** The unique id for this subscription */
+  id: Scalars['ID'];
+  /** The date when the subscription was last modified */
+  modified: Scalars['String'];
+  /** The plans attached to this subscription */
+  plans: Array<BillingPlan>;
+  /** Profile that this billing subscription belongs to */
+  profile: Profile;
+  /** The current status of this subscription */
+  status: BillingSubscriptionStatus;
+};
+
+
+/** A billing subscription */
+export type BillingSubscriptionCreatedArgs = {
+  format?: InputMaybe<Scalars['String']>;
+  locale?: InputMaybe<Scalars['String']>;
+  relativeTo?: InputMaybe<Scalars['String']>;
+  timeZone?: InputMaybe<Scalars['String']>;
+};
+
+
+/** A billing subscription */
+export type BillingSubscriptionModifiedArgs = {
+  format?: InputMaybe<Scalars['String']>;
+  locale?: InputMaybe<Scalars['String']>;
+  relativeTo?: InputMaybe<Scalars['String']>;
+  timeZone?: InputMaybe<Scalars['String']>;
+};
+
+/** Connection of BillingSubscriptions */
+export type BillingSubscriptionConnection = {
+  __typename?: 'BillingSubscriptionConnection';
+  /** All the edges in this page of the connection */
+  edges: Array<BillingSubscriptionEdge>;
+  /** Shortcut for edges[].node */
+  nodes: Array<BillingSubscription>;
+  /** Details regarding the current page of the connnection */
+  pageInfo: PageInfo;
+  /** The total number of items in the connection (in all pages) */
+  totalCount: Scalars['Int'];
+};
+
+/** Edge containing a BillingSubscription */
+export type BillingSubscriptionEdge = {
+  __typename?: 'BillingSubscriptionEdge';
+  /** The cursor string pointing to this item */
+  cursor: Scalars['String'];
+  /** The item */
+  node: BillingSubscription;
+};
+
+/** The status of a BillingSubscription */
+export enum BillingSubscriptionStatus {
+  Active = 'Active',
+  Cancelled = 'Cancelled',
+  Expired = 'Expired',
+  Inactive = 'Inactive'
+}
 
 /** A bounding box on a map defined by two positions (opposite corners of the box) */
 export type Bounds = {
   __typename?: 'Bounds';
-  /** The west-most longitude of the bounding box */
-  w: Scalars['Float'];
-  /** The south-most latitude of the bounding box */
-  s: Scalars['Float'];
   /** The east-most longitude of the bounding box */
   e: Scalars['Float'];
-  /** The north-most latitude of the bounding box */
-  n: Scalars['Float'];
-  /** The south-west point of the bounding box in the form: [west, south] */
-  ws: Array<Scalars['Float']>;
   /** The north-east point of the bounding box in the form: [east, north] */
   en: Array<Scalars['Float']>;
-  /** The south-west and north-east points of the bounding box in the form: [west, south, east, north] */
-  wsen: Array<Scalars['Float']>;
   /** The minimum and maximum points of the bounding box in the form: [minimum, maximum] */
   minMax: Array<Array<Scalars['Float']>>;
+  /** The north-most latitude of the bounding box */
+  n: Scalars['Float'];
+  /** The south-most latitude of the bounding box */
+  s: Scalars['Float'];
+  /** The west-most longitude of the bounding box */
+  w: Scalars['Float'];
+  /** The south-west point of the bounding box in the form: [west, south] */
+  ws: Array<Scalars['Float']>;
+  /** The south-west and north-east points of the bounding box in the form: [west, south, east, north] */
+  wsen: Array<Scalars['Float']>;
 };
 
 /** A bounding circle on a map defined by a center positions and a radius */
@@ -1797,14 +2490,28 @@ export type BoundsCircleInput = {
 
 /** A bounding box on a map defined by two positions (opposite corners of the box) */
 export type BoundsInput = {
-  /** The north-most latitude of the bounding box */
-  n: Scalars['Float'];
   /** The east-most longitude of the bounding box */
   e: Scalars['Float'];
+  /** The north-most latitude of the bounding box */
+  n: Scalars['Float'];
   /** The south-most latitude of the bounding box */
   s: Scalars['Float'];
   /** The west-most longitude of the bounding box */
   w: Scalars['Float'];
+};
+
+/** The result of Mutation.captureMarketingInformation */
+export type CaptureMarketingInformationPayload = {
+  __typename?: 'CaptureMarketingInformationPayload';
+  /** The ID of the profile that the information is associated against */
+  profileId?: Maybe<Scalars['ID']>;
+};
+
+/** Response to Mutation.changeItineraryDefaultLocale */
+export type ChangeItineraryDefaultLocalePayload = {
+  __typename?: 'ChangeItineraryDefaultLocalePayload';
+  /** The changed itinerary */
+  itinerary?: Maybe<Itinerary>;
 };
 
 /** Response of claiming a handle */
@@ -1817,106 +2524,80 @@ export type ClaimProfileHandlePayload = {
 /** A collection type is used to group together a unordered set of items */
 export type Collection = Node & {
   __typename?: 'Collection';
-  /** The Globally Unique ID of the object. */
-  id: Scalars['ID'];
-  /** Profile that owns this collection */
-  profile: Profile;
-  /** The date when the collection was created */
-  created?: Maybe<Scalars['String']>;
-  /** The date when the collection was last modified */
-  modified?: Maybe<Scalars['String']>;
-  /** A supplied title for this collection */
-  title?: Maybe<Scalars['String']>;
-  /** A short text summary */
-  synopsis?: Maybe<Scalars['String']>;
-  /** A longer text description */
-  description?: Maybe<Scalars['String']>;
-  /** A series of strings applied to label this item */
-  tags: Array<Scalars['String']>;
-  /** List of MediaContainers containing images or other media */
-  media: Array<MediaContainer>;
-  /** A single MediaContainer representing the preferred media to use */
-  preferredMedia?: Maybe<MediaContainer>;
-  /** Alias for the read-more attribute */
-  readMoreUrl?: Maybe<Scalars['String']>;
-  /** Alias for the website-url attribute */
-  websiteUrl?: Maybe<Scalars['String']>;
   /** Arbitrary JSON value stored on this resource, keyed by an id */
   attr?: Maybe<Attribute>;
   /** Shortcut for the attr.value, returns null if the attribute doesn't exist */
   attrValue?: Maybe<Scalars['JSON']>;
-  /** Query multiple attributes by id and optionally locale */
-  attrs: Array<Maybe<Attribute>>;
-  /** Return all attributes on the resource */
-  allAttrs: AttributeConnection;
-  /** Query multiple attributes with the same id and optionally locale */
-  attrsById: AttributeConnection;
+  /** Query multiple attributes optionally filtering by id and/or locale */
+  attrs: AttributeConnection;
+  /** The date when the collection was created */
+  created?: Maybe<Scalars['String']>;
+  /** A longer text description */
+  description?: Maybe<Scalars['String']>;
   /** A label used to differentiate types of collections */
   discriminator: Scalars['String'];
+  /** The Globally Unique ID of the object. */
+  id: Scalars['ID'];
   /** Returns an item belonging to this collection by id */
-  item?: Maybe<CollectionItem>;
+  item?: Maybe<CollectionItemEmbedded>;
   /** Retrieve multiple collection-items belonging to this collection */
   items: CollectionItemConnection;
-};
-
-
-/** A collection type is used to group together a unordered set of items */
-export type CollectionCreatedArgs = {
-  format?: Maybe<Scalars['String']>;
-  relativeTo?: Maybe<Scalars['String']>;
-  timeZone?: Maybe<Scalars['String']>;
-  locale?: Maybe<Scalars['String']>;
-};
-
-
-/** A collection type is used to group together a unordered set of items */
-export type CollectionModifiedArgs = {
-  format?: Maybe<Scalars['String']>;
-  relativeTo?: Maybe<Scalars['String']>;
-  timeZone?: Maybe<Scalars['String']>;
-  locale?: Maybe<Scalars['String']>;
-};
-
-
-/** A collection type is used to group together a unordered set of items */
-export type CollectionMediaArgs = {
-  limit?: Scalars['Int'];
+  /**
+   * List of MediaContainers containing images or other media
+   * @deprecated use mediaContainers instead
+   */
+  media: Array<MediaContainer>;
+  /** List of MediaContainers containing images or other media */
+  mediaContainers: MediaContainerConnection;
+  /** The date when the collection was last modified */
+  modified?: Maybe<Scalars['String']>;
+  /** A single MediaContainer representing the preferred media to use */
+  preferredMedia?: Maybe<MediaContainer>;
+  /** Profile that owns this collection */
+  profile: Profile;
+  /** Alias for the read-more attribute */
+  readMoreUrl?: Maybe<Scalars['String']>;
+  /** A short text summary */
+  synopsis?: Maybe<Scalars['String']>;
+  /** A series of strings applied to label this item */
+  tags: Array<Scalars['String']>;
+  /** A supplied title for this collection */
+  title?: Maybe<Scalars['String']>;
+  /** Alias for the website-url attribute */
+  websiteUrl?: Maybe<Scalars['String']>;
 };
 
 
 /** A collection type is used to group together a unordered set of items */
 export type CollectionAttrArgs = {
   id: Scalars['ID'];
-  locale?: Maybe<Scalars['String']>;
+  locale?: InputMaybe<Scalars['String']>;
 };
 
 
 /** A collection type is used to group together a unordered set of items */
 export type CollectionAttrValueArgs = {
   id: Scalars['ID'];
-  locale?: Maybe<Scalars['String']>;
+  locale?: InputMaybe<Scalars['String']>;
 };
 
 
 /** A collection type is used to group together a unordered set of items */
 export type CollectionAttrsArgs = {
-  attrs: Array<AttributeIdentifierInput>;
+  after?: InputMaybe<Scalars['String']>;
+  first: Scalars['Int'];
+  id?: InputMaybe<Scalars['ID']>;
+  includeNoLocale?: InputMaybe<Scalars['Boolean']>;
+  locale?: InputMaybe<Scalars['String']>;
 };
 
 
 /** A collection type is used to group together a unordered set of items */
-export type CollectionAllAttrsArgs = {
-  first: Scalars['Int'];
-  after?: Maybe<Scalars['String']>;
-};
-
-
-/** A collection type is used to group together a unordered set of items */
-export type CollectionAttrsByIdArgs = {
-  first: Scalars['Int'];
-  after?: Maybe<Scalars['String']>;
-  id: Scalars['ID'];
-  locale?: Maybe<Scalars['String']>;
+export type CollectionCreatedArgs = {
+  format?: InputMaybe<Scalars['String']>;
+  locale?: InputMaybe<Scalars['String']>;
+  relativeTo?: InputMaybe<Scalars['String']>;
+  timeZone?: InputMaybe<Scalars['String']>;
 };
 
 
@@ -1928,17 +2609,39 @@ export type CollectionItemArgs = {
 
 /** A collection type is used to group together a unordered set of items */
 export type CollectionItemsArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  bounds?: InputMaybe<BoundsInput>;
+  boundsCircle?: InputMaybe<BoundsCircleInput>;
+  externalIds?: InputMaybe<Array<Scalars['ID']>>;
+  externalSources?: InputMaybe<Array<Scalars['ID']>>;
   first: Scalars['Int'];
-  after?: Maybe<Scalars['String']>;
-  keyword?: Maybe<Scalars['String']>;
-  tags?: Maybe<Array<Scalars['String']>>;
-  sectionIds?: Maybe<Array<Scalars['ID']>>;
-  resourceIds?: Maybe<Array<Scalars['ID']>>;
-  boundsCircle?: Maybe<BoundsCircleInput>;
-  bounds?: Maybe<BoundsInput>;
-  externalIds?: Maybe<Array<Scalars['ID']>>;
-  externalSources?: Maybe<Array<Scalars['ID']>>;
-  sort?: Maybe<Array<CollectionItemsSort>>;
+  keyword?: InputMaybe<Scalars['String']>;
+  resourceIds?: InputMaybe<Array<Scalars['ID']>>;
+  sectionIds?: InputMaybe<Array<Scalars['ID']>>;
+  sort?: InputMaybe<Array<CollectionItemsSort>>;
+  tags?: InputMaybe<Array<Scalars['String']>>;
+};
+
+
+/** A collection type is used to group together a unordered set of items */
+export type CollectionMediaArgs = {
+  limit?: Scalars['Int'];
+};
+
+
+/** A collection type is used to group together a unordered set of items */
+export type CollectionMediaContainersArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  first: Scalars['Int'];
+};
+
+
+/** A collection type is used to group together a unordered set of items */
+export type CollectionModifiedArgs = {
+  format?: InputMaybe<Scalars['String']>;
+  locale?: InputMaybe<Scalars['String']>;
+  relativeTo?: InputMaybe<Scalars['String']>;
+  timeZone?: InputMaybe<Scalars['String']>;
 };
 
 /** Connection of Collections */
@@ -1971,64 +2674,80 @@ export type CollectionEdge = {
 
 /** A collection item contains data about a single entity and is assigned within a collection */
 export type CollectionItem = {
-  /** The unique identifier, taking the shape of item/XYZ */
-  id: Scalars['ID'];
-  /** The associated profile owner */
-  profile: Profile;
-  /** The date when the collection-item was created */
-  created?: Maybe<Scalars['String']>;
-  /** The date when the collection-item was last modified */
-  modified?: Maybe<Scalars['String']>;
-  /** The supplied title */
-  title?: Maybe<Scalars['String']>;
-  /** A short text summary */
-  synopsis?: Maybe<Scalars['String']>;
-  /** A longer text description */
-  description?: Maybe<Scalars['String']>;
-  /** A series of strings applied to label this item */
-  tags: Array<Scalars['String']>;
-  /** List of MediaContainers containing images or other media */
-  media: Array<MediaContainer>;
-  /** The preferred MediaContainer to use */
-  preferredMedia?: Maybe<MediaContainer>;
-  /** Alias for the read-more attribute */
-  readMoreUrl?: Maybe<Scalars['String']>;
-  /** Alias for the website-url attribute */
-  websiteUrl?: Maybe<Scalars['String']>;
-  /** One or more sections this item belongs to */
-  sectionIds: Array<Scalars['ID']>;
-  /** Identifier from an external source this item is associated with */
-  externalId?: Maybe<Scalars['ID']>;
-  /** The source of the item's externalId */
-  externalSource?: Maybe<Scalars['ID']>;
   /** Arbitrary JSON value stored on this resource, keyed by an id */
   attr?: Maybe<Attribute>;
   /** Shortcut for the attr.value, returns null if the attribute doesn't exist */
   attrValue?: Maybe<Scalars['JSON']>;
-  /** Query multiple attributes by id and optionally locale */
-  attrs: Array<Maybe<Attribute>>;
-  /** Return all attributes on the resource */
-  allAttrs: AttributeConnection;
-  /** Query multiple attributes with the same id and optionally locale */
-  attrsById: AttributeConnection;
+  /** Query multiple attributes optionally filtering by id and/or locale */
+  attrs: AttributeConnection;
+  /** The date when the collection-item was created */
+  created?: Maybe<Scalars['String']>;
+  /** A longer text description */
+  description?: Maybe<Scalars['String']>;
+  /** Identifier from an external source this item is associated with */
+  externalId?: Maybe<Scalars['ID']>;
+  /** The source of the item's externalId */
+  externalSource?: Maybe<Scalars['ID']>;
+  /** The unique identifier, taking the shape of item/XYZ */
+  id: Scalars['ID'];
+  /**
+   * List of MediaContainers containing images or other media
+   * @deprecated use mediaContainers instead
+   */
+  media: Array<MediaContainer>;
+  /** List of MediaContainers containing images or other media */
+  mediaContainers: MediaContainerConnection;
+  /** The date when the collection-item was last modified */
+  modified?: Maybe<Scalars['String']>;
+  /** The preferred MediaContainer to use */
+  preferredMedia?: Maybe<MediaContainer>;
+  /** The associated profile owner */
+  profile: Profile;
+  /** Alias for the read-more attribute */
+  readMoreUrl?: Maybe<Scalars['String']>;
+  /** One or more sections this item belongs to */
+  sectionIds: Array<Scalars['ID']>;
+  /** A short text summary */
+  synopsis?: Maybe<Scalars['String']>;
+  /** A series of strings applied to label this item */
+  tags: Array<Scalars['String']>;
+  /** The supplied title */
+  title?: Maybe<Scalars['String']>;
+  /** Alias for the website-url attribute */
+  websiteUrl?: Maybe<Scalars['String']>;
+};
+
+
+/** A collection item contains data about a single entity and is assigned within a collection */
+export type CollectionItemAttrArgs = {
+  id: Scalars['ID'];
+  locale?: InputMaybe<Scalars['String']>;
+};
+
+
+/** A collection item contains data about a single entity and is assigned within a collection */
+export type CollectionItemAttrValueArgs = {
+  id: Scalars['ID'];
+  locale?: InputMaybe<Scalars['String']>;
+};
+
+
+/** A collection item contains data about a single entity and is assigned within a collection */
+export type CollectionItemAttrsArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  first: Scalars['Int'];
+  id?: InputMaybe<Scalars['ID']>;
+  includeNoLocale?: InputMaybe<Scalars['Boolean']>;
+  locale?: InputMaybe<Scalars['String']>;
 };
 
 
 /** A collection item contains data about a single entity and is assigned within a collection */
 export type CollectionItemCreatedArgs = {
-  format?: Maybe<Scalars['String']>;
-  relativeTo?: Maybe<Scalars['String']>;
-  timeZone?: Maybe<Scalars['String']>;
-  locale?: Maybe<Scalars['String']>;
-};
-
-
-/** A collection item contains data about a single entity and is assigned within a collection */
-export type CollectionItemModifiedArgs = {
-  format?: Maybe<Scalars['String']>;
-  relativeTo?: Maybe<Scalars['String']>;
-  timeZone?: Maybe<Scalars['String']>;
-  locale?: Maybe<Scalars['String']>;
+  format?: InputMaybe<Scalars['String']>;
+  locale?: InputMaybe<Scalars['String']>;
+  relativeTo?: InputMaybe<Scalars['String']>;
+  timeZone?: InputMaybe<Scalars['String']>;
 };
 
 
@@ -2039,38 +2758,18 @@ export type CollectionItemMediaArgs = {
 
 
 /** A collection item contains data about a single entity and is assigned within a collection */
-export type CollectionItemAttrArgs = {
-  id: Scalars['ID'];
-  locale?: Maybe<Scalars['String']>;
-};
-
-
-/** A collection item contains data about a single entity and is assigned within a collection */
-export type CollectionItemAttrValueArgs = {
-  id: Scalars['ID'];
-  locale?: Maybe<Scalars['String']>;
-};
-
-
-/** A collection item contains data about a single entity and is assigned within a collection */
-export type CollectionItemAttrsArgs = {
-  attrs: Array<AttributeIdentifierInput>;
-};
-
-
-/** A collection item contains data about a single entity and is assigned within a collection */
-export type CollectionItemAllAttrsArgs = {
+export type CollectionItemMediaContainersArgs = {
+  after?: InputMaybe<Scalars['String']>;
   first: Scalars['Int'];
-  after?: Maybe<Scalars['String']>;
 };
 
 
 /** A collection item contains data about a single entity and is assigned within a collection */
-export type CollectionItemAttrsByIdArgs = {
-  first: Scalars['Int'];
-  after?: Maybe<Scalars['String']>;
-  id: Scalars['ID'];
-  locale?: Maybe<Scalars['String']>;
+export type CollectionItemModifiedArgs = {
+  format?: InputMaybe<Scalars['String']>;
+  locale?: InputMaybe<Scalars['String']>;
+  relativeTo?: InputMaybe<Scalars['String']>;
+  timeZone?: InputMaybe<Scalars['String']>;
 };
 
 /** Connection of CollectionItems */
@@ -2095,83 +2794,113 @@ export type CollectionItemEdge = {
   node: CollectionItem;
 };
 
+/** A CollectionItem that's embedded in another resource */
+export type CollectionItemEmbedded = CollectionItemFailedToLoad | CollectionLocation;
+
+/** Represents an embedded CollectionItem that failed to load */
+export type CollectionItemFailedToLoad = Node & {
+  __typename?: 'CollectionItemFailedToLoad';
+  /** The Globally Unique ID of the object. */
+  id: Scalars['ID'];
+};
+
 /** Determine how to sort CollectionItems when listing */
 export type CollectionItemsSort = {
   /** Sort by the created date */
-  created?: Maybe<SortDirection>;
+  created?: InputMaybe<SortDirection>;
   /** Sort by the modified date */
-  modified?: Maybe<SortDirection>;
+  modified?: InputMaybe<SortDirection>;
   /** Sort by the collection-item title */
-  title?: Maybe<SortDirection>;
+  title?: InputMaybe<SortDirection>;
 };
 
 /** A CollectionItem used to represents a single location association to a place. */
-export type CollectionLocation = Node & CollectionItem & {
+export type CollectionLocation = CollectionItem & Node & {
   __typename?: 'CollectionLocation';
-  /** The unique identifier, taking the shape of item/XYZ */
-  id: Scalars['ID'];
-  /** The associated profile owner */
-  profile: Profile;
-  /** The date when the collection-item was created */
-  created?: Maybe<Scalars['String']>;
-  /** The date when the collection-item was last modified */
-  modified?: Maybe<Scalars['String']>;
-  /** The supplied title */
-  title?: Maybe<Scalars['String']>;
-  /** A short text summary */
-  synopsis?: Maybe<Scalars['String']>;
-  /** A longer text description */
-  description?: Maybe<Scalars['String']>;
-  /** A series of strings applied to label this item */
-  tags: Array<Scalars['String']>;
-  /** List of MediaContainers containing images or other media */
-  media: Array<MediaContainer>;
-  /** The preferred MediaContainer to use */
-  preferredMedia?: Maybe<MediaContainer>;
-  /** Alias for the read-more attribute */
-  readMoreUrl?: Maybe<Scalars['String']>;
-  /** Alias for the website-url attribute */
-  websiteUrl?: Maybe<Scalars['String']>;
-  /** One or more sections this item belongs to */
-  sectionIds: Array<Scalars['ID']>;
-  /** Identifier from an external source this item is associated with */
-  externalId?: Maybe<Scalars['ID']>;
-  /** The source of the item's externalId */
-  externalSource?: Maybe<Scalars['ID']>;
+  /** Address information for the collection location */
+  address: PlaceAddress;
   /** Arbitrary JSON value stored on this resource, keyed by an id */
   attr?: Maybe<Attribute>;
   /** Shortcut for the attr.value, returns null if the attribute doesn't exist */
   attrValue?: Maybe<Scalars['JSON']>;
-  /** Query multiple attributes by id and optionally locale */
-  attrs: Array<Maybe<Attribute>>;
-  /** Return all attributes on the resource */
-  allAttrs: AttributeConnection;
-  /** Query multiple attributes with the same id and optionally locale */
-  attrsById: AttributeConnection;
+  /** Query multiple attributes optionally filtering by id and/or locale */
+  attrs: AttributeConnection;
+  /** The bounding box around the collection-location (derived from place if not overridden) */
+  bounds?: Maybe<Bounds>;
+  /** Contact information for the collection location */
+  contact: PlaceContact;
+  /** The date when the collection-item was created */
+  created?: Maybe<Scalars['String']>;
+  /** A longer text description */
+  description?: Maybe<Scalars['String']>;
+  /** Identifier from an external source this item is associated with */
+  externalId?: Maybe<Scalars['ID']>;
+  /** The source of the item's externalId */
+  externalSource?: Maybe<Scalars['ID']>;
+  /** The unique identifier, taking the shape of item/XYZ */
+  id: Scalars['ID'];
+  /**
+   * List of MediaContainers containing images or other media
+   * @deprecated use mediaContainers instead
+   */
+  media: Array<MediaContainer>;
+  /** List of MediaContainers containing images or other media */
+  mediaContainers: MediaContainerConnection;
+  /** The date when the collection-item was last modified */
+  modified?: Maybe<Scalars['String']>;
   /** The associated place information for this location */
   place: Place;
   /** The position of the collection-location (derived from place if not overridden) */
   position: Position;
-  /** The bounding box around the collection-location (derived from place if not overridden) */
-  bounds?: Maybe<Bounds>;
+  /** The preferred MediaContainer to use */
+  preferredMedia?: Maybe<MediaContainer>;
+  /** The associated profile owner */
+  profile: Profile;
+  /** Alias for the read-more attribute */
+  readMoreUrl?: Maybe<Scalars['String']>;
+  /** One or more sections this item belongs to */
+  sectionIds: Array<Scalars['ID']>;
+  /** A short text summary */
+  synopsis?: Maybe<Scalars['String']>;
+  /** A series of strings applied to label this item */
+  tags: Array<Scalars['String']>;
+  /** The supplied title */
+  title?: Maybe<Scalars['String']>;
+  /** Alias for the website-url attribute */
+  websiteUrl?: Maybe<Scalars['String']>;
+};
+
+
+/** A CollectionItem used to represents a single location association to a place. */
+export type CollectionLocationAttrArgs = {
+  id: Scalars['ID'];
+  locale?: InputMaybe<Scalars['String']>;
+};
+
+
+/** A CollectionItem used to represents a single location association to a place. */
+export type CollectionLocationAttrValueArgs = {
+  id: Scalars['ID'];
+  locale?: InputMaybe<Scalars['String']>;
+};
+
+
+/** A CollectionItem used to represents a single location association to a place. */
+export type CollectionLocationAttrsArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  first: Scalars['Int'];
+  id?: InputMaybe<Scalars['ID']>;
+  includeNoLocale?: InputMaybe<Scalars['Boolean']>;
+  locale?: InputMaybe<Scalars['String']>;
 };
 
 
 /** A CollectionItem used to represents a single location association to a place. */
 export type CollectionLocationCreatedArgs = {
-  format?: Maybe<Scalars['String']>;
-  relativeTo?: Maybe<Scalars['String']>;
-  timeZone?: Maybe<Scalars['String']>;
-  locale?: Maybe<Scalars['String']>;
-};
-
-
-/** A CollectionItem used to represents a single location association to a place. */
-export type CollectionLocationModifiedArgs = {
-  format?: Maybe<Scalars['String']>;
-  relativeTo?: Maybe<Scalars['String']>;
-  timeZone?: Maybe<Scalars['String']>;
-  locale?: Maybe<Scalars['String']>;
+  format?: InputMaybe<Scalars['String']>;
+  locale?: InputMaybe<Scalars['String']>;
+  relativeTo?: InputMaybe<Scalars['String']>;
+  timeZone?: InputMaybe<Scalars['String']>;
 };
 
 
@@ -2182,88 +2911,68 @@ export type CollectionLocationMediaArgs = {
 
 
 /** A CollectionItem used to represents a single location association to a place. */
-export type CollectionLocationAttrArgs = {
-  id: Scalars['ID'];
-  locale?: Maybe<Scalars['String']>;
-};
-
-
-/** A CollectionItem used to represents a single location association to a place. */
-export type CollectionLocationAttrValueArgs = {
-  id: Scalars['ID'];
-  locale?: Maybe<Scalars['String']>;
-};
-
-
-/** A CollectionItem used to represents a single location association to a place. */
-export type CollectionLocationAttrsArgs = {
-  attrs: Array<AttributeIdentifierInput>;
-};
-
-
-/** A CollectionItem used to represents a single location association to a place. */
-export type CollectionLocationAllAttrsArgs = {
+export type CollectionLocationMediaContainersArgs = {
+  after?: InputMaybe<Scalars['String']>;
   first: Scalars['Int'];
-  after?: Maybe<Scalars['String']>;
 };
 
 
 /** A CollectionItem used to represents a single location association to a place. */
-export type CollectionLocationAttrsByIdArgs = {
-  first: Scalars['Int'];
-  after?: Maybe<Scalars['String']>;
-  id: Scalars['ID'];
-  locale?: Maybe<Scalars['String']>;
+export type CollectionLocationModifiedArgs = {
+  format?: InputMaybe<Scalars['String']>;
+  locale?: InputMaybe<Scalars['String']>;
+  relativeTo?: InputMaybe<Scalars['String']>;
+  timeZone?: InputMaybe<Scalars['String']>;
 };
 
 /** Determine how to sort Collections when listing */
 export type CollectionsSort = {
   /** Sort by the created date */
-  created?: Maybe<SortDirection>;
+  created?: InputMaybe<SortDirection>;
   /** Sort by the modified date */
-  modified?: Maybe<SortDirection>;
+  modified?: InputMaybe<SortDirection>;
   /** Sort by the collection title */
-  title?: Maybe<SortDirection>;
+  title?: InputMaybe<SortDirection>;
 };
 
 /** Points on the compass rose */
 export enum CompassPoint {
+  E = 'E',
   N = 'N',
   Ne = 'NE',
-  E = 'E',
-  Se = 'SE',
+  Nw = 'NW',
   S = 'S',
+  Se = 'SE',
   Sw = 'SW',
-  W = 'W',
-  Nw = 'NW'
+  W = 'W'
 }
 
 /** Connected apps stored in the profile */
 export type ConnectedApp = Node & {
   __typename?: 'ConnectedApp';
-  /** The Globally Unique ID of the object. */
-  id: Scalars['ID'];
-  /** The profile associated with this connected app */
-  profile?: Maybe<Profile>;
-  /** A key to describe the type of connection to the application */
-  type?: Maybe<ConnectedAppType>;
-  /** This is the key relating to the service - it identifies the "App" we are connecting to */
-  serviceKey: ConnectedAppServiceKey;
   /** Depending on the authentication method, this can highlight the authenticated application method (e.g. OAuth) */
   authType?: Maybe<ConnectedAppAuthType>;
+  /** The Globally Unique ID of the object. */
+  id: Scalars['ID'];
+  /** Private configuration information as encrypted JSON */
+  privateConfiguration?: Maybe<Scalars['JSON']>;
+  /** The profile associated with this connected app */
+  profile?: Maybe<Profile>;
+  /** A 3rd party ID or Account ID, this does not affect any of the Alpaca ID naming - for instance, if we are connecting to an Identity in OAUTH, this is the OAUTH Identity ID - This is just a place to store data */
+  publicId?: Maybe<Scalars['ID']>;
   /** Any specific scope that has been granted to the 3rd party application */
   scope?: Maybe<Scalars['String']>;
-  /** Encrypted JSON */
-  configuration?: Maybe<Scalars['JSON']>;
-  /** A 3rd party ID or Account ID, this does not affect any of the Alpaca ID naming - for instance, if we are connecting to an Identity in OAUTH, this is the OAUTH Identity ID - This is just a place to store data */
-  thirdPartyId?: Maybe<Scalars['ID']>;
+  /** This is the key relating to the service - it identifies the "App" we are connecting to */
+  serviceKey: ConnectedAppServiceKey;
+  /** A key to describe the type of connection to the application */
+  type?: Maybe<ConnectedAppType>;
 };
 
 /** Possible auth types for a ConnectedApp */
 export enum ConnectedAppAuthType {
-  Tokens = 'Tokens',
+  Credentials = 'Credentials',
   Oauth = 'Oauth',
-  Credentials = 'Credentials'
+  Tokens = 'Tokens'
 }
 
 /** Connection of ConnectedApps */
@@ -2290,68 +2999,84 @@ export type ConnectedAppEdge = {
 
 /** The key of the service for a ConnectedApp */
 export enum ConnectedAppServiceKey {
+  AlpacaLegacy = 'AlpacaLegacy',
   AustralianTourismDataWarehouse = 'AustralianTourismDataWarehouse',
   CrowdriffApi = 'CrowdriffApi',
+  GoogleAnalytics4 = 'GoogleAnalytics4',
   ShopifyApi = 'ShopifyApi'
 }
 
 /** Possible types of ConnectedApp */
 export enum ConnectedAppType {
+  Api = 'Api',
   Configuration = 'Configuration',
-  Credentials = 'Credentials',
-  Api = 'Api'
+  Credentials = 'Credentials'
 }
+
+/** The output after creating a billing checkout session */
+export type CreateBillingCheckoutSessionOutput = {
+  __typename?: 'CreateBillingCheckoutSessionOutput';
+  /** The url for the checkout session */
+  url: Scalars['String'];
+};
+
+/** The output after creating a billing portal session */
+export type CreateBillingPortalSessionOutput = {
+  __typename?: 'CreateBillingPortalSessionOutput';
+  /** The url for the portal session */
+  url: Scalars['String'];
+};
 
 /** Creates a collection */
 export type CreateCollectionInput = {
+  /** Additional data defined on the collection */
+  attrs?: InputMaybe<Array<AttributeInput>>;
+  /** A longer text description */
+  description?: InputMaybe<Scalars['String']>;
   /** A label used to differentiate types of collections */
   discriminator?: CollectionDiscriminator;
-  /** Title of the collection */
-  title?: Maybe<Scalars['String']>;
-  /** A short text summary */
-  synopsis?: Maybe<Scalars['String']>;
-  /** A longer text description */
-  description?: Maybe<Scalars['String']>;
-  /** A series of strings applied to label the collection */
-  tags?: Maybe<Array<Scalars['String']>>;
-  /** Alias for the read-more attribute */
-  readMoreUrl?: Maybe<Scalars['String']>;
-  /** Alias for the website-url attribute */
-  websiteUrl?: Maybe<Scalars['String']>;
-  /** Additional data defined on the collection */
-  attrs?: Maybe<Array<AttributeInput>>;
   /** The list of MediaContainers to add to the new Collection */
-  media?: Maybe<Array<CreateMediaContainerInput>>;
+  media?: InputMaybe<Array<CreateMediaContainerInput>>;
+  /** Alias for the read-more attribute */
+  readMoreUrl?: InputMaybe<Scalars['String']>;
+  /** A short text summary */
+  synopsis?: InputMaybe<Scalars['String']>;
+  /** A series of strings applied to label the collection */
+  tags?: InputMaybe<Array<Scalars['String']>>;
+  /** Title of the collection */
+  title?: InputMaybe<Scalars['String']>;
+  /** Alias for the website-url attribute */
+  websiteUrl?: InputMaybe<Scalars['String']>;
 };
 
 /** The input to create a collection location */
 export type CreateCollectionLocationInput = {
-  /** Title for the new item */
-  title?: Maybe<Scalars['String']>;
-  /** A short summary text content for the new item */
-  synopsis?: Maybe<Scalars['String']>;
-  /** A longer description content for the new item */
-  description?: Maybe<Scalars['String']>;
-  /** A collection of strings used to label the new item */
-  tags?: Maybe<Array<Scalars['String']>>;
-  /** Alias for the read-more attribute */
-  readMoreUrl?: Maybe<Scalars['String']>;
-  /** Alias for the website-url attribute */
-  websiteUrl?: Maybe<Scalars['String']>;
-  /** One or more sections for this new item */
-  sectionIds?: Maybe<Array<Scalars['ID']>>;
-  /** Identifier from an external source this new item is associated with */
-  externalId?: Maybe<Scalars['ID']>;
-  /** The source of this item's externalId */
-  externalSource?: Maybe<Scalars['ID']>;
   /** Additional data defined on this CollectionLocation */
-  attrs?: Maybe<Array<AttributeInput>>;
+  attrs?: InputMaybe<Array<AttributeInput>>;
+  /** A longer description content for the new item */
+  description?: InputMaybe<Scalars['String']>;
+  /** Identifier from an external source this new item is associated with */
+  externalId?: InputMaybe<Scalars['ID']>;
+  /** The source of this item's externalId */
+  externalSource?: InputMaybe<Scalars['ID']>;
   /** The list of MediaContainers to add to the new CollectionLocation */
-  media?: Maybe<Array<CreateMediaContainerInput>>;
+  media?: InputMaybe<Array<CreateMediaContainerInput>>;
   /** The associated place record for this location */
   place: PlaceInput;
   /** Override for the place's position */
-  position?: Maybe<PositionInput>;
+  position?: InputMaybe<PositionInput>;
+  /** Alias for the read-more attribute */
+  readMoreUrl?: InputMaybe<Scalars['String']>;
+  /** One or more sections for this new item */
+  sectionIds?: InputMaybe<Array<Scalars['ID']>>;
+  /** A short summary text content for the new item */
+  synopsis?: InputMaybe<Scalars['String']>;
+  /** A collection of strings used to label the new item */
+  tags?: InputMaybe<Array<Scalars['String']>>;
+  /** Title for the new item */
+  title?: InputMaybe<Scalars['String']>;
+  /** Alias for the website-url attribute */
+  websiteUrl?: InputMaybe<Scalars['String']>;
 };
 
 /** The fields available to return after creating a new collection location */
@@ -2370,18 +3095,18 @@ export type CreateCollectionPayload = {
 
 /** Create a new ConnectedApp */
 export type CreateConnectedAppInput = {
-  /** The type of the connected-app */
-  type?: Maybe<ConnectedAppType>;
+  /** The authenticated application method */
+  authType?: InputMaybe<ConnectedAppAuthType>;
+  /** Encrypted JSON */
+  privateConfiguration?: InputMaybe<Scalars['JSON']>;
+  /** 3rd party ID or account ID */
+  publicId?: InputMaybe<Scalars['ID']>;
+  /** Any specific scope that has been granted to the 3rd party application */
+  scope?: InputMaybe<Scalars['String']>;
   /** Identifies the service being connected to */
   serviceKey: ConnectedAppServiceKey;
-  /** Any specific scope that has been granted to the 3rd party application */
-  scope?: Maybe<Scalars['String']>;
-  /** The authenticated application method */
-  authType?: Maybe<ConnectedAppAuthType>;
-  /** Encrypted JSON */
-  configuration?: Maybe<Scalars['JSON']>;
-  /** 3rd party ID or account ID */
-  thirdPartyId?: Maybe<Scalars['ID']>;
+  /** The type of the connected-app */
+  type?: InputMaybe<ConnectedAppType>;
 };
 
 /** The return fields available after creating a connected app */
@@ -2391,167 +3116,210 @@ export type CreateConnectedAppPayload = {
   connectedApp?: Maybe<ConnectedApp>;
 };
 
+/** Create an IconComposition */
+export type CreateIconCompositionInput = {
+  /** Optional fill color for the icon */
+  iconFill?: InputMaybe<Scalars['String']>;
+  /** A name for this IconComposition, should be unique across the itinerary */
+  name: Scalars['String'];
+  /** ID to the Icon used by this IconComposition */
+  resourceId: Scalars['ID'];
+  /** Optional fill color for the shield */
+  shieldFill?: InputMaybe<Scalars['String']>;
+  /** Indicates which shield to use */
+  shieldKey?: InputMaybe<Scalars['String']>;
+  /** Optional stroke color for the shield */
+  shieldStroke?: InputMaybe<Scalars['String']>;
+};
+
+/** Fields for a new IconSilhouette */
+export type CreateIconSilhouetteInput = {
+  /** Additional data defined on the icon */
+  attrs?: InputMaybe<Array<AttributeInput>>;
+  /** The name of the icon, key will be generated from this value and so should be unique across the profile */
+  name: Scalars['String'];
+  /** SVG path data for this icon, eg: "M 100 .." */
+  paths: Array<Scalars['String']>;
+  /** Optional SVG viewBox for this icon */
+  viewBox?: InputMaybe<Scalars['String']>;
+};
+
+/** The response after creating an IconSilhouette */
+export type CreateIconSilhouettePayload = {
+  __typename?: 'CreateIconSilhouettePayload';
+  /** The newly created IconSilhouette */
+  icon?: Maybe<IconSilhouette>;
+};
+
 /** Creates an itinerary item collection type */
 export type CreateItineraryCollectionInput = {
-  /** The title for the new itinerary-collection */
-  title?: Maybe<Scalars['String']>;
-  /** The synopsis for the new itinerary-collection */
-  synopsis?: Maybe<Scalars['String']>;
-  /** The description for the new itinerary-collection */
-  description?: Maybe<Scalars['String']>;
-  /** The tags for the new itinerary-collection */
-  tags?: Maybe<Array<Scalars['String']>>;
-  /** Alias for the read-more attribute */
-  readMoreUrl?: Maybe<Scalars['String']>;
-  /** Alias for the website-url attribute */
-  websiteUrl?: Maybe<Scalars['String']>;
   /** Additional data defined on the collection */
-  attrs?: Maybe<Array<AttributeInput>>;
+  attrs?: InputMaybe<Array<AttributeInput>>;
+  /** The description for the new itinerary-collection */
+  description?: InputMaybe<Scalars['String']>;
   /** The list of MediaContainers to add to the new ItineraryCollection */
-  media?: Maybe<Array<CreateMediaContainerInput>>;
-  /** Creates the item positioned before all its siblings */
-  positionAtStart?: Maybe<ItineraryItemPositionAtStart>;
-  /** Creates the item positioned after all its siblings */
-  positionAtEnd?: Maybe<ItineraryItemPositionAtEnd>;
+  media?: InputMaybe<Array<CreateMediaContainerInput>>;
   /** Create the item positioned after the given sibling */
-  positionAfterSibling?: Maybe<ItineraryItemPositionAfterSibling>;
+  positionAfterSibling?: InputMaybe<ItineraryItemPositionAfterSibling>;
+  /** Creates the item positioned after all its siblings */
+  positionAtEnd?: InputMaybe<ItineraryItemPositionAtEnd>;
+  /** Creates the item positioned before all its siblings */
+  positionAtStart?: InputMaybe<ItineraryItemPositionAtStart>;
   /** Create the item positioned before the given sibling */
-  positionBeforeSibling?: Maybe<ItineraryItemPositionBeforeSibling>;
+  positionBeforeSibling?: InputMaybe<ItineraryItemPositionBeforeSibling>;
   /** Create the item at last position of the last itinerary-collection item */
-  positionOnLastCollection?: Maybe<ItineraryItemPositionOnLastCollection>;
+  positionOnLastCollection?: InputMaybe<ItineraryItemPositionOnLastCollection>;
+  /** Alias for the read-more attribute */
+  readMoreUrl?: InputMaybe<Scalars['String']>;
+  /** The synopsis for the new itinerary-collection */
+  synopsis?: InputMaybe<Scalars['String']>;
+  /** The tags for the new itinerary-collection */
+  tags?: InputMaybe<Array<Scalars['String']>>;
+  /** The title for the new itinerary-collection */
+  title?: InputMaybe<Scalars['String']>;
+  /** Alias for the website-url attribute */
+  websiteUrl?: InputMaybe<Scalars['String']>;
 };
 
 /** The fields available after creating an itinerary collection */
 export type CreateItineraryCollectionPayload = {
   __typename?: 'CreateItineraryCollectionPayload';
+  /** Other changes to the itinerary caused by the creation of the itinerary-collection */
+  cascaded: ItineraryItemCascadedChanges;
   /** The created itinerary collection */
   collection?: Maybe<ItineraryCollection>;
   /** The modified itinerary */
   itinerary: Itinerary;
-  /** Other changes to the itinerary caused by the creation of the itinerary-collection */
-  cascaded: ItineraryItemCascadedChanges;
 };
 
 /** The input fields to creating new itinerary directions items */
 export type CreateItineraryDirectionsInput = {
-  /** The title for the new itinerary-directions */
-  title?: Maybe<Scalars['String']>;
-  /** The synopsis for the new itinerary-directions */
-  synopsis?: Maybe<Scalars['String']>;
-  /** The description for the new itinerary-directions */
-  description?: Maybe<Scalars['String']>;
-  /** The tags for the new itinerary-directions */
-  tags?: Maybe<Array<Scalars['String']>>;
-  /** Alias for the read-more attribute */
-  readMoreUrl?: Maybe<Scalars['String']>;
-  /** Alias for the website-url attribute */
-  websiteUrl?: Maybe<Scalars['String']>;
   /** Additional data on the new itinerary */
-  attrs?: Maybe<Array<AttributeInput>>;
+  attrs?: InputMaybe<Array<AttributeInput>>;
+  /** The description for the new itinerary-directions */
+  description?: InputMaybe<Scalars['String']>;
+  /** The distance of the new itinerary-directions */
+  distance?: InputMaybe<Scalars['Float']>;
+  /** The duration details of the new itinerary-directions */
+  durations?: InputMaybe<Array<ItineraryDirectionsDurationsInput>>;
+  /** The elevation details of the new itinerary-directions */
+  elevation?: InputMaybe<ElevationInput>;
   /** The list of MediaContainers to add to the new ItineraryDirections */
-  media?: Maybe<Array<CreateMediaContainerInput>>;
+  media?: InputMaybe<Array<CreateMediaContainerInput>>;
   /** The origin itinerary location item, in the form of item/XYZ */
-  originId?: Maybe<Scalars['ID']>;
+  originId?: InputMaybe<Scalars['ID']>;
+  /** Creates the itinerary-directions after the given sibling */
+  positionAfterSibling?: InputMaybe<ItineraryItemPositionAfterSibling>;
+  /** Creates the itinerary-directions to be after all its siblings */
+  positionAtEnd?: InputMaybe<ItineraryItemPositionAtEnd>;
+  /** Creates the itinerary-directions to be before all its siblings */
+  positionAtStart?: InputMaybe<ItineraryItemPositionAtStart>;
+  /** Creates the itinerary-directions before the given sibling */
+  positionBeforeSibling?: InputMaybe<ItineraryItemPositionBeforeSibling>;
+  /** Creates the itinerary-directions at the last position of the last itinerary-collection item */
+  positionOnLastCollection?: InputMaybe<ItineraryItemPositionOnLastCollection>;
+  /** Alias for the read-more attribute */
+  readMoreUrl?: InputMaybe<Scalars['String']>;
   /** The route of this item, must include at least one route segment */
   route: RouteInput;
-  /** The duration details of the new itinerary-directions */
-  durations?: Maybe<Array<ItineraryDirectionsDurationsInput>>;
-  /** The distance of the new itinerary-directions */
-  distance?: Maybe<Scalars['Float']>;
-  /** The elevation details of the new itinerary-directions */
-  elevation?: Maybe<ElevationInput>;
-  /** Creates the itinerary-directions to be before all its siblings */
-  positionAtStart?: Maybe<ItineraryItemPositionAtStart>;
-  /** Creates the itinerary-directions to be after all its siblings */
-  positionAtEnd?: Maybe<ItineraryItemPositionAtEnd>;
-  /** Creates the itinerary-directions after the given sibling */
-  positionAfterSibling?: Maybe<ItineraryItemPositionAfterSibling>;
-  /** Creates the itinerary-directions before the given sibling */
-  positionBeforeSibling?: Maybe<ItineraryItemPositionBeforeSibling>;
-  /** Creates the itinerary-directions at the last position of the last itinerary-collection item */
-  positionOnLastCollection?: Maybe<ItineraryItemPositionOnLastCollection>;
+  /** The synopsis for the new itinerary-directions */
+  synopsis?: InputMaybe<Scalars['String']>;
+  /** The tags for the new itinerary-directions */
+  tags?: InputMaybe<Array<Scalars['String']>>;
+  /** The title for the new itinerary-directions */
+  title?: InputMaybe<Scalars['String']>;
+  /** Alias for the website-url attribute */
+  websiteUrl?: InputMaybe<Scalars['String']>;
 };
 
 /** The itinerary directions return fields available after creating the itinerary directions */
 export type CreateItineraryDirectionsPayload = {
   __typename?: 'CreateItineraryDirectionsPayload';
+  /** Other changes to the itinerary caused by the creation of the itinerary-directions */
+  cascaded: ItineraryItemCascadedChanges;
   /** The created itinerary directions item */
   directions?: Maybe<ItineraryDirections>;
   /** The modified itinerary */
   itinerary: Itinerary;
-  /** Other changes to the itinerary caused by the creation of the itinerary-directions */
-  cascaded: ItineraryItemCascadedChanges;
 };
 
 /** Creates a itinerary */
 export type CreateItineraryInput = {
-  /** The title for the new itinerary */
-  title?: Maybe<Scalars['String']>;
-  /** The synopsis for the new itinerary */
-  synopsis?: Maybe<Scalars['String']>;
-  /** The description for the new itinerary */
-  description?: Maybe<Scalars['String']>;
-  /** The tags for the new itinerary */
-  tags?: Maybe<Array<Scalars['String']>>;
-  /** Alias for the read-more attribute */
-  readMoreUrl?: Maybe<Scalars['String']>;
-  /** Alias for the website-url attribute */
-  websiteUrl?: Maybe<Scalars['String']>;
   /** Additional data on the new itinerary */
-  attrs?: Maybe<Array<AttributeInput>>;
+  attrs?: InputMaybe<Array<AttributeInput>>;
   /** Enable auto routing, or set to null to disable */
-  autoRoute?: Maybe<ItineraryAutoRouteInput>;
+  autoRoute?: InputMaybe<ItineraryAutoRouteInput>;
+  /** The default locale of this itinerary's content */
+  defaultLocale?: InputMaybe<Scalars['String']>;
+  /** The description for the new itinerary */
+  description?: InputMaybe<Scalars['String']>;
   /** Elevation data of the new itinerary */
-  elevation?: Maybe<ElevationInput>;
+  elevation?: InputMaybe<ElevationInput>;
+  /** The list of IconCompositions to add to the new Itinerary */
+  icons?: InputMaybe<Array<CreateIconCompositionInput>>;
   /** The list of MediaContainers to add to the new Itinerary */
-  media?: Maybe<Array<CreateMediaContainerInput>>;
+  media?: InputMaybe<Array<CreateMediaContainerInput>>;
+  /** Alias for the read-more attribute */
+  readMoreUrl?: InputMaybe<Scalars['String']>;
+  /** The synopsis for the new itinerary */
+  synopsis?: InputMaybe<Scalars['String']>;
+  /** The tags for the new itinerary */
+  tags?: InputMaybe<Array<Scalars['String']>>;
+  /** The title for the new itinerary */
+  title?: InputMaybe<Scalars['String']>;
+  /** Alias for the website-url attribute */
+  websiteUrl?: InputMaybe<Scalars['String']>;
 };
 
 /** The fields to create an itinerary location */
 export type CreateItineraryLocationInput = {
-  /** The title for the new itinerary-location */
-  title?: Maybe<Scalars['String']>;
-  /** The synopsis for the new itinerary-location */
-  synopsis?: Maybe<Scalars['String']>;
-  /** The description for the new itinerary-location */
-  description?: Maybe<Scalars['String']>;
-  /** The tags for the new itinerary-location */
-  tags?: Maybe<Array<Scalars['String']>>;
-  /** Alias for the read-more attribute */
-  readMoreUrl?: Maybe<Scalars['String']>;
-  /** Alias for the website-url attribute */
-  websiteUrl?: Maybe<Scalars['String']>;
   /** Additional data defined on the collection */
-  attrs?: Maybe<Array<AttributeInput>>;
+  attrs?: InputMaybe<Array<AttributeInput>>;
+  /** The bounds of the itinerary-location */
+  bounds?: InputMaybe<BoundsInput>;
+  /** The description for the new itinerary-location */
+  description?: InputMaybe<Scalars['String']>;
+  /** Set the optional icon, passed ID must exist in the Itinerary.icons */
+  icon?: InputMaybe<Scalars['ID']>;
   /** The list of MediaContainers to add to the new ItineraryLocation */
-  media?: Maybe<Array<CreateMediaContainerInput>>;
-  /** The position of the itinerary-location */
-  position?: Maybe<PositionInput>;
+  media?: InputMaybe<Array<CreateMediaContainerInput>>;
+  /** Whether this is an optional location on the itinerary */
+  optional?: InputMaybe<Scalars['Boolean']>;
   /** The place for this new itinerary-location */
   place: PlaceInput;
-  /** Whether this is an optional location on the itinerary */
-  optional?: Maybe<Scalars['Boolean']>;
-  /** Creates the item positioned before all its siblings */
-  positionAtStart?: Maybe<ItineraryItemPositionAtStart>;
-  /** Creates the item positioned after all its siblings */
-  positionAtEnd?: Maybe<ItineraryItemPositionAtEnd>;
+  /** The position of the itinerary-location */
+  position?: InputMaybe<PositionInput>;
   /** Create the item positioned after the given sibling */
-  positionAfterSibling?: Maybe<ItineraryItemPositionAfterSibling>;
+  positionAfterSibling?: InputMaybe<ItineraryItemPositionAfterSibling>;
+  /** Creates the item positioned after all its siblings */
+  positionAtEnd?: InputMaybe<ItineraryItemPositionAtEnd>;
+  /** Creates the item positioned before all its siblings */
+  positionAtStart?: InputMaybe<ItineraryItemPositionAtStart>;
   /** Create the item positioned before the given sibling */
-  positionBeforeSibling?: Maybe<ItineraryItemPositionBeforeSibling>;
+  positionBeforeSibling?: InputMaybe<ItineraryItemPositionBeforeSibling>;
   /** Create the item at last position of the last itinerary-collection item */
-  positionOnLastCollection?: Maybe<ItineraryItemPositionOnLastCollection>;
+  positionOnLastCollection?: InputMaybe<ItineraryItemPositionOnLastCollection>;
+  /** Alias for the read-more attribute */
+  readMoreUrl?: InputMaybe<Scalars['String']>;
+  /** The synopsis for the new itinerary-location */
+  synopsis?: InputMaybe<Scalars['String']>;
+  /** The tags for the new itinerary-location */
+  tags?: InputMaybe<Array<Scalars['String']>>;
+  /** The title for the new itinerary-location */
+  title?: InputMaybe<Scalars['String']>;
+  /** Alias for the website-url attribute */
+  websiteUrl?: InputMaybe<Scalars['String']>;
 };
 
 /** The fields available after creating an itinerary location */
 export type CreateItineraryLocationPayload = {
   __typename?: 'CreateItineraryLocationPayload';
-  /** The itinerary location that was created */
-  location?: Maybe<ItineraryLocation>;
-  /** The modified itinerary */
-  itinerary: Itinerary;
   /** Other changes to the itinerary caused by the creation of the itinerary-location */
   cascaded: ItineraryItemCascadedChanges;
+  /** The modified itinerary */
+  itinerary: Itinerary;
+  /** The itinerary location that was created */
+  location?: Maybe<ItineraryLocation>;
 };
 
 /** The fields available after creating an itinerary */
@@ -2561,36 +3329,74 @@ export type CreateItineraryPayload = {
   itinerary?: Maybe<Itinerary>;
 };
 
-/** Create a MediaContainer */
+/** Create a MediaContainer in a MediaContainer list */
 export type CreateMediaContainerInput = {
+  /** Add the MediaContainer after another container in the list */
+  positionAfter?: InputMaybe<MediaContainerPositionAfter>;
+  /** Add the MediaContainer at the end of the list */
+  positionAtEnd?: InputMaybe<MediaContainerPositionAtEnd>;
+  /** Add the MediaContainer at the start of the list */
+  positionAtStart?: InputMaybe<MediaContainerPositionAtStart>;
+  /** Add the MediaContainer before another container in the list */
+  positionBefore?: InputMaybe<MediaContainerPositionBefore>;
   /** ID to a MediaResource to contain */
   resourceId: Scalars['String'];
-  /** Add the MediaContainer before another container in the list */
-  positionBefore?: Maybe<MediaContainerPositionBefore>;
-  /** Add the MediaContainer after another container in the list */
-  positionAfter?: Maybe<MediaContainerPositionAfter>;
-  /** Add the MediaContainer at the start of the list */
-  positionAtStart?: Maybe<MediaContainerPositionAtStart>;
-  /** Add the MediaContainer at the end of the list */
-  positionAtEnd?: Maybe<MediaContainerPositionAtEnd>;
+};
+
+/** Input object to Mutation.createProfile */
+export type CreateProfileInput = {
+  /** Additional data defined on the profile */
+  attrs?: InputMaybe<Array<AttributeInput>>;
+  /** If follow requests should be automatically approved for this profile */
+  autoApproveFollows?: InputMaybe<Scalars['Boolean']>;
+  /** The avatar image */
+  avatar?: InputMaybe<MediaContainerInput>;
+  /** A short biography */
+  bio?: InputMaybe<Scalars['String']>;
+  /** The name of the profile */
+  name: Scalars['String'];
+  /** The type of profile */
+  type: ProfileType;
+  /** The website url */
+  websiteUrl?: InputMaybe<Scalars['String']>;
+};
+
+/** Response payload to Mutation.createProfile */
+export type CreateProfilePayload = {
+  __typename?: 'CreateProfilePayload';
+  /** The newly created profile */
+  profile?: Maybe<Profile>;
+};
+
+/** Input object to Mutation.createUserAgreement */
+export type CreateUserAgreementInput = {
+  /** The type of agreement */
+  type: Scalars['String'];
+};
+
+/** The return fields available after creating a user agreement */
+export type CreateUserAgreementPayload = {
+  __typename?: 'CreateUserAgreementPayload';
+  /** The newly created user agreement */
+  userAgreement?: Maybe<UserAgreement>;
 };
 
 /** An offset in date and/or time represented as integer differences for each datetime field */
 export type DatetimeOffset = {
-  /** Positive or negative difference for years */
-  years?: Maybe<Scalars['Int']>;
-  /** Positive or negative difference for months */
-  months?: Maybe<Scalars['Int']>;
-  /** Positive or negative difference for weeks */
-  weeks?: Maybe<Scalars['Int']>;
   /** Positive or negative difference for days */
-  days?: Maybe<Scalars['Int']>;
+  days?: InputMaybe<Scalars['Int']>;
   /** Positive or negative difference for hours */
-  hours?: Maybe<Scalars['Int']>;
+  hours?: InputMaybe<Scalars['Int']>;
   /** Positive or negative difference for minutes */
-  minutes?: Maybe<Scalars['Int']>;
+  minutes?: InputMaybe<Scalars['Int']>;
+  /** Positive or negative difference for months */
+  months?: InputMaybe<Scalars['Int']>;
   /** Positive or negative difference for seconds */
-  seconds?: Maybe<Scalars['Int']>;
+  seconds?: InputMaybe<Scalars['Int']>;
+  /** Positive or negative difference for weeks */
+  weeks?: InputMaybe<Scalars['Int']>;
+  /** Positive or negative difference for years */
+  years?: InputMaybe<Scalars['Int']>;
 };
 
 /** The fields available after deleting a collection */
@@ -2614,15 +3420,22 @@ export type DeleteConnectedAppPayload = {
   id?: Maybe<Scalars['ID']>;
 };
 
+/** The response after deleting an icon */
+export type DeleteIconResourcePayload = {
+  __typename?: 'DeleteIconResourcePayload';
+  /** The ID of the deleted icon */
+  id?: Maybe<Scalars['ID']>;
+};
+
 /** Deletes a itinerary item */
 export type DeleteItineraryItemPayload = {
   __typename?: 'DeleteItineraryItemPayload';
+  /** Other changes to the itinerary that caused by deleting the itinerary-item */
+  cascaded: ItineraryItemCascadedChanges;
   /** The itinerary item identifier, in the form of item/XYZ */
   id?: Maybe<Scalars['ID']>;
   /** The modified itinerary */
   itinerary: Itinerary;
-  /** Other changes to the itinerary that caused by deleting the itinerary-item */
-  cascaded: ItineraryItemCascadedChanges;
 };
 
 /** The result of deleting an itinerary */
@@ -2632,30 +3445,44 @@ export type DeleteItineraryPayload = {
   id?: Maybe<Scalars['ID']>;
 };
 
+/** The result of deleting a profile */
+export type DeleteProfilePayload = {
+  __typename?: 'DeleteProfilePayload';
+  /** The ID of the profile itinerary */
+  id?: Maybe<Scalars['ID']>;
+};
+
 /** Result of denying a follow request */
 export type DenyProfileFollowPayload = {
   __typename?: 'DenyProfileFollowPayload';
   /** The follower profile */
   fromProfile: Profile;
-  /** The profile being followed */
-  toProfile: Profile;
   /** The status of the follow request */
   status?: Maybe<ProfileFollowStatus>;
+  /** The profile being followed */
+  toProfile: Profile;
 };
 
 /** Distance unit */
 export enum DistanceUnit {
-  Kilometers = 'Kilometers',
   Feet = 'Feet',
-  Miles = 'Miles',
-  Meters = 'Meters'
+  Kilometers = 'Kilometers',
+  Meters = 'Meters',
+  Miles = 'Miles'
 }
+
+/** Response to Mutation.duplicateItinerary */
+export type DuplicateItineraryPayload = {
+  __typename?: 'DuplicateItineraryPayload';
+  /** The newly duplicated itinerary */
+  itinerary?: Maybe<Itinerary>;
+};
 
 /** Duration unit */
 export enum DurationUnit {
-  Seconds = 'Seconds',
+  Hours = 'Hours',
   Minutes = 'Minutes',
-  Hours = 'Hours'
+  Seconds = 'Seconds'
 }
 
 /** Elevation data */
@@ -2665,10 +3492,10 @@ export type Elevation = {
   gain?: Maybe<Scalars['Float']>;
   /** The cumulative elevation loss */
   loss?: Maybe<Scalars['Float']>;
-  /** The minimum elevation */
-  min?: Maybe<Scalars['Float']>;
   /** The maximum elevation */
   max?: Maybe<Scalars['Float']>;
+  /** The minimum elevation */
+  min?: Maybe<Scalars['Float']>;
 };
 
 
@@ -2685,49 +3512,49 @@ export type ElevationLossArgs = {
 
 
 /** Elevation data */
-export type ElevationMinArgs = {
+export type ElevationMaxArgs = {
   unit?: DistanceUnit;
 };
 
 
 /** Elevation data */
-export type ElevationMaxArgs = {
+export type ElevationMinArgs = {
   unit?: DistanceUnit;
 };
 
 /** Input elevation data */
 export type ElevationInput = {
   /** The cumulative elevation gain */
-  gain?: Maybe<Scalars['Float']>;
+  gain?: InputMaybe<Scalars['Float']>;
   /** The cumulative elevation loss */
-  loss?: Maybe<Scalars['Float']>;
-  /** The minimum elevation */
-  min?: Maybe<Scalars['Float']>;
+  loss?: InputMaybe<Scalars['Float']>;
   /** The maximum elevation */
-  max?: Maybe<Scalars['Float']>;
+  max?: InputMaybe<Scalars['Float']>;
+  /** The minimum elevation */
+  min?: InputMaybe<Scalars['Float']>;
 };
 
 /** Uploads a media resource */
 export type FinalizeMediaUploadInput = {
-  /** List of labels to apply to the new media-resource */
-  tags?: Maybe<Array<Scalars['String']>>;
   /** Text attribution for the source of the new media-resource */
-  attribution?: Maybe<Scalars['String']>;
-  /** Text caption for the new media-resource */
-  caption?: Maybe<Scalars['String']>;
-  /** Copyright details of the new media-resource */
-  copyright?: Maybe<Scalars['String']>;
+  attribution?: InputMaybe<Scalars['String']>;
   /** Additional data to define on the new media-resource */
-  attrs?: Maybe<Array<AttributeInput>>;
+  attrs?: InputMaybe<Array<AttributeInput>>;
+  /** Text caption for the new media-resource */
+  caption?: InputMaybe<Scalars['String']>;
+  /** Copyright details of the new media-resource */
+  copyright?: InputMaybe<Scalars['String']>;
+  /** List of labels to apply to the new media-resource */
+  tags?: InputMaybe<Array<Scalars['String']>>;
 };
 
 /** Result of finalizing a media upload */
 export type FinalizeMediaUploadPayload = {
   __typename?: 'FinalizeMediaUploadPayload';
-  /** The status of this media upload */
-  status: MediaUploadStatus;
   /** The newly created media-resource */
   resource?: Maybe<MediaResource>;
+  /** The status of this media upload */
+  status: MediaUploadStatus;
 };
 
 /** Result of creating a follow request */
@@ -2735,10 +3562,10 @@ export type FollowProfilePayload = {
   __typename?: 'FollowProfilePayload';
   /** The follower profile */
   fromProfile: Profile;
-  /** The profile being followed */
-  toProfile: Profile;
   /** The status of the follow request */
   status?: Maybe<ProfileFollowStatus>;
+  /** The profile being followed */
+  toProfile: Profile;
 };
 
 /** Different GeoJSON simplification algorithms */
@@ -2749,23 +3576,253 @@ export type GeoJsonSimplification = {
 
 /** The Ramer-Douglas-Peucker algorithm */
 export type GeoJsonSimplificationRamerDouglasPeucker = {
-  /** The amount of application applied, higher values result in more simplification */
-  tolerance?: Maybe<Scalars['Float']>;
   /** Modify the algorithm to be slower by produce higher quality results */
-  highQuality?: Maybe<Scalars['Boolean']>;
+  highQuality?: InputMaybe<Scalars['Boolean']>;
+  /** The amount of application applied, higher values result in more simplification */
+  tolerance?: InputMaybe<Scalars['Float']>;
+};
+
+/** An icon with styles for use in an Itinerary */
+export type IconComposition = Node & {
+  __typename?: 'IconComposition';
+  /** The date when the IconComposition was created */
+  created: Scalars['String'];
+  /** Optional fill color for the icon */
+  iconFill?: Maybe<Scalars['String']>;
+  /** The Globally Unique ID of the object. */
+  id: Scalars['ID'];
+  /** A key for this IconComposition. Derived from the name */
+  key: Scalars['String'];
+  /** The date when the IconComposition was last modified */
+  modified: Scalars['String'];
+  /** A name for this IconComposition, should be unique across the itinerary */
+  name: Scalars['String'];
+  /** The Icon used by this IconComposition */
+  resource: IconResourceEmbedded;
+  /** Optional fill color for the shield */
+  shieldFill?: Maybe<Scalars['String']>;
+  /** Indicates which shield to use */
+  shieldKey?: Maybe<Scalars['String']>;
+  /** Optional stroke color for the shield */
+  shieldStroke?: Maybe<Scalars['String']>;
+};
+
+
+/** An icon with styles for use in an Itinerary */
+export type IconCompositionCreatedArgs = {
+  format?: InputMaybe<Scalars['String']>;
+  locale?: InputMaybe<Scalars['String']>;
+  relativeTo?: InputMaybe<Scalars['String']>;
+  timeZone?: InputMaybe<Scalars['String']>;
+};
+
+
+/** An icon with styles for use in an Itinerary */
+export type IconCompositionModifiedArgs = {
+  format?: InputMaybe<Scalars['String']>;
+  locale?: InputMaybe<Scalars['String']>;
+  relativeTo?: InputMaybe<Scalars['String']>;
+  timeZone?: InputMaybe<Scalars['String']>;
+};
+
+/** Connection of IconCompositions */
+export type IconCompositionConnection = {
+  __typename?: 'IconCompositionConnection';
+  /** All the edges in this page of the connection */
+  edges: Array<IconCompositionEdge>;
+  /** Shortcut for edges[].node */
+  nodes: Array<IconComposition>;
+  /** Details regarding the current page of the connnection */
+  pageInfo: PageInfo;
+  /** The total number of items in the connection (in all pages) */
+  totalCount: Scalars['Int'];
+};
+
+/** Edge containing a IconComposition */
+export type IconCompositionEdge = {
+  __typename?: 'IconCompositionEdge';
+  /** The cursor string pointing to this item */
+  cursor: Scalars['String'];
+  /** The item */
+  node: IconComposition;
+};
+
+/** An icon for use in the UI or Map */
+export type IconResource = {
+  /** Arbitrary JSON value stored on this resource, keyed by an id */
+  attr?: Maybe<Attribute>;
+  /** Shortcut for the attr.value, returns null if the attribute doesn't exist */
+  attrValue?: Maybe<Scalars['JSON']>;
+  /** Query multiple attributes optionally filtering by id and/or locale */
+  attrs: AttributeConnection;
+  /** The date when the icon was created */
+  created?: Maybe<Scalars['String']>;
+  /** The Globally Unique ID of the object. */
+  id: Scalars['ID'];
+  /** The key of the icon, unique across the profile */
+  key: Scalars['String'];
+  /** The date when the icon was last modified */
+  modified?: Maybe<Scalars['String']>;
+  /** The supplied name for this icon */
+  name: Scalars['String'];
+  /** The profile associated with this icon */
+  profile: Profile;
+};
+
+
+/** An icon for use in the UI or Map */
+export type IconResourceAttrArgs = {
+  id: Scalars['ID'];
+  locale?: InputMaybe<Scalars['String']>;
+};
+
+
+/** An icon for use in the UI or Map */
+export type IconResourceAttrValueArgs = {
+  id: Scalars['ID'];
+  locale?: InputMaybe<Scalars['String']>;
+};
+
+
+/** An icon for use in the UI or Map */
+export type IconResourceAttrsArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  first: Scalars['Int'];
+  id?: InputMaybe<Scalars['ID']>;
+  includeNoLocale?: InputMaybe<Scalars['Boolean']>;
+  locale?: InputMaybe<Scalars['String']>;
+};
+
+
+/** An icon for use in the UI or Map */
+export type IconResourceCreatedArgs = {
+  format?: InputMaybe<Scalars['String']>;
+  locale?: InputMaybe<Scalars['String']>;
+  relativeTo?: InputMaybe<Scalars['String']>;
+  timeZone?: InputMaybe<Scalars['String']>;
+};
+
+
+/** An icon for use in the UI or Map */
+export type IconResourceModifiedArgs = {
+  format?: InputMaybe<Scalars['String']>;
+  locale?: InputMaybe<Scalars['String']>;
+  relativeTo?: InputMaybe<Scalars['String']>;
+  timeZone?: InputMaybe<Scalars['String']>;
+};
+
+/** Connection of IconResources */
+export type IconResourceConnection = {
+  __typename?: 'IconResourceConnection';
+  /** All the edges in this page of the connection */
+  edges: Array<IconResourceEdge>;
+  /** Shortcut for edges[].node */
+  nodes: Array<IconResource>;
+  /** Details regarding the current page of the connnection */
+  pageInfo: PageInfo;
+  /** The total number of items in the connection (in all pages) */
+  totalCount: Scalars['Int'];
+};
+
+/** Edge containing a IconResource */
+export type IconResourceEdge = {
+  __typename?: 'IconResourceEdge';
+  /** The cursor string pointing to this item */
+  cursor: Scalars['String'];
+  /** The item */
+  node: IconResource;
+};
+
+/** A IconResource embedded in another resource */
+export type IconResourceEmbedded = IconResourceFailedToLoad | IconSilhouette;
+
+/** Represents an embedded IconResource that failed to load */
+export type IconResourceFailedToLoad = Node & {
+  __typename?: 'IconResourceFailedToLoad';
+  /** The Globally Unique ID of the object. */
+  id: Scalars['ID'];
+};
+
+/** SVG path based IconResource */
+export type IconSilhouette = IconResource & Node & {
+  __typename?: 'IconSilhouette';
+  /** Arbitrary JSON value stored on this resource, keyed by an id */
+  attr?: Maybe<Attribute>;
+  /** Shortcut for the attr.value, returns null if the attribute doesn't exist */
+  attrValue?: Maybe<Scalars['JSON']>;
+  /** Query multiple attributes optionally filtering by id and/or locale */
+  attrs: AttributeConnection;
+  /** The date when the icon was created */
+  created?: Maybe<Scalars['String']>;
+  /** The Globally Unique ID of the object. */
+  id: Scalars['ID'];
+  /** The key of the icon, unique across the profile */
+  key: Scalars['String'];
+  /** The date when the icon was last modified */
+  modified?: Maybe<Scalars['String']>;
+  /** The supplied name for this icon */
+  name: Scalars['String'];
+  /** SVG path data for this icon, eg: "M 100 .." */
+  paths: Array<Scalars['String']>;
+  /** The profile associated with this icon */
+  profile: Profile;
+  /** Optional SVG viewBox for this icon */
+  viewBox?: Maybe<Scalars['String']>;
+};
+
+
+/** SVG path based IconResource */
+export type IconSilhouetteAttrArgs = {
+  id: Scalars['ID'];
+  locale?: InputMaybe<Scalars['String']>;
+};
+
+
+/** SVG path based IconResource */
+export type IconSilhouetteAttrValueArgs = {
+  id: Scalars['ID'];
+  locale?: InputMaybe<Scalars['String']>;
+};
+
+
+/** SVG path based IconResource */
+export type IconSilhouetteAttrsArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  first: Scalars['Int'];
+  id?: InputMaybe<Scalars['ID']>;
+  includeNoLocale?: InputMaybe<Scalars['Boolean']>;
+  locale?: InputMaybe<Scalars['String']>;
+};
+
+
+/** SVG path based IconResource */
+export type IconSilhouetteCreatedArgs = {
+  format?: InputMaybe<Scalars['String']>;
+  locale?: InputMaybe<Scalars['String']>;
+  relativeTo?: InputMaybe<Scalars['String']>;
+  timeZone?: InputMaybe<Scalars['String']>;
+};
+
+
+/** SVG path based IconResource */
+export type IconSilhouetteModifiedArgs = {
+  format?: InputMaybe<Scalars['String']>;
+  locale?: InputMaybe<Scalars['String']>;
+  relativeTo?: InputMaybe<Scalars['String']>;
+  timeZone?: InputMaybe<Scalars['String']>;
 };
 
 /** Isochrone for the given position with duration and vehicle */
 export type Isochrone = {
   __typename?: 'Isochrone';
-  /** The duration of the isochrone */
-  duration?: Maybe<Scalars['Float']>;
-  /** Copyright details of the isochrone */
-  copyrights: Array<Scalars['String']>;
-  /** The mode of transport of the isochrone */
-  mode: IsochroneMode;
   /** A bounding box around the isochrone */
   bounds: Bounds;
+  /** Copyright details of the isochrone */
+  copyrights: Array<Scalars['String']>;
+  /** The duration of the isochrone */
+  duration?: Maybe<Scalars['Float']>;
+  /** The mode of transport of the isochrone */
+  mode: IsochroneMode;
   /** The isochrone as a geojson polygon */
   polygon: Scalars['JSON'];
 };
@@ -2779,93 +3836,149 @@ export type IsochroneDurationArgs = {
 
 /** Isochrone for the given position with duration and vehicle */
 export type IsochronePolygonArgs = {
-  simplify?: Maybe<GeoJsonSimplification>;
+  simplify?: InputMaybe<GeoJsonSimplification>;
 };
 
 /** Mode of transport for an isochrone */
 export enum IsochroneMode {
-  Car = 'Car',
   Bike = 'Bike',
+  Car = 'Car',
   Foot = 'Foot'
 }
 
 /** Determine how to sort Itineraries when listing */
 export type ItinerariesSort = {
   /** Sort by the created date */
-  created?: Maybe<SortDirection>;
+  created?: InputMaybe<SortDirection>;
   /** Sort by the modified date */
-  modified?: Maybe<SortDirection>;
+  modified?: InputMaybe<SortDirection>;
   /** Sort by the itinerary title */
-  title?: Maybe<SortDirection>;
+  title?: InputMaybe<SortDirection>;
 };
 
 /** An itinerary type is used to structure a series of items representing a travel itinerary */
 export type Itinerary = Node & {
   __typename?: 'Itinerary';
-  /** The Globally Unique ID of the object. */
-  id: Scalars['ID'];
-  /** Profile that owns this itinerary */
-  profile?: Maybe<Profile>;
-  /** The date when the itinerary was created */
-  created?: Maybe<Scalars['String']>;
-  /** The date when the itinerary was last modified */
-  modified?: Maybe<Scalars['String']>;
-  /** Returns a single item from this itinerary by id */
-  item?: Maybe<ItineraryItem>;
-  /** If true, itinerary-directions will be created to automatically route between itinerary-locations */
-  autoRoute?: Maybe<ItineraryAutoRoute>;
-  /** The supplied title */
-  title?: Maybe<Scalars['String']>;
-  /** A short text summary */
-  synopsis?: Maybe<Scalars['String']>;
-  /** A longer text description */
-  description?: Maybe<Scalars['String']>;
-  /** A series of strings applied to label this item */
-  tags: Array<Scalars['String']>;
-  /** List of MediaContainers containing images or other media */
-  media: Array<MediaContainer>;
-  /** The preferred MediaContainer to use */
-  preferredMedia?: Maybe<MediaContainer>;
-  /** Alias for the read-more attribute */
-  readMoreUrl?: Maybe<Scalars['String']>;
-  /** Alias for the website-url attribute */
-  websiteUrl?: Maybe<Scalars['String']>;
-  /** The descending items within this itinerary item */
-  descendants: ItineraryItemConnection;
-  /** The immediate associated children itinerary items */
-  children: ItineraryItemConnection;
   /** Arbitrary JSON value stored on this resource, keyed by an id */
   attr?: Maybe<Attribute>;
   /** Shortcut for the attr.value, returns null if the attribute doesn't exist */
   attrValue?: Maybe<Scalars['JSON']>;
-  /** Query multiple attributes by id and optionally locale */
-  attrs: Array<Maybe<Attribute>>;
-  /** Query multiple attributes with the same id and optionally locale */
-  attrsById: AttributeConnection;
-  /** Return all attributes on the resource */
-  allAttrs: AttributeConnection;
+  /** Query multiple attributes optionally filtering by id and/or locale */
+  attrs: AttributeConnection;
+  /** If true, itinerary-directions will be created to automatically route between itinerary-locations */
+  autoRoute?: Maybe<ItineraryAutoRoute>;
   /** Bounds for the itinerary item */
   bounds?: Maybe<Bounds>;
+  /** The immediate associated children itinerary items */
+  children: ItineraryItemConnection;
+  /** The date when the itinerary was created */
+  created?: Maybe<Scalars['String']>;
+  /** The default locale of this itinerary's content */
+  defaultLocale?: Maybe<Scalars['String']>;
+  /** The descending items within this itinerary item */
+  descendants: ItineraryItemConnection;
+  /** A longer text description */
+  description?: Maybe<Scalars['String']>;
   /** Elevation data of the itinerary */
   elevation: Elevation;
+  /** Icons that are used in this itinerary */
+  icons: IconCompositionConnection;
+  /** The Globally Unique ID of the object. */
+  id: Scalars['ID'];
+  /** Returns a single item from this itinerary by id */
+  item?: Maybe<ItineraryItem>;
+  /** The date when the draft version was last modified */
+  lastDraft?: Maybe<Scalars['String']>;
+  /** The date when the itinerary was last published */
+  lastPublished?: Maybe<Scalars['String']>;
+  /**
+   * List of MediaContainers containing images or other media
+   * @deprecated use mediaContainers instead
+   */
+  media: Array<MediaContainer>;
+  /** List of MediaContainers containing images or other media */
+  mediaContainers: MediaContainerConnection;
+  /** The date when the itinerary was last modified */
+  modified?: Maybe<Scalars['String']>;
+  /** The preferred MediaContainer to use */
+  preferredMedia?: Maybe<MediaContainer>;
+  /** Profile that owns this itinerary */
+  profile?: Maybe<Profile>;
+  /** The date when this itinerary was last published. Will be null on draft versions */
+  published?: Maybe<Scalars['String']>;
+  /** Alias for the read-more attribute */
+  readMoreUrl?: Maybe<Scalars['String']>;
+  /** A short text summary */
+  synopsis?: Maybe<Scalars['String']>;
+  /** A series of strings applied to label this item */
+  tags: Array<Scalars['String']>;
+  /** The supplied title */
+  title?: Maybe<Scalars['String']>;
+  /** Alias for the website-url attribute */
+  websiteUrl?: Maybe<Scalars['String']>;
+};
+
+
+/** An itinerary type is used to structure a series of items representing a travel itinerary */
+export type ItineraryAttrArgs = {
+  id: Scalars['ID'];
+  locale?: InputMaybe<Scalars['String']>;
+};
+
+
+/** An itinerary type is used to structure a series of items representing a travel itinerary */
+export type ItineraryAttrValueArgs = {
+  id: Scalars['ID'];
+  locale?: InputMaybe<Scalars['String']>;
+};
+
+
+/** An itinerary type is used to structure a series of items representing a travel itinerary */
+export type ItineraryAttrsArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  first: Scalars['Int'];
+  id?: InputMaybe<Scalars['ID']>;
+  includeNoLocale?: InputMaybe<Scalars['Boolean']>;
+  locale?: InputMaybe<Scalars['String']>;
+};
+
+
+/** An itinerary type is used to structure a series of items representing a travel itinerary */
+export type ItineraryChildrenArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  first: Scalars['Int'];
+  placeIds?: InputMaybe<Array<Scalars['ID']>>;
+  segmentIds?: InputMaybe<Array<Scalars['ID']>>;
+  type?: InputMaybe<ItineraryItemType>;
 };
 
 
 /** An itinerary type is used to structure a series of items representing a travel itinerary */
 export type ItineraryCreatedArgs = {
-  format?: Maybe<Scalars['String']>;
-  relativeTo?: Maybe<Scalars['String']>;
-  timeZone?: Maybe<Scalars['String']>;
-  locale?: Maybe<Scalars['String']>;
+  format?: InputMaybe<Scalars['String']>;
+  locale?: InputMaybe<Scalars['String']>;
+  relativeTo?: InputMaybe<Scalars['String']>;
+  timeZone?: InputMaybe<Scalars['String']>;
 };
 
 
 /** An itinerary type is used to structure a series of items representing a travel itinerary */
-export type ItineraryModifiedArgs = {
-  format?: Maybe<Scalars['String']>;
-  relativeTo?: Maybe<Scalars['String']>;
-  timeZone?: Maybe<Scalars['String']>;
-  locale?: Maybe<Scalars['String']>;
+export type ItineraryDescendantsArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  depthMax?: InputMaybe<Scalars['Int']>;
+  depthMin?: InputMaybe<Scalars['Int']>;
+  first: Scalars['Int'];
+  parentType?: InputMaybe<ItineraryItemType>;
+  placeIds?: InputMaybe<Array<Scalars['ID']>>;
+  segmentIds?: InputMaybe<Array<Scalars['ID']>>;
+  type?: InputMaybe<ItineraryItemType>;
+};
+
+
+/** An itinerary type is used to structure a series of items representing a travel itinerary */
+export type ItineraryIconsArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  first: Scalars['Int'];
 };
 
 
@@ -2876,65 +3989,51 @@ export type ItineraryItemArgs = {
 
 
 /** An itinerary type is used to structure a series of items representing a travel itinerary */
+export type ItineraryLastDraftArgs = {
+  format?: InputMaybe<Scalars['String']>;
+  locale?: InputMaybe<Scalars['String']>;
+  relativeTo?: InputMaybe<Scalars['String']>;
+  timeZone?: InputMaybe<Scalars['String']>;
+};
+
+
+/** An itinerary type is used to structure a series of items representing a travel itinerary */
+export type ItineraryLastPublishedArgs = {
+  format?: InputMaybe<Scalars['String']>;
+  locale?: InputMaybe<Scalars['String']>;
+  relativeTo?: InputMaybe<Scalars['String']>;
+  timeZone?: InputMaybe<Scalars['String']>;
+};
+
+
+/** An itinerary type is used to structure a series of items representing a travel itinerary */
 export type ItineraryMediaArgs = {
   limit?: Scalars['Int'];
 };
 
 
 /** An itinerary type is used to structure a series of items representing a travel itinerary */
-export type ItineraryDescendantsArgs = {
+export type ItineraryMediaContainersArgs = {
+  after?: InputMaybe<Scalars['String']>;
   first: Scalars['Int'];
-  after?: Maybe<Scalars['String']>;
-  type?: Maybe<ItineraryItemType>;
-  parentType?: Maybe<ItineraryItemType>;
-  placeIds?: Maybe<Array<Scalars['ID']>>;
-  depthMax?: Maybe<Scalars['Int']>;
-  depthMin?: Maybe<Scalars['Int']>;
 };
 
 
 /** An itinerary type is used to structure a series of items representing a travel itinerary */
-export type ItineraryChildrenArgs = {
-  first: Scalars['Int'];
-  after?: Maybe<Scalars['String']>;
-  type?: Maybe<ItineraryItemType>;
-  placeIds?: Maybe<Array<Scalars['ID']>>;
+export type ItineraryModifiedArgs = {
+  format?: InputMaybe<Scalars['String']>;
+  locale?: InputMaybe<Scalars['String']>;
+  relativeTo?: InputMaybe<Scalars['String']>;
+  timeZone?: InputMaybe<Scalars['String']>;
 };
 
 
 /** An itinerary type is used to structure a series of items representing a travel itinerary */
-export type ItineraryAttrArgs = {
-  id: Scalars['ID'];
-  locale?: Maybe<Scalars['String']>;
-};
-
-
-/** An itinerary type is used to structure a series of items representing a travel itinerary */
-export type ItineraryAttrValueArgs = {
-  id: Scalars['ID'];
-  locale?: Maybe<Scalars['String']>;
-};
-
-
-/** An itinerary type is used to structure a series of items representing a travel itinerary */
-export type ItineraryAttrsArgs = {
-  attrs: Array<AttributeIdentifierInput>;
-};
-
-
-/** An itinerary type is used to structure a series of items representing a travel itinerary */
-export type ItineraryAttrsByIdArgs = {
-  first: Scalars['Int'];
-  after?: Maybe<Scalars['String']>;
-  id: Scalars['ID'];
-  locale?: Maybe<Scalars['String']>;
-};
-
-
-/** An itinerary type is used to structure a series of items representing a travel itinerary */
-export type ItineraryAllAttrsArgs = {
-  first: Scalars['Int'];
-  after?: Maybe<Scalars['String']>;
+export type ItineraryPublishedArgs = {
+  format?: InputMaybe<Scalars['String']>;
+  locale?: InputMaybe<Scalars['String']>;
+  relativeTo?: InputMaybe<Scalars['String']>;
+  timeZone?: InputMaybe<Scalars['String']>;
 };
 
 /** Automatically generate ItineraryDirections that connect sibling ItineraryLocations */
@@ -2947,56 +4046,136 @@ export type ItineraryAutoRoute = {
 /** Automatically generate ItineraryDirections that connect sibling ItineraryLocations */
 export type ItineraryAutoRouteInput = {
   /** The default mode of transport to use for the generated ItineraryDirections, if excluded defaults to Car */
-  defaultMode?: Maybe<RouteMode>;
+  defaultMode?: InputMaybe<RouteMode>;
 };
 
 /** An itinerary item representing a collection of other itinerary items */
-export type ItineraryCollection = Node & ItineraryItem & {
+export type ItineraryCollection = ItineraryItem & Node & {
   __typename?: 'ItineraryCollection';
-  /** Unique identifier for the itinerary-item */
-  id: Scalars['ID'];
-  /** The supplied title */
-  title?: Maybe<Scalars['String']>;
-  /** A short text summary */
-  synopsis?: Maybe<Scalars['String']>;
-  /** A longer text description */
-  description?: Maybe<Scalars['String']>;
-  /** A series of strings applied to label this item */
-  tags: Array<Scalars['String']>;
-  /** List of MediaContainers containing images or other media */
-  media: Array<MediaContainer>;
-  /** The preferred MediaContainer to use */
-  preferredMedia?: Maybe<MediaContainer>;
-  /** Alias for the read-more attribute */
-  readMoreUrl?: Maybe<Scalars['String']>;
-  /** Alias for the website-url attribute */
-  websiteUrl?: Maybe<Scalars['String']>;
-  /** The itinerary this item belongs to */
-  itinerary: Itinerary;
-  /** The sibling item that comes before this item */
-  before?: Maybe<ItineraryItem>;
   /** The sibling item that comes after this item */
   after?: Maybe<ItineraryItem>;
-  /** The parent item of this item */
-  parent?: Maybe<ItineraryItem>;
   /** All ancestors of the itinerary-item */
   ancestors: ItineraryItemConnection;
-  /** All the descendants of the itinerary-item in depth-first-search order */
-  descendants: ItineraryItemConnection;
-  /** All the direct children of the itinerary-item */
-  children: ItineraryItemConnection;
   /** Arbitrary JSON value stored on this resource, keyed by an id */
   attr?: Maybe<Attribute>;
   /** Shortcut for the attr.value, returns null if the attribute doesn't exist */
   attrValue?: Maybe<Scalars['JSON']>;
-  /** Query multiple attributes by id and optionally locale */
-  attrs: Array<Maybe<Attribute>>;
-  /** Query multiple attributes with the same id and optionally locale */
-  attrsById: AttributeConnection;
-  /** Return all attributes on the resource */
-  allAttrs: AttributeConnection;
+  /** Query multiple attributes optionally filtering by id and/or locale */
+  attrs: AttributeConnection;
+  /** The sibling item that comes before this item */
+  before?: Maybe<ItineraryItem>;
   /** Bounds for the itinerary item */
   bounds?: Maybe<Bounds>;
+  /** All the direct children of the itinerary-item */
+  children: ItineraryItemConnection;
+  /** All the descendants of the itinerary-item in depth-first-search order */
+  descendants: ItineraryItemConnection;
+  /** A longer text description */
+  description?: Maybe<Scalars['String']>;
+  /** Unique identifier for the itinerary-item */
+  id: Scalars['ID'];
+  /** The itinerary this item belongs to */
+  itinerary: Itinerary;
+  /**
+   * List of MediaContainers containing images or other media
+   * @deprecated use mediaContainers instead
+   */
+  media: Array<MediaContainer>;
+  /** List of MediaContainers containing images or other media */
+  mediaContainers: MediaContainerConnection;
+  /** The parent item of this item */
+  parent?: Maybe<ItineraryItem>;
+  /** The preferred MediaContainer to use */
+  preferredMedia?: Maybe<MediaContainer>;
+  /** Alias for the read-more attribute */
+  readMoreUrl?: Maybe<Scalars['String']>;
+  /** A number corresponding to the item's position compared to it's siblings. */
+  siblingPositionNumber?: Maybe<Scalars['Float']>;
+  /** A short text summary */
+  synopsis?: Maybe<Scalars['String']>;
+  /** A series of strings applied to label this item */
+  tags: Array<Scalars['String']>;
+  /** The supplied title */
+  title?: Maybe<Scalars['String']>;
+  /** Alias for the website-url attribute */
+  websiteUrl?: Maybe<Scalars['String']>;
+};
+
+
+/** An itinerary item representing a collection of other itinerary items */
+export type ItineraryCollectionAfterArgs = {
+  parentType?: InputMaybe<ItineraryItemType>;
+  placeIds?: InputMaybe<Array<Scalars['ID']>>;
+  segmentIds?: InputMaybe<Array<Scalars['ID']>>;
+  type?: InputMaybe<ItineraryItemType>;
+};
+
+
+/** An itinerary item representing a collection of other itinerary items */
+export type ItineraryCollectionAncestorsArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  first: Scalars['Int'];
+  parentType?: InputMaybe<ItineraryItemType>;
+  placeIds?: InputMaybe<Array<Scalars['ID']>>;
+  segmentIds?: InputMaybe<Array<Scalars['ID']>>;
+  type?: InputMaybe<ItineraryItemType>;
+};
+
+
+/** An itinerary item representing a collection of other itinerary items */
+export type ItineraryCollectionAttrArgs = {
+  id: Scalars['ID'];
+  locale?: InputMaybe<Scalars['String']>;
+};
+
+
+/** An itinerary item representing a collection of other itinerary items */
+export type ItineraryCollectionAttrValueArgs = {
+  id: Scalars['ID'];
+  locale?: InputMaybe<Scalars['String']>;
+};
+
+
+/** An itinerary item representing a collection of other itinerary items */
+export type ItineraryCollectionAttrsArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  first: Scalars['Int'];
+  id?: InputMaybe<Scalars['ID']>;
+  includeNoLocale?: InputMaybe<Scalars['Boolean']>;
+  locale?: InputMaybe<Scalars['String']>;
+};
+
+
+/** An itinerary item representing a collection of other itinerary items */
+export type ItineraryCollectionBeforeArgs = {
+  parentType?: InputMaybe<ItineraryItemType>;
+  placeIds?: InputMaybe<Array<Scalars['ID']>>;
+  segmentIds?: InputMaybe<Array<Scalars['ID']>>;
+  type?: InputMaybe<ItineraryItemType>;
+};
+
+
+/** An itinerary item representing a collection of other itinerary items */
+export type ItineraryCollectionChildrenArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  first: Scalars['Int'];
+  parentType?: InputMaybe<ItineraryItemType>;
+  placeIds?: InputMaybe<Array<Scalars['ID']>>;
+  segmentIds?: InputMaybe<Array<Scalars['ID']>>;
+  type?: InputMaybe<ItineraryItemType>;
+};
+
+
+/** An itinerary item representing a collection of other itinerary items */
+export type ItineraryCollectionDescendantsArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  depthMax?: InputMaybe<Scalars['Int']>;
+  depthMin?: InputMaybe<Scalars['Int']>;
+  first: Scalars['Int'];
+  parentType?: InputMaybe<ItineraryItemType>;
+  placeIds?: InputMaybe<Array<Scalars['ID']>>;
+  segmentIds?: InputMaybe<Array<Scalars['ID']>>;
+  type?: InputMaybe<ItineraryItemType>;
 };
 
 
@@ -3007,282 +4186,177 @@ export type ItineraryCollectionMediaArgs = {
 
 
 /** An itinerary item representing a collection of other itinerary items */
-export type ItineraryCollectionBeforeArgs = {
-  type?: Maybe<ItineraryItemType>;
-  parentType?: Maybe<ItineraryItemType>;
-  placeIds?: Maybe<Array<Scalars['ID']>>;
-};
-
-
-/** An itinerary item representing a collection of other itinerary items */
-export type ItineraryCollectionAfterArgs = {
-  type?: Maybe<ItineraryItemType>;
-  parentType?: Maybe<ItineraryItemType>;
-  placeIds?: Maybe<Array<Scalars['ID']>>;
+export type ItineraryCollectionMediaContainersArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  first: Scalars['Int'];
 };
 
 
 /** An itinerary item representing a collection of other itinerary items */
 export type ItineraryCollectionParentArgs = {
-  type?: Maybe<ItineraryItemType>;
-  parentType?: Maybe<ItineraryItemType>;
-  placeIds?: Maybe<Array<Scalars['ID']>>;
+  parentType?: InputMaybe<ItineraryItemType>;
+  placeIds?: InputMaybe<Array<Scalars['ID']>>;
+  segmentIds?: InputMaybe<Array<Scalars['ID']>>;
+  type?: InputMaybe<ItineraryItemType>;
 };
 
 
 /** An itinerary item representing a collection of other itinerary items */
-export type ItineraryCollectionAncestorsArgs = {
-  first: Scalars['Int'];
-  after?: Maybe<Scalars['String']>;
-  type?: Maybe<ItineraryItemType>;
-  parentType?: Maybe<ItineraryItemType>;
-  placeIds?: Maybe<Array<Scalars['ID']>>;
-};
-
-
-/** An itinerary item representing a collection of other itinerary items */
-export type ItineraryCollectionDescendantsArgs = {
-  first: Scalars['Int'];
-  after?: Maybe<Scalars['String']>;
-  type?: Maybe<ItineraryItemType>;
-  parentType?: Maybe<ItineraryItemType>;
-  placeIds?: Maybe<Array<Scalars['ID']>>;
-  depthMax?: Maybe<Scalars['Int']>;
-  depthMin?: Maybe<Scalars['Int']>;
-};
-
-
-/** An itinerary item representing a collection of other itinerary items */
-export type ItineraryCollectionChildrenArgs = {
-  first: Scalars['Int'];
-  after?: Maybe<Scalars['String']>;
-  type?: Maybe<ItineraryItemType>;
-  parentType?: Maybe<ItineraryItemType>;
-  placeIds?: Maybe<Array<Scalars['ID']>>;
-};
-
-
-/** An itinerary item representing a collection of other itinerary items */
-export type ItineraryCollectionAttrArgs = {
-  id: Scalars['ID'];
-  locale?: Maybe<Scalars['String']>;
-};
-
-
-/** An itinerary item representing a collection of other itinerary items */
-export type ItineraryCollectionAttrValueArgs = {
-  id: Scalars['ID'];
-  locale?: Maybe<Scalars['String']>;
-};
-
-
-/** An itinerary item representing a collection of other itinerary items */
-export type ItineraryCollectionAttrsArgs = {
-  attrs: Array<AttributeIdentifierInput>;
-};
-
-
-/** An itinerary item representing a collection of other itinerary items */
-export type ItineraryCollectionAttrsByIdArgs = {
-  first: Scalars['Int'];
-  after?: Maybe<Scalars['String']>;
-  id: Scalars['ID'];
-  locale?: Maybe<Scalars['String']>;
-};
-
-
-/** An itinerary item representing a collection of other itinerary items */
-export type ItineraryCollectionAllAttrsArgs = {
-  first: Scalars['Int'];
-  after?: Maybe<Scalars['String']>;
-};
-
-/** Connection of Itinerarys */
-export type ItineraryConnection = {
-  __typename?: 'ItineraryConnection';
-  /** All the edges in this page of the connection */
-  edges: Array<ItineraryEdge>;
-  /** Shortcut for edges[].node */
-  nodes: Array<Itinerary>;
-  /** Details regarding the current page of the connnection */
-  pageInfo: PageInfo;
-  /** The total number of items in the connection (in all pages) */
-  totalCount: Scalars['Int'];
+export type ItineraryCollectionSiblingPositionNumberArgs = {
+  skipOmitList?: Scalars['Boolean'];
+  skipOptional?: Scalars['Boolean'];
+  type?: InputMaybe<ItineraryItemType>;
 };
 
 /** An itinerary item representing directions from an origin location to the parent location. This item encapsulates modes of transport and routes. */
-export type ItineraryDirections = Node & ItineraryItem & {
+export type ItineraryDirections = ItineraryItem & Node & {
   __typename?: 'ItineraryDirections';
-  /** Unique identifier for the itinerary-item */
-  id: Scalars['ID'];
-  /** The supplied title */
-  title?: Maybe<Scalars['String']>;
-  /** A short text summary */
-  synopsis?: Maybe<Scalars['String']>;
-  /** A longer text description */
-  description?: Maybe<Scalars['String']>;
-  /** A series of strings applied to label this item */
-  tags: Array<Scalars['String']>;
-  /** List of MediaContainers containing images or other media */
-  media: Array<MediaContainer>;
-  /** The preferred MediaContainer to use */
-  preferredMedia?: Maybe<MediaContainer>;
-  /** Alias for the read-more attribute */
-  readMoreUrl?: Maybe<Scalars['String']>;
-  /** Alias for the website-url attribute */
-  websiteUrl?: Maybe<Scalars['String']>;
-  /** The itinerary this item belongs to */
-  itinerary: Itinerary;
-  /** The sibling item that comes before this item */
-  before?: Maybe<ItineraryItem>;
   /** The sibling item that comes after this item */
   after?: Maybe<ItineraryItem>;
-  /** The parent item of this item */
-  parent?: Maybe<ItineraryItem>;
   /** All ancestors of the itinerary-item */
   ancestors: ItineraryItemConnection;
-  /** All the descendants of the itinerary-item in depth-first-search order */
-  descendants: ItineraryItemConnection;
-  /** All the direct children of the itinerary-item */
-  children: ItineraryItemConnection;
   /** Arbitrary JSON value stored on this resource, keyed by an id */
   attr?: Maybe<Attribute>;
   /** Shortcut for the attr.value, returns null if the attribute doesn't exist */
   attrValue?: Maybe<Scalars['JSON']>;
-  /** Query multiple attributes by id and optionally locale */
-  attrs: Array<Maybe<Attribute>>;
-  /** Query multiple attributes with the same id and optionally locale */
-  attrsById: AttributeConnection;
-  /** Return all attributes on the resource */
-  allAttrs: AttributeConnection;
+  /** Query multiple attributes optionally filtering by id and/or locale */
+  attrs: AttributeConnection;
+  /** The sibling item that comes before this item */
+  before?: Maybe<ItineraryItem>;
   /** Bounds for the itinerary-directions and it's descendants */
   bounds?: Maybe<Bounds>;
-  /** The itinerary-location that is the starting point of the directions */
-  origin?: Maybe<ItineraryLocation>;
+  /** All the direct children of the itinerary-item */
+  children: ItineraryItemConnection;
+  /** All the descendants of the itinerary-item in depth-first-search order */
+  descendants: ItineraryItemConnection;
+  /** A longer text description */
+  description?: Maybe<Scalars['String']>;
   /** The itinerary-location that is the ending point of the directions */
   destination?: Maybe<ItineraryLocation>;
-  /** The route details of this directions item */
-  route: Route;
-  /** The duration of this itinerary-directions */
-  durations: Array<ItineraryDirectionsDurations>;
-  /** The minimum duration of this itinerary-directions */
-  durationMin?: Maybe<Scalars['Float']>;
-  /** The maximum duration of this itinerary-directions */
-  durationMax?: Maybe<Scalars['Float']>;
   /** The estimated distance of this itinerary-directions */
   distance?: Maybe<Scalars['Float']>;
+  /** The maximum duration of this itinerary-directions */
+  durationMax?: Maybe<Scalars['Float']>;
+  /** The minimum duration of this itinerary-directions */
+  durationMin?: Maybe<Scalars['Float']>;
+  /** The duration of this itinerary-directions */
+  durations: Array<ItineraryDirectionsDurations>;
   /** The elevation details of this itinerary-directions */
   elevation: Elevation;
-};
-
-
-/** An itinerary item representing directions from an origin location to the parent location. This item encapsulates modes of transport and routes. */
-export type ItineraryDirectionsMediaArgs = {
-  limit?: Scalars['Int'];
-};
-
-
-/** An itinerary item representing directions from an origin location to the parent location. This item encapsulates modes of transport and routes. */
-export type ItineraryDirectionsBeforeArgs = {
-  type?: Maybe<ItineraryItemType>;
-  parentType?: Maybe<ItineraryItemType>;
-  placeIds?: Maybe<Array<Scalars['ID']>>;
+  /** Unique identifier for the itinerary-item */
+  id: Scalars['ID'];
+  /** The itinerary this item belongs to */
+  itinerary: Itinerary;
+  /**
+   * List of MediaContainers containing images or other media
+   * @deprecated use mediaContainers instead
+   */
+  media: Array<MediaContainer>;
+  /** List of MediaContainers containing images or other media */
+  mediaContainers: MediaContainerConnection;
+  /** The itinerary-location that is the starting point of the directions */
+  origin?: Maybe<ItineraryLocation>;
+  /** The parent item of this item */
+  parent?: Maybe<ItineraryItem>;
+  /** The preferred MediaContainer to use */
+  preferredMedia?: Maybe<MediaContainer>;
+  /** Alias for the read-more attribute */
+  readMoreUrl?: Maybe<Scalars['String']>;
+  /** The route details of this directions item */
+  route: Route;
+  /** A number corresponding to the item's position compared to it's siblings. */
+  siblingPositionNumber?: Maybe<Scalars['Float']>;
+  /** A short text summary */
+  synopsis?: Maybe<Scalars['String']>;
+  /** A series of strings applied to label this item */
+  tags: Array<Scalars['String']>;
+  /** The supplied title */
+  title?: Maybe<Scalars['String']>;
+  /** Alias for the website-url attribute */
+  websiteUrl?: Maybe<Scalars['String']>;
 };
 
 
 /** An itinerary item representing directions from an origin location to the parent location. This item encapsulates modes of transport and routes. */
 export type ItineraryDirectionsAfterArgs = {
-  type?: Maybe<ItineraryItemType>;
-  parentType?: Maybe<ItineraryItemType>;
-  placeIds?: Maybe<Array<Scalars['ID']>>;
-};
-
-
-/** An itinerary item representing directions from an origin location to the parent location. This item encapsulates modes of transport and routes. */
-export type ItineraryDirectionsParentArgs = {
-  type?: Maybe<ItineraryItemType>;
-  parentType?: Maybe<ItineraryItemType>;
-  placeIds?: Maybe<Array<Scalars['ID']>>;
+  parentType?: InputMaybe<ItineraryItemType>;
+  placeIds?: InputMaybe<Array<Scalars['ID']>>;
+  segmentIds?: InputMaybe<Array<Scalars['ID']>>;
+  type?: InputMaybe<ItineraryItemType>;
 };
 
 
 /** An itinerary item representing directions from an origin location to the parent location. This item encapsulates modes of transport and routes. */
 export type ItineraryDirectionsAncestorsArgs = {
+  after?: InputMaybe<Scalars['String']>;
   first: Scalars['Int'];
-  after?: Maybe<Scalars['String']>;
-  type?: Maybe<ItineraryItemType>;
-  parentType?: Maybe<ItineraryItemType>;
-  placeIds?: Maybe<Array<Scalars['ID']>>;
-};
-
-
-/** An itinerary item representing directions from an origin location to the parent location. This item encapsulates modes of transport and routes. */
-export type ItineraryDirectionsDescendantsArgs = {
-  first: Scalars['Int'];
-  after?: Maybe<Scalars['String']>;
-  type?: Maybe<ItineraryItemType>;
-  parentType?: Maybe<ItineraryItemType>;
-  placeIds?: Maybe<Array<Scalars['ID']>>;
-  depthMax?: Maybe<Scalars['Int']>;
-  depthMin?: Maybe<Scalars['Int']>;
-};
-
-
-/** An itinerary item representing directions from an origin location to the parent location. This item encapsulates modes of transport and routes. */
-export type ItineraryDirectionsChildrenArgs = {
-  first: Scalars['Int'];
-  after?: Maybe<Scalars['String']>;
-  type?: Maybe<ItineraryItemType>;
-  parentType?: Maybe<ItineraryItemType>;
-  placeIds?: Maybe<Array<Scalars['ID']>>;
+  parentType?: InputMaybe<ItineraryItemType>;
+  placeIds?: InputMaybe<Array<Scalars['ID']>>;
+  segmentIds?: InputMaybe<Array<Scalars['ID']>>;
+  type?: InputMaybe<ItineraryItemType>;
 };
 
 
 /** An itinerary item representing directions from an origin location to the parent location. This item encapsulates modes of transport and routes. */
 export type ItineraryDirectionsAttrArgs = {
   id: Scalars['ID'];
-  locale?: Maybe<Scalars['String']>;
+  locale?: InputMaybe<Scalars['String']>;
 };
 
 
 /** An itinerary item representing directions from an origin location to the parent location. This item encapsulates modes of transport and routes. */
 export type ItineraryDirectionsAttrValueArgs = {
   id: Scalars['ID'];
-  locale?: Maybe<Scalars['String']>;
+  locale?: InputMaybe<Scalars['String']>;
 };
 
 
 /** An itinerary item representing directions from an origin location to the parent location. This item encapsulates modes of transport and routes. */
 export type ItineraryDirectionsAttrsArgs = {
-  attrs: Array<AttributeIdentifierInput>;
-};
-
-
-/** An itinerary item representing directions from an origin location to the parent location. This item encapsulates modes of transport and routes. */
-export type ItineraryDirectionsAttrsByIdArgs = {
+  after?: InputMaybe<Scalars['String']>;
   first: Scalars['Int'];
-  after?: Maybe<Scalars['String']>;
-  id: Scalars['ID'];
-  locale?: Maybe<Scalars['String']>;
+  id?: InputMaybe<Scalars['ID']>;
+  includeNoLocale?: InputMaybe<Scalars['Boolean']>;
+  locale?: InputMaybe<Scalars['String']>;
 };
 
 
 /** An itinerary item representing directions from an origin location to the parent location. This item encapsulates modes of transport and routes. */
-export type ItineraryDirectionsAllAttrsArgs = {
+export type ItineraryDirectionsBeforeArgs = {
+  parentType?: InputMaybe<ItineraryItemType>;
+  placeIds?: InputMaybe<Array<Scalars['ID']>>;
+  segmentIds?: InputMaybe<Array<Scalars['ID']>>;
+  type?: InputMaybe<ItineraryItemType>;
+};
+
+
+/** An itinerary item representing directions from an origin location to the parent location. This item encapsulates modes of transport and routes. */
+export type ItineraryDirectionsChildrenArgs = {
+  after?: InputMaybe<Scalars['String']>;
   first: Scalars['Int'];
-  after?: Maybe<Scalars['String']>;
+  parentType?: InputMaybe<ItineraryItemType>;
+  placeIds?: InputMaybe<Array<Scalars['ID']>>;
+  segmentIds?: InputMaybe<Array<Scalars['ID']>>;
+  type?: InputMaybe<ItineraryItemType>;
 };
 
 
 /** An itinerary item representing directions from an origin location to the parent location. This item encapsulates modes of transport and routes. */
-export type ItineraryDirectionsBoundsArgs = {
-  excludeDescendants?: Maybe<Scalars['Boolean']>;
+export type ItineraryDirectionsDescendantsArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  depthMax?: InputMaybe<Scalars['Int']>;
+  depthMin?: InputMaybe<Scalars['Int']>;
+  first: Scalars['Int'];
+  parentType?: InputMaybe<ItineraryItemType>;
+  placeIds?: InputMaybe<Array<Scalars['ID']>>;
+  segmentIds?: InputMaybe<Array<Scalars['ID']>>;
+  type?: InputMaybe<ItineraryItemType>;
 };
 
 
 /** An itinerary item representing directions from an origin location to the parent location. This item encapsulates modes of transport and routes. */
-export type ItineraryDirectionsDurationMinArgs = {
-  unit?: DurationUnit;
+export type ItineraryDirectionsDistanceArgs = {
+  unit?: DistanceUnit;
 };
 
 
@@ -3293,8 +4367,38 @@ export type ItineraryDirectionsDurationMaxArgs = {
 
 
 /** An itinerary item representing directions from an origin location to the parent location. This item encapsulates modes of transport and routes. */
-export type ItineraryDirectionsDistanceArgs = {
-  unit?: DistanceUnit;
+export type ItineraryDirectionsDurationMinArgs = {
+  unit?: DurationUnit;
+};
+
+
+/** An itinerary item representing directions from an origin location to the parent location. This item encapsulates modes of transport and routes. */
+export type ItineraryDirectionsMediaArgs = {
+  limit?: Scalars['Int'];
+};
+
+
+/** An itinerary item representing directions from an origin location to the parent location. This item encapsulates modes of transport and routes. */
+export type ItineraryDirectionsMediaContainersArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  first: Scalars['Int'];
+};
+
+
+/** An itinerary item representing directions from an origin location to the parent location. This item encapsulates modes of transport and routes. */
+export type ItineraryDirectionsParentArgs = {
+  parentType?: InputMaybe<ItineraryItemType>;
+  placeIds?: InputMaybe<Array<Scalars['ID']>>;
+  segmentIds?: InputMaybe<Array<Scalars['ID']>>;
+  type?: InputMaybe<ItineraryItemType>;
+};
+
+
+/** An itinerary item representing directions from an origin location to the parent location. This item encapsulates modes of transport and routes. */
+export type ItineraryDirectionsSiblingPositionNumberArgs = {
+  skipOmitList?: Scalars['Boolean'];
+  skipOptional?: Scalars['Boolean'];
+  type?: InputMaybe<ItineraryItemType>;
 };
 
 /** The method to determine if an ItineraryDirections is related to an ItineraryLocation */
@@ -3327,10 +4431,10 @@ export enum ItineraryDirectionsDirection {
 /** An itinerary-directions duration value */
 export type ItineraryDirectionsDurations = {
   __typename?: 'ItineraryDirectionsDurations';
-  /** Unique identifier for this duration */
-  id: Scalars['ID'];
   /** The duration value */
   duration: Scalars['Float'];
+  /** Unique identifier for this duration */
+  id: Scalars['ID'];
   /** Label for the duration */
   label?: Maybe<Scalars['String']>;
 };
@@ -3346,7 +4450,7 @@ export type ItineraryDirectionsDurationsInput = {
   /** The duration value */
   duration: Scalars['Float'];
   /** Label for the duration */
-  label?: Maybe<Scalars['String']>;
+  label?: InputMaybe<Scalars['String']>;
 };
 
 /** Edge containing a ItineraryDirections */
@@ -3354,10 +4458,10 @@ export type ItineraryDirectionsEdge = {
   __typename?: 'ItineraryDirectionsEdge';
   /** The cursor string pointing to this item */
   cursor: Scalars['String'];
-  /** The item */
-  node: ItineraryDirections;
   /** Whether this itinerary-directions is inbound or outbound from the itinerary-location */
   direction: ItineraryDirectionsDirection;
+  /** The item */
+  node: ItineraryDirections;
 };
 
 /** Restricts search for directions to a portion of an Itinerary */
@@ -3366,61 +4470,132 @@ export enum ItineraryDirectionsRestrict {
   ParentDescendants = 'ParentDescendants'
 }
 
-/** Edge containing a Itinerary */
-export type ItineraryEdge = {
-  __typename?: 'ItineraryEdge';
-  /** The cursor string pointing to this item */
-  cursor: Scalars['String'];
-  /** The item */
-  node: Itinerary;
-};
-
 /** An item in an itinerary as part of the tree */
 export type ItineraryItem = {
-  /** Unique identifier for the itinerary-item */
-  id: Scalars['ID'];
-  /** The supplied title */
-  title?: Maybe<Scalars['String']>;
-  /** A short text summary */
-  synopsis?: Maybe<Scalars['String']>;
-  /** A longer text description */
-  description?: Maybe<Scalars['String']>;
-  /** A series of strings applied to label this item */
-  tags: Array<Scalars['String']>;
-  /** List of MediaContainers containing images or other media */
-  media: Array<MediaContainer>;
-  /** The preferred MediaContainer to use */
-  preferredMedia?: Maybe<MediaContainer>;
-  /** Alias for the read-more attribute */
-  readMoreUrl?: Maybe<Scalars['String']>;
-  /** Alias for the website-url attribute */
-  websiteUrl?: Maybe<Scalars['String']>;
-  /** The itinerary this item belongs to */
-  itinerary: Itinerary;
-  /** The sibling item that comes before this item */
-  before?: Maybe<ItineraryItem>;
   /** The sibling item that comes after this item */
   after?: Maybe<ItineraryItem>;
-  /** The parent item of this item */
-  parent?: Maybe<ItineraryItem>;
   /** All ancestors of the itinerary-item */
   ancestors: ItineraryItemConnection;
-  /** All the descendants of the itinerary-item in depth-first-search order */
-  descendants: ItineraryItemConnection;
-  /** All the direct children of the itinerary-item */
-  children: ItineraryItemConnection;
   /** Arbitrary JSON value stored on this resource, keyed by an id */
   attr?: Maybe<Attribute>;
   /** Shortcut for the attr.value, returns null if the attribute doesn't exist */
   attrValue?: Maybe<Scalars['JSON']>;
-  /** Query multiple attributes by id and optionally locale */
-  attrs: Array<Maybe<Attribute>>;
-  /** Query multiple attributes with the same id and optionally locale */
-  attrsById: AttributeConnection;
-  /** Return all attributes on the resource */
-  allAttrs: AttributeConnection;
+  /** Query multiple attributes optionally filtering by id and/or locale */
+  attrs: AttributeConnection;
+  /** The sibling item that comes before this item */
+  before?: Maybe<ItineraryItem>;
   /** Bounds for the itinerary item */
   bounds?: Maybe<Bounds>;
+  /** All the direct children of the itinerary-item */
+  children: ItineraryItemConnection;
+  /** All the descendants of the itinerary-item in depth-first-search order */
+  descendants: ItineraryItemConnection;
+  /** A longer text description */
+  description?: Maybe<Scalars['String']>;
+  /** Unique identifier for the itinerary-item */
+  id: Scalars['ID'];
+  /** The itinerary this item belongs to */
+  itinerary: Itinerary;
+  /**
+   * List of MediaContainers containing images or other media
+   * @deprecated use mediaContainers instead
+   */
+  media: Array<MediaContainer>;
+  /** List of MediaContainers containing images or other media */
+  mediaContainers: MediaContainerConnection;
+  /** The parent item of this item */
+  parent?: Maybe<ItineraryItem>;
+  /** The preferred MediaContainer to use */
+  preferredMedia?: Maybe<MediaContainer>;
+  /** Alias for the read-more attribute */
+  readMoreUrl?: Maybe<Scalars['String']>;
+  /** A number corresponding to the item's position compared to it's siblings. */
+  siblingPositionNumber?: Maybe<Scalars['Float']>;
+  /** A short text summary */
+  synopsis?: Maybe<Scalars['String']>;
+  /** A series of strings applied to label this item */
+  tags: Array<Scalars['String']>;
+  /** The supplied title */
+  title?: Maybe<Scalars['String']>;
+  /** Alias for the website-url attribute */
+  websiteUrl?: Maybe<Scalars['String']>;
+};
+
+
+/** An item in an itinerary as part of the tree */
+export type ItineraryItemAfterArgs = {
+  parentType?: InputMaybe<ItineraryItemType>;
+  placeIds?: InputMaybe<Array<Scalars['ID']>>;
+  segmentIds?: InputMaybe<Array<Scalars['ID']>>;
+  type?: InputMaybe<ItineraryItemType>;
+};
+
+
+/** An item in an itinerary as part of the tree */
+export type ItineraryItemAncestorsArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  first: Scalars['Int'];
+  parentType?: InputMaybe<ItineraryItemType>;
+  placeIds?: InputMaybe<Array<Scalars['ID']>>;
+  segmentIds?: InputMaybe<Array<Scalars['ID']>>;
+  type?: InputMaybe<ItineraryItemType>;
+};
+
+
+/** An item in an itinerary as part of the tree */
+export type ItineraryItemAttrArgs = {
+  id: Scalars['ID'];
+  locale?: InputMaybe<Scalars['String']>;
+};
+
+
+/** An item in an itinerary as part of the tree */
+export type ItineraryItemAttrValueArgs = {
+  id: Scalars['ID'];
+  locale?: InputMaybe<Scalars['String']>;
+};
+
+
+/** An item in an itinerary as part of the tree */
+export type ItineraryItemAttrsArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  first: Scalars['Int'];
+  id?: InputMaybe<Scalars['ID']>;
+  includeNoLocale?: InputMaybe<Scalars['Boolean']>;
+  locale?: InputMaybe<Scalars['String']>;
+};
+
+
+/** An item in an itinerary as part of the tree */
+export type ItineraryItemBeforeArgs = {
+  parentType?: InputMaybe<ItineraryItemType>;
+  placeIds?: InputMaybe<Array<Scalars['ID']>>;
+  segmentIds?: InputMaybe<Array<Scalars['ID']>>;
+  type?: InputMaybe<ItineraryItemType>;
+};
+
+
+/** An item in an itinerary as part of the tree */
+export type ItineraryItemChildrenArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  first: Scalars['Int'];
+  parentType?: InputMaybe<ItineraryItemType>;
+  placeIds?: InputMaybe<Array<Scalars['ID']>>;
+  segmentIds?: InputMaybe<Array<Scalars['ID']>>;
+  type?: InputMaybe<ItineraryItemType>;
+};
+
+
+/** An item in an itinerary as part of the tree */
+export type ItineraryItemDescendantsArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  depthMax?: InputMaybe<Scalars['Int']>;
+  depthMin?: InputMaybe<Scalars['Int']>;
+  first: Scalars['Int'];
+  parentType?: InputMaybe<ItineraryItemType>;
+  placeIds?: InputMaybe<Array<Scalars['ID']>>;
+  segmentIds?: InputMaybe<Array<Scalars['ID']>>;
+  type?: InputMaybe<ItineraryItemType>;
 };
 
 
@@ -3431,103 +4606,35 @@ export type ItineraryItemMediaArgs = {
 
 
 /** An item in an itinerary as part of the tree */
-export type ItineraryItemBeforeArgs = {
-  type?: Maybe<ItineraryItemType>;
-  parentType?: Maybe<ItineraryItemType>;
-  placeIds?: Maybe<Array<Scalars['ID']>>;
-};
-
-
-/** An item in an itinerary as part of the tree */
-export type ItineraryItemAfterArgs = {
-  type?: Maybe<ItineraryItemType>;
-  parentType?: Maybe<ItineraryItemType>;
-  placeIds?: Maybe<Array<Scalars['ID']>>;
+export type ItineraryItemMediaContainersArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  first: Scalars['Int'];
 };
 
 
 /** An item in an itinerary as part of the tree */
 export type ItineraryItemParentArgs = {
-  type?: Maybe<ItineraryItemType>;
-  parentType?: Maybe<ItineraryItemType>;
-  placeIds?: Maybe<Array<Scalars['ID']>>;
+  parentType?: InputMaybe<ItineraryItemType>;
+  placeIds?: InputMaybe<Array<Scalars['ID']>>;
+  segmentIds?: InputMaybe<Array<Scalars['ID']>>;
+  type?: InputMaybe<ItineraryItemType>;
 };
 
 
 /** An item in an itinerary as part of the tree */
-export type ItineraryItemAncestorsArgs = {
-  first: Scalars['Int'];
-  after?: Maybe<Scalars['String']>;
-  type?: Maybe<ItineraryItemType>;
-  parentType?: Maybe<ItineraryItemType>;
-  placeIds?: Maybe<Array<Scalars['ID']>>;
-};
-
-
-/** An item in an itinerary as part of the tree */
-export type ItineraryItemDescendantsArgs = {
-  first: Scalars['Int'];
-  after?: Maybe<Scalars['String']>;
-  type?: Maybe<ItineraryItemType>;
-  parentType?: Maybe<ItineraryItemType>;
-  placeIds?: Maybe<Array<Scalars['ID']>>;
-  depthMax?: Maybe<Scalars['Int']>;
-  depthMin?: Maybe<Scalars['Int']>;
-};
-
-
-/** An item in an itinerary as part of the tree */
-export type ItineraryItemChildrenArgs = {
-  first: Scalars['Int'];
-  after?: Maybe<Scalars['String']>;
-  type?: Maybe<ItineraryItemType>;
-  parentType?: Maybe<ItineraryItemType>;
-  placeIds?: Maybe<Array<Scalars['ID']>>;
-};
-
-
-/** An item in an itinerary as part of the tree */
-export type ItineraryItemAttrArgs = {
-  id: Scalars['ID'];
-  locale?: Maybe<Scalars['String']>;
-};
-
-
-/** An item in an itinerary as part of the tree */
-export type ItineraryItemAttrValueArgs = {
-  id: Scalars['ID'];
-  locale?: Maybe<Scalars['String']>;
-};
-
-
-/** An item in an itinerary as part of the tree */
-export type ItineraryItemAttrsArgs = {
-  attrs: Array<AttributeIdentifierInput>;
-};
-
-
-/** An item in an itinerary as part of the tree */
-export type ItineraryItemAttrsByIdArgs = {
-  first: Scalars['Int'];
-  after?: Maybe<Scalars['String']>;
-  id: Scalars['ID'];
-  locale?: Maybe<Scalars['String']>;
-};
-
-
-/** An item in an itinerary as part of the tree */
-export type ItineraryItemAllAttrsArgs = {
-  first: Scalars['Int'];
-  after?: Maybe<Scalars['String']>;
+export type ItineraryItemSiblingPositionNumberArgs = {
+  skipOmitList?: Scalars['Boolean'];
+  skipOptional?: Scalars['Boolean'];
+  type?: InputMaybe<ItineraryItemType>;
 };
 
 /** Changes to an itinerary caused by a mutation */
 export type ItineraryItemCascadedChanges = {
   __typename?: 'ItineraryItemCascadedChanges';
-  /** Itinerary-items that were deleted due to the mutation */
-  deletedIds: Array<Scalars['ID']>;
   /** Itinerary-items that were created due to the mutation */
   created: Array<ItineraryItem>;
+  /** Itinerary-items that were deleted due to the mutation */
+  deletedIds: Array<Scalars['ID']>;
   /** Itinerary-items that were updated due to the mutation */
   updated: Array<ItineraryItem>;
 };
@@ -3550,116 +4657,227 @@ export type ItineraryItemEdge = {
   __typename?: 'ItineraryItemEdge';
   /** The cursor string pointing to this item */
   cursor: Scalars['String'];
-  /** The item */
-  node: ItineraryItem;
   /** List itinerary-directions connecting this node to other nodes in the connection */
   directions: ItineraryDirectionsConnection;
+  /** A number corresponding to the item's position in the connection. */
+  edgePositionNumber?: Maybe<Scalars['Float']>;
+  /** The item */
+  node: ItineraryItem;
 };
 
 
 /** Edge containing a ItineraryItem */
 export type ItineraryItemEdgeDirectionsArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  direction?: InputMaybe<ItineraryDirectionsDirection>;
   first: Scalars['Int'];
-  after?: Maybe<Scalars['String']>;
-  direction?: Maybe<ItineraryDirectionsDirection>;
   limitImmediate?: Scalars['Boolean'];
   skipOptional?: Scalars['Boolean'];
+};
+
+
+/** Edge containing a ItineraryItem */
+export type ItineraryItemEdgeEdgePositionNumberArgs = {
+  skipOmitList?: Scalars['Boolean'];
+  skipOptional?: Scalars['Boolean'];
+  type?: InputMaybe<ItineraryItemType>;
 };
 
 /** Positions the item after a sibling */
 export type ItineraryItemPositionAfterSibling = {
   /** The sibling itinerary item identifier, in the form of item/XYZ */
-  siblingId?: Maybe<Scalars['ID']>;
+  siblingId?: InputMaybe<Scalars['ID']>;
 };
 
 /** Positions the item at the end position of its siblings */
 export type ItineraryItemPositionAtEnd = {
   /** The parent itinerary item identifier, in the form of item/XYZ */
-  parentId?: Maybe<Scalars['ID']>;
+  parentId?: InputMaybe<Scalars['ID']>;
 };
 
 /** Positions the item at the start position of its siblings */
 export type ItineraryItemPositionAtStart = {
   /** The parent itinerary item identifier, in the form of item/XYZ */
-  parentId?: Maybe<Scalars['ID']>;
+  parentId?: InputMaybe<Scalars['ID']>;
 };
 
 /** Positions the item before a sibling */
 export type ItineraryItemPositionBeforeSibling = {
   /** The sibling itinerary item identifier, in the form of item/XYZ */
-  siblingId?: Maybe<Scalars['ID']>;
+  siblingId?: InputMaybe<Scalars['ID']>;
 };
 
 /** Positions the itinerary item to the last position of the last itinerary collection item */
 export type ItineraryItemPositionOnLastCollection = {
   /** The itinerary item identifier to limit descendent searching withing */
-  searchUnder?: Maybe<Scalars['ID']>;
+  searchUnder?: InputMaybe<Scalars['ID']>;
 };
 
 /** Possible types of ItineraryItem */
 export enum ItineraryItemType {
   ItineraryCollection = 'ItineraryCollection',
-  ItineraryLocation = 'ItineraryLocation',
-  ItineraryDirections = 'ItineraryDirections'
+  ItineraryDirections = 'ItineraryDirections',
+  ItineraryLocation = 'ItineraryLocation'
 }
 
 /** An itinerary item representing a location with an associated place in the itinerary */
-export type ItineraryLocation = Node & ItineraryItem & {
+export type ItineraryLocation = ItineraryItem & Node & {
   __typename?: 'ItineraryLocation';
-  /** Unique identifier for the itinerary-item */
-  id: Scalars['ID'];
-  /** The supplied title */
-  title?: Maybe<Scalars['String']>;
-  /** A short text summary */
-  synopsis?: Maybe<Scalars['String']>;
-  /** A longer text description */
-  description?: Maybe<Scalars['String']>;
-  /** A series of strings applied to label this item */
-  tags: Array<Scalars['String']>;
-  /** List of MediaContainers containing images or other media */
-  media: Array<MediaContainer>;
-  /** The preferred MediaContainer to use */
-  preferredMedia?: Maybe<MediaContainer>;
-  /** Alias for the read-more attribute */
-  readMoreUrl?: Maybe<Scalars['String']>;
-  /** Alias for the website-url attribute */
-  websiteUrl?: Maybe<Scalars['String']>;
-  /** The itinerary this item belongs to */
-  itinerary: Itinerary;
-  /** The sibling item that comes before this item */
-  before?: Maybe<ItineraryItem>;
+  /** Address information for the itinerary location */
+  address: PlaceAddress;
   /** The sibling item that comes after this item */
   after?: Maybe<ItineraryItem>;
-  /** The parent item of this item */
-  parent?: Maybe<ItineraryItem>;
   /** All ancestors of the itinerary-item */
   ancestors: ItineraryItemConnection;
-  /** All the descendants of the itinerary-item in depth-first-search order */
-  descendants: ItineraryItemConnection;
-  /** All the direct children of the itinerary-item */
-  children: ItineraryItemConnection;
   /** Arbitrary JSON value stored on this resource, keyed by an id */
   attr?: Maybe<Attribute>;
   /** Shortcut for the attr.value, returns null if the attribute doesn't exist */
   attrValue?: Maybe<Scalars['JSON']>;
-  /** Query multiple attributes by id and optionally locale */
-  attrs: Array<Maybe<Attribute>>;
-  /** Query multiple attributes with the same id and optionally locale */
-  attrsById: AttributeConnection;
-  /** Return all attributes on the resource */
-  allAttrs: AttributeConnection;
+  /** Query multiple attributes optionally filtering by id and/or locale */
+  attrs: AttributeConnection;
+  /** The sibling item that comes before this item */
+  before?: Maybe<ItineraryItem>;
   /** Bounds for the itinerary-location and it's descendants */
-  bounds: Bounds;
+  bounds?: Maybe<Bounds>;
+  /** All the direct children of the itinerary-item */
+  children: ItineraryItemConnection;
+  /** Contact information for the itinerary location */
+  contact: PlaceContact;
+  /** All the descendants of the itinerary-item in depth-first-search order */
+  descendants: ItineraryItemConnection;
+  /** A longer text description */
+  description?: Maybe<Scalars['String']>;
+  /** Retrieves itinerary-directions associated with this itinerary-location */
+  directions: ItineraryDirectionsConnection;
+  /** The IconComposition used by the this ItineraryLocation */
+  icon?: Maybe<IconComposition>;
+  /** Unique identifier for the itinerary-item */
+  id: Scalars['ID'];
+  /** The itinerary this item belongs to */
+  itinerary: Itinerary;
+  /**
+   * List of MediaContainers containing images or other media
+   * @deprecated use mediaContainers instead
+   */
+  media: Array<MediaContainer>;
+  /** List of MediaContainers containing images or other media */
+  mediaContainers: MediaContainerConnection;
+  /** Whether the location is an optional stop */
+  optional: Scalars['Boolean'];
+  /** The parent item of this item */
+  parent?: Maybe<ItineraryItem>;
   /** The place details of this location */
   place: Place;
   /** The position of the collection-location (derived from place if not overridden) */
   position: Position;
-  /** The representation of a location, as a GeoJSON FeatureCollection */
-  geoJson: Scalars['JSON'];
-  /** Whether the location is an optional stop */
-  optional: Scalars['Boolean'];
-  /** Retrieves itinerary-directions associated with this itinerary-location */
-  directions: ItineraryDirectionsConnection;
+  /** The preferred MediaContainer to use */
+  preferredMedia?: Maybe<MediaContainer>;
+  /** Alias for the read-more attribute */
+  readMoreUrl?: Maybe<Scalars['String']>;
+  /** A number corresponding to the item's position compared to it's siblings. */
+  siblingPositionNumber?: Maybe<Scalars['Float']>;
+  /** A short text summary */
+  synopsis?: Maybe<Scalars['String']>;
+  /** A series of strings applied to label this item */
+  tags: Array<Scalars['String']>;
+  /** The supplied title */
+  title?: Maybe<Scalars['String']>;
+  /** Alias for the website-url attribute */
+  websiteUrl?: Maybe<Scalars['String']>;
+};
+
+
+/** An itinerary item representing a location with an associated place in the itinerary */
+export type ItineraryLocationAfterArgs = {
+  parentType?: InputMaybe<ItineraryItemType>;
+  placeIds?: InputMaybe<Array<Scalars['ID']>>;
+  segmentIds?: InputMaybe<Array<Scalars['ID']>>;
+  type?: InputMaybe<ItineraryItemType>;
+};
+
+
+/** An itinerary item representing a location with an associated place in the itinerary */
+export type ItineraryLocationAncestorsArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  first: Scalars['Int'];
+  parentType?: InputMaybe<ItineraryItemType>;
+  placeIds?: InputMaybe<Array<Scalars['ID']>>;
+  segmentIds?: InputMaybe<Array<Scalars['ID']>>;
+  type?: InputMaybe<ItineraryItemType>;
+};
+
+
+/** An itinerary item representing a location with an associated place in the itinerary */
+export type ItineraryLocationAttrArgs = {
+  id: Scalars['ID'];
+  locale?: InputMaybe<Scalars['String']>;
+};
+
+
+/** An itinerary item representing a location with an associated place in the itinerary */
+export type ItineraryLocationAttrValueArgs = {
+  id: Scalars['ID'];
+  locale?: InputMaybe<Scalars['String']>;
+};
+
+
+/** An itinerary item representing a location with an associated place in the itinerary */
+export type ItineraryLocationAttrsArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  first: Scalars['Int'];
+  id?: InputMaybe<Scalars['ID']>;
+  includeNoLocale?: InputMaybe<Scalars['Boolean']>;
+  locale?: InputMaybe<Scalars['String']>;
+};
+
+
+/** An itinerary item representing a location with an associated place in the itinerary */
+export type ItineraryLocationBeforeArgs = {
+  parentType?: InputMaybe<ItineraryItemType>;
+  placeIds?: InputMaybe<Array<Scalars['ID']>>;
+  segmentIds?: InputMaybe<Array<Scalars['ID']>>;
+  type?: InputMaybe<ItineraryItemType>;
+};
+
+
+/** An itinerary item representing a location with an associated place in the itinerary */
+export type ItineraryLocationBoundsArgs = {
+  raw?: Scalars['Boolean'];
+};
+
+
+/** An itinerary item representing a location with an associated place in the itinerary */
+export type ItineraryLocationChildrenArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  first: Scalars['Int'];
+  parentType?: InputMaybe<ItineraryItemType>;
+  placeIds?: InputMaybe<Array<Scalars['ID']>>;
+  segmentIds?: InputMaybe<Array<Scalars['ID']>>;
+  type?: InputMaybe<ItineraryItemType>;
+};
+
+
+/** An itinerary item representing a location with an associated place in the itinerary */
+export type ItineraryLocationDescendantsArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  depthMax?: InputMaybe<Scalars['Int']>;
+  depthMin?: InputMaybe<Scalars['Int']>;
+  first: Scalars['Int'];
+  parentType?: InputMaybe<ItineraryItemType>;
+  placeIds?: InputMaybe<Array<Scalars['ID']>>;
+  segmentIds?: InputMaybe<Array<Scalars['ID']>>;
+  type?: InputMaybe<ItineraryItemType>;
+};
+
+
+/** An itinerary item representing a location with an associated place in the itinerary */
+export type ItineraryLocationDirectionsArgs = {
+  accuracy?: InputMaybe<ItineraryDirectionsAccuracy>;
+  after?: InputMaybe<Scalars['String']>;
+  direction?: InputMaybe<ItineraryDirectionsDirection>;
+  first: Scalars['Int'];
+  restrict?: InputMaybe<ItineraryDirectionsRestrict>;
+  segmentIds?: InputMaybe<Array<Scalars['ID']>>;
 };
 
 
@@ -3670,112 +4888,141 @@ export type ItineraryLocationMediaArgs = {
 
 
 /** An itinerary item representing a location with an associated place in the itinerary */
-export type ItineraryLocationBeforeArgs = {
-  type?: Maybe<ItineraryItemType>;
-  parentType?: Maybe<ItineraryItemType>;
-  placeIds?: Maybe<Array<Scalars['ID']>>;
-};
-
-
-/** An itinerary item representing a location with an associated place in the itinerary */
-export type ItineraryLocationAfterArgs = {
-  type?: Maybe<ItineraryItemType>;
-  parentType?: Maybe<ItineraryItemType>;
-  placeIds?: Maybe<Array<Scalars['ID']>>;
+export type ItineraryLocationMediaContainersArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  first: Scalars['Int'];
 };
 
 
 /** An itinerary item representing a location with an associated place in the itinerary */
 export type ItineraryLocationParentArgs = {
-  type?: Maybe<ItineraryItemType>;
-  parentType?: Maybe<ItineraryItemType>;
-  placeIds?: Maybe<Array<Scalars['ID']>>;
+  parentType?: InputMaybe<ItineraryItemType>;
+  placeIds?: InputMaybe<Array<Scalars['ID']>>;
+  segmentIds?: InputMaybe<Array<Scalars['ID']>>;
+  type?: InputMaybe<ItineraryItemType>;
 };
 
 
 /** An itinerary item representing a location with an associated place in the itinerary */
-export type ItineraryLocationAncestorsArgs = {
-  first: Scalars['Int'];
-  after?: Maybe<Scalars['String']>;
-  type?: Maybe<ItineraryItemType>;
-  parentType?: Maybe<ItineraryItemType>;
-  placeIds?: Maybe<Array<Scalars['ID']>>;
+export type ItineraryLocationSiblingPositionNumberArgs = {
+  skipOmitList?: Scalars['Boolean'];
+  skipOptional?: Scalars['Boolean'];
+  type?: InputMaybe<ItineraryItemType>;
 };
 
-
-/** An itinerary item representing a location with an associated place in the itinerary */
-export type ItineraryLocationDescendantsArgs = {
-  first: Scalars['Int'];
-  after?: Maybe<Scalars['String']>;
-  type?: Maybe<ItineraryItemType>;
-  parentType?: Maybe<ItineraryItemType>;
-  placeIds?: Maybe<Array<Scalars['ID']>>;
-  depthMax?: Maybe<Scalars['Int']>;
-  depthMin?: Maybe<Scalars['Int']>;
+/** Connection of ItinerarySearchs */
+export type ItinerarySearchConnection = {
+  __typename?: 'ItinerarySearchConnection';
+  /** All the edges in this page of the connection */
+  edges: Array<ItinerarySearchEdge>;
+  /** Shortcut for edges[].node */
+  nodes: Array<ItinerarySearchNode>;
+  /** Details regarding the current page of the connnection */
+  pageInfo: PageInfo;
+  /** The total number of items in the connection (in all pages) */
+  totalCount: Scalars['Int'];
 };
 
-
-/** An itinerary item representing a location with an associated place in the itinerary */
-export type ItineraryLocationChildrenArgs = {
-  first: Scalars['Int'];
-  after?: Maybe<Scalars['String']>;
-  type?: Maybe<ItineraryItemType>;
-  parentType?: Maybe<ItineraryItemType>;
-  placeIds?: Maybe<Array<Scalars['ID']>>;
+/** Edge containing a ItinerarySearch */
+export type ItinerarySearchEdge = {
+  __typename?: 'ItinerarySearchEdge';
+  /** The cursor string pointing to this item */
+  cursor: Scalars['String'];
+  /** The item */
+  node: ItinerarySearchNode;
 };
 
-
-/** An itinerary item representing a location with an associated place in the itinerary */
-export type ItineraryLocationAttrArgs = {
+/** A result from an itinerary search */
+export type ItinerarySearchNode = {
+  __typename?: 'ItinerarySearchNode';
+  /** Bounds for the itinerary item */
+  bounds?: Maybe<Bounds>;
+  /** The date when the itinerary was created */
+  created?: Maybe<Scalars['String']>;
+  /** The default locale of this itinerary's content */
+  defaultLocale?: Maybe<Scalars['String']>;
+  /** A longer text description */
+  description?: Maybe<Scalars['String']>;
+  /** Identifier from an external source this itinerary is associated with */
+  externalId?: Maybe<Scalars['ID']>;
+  /** The source of this itinerary's externalId */
+  externalSource?: Maybe<Scalars['ID']>;
+  /** The genres of this Itinerary */
+  genres?: Maybe<Array<Scalars['String']>>;
+  /** The Globally Unique ID of the itinerary. */
   id: Scalars['ID'];
-  locale?: Maybe<Scalars['String']>;
+  /** The full itinerary */
+  itinerary: Itinerary;
+  /** The date when the draft version was last modified */
+  lastDraft?: Maybe<Scalars['String']>;
+  /** The date when the itinerary was last published */
+  lastPublished?: Maybe<Scalars['String']>;
+  /** Whether this itinerary is publically listed */
+  listed?: Maybe<Scalars['Boolean']>;
+  /** The date when the itinerary was last modified */
+  modified?: Maybe<Scalars['String']>;
+  /** The preferred MediaContainer to use */
+  preferredMedia?: Maybe<MediaContainer>;
+  /** Profile that owns this itinerary */
+  profile?: Maybe<Profile>;
+  /** The date when this itinerary was last published. Will be null on draft versions */
+  published?: Maybe<Scalars['String']>;
+  /** A short text summary */
+  synopsis?: Maybe<Scalars['String']>;
+  /** A series of strings applied to label this item */
+  tags: Array<Scalars['String']>;
+  /** The supplied title */
+  title?: Maybe<Scalars['String']>;
+  /** Total number of ItineraryLocations inside this Itinerary */
+  totalLocations: Scalars['Int'];
+  /** The type of itinerary */
+  type?: Maybe<Scalars['String']>;
 };
 
 
-/** An itinerary item representing a location with an associated place in the itinerary */
-export type ItineraryLocationAttrValueArgs = {
-  id: Scalars['ID'];
-  locale?: Maybe<Scalars['String']>;
+/** A result from an itinerary search */
+export type ItinerarySearchNodeCreatedArgs = {
+  format?: InputMaybe<Scalars['String']>;
+  locale?: InputMaybe<Scalars['String']>;
+  relativeTo?: InputMaybe<Scalars['String']>;
+  timeZone?: InputMaybe<Scalars['String']>;
 };
 
 
-/** An itinerary item representing a location with an associated place in the itinerary */
-export type ItineraryLocationAttrsArgs = {
-  attrs: Array<AttributeIdentifierInput>;
+/** A result from an itinerary search */
+export type ItinerarySearchNodeLastDraftArgs = {
+  format?: InputMaybe<Scalars['String']>;
+  locale?: InputMaybe<Scalars['String']>;
+  relativeTo?: InputMaybe<Scalars['String']>;
+  timeZone?: InputMaybe<Scalars['String']>;
 };
 
 
-/** An itinerary item representing a location with an associated place in the itinerary */
-export type ItineraryLocationAttrsByIdArgs = {
-  first: Scalars['Int'];
-  after?: Maybe<Scalars['String']>;
-  id: Scalars['ID'];
-  locale?: Maybe<Scalars['String']>;
+/** A result from an itinerary search */
+export type ItinerarySearchNodeLastPublishedArgs = {
+  format?: InputMaybe<Scalars['String']>;
+  locale?: InputMaybe<Scalars['String']>;
+  relativeTo?: InputMaybe<Scalars['String']>;
+  timeZone?: InputMaybe<Scalars['String']>;
 };
 
 
-/** An itinerary item representing a location with an associated place in the itinerary */
-export type ItineraryLocationAllAttrsArgs = {
-  first: Scalars['Int'];
-  after?: Maybe<Scalars['String']>;
+/** A result from an itinerary search */
+export type ItinerarySearchNodeModifiedArgs = {
+  format?: InputMaybe<Scalars['String']>;
+  locale?: InputMaybe<Scalars['String']>;
+  relativeTo?: InputMaybe<Scalars['String']>;
+  timeZone?: InputMaybe<Scalars['String']>;
 };
 
 
-/** An itinerary item representing a location with an associated place in the itinerary */
-export type ItineraryLocationBoundsArgs = {
-  excludeDescendants?: Maybe<Scalars['Boolean']>;
+/** A result from an itinerary search */
+export type ItinerarySearchNodePublishedArgs = {
+  format?: InputMaybe<Scalars['String']>;
+  locale?: InputMaybe<Scalars['String']>;
+  relativeTo?: InputMaybe<Scalars['String']>;
+  timeZone?: InputMaybe<Scalars['String']>;
 };
-
-
-/** An itinerary item representing a location with an associated place in the itinerary */
-export type ItineraryLocationDirectionsArgs = {
-  first: Scalars['Int'];
-  after?: Maybe<Scalars['String']>;
-  direction?: Maybe<ItineraryDirectionsDirection>;
-  accuracy?: Maybe<ItineraryDirectionsAccuracy>;
-  restrict?: Maybe<ItineraryDirectionsRestrict>;
-};
-
 
 /** A container for a MediaResource */
 export type MediaContainer = {
@@ -3783,130 +5030,144 @@ export type MediaContainer = {
   /** Unique identifier for this container */
   id: Scalars['ID'];
   /** The MediaResource inside this container */
-  resource: MediaResource;
+  resource: MediaResourceEmbedded;
+};
+
+/** Connection of MediaContainers */
+export type MediaContainerConnection = {
+  __typename?: 'MediaContainerConnection';
+  /** All the edges in this page of the connection */
+  edges: Array<MediaContainerEdge>;
+  /** Shortcut for edges[].node */
+  nodes: Array<MediaContainer>;
+  /** Details regarding the current page of the connnection */
+  pageInfo: PageInfo;
+  /** The total number of items in the connection (in all pages) */
+  totalCount: Scalars['Int'];
+};
+
+/** Edge containing a MediaContainer */
+export type MediaContainerEdge = {
+  __typename?: 'MediaContainerEdge';
+  /** The cursor string pointing to this item */
+  cursor: Scalars['String'];
+  /** The item */
+  node: MediaContainer;
+};
+
+/** Set a singular MediaContainer */
+export type MediaContainerInput = {
+  /** ID to a MediaResource to contain */
+  resourceId: Scalars['String'];
 };
 
 /** Positions the MediaContainer after a sibling MediaContainer */
 export type MediaContainerPositionAfter = {
   /** The sibling MediaContainer identifier, if null it means the top of the list (ie. before the first sibling) */
-  id?: Maybe<Scalars['ID']>;
+  id?: InputMaybe<Scalars['ID']>;
 };
 
 /** Positions the MediaContainer at the end of the list */
 export type MediaContainerPositionAtEnd = {
   /** Ignored, required by GraphQL which does not allow empty input objects */
-  _?: Maybe<Scalars['Int']>;
+  _?: InputMaybe<Scalars['Int']>;
 };
 
 /** Positions the MediaContainer at the start of the list */
 export type MediaContainerPositionAtStart = {
   /** Ignored, required by GraphQL which does not allow empty input objects */
-  _?: Maybe<Scalars['Int']>;
+  _?: InputMaybe<Scalars['Int']>;
 };
 
 /** Positions the MediaContainer before a sibling MediaContainer */
 export type MediaContainerPositionBefore = {
   /** The sibling MediaContainer identifier, if null it means the bottom of the list (ie. after the last sibling) */
-  id?: Maybe<Scalars['ID']>;
+  id?: InputMaybe<Scalars['ID']>;
 };
 
 /** A MediaResource representing an image */
 export type MediaImage = MediaResource & {
   __typename?: 'MediaImage';
-  /** Unique identifier for the media-resource */
-  id?: Maybe<Scalars['ID']>;
-  /** The associated profile owner */
-  profile?: Maybe<Profile>;
-  /** The provider for the media */
-  provider: Scalars['String'];
-  /** Text caption for the media-resource */
-  caption?: Maybe<Scalars['String']>;
-  /** Text attribution for the source of the media-resource */
-  attribution?: Maybe<Scalars['String']>;
-  /** Copyright details of the media-resource */
-  copyright?: Maybe<Scalars['String']>;
   /** Alternative text for the media-resource */
   altText?: Maybe<Scalars['String']>;
-  /** A series of strings representing applied labels to the media */
-  tags: Array<Scalars['String']>;
   /** Arbitrary JSON value stored on this resource, keyed by an id */
   attr?: Maybe<Attribute>;
   /** Shortcut for the attr.value, returns null if the attribute doesn't exist */
   attrValue?: Maybe<Scalars['JSON']>;
-  /** Query multiple attributes by id and optionally locale */
-  attrs: Array<Maybe<Attribute>>;
-  /** Return all attributes on the resource */
-  allAttrs: AttributeConnection;
-  /** Query multiple attributes with the same id and optionally locale */
-  attrsById: AttributeConnection;
+  /** Text attribution for the source of the media-resource */
+  attribution?: Maybe<Scalars['String']>;
+  /** Query multiple attributes optionally filtering by id and/or locale */
+  attrs: AttributeConnection;
+  /** Text caption for the media-resource */
+  caption?: Maybe<Scalars['String']>;
+  /** Copyright details of the media-resource */
+  copyright?: Maybe<Scalars['String']>;
+  /** Look up one exif value in this media-image by id */
+  exif?: Maybe<MediaImageExif>;
+  /** Ids of all exif data in this media-image */
+  exifIds: Array<Scalars['ID']>;
+  /** Will be true if the resource has a caption, attribution or copyright */
+  hasContent: Scalars['Boolean'];
+  /** Unique identifier for the media-resource */
+  id?: Maybe<Scalars['ID']>;
   /** The original width and height of the image */
   originalSize?: Maybe<Array<Scalars['Int']>>;
-  /** Provides the URL of the media */
-  url?: Maybe<Scalars['String']>;
+  /** The associated profile owner */
+  profile?: Maybe<Profile>;
+  /** The provider for the media */
+  provider: Scalars['String'];
   /** Provides a specific source for the media, based often on different encoding or different sizing */
   source?: Maybe<MediaImageSource>;
   /** A collection of sources for the media */
   sources: Array<MediaImageSource>;
-  /** Ids of all exif data in this media-image */
-  exifIds: Array<Scalars['ID']>;
-  /** Look up one exif value in this media-image by id */
-  exif?: Maybe<MediaImageExif>;
+  /** A series of strings representing applied labels to the media */
+  tags: Array<Scalars['String']>;
+  /** Provides the URL of the media */
+  url?: Maybe<Scalars['String']>;
 };
 
 
 /** A MediaResource representing an image */
 export type MediaImageAttrArgs = {
   id: Scalars['ID'];
-  locale?: Maybe<Scalars['String']>;
+  locale?: InputMaybe<Scalars['String']>;
 };
 
 
 /** A MediaResource representing an image */
 export type MediaImageAttrValueArgs = {
   id: Scalars['ID'];
-  locale?: Maybe<Scalars['String']>;
+  locale?: InputMaybe<Scalars['String']>;
 };
 
 
 /** A MediaResource representing an image */
 export type MediaImageAttrsArgs = {
-  attrs: Array<AttributeIdentifierInput>;
-};
-
-
-/** A MediaResource representing an image */
-export type MediaImageAllAttrsArgs = {
+  after?: InputMaybe<Scalars['String']>;
   first: Scalars['Int'];
-  after?: Maybe<Scalars['String']>;
-};
-
-
-/** A MediaResource representing an image */
-export type MediaImageAttrsByIdArgs = {
-  first: Scalars['Int'];
-  after?: Maybe<Scalars['String']>;
-  id: Scalars['ID'];
-  locale?: Maybe<Scalars['String']>;
-};
-
-
-/** A MediaResource representing an image */
-export type MediaImageUrlArgs = {
-  id?: Maybe<Scalars['String']>;
-  bestFit?: Maybe<Array<Scalars['Int']>>;
-};
-
-
-/** A MediaResource representing an image */
-export type MediaImageSourceArgs = {
-  id?: Maybe<Scalars['String']>;
-  bestFit?: Maybe<Array<Scalars['Int']>>;
+  id?: InputMaybe<Scalars['ID']>;
+  includeNoLocale?: InputMaybe<Scalars['Boolean']>;
+  locale?: InputMaybe<Scalars['String']>;
 };
 
 
 /** A MediaResource representing an image */
 export type MediaImageExifArgs = {
   id: Scalars['ID'];
+};
+
+
+/** A MediaResource representing an image */
+export type MediaImageSourceArgs = {
+  bestFit?: InputMaybe<Array<Scalars['Int']>>;
+  id?: InputMaybe<Scalars['String']>;
+};
+
+
+/** A MediaResource representing an image */
+export type MediaImageUrlArgs = {
+  bestFit?: InputMaybe<Array<Scalars['Int']>>;
+  id?: InputMaybe<Scalars['String']>;
 };
 
 /** One exif datum on a media-image */
@@ -3921,6 +5182,8 @@ export type MediaImageExif = {
 /** An source for a media image */
 export type MediaImageSource = {
   __typename?: 'MediaImageSource';
+  /** The height of the media */
+  height?: Maybe<Scalars['Int']>;
   /** A optional identifier for the source */
   id?: Maybe<Scalars['String']>;
   /** The content-type of the media source */
@@ -3929,183 +5192,296 @@ export type MediaImageSource = {
   url: Scalars['String'];
   /** The width of the media */
   width?: Maybe<Scalars['Int']>;
-  /** The height of the media */
-  height?: Maybe<Scalars['Int']>;
 };
 
 /** Representing media such as images/photos as well as other types such as video or audio */
 export type MediaResource = {
+  /** Alternative text for the media-resource */
+  altText?: Maybe<Scalars['String']>;
+  /** Arbitrary JSON value stored on this resource, keyed by an id */
+  attr?: Maybe<Attribute>;
+  /** Shortcut for the attr.value, returns null if the attribute doesn't exist */
+  attrValue?: Maybe<Scalars['JSON']>;
+  /** Text attribution for the source of the media-resource */
+  attribution?: Maybe<Scalars['String']>;
+  /** Query multiple attributes optionally filtering by id and/or locale */
+  attrs: AttributeConnection;
+  /** Text caption for the media-resource */
+  caption?: Maybe<Scalars['String']>;
+  /** Copyright details of the media-resource */
+  copyright?: Maybe<Scalars['String']>;
+  /** Will be true if the resource has a caption, attribution or copyright */
+  hasContent: Scalars['Boolean'];
   /** Unique identifier for the media-resource */
   id?: Maybe<Scalars['ID']>;
   /** The associated profile owner */
   profile?: Maybe<Profile>;
   /** The provider for the media */
   provider: Scalars['String'];
-  /** Text caption for the media-resource */
-  caption?: Maybe<Scalars['String']>;
-  /** Text attribution for the source of the media-resource */
-  attribution?: Maybe<Scalars['String']>;
-  /** Copyright details of the media-resource */
-  copyright?: Maybe<Scalars['String']>;
-  /** Alternative text for the media-resource */
-  altText?: Maybe<Scalars['String']>;
   /** A series of strings representing applied labels to the media */
   tags: Array<Scalars['String']>;
-  /** Arbitrary JSON value stored on this resource, keyed by an id */
-  attr?: Maybe<Attribute>;
-  /** Shortcut for the attr.value, returns null if the attribute doesn't exist */
-  attrValue?: Maybe<Scalars['JSON']>;
-  /** Query multiple attributes by id and optionally locale */
-  attrs: Array<Maybe<Attribute>>;
-  /** Return all attributes on the resource */
-  allAttrs: AttributeConnection;
-  /** Query multiple attributes with the same id and optionally locale */
-  attrsById: AttributeConnection;
 };
 
 
 /** Representing media such as images/photos as well as other types such as video or audio */
 export type MediaResourceAttrArgs = {
   id: Scalars['ID'];
-  locale?: Maybe<Scalars['String']>;
+  locale?: InputMaybe<Scalars['String']>;
 };
 
 
 /** Representing media such as images/photos as well as other types such as video or audio */
 export type MediaResourceAttrValueArgs = {
   id: Scalars['ID'];
-  locale?: Maybe<Scalars['String']>;
+  locale?: InputMaybe<Scalars['String']>;
 };
 
 
 /** Representing media such as images/photos as well as other types such as video or audio */
 export type MediaResourceAttrsArgs = {
-  attrs: Array<AttributeIdentifierInput>;
+  after?: InputMaybe<Scalars['String']>;
+  first: Scalars['Int'];
+  id?: InputMaybe<Scalars['ID']>;
+  includeNoLocale?: InputMaybe<Scalars['Boolean']>;
+  locale?: InputMaybe<Scalars['String']>;
 };
 
+/** A MediaResource embedded in another resource */
+export type MediaResourceEmbedded = MediaImage | MediaResourceFailedToLoad;
 
-/** Representing media such as images/photos as well as other types such as video or audio */
-export type MediaResourceAllAttrsArgs = {
-  first: Scalars['Int'];
-  after?: Maybe<Scalars['String']>;
-};
-
-
-/** Representing media such as images/photos as well as other types such as video or audio */
-export type MediaResourceAttrsByIdArgs = {
-  first: Scalars['Int'];
-  after?: Maybe<Scalars['String']>;
+/** Represents an embedded MediaResource that failed to load */
+export type MediaResourceFailedToLoad = Node & {
+  __typename?: 'MediaResourceFailedToLoad';
+  /** The Globally Unique ID of the object. */
   id: Scalars['ID'];
-  locale?: Maybe<Scalars['String']>;
 };
 
 /** The status of a Media upload process */
 export enum MediaUploadStatus {
   AwaitingUpload = 'AwaitingUpload',
-  Processing = 'Processing',
   Complete = 'Complete',
+  Processing = 'Processing',
   ProcessingFailed = 'ProcessingFailed'
 }
 
 /** Moves the itinerary item */
 export type MoveItineraryItemPayload = {
   __typename?: 'MoveItineraryItemPayload';
+  /** Other changes to the itinerary that caused by moving the itinerary-item */
+  cascaded: ItineraryItemCascadedChanges;
   /** The fields for the item */
   item?: Maybe<ItineraryItem>;
   /** The modified itinerary */
   itinerary: Itinerary;
-  /** Other changes to the itinerary that caused by moving the itinerary-item */
-  cascaded: ItineraryItemCascadedChanges;
 };
 
 /** Move a MediaContainer within a list, exactly one of the position arguments is required. */
 export type MoveMediaContainerInput = {
   /** ID to the Container to update */
   id: Scalars['String'];
-  /** Move the MediaContainer before another container in the list */
-  positionBefore?: Maybe<MediaContainerPositionBefore>;
   /** Move the MediaContainer after another container in the list */
-  positionAfter?: Maybe<MediaContainerPositionAfter>;
-  /** Move the MediaContainer at the start of the list */
-  positionAtStart?: Maybe<MediaContainerPositionAtStart>;
+  positionAfter?: InputMaybe<MediaContainerPositionAfter>;
   /** Move the MediaContainer at the end of the list */
-  positionAtEnd?: Maybe<MediaContainerPositionAtEnd>;
+  positionAtEnd?: InputMaybe<MediaContainerPositionAtEnd>;
+  /** Move the MediaContainer at the start of the list */
+  positionAtStart?: InputMaybe<MediaContainerPositionAtStart>;
+  /** Move the MediaContainer before another container in the list */
+  positionBefore?: InputMaybe<MediaContainerPositionBefore>;
 };
 
 export type Mutation = {
   __typename?: 'Mutation';
+  /** Approve a follow request between two profiles */
+  approveProfileFollow: ApproveProfileFollowPayload;
+  /** Capture marketing information against the given profile */
+  captureMarketingInformation: CaptureMarketingInformationPayload;
+  /** Change the itinerary's default-locale as well the locale of attributes with the previous default-locale */
+  changeItineraryDefaultLocale: DuplicateItineraryPayload;
+  /** Claim an unclaimed handle for the given profile */
+  claimProfileHandle: ClaimProfileHandlePayload;
+  /** Create a billing checkout session */
+  createBillingCheckoutSession: CreateBillingCheckoutSessionOutput;
+  /** Create a billing portal session */
+  createBillingPortalSession: CreateBillingPortalSessionOutput;
   /** The return fields available after creating a collection */
   createCollection: CreateCollectionPayload;
-  /** Updates a collection */
-  updateCollection: UpdateCollectionPayload;
+  /** Create a new collection-location under the given collection */
+  createCollectionLocation: CreateCollectionLocationPayload;
+  /** The return fields available after creating a connected app */
+  createConnectedApp: CreateConnectedAppPayload;
+  /** Creates a new icon */
+  createIconSilhouette: CreateIconSilhouettePayload;
+  /** Create a new itinerary */
+  createItinerary: CreateItineraryPayload;
+  /** Create a new ItineraryCollection item inside the given itinerary */
+  createItineraryCollection: CreateItineraryCollectionPayload;
+  /** Create a new ItineraryDirections item inside the given itinerary */
+  createItineraryDirections: CreateItineraryDirectionsPayload;
+  /** Create a new ItineraryLocation item inside the given itinerary */
+  createItineraryLocation: CreateItineraryLocationPayload;
+  /** Creates a new profile with the given fields. Can only be called with a bearer token. */
+  createProfile: CreateProfilePayload;
+  /** The return fields available after creating a user agreement */
+  createUserAgreement: CreateUserAgreementPayload;
   /** Delete an collection */
   deleteCollection: DeleteCollectionPayload;
   /** The fields available after the collection is deleted */
   deleteCollectionItem: DeleteCollectionItemPayload;
-  /** Create a new collection-location under the given collection */
-  createCollectionLocation: CreateCollectionLocationPayload;
-  /** The fields avaialble after updating the collection location */
-  updateCollectionLocation: UpdateCollectionLocationPayload;
-  /** The return fields available after creating a connected app */
-  createConnectedApp: CreateConnectedAppPayload;
-  /** Update a connected app */
-  updateConnectedApp: UpdateConnectedAppPayload;
   /** Deleted a connected app */
   deleteConnectedApp: DeleteConnectedAppPayload;
-  /** Move an ItineraryItem */
-  moveItineraryItem: MoveItineraryItemPayload;
-  /** Delete an ItineraryItem */
-  deleteItineraryItem: DeleteItineraryItemPayload;
-  /** Create a new itinerary */
-  createItinerary: CreateItineraryPayload;
-  /** Updates a itinerary */
-  updateItinerary: UpdateItineraryPayload;
+  /** Delete an icon */
+  deleteIconResource: DeleteIconResourcePayload;
   /** Delete an itinerary */
   deleteItinerary: DeleteItineraryPayload;
-  /** Publish an itinerary making it publically accessible */
-  publishItinerary: PublishItineraryPayload;
-  /** Create a new ItineraryCollection item inside the given itinerary */
-  createItineraryCollection: CreateItineraryCollectionPayload;
-  /** Update an ItineraryCollection */
-  updateItineraryCollection: UpdateItineraryCollectionPayload;
-  /** Create a new ItineraryLocation item inside the given itinerary */
-  createItineraryLocation: CreateItineraryLocationPayload;
-  /** Update an ItineraryLocation */
-  updateItineraryLocation: UpdateItineraryLocationPayload;
-  /** Create a new ItineraryDirections item inside the given itinerary */
-  createItineraryDirections: CreateItineraryDirectionsPayload;
-  /** Update an ItineraryDirections */
-  updateItineraryDirections: UpdateItineraryDirectionsPayload;
-  /** Start a media upload */
-  startMediaUpload: StartMediaUploadPayload;
-  /** Finalize the media upload by creating a media-resource */
-  finalizeMediaUpload: FinalizeMediaUploadPayload;
-  /** Update a media resource with updated properties */
-  updateMediaResource: UpdateMediaResourcePayload;
-  /** Create a follow request between two profiles */
-  followProfile: FollowProfilePayload;
-  /** Remove the follow between two profiles */
-  unfollowProfile: UnfollowProfilePayload;
-  /** Approve a follow request between two profiles */
-  approveProfileFollow: ApproveProfileFollowPayload;
+  /** Delete an ItineraryItem */
+  deleteItineraryItem: DeleteItineraryItemPayload;
+  /** Delete a profile */
+  deleteProfile: DeleteProfilePayload;
   /** Deny a follow request between two profiles */
   denyProfileFollow: DenyProfileFollowPayload;
-  /** Claim an unclaimed handle for the given profile */
-  claimProfileHandle: ClaimProfileHandlePayload;
+  /** Duplicate an itinerary, creating copy with a new id */
+  duplicateItinerary: DuplicateItineraryPayload;
+  /** Finalize the media upload by creating a media-resource */
+  finalizeMediaUpload: FinalizeMediaUploadPayload;
+  /** Create a follow request between two profiles */
+  followProfile: FollowProfilePayload;
+  /** Move an ItineraryItem */
+  moveItineraryItem: MoveItineraryItemPayload;
+  /** Publish an itinerary making it publically accessible */
+  publishItinerary: PublishItineraryPayload;
+  /** Revert the draft version of an itinerary to last published version */
+  revertItinerary: PublishItineraryPayload;
+  /** Start a media upload */
+  startMediaUpload: StartMediaUploadPayload;
+  /** Remove the follow between two profiles */
+  unfollowProfile: UnfollowProfilePayload;
+  /** Update the billing details associated with a profile */
+  updateBillingDetails: UpdateBillingDetailsOutput;
+  /** Updates a collection */
+  updateCollection: UpdateCollectionPayload;
+  /** The fields avaialble after updating the collection location */
+  updateCollectionLocation: UpdateCollectionLocationPayload;
+  /** Update a connected app */
+  updateConnectedApp: UpdateConnectedAppPayload;
+  /** Updates a icon */
+  updateIconSilhouette: UpdateIconSilhouettePayload;
+  /** Updates a itinerary */
+  updateItinerary: UpdateItineraryPayload;
+  /** Update an ItineraryCollection */
+  updateItineraryCollection: UpdateItineraryCollectionPayload;
+  /** Update an ItineraryDirections */
+  updateItineraryDirections: UpdateItineraryDirectionsPayload;
+  /** Update an ItineraryLocation */
+  updateItineraryLocation: UpdateItineraryLocationPayload;
+  /** Update a media resource with updated properties */
+  updateMediaResource: UpdateMediaResourcePayload;
   /** Updates the specified profile with the given fields */
   updateProfile: UpdateProfilePayload;
 };
 
 
-export type MutationCreateCollectionArgs = {
-  profileId: Scalars['ID'];
-  collection: CreateCollectionInput;
+export type MutationApproveProfileFollowArgs = {
+  fromProfileId: Scalars['ID'];
+  toProfileId: Scalars['ID'];
 };
 
 
-export type MutationUpdateCollectionArgs = {
+export type MutationCaptureMarketingInformationArgs = {
+  intendedUses?: InputMaybe<Scalars['String']>;
+  leadSource?: InputMaybe<Scalars['String']>;
+  name?: InputMaybe<Scalars['String']>;
+  organizationType?: InputMaybe<Scalars['String']>;
+  profileId: Scalars['ID'];
+};
+
+
+export type MutationChangeItineraryDefaultLocaleArgs = {
+  defaultLocale: Scalars['String'];
   id: Scalars['ID'];
-  collection: UpdateCollectionInput;
+};
+
+
+export type MutationClaimProfileHandleArgs = {
+  handle: Scalars['String'];
+  id: Scalars['ID'];
+};
+
+
+export type MutationCreateBillingCheckoutSessionArgs = {
+  cancelUrl: Scalars['String'];
+  prices: Array<BillingPriceInput>;
+  profileId: Scalars['ID'];
+  successUrl: Scalars['String'];
+};
+
+
+export type MutationCreateBillingPortalSessionArgs = {
+  profileId: Scalars['ID'];
+  returnUrl: Scalars['String'];
+};
+
+
+export type MutationCreateCollectionArgs = {
+  collection: CreateCollectionInput;
+  profileId: Scalars['ID'];
+};
+
+
+export type MutationCreateCollectionLocationArgs = {
+  collectionId: Scalars['ID'];
+  location: CreateCollectionLocationInput;
+};
+
+
+export type MutationCreateConnectedAppArgs = {
+  connectedApp: CreateConnectedAppInput;
+  profileId: Scalars['ID'];
+};
+
+
+export type MutationCreateIconSilhouetteArgs = {
+  icon: CreateIconSilhouetteInput;
+  profileId: Scalars['ID'];
+};
+
+
+export type MutationCreateItineraryArgs = {
+  itinerary: CreateItineraryInput;
+  profileId?: InputMaybe<Scalars['ID']>;
+  publish?: Scalars['Boolean'];
+};
+
+
+export type MutationCreateItineraryCollectionArgs = {
+  collection: CreateItineraryCollectionInput;
+  itineraryId: Scalars['ID'];
+  publish?: Scalars['Boolean'];
+};
+
+
+export type MutationCreateItineraryDirectionsArgs = {
+  directions: CreateItineraryDirectionsInput;
+  itineraryId: Scalars['ID'];
+  publish?: Scalars['Boolean'];
+};
+
+
+export type MutationCreateItineraryLocationArgs = {
+  autoRoute?: InputMaybe<RouteSegmentInput>;
+  itineraryId: Scalars['ID'];
+  location: CreateItineraryLocationInput;
+  publish?: Scalars['Boolean'];
+};
+
+
+export type MutationCreateProfileArgs = {
+  profile: CreateProfileInput;
+};
+
+
+export type MutationCreateUserAgreementArgs = {
+  profileId?: InputMaybe<Scalars['ID']>;
+  userAgreement: CreateUserAgreementInput;
 };
 
 
@@ -4119,59 +5495,13 @@ export type MutationDeleteCollectionItemArgs = {
 };
 
 
-export type MutationCreateCollectionLocationArgs = {
-  collectionId: Scalars['ID'];
-  location: CreateCollectionLocationInput;
-};
-
-
-export type MutationUpdateCollectionLocationArgs = {
-  id: Scalars['ID'];
-  location: UpdateCollectionLocationInput;
-};
-
-
-export type MutationCreateConnectedAppArgs = {
-  profileId: Scalars['ID'];
-  connectedApp: CreateConnectedAppInput;
-};
-
-
-export type MutationUpdateConnectedAppArgs = {
-  id: Scalars['ID'];
-  connectedApp: UpdateConnectedAppInput;
-};
-
-
 export type MutationDeleteConnectedAppArgs = {
   id: Scalars['ID'];
 };
 
 
-export type MutationMoveItineraryItemArgs = {
+export type MutationDeleteIconResourceArgs = {
   id: Scalars['ID'];
-  positionAtStart?: Maybe<ItineraryItemPositionAtStart>;
-  positionAtEnd?: Maybe<ItineraryItemPositionAtEnd>;
-  positionAfterSibling?: Maybe<ItineraryItemPositionAfterSibling>;
-  positionBeforeSibling?: Maybe<ItineraryItemPositionBeforeSibling>;
-  positionOnLastCollection?: Maybe<ItineraryItemPositionOnLastCollection>;
-};
-
-
-export type MutationDeleteItineraryItemArgs = {
-  id: Scalars['ID'];
-};
-
-
-export type MutationCreateItineraryArgs = {
-  itinerary: CreateItineraryInput;
-  profileId?: Maybe<Scalars['ID']>;
-};
-
-
-export type MutationUpdateItineraryArgs = {
-  id: Scalars['ID'];
-  itinerary: UpdateItineraryInput;
 };
 
 
@@ -4180,82 +5510,14 @@ export type MutationDeleteItineraryArgs = {
 };
 
 
-export type MutationPublishItineraryArgs = {
+export type MutationDeleteItineraryItemArgs = {
   id: Scalars['ID'];
+  publish?: Scalars['Boolean'];
 };
 
 
-export type MutationCreateItineraryCollectionArgs = {
-  itineraryId: Scalars['ID'];
-  collection: CreateItineraryCollectionInput;
-};
-
-
-export type MutationUpdateItineraryCollectionArgs = {
+export type MutationDeleteProfileArgs = {
   id: Scalars['ID'];
-  collection: UpdateItineraryCollectionInput;
-};
-
-
-export type MutationCreateItineraryLocationArgs = {
-  itineraryId: Scalars['ID'];
-  location: CreateItineraryLocationInput;
-  autoRoute?: Maybe<RouteSegmentInput>;
-};
-
-
-export type MutationUpdateItineraryLocationArgs = {
-  id: Scalars['ID'];
-  location: UpdateItineraryLocationInput;
-};
-
-
-export type MutationCreateItineraryDirectionsArgs = {
-  itineraryId: Scalars['ID'];
-  directions: CreateItineraryDirectionsInput;
-};
-
-
-export type MutationUpdateItineraryDirectionsArgs = {
-  id: Scalars['ID'];
-  directions: UpdateItineraryDirectionsInput;
-};
-
-
-export type MutationStartMediaUploadArgs = {
-  filename: Scalars['String'];
-  contentType?: Maybe<Scalars['String']>;
-};
-
-
-export type MutationFinalizeMediaUploadArgs = {
-  token: Scalars['String'];
-  profileId?: Maybe<Scalars['ID']>;
-  resource?: Maybe<FinalizeMediaUploadInput>;
-};
-
-
-export type MutationUpdateMediaResourceArgs = {
-  id: Scalars['ID'];
-  resource: UpdateMediaResourceInput;
-};
-
-
-export type MutationFollowProfileArgs = {
-  fromProfileId: Scalars['ID'];
-  toProfileId: Scalars['ID'];
-};
-
-
-export type MutationUnfollowProfileArgs = {
-  fromProfileId: Scalars['ID'];
-  toProfileId: Scalars['ID'];
-};
-
-
-export type MutationApproveProfileFollowArgs = {
-  fromProfileId: Scalars['ID'];
-  toProfileId: Scalars['ID'];
 };
 
 
@@ -4265,9 +5527,118 @@ export type MutationDenyProfileFollowArgs = {
 };
 
 
-export type MutationClaimProfileHandleArgs = {
+export type MutationDuplicateItineraryArgs = {
   id: Scalars['ID'];
-  handle: Scalars['String'];
+};
+
+
+export type MutationFinalizeMediaUploadArgs = {
+  profileId?: InputMaybe<Scalars['ID']>;
+  resource?: InputMaybe<FinalizeMediaUploadInput>;
+  token: Scalars['String'];
+};
+
+
+export type MutationFollowProfileArgs = {
+  fromProfileId: Scalars['ID'];
+  toProfileId: Scalars['ID'];
+};
+
+
+export type MutationMoveItineraryItemArgs = {
+  id: Scalars['ID'];
+  positionAfterSibling?: InputMaybe<ItineraryItemPositionAfterSibling>;
+  positionAtEnd?: InputMaybe<ItineraryItemPositionAtEnd>;
+  positionAtStart?: InputMaybe<ItineraryItemPositionAtStart>;
+  positionBeforeSibling?: InputMaybe<ItineraryItemPositionBeforeSibling>;
+  positionOnLastCollection?: InputMaybe<ItineraryItemPositionOnLastCollection>;
+  publish?: Scalars['Boolean'];
+};
+
+
+export type MutationPublishItineraryArgs = {
+  id: Scalars['ID'];
+};
+
+
+export type MutationRevertItineraryArgs = {
+  id: Scalars['ID'];
+};
+
+
+export type MutationStartMediaUploadArgs = {
+  contentType?: InputMaybe<Scalars['String']>;
+  filename: Scalars['String'];
+};
+
+
+export type MutationUnfollowProfileArgs = {
+  fromProfileId: Scalars['ID'];
+  toProfileId: Scalars['ID'];
+};
+
+
+export type MutationUpdateBillingDetailsArgs = {
+  billingDetails: UpdateBillingDetailsInput;
+  profileId: Scalars['ID'];
+};
+
+
+export type MutationUpdateCollectionArgs = {
+  collection: UpdateCollectionInput;
+  id: Scalars['ID'];
+};
+
+
+export type MutationUpdateCollectionLocationArgs = {
+  id: Scalars['ID'];
+  location: UpdateCollectionLocationInput;
+};
+
+
+export type MutationUpdateConnectedAppArgs = {
+  connectedApp: UpdateConnectedAppInput;
+  id: Scalars['ID'];
+};
+
+
+export type MutationUpdateIconSilhouetteArgs = {
+  icon: UpdateIconSilhouetteInput;
+  id: Scalars['ID'];
+};
+
+
+export type MutationUpdateItineraryArgs = {
+  id: Scalars['ID'];
+  itinerary: UpdateItineraryInput;
+  publish?: Scalars['Boolean'];
+};
+
+
+export type MutationUpdateItineraryCollectionArgs = {
+  collection: UpdateItineraryCollectionInput;
+  id: Scalars['ID'];
+  publish?: Scalars['Boolean'];
+};
+
+
+export type MutationUpdateItineraryDirectionsArgs = {
+  directions: UpdateItineraryDirectionsInput;
+  id: Scalars['ID'];
+  publish?: Scalars['Boolean'];
+};
+
+
+export type MutationUpdateItineraryLocationArgs = {
+  id: Scalars['ID'];
+  location: UpdateItineraryLocationInput;
+  publish?: Scalars['Boolean'];
+};
+
+
+export type MutationUpdateMediaResourceArgs = {
+  id: Scalars['ID'];
+  resource: UpdateMediaResourceInput;
 };
 
 
@@ -4285,115 +5656,111 @@ export type Node = {
 /** Details regarding a page in a connnection */
 export type PageInfo = {
   __typename?: 'PageInfo';
-  /** True if there is a page before this one */
-  hasPreviousPage: Scalars['Boolean'];
-  /** True if there is a page after this one */
-  hasNextPage: Scalars['Boolean'];
-  /** The cursor of the first edge in this page */
-  startCursor?: Maybe<Scalars['String']>;
   /** The cursor of the last edge in this page */
   endCursor?: Maybe<Scalars['String']>;
+  /** True if there is a page after this one */
+  hasNextPage: Scalars['Boolean'];
+  /** True if there is a page before this one */
+  hasPreviousPage: Scalars['Boolean'];
+  /** The cursor of the first edge in this page */
+  startCursor?: Maybe<Scalars['String']>;
 };
 
 /** A defined location in the world */
 export type Place = Node & {
   __typename?: 'Place';
-  /** The Globally Unique ID of the object. */
-  id: Scalars['ID'];
-  /** If non-null, an error occured while resolving this place and only a subset of data will be accessible */
-  resolutionError?: Maybe<PlaceResolutionError>;
-  /** Alias for `Place.name` */
-  title?: Maybe<Scalars['String']>;
-  /** The name of the place */
-  name?: Maybe<Scalars['String']>;
-  /** A short summary */
-  synopsis?: Maybe<Scalars['String']>;
-  /** A longer description */
-  description?: Maybe<Scalars['String']>;
-  /** A collection of strings used to label this place */
-  tags: Array<Scalars['String']>;
   /** The address of the place */
   address: PlaceAddress;
-  /** The position of the place */
-  position: Position;
-  /** The bounding box around the place */
-  bounds?: Maybe<Bounds>;
-  /** The operating hours for this place, as encoded in OpenStreetMap hours specification */
-  hours?: Maybe<PlaceHours>;
-  /** The maki icon for this place */
-  maki?: Maybe<Scalars['String']>;
-  /** Source of the place data */
-  contributor?: Maybe<Scalars['String']>;
   /** Arbitrary JSON value stored on this resource, keyed by an id */
   attr?: Maybe<Attribute>;
   /** Shortcut for the attr.value, returns null if the attribute doesn't exist */
   attrValue?: Maybe<Scalars['JSON']>;
-  /** Query multiple attributes by id and optionally locale */
-  attrs: Array<Maybe<Attribute>>;
-  /** Return all attributes on the resource */
-  allAttrs: AttributeConnection;
-  /** Query multiple attributes with the same id and optionally locale */
-  attrsById: AttributeConnection;
   /** The required attribution required when using this place information */
   attribution: Array<PlaceAttribution>;
+  /** Query multiple attributes optionally filtering by id and/or locale */
+  attrs: AttributeConnection;
+  /** The bounding box around the place */
+  bounds?: Maybe<Bounds>;
   /** Contact information supplied for this place */
   contact: PlaceContact;
+  /** Source of the place data */
+  contributor?: Maybe<Scalars['String']>;
+  /** A longer description */
+  description?: Maybe<Scalars['String']>;
+  /** The operating hours for this place, as encoded in OpenStreetMap hours specification */
+  hours?: Maybe<PlaceHours>;
+  /** The Globally Unique ID of the object. */
+  id: Scalars['ID'];
   /** Layers associated to this place */
   layers: Array<PlaceLayer>;
-  /** List of MediaContainers supplied with the place information, such as images of the places */
+  /** The maki icon for this place */
+  maki?: Maybe<Scalars['String']>;
+  /**
+   * List of MediaContainers supplied with the place information, such as images of the places
+   * @deprecated use mediaContainers instead
+   */
   media: Array<MediaContainer>;
+  /** List of MediaContainers supplied with the place information, such as images of the places */
+  mediaContainers: MediaContainerConnection;
+  /** The name of the place */
+  name?: Maybe<Scalars['String']>;
+  /** A url displaying how to navigate to this place */
+  navigationUrl: Scalars['String'];
+  /** The position of the place */
+  position: Position;
   /** The preferred MediaContainer to use */
   preferredMedia?: Maybe<MediaContainer>;
   /** Alias for the read-more attribute */
   readMoreUrl?: Maybe<Scalars['String']>;
-  /** Alias for the website-url attribute */
-  websiteUrl?: Maybe<Scalars['String']>;
-  /** A url displaying how to navigate to this place */
-  navigationUrl: Scalars['String'];
+  /** If non-null, an error occured while resolving this place and only a subset of data will be accessible */
+  resolutionError?: Maybe<ResolutionError>;
+  /** A short summary */
+  synopsis?: Maybe<Scalars['String']>;
+  /** A collection of strings used to label this place */
+  tags: Array<Scalars['String']>;
+  /** Alias for `Place.name` */
+  title?: Maybe<Scalars['String']>;
   /** Calculate distance and bearing information from the specified positions to this place */
   towards: Array<PlaceTowards>;
+  /** Alias for the website-url attribute */
+  websiteUrl?: Maybe<Scalars['String']>;
 };
 
 
 /** A defined location in the world */
 export type PlaceAttrArgs = {
   id: Scalars['ID'];
-  locale?: Maybe<Scalars['String']>;
+  locale?: InputMaybe<Scalars['String']>;
 };
 
 
 /** A defined location in the world */
 export type PlaceAttrValueArgs = {
   id: Scalars['ID'];
-  locale?: Maybe<Scalars['String']>;
+  locale?: InputMaybe<Scalars['String']>;
 };
 
 
 /** A defined location in the world */
 export type PlaceAttrsArgs = {
-  attrs: Array<AttributeIdentifierInput>;
-};
-
-
-/** A defined location in the world */
-export type PlaceAllAttrsArgs = {
+  after?: InputMaybe<Scalars['String']>;
   first: Scalars['Int'];
-  after?: Maybe<Scalars['String']>;
-};
-
-
-/** A defined location in the world */
-export type PlaceAttrsByIdArgs = {
-  first: Scalars['Int'];
-  after?: Maybe<Scalars['String']>;
-  id: Scalars['ID'];
-  locale?: Maybe<Scalars['String']>;
+  id?: InputMaybe<Scalars['ID']>;
+  includeNoLocale?: InputMaybe<Scalars['Boolean']>;
+  locale?: InputMaybe<Scalars['String']>;
 };
 
 
 /** A defined location in the world */
 export type PlaceMediaArgs = {
   limit?: Scalars['Int'];
+};
+
+
+/** A defined location in the world */
+export type PlaceMediaContainersArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  first: Scalars['Int'];
 };
 
 
@@ -4428,92 +5795,92 @@ export type PlaceAddress = {
 /** Describes the attribution requirements associated with the place. */
 export type PlaceAttribution = {
   __typename?: 'PlaceAttribution';
-  /** Text Attribution required for this place */
-  text?: Maybe<Scalars['String']>;
-  /** A link required for this place */
-  link?: Maybe<Scalars['String']>;
   /** Specific licensing information for this place if known */
   license?: Maybe<Scalars['String']>;
+  /** A link required for this place */
+  link?: Maybe<Scalars['String']>;
+  /** Any media to be used in attribution, such as watermarks */
+  mediaResource?: Maybe<MediaResourceEmbedded>;
   /** The required tracking pixel */
   pixel?: Maybe<Scalars['String']>;
-  /** Any media to be used in attribution, such as watermarks */
-  mediaResource?: Maybe<MediaResource>;
+  /** Text Attribution required for this place */
+  text?: Maybe<Scalars['String']>;
 };
 
 /** Contact information for a Place */
 export type PlaceContact = {
   __typename?: 'PlaceContact';
-  /** Contact website for this place */
-  websiteUrl?: Maybe<Scalars['String']>;
-  /** Phone number for this place */
-  phoneNumber?: Maybe<Scalars['String']>;
+  /** Booking url for this place */
+  bookingUrl?: Maybe<Scalars['String']>;
   /** Email address for this place */
   emailAddress?: Maybe<Scalars['String']>;
-  /** Bookings url for this place */
-  bookingsUrl?: Maybe<Scalars['String']>;
   /** Facebook page for this place */
   facebookUrl?: Maybe<Scalars['String']>;
-  /** Twitter for this place */
-  twitterUrl?: Maybe<Scalars['String']>;
   /** Instagram for this place */
   instagramUrl?: Maybe<Scalars['String']>;
+  /** Phone number for this place */
+  phoneNumber?: Maybe<Scalars['String']>;
+  /** Twitter for this place */
+  twitterUrl?: Maybe<Scalars['String']>;
+  /** Contact website for this place */
+  websiteUrl?: Maybe<Scalars['String']>;
 };
 
 /** The opening hours for a place */
 export type PlaceHours = {
   __typename?: 'PlaceHours';
-  /**
-   * The opening hours formatted in the OpenStreetMap opening_hours tag format.
-   *
-   * See: <https://wiki.openstreetmap.org/wiki/Key:opening_hours/specification>
-   */
-  osmTag: Scalars['String'];
-  /** Whether or not the hours are the same each week. */
-  weekStable: Scalars['Boolean'];
-  /** Look up the open/closed status of the place for the current time or a given datetime. */
-  status: PlaceHoursStatus;
   /** Look up the place hours comment (if any) for the current time or a given datetime. */
   comment?: Maybe<Scalars['String']>;
-  /** Look up intervals where the opening hours status/comment for the place changes */
-  intervals: PlaceHoursIntervalConnection;
   /**
    * Look up the opening hours for a specific day. Days are calculated according to the local time of the place.
    *
    * Will return a maximum of 90 days.
    */
   forDays: Array<PlaceHoursForDay>;
-};
-
-
-/** The opening hours for a place */
-export type PlaceHoursStatusArgs = {
-  datetime?: Maybe<Scalars['String']>;
+  /** Look up intervals where the opening hours status/comment for the place changes */
+  intervals: PlaceHoursIntervalConnection;
+  /**
+   * The opening hours formatted in the OpenStreetMap opening_hours tag format.
+   *
+   * See: <https://wiki.openstreetmap.org/wiki/Key:opening_hours/specification>
+   */
+  osmTag: Scalars['String'];
+  /** Look up the open/closed status of the place for the current time or a given datetime. */
+  status: PlaceHoursStatus;
+  /** Whether or not the hours are the same each week. */
+  weekStable: Scalars['Boolean'];
 };
 
 
 /** The opening hours for a place */
 export type PlaceHoursCommentArgs = {
-  datetime?: Maybe<Scalars['String']>;
-};
-
-
-/** The opening hours for a place */
-export type PlaceHoursIntervalsArgs = {
-  first: Scalars['Int'];
-  after?: Maybe<Scalars['String']>;
-  from?: Maybe<Scalars['String']>;
-  to?: Maybe<Scalars['String']>;
-  offset?: Maybe<DatetimeOffset>;
-  status?: Maybe<PlaceHoursStatus>;
+  datetime?: InputMaybe<Scalars['String']>;
 };
 
 
 /** The opening hours for a place */
 export type PlaceHoursForDaysArgs = {
-  days?: Maybe<Array<Scalars['String']>>;
-  from?: Maybe<Scalars['String']>;
-  to?: Maybe<Scalars['String']>;
-  offset?: Maybe<DatetimeOffset>;
+  days?: InputMaybe<Array<Scalars['String']>>;
+  from?: InputMaybe<Scalars['String']>;
+  offset?: InputMaybe<DatetimeOffset>;
+  to?: InputMaybe<Scalars['String']>;
+};
+
+
+/** The opening hours for a place */
+export type PlaceHoursIntervalsArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  first: Scalars['Int'];
+  from?: InputMaybe<Scalars['String']>;
+  offset?: InputMaybe<DatetimeOffset>;
+  status?: InputMaybe<PlaceHoursStatus>;
+  to?: InputMaybe<Scalars['String']>;
+};
+
+
+/** The opening hours for a place */
+export type PlaceHoursStatusArgs = {
+  datetime?: InputMaybe<Scalars['String']>;
 };
 
 /** The opening hour for a place on a specific day */
@@ -4533,53 +5900,53 @@ export type PlaceHoursForDay = {
 
 /** The opening hour for a place on a specific day */
 export type PlaceHoursForDayDateArgs = {
-  format?: Maybe<Scalars['String']>;
-  relativeTo?: Maybe<Scalars['String']>;
-  timeZone?: Maybe<Scalars['String']>;
-  locale?: Maybe<Scalars['String']>;
+  format?: InputMaybe<Scalars['String']>;
+  locale?: InputMaybe<Scalars['String']>;
+  relativeTo?: InputMaybe<Scalars['String']>;
+  timeZone?: InputMaybe<Scalars['String']>;
 };
 
 
 /** The opening hour for a place on a specific day */
 export type PlaceHoursForDayIntervalsArgs = {
-  status?: Maybe<PlaceHoursStatus>;
+  status?: InputMaybe<PlaceHoursStatus>;
 };
 
 /** The opening hours for a place during the interval between two datetimes */
 export type PlaceHoursInterval = {
   __typename?: 'PlaceHoursInterval';
-  /** The starting datetime of this interval */
-  from: Scalars['String'];
-  /** The ending datetime of this interval, will be null if there is no following interval and the status/comment will no longer change */
-  to?: Maybe<Scalars['String']>;
-  /** The open/closed status of the place during this interval */
-  status: PlaceHoursStatus;
   /** The place hours comment (if any) during this interval */
   comment?: Maybe<Scalars['String']>;
+  /** The starting datetime of this interval */
+  from: Scalars['String'];
   /**
    * The holidays that occur during this interval
    *
    * Note: Will return holidays up to a maximum of one year from the "from" date
    */
   publicHolidays: Array<PlaceHoursIntervalHoliday>;
+  /** The open/closed status of the place during this interval */
+  status: PlaceHoursStatus;
+  /** The ending datetime of this interval, will be null if there is no following interval and the status/comment will no longer change */
+  to?: Maybe<Scalars['String']>;
 };
 
 
 /** The opening hours for a place during the interval between two datetimes */
 export type PlaceHoursIntervalFromArgs = {
-  format?: Maybe<Scalars['String']>;
-  relativeTo?: Maybe<Scalars['String']>;
-  timeZone?: Maybe<Scalars['String']>;
-  locale?: Maybe<Scalars['String']>;
+  format?: InputMaybe<Scalars['String']>;
+  locale?: InputMaybe<Scalars['String']>;
+  relativeTo?: InputMaybe<Scalars['String']>;
+  timeZone?: InputMaybe<Scalars['String']>;
 };
 
 
 /** The opening hours for a place during the interval between two datetimes */
 export type PlaceHoursIntervalToArgs = {
-  format?: Maybe<Scalars['String']>;
-  relativeTo?: Maybe<Scalars['String']>;
-  timeZone?: Maybe<Scalars['String']>;
-  locale?: Maybe<Scalars['String']>;
+  format?: InputMaybe<Scalars['String']>;
+  locale?: InputMaybe<Scalars['String']>;
+  relativeTo?: InputMaybe<Scalars['String']>;
+  timeZone?: InputMaybe<Scalars['String']>;
 };
 
 /** Connection of PlaceHoursIntervals */
@@ -4617,23 +5984,23 @@ export type PlaceHoursIntervalHoliday = {
 
 /** A holiday that occurs during an interval */
 export type PlaceHoursIntervalHolidayDateArgs = {
-  format?: Maybe<Scalars['String']>;
-  relativeTo?: Maybe<Scalars['String']>;
-  timeZone?: Maybe<Scalars['String']>;
-  locale?: Maybe<Scalars['String']>;
+  format?: InputMaybe<Scalars['String']>;
+  locale?: InputMaybe<Scalars['String']>;
+  relativeTo?: InputMaybe<Scalars['String']>;
+  timeZone?: InputMaybe<Scalars['String']>;
 };
 
 /** Whether a place is open/closed or if the status is unknown */
 export enum PlaceHoursStatus {
-  Open = 'Open',
   Closed = 'Closed',
+  Open = 'Open',
   Unknown = 'Unknown'
 }
 
 /** Create a new place or refer to an existing place */
 export type PlaceInput = {
   /** Unique place identifier */
-  id?: Maybe<Scalars['ID']>;
+  id?: InputMaybe<Scalars['ID']>;
   /** The position of the place */
   position: PositionInput;
 };
@@ -4649,16 +6016,9 @@ export type PlaceLayer = {
 
 /** Navigation service provider */
 export enum PlaceNavigationUrlProvider {
-  Google = 'Google',
-  Apple = 'Apple'
+  Apple = 'Apple',
+  Google = 'Google'
 }
-
-/** Error which occured while resolving a Place ID */
-export type PlaceResolutionError = {
-  __typename?: 'PlaceResolutionError';
-  /** Human readable error message */
-  message: Scalars['String'];
-};
 
 /** Connection of PlaceSearchs */
 export type PlaceSearchConnection = {
@@ -4676,65 +6036,65 @@ export type PlaceSearchEdge = {
   __typename?: 'PlaceSearchEdge';
   /** The cursor string pointing to this item */
   cursor: Scalars['String'];
-  /** The item */
-  node: PlaceSearchNode;
-  /** The one line text search result */
-  single: TextSearchResult;
   /** The main line of the two line search result */
   main: TextSearchResult;
+  /** The item */
+  node: PlaceSearchNode;
   /** The secondary line of the two line search result */
   secondary: TextSearchResult;
+  /** The one line text search result */
+  single: TextSearchResult;
 };
 
 /** A result from a place search */
 export type PlaceSearchNode = {
   __typename?: 'PlaceSearchNode';
-  /** The Globally Unique ID of the place. */
-  id: Scalars['ID'];
-  /** The position of the place */
-  position: Position;
-  /** Alias for `Place.name` */
-  title?: Maybe<Scalars['String']>;
-  /** The name of the place */
-  name?: Maybe<Scalars['String']>;
-  /** A short summary */
-  synopsis?: Maybe<Scalars['String']>;
-  /** A longer description */
-  description?: Maybe<Scalars['String']>;
   /** The address of the place */
   address: PlaceAddress;
-  /** The maki icon for this place */
-  maki?: Maybe<Scalars['String']>;
-  /** Layers associated to this place */
-  layers: Array<PlaceLayer>;
   /** Source of the place data */
   contributor?: Maybe<Scalars['String']>;
+  /** A longer description */
+  description?: Maybe<Scalars['String']>;
+  /** The Globally Unique ID of the place. */
+  id: Scalars['ID'];
+  /** Layers associated to this place */
+  layers: Array<PlaceLayer>;
+  /** The maki icon for this place */
+  maki?: Maybe<Scalars['String']>;
+  /** The name of the place */
+  name?: Maybe<Scalars['String']>;
+  /** The position of the place */
+  position: Position;
+  /** A short summary */
+  synopsis?: Maybe<Scalars['String']>;
+  /** Alias for `Place.name` */
+  title?: Maybe<Scalars['String']>;
 };
 
 /** Where to search for place information */
 export enum PlaceSearchSource {
-  OpenStreetMap = 'OpenStreetMap',
-  Facebook = 'Facebook',
-  OpenAddresses = 'OpenAddresses',
-  Geonames = 'Geonames',
-  Yelp = 'Yelp',
   AustralianTourismDataWarehouse = 'AustralianTourismDataWarehouse',
-  Zomato = 'Zomato',
+  Facebook = 'Facebook',
+  Geonames = 'Geonames',
+  OpenAddresses = 'OpenAddresses',
+  OpenStreetMap = 'OpenStreetMap',
   TripAdvisor = 'TripAdvisor',
-  WhosOnFirst = 'WhosOnFirst'
+  WhosOnFirst = 'WhosOnFirst',
+  Yelp = 'Yelp',
+  Zomato = 'Zomato'
 }
 
 /** Place bearing and distance information towards point */
 export type PlaceTowards = {
   __typename?: 'PlaceTowards';
-  /** The point */
-  position: Position;
   /** The bearing angle from the place to the point */
   bearing: Scalars['Float'];
-  /** The distance from the place to the point */
-  distance: Scalars['Float'];
   /** Compass point towards given point */
   compass: CompassPoint;
+  /** The distance from the place to the point */
+  distance: Scalars['Float'];
+  /** The point */
+  position: Position;
 };
 
 
@@ -4752,113 +6112,154 @@ export type PlaceTowardsDistanceArgs = {
 /** A position on a map with a longitude and latitude */
 export type Position = {
   __typename?: 'Position';
-  /** The position in the form: [longitude, latitude] */
-  lonLat: Array<Scalars['Float']>;
-  /** The position in the form: [latitude, longitude] */
-  latLon: Array<Scalars['Float']>;
-  /** The position's latitude */
-  lat: Scalars['Float'];
-  /** The position's longitude */
-  lon: Scalars['Float'];
-  /** Identifier for the Position type useful for client-side caching */
-  id: Scalars['ID'];
-  /** PlaceLayers associated to this position */
-  layers: Array<PlaceLayer>;
   /** Arbitrary JSON value stored on this resource, keyed by an id */
   attr?: Maybe<Attribute>;
   /** Shortcut for the attr.value, returns null if the attribute doesn't exist */
   attrValue?: Maybe<Scalars['JSON']>;
-  /** Query multiple attributes by id and optionally locale */
-  attrs: Array<Maybe<Attribute>>;
-  /** Return all attributes on the resource */
-  allAttrs: AttributeConnection;
-  /** Query multiple attributes with the same id and optionally locale */
-  attrsById: AttributeConnection;
+  /** Query multiple attributes optionally filtering by id and/or locale */
+  attrs: AttributeConnection;
+  /** Identifier for the Position type useful for client-side caching */
+  id: Scalars['ID'];
+  /** The position's latitude */
+  lat: Scalars['Float'];
+  /** The position in the form: [latitude, longitude] */
+  latLon: Array<Scalars['Float']>;
+  /** PlaceLayers associated to this position */
+  layers: Array<PlaceLayer>;
+  /** The position's longitude */
+  lon: Scalars['Float'];
+  /** The position in the form: [longitude, latitude] */
+  lonLat: Array<Scalars['Float']>;
 };
 
 
 /** A position on a map with a longitude and latitude */
 export type PositionAttrArgs = {
   id: Scalars['ID'];
-  locale?: Maybe<Scalars['String']>;
+  locale?: InputMaybe<Scalars['String']>;
 };
 
 
 /** A position on a map with a longitude and latitude */
 export type PositionAttrValueArgs = {
   id: Scalars['ID'];
-  locale?: Maybe<Scalars['String']>;
+  locale?: InputMaybe<Scalars['String']>;
 };
 
 
 /** A position on a map with a longitude and latitude */
 export type PositionAttrsArgs = {
-  attrs: Array<AttributeIdentifierInput>;
-};
-
-
-/** A position on a map with a longitude and latitude */
-export type PositionAllAttrsArgs = {
+  after?: InputMaybe<Scalars['String']>;
   first: Scalars['Int'];
-  after?: Maybe<Scalars['String']>;
-};
-
-
-/** A position on a map with a longitude and latitude */
-export type PositionAttrsByIdArgs = {
-  first: Scalars['Int'];
-  after?: Maybe<Scalars['String']>;
-  id: Scalars['ID'];
-  locale?: Maybe<Scalars['String']>;
+  id?: InputMaybe<Scalars['ID']>;
+  includeNoLocale?: InputMaybe<Scalars['Boolean']>;
+  locale?: InputMaybe<Scalars['String']>;
 };
 
 /** A position on a map with a longitude and latitude */
 export type PositionInput = {
-  /** The longitude */
-  lon: Scalars['Float'];
   /** The latitude */
   lat: Scalars['Float'];
+  /** The longitude */
+  lon: Scalars['Float'];
 };
 
 /** Profile */
 export type Profile = Node & {
   __typename?: 'Profile';
+  /** Arbitrary JSON value stored on this resource, keyed by an id */
+  attr?: Maybe<Attribute>;
+  /** Shortcut for the attr.value, returns null if the attribute doesn't exist */
+  attrValue?: Maybe<Scalars['JSON']>;
+  /** Query multiple attributes optionally filtering by id and/or locale */
+  attrs: AttributeConnection;
+  /** Indicates if follows on this profile are automatically approved */
+  autoApproveFollows: Scalars['Boolean'];
+  /** The avatar */
+  avatar?: Maybe<MediaContainer>;
+  /** Fetch billing details associated with this profile */
+  billingDetails?: Maybe<BillingDetails>;
+  /** Fetch billing subscriptions associated with a profile */
+  billingSubscriptions: BillingSubscriptionConnection;
+  /** A short biography */
+  bio?: Maybe<Scalars['String']>;
+  /** Fetch connected-apps associated with this profile */
+  connectedApps: ConnectedAppConnection;
+  /** Profiles that follow this profile */
+  followers: ProfileFollowConnection;
+  /** Profiles that this profile follows */
+  following: ProfileFollowConnection;
+  /** The (optional) unique handle of the profile */
+  handle?: Maybe<Scalars['String']>;
   /** The Globally Unique ID of the object. */
   id: Scalars['ID'];
   /** The name of the profile */
   name: Scalars['String'];
   /** The type of the profile */
   type: ProfileType;
-  /** Indicates if follows on this profile are automatically approved */
-  autoApproveFollows: Scalars['Boolean'];
-  /** The (optional) unique handle of the profile */
-  handle?: Maybe<Scalars['String']>;
-  /** A short biography */
-  bio?: Maybe<Scalars['String']>;
   /** The Website URL */
   websiteUrl?: Maybe<Scalars['String']>;
-  /** Profiles that follow this profile */
-  followers: ProfileFollowConnection;
-  /** Profiles that this profile follows */
-  following: ProfileFollowConnection;
+};
+
+
+/** Profile */
+export type ProfileAttrArgs = {
+  id: Scalars['ID'];
+  locale?: InputMaybe<Scalars['String']>;
+};
+
+
+/** Profile */
+export type ProfileAttrValueArgs = {
+  id: Scalars['ID'];
+  locale?: InputMaybe<Scalars['String']>;
+};
+
+
+/** Profile */
+export type ProfileAttrsArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  first: Scalars['Int'];
+  id?: InputMaybe<Scalars['ID']>;
+  includeNoLocale?: InputMaybe<Scalars['Boolean']>;
+  locale?: InputMaybe<Scalars['String']>;
+};
+
+
+/** Profile */
+export type ProfileBillingSubscriptionsArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  first: Scalars['Int'];
+};
+
+
+/** Profile */
+export type ProfileConnectedAppsArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  authType?: InputMaybe<ConnectedAppAuthType>;
+  deleted?: InputMaybe<Scalars['Boolean']>;
+  expired?: InputMaybe<Scalars['Boolean']>;
+  first: Scalars['Int'];
+  serviceKey?: InputMaybe<ConnectedAppServiceKey>;
+  type?: InputMaybe<ConnectedAppType>;
 };
 
 
 /** Profile */
 export type ProfileFollowersArgs = {
+  after?: InputMaybe<Scalars['String']>;
   first: Scalars['Int'];
-  after?: Maybe<Scalars['String']>;
-  status?: Maybe<ProfileFollowStatus>;
-  handle?: Maybe<Scalars['String']>;
+  handle?: InputMaybe<Scalars['String']>;
+  status?: InputMaybe<ProfileFollowStatus>;
 };
 
 
 /** Profile */
 export type ProfileFollowingArgs = {
+  after?: InputMaybe<Scalars['String']>;
   first: Scalars['Int'];
-  after?: Maybe<Scalars['String']>;
-  status?: Maybe<ProfileFollowStatus>;
-  handle?: Maybe<Scalars['String']>;
+  handle?: InputMaybe<Scalars['String']>;
+  status?: InputMaybe<ProfileFollowStatus>;
 };
 
 /** Connection of Profiles */
@@ -4909,9 +6310,9 @@ export type ProfileFollowEdge = {
 
 /** Profile follow status */
 export enum ProfileFollowStatus {
-  Pending = 'Pending',
   Approved = 'Approved',
-  Denied = 'Denied'
+  Denied = 'Denied',
+  Pending = 'Pending'
 }
 
 /** Profile type */
@@ -4929,67 +6330,93 @@ export type PublishItineraryPayload = {
 
 export type Query = {
   __typename?: 'Query';
-  /** Get a resource that implements Node by id */
-  node?: Maybe<Node>;
+  /** Look up all authorised profiles */
+  authorizedProfiles: ProfileConnection;
+  /** Fetch billing details associated with a profile */
+  billingDetails?: Maybe<BillingDetails>;
+  /** List of available billing prices */
+  billingPrices: BillingPriceConnection;
+  /** Fetch billing subscriptions associated with a profile */
+  billingSubscriptions: BillingSubscriptionConnection;
   /** Retrieve a collection by id */
   collection?: Maybe<Collection>;
-  /** Retrieve multiple collections */
-  collections: CollectionConnection;
   /** Retrieve a collection item by id */
   collectionItem?: Maybe<CollectionItem>;
   /** Retrieve multiple collection items filtered by different criteria */
   collectionItems: CollectionItemConnection;
+  /** Retrieve multiple collections */
+  collections: CollectionConnection;
   /** Obtains a connected app by a provided id */
   connectedApp?: Maybe<ConnectedApp>;
   /** Search connected apps */
   connectedApps: ConnectedAppConnection;
+  /** Obtains an IconResource with a provided id */
+  iconResource?: Maybe<IconResource>;
+  /** Retrieve multiple IconResources under a profile */
+  iconResources: IconResourceConnection;
   /** Query for fetching isochrone */
   isochrone: Array<Isochrone>;
+  /** Query itineraries that belong to a profile */
+  itineraries: ItinerarySearchConnection;
   /** Get an itinerary by id */
   itinerary?: Maybe<Itinerary>;
-  /** Query itineraries that belong to a profile */
-  itineraries: ItineraryConnection;
-  /** Look up routes for traveling along the given positions */
-  routes: RouteConnection;
+  /** Retrieve a MediaContainer by id */
+  mediaContainer?: Maybe<MediaContainer>;
   /** Retrieve a MediaResource by id */
   mediaResource?: Maybe<MediaResource>;
+  /** Get a resource that implements Node by id */
+  node?: Maybe<Node>;
   /** Get a place by id */
   place?: Maybe<Place>;
-  /** Get multiple places by id */
-  places: Array<Maybe<Place>>;
-  /** Search for places */
-  placeSearch: PlaceSearchConnection;
-  /** Autocomplete for place search */
-  placeAutocompleteSearch: PlaceSearchConnection;
   /** Search for places based on address details */
   placeAddressSearch: PlaceSearchConnection;
+  /** Autocomplete for place search */
+  placeAutocompleteSearch: PlaceSearchConnection;
   /** Search for places by location */
   placeReverseSearch: PlaceSearchConnection;
+  /** Search for places */
+  placeSearch: PlaceSearchConnection;
+  /** Get multiple places by id */
+  places: Array<Maybe<Place>>;
   /** Obtains a profile by a provided id */
   profile?: Maybe<Profile>;
-  /** Look up all authorised profiles */
-  authorizedProfiles: ProfileConnection;
+  /** Obtains a profile with the provided handle */
+  profileByHandle?: Maybe<Profile>;
   /** Search profiles */
   profiles: ProfileConnection;
+  /** Look up routes for traveling along the given positions */
+  routes: RouteConnection;
+  /** Query for fetching agreements made by this user */
+  userAgreements: UserAgreementConnection;
 };
 
 
-export type QueryNodeArgs = {
-  id: Scalars['ID'];
+export type QueryAuthorizedProfilesArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  first: Scalars['Int'];
+};
+
+
+export type QueryBillingDetailsArgs = {
+  profileId: Scalars['ID'];
+};
+
+
+export type QueryBillingPricesArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  first: Scalars['Int'];
+};
+
+
+export type QueryBillingSubscriptionsArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  first: Scalars['Int'];
+  profileId: Scalars['ID'];
 };
 
 
 export type QueryCollectionArgs = {
   id: Scalars['ID'];
-};
-
-
-export type QueryCollectionsArgs = {
-  first: Scalars['Int'];
-  after?: Maybe<Scalars['String']>;
-  profileId: Scalars['ID'];
-  discriminator?: Maybe<Scalars['String']>;
-  sort?: Maybe<Array<CollectionsSort>>;
 };
 
 
@@ -4999,20 +6426,29 @@ export type QueryCollectionItemArgs = {
 
 
 export type QueryCollectionItemsArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  bounds?: InputMaybe<BoundsInput>;
+  boundsCircle?: InputMaybe<BoundsCircleInput>;
+  collectionIds?: InputMaybe<Array<Scalars['ID']>>;
+  externalIds?: InputMaybe<Array<Scalars['ID']>>;
+  externalSources?: InputMaybe<Array<Scalars['ID']>>;
   first: Scalars['Int'];
-  after?: Maybe<Scalars['String']>;
-  profileId?: Maybe<Scalars['ID']>;
-  collectionIds?: Maybe<Array<Scalars['ID']>>;
-  keyword?: Maybe<Scalars['String']>;
-  tags?: Maybe<Array<Scalars['String']>>;
-  sectionIds?: Maybe<Array<Scalars['ID']>>;
-  resourceIds?: Maybe<Array<Scalars['ID']>>;
-  placeIds?: Maybe<Array<Scalars['ID']>>;
-  boundsCircle?: Maybe<BoundsCircleInput>;
-  bounds?: Maybe<BoundsInput>;
-  externalIds?: Maybe<Array<Scalars['ID']>>;
-  externalSources?: Maybe<Array<Scalars['ID']>>;
-  sort?: Maybe<Array<CollectionItemsSort>>;
+  keyword?: InputMaybe<Scalars['String']>;
+  placeIds?: InputMaybe<Array<Scalars['ID']>>;
+  profileId?: InputMaybe<Scalars['ID']>;
+  resourceIds?: InputMaybe<Array<Scalars['ID']>>;
+  sectionIds?: InputMaybe<Array<Scalars['ID']>>;
+  sort?: InputMaybe<Array<CollectionItemsSort>>;
+  tags?: InputMaybe<Array<Scalars['String']>>;
+};
+
+
+export type QueryCollectionsArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  discriminator?: InputMaybe<Scalars['String']>;
+  first: Scalars['Int'];
+  profileId: Scalars['ID'];
+  sort?: InputMaybe<Array<CollectionsSort>>;
 };
 
 
@@ -5022,14 +6458,26 @@ export type QueryConnectedAppArgs = {
 
 
 export type QueryConnectedAppsArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  authType?: InputMaybe<ConnectedAppAuthType>;
+  deleted?: InputMaybe<Scalars['Boolean']>;
+  expired?: InputMaybe<Scalars['Boolean']>;
   first: Scalars['Int'];
-  after?: Maybe<Scalars['String']>;
-  profileId?: Maybe<Scalars['ID']>;
-  deleted?: Maybe<Scalars['Boolean']>;
-  expired?: Maybe<Scalars['Boolean']>;
-  type?: Maybe<ConnectedAppType>;
-  authType?: Maybe<ConnectedAppAuthType>;
-  serviceKey?: Maybe<ConnectedAppServiceKey>;
+  profileId: Scalars['ID'];
+  serviceKey?: InputMaybe<ConnectedAppServiceKey>;
+  type?: InputMaybe<ConnectedAppType>;
+};
+
+
+export type QueryIconResourceArgs = {
+  id: Scalars['ID'];
+};
+
+
+export type QueryIconResourcesArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  first: Scalars['Int'];
+  profileId: Scalars['ID'];
 };
 
 
@@ -5040,29 +6488,31 @@ export type QueryIsochroneArgs = {
 };
 
 
+export type QueryItinerariesArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  first: Scalars['Int'];
+  keyword?: InputMaybe<Scalars['String']>;
+  profileId: Scalars['ID'];
+  sort?: InputMaybe<Array<ItinerariesSort>>;
+};
+
+
 export type QueryItineraryArgs = {
   id: Scalars['ID'];
 };
 
 
-export type QueryItinerariesArgs = {
-  first: Scalars['Int'];
-  after?: Maybe<Scalars['String']>;
-  profileId: Scalars['ID'];
-  keyword?: Maybe<Scalars['String']>;
-  sort?: Maybe<Array<ItinerariesSort>>;
-};
-
-
-export type QueryRoutesArgs = {
-  first: Scalars['Int'];
-  after?: Maybe<Scalars['String']>;
-  positions: Array<PositionInput>;
-  mode?: RouteSearchableMode;
+export type QueryMediaContainerArgs = {
+  id: Scalars['ID'];
 };
 
 
 export type QueryMediaResourceArgs = {
+  id: Scalars['ID'];
+};
+
+
+export type QueryNodeArgs = {
   id: Scalars['ID'];
 };
 
@@ -5072,63 +6522,63 @@ export type QueryPlaceArgs = {
 };
 
 
-export type QueryPlacesArgs = {
-  ids: Array<Scalars['ID']>;
-};
-
-
-export type QueryPlaceSearchArgs = {
+export type QueryPlaceAddressSearchArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  borough?: InputMaybe<Scalars['String']>;
+  country?: InputMaybe<Scalars['String']>;
+  county?: InputMaybe<Scalars['String']>;
   first: Scalars['Int'];
-  after?: Maybe<Scalars['String']>;
-  text?: Maybe<Scalars['String']>;
-  focus?: Maybe<PositionInput>;
-  bounds?: Maybe<BoundsInput>;
-  sources?: Maybe<Array<PlaceSearchSource>>;
-  layers?: Maybe<Array<Scalars['String']>>;
-  thirdPartyQuery?: Maybe<Scalars['JSON']>;
-  maxLabelLength?: Maybe<Scalars['Int']>;
+  layers?: InputMaybe<Array<Scalars['String']>>;
+  locality?: InputMaybe<Scalars['String']>;
+  maxLabelLength?: InputMaybe<Scalars['Int']>;
+  neighbourhood?: InputMaybe<Scalars['String']>;
+  postalCode?: InputMaybe<Scalars['String']>;
+  region?: InputMaybe<Scalars['String']>;
+  sources?: InputMaybe<Array<PlaceSearchSource>>;
+  streetAddress?: InputMaybe<Scalars['String']>;
+  thirdPartyQuery?: InputMaybe<Scalars['JSON']>;
 };
 
 
 export type QueryPlaceAutocompleteSearchArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  bounds?: InputMaybe<BoundsInput>;
   first: Scalars['Int'];
-  after?: Maybe<Scalars['String']>;
+  focus?: InputMaybe<PositionInput>;
+  layers?: InputMaybe<Array<Scalars['String']>>;
+  maxLabelLength?: InputMaybe<Scalars['Int']>;
+  sources?: InputMaybe<Array<PlaceSearchSource>>;
   text: Scalars['String'];
-  focus?: Maybe<PositionInput>;
-  bounds?: Maybe<BoundsInput>;
-  sources?: Maybe<Array<PlaceSearchSource>>;
-  layers?: Maybe<Array<Scalars['String']>>;
-  thirdPartyQuery?: Maybe<Scalars['JSON']>;
-  maxLabelLength?: Maybe<Scalars['Int']>;
-};
-
-
-export type QueryPlaceAddressSearchArgs = {
-  first: Scalars['Int'];
-  after?: Maybe<Scalars['String']>;
-  borough?: Maybe<Scalars['String']>;
-  country?: Maybe<Scalars['String']>;
-  county?: Maybe<Scalars['String']>;
-  locality?: Maybe<Scalars['String']>;
-  neighbourhood?: Maybe<Scalars['String']>;
-  postalCode?: Maybe<Scalars['String']>;
-  region?: Maybe<Scalars['String']>;
-  streetAddress?: Maybe<Scalars['String']>;
-  sources?: Maybe<Array<PlaceSearchSource>>;
-  layers?: Maybe<Array<Scalars['String']>>;
-  thirdPartyQuery?: Maybe<Scalars['JSON']>;
-  maxLabelLength?: Maybe<Scalars['Int']>;
+  thirdPartyQuery?: InputMaybe<Scalars['JSON']>;
 };
 
 
 export type QueryPlaceReverseSearchArgs = {
+  after?: InputMaybe<Scalars['String']>;
   first: Scalars['Int'];
-  after?: Maybe<Scalars['String']>;
   focus: PositionInput;
-  sources?: Maybe<Array<PlaceSearchSource>>;
-  layers?: Maybe<Array<Scalars['String']>>;
-  thirdPartyQuery?: Maybe<Scalars['JSON']>;
-  maxLabelLength?: Maybe<Scalars['Int']>;
+  layers?: InputMaybe<Array<Scalars['String']>>;
+  maxLabelLength?: InputMaybe<Scalars['Int']>;
+  sources?: InputMaybe<Array<PlaceSearchSource>>;
+  thirdPartyQuery?: InputMaybe<Scalars['JSON']>;
+};
+
+
+export type QueryPlaceSearchArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  bounds?: InputMaybe<BoundsInput>;
+  first: Scalars['Int'];
+  focus?: InputMaybe<PositionInput>;
+  layers?: InputMaybe<Array<Scalars['String']>>;
+  maxLabelLength?: InputMaybe<Scalars['Int']>;
+  sources?: InputMaybe<Array<PlaceSearchSource>>;
+  text?: InputMaybe<Scalars['String']>;
+  thirdPartyQuery?: InputMaybe<Scalars['JSON']>;
+};
+
+
+export type QueryPlacesArgs = {
+  ids: Array<Scalars['ID']>;
 };
 
 
@@ -5137,21 +6587,51 @@ export type QueryProfileArgs = {
 };
 
 
-export type QueryAuthorizedProfilesArgs = {
-  first: Scalars['Int'];
-  after?: Maybe<Scalars['String']>;
+export type QueryProfileByHandleArgs = {
+  handle: Scalars['String'];
 };
 
 
 export type QueryProfilesArgs = {
+  after?: InputMaybe<Scalars['String']>;
   first: Scalars['Int'];
-  after?: Maybe<Scalars['String']>;
   handle: Scalars['String'];
+};
+
+
+export type QueryRoutesArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  first: Scalars['Int'];
+  mode?: RouteSearchableMode;
+  positions: Array<PositionInput>;
+};
+
+
+export type QueryUserAgreementsArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  first: Scalars['Int'];
+  profileId?: InputMaybe<Scalars['ID']>;
+};
+
+/** Error which occurred while resolving an ID */
+export type ResolutionError = {
+  __typename?: 'ResolutionError';
+  /** Human readable error message */
+  message: Scalars['String'];
+};
+
+/** Response to Mutation.revertItinerary */
+export type RevertItineraryPayload = {
+  __typename?: 'RevertItineraryPayload';
+  /** The reverted itinerary */
+  itinerary?: Maybe<Itinerary>;
 };
 
 /** The representation of a route path taken */
 export type Route = {
   __typename?: 'Route';
+  /** The set of all RouteModes used by all the segments */
+  modes: Array<RouteMode>;
   /** The segments of this route */
   segments: Array<RouteSegment>;
 };
@@ -5184,67 +6664,145 @@ export type RouteInput = {
 
 /** Modes of transport */
 export enum RouteMode {
+  Abseiling = 'Abseiling',
+  AdventureBike = 'AdventureBike',
+  AerialLift = 'AerialLift',
+  AlpineSki = 'AlpineSki',
+  BackcountrySki = 'BackcountrySki',
+  Barge = 'Barge',
   Bike = 'Bike',
   Boat = 'Boat',
   Bus = 'Bus',
+  CableCar = 'CableCar',
+  Camel = 'Camel',
+  Canoe = 'Canoe',
   Car = 'Car',
+  Caving = 'Caving',
+  Chairlift = 'Chairlift',
+  CrossCountrySky = 'CrossCountrySky',
   Cruise = 'Cruise',
+  Cycling = 'Cycling',
+  Dirtbike = 'Dirtbike',
+  Dive = 'Dive',
   DogSled = 'DogSled',
+  ElectricCar = 'ElectricCar',
+  ElectricMotorbike = 'ElectricMotorbike',
+  Ferry = 'Ferry',
   Foot = 'Foot',
+  FourWheelDriving = 'FourWheelDriving',
+  Funicular = 'Funicular',
+  Geocaching = 'Geocaching',
+  Glider = 'Glider',
+  Golfcar = 'Golfcar',
+  Gondola = 'Gondola',
+  HandGliding = 'HandGliding',
+  Handcycle = 'Handcycle',
+  Helicopter = 'Helicopter',
   Hike = 'Hike',
+  Hitchhiking = 'Hitchhiking',
+  Horse = 'Horse',
+  HorseAndCart = 'HorseAndCart',
+  HotAirBaloon = 'HotAirBaloon',
+  IceSkate = 'IceSkate',
+  InlineSkate = 'InlineSkate',
+  JetBoat = 'JetBoat',
+  Jetski = 'Jetski',
   Kayak = 'Kayak',
+  Kitesurf = 'Kitesurf',
+  LightAircraft = 'LightAircraft',
+  LightRail = 'LightRail',
+  Minibus = 'Minibus',
+  Monorail = 'Monorail',
   Motorcycle = 'Motorcycle',
   MountainBike = 'MountainBike',
+  Mountaineering = 'Mountaineering',
+  NordicSki = 'NordicSki',
+  NordicWalking = 'NordicWalking',
+  Orienteering = 'Orienteering',
   Plane = 'Plane',
+  Quadbike = 'Quadbike',
+  Rickshaw = 'Rickshaw',
+  RockClimbing = 'RockClimbing',
+  Row = 'Row',
+  Rowboat = 'Rowboat',
+  Run = 'Run',
+  Sail = 'Sail',
+  Scooter = 'Scooter',
+  Skateboarding = 'Skateboarding',
+  Skydive = 'Skydive',
+  Snorkel = 'Snorkel',
+  Snowboard = 'Snowboard',
+  Snowshoe = 'Snowshoe',
+  StandUpPaddleBoard = 'StandUpPaddleBoard',
+  Surf = 'Surf',
+  Swim = 'Swim',
+  TaxiOrRideshare = 'TaxiOrRideshare',
+  TrailRun = 'TrailRun',
   Train = 'Train',
-  Transit = 'Transit'
+  Transit = 'Transit',
+  Trekking = 'Trekking',
+  Tubing = 'Tubing',
+  WalkOrRide = 'WalkOrRide',
+  WaterSki = 'WaterSki',
+  WaterTaxi = 'WaterTaxi',
+  Wheelchair = 'Wheelchair',
+  WhiteWaterRafting = 'WhiteWaterRafting',
+  Windsurf = 'Windsurf',
+  ZipLine = 'ZipLine'
 }
 
 /** Subset of RouteModes supporting route search */
 export enum RouteSearchableMode {
   Bike = 'Bike',
   Bus = 'Bus',
+  Camel = 'Camel',
   Car = 'Car',
+  Cycling = 'Cycling',
+  ElectricCar = 'ElectricCar',
+  ElectricMotorbike = 'ElectricMotorbike',
   Foot = 'Foot',
+  FourWheelDriving = 'FourWheelDriving',
   Hike = 'Hike',
+  Hitchhiking = 'Hitchhiking',
+  Horse = 'Horse',
+  HorseAndCart = 'HorseAndCart',
+  InlineSkate = 'InlineSkate',
+  Minibus = 'Minibus',
   Motorcycle = 'Motorcycle',
   MountainBike = 'MountainBike',
-  Transit = 'Transit'
+  NordicWalking = 'NordicWalking',
+  Rickshaw = 'Rickshaw',
+  Run = 'Run',
+  Scooter = 'Scooter',
+  Snowshoe = 'Snowshoe',
+  TaxiOrRideshare = 'TaxiOrRideshare',
+  TrailRun = 'TrailRun',
+  Trekking = 'Trekking',
+  WalkOrRide = 'WalkOrRide',
+  Wheelchair = 'Wheelchair'
 }
 
 /** One segment of a Route */
 export type RouteSegment = {
   __typename?: 'RouteSegment';
+  /** The estimated distance for this path */
+  distance?: Maybe<Scalars['Float']>;
+  /** The estimated duration for this path */
+  duration?: Maybe<Scalars['Float']>;
+  /** The estimated elevation details of this route */
+  elevation: Elevation;
+  /** The representation of this path as encoded as geojson FeatureCollection type */
+  geoJson?: Maybe<Scalars['JSON']>;
   /** WARNING: this ID is unstable, modifying the route might change the ID */
   id: Scalars['ID'];
   /** The mode of transport to be taken. eg: car, walk, kayak, etc */
   mode: RouteMode;
+  /** The path representation as encoded as a polyline format */
+  polyline?: Maybe<Scalars['String']>;
   /** The way positions along this route */
   positions?: Maybe<Array<Position>>;
   /** Whether this route was searched for */
   useRouteSearching: Scalars['Boolean'];
-  /** The representation of this path as encoded as geojson FeatureCollection type */
-  geoJson?: Maybe<Scalars['JSON']>;
-  /** The estimated duration for this path */
-  duration?: Maybe<Scalars['Float']>;
-  /** The estimated distance for this path */
-  distance?: Maybe<Scalars['Float']>;
-  /** The estimated elevation details of this route */
-  elevation: Elevation;
-  /** The path representation as encoded as a polyline format */
-  polyline?: Maybe<Scalars['String']>;
-};
-
-
-/** One segment of a Route */
-export type RouteSegmentGeoJsonArgs = {
-  simplify?: Maybe<GeoJsonSimplification>;
-};
-
-
-/** One segment of a Route */
-export type RouteSegmentDurationArgs = {
-  unit?: DurationUnit;
 };
 
 
@@ -5255,22 +6813,34 @@ export type RouteSegmentDistanceArgs = {
 
 
 /** One segment of a Route */
+export type RouteSegmentDurationArgs = {
+  unit?: DurationUnit;
+};
+
+
+/** One segment of a Route */
+export type RouteSegmentGeoJsonArgs = {
+  simplify?: InputMaybe<GeoJsonSimplification>;
+};
+
+
+/** One segment of a Route */
 export type RouteSegmentPolylineArgs = {
-  simplify?: Maybe<GeoJsonSimplification>;
+  simplify?: InputMaybe<GeoJsonSimplification>;
 };
 
 /** Create a RouteSegment */
 export type RouteSegmentInput = {
-  /** The mode of transport to be taken on this segment, defaults to Car */
-  mode?: Maybe<RouteMode>;
-  /** The way positions along this route */
-  positions?: Maybe<Array<PositionInput>>;
-  /** Whether to plan out a route using the positions. Defaults to true if the mode is searchable and otherwise will be set to false */
-  useRouteSearching?: Maybe<Scalars['Boolean']>;
   /** The distance for this route segment */
-  distance?: Maybe<Scalars['Float']>;
+  distance?: InputMaybe<Scalars['Float']>;
   /** The duration for this route segment */
-  duration?: Maybe<Scalars['Float']>;
+  duration?: InputMaybe<Scalars['Float']>;
+  /** The mode of transport to be taken on this segment, defaults to Car */
+  mode?: InputMaybe<RouteMode>;
+  /** The way positions along this route */
+  positions?: InputMaybe<Array<PositionInput>>;
+  /** Whether to plan out a route using the positions. Defaults to true if the mode is searchable and otherwise will be set to false */
+  useRouteSearching?: InputMaybe<Scalars['Boolean']>;
 };
 
 /** Determines which order a specific field will be ordered in */
@@ -5284,12 +6854,12 @@ export enum SortDirection {
 /** Result of starting a media upload */
 export type StartMediaUploadPayload = {
   __typename?: 'StartMediaUploadPayload';
+  /** Data to pass with the upload */
+  fields: Scalars['JSON'];
   /** The upload token, required when finalising the upload */
   token: Scalars['String'];
   /** The url to upload media to (via HTTP POST) */
   url: Scalars['String'];
-  /** Data to pass with the upload */
-  fields: Scalars['JSON'];
 };
 
 /** A text search result with a label and matches to highlight */
@@ -5304,10 +6874,10 @@ export type TextSearchResult = {
 /** A details of a single result from a text search */
 export type TextSearchResultMatch = {
   __typename?: 'TextSearchResultMatch';
-  /** Start of the match */
-  offset: Scalars['Int'];
   /** Length of the match */
   length: Scalars['Int'];
+  /** Start of the match */
+  offset: Scalars['Int'];
 };
 
 /** Result of unfollowing a profile */
@@ -5315,76 +6885,97 @@ export type UnfollowProfilePayload = {
   __typename?: 'UnfollowProfilePayload';
   /** The follower profile */
   fromProfile: Profile;
-  /** The profile being followed */
-  toProfile: Profile;
   /** The status of the follow request */
   status?: Maybe<ProfileFollowStatus>;
+  /** The profile being followed */
+  toProfile: Profile;
+};
+
+/** The fields to change when updating the billing details */
+export type UpdateBillingDetailsInput = {
+  /** The billing address */
+  address: BillingAddressInput;
+  /** The email address */
+  emailAddress: Scalars['String'];
+  /** The family name */
+  familyName: Scalars['String'];
+  /** The given name */
+  givenName: Scalars['String'];
+  /** The optional organization name */
+  organization?: InputMaybe<Scalars['String']>;
+};
+
+/** The output after updating the billing details */
+export type UpdateBillingDetailsOutput = {
+  __typename?: 'UpdateBillingDetailsOutput';
+  /** The updated billing details */
+  billingDetails: BillingDetails;
 };
 
 /** Updates a collection */
 export type UpdateCollectionInput = {
-  /** The title for the collection */
-  title?: Maybe<Scalars['String']>;
-  /** The synopsis for the collection */
-  synopsis?: Maybe<Scalars['String']>;
-  /** The description for the collection */
-  description?: Maybe<Scalars['String']>;
-  /** The tags for the collection */
-  tags?: Maybe<Array<Scalars['String']>>;
-  /** Alias for the read-more attribute */
-  readMoreUrl?: Maybe<Scalars['String']>;
-  /** Alias for the website-url attribute */
-  websiteUrl?: Maybe<Scalars['String']>;
-  /** Insert or update attributes to the collection */
-  upsertAttrs?: Maybe<Array<AttributeInput>>;
-  /** Delete attributes to the collection */
-  deleteAttrs?: Maybe<Array<AttributeIdentifierInput>>;
   /** Add multiple Media with MediaResources */
-  createMedia?: Maybe<Array<CreateMediaContainerInput>>;
-  /** Move one or move MediaContainers */
-  moveMedia?: Maybe<Array<MoveMediaContainerInput>>;
-  /** Update one or move MediaContainers */
-  updateMedia?: Maybe<Array<UpdateMediaContainerInput>>;
+  createMedia?: InputMaybe<Array<CreateMediaContainerInput>>;
+  /** Delete attributes to the collection */
+  deleteAttrs?: InputMaybe<Array<AttributeIdentifierInput>>;
   /** Delete one or move MediaContainers */
-  deleteMedia?: Maybe<Array<Scalars['ID']>>;
+  deleteMedia?: InputMaybe<Array<Scalars['ID']>>;
+  /** The description for the collection */
+  description?: InputMaybe<Scalars['String']>;
+  /** Move one or move MediaContainers */
+  moveMedia?: InputMaybe<Array<MoveMediaContainerInput>>;
+  /** Alias for the read-more attribute */
+  readMoreUrl?: InputMaybe<Scalars['String']>;
+  /** The synopsis for the collection */
+  synopsis?: InputMaybe<Scalars['String']>;
+  /** The tags for the collection */
+  tags?: InputMaybe<Array<Scalars['String']>>;
+  /** The title for the collection */
+  title?: InputMaybe<Scalars['String']>;
+  /** Update one or move MediaContainers */
+  updateMedia?: InputMaybe<Array<UpdateMediaContainerInput>>;
+  /** Insert or update attributes to the collection */
+  upsertAttrs?: InputMaybe<Array<AttributeInput>>;
+  /** Alias for the website-url attribute */
+  websiteUrl?: InputMaybe<Scalars['String']>;
 };
 
 /** The fields for the collection location to update */
 export type UpdateCollectionLocationInput = {
-  /** Title for this item */
-  title?: Maybe<Scalars['String']>;
-  /** A longer description content for this item */
-  synopsis?: Maybe<Scalars['String']>;
-  /** A longer description content for this item */
-  description?: Maybe<Scalars['String']>;
-  /** A collection of strings used to label this item */
-  tags?: Maybe<Array<Scalars['String']>>;
-  /** Shortcut for setting the read-more attribute */
-  readMoreUrl?: Maybe<Scalars['String']>;
-  /** Shortcut for setting the website-url attribute */
-  websiteUrl?: Maybe<Scalars['String']>;
-  /** One or more sections for this item */
-  sectionIds?: Maybe<Array<Scalars['ID']>>;
-  /** Identifier from an external source this item is associated with */
-  externalId?: Maybe<Scalars['ID']>;
-  /** The source of this item's externalId */
-  externalSource?: Maybe<Scalars['ID']>;
-  /** The associated place information for this item */
-  place?: Maybe<PlaceInput>;
-  /** Override for the place's position */
-  position?: Maybe<PositionInput>;
-  /** Insert or update attributes to the collection */
-  upsertAttrs?: Maybe<Array<AttributeInput>>;
-  /** Delete attributes to the collection */
-  deleteAttrs?: Maybe<Array<AttributeIdentifierInput>>;
   /** Add multiple Media with MediaResources */
-  createMedia?: Maybe<Array<CreateMediaContainerInput>>;
-  /** Move one or move MediaContainers */
-  moveMedia?: Maybe<Array<MoveMediaContainerInput>>;
-  /** Update one or move MediaContainers */
-  updateMedia?: Maybe<Array<UpdateMediaContainerInput>>;
+  createMedia?: InputMaybe<Array<CreateMediaContainerInput>>;
+  /** Delete attributes to the collection */
+  deleteAttrs?: InputMaybe<Array<AttributeIdentifierInput>>;
   /** Delete one or move MediaContainers */
-  deleteMedia?: Maybe<Array<Scalars['ID']>>;
+  deleteMedia?: InputMaybe<Array<Scalars['ID']>>;
+  /** A longer description content for this item */
+  description?: InputMaybe<Scalars['String']>;
+  /** Identifier from an external source this item is associated with */
+  externalId?: InputMaybe<Scalars['ID']>;
+  /** The source of this item's externalId */
+  externalSource?: InputMaybe<Scalars['ID']>;
+  /** Move one or move MediaContainers */
+  moveMedia?: InputMaybe<Array<MoveMediaContainerInput>>;
+  /** The associated place information for this item */
+  place?: InputMaybe<PlaceInput>;
+  /** Override for the place's position */
+  position?: InputMaybe<PositionInput>;
+  /** Shortcut for setting the read-more attribute */
+  readMoreUrl?: InputMaybe<Scalars['String']>;
+  /** One or more sections for this item */
+  sectionIds?: InputMaybe<Array<Scalars['ID']>>;
+  /** A longer description content for this item */
+  synopsis?: InputMaybe<Scalars['String']>;
+  /** A collection of strings used to label this item */
+  tags?: InputMaybe<Array<Scalars['String']>>;
+  /** Title for this item */
+  title?: InputMaybe<Scalars['String']>;
+  /** Update one or move MediaContainers */
+  updateMedia?: InputMaybe<Array<UpdateMediaContainerInput>>;
+  /** Insert or update attributes to the collection */
+  upsertAttrs?: InputMaybe<Array<AttributeInput>>;
+  /** Shortcut for setting the website-url attribute */
+  websiteUrl?: InputMaybe<Scalars['String']>;
 };
 
 /** The fields available after the collection location has been updated */
@@ -5404,13 +6995,13 @@ export type UpdateCollectionPayload = {
 /** Updates a connected app */
 export type UpdateConnectedAppInput = {
   /** The type of the connected-app */
-  authType?: Maybe<ConnectedAppAuthType>;
-  /** Any specific scope that has been granted to the 3rd party application */
-  scope?: Maybe<Scalars['String']>;
-  /** 3rd party ID or account ID */
-  thirdPartyId?: Maybe<Scalars['ID']>;
+  authType?: InputMaybe<ConnectedAppAuthType>;
   /** Encrypted JSON */
-  configuration?: Maybe<Scalars['String']>;
+  privateConfiguration?: InputMaybe<Scalars['String']>;
+  /** 3rd party ID or account ID */
+  publicId?: InputMaybe<Scalars['ID']>;
+  /** Any specific scope that has been granted to the 3rd party application */
+  scope?: InputMaybe<Scalars['String']>;
 };
 
 /** The available fields after updating a connected app */
@@ -5420,202 +7011,255 @@ export type UpdateConnectedAppPayload = {
   connectedApp?: Maybe<ConnectedApp>;
 };
 
+/** Update an IconComposition */
+export type UpdateIconCompositionInput = {
+  /** Change the fill color for the icon, set to null to remove the fill */
+  iconFill?: InputMaybe<Scalars['String']>;
+  /** ID of the IconComposition to update */
+  id: Scalars['String'];
+  /** Change the name */
+  name?: InputMaybe<Scalars['String']>;
+  /** Change the Icon used by this IconComposition */
+  resourceId?: InputMaybe<Scalars['ID']>;
+  /** Change the fill color for the shield, set to null to remove the fill */
+  shieldFill?: InputMaybe<Scalars['String']>;
+  /** Change which shield to use for the icon, set to null to clear the shieldFill and shieldStroke as well */
+  shieldKey?: InputMaybe<Scalars['String']>;
+  /** Change the stroke color for the shield, set to null to remove the stroke */
+  shieldStroke?: InputMaybe<Scalars['String']>;
+};
+
+/** Fields for updating an IconSilhouette */
+export type UpdateIconSilhouetteInput = {
+  /** Delete attributes to the icon */
+  deleteAttrs?: InputMaybe<Array<AttributeIdentifierInput>>;
+  /** Change the name of this icon */
+  name?: InputMaybe<Scalars['String']>;
+  /** SVG path data for this icon, eg: "M 100 .." */
+  paths?: InputMaybe<Array<Scalars['String']>>;
+  /** Insert or update attributes to the icon */
+  upsertAttrs?: InputMaybe<Array<AttributeInput>>;
+  /** Optional SVG viewBox for this icon */
+  viewBox?: InputMaybe<Scalars['String']>;
+};
+
+/** The response after updating an icon */
+export type UpdateIconSilhouettePayload = {
+  __typename?: 'UpdateIconSilhouettePayload';
+  /** The updated icon */
+  icon?: Maybe<IconSilhouette>;
+};
+
 /** The intinerary collection fields to update */
 export type UpdateItineraryCollectionInput = {
-  /** The title for the itinerary-collection */
-  title?: Maybe<Scalars['String']>;
-  /** The synopsis for the itinerary-collection */
-  synopsis?: Maybe<Scalars['String']>;
-  /** The description for the itinerary-collection */
-  description?: Maybe<Scalars['String']>;
-  /** The tags for the itinerary-collection */
-  tags?: Maybe<Array<Scalars['String']>>;
-  /** Alias for the read-more attribute */
-  readMoreUrl?: Maybe<Scalars['String']>;
-  /** Alias for the website-url attribute */
-  websiteUrl?: Maybe<Scalars['String']>;
-  /** Insert or update attributes to the itinerary-collection */
-  upsertAttrs?: Maybe<Array<AttributeInput>>;
-  /** Delete attributes to the itinerary-collection */
-  deleteAttrs?: Maybe<Array<AttributeIdentifierInput>>;
   /** Add multiple Media with MediaResources */
-  createMedia?: Maybe<Array<CreateMediaContainerInput>>;
-  /** Move one or move MediaContainers */
-  moveMedia?: Maybe<Array<MoveMediaContainerInput>>;
-  /** Update one or move MediaContainers */
-  updateMedia?: Maybe<Array<UpdateMediaContainerInput>>;
+  createMedia?: InputMaybe<Array<CreateMediaContainerInput>>;
+  /** Delete attributes to the itinerary-collection */
+  deleteAttrs?: InputMaybe<Array<AttributeIdentifierInput>>;
   /** Delete one or move MediaContainers */
-  deleteMedia?: Maybe<Array<Scalars['ID']>>;
+  deleteMedia?: InputMaybe<Array<Scalars['ID']>>;
+  /** The description for the itinerary-collection */
+  description?: InputMaybe<Scalars['String']>;
+  /** Move one or move MediaContainers */
+  moveMedia?: InputMaybe<Array<MoveMediaContainerInput>>;
+  /** Alias for the read-more attribute */
+  readMoreUrl?: InputMaybe<Scalars['String']>;
+  /** The synopsis for the itinerary-collection */
+  synopsis?: InputMaybe<Scalars['String']>;
+  /** The tags for the itinerary-collection */
+  tags?: InputMaybe<Array<Scalars['String']>>;
+  /** The title for the itinerary-collection */
+  title?: InputMaybe<Scalars['String']>;
+  /** Update one or move MediaContainers */
+  updateMedia?: InputMaybe<Array<UpdateMediaContainerInput>>;
+  /** Insert or update attributes to the itinerary-collection */
+  upsertAttrs?: InputMaybe<Array<AttributeInput>>;
+  /** Alias for the website-url attribute */
+  websiteUrl?: InputMaybe<Scalars['String']>;
 };
 
 /** The fields available after updating the itinerary collection */
 export type UpdateItineraryCollectionPayload = {
   __typename?: 'UpdateItineraryCollectionPayload';
+  /** Other changes to the itinerary that caused by deleting the itinerary-item */
+  cascaded: ItineraryItemCascadedChanges;
   /** The itinerary collection that was created */
   collection?: Maybe<ItineraryCollection>;
   /** The modified itinerary */
   itinerary: Itinerary;
-  /** Other changes to the itinerary that caused by deleting the itinerary-item */
-  cascaded: ItineraryItemCascadedChanges;
 };
 
 /** The input fields to update the itinerary directions */
 export type UpdateItineraryDirectionsInput = {
-  /** The title for the itinerary directions */
-  title?: Maybe<Scalars['String']>;
-  /** The synopsis for the itinerary-directions */
-  synopsis?: Maybe<Scalars['String']>;
-  /** The description for the itinerary-directions */
-  description?: Maybe<Scalars['String']>;
-  /** The tags for the itinerary-directions */
-  tags?: Maybe<Array<Scalars['String']>>;
-  /** Alias for the read-more attribute */
-  readMoreUrl?: Maybe<Scalars['String']>;
-  /** Alias for the website-url attribute */
-  websiteUrl?: Maybe<Scalars['String']>;
-  /** Insert or update attributes to the collection */
-  upsertAttrs?: Maybe<Array<AttributeInput>>;
-  /** Delete attributes to the collection */
-  deleteAttrs?: Maybe<Array<AttributeIdentifierInput>>;
   /** Add multiple Media with MediaResources */
-  createMedia?: Maybe<Array<CreateMediaContainerInput>>;
-  /** Move one or move MediaContainers */
-  moveMedia?: Maybe<Array<MoveMediaContainerInput>>;
-  /** Update one or move MediaContainers */
-  updateMedia?: Maybe<Array<UpdateMediaContainerInput>>;
+  createMedia?: InputMaybe<Array<CreateMediaContainerInput>>;
+  /** Delete attributes to the collection */
+  deleteAttrs?: InputMaybe<Array<AttributeIdentifierInput>>;
   /** Delete one or move MediaContainers */
-  deleteMedia?: Maybe<Array<Scalars['ID']>>;
-  /** The origin/starting itinerary location item, in the form of item/XYZ */
-  originId?: Maybe<Scalars['ID']>;
-  /** The route of this item, must include at least one route segment */
-  route?: Maybe<RouteInput>;
+  deleteMedia?: InputMaybe<Array<Scalars['ID']>>;
+  /** The description for the itinerary-directions */
+  description?: InputMaybe<Scalars['String']>;
   /** The distance of the itinerary-directions */
-  distance?: Maybe<Scalars['Float']>;
+  distance?: InputMaybe<Scalars['Float']>;
   /** The duration details of the new itinerary-directions */
-  durations?: Maybe<Array<ItineraryDirectionsDurationsInput>>;
+  durations?: InputMaybe<Array<ItineraryDirectionsDurationsInput>>;
   /** The elevation details of the new itinerary-directions */
-  elevation?: Maybe<ElevationInput>;
+  elevation?: InputMaybe<ElevationInput>;
+  /** Move one or move MediaContainers */
+  moveMedia?: InputMaybe<Array<MoveMediaContainerInput>>;
+  /** The origin/starting itinerary location item, in the form of item/XYZ */
+  originId?: InputMaybe<Scalars['ID']>;
+  /** Alias for the read-more attribute */
+  readMoreUrl?: InputMaybe<Scalars['String']>;
+  /** The route of this item, must include at least one route segment */
+  route?: InputMaybe<RouteInput>;
+  /** The synopsis for the itinerary-directions */
+  synopsis?: InputMaybe<Scalars['String']>;
+  /** The tags for the itinerary-directions */
+  tags?: InputMaybe<Array<Scalars['String']>>;
+  /** The title for the itinerary directions */
+  title?: InputMaybe<Scalars['String']>;
+  /** Update one or move MediaContainers */
+  updateMedia?: InputMaybe<Array<UpdateMediaContainerInput>>;
+  /** Insert or update attributes to the collection */
+  upsertAttrs?: InputMaybe<Array<AttributeInput>>;
+  /** Alias for the website-url attribute */
+  websiteUrl?: InputMaybe<Scalars['String']>;
 };
 
 /** The fields available after updating the itinerary directions item */
 export type UpdateItineraryDirectionsPayload = {
   __typename?: 'UpdateItineraryDirectionsPayload';
+  /** Other changes to the itinerary that caused by deleting the itinerary-item */
+  cascaded: ItineraryItemCascadedChanges;
   /** The updated itinerary directions item */
   directions?: Maybe<ItineraryDirections>;
   /** The modified itinerary */
   itinerary: Itinerary;
-  /** Other changes to the itinerary that caused by deleting the itinerary-item */
-  cascaded: ItineraryItemCascadedChanges;
 };
 
 /** Updates a itinerary */
 export type UpdateItineraryInput = {
-  /** The title for the itinerary */
-  title?: Maybe<Scalars['String']>;
-  /** The synopsis for the itinerary */
-  synopsis?: Maybe<Scalars['String']>;
-  /** The description for the itinerary */
-  description?: Maybe<Scalars['String']>;
-  /** The tags for the itinerary */
-  tags?: Maybe<Array<Scalars['String']>>;
-  /** Alias for the read-more attribute */
-  readMoreUrl?: Maybe<Scalars['String']>;
-  /** Alias for the website-url attribute */
-  websiteUrl?: Maybe<Scalars['String']>;
-  /** Insert or update attributes to the collection */
-  upsertAttrs?: Maybe<Array<AttributeInput>>;
-  /** Delete attributes to the collection */
-  deleteAttrs?: Maybe<Array<AttributeIdentifierInput>>;
-  /** Add multiple Media with MediaResources */
-  createMedia?: Maybe<Array<CreateMediaContainerInput>>;
-  /** Move one or move MediaContainers */
-  moveMedia?: Maybe<Array<MoveMediaContainerInput>>;
-  /** Update one or move MediaContainers */
-  updateMedia?: Maybe<Array<UpdateMediaContainerInput>>;
-  /** Delete one or move MediaContainers */
-  deleteMedia?: Maybe<Array<Scalars['ID']>>;
   /** Enable auto routing, or set to null to disable */
-  autoRoute?: Maybe<ItineraryAutoRouteInput>;
+  autoRoute?: InputMaybe<ItineraryAutoRouteInput>;
+  /** Remove any routes that were created with auto routing */
+  autoRouteRemoveExisting?: InputMaybe<Scalars['Boolean']>;
+  /** Add new IconCompositions to the itinerary */
+  createIcons?: InputMaybe<Array<CreateIconCompositionInput>>;
+  /** Add multiple Media with MediaResources */
+  createMedia?: InputMaybe<Array<CreateMediaContainerInput>>;
+  /** The default locale of this itinerary's content */
+  defaultLocale?: InputMaybe<Scalars['String']>;
+  /** Delete attributes to the collection */
+  deleteAttrs?: InputMaybe<Array<AttributeIdentifierInput>>;
+  /** Delete one or move IconCompositions */
+  deleteIcons?: InputMaybe<Array<Scalars['ID']>>;
+  /** Delete one or move MediaContainers */
+  deleteMedia?: InputMaybe<Array<Scalars['ID']>>;
+  /** The description for the itinerary */
+  description?: InputMaybe<Scalars['String']>;
   /** Elevation data of the new itinerary */
-  elevation?: Maybe<ElevationInput>;
+  elevation?: InputMaybe<ElevationInput>;
+  /** Move one or move MediaContainers */
+  moveMedia?: InputMaybe<Array<MoveMediaContainerInput>>;
+  /** Alias for the read-more attribute */
+  readMoreUrl?: InputMaybe<Scalars['String']>;
+  /** The synopsis for the itinerary */
+  synopsis?: InputMaybe<Scalars['String']>;
+  /** The tags for the itinerary */
+  tags?: InputMaybe<Array<Scalars['String']>>;
+  /** The title for the itinerary */
+  title?: InputMaybe<Scalars['String']>;
+  /** Update IconCompositions in the itinerary */
+  updateIcons?: InputMaybe<Array<UpdateIconCompositionInput>>;
+  /** Update one or move MediaContainers */
+  updateMedia?: InputMaybe<Array<UpdateMediaContainerInput>>;
+  /** Insert or update attributes to the collection */
+  upsertAttrs?: InputMaybe<Array<AttributeInput>>;
+  /** Alias for the website-url attribute */
+  websiteUrl?: InputMaybe<Scalars['String']>;
 };
 
 /** The fields to update on an itinerary location */
 export type UpdateItineraryLocationInput = {
-  /** The title for the itinerary-location */
-  title?: Maybe<Scalars['String']>;
-  /** The synopsis for the itinerary-location */
-  synopsis?: Maybe<Scalars['String']>;
-  /** The description for the itinerary-location */
-  description?: Maybe<Scalars['String']>;
-  /** The tags for the itinerary-location */
-  tags?: Maybe<Array<Scalars['String']>>;
-  /** Alias for the read-more attribute */
-  readMoreUrl?: Maybe<Scalars['String']>;
-  /** Alias for the website-url attribute */
-  websiteUrl?: Maybe<Scalars['String']>;
-  /** Insert or update attributes to the itinerary-collection */
-  upsertAttrs?: Maybe<Array<AttributeInput>>;
-  /** Delete attributes to the itinerary-collection */
-  deleteAttrs?: Maybe<Array<AttributeIdentifierInput>>;
+  /** The bounds of the itinerary-location */
+  bounds?: InputMaybe<BoundsInput>;
   /** Add multiple Media with MediaResources */
-  createMedia?: Maybe<Array<CreateMediaContainerInput>>;
-  /** Move one or move MediaContainers */
-  moveMedia?: Maybe<Array<MoveMediaContainerInput>>;
-  /** Update one or move MediaContainers */
-  updateMedia?: Maybe<Array<UpdateMediaContainerInput>>;
+  createMedia?: InputMaybe<Array<CreateMediaContainerInput>>;
+  /** Delete attributes to the itinerary-collection */
+  deleteAttrs?: InputMaybe<Array<AttributeIdentifierInput>>;
   /** Delete one or move MediaContainers */
-  deleteMedia?: Maybe<Array<Scalars['ID']>>;
-  /** The place for this itinerary-location */
-  position?: Maybe<PositionInput>;
-  /** The place for this itinerary-location */
-  place?: Maybe<PlaceInput>;
+  deleteMedia?: InputMaybe<Array<Scalars['ID']>>;
+  /** The description for the itinerary-location */
+  description?: InputMaybe<Scalars['String']>;
+  /** Set or remove the optional icon, passed ID must exist in the Itinerary.icons */
+  icon?: InputMaybe<Scalars['ID']>;
+  /** Move one or move MediaContainers */
+  moveMedia?: InputMaybe<Array<MoveMediaContainerInput>>;
   /** Whether the location specified is optional on the itinerary */
-  optional?: Maybe<Scalars['Boolean']>;
+  optional?: InputMaybe<Scalars['Boolean']>;
+  /** The place for this itinerary-location */
+  place?: InputMaybe<PlaceInput>;
+  /** The place for this itinerary-location */
+  position?: InputMaybe<PositionInput>;
+  /** Alias for the read-more attribute */
+  readMoreUrl?: InputMaybe<Scalars['String']>;
+  /** The synopsis for the itinerary-location */
+  synopsis?: InputMaybe<Scalars['String']>;
+  /** The tags for the itinerary-location */
+  tags?: InputMaybe<Array<Scalars['String']>>;
+  /** The title for the itinerary-location */
+  title?: InputMaybe<Scalars['String']>;
+  /** Update one or move MediaContainers */
+  updateMedia?: InputMaybe<Array<UpdateMediaContainerInput>>;
+  /** Insert or update attributes to the itinerary-collection */
+  upsertAttrs?: InputMaybe<Array<AttributeInput>>;
+  /** Alias for the website-url attribute */
+  websiteUrl?: InputMaybe<Scalars['String']>;
 };
 
 /** The fields available after updating a location */
 export type UpdateItineraryLocationPayload = {
   __typename?: 'UpdateItineraryLocationPayload';
-  /** The updated itinerary location */
-  location?: Maybe<ItineraryLocation>;
-  /** The modified itinerary */
-  itinerary: Itinerary;
   /** Other changes to the itinerary that caused by deleting the itinerary-item */
   cascaded: ItineraryItemCascadedChanges;
+  /** The modified itinerary */
+  itinerary: Itinerary;
+  /** The updated itinerary location */
+  location?: Maybe<ItineraryLocation>;
 };
 
 /** The available fields after updating a itinerary */
 export type UpdateItineraryPayload = {
   __typename?: 'UpdateItineraryPayload';
-  /** The updated itinerary */
-  itinerary?: Maybe<Itinerary>;
   /** Other changes to the itinerary that caused by updating the itinerary */
   cascaded: ItineraryItemCascadedChanges;
+  /** The updated itinerary */
+  itinerary?: Maybe<Itinerary>;
 };
 
-/** Update a MediaContainer */
+/** Update a MediaContainer in a MediaContainer list */
 export type UpdateMediaContainerInput = {
   /** ID to the MediaContainer to update */
   id: Scalars['String'];
   /** ID to a MediaResource */
-  resourceId?: Maybe<Scalars['String']>;
+  resourceId?: InputMaybe<Scalars['String']>;
 };
 
 /** Updates a media resource */
 export type UpdateMediaResourceInput = {
-  /** List of labels to apply to the media-resource */
-  tags?: Maybe<Array<Scalars['String']>>;
   /** Text attribution for the source of the media-resource */
-  attribution?: Maybe<Scalars['String']>;
+  attribution?: InputMaybe<Scalars['String']>;
   /** Text caption for the media-resource */
-  caption?: Maybe<Scalars['String']>;
+  caption?: InputMaybe<Scalars['String']>;
   /** Copyright details of the media-resource */
-  copyright?: Maybe<Scalars['String']>;
-  /** Insert or update attributes to the media-resource */
-  upsertAttrs?: Maybe<Array<AttributeInput>>;
+  copyright?: InputMaybe<Scalars['String']>;
   /** Delete attributes to the media-resource */
-  deleteAttrs?: Maybe<Array<AttributeIdentifierInput>>;
+  deleteAttrs?: InputMaybe<Array<AttributeIdentifierInput>>;
+  /** List of labels to apply to the media-resource */
+  tags?: InputMaybe<Array<Scalars['String']>>;
+  /** Insert or update attributes to the media-resource */
+  upsertAttrs?: InputMaybe<Array<AttributeInput>>;
 };
 
 /** Response payload to Mutation.updateMediaResource */
@@ -5627,14 +7271,22 @@ export type UpdateMediaResourcePayload = {
 
 /** Input object to Mutation.updateProfile */
 export type UpdateProfileInput = {
-  /** The name of the profile */
-  name?: Maybe<Scalars['String']>;
-  /** A short biography */
-  bio?: Maybe<Scalars['String']>;
-  /** The website url */
-  websiteUrl?: Maybe<Scalars['String']>;
   /** If follow requests should be automatically approved for this profile */
-  autoApproveFollows?: Maybe<Scalars['Boolean']>;
+  autoApproveFollows?: InputMaybe<Scalars['Boolean']>;
+  /** The avatar image */
+  avatar?: InputMaybe<MediaContainerInput>;
+  /** A short biography */
+  bio?: InputMaybe<Scalars['String']>;
+  /** Delete attributes to the profile */
+  deleteAttrs?: InputMaybe<Array<AttributeIdentifierInput>>;
+  /** The name of the profile */
+  name?: InputMaybe<Scalars['String']>;
+  /** The type of profile */
+  type?: InputMaybe<ProfileType>;
+  /** Insert or update attributes to the profile */
+  upsertAttrs?: InputMaybe<Array<AttributeInput>>;
+  /** The website url */
+  websiteUrl?: InputMaybe<Scalars['String']>;
 };
 
 /** Response payload to Mutation.updateProfile */
@@ -5644,13 +7296,57 @@ export type UpdateProfilePayload = {
   profile?: Maybe<Profile>;
 };
 
+/** An agreement made by a user */
+export type UserAgreement = Node & {
+  __typename?: 'UserAgreement';
+  /** The date when the agreement was made */
+  date?: Maybe<Scalars['String']>;
+  /** The Globally Unique ID of the object. */
+  id: Scalars['ID'];
+  /** Profile that associated with this agreement */
+  profile?: Maybe<Profile>;
+  /** The type of agreement */
+  type: Scalars['String'];
+};
+
+
+/** An agreement made by a user */
+export type UserAgreementDateArgs = {
+  format?: InputMaybe<Scalars['String']>;
+  locale?: InputMaybe<Scalars['String']>;
+  relativeTo?: InputMaybe<Scalars['String']>;
+  timeZone?: InputMaybe<Scalars['String']>;
+};
+
+/** Connection of UserAgreements */
+export type UserAgreementConnection = {
+  __typename?: 'UserAgreementConnection';
+  /** All the edges in this page of the connection */
+  edges: Array<UserAgreementEdge>;
+  /** Shortcut for edges[].node */
+  nodes: Array<UserAgreement>;
+  /** Details regarding the current page of the connnection */
+  pageInfo: PageInfo;
+  /** The total number of items in the connection (in all pages) */
+  totalCount: Scalars['Int'];
+};
+
+/** Edge containing a UserAgreement */
+export type UserAgreementEdge = {
+  __typename?: 'UserAgreementEdge';
+  /** The cursor string pointing to this item */
+  cursor: Scalars['String'];
+  /** The item */
+  node: UserAgreement;
+};
+
 export type CreateCollectionLocationMutationVariables = Exact<{
   collectionId: Scalars['ID'];
   location: CreateCollectionLocationInput;
 }>;
 
 
-export type CreateCollectionLocationMutation = { __typename?: 'Mutation', createCollectionLocation: { __typename: 'CreateCollectionLocationPayload', location?: Maybe<{ __typename: 'CollectionLocation', id: string, title?: Maybe<string>, synopsis?: Maybe<string>, description?: Maybe<string>, tags: Array<string>, readMoreUrl?: Maybe<string>, websiteUrl?: Maybe<string>, place: { __typename: 'Place', id: string, name?: Maybe<string>, synopsis?: Maybe<string>, maki?: Maybe<string>, position: { __typename?: 'Position', lon: number, lat: number }, address: { __typename?: 'PlaceAddress', addressLineOne?: Maybe<string>, addressLineTwo?: Maybe<string>, addressLineThree?: Maybe<string>, locality?: Maybe<string>, region?: Maybe<string>, regionCode?: Maybe<string>, country?: Maybe<string>, countryCode?: Maybe<string> }, layers: Array<{ __typename: 'PlaceLayer', id: string, name?: Maybe<string> }> }, position: { __typename?: 'Position', lon: number, lat: number } }> } };
+export type CreateCollectionLocationMutation = { __typename?: 'Mutation', createCollectionLocation: { __typename: 'CreateCollectionLocationPayload', location?: { __typename: 'CollectionLocation', id: string, title?: string | null, synopsis?: string | null, description?: string | null, tags: Array<string>, readMoreUrl?: string | null, websiteUrl?: string | null, place: { __typename: 'Place', id: string, name?: string | null, synopsis?: string | null, maki?: string | null, position: { __typename?: 'Position', lon: number, lat: number }, address: { __typename?: 'PlaceAddress', addressLineOne?: string | null, addressLineTwo?: string | null, addressLineThree?: string | null, locality?: string | null, region?: string | null, regionCode?: string | null, country?: string | null, countryCode?: string | null }, layers: Array<{ __typename: 'PlaceLayer', id: string, name?: string | null }> }, position: { __typename?: 'Position', lon: number, lat: number } } | null } };
 
 export type DeleteCollectionLocationMutationVariables = Exact<{
   id: Scalars['ID'];
@@ -5660,83 +7356,83 @@ export type DeleteCollectionLocationMutationVariables = Exact<{
 export type DeleteCollectionLocationMutation = { __typename?: 'Mutation', deleteCollectionItem: { __typename: 'DeleteCollectionItemPayload' } };
 
 export type FindCollectionLocationIdsByExternalQueryVariables = Exact<{
-  collectionId?: Maybe<Array<Scalars['ID']> | Scalars['ID']>;
-  externalIds?: Maybe<Array<Scalars['ID']> | Scalars['ID']>;
-  externalSources?: Maybe<Array<Scalars['ID']> | Scalars['ID']>;
+  collectionId?: InputMaybe<Array<Scalars['ID']> | Scalars['ID']>;
+  externalIds?: InputMaybe<Array<Scalars['ID']> | Scalars['ID']>;
+  externalSources?: InputMaybe<Array<Scalars['ID']> | Scalars['ID']>;
   first: Scalars['Int'];
-  after?: Maybe<Scalars['String']>;
+  after?: InputMaybe<Scalars['String']>;
 }>;
 
 
-export type FindCollectionLocationIdsByExternalQuery = { __typename?: 'Query', collectionItems: { __typename: 'CollectionItemConnection', totalCount: number, edges: Array<{ __typename?: 'CollectionItemEdge', cursor: string, node: { __typename: 'CollectionLocation', id: string, place: { __typename: 'Place', id: string } } }>, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: Maybe<string>, endCursor?: Maybe<string> } } };
+export type FindCollectionLocationIdsByExternalQuery = { __typename?: 'Query', collectionItems: { __typename: 'CollectionItemConnection', totalCount: number, edges: Array<{ __typename?: 'CollectionItemEdge', cursor: string, node: { __typename: 'CollectionLocation', id: string, place: { __typename: 'Place', id: string } } }>, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: string | null, endCursor?: string | null } } };
 
 export type FindCollectionLocationIdsByTagQueryVariables = Exact<{
-  collectionId?: Maybe<Array<Scalars['ID']> | Scalars['ID']>;
-  tags?: Maybe<Array<Scalars['String']> | Scalars['String']>;
+  collectionId?: InputMaybe<Array<Scalars['ID']> | Scalars['ID']>;
+  tags?: InputMaybe<Array<Scalars['String']> | Scalars['String']>;
   first: Scalars['Int'];
-  after?: Maybe<Scalars['String']>;
+  after?: InputMaybe<Scalars['String']>;
 }>;
 
 
-export type FindCollectionLocationIdsByTagQuery = { __typename?: 'Query', collectionItems: { __typename: 'CollectionItemConnection', totalCount: number, edges: Array<{ __typename?: 'CollectionItemEdge', cursor: string, node: { __typename: 'CollectionLocation', id: string, place: { __typename: 'Place', id: string } } }>, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: Maybe<string>, endCursor?: Maybe<string> } } };
+export type FindCollectionLocationIdsByTagQuery = { __typename?: 'Query', collectionItems: { __typename: 'CollectionItemConnection', totalCount: number, edges: Array<{ __typename?: 'CollectionItemEdge', cursor: string, node: { __typename: 'CollectionLocation', id: string, place: { __typename: 'Place', id: string } } }>, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: string | null, endCursor?: string | null } } };
 
 export type FindCollectionLocationsByExternalQueryVariables = Exact<{
-  collectionId?: Maybe<Array<Scalars['ID']> | Scalars['ID']>;
-  externalIds?: Maybe<Array<Scalars['ID']> | Scalars['ID']>;
-  externalSources?: Maybe<Array<Scalars['ID']> | Scalars['ID']>;
+  collectionId?: InputMaybe<Array<Scalars['ID']> | Scalars['ID']>;
+  externalIds?: InputMaybe<Array<Scalars['ID']> | Scalars['ID']>;
+  externalSources?: InputMaybe<Array<Scalars['ID']> | Scalars['ID']>;
   first: Scalars['Int'];
-  after?: Maybe<Scalars['String']>;
+  after?: InputMaybe<Scalars['String']>;
 }>;
 
 
-export type FindCollectionLocationsByExternalQuery = { __typename?: 'Query', collectionItems: { __typename: 'CollectionItemConnection', totalCount: number, edges: Array<{ __typename?: 'CollectionItemEdge', cursor: string, node: { __typename: 'CollectionLocation', id: string, title?: Maybe<string>, synopsis?: Maybe<string>, tags: Array<string>, readMoreUrl?: Maybe<string>, place: { __typename: 'Place', id: string, name?: Maybe<string>, synopsis?: Maybe<string>, maki?: Maybe<string>, position: { __typename?: 'Position', lon: number, lat: number }, address: { __typename?: 'PlaceAddress', addressLineOne?: Maybe<string>, addressLineTwo?: Maybe<string>, addressLineThree?: Maybe<string>, locality?: Maybe<string>, region?: Maybe<string>, regionCode?: Maybe<string>, country?: Maybe<string>, countryCode?: Maybe<string> }, layers: Array<{ __typename: 'PlaceLayer', id: string, name?: Maybe<string> }> }, position: { __typename?: 'Position', lon: number, lat: number }, externalId?: Maybe<{ __typename?: 'Attribute', value?: Maybe<any> }>, externalSource?: Maybe<{ __typename?: 'Attribute', value?: Maybe<any> }> } }>, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: Maybe<string>, endCursor?: Maybe<string> } } };
+export type FindCollectionLocationsByExternalQuery = { __typename?: 'Query', collectionItems: { __typename: 'CollectionItemConnection', totalCount: number, edges: Array<{ __typename?: 'CollectionItemEdge', cursor: string, node: { __typename: 'CollectionLocation', id: string, title?: string | null, synopsis?: string | null, tags: Array<string>, readMoreUrl?: string | null, place: { __typename: 'Place', id: string, name?: string | null, synopsis?: string | null, maki?: string | null, position: { __typename?: 'Position', lon: number, lat: number }, address: { __typename?: 'PlaceAddress', addressLineOne?: string | null, addressLineTwo?: string | null, addressLineThree?: string | null, locality?: string | null, region?: string | null, regionCode?: string | null, country?: string | null, countryCode?: string | null }, layers: Array<{ __typename: 'PlaceLayer', id: string, name?: string | null }> }, position: { __typename?: 'Position', lon: number, lat: number }, externalId?: { __typename?: 'Attribute', value?: any | null } | null, externalSource?: { __typename?: 'Attribute', value?: any | null } | null } }>, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: string | null, endCursor?: string | null } } };
 
 export type FindCollectionLocationsByTagQueryVariables = Exact<{
-  collectionId?: Maybe<Array<Scalars['ID']> | Scalars['ID']>;
-  tags?: Maybe<Array<Scalars['String']> | Scalars['String']>;
+  collectionId?: InputMaybe<Array<Scalars['ID']> | Scalars['ID']>;
+  tags?: InputMaybe<Array<Scalars['String']> | Scalars['String']>;
   first: Scalars['Int'];
-  after?: Maybe<Scalars['String']>;
+  after?: InputMaybe<Scalars['String']>;
 }>;
 
 
-export type FindCollectionLocationsByTagQuery = { __typename?: 'Query', collectionItems: { __typename: 'CollectionItemConnection', totalCount: number, edges: Array<{ __typename?: 'CollectionItemEdge', cursor: string, node: { __typename: 'CollectionLocation', id: string, title?: Maybe<string>, synopsis?: Maybe<string>, tags: Array<string>, readMoreUrl?: Maybe<string>, place: { __typename: 'Place', id: string, name?: Maybe<string>, synopsis?: Maybe<string>, maki?: Maybe<string>, position: { __typename?: 'Position', lon: number, lat: number }, address: { __typename?: 'PlaceAddress', addressLineOne?: Maybe<string>, addressLineTwo?: Maybe<string>, addressLineThree?: Maybe<string>, locality?: Maybe<string>, region?: Maybe<string>, regionCode?: Maybe<string>, country?: Maybe<string>, countryCode?: Maybe<string> }, layers: Array<{ __typename: 'PlaceLayer', id: string, name?: Maybe<string> }> }, position: { __typename?: 'Position', lon: number, lat: number }, externalId?: Maybe<{ __typename?: 'Attribute', value?: Maybe<any> }>, externalSource?: Maybe<{ __typename?: 'Attribute', value?: Maybe<any> }> } }>, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: Maybe<string>, endCursor?: Maybe<string> } } };
+export type FindCollectionLocationsByTagQuery = { __typename?: 'Query', collectionItems: { __typename: 'CollectionItemConnection', totalCount: number, edges: Array<{ __typename?: 'CollectionItemEdge', cursor: string, node: { __typename: 'CollectionLocation', id: string, title?: string | null, synopsis?: string | null, tags: Array<string>, readMoreUrl?: string | null, place: { __typename: 'Place', id: string, name?: string | null, synopsis?: string | null, maki?: string | null, position: { __typename?: 'Position', lon: number, lat: number }, address: { __typename?: 'PlaceAddress', addressLineOne?: string | null, addressLineTwo?: string | null, addressLineThree?: string | null, locality?: string | null, region?: string | null, regionCode?: string | null, country?: string | null, countryCode?: string | null }, layers: Array<{ __typename: 'PlaceLayer', id: string, name?: string | null }> }, position: { __typename?: 'Position', lon: number, lat: number }, externalId?: { __typename?: 'Attribute', value?: any | null } | null, externalSource?: { __typename?: 'Attribute', value?: any | null } | null } }>, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: string | null, endCursor?: string | null } } };
 
-export type CollectionContentFragment = { __typename?: 'Collection', title?: Maybe<string>, synopsis?: Maybe<string>, description?: Maybe<string>, discriminator: string, readMoreUrl?: Maybe<string> };
+export type CollectionContentFragment = { __typename?: 'Collection', title?: string | null, synopsis?: string | null, description?: string | null, discriminator: string, readMoreUrl?: string | null };
 
 export type CollectionItemsCountFragment = { __typename?: 'Collection', items: { __typename?: 'CollectionItemConnection', totalCount: number } };
 
-export type CollectionLocationContentFragment = { __typename?: 'CollectionLocation', title?: Maybe<string>, synopsis?: Maybe<string>, description?: Maybe<string>, tags: Array<string>, readMoreUrl?: Maybe<string>, websiteUrl?: Maybe<string>, position: { __typename?: 'Position', lon: number, lat: number } };
+export type CollectionLocationContentFragment = { __typename?: 'CollectionLocation', title?: string | null, synopsis?: string | null, description?: string | null, tags: Array<string>, readMoreUrl?: string | null, websiteUrl?: string | null, position: { __typename?: 'Position', lon: number, lat: number } };
 
-export type CollectionLocationExternalRefsFragment = { __typename?: 'CollectionLocation', externalId?: Maybe<{ __typename?: 'Attribute', value?: Maybe<any> }>, externalSource?: Maybe<{ __typename?: 'Attribute', value?: Maybe<any> }> };
+export type CollectionLocationExternalRefsFragment = { __typename?: 'CollectionLocation', externalId?: { __typename?: 'Attribute', value?: any | null } | null, externalSource?: { __typename?: 'Attribute', value?: any | null } | null };
 
-export type CollectionLocationPartialContentFragment = { __typename?: 'CollectionLocation', title?: Maybe<string>, synopsis?: Maybe<string>, tags: Array<string>, readMoreUrl?: Maybe<string>, position: { __typename?: 'Position', lon: number, lat: number } };
+export type CollectionLocationPartialContentFragment = { __typename?: 'CollectionLocation', title?: string | null, synopsis?: string | null, tags: Array<string>, readMoreUrl?: string | null, position: { __typename?: 'Position', lon: number, lat: number } };
 
-export type CollectionPartialContentFragment = { __typename?: 'Collection', title?: Maybe<string>, synopsis?: Maybe<string>, readMoreUrl?: Maybe<string> };
+export type CollectionPartialContentFragment = { __typename?: 'Collection', title?: string | null, synopsis?: string | null, readMoreUrl?: string | null };
 
 export type GetCollectionLocationQueryVariables = Exact<{
   id: Scalars['ID'];
-  mediaImagePreferredBestFit?: Maybe<Array<Scalars['Int']> | Scalars['Int']>;
+  mediaImagePreferredBestFit?: InputMaybe<Array<Scalars['Int']> | Scalars['Int']>;
 }>;
 
 
-export type GetCollectionLocationQuery = { __typename?: 'Query', collectionItem?: Maybe<{ __typename: 'CollectionLocation', id: string, title?: Maybe<string>, synopsis?: Maybe<string>, description?: Maybe<string>, tags: Array<string>, readMoreUrl?: Maybe<string>, websiteUrl?: Maybe<string>, place: { __typename: 'Place', id: string, name?: Maybe<string>, synopsis?: Maybe<string>, maki?: Maybe<string>, position: { __typename?: 'Position', lon: number, lat: number }, address: { __typename?: 'PlaceAddress', addressLineOne?: Maybe<string>, addressLineTwo?: Maybe<string>, addressLineThree?: Maybe<string>, locality?: Maybe<string>, region?: Maybe<string>, regionCode?: Maybe<string>, country?: Maybe<string>, countryCode?: Maybe<string> }, layers: Array<{ __typename: 'PlaceLayer', id: string, name?: Maybe<string> }> }, preferredMedia?: Maybe<{ __typename: 'MediaContainer', id: string, resource: { __typename: 'MediaImage', caption?: Maybe<string>, copyright?: Maybe<string>, attribution?: Maybe<string>, id?: Maybe<string>, altText?: Maybe<string>, source?: Maybe<{ __typename?: 'MediaImageSource', url: string }> } }>, position: { __typename?: 'Position', lon: number, lat: number } }> };
+export type GetCollectionLocationQuery = { __typename?: 'Query', collectionItem?: { __typename: 'CollectionLocation', id: string, title?: string | null, synopsis?: string | null, description?: string | null, tags: Array<string>, readMoreUrl?: string | null, websiteUrl?: string | null, place: { __typename: 'Place', id: string, name?: string | null, synopsis?: string | null, maki?: string | null, position: { __typename?: 'Position', lon: number, lat: number }, address: { __typename?: 'PlaceAddress', addressLineOne?: string | null, addressLineTwo?: string | null, addressLineThree?: string | null, locality?: string | null, region?: string | null, regionCode?: string | null, country?: string | null, countryCode?: string | null }, layers: Array<{ __typename: 'PlaceLayer', id: string, name?: string | null }> }, preferredMedia?: { __typename: 'MediaContainer', id: string, resource: { __typename: 'MediaImage', id?: string | null, caption?: string | null, copyright?: string | null, attribution?: string | null, altText?: string | null, source?: { __typename?: 'MediaImageSource', url: string } | null } | { __typename: 'MediaResourceFailedToLoad' } } | null, position: { __typename?: 'Position', lon: number, lat: number } } | null };
 
 export type GetCollectionQueryVariables = Exact<{
   id: Scalars['ID'];
 }>;
 
 
-export type GetCollectionQuery = { __typename?: 'Query', collection?: Maybe<{ __typename: 'Collection', id: string, title?: Maybe<string>, synopsis?: Maybe<string>, description?: Maybe<string>, discriminator: string, readMoreUrl?: Maybe<string>, items: { __typename?: 'CollectionItemConnection', totalCount: number } }> };
+export type GetCollectionQuery = { __typename?: 'Query', collection?: { __typename: 'Collection', id: string, title?: string | null, synopsis?: string | null, description?: string | null, discriminator: string, readMoreUrl?: string | null, items: { __typename?: 'CollectionItemConnection', totalCount: number } } | null };
 
 export type ListCollectionsQueryVariables = Exact<{
   profileId: Scalars['ID'];
   first: Scalars['Int'];
-  after?: Maybe<Scalars['String']>;
-  discriminator?: Maybe<Scalars['String']>;
+  after?: InputMaybe<Scalars['String']>;
+  discriminator?: InputMaybe<Scalars['String']>;
 }>;
 
 
-export type ListCollectionsQuery = { __typename?: 'Query', collections: { __typename: 'CollectionConnection', totalCount: number, edges: Array<{ __typename?: 'CollectionEdge', node: { __typename: 'Collection', id: string, title?: Maybe<string>, synopsis?: Maybe<string>, readMoreUrl?: Maybe<string>, items: { __typename?: 'CollectionItemConnection', totalCount: number } } }>, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: Maybe<string>, endCursor?: Maybe<string> } } };
+export type ListCollectionsQuery = { __typename?: 'Query', collections: { __typename: 'CollectionConnection', totalCount: number, edges: Array<{ __typename?: 'CollectionEdge', node: { __typename: 'Collection', id: string, title?: string | null, synopsis?: string | null, readMoreUrl?: string | null, items: { __typename?: 'CollectionItemConnection', totalCount: number } } }>, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: string | null, endCursor?: string | null } } };
 
 export type UpdateCollectionLocationMutationVariables = Exact<{
   id: Scalars['ID'];
@@ -5744,7 +7440,7 @@ export type UpdateCollectionLocationMutationVariables = Exact<{
 }>;
 
 
-export type UpdateCollectionLocationMutation = { __typename?: 'Mutation', updateCollectionLocation: { __typename: 'UpdateCollectionLocationPayload', location?: Maybe<{ __typename: 'CollectionLocation', id: string, title?: Maybe<string>, synopsis?: Maybe<string>, description?: Maybe<string>, tags: Array<string>, readMoreUrl?: Maybe<string>, websiteUrl?: Maybe<string>, position: { __typename?: 'Position', lon: number, lat: number } }> } };
+export type UpdateCollectionLocationMutation = { __typename?: 'Mutation', updateCollectionLocation: { __typename: 'UpdateCollectionLocationPayload', location?: { __typename: 'CollectionLocation', id: string, title?: string | null, synopsis?: string | null, description?: string | null, tags: Array<string>, readMoreUrl?: string | null, websiteUrl?: string | null, position: { __typename?: 'Position', lon: number, lat: number } } | null } };
 
 export type CreateItineraryDirectionsMutationVariables = Exact<{
   itineraryId: Scalars['ID'];
@@ -5752,7 +7448,7 @@ export type CreateItineraryDirectionsMutationVariables = Exact<{
 }>;
 
 
-export type CreateItineraryDirectionsMutation = { __typename?: 'Mutation', createItineraryDirections: { __typename: 'CreateItineraryDirectionsPayload', directions?: Maybe<{ __typename: 'ItineraryDirections', id: string, durationMin?: Maybe<number> }>, cascaded: { __typename?: 'ItineraryItemCascadedChanges', deletedIds: Array<string>, created: Array<{ __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', id: string }>, updated: Array<{ __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', id: string }> } } };
+export type CreateItineraryDirectionsMutation = { __typename?: 'Mutation', createItineraryDirections: { __typename: 'CreateItineraryDirectionsPayload', directions?: { __typename: 'ItineraryDirections', id: string, durationMin?: number | null } | null, cascaded: { __typename?: 'ItineraryItemCascadedChanges', deletedIds: Array<string>, created: Array<{ __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', id: string }>, updated: Array<{ __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', id: string }> } } };
 
 export type CreateItineraryLocationMutationVariables = Exact<{
   itineraryId: Scalars['ID'];
@@ -5760,15 +7456,15 @@ export type CreateItineraryLocationMutationVariables = Exact<{
 }>;
 
 
-export type CreateItineraryLocationMutation = { __typename?: 'Mutation', createItineraryLocation: { __typename: 'CreateItineraryLocationPayload', location?: Maybe<{ __typename: 'ItineraryLocation', id: string, title?: Maybe<string>, synopsis?: Maybe<string>, description?: Maybe<string>, tags: Array<string>, optional: boolean, readMoreUrl?: Maybe<string>, itinerary: { __typename: 'Itinerary', id: string, locations: { __typename?: 'ItineraryItemConnection', totalCount: number } }, place: { __typename: 'Place', id: string, name?: Maybe<string>, synopsis?: Maybe<string>, maki?: Maybe<string>, position: { __typename?: 'Position', lon: number, lat: number }, address: { __typename?: 'PlaceAddress', addressLineOne?: Maybe<string>, addressLineTwo?: Maybe<string>, addressLineThree?: Maybe<string>, locality?: Maybe<string>, region?: Maybe<string>, regionCode?: Maybe<string>, country?: Maybe<string>, countryCode?: Maybe<string> }, layers: Array<{ __typename: 'PlaceLayer', id: string, name?: Maybe<string> }> }, position: { __typename?: 'Position', lon: number, lat: number } }>, cascaded: { __typename?: 'ItineraryItemCascadedChanges', deletedIds: Array<string>, created: Array<{ __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', id: string }>, updated: Array<{ __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', id: string }> } } };
+export type CreateItineraryLocationMutation = { __typename?: 'Mutation', createItineraryLocation: { __typename: 'CreateItineraryLocationPayload', location?: { __typename: 'ItineraryLocation', id: string, title?: string | null, synopsis?: string | null, description?: string | null, tags: Array<string>, optional: boolean, readMoreUrl?: string | null, itinerary: { __typename: 'Itinerary', id: string, locations: { __typename?: 'ItineraryItemConnection', totalCount: number } }, place: { __typename: 'Place', id: string, name?: string | null, synopsis?: string | null, maki?: string | null, position: { __typename?: 'Position', lon: number, lat: number }, address: { __typename?: 'PlaceAddress', addressLineOne?: string | null, addressLineTwo?: string | null, addressLineThree?: string | null, locality?: string | null, region?: string | null, regionCode?: string | null, country?: string | null, countryCode?: string | null }, layers: Array<{ __typename: 'PlaceLayer', id: string, name?: string | null }> }, position: { __typename?: 'Position', lon: number, lat: number } } | null, cascaded: { __typename?: 'ItineraryItemCascadedChanges', deletedIds: Array<string>, created: Array<{ __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', id: string }>, updated: Array<{ __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', id: string }> } } };
 
 export type CreateItineraryMutationVariables = Exact<{
   itinerary: CreateItineraryInput;
-  profileId?: Maybe<Scalars['ID']>;
+  profileId?: InputMaybe<Scalars['ID']>;
 }>;
 
 
-export type CreateItineraryMutation = { __typename?: 'Mutation', createItinerary: { __typename: 'CreateItineraryPayload', itinerary?: Maybe<{ __typename: 'Itinerary', id: string, title?: Maybe<string>, synopsis?: Maybe<string>, description?: Maybe<string>, tags: Array<string>, created?: Maybe<string>, autoRoute?: Maybe<{ __typename?: 'ItineraryAutoRoute', defaultMode: RouteMode }>, locations: { __typename?: 'ItineraryItemConnection', totalCount: number } }> } };
+export type CreateItineraryMutation = { __typename?: 'Mutation', createItinerary: { __typename: 'CreateItineraryPayload', itinerary?: { __typename: 'Itinerary', id: string, title?: string | null, synopsis?: string | null, description?: string | null, tags: Array<string>, created?: string | null, autoRoute?: { __typename?: 'ItineraryAutoRoute', defaultMode: RouteMode } | null, locations: { __typename?: 'ItineraryItemConnection', totalCount: number } } | null } };
 
 export type DeleteItineraryLocationMutationVariables = Exact<{
   id: Scalars['ID'];
@@ -5789,7 +7485,7 @@ export type DisableItineraryAutoRouteMutationVariables = Exact<{
 }>;
 
 
-export type DisableItineraryAutoRouteMutation = { __typename?: 'Mutation', updateItinerary: { __typename: 'UpdateItineraryPayload', itinerary?: Maybe<{ __typename: 'Itinerary', id: string, autoRoute?: Maybe<{ __typename?: 'ItineraryAutoRoute', defaultMode: RouteMode }> }>, cascaded: { __typename?: 'ItineraryItemCascadedChanges', deletedIds: Array<string>, created: Array<{ __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', id: string }>, updated: Array<{ __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', id: string }> } } };
+export type DisableItineraryAutoRouteMutation = { __typename?: 'Mutation', updateItinerary: { __typename: 'UpdateItineraryPayload', itinerary?: { __typename: 'Itinerary', id: string, autoRoute?: { __typename?: 'ItineraryAutoRoute', defaultMode: RouteMode } | null } | null, cascaded: { __typename?: 'ItineraryItemCascadedChanges', deletedIds: Array<string>, created: Array<{ __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', id: string }>, updated: Array<{ __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', id: string }> } } };
 
 export type EnableItineraryAutoRouteMutationVariables = Exact<{
   id: Scalars['ID'];
@@ -5797,43 +7493,45 @@ export type EnableItineraryAutoRouteMutationVariables = Exact<{
 }>;
 
 
-export type EnableItineraryAutoRouteMutation = { __typename?: 'Mutation', updateItinerary: { __typename: 'UpdateItineraryPayload', itinerary?: Maybe<{ __typename: 'Itinerary', id: string, autoRoute?: Maybe<{ __typename?: 'ItineraryAutoRoute', defaultMode: RouteMode }> }>, cascaded: { __typename?: 'ItineraryItemCascadedChanges', deletedIds: Array<string>, created: Array<{ __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', id: string }>, updated: Array<{ __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', id: string }> } } };
+export type EnableItineraryAutoRouteMutation = { __typename?: 'Mutation', updateItinerary: { __typename: 'UpdateItineraryPayload', itinerary?: { __typename: 'Itinerary', id: string, autoRoute?: { __typename?: 'ItineraryAutoRoute', defaultMode: RouteMode } | null } | null, cascaded: { __typename?: 'ItineraryItemCascadedChanges', deletedIds: Array<string>, created: Array<{ __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', id: string }>, updated: Array<{ __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', id: string }> } } };
 
 export type FindItineraryLocationIdsByPlaceIdQueryVariables = Exact<{
   itineraryId: Scalars['ID'];
   placeId: Scalars['ID'];
   first: Scalars['Int'];
-  after?: Maybe<Scalars['String']>;
+  after?: InputMaybe<Scalars['String']>;
 }>;
 
 
-export type FindItineraryLocationIdsByPlaceIdQuery = { __typename?: 'Query', itinerary?: Maybe<{ __typename?: 'Itinerary', descendants: { __typename: 'ItineraryItemConnection', totalCount: number, edges: Array<{ __typename?: 'ItineraryItemEdge', node: { __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', id: string, place: { __typename: 'Place', id: string } } }>, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: Maybe<string>, endCursor?: Maybe<string> } } }> };
+export type FindItineraryLocationIdsByPlaceIdQuery = { __typename?: 'Query', itinerary?: { __typename?: 'Itinerary', descendants: { __typename: 'ItineraryItemConnection', totalCount: number, edges: Array<{ __typename?: 'ItineraryItemEdge', node: { __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', id: string, place: { __typename: 'Place', id: string } } }>, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: string | null, endCursor?: string | null } } } | null };
 
 export type FindItineraryLocationsByPlaceIdQueryVariables = Exact<{
   itineraryId: Scalars['ID'];
   placeId: Scalars['ID'];
   first: Scalars['Int'];
-  after?: Maybe<Scalars['String']>;
+  after?: InputMaybe<Scalars['String']>;
 }>;
 
 
-export type FindItineraryLocationsByPlaceIdQuery = { __typename?: 'Query', itinerary?: Maybe<{ __typename?: 'Itinerary', descendants: { __typename: 'ItineraryItemConnection', totalCount: number, edges: Array<{ __typename?: 'ItineraryItemEdge', node: { __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', id: string, title?: Maybe<string>, synopsis?: Maybe<string>, tags: Array<string>, optional: boolean, readMoreUrl?: Maybe<string>, place: { __typename: 'Place', id: string, name?: Maybe<string>, synopsis?: Maybe<string>, maki?: Maybe<string>, position: { __typename?: 'Position', lon: number, lat: number }, address: { __typename?: 'PlaceAddress', addressLineOne?: Maybe<string>, addressLineTwo?: Maybe<string>, addressLineThree?: Maybe<string>, locality?: Maybe<string>, region?: Maybe<string>, regionCode?: Maybe<string>, country?: Maybe<string>, countryCode?: Maybe<string> }, layers: Array<{ __typename: 'PlaceLayer', id: string, name?: Maybe<string> }> }, position: { __typename?: 'Position', lon: number, lat: number } } }>, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: Maybe<string>, endCursor?: Maybe<string> } } }> };
+export type FindItineraryLocationsByPlaceIdQuery = { __typename?: 'Query', itinerary?: { __typename?: 'Itinerary', descendants: { __typename: 'ItineraryItemConnection', totalCount: number, edges: Array<{ __typename?: 'ItineraryItemEdge', node: { __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', id: string, title?: string | null, synopsis?: string | null, tags: Array<string>, optional: boolean, readMoreUrl?: string | null, place: { __typename: 'Place', id: string, name?: string | null, synopsis?: string | null, maki?: string | null, position: { __typename?: 'Position', lon: number, lat: number }, address: { __typename?: 'PlaceAddress', addressLineOne?: string | null, addressLineTwo?: string | null, addressLineThree?: string | null, locality?: string | null, region?: string | null, regionCode?: string | null, country?: string | null, countryCode?: string | null }, layers: Array<{ __typename: 'PlaceLayer', id: string, name?: string | null }> }, position: { __typename?: 'Position', lon: number, lat: number } } }>, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: string | null, endCursor?: string | null } } } | null };
 
 export type ItineraryCascadedChangesFragment = { __typename?: 'ItineraryItemCascadedChanges', deletedIds: Array<string>, created: Array<{ __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', id: string }>, updated: Array<{ __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', id: string }> };
 
-export type ItineraryContentFragment = { __typename?: 'Itinerary', title?: Maybe<string>, synopsis?: Maybe<string>, description?: Maybe<string>, tags: Array<string>, created?: Maybe<string>, autoRoute?: Maybe<{ __typename?: 'ItineraryAutoRoute', defaultMode: RouteMode }> };
+export type ItineraryContentFragment = { __typename?: 'Itinerary', title?: string | null, synopsis?: string | null, description?: string | null, tags: Array<string>, created?: string | null, autoRoute?: { __typename?: 'ItineraryAutoRoute', defaultMode: RouteMode } | null };
 
-export type ItineraryDirectionsContentFragment = { __typename?: 'ItineraryDirections', durationMin?: Maybe<number> };
+export type ItineraryDirectionsContentFragment = { __typename?: 'ItineraryDirections', durationMin?: number | null };
 
-export type ItineraryDirectionsPartialContentFragment = { __typename?: 'ItineraryDirections', durationMin?: Maybe<number> };
+export type ItineraryDirectionsPartialContentFragment = { __typename?: 'ItineraryDirections', durationMin?: number | null };
 
-export type ItineraryLocationContentFragment = { __typename?: 'ItineraryLocation', title?: Maybe<string>, synopsis?: Maybe<string>, description?: Maybe<string>, tags: Array<string>, optional: boolean, readMoreUrl?: Maybe<string>, position: { __typename?: 'Position', lon: number, lat: number } };
+export type ItineraryLocationContentFragment = { __typename?: 'ItineraryLocation', title?: string | null, synopsis?: string | null, description?: string | null, tags: Array<string>, optional: boolean, readMoreUrl?: string | null, position: { __typename?: 'Position', lon: number, lat: number } };
 
-export type ItineraryLocationPartialContentFragment = { __typename?: 'ItineraryLocation', title?: Maybe<string>, synopsis?: Maybe<string>, tags: Array<string>, optional: boolean, readMoreUrl?: Maybe<string>, position: { __typename?: 'Position', lon: number, lat: number } };
+export type ItineraryLocationPartialContentFragment = { __typename?: 'ItineraryLocation', title?: string | null, synopsis?: string | null, tags: Array<string>, optional: boolean, readMoreUrl?: string | null, position: { __typename?: 'Position', lon: number, lat: number } };
 
 export type ItineraryLocationsCountFragment = { __typename?: 'Itinerary', locations: { __typename?: 'ItineraryItemConnection', totalCount: number } };
 
-export type ItineraryPartialContentFragment = { __typename?: 'Itinerary', title?: Maybe<string>, synopsis?: Maybe<string>, tags: Array<string>, created?: Maybe<string> };
+export type ItineraryPartialContentFragment = { __typename?: 'Itinerary', title?: string | null, synopsis?: string | null, tags: Array<string>, created?: string | null };
+
+export type ItinerarySearchPartialContentFragment = { __typename?: 'ItinerarySearchNode', title?: string | null, synopsis?: string | null, tags: Array<string>, created?: string | null };
 
 export type GetItineraryDirectionsQueryVariables = Exact<{
   id: Scalars['ID'];
@@ -5841,44 +7539,44 @@ export type GetItineraryDirectionsQueryVariables = Exact<{
 }>;
 
 
-export type GetItineraryDirectionsQuery = { __typename?: 'Query', node?: Maybe<{ __typename: 'Collection', id: string } | { __typename: 'CollectionLocation', id: string } | { __typename: 'ConnectedApp', id: string } | { __typename: 'Itinerary', id: string } | { __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string, durationMin?: Maybe<number>, route: { __typename?: 'Route', segments: Array<{ __typename: 'RouteSegment', id: string, mode: RouteMode, polyline?: Maybe<string> }> } } | { __typename: 'ItineraryLocation', id: string } | { __typename: 'Place', id: string } | { __typename: 'Profile', id: string }> };
+export type GetItineraryDirectionsQuery = { __typename?: 'Query', node?: { __typename: 'Collection', id: string } | { __typename: 'CollectionItemFailedToLoad', id: string } | { __typename: 'CollectionLocation', id: string } | { __typename: 'ConnectedApp', id: string } | { __typename: 'IconComposition', id: string } | { __typename: 'IconResourceFailedToLoad', id: string } | { __typename: 'IconSilhouette', id: string } | { __typename: 'Itinerary', id: string } | { __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string, durationMin?: number | null, route: { __typename?: 'Route', segments: Array<{ __typename: 'RouteSegment', id: string, mode: RouteMode, polyline?: string | null }> } } | { __typename: 'ItineraryLocation', id: string } | { __typename: 'MediaResourceFailedToLoad', id: string } | { __typename: 'Place', id: string } | { __typename: 'Profile', id: string } | { __typename: 'UserAgreement', id: string } | null };
 
 export type GetItineraryLocationQueryVariables = Exact<{
   id: Scalars['ID'];
-  mediaImagePreferredBestFit?: Maybe<Array<Scalars['Int']> | Scalars['Int']>;
+  mediaImagePreferredBestFit?: InputMaybe<Array<Scalars['Int']> | Scalars['Int']>;
 }>;
 
 
-export type GetItineraryLocationQuery = { __typename?: 'Query', node?: Maybe<{ __typename: 'Collection', id: string } | { __typename: 'CollectionLocation', id: string } | { __typename: 'ConnectedApp', id: string } | { __typename: 'Itinerary', id: string } | { __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', id: string, title?: Maybe<string>, synopsis?: Maybe<string>, description?: Maybe<string>, tags: Array<string>, optional: boolean, readMoreUrl?: Maybe<string>, place: { __typename: 'Place', id: string, name?: Maybe<string>, synopsis?: Maybe<string>, description?: Maybe<string>, maki?: Maybe<string>, position: { __typename?: 'Position', lon: number, lat: number }, address: { __typename?: 'PlaceAddress', addressLineOne?: Maybe<string>, addressLineTwo?: Maybe<string>, addressLineThree?: Maybe<string>, locality?: Maybe<string>, region?: Maybe<string>, regionCode?: Maybe<string>, country?: Maybe<string>, countryCode?: Maybe<string> }, contact: { __typename?: 'PlaceContact', phoneNumber?: Maybe<string>, emailAddress?: Maybe<string>, websiteUrl?: Maybe<string>, bookingsUrl?: Maybe<string>, facebookUrl?: Maybe<string>, instagramUrl?: Maybe<string>, twitterUrl?: Maybe<string> }, layers: Array<{ __typename: 'PlaceLayer', id: string, name?: Maybe<string> }>, hours?: Maybe<{ __typename?: 'PlaceHours', osmTag: string }> }, preferredMedia?: Maybe<{ __typename: 'MediaContainer', id: string, resource: { __typename: 'MediaImage', id?: Maybe<string>, provider: string, copyright?: Maybe<string>, altText?: Maybe<string>, attribution?: Maybe<string>, caption?: Maybe<string>, tags: Array<string>, source?: Maybe<{ __typename?: 'MediaImageSource', url: string }> } }>, position: { __typename?: 'Position', lon: number, lat: number } } | { __typename: 'Place', id: string } | { __typename: 'Profile', id: string }> };
+export type GetItineraryLocationQuery = { __typename?: 'Query', node?: { __typename: 'Collection', id: string } | { __typename: 'CollectionItemFailedToLoad', id: string } | { __typename: 'CollectionLocation', id: string } | { __typename: 'ConnectedApp', id: string } | { __typename: 'IconComposition', id: string } | { __typename: 'IconResourceFailedToLoad', id: string } | { __typename: 'IconSilhouette', id: string } | { __typename: 'Itinerary', id: string } | { __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', id: string, title?: string | null, synopsis?: string | null, description?: string | null, tags: Array<string>, optional: boolean, readMoreUrl?: string | null, place: { __typename: 'Place', id: string, name?: string | null, synopsis?: string | null, description?: string | null, maki?: string | null, position: { __typename?: 'Position', lon: number, lat: number }, address: { __typename?: 'PlaceAddress', addressLineOne?: string | null, addressLineTwo?: string | null, addressLineThree?: string | null, locality?: string | null, region?: string | null, regionCode?: string | null, country?: string | null, countryCode?: string | null }, contact: { __typename?: 'PlaceContact', phoneNumber?: string | null, emailAddress?: string | null, websiteUrl?: string | null, bookingUrl?: string | null, facebookUrl?: string | null, instagramUrl?: string | null, twitterUrl?: string | null }, layers: Array<{ __typename: 'PlaceLayer', id: string, name?: string | null }>, hours?: { __typename?: 'PlaceHours', osmTag: string } | null }, preferredMedia?: { __typename: 'MediaContainer', id: string, resource: { __typename: 'MediaImage', id?: string | null, provider: string, copyright?: string | null, altText?: string | null, attribution?: string | null, caption?: string | null, tags: Array<string>, source?: { __typename?: 'MediaImageSource', url: string } | null } | { __typename: 'MediaResourceFailedToLoad' } } | null, position: { __typename?: 'Position', lon: number, lat: number } } | { __typename: 'MediaResourceFailedToLoad', id: string } | { __typename: 'Place', id: string } | { __typename: 'Profile', id: string } | { __typename: 'UserAgreement', id: string } | null };
 
 export type GetItineraryQueryVariables = Exact<{
   id: Scalars['ID'];
-  mediaImagePreferredBestFit?: Maybe<Array<Scalars['Int']> | Scalars['Int']>;
+  mediaImagePreferredBestFit?: InputMaybe<Array<Scalars['Int']> | Scalars['Int']>;
 }>;
 
 
-export type GetItineraryQuery = { __typename?: 'Query', itinerary?: Maybe<{ __typename: 'Itinerary', id: string, title?: Maybe<string>, synopsis?: Maybe<string>, description?: Maybe<string>, tags: Array<string>, created?: Maybe<string>, profile?: Maybe<{ __typename: 'Profile', id: string, name: string, handle?: Maybe<string> }>, preferredMedia?: Maybe<{ __typename: 'MediaContainer', id: string, resource: { __typename: 'MediaImage', id?: Maybe<string>, provider: string, copyright?: Maybe<string>, altText?: Maybe<string>, attribution?: Maybe<string>, caption?: Maybe<string>, tags: Array<string>, source?: Maybe<{ __typename?: 'MediaImageSource', url: string }> } }>, autoRoute?: Maybe<{ __typename?: 'ItineraryAutoRoute', defaultMode: RouteMode }>, locations: { __typename?: 'ItineraryItemConnection', totalCount: number } }> };
+export type GetItineraryQuery = { __typename?: 'Query', itinerary?: { __typename: 'Itinerary', id: string, title?: string | null, synopsis?: string | null, description?: string | null, tags: Array<string>, created?: string | null, profile?: { __typename: 'Profile', id: string, name: string, handle?: string | null } | null, preferredMedia?: { __typename: 'MediaContainer', id: string, resource: { __typename: 'MediaImage', id?: string | null, provider: string, copyright?: string | null, altText?: string | null, attribution?: string | null, caption?: string | null, tags: Array<string>, source?: { __typename?: 'MediaImageSource', url: string } | null } | { __typename: 'MediaResourceFailedToLoad' } } | null, autoRoute?: { __typename?: 'ItineraryAutoRoute', defaultMode: RouteMode } | null, locations: { __typename?: 'ItineraryItemConnection', totalCount: number } } | null };
 
 export type ListItinerariesQueryVariables = Exact<{
   profileId: Scalars['ID'];
   first: Scalars['Int'];
-  after?: Maybe<Scalars['String']>;
-  mediaImagePreferredBestFit?: Maybe<Array<Scalars['Int']> | Scalars['Int']>;
+  after?: InputMaybe<Scalars['String']>;
+  mediaImagePreferredBestFit?: InputMaybe<Array<Scalars['Int']> | Scalars['Int']>;
 }>;
 
 
-export type ListItinerariesQuery = { __typename?: 'Query', itineraries: { __typename: 'ItineraryConnection', totalCount: number, edges: Array<{ __typename?: 'ItineraryEdge', node: { __typename: 'Itinerary', id: string, title?: Maybe<string>, synopsis?: Maybe<string>, tags: Array<string>, created?: Maybe<string>, preferredMedia?: Maybe<{ __typename: 'MediaContainer', id: string, resource: { __typename: 'MediaImage', id?: Maybe<string>, provider: string, copyright?: Maybe<string>, altText?: Maybe<string>, attribution?: Maybe<string>, caption?: Maybe<string>, tags: Array<string>, source?: Maybe<{ __typename?: 'MediaImageSource', url: string }> } }> } }>, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: Maybe<string>, endCursor?: Maybe<string> } } };
+export type ListItinerariesQuery = { __typename?: 'Query', itineraries: { __typename: 'ItinerarySearchConnection', totalCount: number, edges: Array<{ __typename?: 'ItinerarySearchEdge', node: { __typename: 'ItinerarySearchNode', id: string, title?: string | null, synopsis?: string | null, tags: Array<string>, created?: string | null, preferredMedia?: { __typename: 'MediaContainer', id: string, resource: { __typename: 'MediaImage', id?: string | null, provider: string, copyright?: string | null, altText?: string | null, attribution?: string | null, caption?: string | null, tags: Array<string>, source?: { __typename?: 'MediaImageSource', url: string } | null } | { __typename: 'MediaResourceFailedToLoad' } } | null } }>, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: string | null, endCursor?: string | null } } };
 
 export type ListItineraryLocationsQueryVariables = Exact<{
   id: Scalars['ID'];
   first: Scalars['Int'];
-  after?: Maybe<Scalars['String']>;
+  after?: InputMaybe<Scalars['String']>;
   includeRoutePolyline: Scalars['Boolean'];
-  mediaImagePreferredBestFit?: Maybe<Array<Scalars['Int']> | Scalars['Int']>;
+  mediaImagePreferredBestFit?: InputMaybe<Array<Scalars['Int']> | Scalars['Int']>;
 }>;
 
 
-export type ListItineraryLocationsQuery = { __typename?: 'Query', itinerary?: Maybe<{ __typename: 'Itinerary', id: string, locations: { __typename?: 'ItineraryItemConnection', totalCount: number, edges: Array<{ __typename?: 'ItineraryItemEdge', location: { __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', id: string, title?: Maybe<string>, synopsis?: Maybe<string>, tags: Array<string>, optional: boolean, readMoreUrl?: Maybe<string>, place: { __typename: 'Place', id: string, name?: Maybe<string>, synopsis?: Maybe<string>, maki?: Maybe<string>, position: { __typename?: 'Position', lon: number, lat: number }, address: { __typename?: 'PlaceAddress', addressLineOne?: Maybe<string>, addressLineTwo?: Maybe<string>, addressLineThree?: Maybe<string>, locality?: Maybe<string>, region?: Maybe<string>, regionCode?: Maybe<string>, country?: Maybe<string>, countryCode?: Maybe<string> }, layers: Array<{ __typename: 'PlaceLayer', id: string, name?: Maybe<string> }> }, preferredMedia?: Maybe<{ __typename: 'MediaContainer', id: string, resource: { __typename: 'MediaImage', id?: Maybe<string>, provider: string, copyright?: Maybe<string>, altText?: Maybe<string>, attribution?: Maybe<string>, caption?: Maybe<string>, tags: Array<string>, source?: Maybe<{ __typename?: 'MediaImageSource', url: string }> } }>, position: { __typename?: 'Position', lon: number, lat: number } }, arrival: { __typename?: 'ItineraryDirectionsConnection', totalCount: number, directions: Array<{ __typename: 'ItineraryDirections', id: string, durationMin?: Maybe<number>, route: { __typename?: 'Route', segments: Array<{ __typename: 'RouteSegment', id: string, mode: RouteMode, polyline?: Maybe<string> }> } }> } }>, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: Maybe<string>, endCursor?: Maybe<string> } } }> };
+export type ListItineraryLocationsQuery = { __typename?: 'Query', itinerary?: { __typename: 'Itinerary', id: string, locations: { __typename?: 'ItineraryItemConnection', totalCount: number, edges: Array<{ __typename?: 'ItineraryItemEdge', location: { __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', id: string, title?: string | null, synopsis?: string | null, tags: Array<string>, optional: boolean, readMoreUrl?: string | null, place: { __typename: 'Place', id: string, name?: string | null, synopsis?: string | null, maki?: string | null, position: { __typename?: 'Position', lon: number, lat: number }, address: { __typename?: 'PlaceAddress', addressLineOne?: string | null, addressLineTwo?: string | null, addressLineThree?: string | null, locality?: string | null, region?: string | null, regionCode?: string | null, country?: string | null, countryCode?: string | null }, layers: Array<{ __typename: 'PlaceLayer', id: string, name?: string | null }> }, preferredMedia?: { __typename: 'MediaContainer', id: string, resource: { __typename: 'MediaImage', id?: string | null, provider: string, copyright?: string | null, altText?: string | null, attribution?: string | null, caption?: string | null, tags: Array<string>, source?: { __typename?: 'MediaImageSource', url: string } | null } | { __typename: 'MediaResourceFailedToLoad' } } | null, position: { __typename?: 'Position', lon: number, lat: number } }, arrival: { __typename?: 'ItineraryDirectionsConnection', totalCount: number, directions: Array<{ __typename: 'ItineraryDirections', id: string, durationMin?: number | null, route: { __typename?: 'Route', segments: Array<{ __typename: 'RouteSegment', id: string, mode: RouteMode, polyline?: string | null }> } }> } }>, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: string | null, endCursor?: string | null } } } | null };
 
 export type MoveItineraryLocationAfterMutationVariables = Exact<{
   id: Scalars['ID'];
@@ -5901,7 +7599,7 @@ export type UpdateItineraryLocationIsOptionalMutationVariables = Exact<{
 }>;
 
 
-export type UpdateItineraryLocationIsOptionalMutation = { __typename?: 'Mutation', updateItineraryLocation: { __typename: 'UpdateItineraryLocationPayload', location?: Maybe<{ __typename: 'ItineraryLocation', id: string, optional: boolean }>, cascaded: { __typename?: 'ItineraryItemCascadedChanges', deletedIds: Array<string>, created: Array<{ __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', id: string }>, updated: Array<{ __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', id: string }> } } };
+export type UpdateItineraryLocationIsOptionalMutation = { __typename?: 'Mutation', updateItineraryLocation: { __typename: 'UpdateItineraryLocationPayload', location?: { __typename: 'ItineraryLocation', id: string, optional: boolean } | null, cascaded: { __typename?: 'ItineraryItemCascadedChanges', deletedIds: Array<string>, created: Array<{ __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', id: string }>, updated: Array<{ __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', id: string }> } } };
 
 export type UpdateItineraryLocationMutationVariables = Exact<{
   id: Scalars['ID'];
@@ -5909,7 +7607,7 @@ export type UpdateItineraryLocationMutationVariables = Exact<{
 }>;
 
 
-export type UpdateItineraryLocationMutation = { __typename?: 'Mutation', updateItineraryLocation: { __typename: 'UpdateItineraryLocationPayload', location?: Maybe<{ __typename: 'ItineraryLocation', id: string, title?: Maybe<string>, synopsis?: Maybe<string>, description?: Maybe<string>, tags: Array<string>, optional: boolean, readMoreUrl?: Maybe<string>, position: { __typename?: 'Position', lon: number, lat: number } }>, cascaded: { __typename?: 'ItineraryItemCascadedChanges', deletedIds: Array<string>, created: Array<{ __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', id: string }>, updated: Array<{ __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', id: string }> } } };
+export type UpdateItineraryLocationMutation = { __typename?: 'Mutation', updateItineraryLocation: { __typename: 'UpdateItineraryLocationPayload', location?: { __typename: 'ItineraryLocation', id: string, title?: string | null, synopsis?: string | null, description?: string | null, tags: Array<string>, optional: boolean, readMoreUrl?: string | null, position: { __typename?: 'Position', lon: number, lat: number } } | null, cascaded: { __typename?: 'ItineraryItemCascadedChanges', deletedIds: Array<string>, created: Array<{ __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', id: string }>, updated: Array<{ __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', id: string }> } } };
 
 export type UpdateItineraryMutationVariables = Exact<{
   id: Scalars['ID'];
@@ -5917,21 +7615,21 @@ export type UpdateItineraryMutationVariables = Exact<{
 }>;
 
 
-export type UpdateItineraryMutation = { __typename?: 'Mutation', updateItinerary: { __typename: 'UpdateItineraryPayload', itinerary?: Maybe<{ __typename: 'Itinerary', id: string, title?: Maybe<string>, synopsis?: Maybe<string>, description?: Maybe<string>, tags: Array<string>, created?: Maybe<string>, autoRoute?: Maybe<{ __typename?: 'ItineraryAutoRoute', defaultMode: RouteMode }> }>, cascaded: { __typename?: 'ItineraryItemCascadedChanges', deletedIds: Array<string>, created: Array<{ __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', id: string }>, updated: Array<{ __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', id: string }> } } };
+export type UpdateItineraryMutation = { __typename?: 'Mutation', updateItinerary: { __typename: 'UpdateItineraryPayload', itinerary?: { __typename: 'Itinerary', id: string, title?: string | null, synopsis?: string | null, description?: string | null, tags: Array<string>, created?: string | null, autoRoute?: { __typename?: 'ItineraryAutoRoute', defaultMode: RouteMode } | null } | null, cascaded: { __typename?: 'ItineraryItemCascadedChanges', deletedIds: Array<string>, created: Array<{ __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', id: string }>, updated: Array<{ __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', id: string }> } } };
 
-export type MediaImageContentFragment = { __typename?: 'MediaImage', provider: string, copyright?: Maybe<string>, altText?: Maybe<string>, attribution?: Maybe<string>, caption?: Maybe<string>, tags: Array<string> };
+export type MediaImageContentFragment = { __typename?: 'MediaImage', provider: string, copyright?: string | null, altText?: string | null, attribution?: string | null, caption?: string | null, tags: Array<string> };
 
-export type MediaImagePartialContentFragment = { __typename?: 'MediaImage', provider: string, copyright?: Maybe<string>, altText?: Maybe<string>, attribution?: Maybe<string>, caption?: Maybe<string>, tags: Array<string> };
+export type MediaImagePartialContentFragment = { __typename?: 'MediaImage', provider: string, copyright?: string | null, altText?: string | null, attribution?: string | null, caption?: string | null, tags: Array<string> };
 
 export type GetMediaImageQueryVariables = Exact<{
   id: Scalars['ID'];
-  smallBestFit?: Maybe<Array<Scalars['Int']> | Scalars['Int']>;
-  mediumBestFit?: Maybe<Array<Scalars['Int']> | Scalars['Int']>;
-  largeBestFit?: Maybe<Array<Scalars['Int']> | Scalars['Int']>;
+  smallBestFit?: InputMaybe<Array<Scalars['Int']> | Scalars['Int']>;
+  mediumBestFit?: InputMaybe<Array<Scalars['Int']> | Scalars['Int']>;
+  largeBestFit?: InputMaybe<Array<Scalars['Int']> | Scalars['Int']>;
 }>;
 
 
-export type GetMediaImageQuery = { __typename?: 'Query', mediaResource?: Maybe<{ __typename: 'MediaImage', id?: Maybe<string>, provider: string, copyright?: Maybe<string>, altText?: Maybe<string>, attribution?: Maybe<string>, caption?: Maybe<string>, tags: Array<string>, small?: Maybe<{ __typename?: 'MediaImageSource', url: string }>, medium?: Maybe<{ __typename?: 'MediaImageSource', url: string }>, large?: Maybe<{ __typename?: 'MediaImageSource', url: string }> }> };
+export type GetMediaImageQuery = { __typename?: 'Query', mediaResource?: { __typename: 'MediaImage', id?: string | null, provider: string, copyright?: string | null, altText?: string | null, attribution?: string | null, caption?: string | null, tags: Array<string>, small?: { __typename?: 'MediaImageSource', url: string } | null, medium?: { __typename?: 'MediaImageSource', url: string } | null, large?: { __typename?: 'MediaImageSource', url: string } | null } | null };
 
 export type AutocompleteSearchPlaceQueryVariables = Exact<{
   text: Scalars['String'];
@@ -5939,21 +7637,21 @@ export type AutocompleteSearchPlaceQueryVariables = Exact<{
 }>;
 
 
-export type AutocompleteSearchPlaceQuery = { __typename?: 'Query', placeAutocompleteSearch: { __typename: 'PlaceSearchConnection', edges: Array<{ __typename?: 'PlaceSearchEdge', node: { __typename: 'PlaceSearchNode', id: string, name?: Maybe<string>, maki?: Maybe<string>, position: { __typename?: 'Position', lon: number, lat: number }, address: { __typename?: 'PlaceAddress', addressLineOne?: Maybe<string>, addressLineTwo?: Maybe<string>, addressLineThree?: Maybe<string>, locality?: Maybe<string>, region?: Maybe<string>, regionCode?: Maybe<string>, country?: Maybe<string>, countryCode?: Maybe<string> }, layers: Array<{ __typename: 'PlaceLayer', id: string, name?: Maybe<string> }> }, main: { __typename?: 'TextSearchResult', label: string, matches: Array<{ __typename?: 'TextSearchResultMatch', offset: number, length: number }> }, secondary: { __typename?: 'TextSearchResult', label: string, matches: Array<{ __typename?: 'TextSearchResultMatch', offset: number, length: number }> } }> } };
+export type AutocompleteSearchPlaceQuery = { __typename?: 'Query', placeAutocompleteSearch: { __typename: 'PlaceSearchConnection', edges: Array<{ __typename?: 'PlaceSearchEdge', node: { __typename: 'PlaceSearchNode', id: string, name?: string | null, maki?: string | null, position: { __typename?: 'Position', lon: number, lat: number }, address: { __typename?: 'PlaceAddress', addressLineOne?: string | null, addressLineTwo?: string | null, addressLineThree?: string | null, locality?: string | null, region?: string | null, regionCode?: string | null, country?: string | null, countryCode?: string | null }, layers: Array<{ __typename: 'PlaceLayer', id: string, name?: string | null }> }, main: { __typename?: 'TextSearchResult', label: string, matches: Array<{ __typename?: 'TextSearchResultMatch', offset: number, length: number }> }, secondary: { __typename?: 'TextSearchResult', label: string, matches: Array<{ __typename?: 'TextSearchResultMatch', offset: number, length: number }> } }> } };
 
-export type PlaceContentFragment = { __typename?: 'Place', name?: Maybe<string>, synopsis?: Maybe<string>, description?: Maybe<string>, maki?: Maybe<string>, position: { __typename?: 'Position', lon: number, lat: number }, address: { __typename?: 'PlaceAddress', addressLineOne?: Maybe<string>, addressLineTwo?: Maybe<string>, addressLineThree?: Maybe<string>, locality?: Maybe<string>, region?: Maybe<string>, regionCode?: Maybe<string>, country?: Maybe<string>, countryCode?: Maybe<string> }, contact: { __typename?: 'PlaceContact', phoneNumber?: Maybe<string>, emailAddress?: Maybe<string>, websiteUrl?: Maybe<string>, bookingsUrl?: Maybe<string>, facebookUrl?: Maybe<string>, instagramUrl?: Maybe<string>, twitterUrl?: Maybe<string> }, layers: Array<{ __typename: 'PlaceLayer', id: string, name?: Maybe<string> }>, hours?: Maybe<{ __typename?: 'PlaceHours', osmTag: string }> };
+export type PlaceContentFragment = { __typename?: 'Place', name?: string | null, synopsis?: string | null, description?: string | null, maki?: string | null, position: { __typename?: 'Position', lon: number, lat: number }, address: { __typename?: 'PlaceAddress', addressLineOne?: string | null, addressLineTwo?: string | null, addressLineThree?: string | null, locality?: string | null, region?: string | null, regionCode?: string | null, country?: string | null, countryCode?: string | null }, contact: { __typename?: 'PlaceContact', phoneNumber?: string | null, emailAddress?: string | null, websiteUrl?: string | null, bookingUrl?: string | null, facebookUrl?: string | null, instagramUrl?: string | null, twitterUrl?: string | null }, layers: Array<{ __typename: 'PlaceLayer', id: string, name?: string | null }>, hours?: { __typename?: 'PlaceHours', osmTag: string } | null };
 
-export type PlacePartialContentFragment = { __typename?: 'Place', name?: Maybe<string>, synopsis?: Maybe<string>, maki?: Maybe<string>, position: { __typename?: 'Position', lon: number, lat: number }, address: { __typename?: 'PlaceAddress', addressLineOne?: Maybe<string>, addressLineTwo?: Maybe<string>, addressLineThree?: Maybe<string>, locality?: Maybe<string>, region?: Maybe<string>, regionCode?: Maybe<string>, country?: Maybe<string>, countryCode?: Maybe<string> }, layers: Array<{ __typename: 'PlaceLayer', id: string, name?: Maybe<string> }> };
+export type PlacePartialContentFragment = { __typename?: 'Place', name?: string | null, synopsis?: string | null, maki?: string | null, position: { __typename?: 'Position', lon: number, lat: number }, address: { __typename?: 'PlaceAddress', addressLineOne?: string | null, addressLineTwo?: string | null, addressLineThree?: string | null, locality?: string | null, region?: string | null, regionCode?: string | null, country?: string | null, countryCode?: string | null }, layers: Array<{ __typename: 'PlaceLayer', id: string, name?: string | null }> };
 
-export type PlaceSearchContentFragment = { __typename?: 'PlaceSearchNode', name?: Maybe<string>, maki?: Maybe<string>, position: { __typename?: 'Position', lon: number, lat: number }, address: { __typename?: 'PlaceAddress', addressLineOne?: Maybe<string>, addressLineTwo?: Maybe<string>, addressLineThree?: Maybe<string>, locality?: Maybe<string>, region?: Maybe<string>, regionCode?: Maybe<string>, country?: Maybe<string>, countryCode?: Maybe<string> }, layers: Array<{ __typename: 'PlaceLayer', id: string, name?: Maybe<string> }> };
+export type PlaceSearchContentFragment = { __typename?: 'PlaceSearchNode', name?: string | null, maki?: string | null, position: { __typename?: 'Position', lon: number, lat: number }, address: { __typename?: 'PlaceAddress', addressLineOne?: string | null, addressLineTwo?: string | null, addressLineThree?: string | null, locality?: string | null, region?: string | null, regionCode?: string | null, country?: string | null, countryCode?: string | null }, layers: Array<{ __typename: 'PlaceLayer', id: string, name?: string | null }> };
 
 export type GetPlaceQueryVariables = Exact<{
   id: Scalars['ID'];
-  mediaImagePreferredBestFit?: Maybe<Array<Scalars['Int']> | Scalars['Int']>;
+  mediaImagePreferredBestFit?: InputMaybe<Array<Scalars['Int']> | Scalars['Int']>;
 }>;
 
 
-export type GetPlaceQuery = { __typename?: 'Query', place?: Maybe<{ __typename: 'Place', id: string, name?: Maybe<string>, synopsis?: Maybe<string>, description?: Maybe<string>, maki?: Maybe<string>, preferredMedia?: Maybe<{ __typename: 'MediaContainer', id: string, resource: { __typename: 'MediaImage', id?: Maybe<string>, provider: string, copyright?: Maybe<string>, altText?: Maybe<string>, attribution?: Maybe<string>, caption?: Maybe<string>, tags: Array<string>, source?: Maybe<{ __typename?: 'MediaImageSource', url: string }> } }>, position: { __typename?: 'Position', lon: number, lat: number }, address: { __typename?: 'PlaceAddress', addressLineOne?: Maybe<string>, addressLineTwo?: Maybe<string>, addressLineThree?: Maybe<string>, locality?: Maybe<string>, region?: Maybe<string>, regionCode?: Maybe<string>, country?: Maybe<string>, countryCode?: Maybe<string> }, contact: { __typename?: 'PlaceContact', phoneNumber?: Maybe<string>, emailAddress?: Maybe<string>, websiteUrl?: Maybe<string>, bookingsUrl?: Maybe<string>, facebookUrl?: Maybe<string>, instagramUrl?: Maybe<string>, twitterUrl?: Maybe<string> }, layers: Array<{ __typename: 'PlaceLayer', id: string, name?: Maybe<string> }>, hours?: Maybe<{ __typename?: 'PlaceHours', osmTag: string }> }> };
+export type GetPlaceQuery = { __typename?: 'Query', place?: { __typename: 'Place', id: string, name?: string | null, synopsis?: string | null, description?: string | null, maki?: string | null, preferredMedia?: { __typename: 'MediaContainer', id: string, resource: { __typename: 'MediaImage', id?: string | null, provider: string, copyright?: string | null, altText?: string | null, attribution?: string | null, caption?: string | null, tags: Array<string>, source?: { __typename?: 'MediaImageSource', url: string } | null } | { __typename: 'MediaResourceFailedToLoad' } } | null, position: { __typename?: 'Position', lon: number, lat: number }, address: { __typename?: 'PlaceAddress', addressLineOne?: string | null, addressLineTwo?: string | null, addressLineThree?: string | null, locality?: string | null, region?: string | null, regionCode?: string | null, country?: string | null, countryCode?: string | null }, contact: { __typename?: 'PlaceContact', phoneNumber?: string | null, emailAddress?: string | null, websiteUrl?: string | null, bookingUrl?: string | null, facebookUrl?: string | null, instagramUrl?: string | null, twitterUrl?: string | null }, layers: Array<{ __typename: 'PlaceLayer', id: string, name?: string | null }>, hours?: { __typename?: 'PlaceHours', osmTag: string } | null } | null };
 
 export type ReverseSearchPlaceByPositionQueryVariables = Exact<{
   focus: PositionInput;
@@ -5962,26 +7660,26 @@ export type ReverseSearchPlaceByPositionQueryVariables = Exact<{
 }>;
 
 
-export type ReverseSearchPlaceByPositionQuery = { __typename?: 'Query', placeReverseSearch: { __typename: 'PlaceSearchConnection', places: Array<{ __typename: 'PlaceSearchNode', id: string, name?: Maybe<string>, maki?: Maybe<string>, position: { __typename?: 'Position', lon: number, lat: number }, address: { __typename?: 'PlaceAddress', addressLineOne?: Maybe<string>, addressLineTwo?: Maybe<string>, addressLineThree?: Maybe<string>, locality?: Maybe<string>, region?: Maybe<string>, regionCode?: Maybe<string>, country?: Maybe<string>, countryCode?: Maybe<string> }, layers: Array<{ __typename: 'PlaceLayer', id: string, name?: Maybe<string> }> }> } };
+export type ReverseSearchPlaceByPositionQuery = { __typename?: 'Query', placeReverseSearch: { __typename: 'PlaceSearchConnection', places: Array<{ __typename: 'PlaceSearchNode', id: string, name?: string | null, maki?: string | null, position: { __typename?: 'Position', lon: number, lat: number }, address: { __typename?: 'PlaceAddress', addressLineOne?: string | null, addressLineTwo?: string | null, addressLineThree?: string | null, locality?: string | null, region?: string | null, regionCode?: string | null, country?: string | null, countryCode?: string | null }, layers: Array<{ __typename: 'PlaceLayer', id: string, name?: string | null }> }> } };
 
-export type ProfileContentFragment = { __typename?: 'Profile', name: string, handle?: Maybe<string>, type: ProfileType, bio?: Maybe<string>, websiteUrl?: Maybe<string> };
+export type ProfileContentFragment = { __typename?: 'Profile', name: string, handle?: string | null, type: ProfileType, bio?: string | null, websiteUrl?: string | null };
 
-export type ProfilePartialContentFragment = { __typename?: 'Profile', name: string, handle?: Maybe<string> };
+export type ProfilePartialContentFragment = { __typename?: 'Profile', name: string, handle?: string | null };
 
 export type GetProfileQueryVariables = Exact<{
   id: Scalars['ID'];
 }>;
 
 
-export type GetProfileQuery = { __typename?: 'Query', profile?: Maybe<{ __typename: 'Profile', id: string, name: string, handle?: Maybe<string>, type: ProfileType, bio?: Maybe<string>, websiteUrl?: Maybe<string> }> };
+export type GetProfileQuery = { __typename?: 'Query', profile?: { __typename: 'Profile', id: string, name: string, handle?: string | null, type: ProfileType, bio?: string | null, websiteUrl?: string | null } | null };
 
 export type ListAuthorizedProfilesQueryVariables = Exact<{
   first: Scalars['Int'];
-  after?: Maybe<Scalars['String']>;
+  after?: InputMaybe<Scalars['String']>;
 }>;
 
 
-export type ListAuthorizedProfilesQuery = { __typename?: 'Query', authorizedProfiles: { __typename: 'ProfileConnection', totalCount: number, profiles: Array<{ __typename: 'Profile', id: string, name: string, handle?: Maybe<string> }>, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: Maybe<string>, endCursor?: Maybe<string> } } };
+export type ListAuthorizedProfilesQuery = { __typename?: 'Query', authorizedProfiles: { __typename: 'ProfileConnection', totalCount: number, profiles: Array<{ __typename: 'Profile', id: string, name: string, handle?: string | null }>, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: string | null, endCursor?: string | null } } };
 
 export type SearchRoutesBetweenPositionsQueryVariables = Exact<{
   mode: RouteSearchableMode;
@@ -5991,7 +7689,7 @@ export type SearchRoutesBetweenPositionsQueryVariables = Exact<{
 }>;
 
 
-export type SearchRoutesBetweenPositionsQuery = { __typename?: 'Query', routes: { __typename: 'RouteConnection', routes: Array<{ __typename?: 'Route', segments: Array<{ __typename?: 'RouteSegment', distance?: Maybe<number>, duration?: Maybe<number>, polyline?: Maybe<string> }> }> } };
+export type SearchRoutesBetweenPositionsQuery = { __typename?: 'Query', routes: { __typename: 'RouteConnection', routes: Array<{ __typename?: 'Route', segments: Array<{ __typename?: 'RouteSegment', distance?: number | null, duration?: number | null, polyline?: string | null }> }> } };
 
 
       export interface PossibleTypesResultData {
@@ -6004,6 +7702,17 @@ export type SearchRoutesBetweenPositionsQuery = { __typename?: 'Query', routes: 
     "CollectionItem": [
       "CollectionLocation"
     ],
+    "CollectionItemEmbedded": [
+      "CollectionItemFailedToLoad",
+      "CollectionLocation"
+    ],
+    "IconResource": [
+      "IconSilhouette"
+    ],
+    "IconResourceEmbedded": [
+      "IconResourceFailedToLoad",
+      "IconSilhouette"
+    ],
     "ItineraryItem": [
       "ItineraryCollection",
       "ItineraryDirections",
@@ -6012,16 +7721,26 @@ export type SearchRoutesBetweenPositionsQuery = { __typename?: 'Query', routes: 
     "MediaResource": [
       "MediaImage"
     ],
+    "MediaResourceEmbedded": [
+      "MediaImage",
+      "MediaResourceFailedToLoad"
+    ],
     "Node": [
       "Collection",
+      "CollectionItemFailedToLoad",
       "CollectionLocation",
       "ConnectedApp",
+      "IconComposition",
+      "IconResourceFailedToLoad",
+      "IconSilhouette",
       "Itinerary",
       "ItineraryCollection",
       "ItineraryDirections",
       "ItineraryLocation",
+      "MediaResourceFailedToLoad",
       "Place",
-      "Profile"
+      "Profile",
+      "UserAgreement"
     ]
   }
 };
@@ -6163,6 +7882,14 @@ export const ItineraryPartialContentFragmentDoc = gql`
   created
 }
     `;
+export const ItinerarySearchPartialContentFragmentDoc = gql`
+    fragment ItinerarySearchPartialContent on ItinerarySearchNode {
+  title
+  synopsis
+  tags
+  created
+}
+    `;
 export const MediaImageContentFragmentDoc = gql`
     fragment MediaImageContent on MediaImage {
   provider
@@ -6207,7 +7934,7 @@ export const PlaceContentFragmentDoc = gql`
     phoneNumber
     emailAddress
     websiteUrl
-    bookingsUrl
+    bookingUrl
     facebookUrl
     instagramUrl
     twitterUrl
@@ -6469,16 +8196,16 @@ export const GetCollectionLocationDocument = gql`
         id
         __typename
         resource {
-          id
           __typename
-          altText
           ... on MediaImage {
+            id
             source(bestFit: $mediaImagePreferredBestFit) {
               url
             }
             caption
             copyright
             attribution
+            altText
           }
         }
       }
@@ -6760,9 +8487,9 @@ export const GetItineraryLocationDocument = gql`
         id
         __typename
         resource {
-          id
           __typename
           ... on MediaImage {
+            id
             source(bestFit: $mediaImagePreferredBestFit) {
               url
             }
@@ -6792,9 +8519,9 @@ export const GetItineraryDocument = gql`
       id
       __typename
       resource {
-        id
         __typename
         ... on MediaImage {
+          id
           source(bestFit: $mediaImagePreferredBestFit) {
             url
           }
@@ -6816,14 +8543,14 @@ export const ListItinerariesDocument = gql`
       node {
         id
         __typename
-        ...ItineraryPartialContent
+        ...ItinerarySearchPartialContent
         preferredMedia {
           id
           __typename
           resource {
-            id
             __typename
             ... on MediaImage {
+              id
               source(bestFit: $mediaImagePreferredBestFit) {
                 url
               }
@@ -6842,7 +8569,7 @@ export const ListItinerariesDocument = gql`
     }
   }
 }
-    ${ItineraryPartialContentFragmentDoc}
+    ${ItinerarySearchPartialContentFragmentDoc}
 ${MediaImagePartialContentFragmentDoc}`;
 export const ListItineraryLocationsDocument = gql`
     query listItineraryLocations($id: ID!, $first: Int!, $after: String, $includeRoutePolyline: Boolean!, $mediaImagePreferredBestFit: [Int!]) {
@@ -6865,9 +8592,9 @@ export const ListItineraryLocationsDocument = gql`
               id
               __typename
               resource {
-                id
                 __typename
                 ... on MediaImage {
+                  id
                   source(bestFit: $mediaImagePreferredBestFit) {
                     url
                   }
@@ -6978,9 +8705,9 @@ ${ItineraryCascadedChangesFragmentDoc}`;
 export const GetMediaImageDocument = gql`
     query getMediaImage($id: ID!, $smallBestFit: [Int!], $mediumBestFit: [Int!], $largeBestFit: [Int!]) {
   mediaResource(id: $id) {
-    id
     __typename
     ... on MediaImage {
+      id
       ...MediaImageContent
       small: source(bestFit: $smallBestFit) {
         url
@@ -7033,9 +8760,9 @@ export const GetPlaceDocument = gql`
       id
       __typename
       resource {
-        id
         __typename
         ... on MediaImage {
+          id
           source(bestFit: $mediaImagePreferredBestFit) {
             url
           }
@@ -7102,120 +8829,120 @@ export const SearchRoutesBetweenPositionsDocument = gql`
 }
     `;
 
-export type SdkFunctionWrapper = <T>(action: (requestHeaders?:Record<string, string>) => Promise<T>, operationName: string) => Promise<T>;
+export type SdkFunctionWrapper = <T>(action: (requestHeaders?:Record<string, string>) => Promise<T>, operationName: string, operationType?: string) => Promise<T>;
 
 
-const defaultWrapper: SdkFunctionWrapper = (action, _operationName) => action();
+const defaultWrapper: SdkFunctionWrapper = (action, _operationName, _operationType) => action();
 
 export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = defaultWrapper) {
   return {
     createCollectionLocation(variables: CreateCollectionLocationMutationVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<CreateCollectionLocationMutation> {
-      return withWrapper((wrappedRequestHeaders) => client.request<CreateCollectionLocationMutation>(CreateCollectionLocationDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'createCollectionLocation');
+      return withWrapper((wrappedRequestHeaders) => client.request<CreateCollectionLocationMutation>(CreateCollectionLocationDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'createCollectionLocation', 'mutation');
     },
     deleteCollectionLocation(variables: DeleteCollectionLocationMutationVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<DeleteCollectionLocationMutation> {
-      return withWrapper((wrappedRequestHeaders) => client.request<DeleteCollectionLocationMutation>(DeleteCollectionLocationDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'deleteCollectionLocation');
+      return withWrapper((wrappedRequestHeaders) => client.request<DeleteCollectionLocationMutation>(DeleteCollectionLocationDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'deleteCollectionLocation', 'mutation');
     },
     findCollectionLocationIdsByExternal(variables: FindCollectionLocationIdsByExternalQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<FindCollectionLocationIdsByExternalQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<FindCollectionLocationIdsByExternalQuery>(FindCollectionLocationIdsByExternalDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'findCollectionLocationIdsByExternal');
+      return withWrapper((wrappedRequestHeaders) => client.request<FindCollectionLocationIdsByExternalQuery>(FindCollectionLocationIdsByExternalDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'findCollectionLocationIdsByExternal', 'query');
     },
     findCollectionLocationIdsByTag(variables: FindCollectionLocationIdsByTagQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<FindCollectionLocationIdsByTagQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<FindCollectionLocationIdsByTagQuery>(FindCollectionLocationIdsByTagDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'findCollectionLocationIdsByTag');
+      return withWrapper((wrappedRequestHeaders) => client.request<FindCollectionLocationIdsByTagQuery>(FindCollectionLocationIdsByTagDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'findCollectionLocationIdsByTag', 'query');
     },
     findCollectionLocationsByExternal(variables: FindCollectionLocationsByExternalQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<FindCollectionLocationsByExternalQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<FindCollectionLocationsByExternalQuery>(FindCollectionLocationsByExternalDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'findCollectionLocationsByExternal');
+      return withWrapper((wrappedRequestHeaders) => client.request<FindCollectionLocationsByExternalQuery>(FindCollectionLocationsByExternalDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'findCollectionLocationsByExternal', 'query');
     },
     findCollectionLocationsByTag(variables: FindCollectionLocationsByTagQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<FindCollectionLocationsByTagQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<FindCollectionLocationsByTagQuery>(FindCollectionLocationsByTagDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'findCollectionLocationsByTag');
+      return withWrapper((wrappedRequestHeaders) => client.request<FindCollectionLocationsByTagQuery>(FindCollectionLocationsByTagDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'findCollectionLocationsByTag', 'query');
     },
     getCollectionLocation(variables: GetCollectionLocationQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetCollectionLocationQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<GetCollectionLocationQuery>(GetCollectionLocationDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getCollectionLocation');
+      return withWrapper((wrappedRequestHeaders) => client.request<GetCollectionLocationQuery>(GetCollectionLocationDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getCollectionLocation', 'query');
     },
     getCollection(variables: GetCollectionQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetCollectionQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<GetCollectionQuery>(GetCollectionDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getCollection');
+      return withWrapper((wrappedRequestHeaders) => client.request<GetCollectionQuery>(GetCollectionDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getCollection', 'query');
     },
     listCollections(variables: ListCollectionsQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<ListCollectionsQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<ListCollectionsQuery>(ListCollectionsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'listCollections');
+      return withWrapper((wrappedRequestHeaders) => client.request<ListCollectionsQuery>(ListCollectionsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'listCollections', 'query');
     },
     updateCollectionLocation(variables: UpdateCollectionLocationMutationVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<UpdateCollectionLocationMutation> {
-      return withWrapper((wrappedRequestHeaders) => client.request<UpdateCollectionLocationMutation>(UpdateCollectionLocationDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'updateCollectionLocation');
+      return withWrapper((wrappedRequestHeaders) => client.request<UpdateCollectionLocationMutation>(UpdateCollectionLocationDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'updateCollectionLocation', 'mutation');
     },
     createItineraryDirections(variables: CreateItineraryDirectionsMutationVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<CreateItineraryDirectionsMutation> {
-      return withWrapper((wrappedRequestHeaders) => client.request<CreateItineraryDirectionsMutation>(CreateItineraryDirectionsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'createItineraryDirections');
+      return withWrapper((wrappedRequestHeaders) => client.request<CreateItineraryDirectionsMutation>(CreateItineraryDirectionsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'createItineraryDirections', 'mutation');
     },
     createItineraryLocation(variables: CreateItineraryLocationMutationVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<CreateItineraryLocationMutation> {
-      return withWrapper((wrappedRequestHeaders) => client.request<CreateItineraryLocationMutation>(CreateItineraryLocationDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'createItineraryLocation');
+      return withWrapper((wrappedRequestHeaders) => client.request<CreateItineraryLocationMutation>(CreateItineraryLocationDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'createItineraryLocation', 'mutation');
     },
     createItinerary(variables: CreateItineraryMutationVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<CreateItineraryMutation> {
-      return withWrapper((wrappedRequestHeaders) => client.request<CreateItineraryMutation>(CreateItineraryDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'createItinerary');
+      return withWrapper((wrappedRequestHeaders) => client.request<CreateItineraryMutation>(CreateItineraryDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'createItinerary', 'mutation');
     },
     deleteItineraryLocation(variables: DeleteItineraryLocationMutationVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<DeleteItineraryLocationMutation> {
-      return withWrapper((wrappedRequestHeaders) => client.request<DeleteItineraryLocationMutation>(DeleteItineraryLocationDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'deleteItineraryLocation');
+      return withWrapper((wrappedRequestHeaders) => client.request<DeleteItineraryLocationMutation>(DeleteItineraryLocationDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'deleteItineraryLocation', 'mutation');
     },
     deleteItinerary(variables: DeleteItineraryMutationVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<DeleteItineraryMutation> {
-      return withWrapper((wrappedRequestHeaders) => client.request<DeleteItineraryMutation>(DeleteItineraryDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'deleteItinerary');
+      return withWrapper((wrappedRequestHeaders) => client.request<DeleteItineraryMutation>(DeleteItineraryDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'deleteItinerary', 'mutation');
     },
     disableItineraryAutoRoute(variables: DisableItineraryAutoRouteMutationVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<DisableItineraryAutoRouteMutation> {
-      return withWrapper((wrappedRequestHeaders) => client.request<DisableItineraryAutoRouteMutation>(DisableItineraryAutoRouteDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'disableItineraryAutoRoute');
+      return withWrapper((wrappedRequestHeaders) => client.request<DisableItineraryAutoRouteMutation>(DisableItineraryAutoRouteDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'disableItineraryAutoRoute', 'mutation');
     },
     enableItineraryAutoRoute(variables: EnableItineraryAutoRouteMutationVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<EnableItineraryAutoRouteMutation> {
-      return withWrapper((wrappedRequestHeaders) => client.request<EnableItineraryAutoRouteMutation>(EnableItineraryAutoRouteDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'enableItineraryAutoRoute');
+      return withWrapper((wrappedRequestHeaders) => client.request<EnableItineraryAutoRouteMutation>(EnableItineraryAutoRouteDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'enableItineraryAutoRoute', 'mutation');
     },
     findItineraryLocationIdsByPlaceId(variables: FindItineraryLocationIdsByPlaceIdQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<FindItineraryLocationIdsByPlaceIdQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<FindItineraryLocationIdsByPlaceIdQuery>(FindItineraryLocationIdsByPlaceIdDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'findItineraryLocationIdsByPlaceId');
+      return withWrapper((wrappedRequestHeaders) => client.request<FindItineraryLocationIdsByPlaceIdQuery>(FindItineraryLocationIdsByPlaceIdDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'findItineraryLocationIdsByPlaceId', 'query');
     },
     findItineraryLocationsByPlaceId(variables: FindItineraryLocationsByPlaceIdQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<FindItineraryLocationsByPlaceIdQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<FindItineraryLocationsByPlaceIdQuery>(FindItineraryLocationsByPlaceIdDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'findItineraryLocationsByPlaceId');
+      return withWrapper((wrappedRequestHeaders) => client.request<FindItineraryLocationsByPlaceIdQuery>(FindItineraryLocationsByPlaceIdDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'findItineraryLocationsByPlaceId', 'query');
     },
     getItineraryDirections(variables: GetItineraryDirectionsQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetItineraryDirectionsQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<GetItineraryDirectionsQuery>(GetItineraryDirectionsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getItineraryDirections');
+      return withWrapper((wrappedRequestHeaders) => client.request<GetItineraryDirectionsQuery>(GetItineraryDirectionsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getItineraryDirections', 'query');
     },
     getItineraryLocation(variables: GetItineraryLocationQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetItineraryLocationQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<GetItineraryLocationQuery>(GetItineraryLocationDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getItineraryLocation');
+      return withWrapper((wrappedRequestHeaders) => client.request<GetItineraryLocationQuery>(GetItineraryLocationDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getItineraryLocation', 'query');
     },
     getItinerary(variables: GetItineraryQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetItineraryQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<GetItineraryQuery>(GetItineraryDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getItinerary');
+      return withWrapper((wrappedRequestHeaders) => client.request<GetItineraryQuery>(GetItineraryDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getItinerary', 'query');
     },
     listItineraries(variables: ListItinerariesQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<ListItinerariesQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<ListItinerariesQuery>(ListItinerariesDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'listItineraries');
+      return withWrapper((wrappedRequestHeaders) => client.request<ListItinerariesQuery>(ListItinerariesDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'listItineraries', 'query');
     },
     listItineraryLocations(variables: ListItineraryLocationsQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<ListItineraryLocationsQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<ListItineraryLocationsQuery>(ListItineraryLocationsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'listItineraryLocations');
+      return withWrapper((wrappedRequestHeaders) => client.request<ListItineraryLocationsQuery>(ListItineraryLocationsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'listItineraryLocations', 'query');
     },
     moveItineraryLocationAfter(variables: MoveItineraryLocationAfterMutationVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<MoveItineraryLocationAfterMutation> {
-      return withWrapper((wrappedRequestHeaders) => client.request<MoveItineraryLocationAfterMutation>(MoveItineraryLocationAfterDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'moveItineraryLocationAfter');
+      return withWrapper((wrappedRequestHeaders) => client.request<MoveItineraryLocationAfterMutation>(MoveItineraryLocationAfterDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'moveItineraryLocationAfter', 'mutation');
     },
     moveItineraryLocationToStart(variables: MoveItineraryLocationToStartMutationVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<MoveItineraryLocationToStartMutation> {
-      return withWrapper((wrappedRequestHeaders) => client.request<MoveItineraryLocationToStartMutation>(MoveItineraryLocationToStartDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'moveItineraryLocationToStart');
+      return withWrapper((wrappedRequestHeaders) => client.request<MoveItineraryLocationToStartMutation>(MoveItineraryLocationToStartDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'moveItineraryLocationToStart', 'mutation');
     },
     updateItineraryLocationIsOptional(variables: UpdateItineraryLocationIsOptionalMutationVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<UpdateItineraryLocationIsOptionalMutation> {
-      return withWrapper((wrappedRequestHeaders) => client.request<UpdateItineraryLocationIsOptionalMutation>(UpdateItineraryLocationIsOptionalDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'updateItineraryLocationIsOptional');
+      return withWrapper((wrappedRequestHeaders) => client.request<UpdateItineraryLocationIsOptionalMutation>(UpdateItineraryLocationIsOptionalDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'updateItineraryLocationIsOptional', 'mutation');
     },
     updateItineraryLocation(variables: UpdateItineraryLocationMutationVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<UpdateItineraryLocationMutation> {
-      return withWrapper((wrappedRequestHeaders) => client.request<UpdateItineraryLocationMutation>(UpdateItineraryLocationDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'updateItineraryLocation');
+      return withWrapper((wrappedRequestHeaders) => client.request<UpdateItineraryLocationMutation>(UpdateItineraryLocationDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'updateItineraryLocation', 'mutation');
     },
     updateItinerary(variables: UpdateItineraryMutationVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<UpdateItineraryMutation> {
-      return withWrapper((wrappedRequestHeaders) => client.request<UpdateItineraryMutation>(UpdateItineraryDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'updateItinerary');
+      return withWrapper((wrappedRequestHeaders) => client.request<UpdateItineraryMutation>(UpdateItineraryDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'updateItinerary', 'mutation');
     },
     getMediaImage(variables: GetMediaImageQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetMediaImageQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<GetMediaImageQuery>(GetMediaImageDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getMediaImage');
+      return withWrapper((wrappedRequestHeaders) => client.request<GetMediaImageQuery>(GetMediaImageDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getMediaImage', 'query');
     },
     autocompleteSearchPlace(variables: AutocompleteSearchPlaceQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<AutocompleteSearchPlaceQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<AutocompleteSearchPlaceQuery>(AutocompleteSearchPlaceDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'autocompleteSearchPlace');
+      return withWrapper((wrappedRequestHeaders) => client.request<AutocompleteSearchPlaceQuery>(AutocompleteSearchPlaceDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'autocompleteSearchPlace', 'query');
     },
     getPlace(variables: GetPlaceQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetPlaceQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<GetPlaceQuery>(GetPlaceDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getPlace');
+      return withWrapper((wrappedRequestHeaders) => client.request<GetPlaceQuery>(GetPlaceDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getPlace', 'query');
     },
     reverseSearchPlaceByPosition(variables: ReverseSearchPlaceByPositionQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<ReverseSearchPlaceByPositionQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<ReverseSearchPlaceByPositionQuery>(ReverseSearchPlaceByPositionDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'reverseSearchPlaceByPosition');
+      return withWrapper((wrappedRequestHeaders) => client.request<ReverseSearchPlaceByPositionQuery>(ReverseSearchPlaceByPositionDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'reverseSearchPlaceByPosition', 'query');
     },
     getProfile(variables: GetProfileQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetProfileQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<GetProfileQuery>(GetProfileDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getProfile');
+      return withWrapper((wrappedRequestHeaders) => client.request<GetProfileQuery>(GetProfileDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getProfile', 'query');
     },
     listAuthorizedProfiles(variables: ListAuthorizedProfilesQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<ListAuthorizedProfilesQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<ListAuthorizedProfilesQuery>(ListAuthorizedProfilesDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'listAuthorizedProfiles');
+      return withWrapper((wrappedRequestHeaders) => client.request<ListAuthorizedProfilesQuery>(ListAuthorizedProfilesDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'listAuthorizedProfiles', 'query');
     },
     searchRoutesBetweenPositions(variables: SearchRoutesBetweenPositionsQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<SearchRoutesBetweenPositionsQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<SearchRoutesBetweenPositionsQuery>(SearchRoutesBetweenPositionsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'searchRoutesBetweenPositions');
+      return withWrapper((wrappedRequestHeaders) => client.request<SearchRoutesBetweenPositionsQuery>(SearchRoutesBetweenPositionsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'searchRoutesBetweenPositions', 'query');
     }
   };
 }

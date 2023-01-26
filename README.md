@@ -38,14 +38,14 @@ GraphQL is not opinionated with the client you want to use, and as such, Alpaca
 have provided a number of SDK options to suit the common development platforms
 developers use.
 
-| GraphQL Client                                            |                                                                                                      |
-| --------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
-| [graphql-request](packages/graphql-request) (recommended) | Minimal GraphQL client supporting Node and browsers for scripts or simple apps                       |
-| [urql](packages/urql)                                     | A versatile GraphQL client for developing with React/Preact, Vue or Svelte                           |
-| [react-query](packages/react-query)                       | SDK driven by performant and powerful data synchronization for react                                 |
-| [react-apollo](packages/react-apollo)                     | Full featured GraphQL development client including powerful caching and state management for React   |
-| [vue-apollo](packages/vue-apollo)                         | Full featured GraphQL development client including powerful caching and state management for Vue     |
-| [stencil-apollo](packages/stencil-apollo)                 | Full featured GraphQL development client including powerful caching and state management for Stencil |
+| GraphQL Client                                      |                                                                                                      |
+| --------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| [graphql-request](packages/graphql-request)         | Minimal GraphQL client supporting Node and browsers for scripts or simple apps                       |
+| [urql](packages/urql)                               | A versatile GraphQL client for developing with React/Preact, Vue or Svelte                           |
+| [react-query](packages/react-query)                 | SDK driven by performant and powerful data synchronization for react                                 |
+| [react-apollo](packages/react-apollo) (recommended) | Full featured GraphQL development client including powerful caching and state management for React   |
+| [vue-apollo](packages/vue-apollo)                   | Full featured GraphQL development client including powerful caching and state management for Vue     |
+| [stencil-apollo](packages/stencil-apollo)           | Full featured GraphQL development client including powerful caching and state management for Stencil |
 
 #### Using Something Else?
 
@@ -62,4 +62,4 @@ These libraries are licensed under MIT and are community supported.
 
 ## Legal Statement
 
-Copyright © 2020-2021 Alpaca Travel. All right reserved.
+Copyright © 2020-2022 Alpaca Travel. All right reserved.
