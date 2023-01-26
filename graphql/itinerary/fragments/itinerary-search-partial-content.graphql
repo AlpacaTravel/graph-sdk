@@ -1,0 +1,7 @@
+fragment ItinerarySearchPartialContent on ItinerarySearchNode {
+  title
+  synopsis
+  tags
+
+  created
+}

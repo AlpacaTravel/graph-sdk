@@ -26,7 +26,7 @@ fragment PlaceContent on Place {
     emailAddress
 
     websiteUrl
-    bookingsUrl
+    bookingUrl
     facebookUrl
     instagramUrl
     twitterUrl

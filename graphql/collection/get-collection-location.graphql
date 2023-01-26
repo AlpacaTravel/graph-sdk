@@ -29,16 +29,17 @@ query getCollectionLocation($id: ID!, $mediaImagePreferredBestFit: [Int!]) {
         __typename
 
         resource {
-          id
           __typename
-          altText
+
           ... on MediaImage {
+            id
             source(bestFit: $mediaImagePreferredBestFit) {
               url
             }
             caption
             copyright
             attribution
+            altText
           }
         }
       }

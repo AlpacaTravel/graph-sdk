@@ -1,4 +1,4 @@
-#import "./fragments/itinerary-partial-content.graphql"
+#import "./fragments/itinerary-search-partial-content.graphql"
 #import "./../media/fragments/media-image-partial-content.graphql"
 
 # Query a list of itineraries from an associated profile.
@@ -25,7 +25,7 @@ query listItineraries(
         id
         __typename
 
-        ...ItineraryPartialContent
+        ...ItinerarySearchPartialContent
 
         # Select preferred media
         preferredMedia {
@@ -33,10 +33,10 @@ query listItineraries(
           __typename
 
           resource {
-            id
             __typename
 
             ... on MediaImage {
+              id
               source(bestFit: $mediaImagePreferredBestFit) {
                 url
               }

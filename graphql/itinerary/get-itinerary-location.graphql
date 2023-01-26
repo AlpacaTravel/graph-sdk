@@ -28,9 +28,9 @@ query getItineraryLocation($id: ID!, $mediaImagePreferredBestFit: [Int!]) {
         __typename
 
         resource {
-          id
           __typename
           ... on MediaImage {
+            id
             source(bestFit: $mediaImagePreferredBestFit) {
               url
             }
