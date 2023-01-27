@@ -1,6 +1,6 @@
 {
   "name": "@alpaca-travel/graph-sdk-react-apollo",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "author": "Tom Manderson <tom@alpaca.travel>",
   "homepage": "https://alpacatravel.github.io/graph-sdk/packages/react-apollo/",
   "main": "dist/cjs/index.js",
