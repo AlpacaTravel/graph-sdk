@@ -71,7 +71,7 @@ npm install @alpaca-travel/graph-sdk-react-apollo --save
 This single package exposes a number of React hooks and GraphQL documents
 providing the basis of the Alpaca Travel SDK.
 
-### Initialize the ApolloClient
+## Initialize the ApolloClient
 
 You'll need to establish your client and provide it to the application.
 
@@ -106,7 +106,7 @@ See More:
   [Apollo Client](https://github.com/AlpacaTravel/graphql-docs/tree/master/topics/javascript/react/Apollo%20Client)
   Topic
 
-### Connect your client to React
+## Connect your client to React
 
 In your application component, you can provide the Apollo Client to wrap your
 application using the `ApolloProvider`.
@@ -132,7 +132,7 @@ function App() {
 export default App;
 ```
 
-### Fetch data with the SDK
+## Fetch data with the SDK
 
 The below provides an example of using the 'getItinerary' SDK query, which is
 exposed as `useGetItineraryQuery`. You also have access to variations, such as
@@ -170,7 +170,7 @@ function MyComponent() {
 }
 ```
 
-## Reference
+## Setup Code Example Reference
 
 You can refer to this
 [CodeSandbox example](https://codesandbox.io/s/alpaca-travel-typescript-sdk-react-apollo-e958zh?file=/src/App.tsx)
@@ -184,7 +184,7 @@ The capabilities of the API are documented using typedoc.
 See
 [API Documentation](https://alpacatravel.github.io/graph-sdk/packages/react-apollo/docs)
 
-### Extending using your own GraphQL Queries
+## Extending the SDK Functionality
 
 You have options on how you would like extend your queries.
 
@@ -197,7 +197,7 @@ You have options on how you would like extend your queries.
 As an alternative option, you can review this package for a reference of
 implementating your own SDK modifications.
 
-#### Using Apollo `useQuery`
+### Using Apollo `useQuery`
 
 Apollo makes it easy for you to create your own GraphQL documents that connect
 to Alpaca and then execute your queries and mutations.
@@ -239,12 +239,17 @@ function Profiles() {
 - See
   [Apollo Mutations](https://www.apollographql.com/docs/react/data/mutations/)
 
-#### Using graphql-codegen
+### Using `graphql-codegen` in your project
 
 You can leverage the tool `graphql-codegen` in order to generate additional
 hooks and capability for your application.
 
-Install graphql-codegen and the related libraries to your project
+This has the benefit of validating your GraphQL operations against the Alpaca
+Travel GraphQL schema, and can generate associated types that can help
+development.
+
+Install graphql-codegen and the related libraries to your project (Assumes
+typescript):
 
 ```shell
 npm install -D @graphql-codegen/cli @graphql-codegen/fragment-matcher @graphql-codegen/introspection @graphql-codegen/jsdoc @graphql-codegen/typescript @graphql-codegen/typescript-operations @graphql-codegen/typescript-react-apollo
