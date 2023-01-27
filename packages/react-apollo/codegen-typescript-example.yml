@@ -1,0 +1,21 @@
+---
+# Anchors
+typescript: &typescript
+  plugins:
+    - jsdoc
+    - typescript
+    - typescript-operations
+    - fragment-matcher
+    - typescript-react-apollo
+  config:
+    withRefetchQuery: true
+    preResolveTypes: true
+    flattenGeneratedTypes: false
+    exportFragmentSpreadSubTypes: true
+
+# GraphQL Codegen
+generates:
+  src/graphql/index.ts:
+    schema: 'https://withalpaca.com/api/graphql'
+    documents: src/graphql/**/*.graphql
+    <<: *typescript
