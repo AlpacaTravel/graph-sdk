@@ -1,3 +1,4 @@
 fragment ItineraryDirectionsPartialContent on ItineraryDirections {
   durationMin
+  distance
 }

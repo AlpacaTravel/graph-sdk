@@ -38,8 +38,4 @@ fragment PlaceContent on Place {
 
     name
   }
-
-  hours {
-    osmTag
-  }
 }

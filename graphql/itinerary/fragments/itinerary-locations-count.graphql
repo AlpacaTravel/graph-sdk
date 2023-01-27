@@ -1,5 +1,6 @@
 fragment ItineraryLocationsCount on Itinerary {
-  locations: descendants(first: 0, type: ItineraryLocation) {
+  locations: descendants(first: 0, type: ItineraryLocation)
+    @connection(key: "itinerary-locations-count") {
     totalCount
   }
 }

@@ -7466,7 +7466,7 @@ export type CreateItineraryDirectionsMutationVariables = Exact<{
 }>;
 
 
-export type CreateItineraryDirectionsMutation = { __typename?: 'Mutation', createItineraryDirections: { __typename: 'CreateItineraryDirectionsPayload', directions?: { __typename: 'ItineraryDirections', id: string, durationMin?: number | null } | null, cascaded: { __typename?: 'ItineraryItemCascadedChanges', deletedIds: Array<string>, created: Array<{ __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', id: string }>, updated: Array<{ __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', id: string }> } } };
+export type CreateItineraryDirectionsMutation = { __typename?: 'Mutation', createItineraryDirections: { __typename: 'CreateItineraryDirectionsPayload', directions?: { __typename: 'ItineraryDirections', id: string, durationMin?: number | null, distance?: number | null } | null, cascaded: { __typename?: 'ItineraryItemCascadedChanges', deletedIds: Array<string>, created: Array<{ __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', id: string }>, updated: Array<{ __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', id: string }> } } };
 
 export type CreateItineraryLocationMutationVariables = Exact<{
   itineraryId: Scalars['ID'];
@@ -7482,7 +7482,7 @@ export type CreateItineraryMutationVariables = Exact<{
 }>;
 
 
-export type CreateItineraryMutation = { __typename?: 'Mutation', createItinerary: { __typename: 'CreateItineraryPayload', itinerary?: { __typename: 'Itinerary', id: string, title?: string | null, synopsis?: string | null, description?: string | null, tags: Array<string>, created?: string | null, autoRoute?: { __typename?: 'ItineraryAutoRoute', defaultMode: RouteMode } | null, locations: { __typename?: 'ItineraryItemConnection', totalCount: number } } | null } };
+export type CreateItineraryMutation = { __typename?: 'Mutation', createItinerary: { __typename: 'CreateItineraryPayload', itinerary?: { __typename: 'Itinerary', id: string, title?: string | null, synopsis?: string | null, description?: string | null, tags: Array<string>, created?: string | null, modified?: string | null, published?: string | null, autoRoute?: { __typename?: 'ItineraryAutoRoute', defaultMode: RouteMode } | null, locations: { __typename?: 'ItineraryItemConnection', totalCount: number } } | null } };
 
 export type DeleteItineraryLocationMutationVariables = Exact<{
   id: Scalars['ID'];
@@ -7535,11 +7535,11 @@ export type FindItineraryLocationsByPlaceIdQuery = { __typename?: 'Query', itine
 
 export type ItineraryCascadedChangesFragment = { __typename?: 'ItineraryItemCascadedChanges', deletedIds: Array<string>, created: Array<{ __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', id: string }>, updated: Array<{ __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', id: string }> };
 
-export type ItineraryContentFragment = { __typename?: 'Itinerary', title?: string | null, synopsis?: string | null, description?: string | null, tags: Array<string>, created?: string | null, autoRoute?: { __typename?: 'ItineraryAutoRoute', defaultMode: RouteMode } | null };
+export type ItineraryContentFragment = { __typename?: 'Itinerary', title?: string | null, synopsis?: string | null, description?: string | null, tags: Array<string>, created?: string | null, modified?: string | null, published?: string | null, autoRoute?: { __typename?: 'ItineraryAutoRoute', defaultMode: RouteMode } | null };
 
-export type ItineraryDirectionsContentFragment = { __typename?: 'ItineraryDirections', durationMin?: number | null };
+export type ItineraryDirectionsContentFragment = { __typename?: 'ItineraryDirections', durationMin?: number | null, distance?: number | null };
 
-export type ItineraryDirectionsPartialContentFragment = { __typename?: 'ItineraryDirections', durationMin?: number | null };
+export type ItineraryDirectionsPartialContentFragment = { __typename?: 'ItineraryDirections', durationMin?: number | null, distance?: number | null };
 
 export type ItineraryLocationContentFragment = { __typename?: 'ItineraryLocation', title?: string | null, synopsis?: string | null, description?: string | null, tags: Array<string>, optional: boolean, readMoreUrl?: string | null, position: { __typename?: 'Position', lon: number, lat: number } };
 
@@ -7547,9 +7547,9 @@ export type ItineraryLocationPartialContentFragment = { __typename?: 'ItineraryL
 
 export type ItineraryLocationsCountFragment = { __typename?: 'Itinerary', locations: { __typename?: 'ItineraryItemConnection', totalCount: number } };
 
-export type ItineraryPartialContentFragment = { __typename?: 'Itinerary', title?: string | null, synopsis?: string | null, tags: Array<string>, created?: string | null };
+export type ItineraryPartialContentFragment = { __typename?: 'Itinerary', title?: string | null, synopsis?: string | null, tags: Array<string>, created?: string | null, modified?: string | null, published?: string | null };
 
-export type ItinerarySearchPartialContentFragment = { __typename?: 'ItinerarySearchNode', title?: string | null, synopsis?: string | null, tags: Array<string>, created?: string | null };
+export type ItinerarySearchPartialContentFragment = { __typename?: 'ItinerarySearchNode', title?: string | null, synopsis?: string | null, tags: Array<string>, created?: string | null, published?: string | null };
 
 export type GetItineraryDirectionsQueryVariables = Exact<{
   id: Scalars['ID'];
@@ -7557,44 +7557,40 @@ export type GetItineraryDirectionsQueryVariables = Exact<{
 }>;
 
 
-export type GetItineraryDirectionsQuery = { __typename?: 'Query', node?: { __typename: 'Collection', id: string } | { __typename: 'CollectionItemFailedToLoad', id: string } | { __typename: 'CollectionLocation', id: string } | { __typename: 'ConnectedApp', id: string } | { __typename: 'IconComposition', id: string } | { __typename: 'IconResourceFailedToLoad', id: string } | { __typename: 'IconSilhouette', id: string } | { __typename: 'Itinerary', id: string } | { __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string, durationMin?: number | null, route: { __typename?: 'Route', segments: Array<{ __typename: 'RouteSegment', id: string, mode: RouteMode, polyline?: string | null }> } } | { __typename: 'ItineraryLocation', id: string } | { __typename: 'MediaResourceFailedToLoad', id: string } | { __typename: 'Place', id: string } | { __typename: 'Profile', id: string } | { __typename: 'UserAgreement', id: string } | null };
+export type GetItineraryDirectionsQuery = { __typename?: 'Query', node?: { __typename: 'Collection', id: string } | { __typename: 'CollectionItemFailedToLoad', id: string } | { __typename: 'CollectionLocation', id: string } | { __typename: 'ConnectedApp', id: string } | { __typename: 'IconComposition', id: string } | { __typename: 'IconResourceFailedToLoad', id: string } | { __typename: 'IconSilhouette', id: string } | { __typename: 'Itinerary', id: string } | { __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string, durationMin?: number | null, distance?: number | null, route: { __typename?: 'Route', segments: Array<{ __typename: 'RouteSegment', id: string, mode: RouteMode, polyline?: string | null }> } } | { __typename: 'ItineraryLocation', id: string } | { __typename: 'MediaResourceFailedToLoad', id: string } | { __typename: 'Place', id: string } | { __typename: 'Profile', id: string } | { __typename: 'UserAgreement', id: string } | null };
 
 export type GetItineraryLocationQueryVariables = Exact<{
   id: Scalars['ID'];
-  mediaImagePreferredBestFit?: InputMaybe<Array<Scalars['Int']> | Scalars['Int']>;
 }>;
 
 
-export type GetItineraryLocationQuery = { __typename?: 'Query', node?: { __typename: 'Collection', id: string } | { __typename: 'CollectionItemFailedToLoad', id: string } | { __typename: 'CollectionLocation', id: string } | { __typename: 'ConnectedApp', id: string } | { __typename: 'IconComposition', id: string } | { __typename: 'IconResourceFailedToLoad', id: string } | { __typename: 'IconSilhouette', id: string } | { __typename: 'Itinerary', id: string } | { __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', id: string, title?: string | null, synopsis?: string | null, description?: string | null, tags: Array<string>, optional: boolean, readMoreUrl?: string | null, place: { __typename: 'Place', id: string, name?: string | null, synopsis?: string | null, description?: string | null, maki?: string | null, position: { __typename?: 'Position', lon: number, lat: number }, address: { __typename?: 'PlaceAddress', addressLineOne?: string | null, addressLineTwo?: string | null, addressLineThree?: string | null, locality?: string | null, region?: string | null, regionCode?: string | null, country?: string | null, countryCode?: string | null }, contact: { __typename?: 'PlaceContact', phoneNumber?: string | null, emailAddress?: string | null, websiteUrl?: string | null, bookingUrl?: string | null, facebookUrl?: string | null, instagramUrl?: string | null, twitterUrl?: string | null }, layers: Array<{ __typename: 'PlaceLayer', id: string, name?: string | null }>, hours?: { __typename?: 'PlaceHours', osmTag: string } | null }, preferredMedia?: { __typename: 'MediaContainer', id: string, resource: { __typename: 'MediaImage', id?: string | null, provider: string, copyright?: string | null, altText?: string | null, attribution?: string | null, caption?: string | null, tags: Array<string>, source?: { __typename?: 'MediaImageSource', url: string } | null } | { __typename: 'MediaResourceFailedToLoad' } } | null, position: { __typename?: 'Position', lon: number, lat: number } } | { __typename: 'MediaResourceFailedToLoad', id: string } | { __typename: 'Place', id: string } | { __typename: 'Profile', id: string } | { __typename: 'UserAgreement', id: string } | null };
+export type GetItineraryLocationQuery = { __typename?: 'Query', node?: { __typename: 'Collection', id: string } | { __typename: 'CollectionItemFailedToLoad', id: string } | { __typename: 'CollectionLocation', id: string } | { __typename: 'ConnectedApp', id: string } | { __typename: 'IconComposition', id: string } | { __typename: 'IconResourceFailedToLoad', id: string } | { __typename: 'IconSilhouette', id: string } | { __typename: 'Itinerary', id: string } | { __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', id: string, title?: string | null, synopsis?: string | null, description?: string | null, tags: Array<string>, optional: boolean, readMoreUrl?: string | null, place: { __typename: 'Place', id: string, name?: string | null, synopsis?: string | null, description?: string | null, maki?: string | null, position: { __typename?: 'Position', lon: number, lat: number }, address: { __typename?: 'PlaceAddress', addressLineOne?: string | null, addressLineTwo?: string | null, addressLineThree?: string | null, locality?: string | null, region?: string | null, regionCode?: string | null, country?: string | null, countryCode?: string | null }, contact: { __typename?: 'PlaceContact', phoneNumber?: string | null, emailAddress?: string | null, websiteUrl?: string | null, bookingUrl?: string | null, facebookUrl?: string | null, instagramUrl?: string | null, twitterUrl?: string | null }, layers: Array<{ __typename: 'PlaceLayer', id: string, name?: string | null }> }, position: { __typename?: 'Position', lon: number, lat: number } } | { __typename: 'MediaResourceFailedToLoad', id: string } | { __typename: 'Place', id: string } | { __typename: 'Profile', id: string } | { __typename: 'UserAgreement', id: string } | null };
 
 export type GetItineraryQueryVariables = Exact<{
   id: Scalars['ID'];
-  mediaImagePreferredBestFit?: InputMaybe<Array<Scalars['Int']> | Scalars['Int']>;
 }>;
 
 
-export type GetItineraryQuery = { __typename?: 'Query', itinerary?: { __typename: 'Itinerary', id: string, title?: string | null, synopsis?: string | null, description?: string | null, tags: Array<string>, created?: string | null, profile?: { __typename: 'Profile', id: string, name: string, handle?: string | null } | null, preferredMedia?: { __typename: 'MediaContainer', id: string, resource: { __typename: 'MediaImage', id?: string | null, provider: string, copyright?: string | null, altText?: string | null, attribution?: string | null, caption?: string | null, tags: Array<string>, source?: { __typename?: 'MediaImageSource', url: string } | null } | { __typename: 'MediaResourceFailedToLoad' } } | null, autoRoute?: { __typename?: 'ItineraryAutoRoute', defaultMode: RouteMode } | null, locations: { __typename?: 'ItineraryItemConnection', totalCount: number } } | null };
+export type GetItineraryQuery = { __typename?: 'Query', itinerary?: { __typename: 'Itinerary', id: string, title?: string | null, synopsis?: string | null, description?: string | null, tags: Array<string>, created?: string | null, modified?: string | null, published?: string | null, profile?: { __typename: 'Profile', id: string, name: string, handle?: string | null } | null, autoRoute?: { __typename?: 'ItineraryAutoRoute', defaultMode: RouteMode } | null, locations: { __typename?: 'ItineraryItemConnection', totalCount: number } } | null };
 
 export type ListItinerariesQueryVariables = Exact<{
   profileId: Scalars['ID'];
   first: Scalars['Int'];
   after?: InputMaybe<Scalars['String']>;
-  mediaImagePreferredBestFit?: InputMaybe<Array<Scalars['Int']> | Scalars['Int']>;
 }>;
 
 
-export type ListItinerariesQuery = { __typename?: 'Query', itineraries: { __typename: 'ItinerarySearchConnection', totalCount: number, edges: Array<{ __typename?: 'ItinerarySearchEdge', node: { __typename: 'ItinerarySearchNode', id: string, title?: string | null, synopsis?: string | null, tags: Array<string>, created?: string | null, preferredMedia?: { __typename: 'MediaContainer', id: string, resource: { __typename: 'MediaImage', id?: string | null, provider: string, copyright?: string | null, altText?: string | null, attribution?: string | null, caption?: string | null, tags: Array<string>, source?: { __typename?: 'MediaImageSource', url: string } | null } | { __typename: 'MediaResourceFailedToLoad' } } | null } }>, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: string | null, endCursor?: string | null } } };
+export type ListItinerariesQuery = { __typename?: 'Query', itineraries: { __typename: 'ItinerarySearchConnection', totalCount: number, edges: Array<{ __typename?: 'ItinerarySearchEdge', node: { __typename: 'ItinerarySearchNode', id: string, title?: string | null, synopsis?: string | null, tags: Array<string>, created?: string | null, published?: string | null } }>, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: string | null, endCursor?: string | null } } };
 
 export type ListItineraryLocationsQueryVariables = Exact<{
   id: Scalars['ID'];
   first: Scalars['Int'];
   after?: InputMaybe<Scalars['String']>;
   includeRoutePolyline: Scalars['Boolean'];
-  mediaImagePreferredBestFit?: InputMaybe<Array<Scalars['Int']> | Scalars['Int']>;
 }>;
 
 
-export type ListItineraryLocationsQuery = { __typename?: 'Query', itinerary?: { __typename: 'Itinerary', id: string, locations: { __typename?: 'ItineraryItemConnection', totalCount: number, edges: Array<{ __typename?: 'ItineraryItemEdge', location: { __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', id: string, title?: string | null, synopsis?: string | null, tags: Array<string>, optional: boolean, readMoreUrl?: string | null, place: { __typename: 'Place', id: string, name?: string | null, synopsis?: string | null, maki?: string | null, position: { __typename?: 'Position', lon: number, lat: number }, address: { __typename?: 'PlaceAddress', addressLineOne?: string | null, addressLineTwo?: string | null, addressLineThree?: string | null, locality?: string | null, region?: string | null, regionCode?: string | null, country?: string | null, countryCode?: string | null }, layers: Array<{ __typename: 'PlaceLayer', id: string, name?: string | null }> }, preferredMedia?: { __typename: 'MediaContainer', id: string, resource: { __typename: 'MediaImage', id?: string | null, provider: string, copyright?: string | null, altText?: string | null, attribution?: string | null, caption?: string | null, tags: Array<string>, source?: { __typename?: 'MediaImageSource', url: string } | null } | { __typename: 'MediaResourceFailedToLoad' } } | null, position: { __typename?: 'Position', lon: number, lat: number } }, arrival: { __typename?: 'ItineraryDirectionsConnection', totalCount: number, directions: Array<{ __typename: 'ItineraryDirections', id: string, durationMin?: number | null, route: { __typename?: 'Route', segments: Array<{ __typename: 'RouteSegment', id: string, mode: RouteMode, polyline?: string | null }> } }> } }>, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: string | null, endCursor?: string | null } } } | null };
+export type ListItineraryLocationsQuery = { __typename?: 'Query', itinerary?: { __typename: 'Itinerary', id: string, locations: { __typename?: 'ItineraryItemConnection', totalCount: number, edges: Array<{ __typename?: 'ItineraryItemEdge', location: { __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', id: string, title?: string | null, synopsis?: string | null, tags: Array<string>, optional: boolean, readMoreUrl?: string | null, place: { __typename: 'Place', id: string, name?: string | null, synopsis?: string | null, maki?: string | null, position: { __typename?: 'Position', lon: number, lat: number }, address: { __typename?: 'PlaceAddress', addressLineOne?: string | null, addressLineTwo?: string | null, addressLineThree?: string | null, locality?: string | null, region?: string | null, regionCode?: string | null, country?: string | null, countryCode?: string | null }, layers: Array<{ __typename: 'PlaceLayer', id: string, name?: string | null }> }, position: { __typename?: 'Position', lon: number, lat: number } }, arrival: { __typename?: 'ItineraryDirectionsConnection', totalCount: number, directions: Array<{ __typename: 'ItineraryDirections', id: string, durationMin?: number | null, distance?: number | null, route: { __typename?: 'Route', segments: Array<{ __typename: 'RouteSegment', id: string, mode: RouteMode, polyline?: string | null }> } }> } }>, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: string | null, endCursor?: string | null } } } | null };
 
 export type MoveItineraryLocationAfterMutationVariables = Exact<{
   id: Scalars['ID'];
@@ -7633,11 +7629,11 @@ export type UpdateItineraryMutationVariables = Exact<{
 }>;
 
 
-export type UpdateItineraryMutation = { __typename?: 'Mutation', updateItinerary: { __typename: 'UpdateItineraryPayload', itinerary?: { __typename: 'Itinerary', id: string, title?: string | null, synopsis?: string | null, description?: string | null, tags: Array<string>, created?: string | null, autoRoute?: { __typename?: 'ItineraryAutoRoute', defaultMode: RouteMode } | null } | null, cascaded: { __typename?: 'ItineraryItemCascadedChanges', deletedIds: Array<string>, created: Array<{ __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', id: string }>, updated: Array<{ __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', id: string }> } } };
+export type UpdateItineraryMutation = { __typename?: 'Mutation', updateItinerary: { __typename: 'UpdateItineraryPayload', itinerary?: { __typename: 'Itinerary', id: string, title?: string | null, synopsis?: string | null, description?: string | null, tags: Array<string>, created?: string | null, modified?: string | null, published?: string | null, autoRoute?: { __typename?: 'ItineraryAutoRoute', defaultMode: RouteMode } | null } | null, cascaded: { __typename?: 'ItineraryItemCascadedChanges', deletedIds: Array<string>, created: Array<{ __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', id: string }>, updated: Array<{ __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', id: string }> } } };
 
-export type MediaImageContentFragment = { __typename?: 'MediaImage', provider: string, copyright?: string | null, altText?: string | null, attribution?: string | null, caption?: string | null, tags: Array<string> };
+export type MediaImageContentFragment = { __typename?: 'MediaImage', provider: string, copyright?: string | null, altText?: string | null, attribution?: string | null, caption?: string | null };
 
-export type MediaImagePartialContentFragment = { __typename?: 'MediaImage', provider: string, copyright?: string | null, altText?: string | null, attribution?: string | null, caption?: string | null, tags: Array<string> };
+export type MediaImagePartialContentFragment = { __typename?: 'MediaImage', provider: string, hasContent: boolean };
 
 export type GetMediaImageQueryVariables = Exact<{
   id: Scalars['ID'];
@@ -7647,7 +7643,7 @@ export type GetMediaImageQueryVariables = Exact<{
 }>;
 
 
-export type GetMediaImageQuery = { __typename?: 'Query', mediaResource?: { __typename: 'MediaImage', id?: string | null, provider: string, copyright?: string | null, altText?: string | null, attribution?: string | null, caption?: string | null, tags: Array<string>, small?: { __typename?: 'MediaImageSource', url: string } | null, medium?: { __typename?: 'MediaImageSource', url: string } | null, large?: { __typename?: 'MediaImageSource', url: string } | null } | null };
+export type GetMediaImageQuery = { __typename?: 'Query', mediaResource?: { __typename: 'MediaImage', id?: string | null, provider: string, copyright?: string | null, altText?: string | null, attribution?: string | null, caption?: string | null, small?: { __typename?: 'MediaImageSource', url: string } | null, medium?: { __typename?: 'MediaImageSource', url: string } | null, large?: { __typename?: 'MediaImageSource', url: string } | null } | null };
 
 export type AutocompleteSearchPlaceQueryVariables = Exact<{
   text: Scalars['String'];
@@ -7657,7 +7653,7 @@ export type AutocompleteSearchPlaceQueryVariables = Exact<{
 
 export type AutocompleteSearchPlaceQuery = { __typename?: 'Query', placeAutocompleteSearch: { __typename: 'PlaceSearchConnection', edges: Array<{ __typename?: 'PlaceSearchEdge', node: { __typename: 'PlaceSearchNode', id: string, name?: string | null, maki?: string | null, position: { __typename?: 'Position', lon: number, lat: number }, address: { __typename?: 'PlaceAddress', addressLineOne?: string | null, addressLineTwo?: string | null, addressLineThree?: string | null, locality?: string | null, region?: string | null, regionCode?: string | null, country?: string | null, countryCode?: string | null }, layers: Array<{ __typename: 'PlaceLayer', id: string, name?: string | null }> }, main: { __typename?: 'TextSearchResult', label: string, matches: Array<{ __typename?: 'TextSearchResultMatch', offset: number, length: number }> }, secondary: { __typename?: 'TextSearchResult', label: string, matches: Array<{ __typename?: 'TextSearchResultMatch', offset: number, length: number }> } }> } };
 
-export type PlaceContentFragment = { __typename?: 'Place', name?: string | null, synopsis?: string | null, description?: string | null, maki?: string | null, position: { __typename?: 'Position', lon: number, lat: number }, address: { __typename?: 'PlaceAddress', addressLineOne?: string | null, addressLineTwo?: string | null, addressLineThree?: string | null, locality?: string | null, region?: string | null, regionCode?: string | null, country?: string | null, countryCode?: string | null }, contact: { __typename?: 'PlaceContact', phoneNumber?: string | null, emailAddress?: string | null, websiteUrl?: string | null, bookingUrl?: string | null, facebookUrl?: string | null, instagramUrl?: string | null, twitterUrl?: string | null }, layers: Array<{ __typename: 'PlaceLayer', id: string, name?: string | null }>, hours?: { __typename?: 'PlaceHours', osmTag: string } | null };
+export type PlaceContentFragment = { __typename?: 'Place', name?: string | null, synopsis?: string | null, description?: string | null, maki?: string | null, position: { __typename?: 'Position', lon: number, lat: number }, address: { __typename?: 'PlaceAddress', addressLineOne?: string | null, addressLineTwo?: string | null, addressLineThree?: string | null, locality?: string | null, region?: string | null, regionCode?: string | null, country?: string | null, countryCode?: string | null }, contact: { __typename?: 'PlaceContact', phoneNumber?: string | null, emailAddress?: string | null, websiteUrl?: string | null, bookingUrl?: string | null, facebookUrl?: string | null, instagramUrl?: string | null, twitterUrl?: string | null }, layers: Array<{ __typename: 'PlaceLayer', id: string, name?: string | null }> };
 
 export type PlacePartialContentFragment = { __typename?: 'Place', name?: string | null, synopsis?: string | null, maki?: string | null, position: { __typename?: 'Position', lon: number, lat: number }, address: { __typename?: 'PlaceAddress', addressLineOne?: string | null, addressLineTwo?: string | null, addressLineThree?: string | null, locality?: string | null, region?: string | null, regionCode?: string | null, country?: string | null, countryCode?: string | null }, layers: Array<{ __typename: 'PlaceLayer', id: string, name?: string | null }> };
 
@@ -7669,7 +7665,7 @@ export type GetPlaceQueryVariables = Exact<{
 }>;
 
 
-export type GetPlaceQuery = { __typename?: 'Query', place?: { __typename: 'Place', id: string, name?: string | null, synopsis?: string | null, description?: string | null, maki?: string | null, preferredMedia?: { __typename: 'MediaContainer', id: string, resource: { __typename: 'MediaImage', id?: string | null, provider: string, copyright?: string | null, altText?: string | null, attribution?: string | null, caption?: string | null, tags: Array<string>, source?: { __typename?: 'MediaImageSource', url: string } | null } | { __typename: 'MediaResourceFailedToLoad' } } | null, position: { __typename?: 'Position', lon: number, lat: number }, address: { __typename?: 'PlaceAddress', addressLineOne?: string | null, addressLineTwo?: string | null, addressLineThree?: string | null, locality?: string | null, region?: string | null, regionCode?: string | null, country?: string | null, countryCode?: string | null }, contact: { __typename?: 'PlaceContact', phoneNumber?: string | null, emailAddress?: string | null, websiteUrl?: string | null, bookingUrl?: string | null, facebookUrl?: string | null, instagramUrl?: string | null, twitterUrl?: string | null }, layers: Array<{ __typename: 'PlaceLayer', id: string, name?: string | null }>, hours?: { __typename?: 'PlaceHours', osmTag: string } | null } | null };
+export type GetPlaceQuery = { __typename?: 'Query', place?: { __typename: 'Place', id: string, name?: string | null, synopsis?: string | null, description?: string | null, maki?: string | null, position: { __typename?: 'Position', lon: number, lat: number }, address: { __typename?: 'PlaceAddress', addressLineOne?: string | null, addressLineTwo?: string | null, addressLineThree?: string | null, locality?: string | null, region?: string | null, regionCode?: string | null, country?: string | null, countryCode?: string | null }, contact: { __typename?: 'PlaceContact', phoneNumber?: string | null, emailAddress?: string | null, websiteUrl?: string | null, bookingUrl?: string | null, facebookUrl?: string | null, instagramUrl?: string | null, twitterUrl?: string | null }, layers: Array<{ __typename: 'PlaceLayer', id: string, name?: string | null }> } | null };
 
 export type ReverseSearchPlaceByPositionQueryVariables = Exact<{
   focus: PositionInput;
@@ -7680,7 +7676,7 @@ export type ReverseSearchPlaceByPositionQueryVariables = Exact<{
 
 export type ReverseSearchPlaceByPositionQuery = { __typename?: 'Query', placeReverseSearch: { __typename: 'PlaceSearchConnection', places: Array<{ __typename: 'PlaceSearchNode', id: string, name?: string | null, maki?: string | null, position: { __typename?: 'Position', lon: number, lat: number }, address: { __typename?: 'PlaceAddress', addressLineOne?: string | null, addressLineTwo?: string | null, addressLineThree?: string | null, locality?: string | null, region?: string | null, regionCode?: string | null, country?: string | null, countryCode?: string | null }, layers: Array<{ __typename: 'PlaceLayer', id: string, name?: string | null }> }> } };
 
-export type ProfileContentFragment = { __typename?: 'Profile', name: string, handle?: string | null, type: ProfileType, bio?: string | null, websiteUrl?: string | null };
+export type ProfileContentFragment = { __typename?: 'Profile', name: string, handle?: string | null, bio?: string | null, websiteUrl?: string | null };
 
 export type ProfilePartialContentFragment = { __typename?: 'Profile', name: string, handle?: string | null };
 
@@ -7689,7 +7685,7 @@ export type GetProfileQueryVariables = Exact<{
 }>;
 
 
-export type GetProfileQuery = { __typename?: 'Query', profile?: { __typename: 'Profile', id: string, name: string, handle?: string | null, type: ProfileType, bio?: string | null, websiteUrl?: string | null } | null };
+export type GetProfileQuery = { __typename?: 'Query', profile?: { __typename: 'Profile', id: string, name: string, handle?: string | null, bio?: string | null, websiteUrl?: string | null } | null };
 
 export type ListAuthorizedProfilesQueryVariables = Exact<{
   first: Scalars['Int'];
@@ -7775,7 +7771,7 @@ export const CollectionContentFragmentDoc = `
     `;
 export const CollectionItemsCountFragmentDoc = `
     fragment CollectionItemsCount on Collection {
-  items(first: 0) {
+  items(first: 0) @connection(key: "collection-items-count") {
     totalCount
   }
 }
@@ -7796,10 +7792,10 @@ export const CollectionLocationContentFragmentDoc = `
     `;
 export const CollectionLocationExternalRefsFragmentDoc = `
     fragment CollectionLocationExternalRefs on CollectionLocation {
-  externalId: attr(id: "custom://external-ref") {
+  externalId: attr(id: "custom/external-ref") {
     value
   }
-  externalSource: attr(id: "custom://external-source") {
+  externalSource: attr(id: "custom/external-source") {
     value
   }
 }
@@ -7843,6 +7839,8 @@ export const ItineraryContentFragmentDoc = `
   description
   tags
   created
+  modified
+  published
   autoRoute {
     defaultMode
   }
@@ -7851,11 +7849,13 @@ export const ItineraryContentFragmentDoc = `
 export const ItineraryDirectionsContentFragmentDoc = `
     fragment ItineraryDirectionsContent on ItineraryDirections {
   durationMin
+  distance
 }
     `;
 export const ItineraryDirectionsPartialContentFragmentDoc = `
     fragment ItineraryDirectionsPartialContent on ItineraryDirections {
   durationMin
+  distance
 }
     `;
 export const ItineraryLocationContentFragmentDoc = `
@@ -7887,7 +7887,7 @@ export const ItineraryLocationPartialContentFragmentDoc = `
     `;
 export const ItineraryLocationsCountFragmentDoc = `
     fragment ItineraryLocationsCount on Itinerary {
-  locations: descendants(first: 0, type: ItineraryLocation) {
+  locations: descendants(first: 0, type: ItineraryLocation) @connection(key: "itinerary-locations-count") {
     totalCount
   }
 }
@@ -7898,6 +7898,8 @@ export const ItineraryPartialContentFragmentDoc = `
   synopsis
   tags
   created
+  modified
+  published
 }
     `;
 export const ItinerarySearchPartialContentFragmentDoc = `
@@ -7906,6 +7908,7 @@ export const ItinerarySearchPartialContentFragmentDoc = `
   synopsis
   tags
   created
+  published
 }
     `;
 export const MediaImageContentFragmentDoc = `
@@ -7915,17 +7918,12 @@ export const MediaImageContentFragmentDoc = `
   altText
   attribution
   caption
-  tags
 }
     `;
 export const MediaImagePartialContentFragmentDoc = `
     fragment MediaImagePartialContent on MediaImage {
   provider
-  copyright
-  altText
-  attribution
-  caption
-  tags
+  hasContent
 }
     `;
 export const PlaceContentFragmentDoc = `
@@ -7961,9 +7959,6 @@ export const PlaceContentFragmentDoc = `
     id
     __typename
     name
-  }
-  hours {
-    osmTag
   }
 }
     `;
@@ -8022,7 +8017,6 @@ export const ProfileContentFragmentDoc = `
     fragment ProfileContent on Profile {
   name
   handle
-  type
   bio
   websiteUrl
 }
@@ -8730,7 +8724,7 @@ export const useGetItineraryDirectionsQuery = <
       options
     );
 export const GetItineraryLocationDocument = `
-    query getItineraryLocation($id: ID!, $mediaImagePreferredBestFit: [Int!]) {
+    query getItineraryLocation($id: ID!) {
   node(id: $id) {
     id
     __typename
@@ -8741,26 +8735,11 @@ export const GetItineraryLocationDocument = `
         __typename
         ...PlaceContent
       }
-      preferredMedia {
-        id
-        __typename
-        resource {
-          __typename
-          ... on MediaImage {
-            id
-            source(bestFit: $mediaImagePreferredBestFit) {
-              url
-            }
-            ...MediaImagePartialContent
-          }
-        }
-      }
     }
   }
 }
     ${ItineraryLocationContentFragmentDoc}
-${PlaceContentFragmentDoc}
-${MediaImagePartialContentFragmentDoc}`;
+${PlaceContentFragmentDoc}`;
 export const useGetItineraryLocationQuery = <
       TData = GetItineraryLocationQuery,
       TError = unknown
@@ -8775,7 +8754,7 @@ export const useGetItineraryLocationQuery = <
       options
     );
 export const GetItineraryDocument = `
-    query getItinerary($id: ID!, $mediaImagePreferredBestFit: [Int!]) {
+    query getItinerary($id: ID!) {
   itinerary(id: $id) {
     id
     __typename
@@ -8786,26 +8765,11 @@ export const GetItineraryDocument = `
       __typename
       ...ProfilePartialContent
     }
-    preferredMedia {
-      id
-      __typename
-      resource {
-        __typename
-        ... on MediaImage {
-          id
-          source(bestFit: $mediaImagePreferredBestFit) {
-            url
-          }
-          ...MediaImagePartialContent
-        }
-      }
-    }
   }
 }
     ${ItineraryContentFragmentDoc}
 ${ItineraryLocationsCountFragmentDoc}
-${ProfilePartialContentFragmentDoc}
-${MediaImagePartialContentFragmentDoc}`;
+${ProfilePartialContentFragmentDoc}`;
 export const useGetItineraryQuery = <
       TData = GetItineraryQuery,
       TError = unknown
@@ -8820,7 +8784,7 @@ export const useGetItineraryQuery = <
       options
     );
 export const ListItinerariesDocument = `
-    query listItineraries($profileId: ID!, $first: Int!, $after: String, $mediaImagePreferredBestFit: [Int!]) {
+    query listItineraries($profileId: ID!, $first: Int!, $after: String) {
   itineraries(profileId: $profileId, first: $first, after: $after) {
     __typename
     edges {
@@ -8828,20 +8792,6 @@ export const ListItinerariesDocument = `
         id
         __typename
         ...ItinerarySearchPartialContent
-        preferredMedia {
-          id
-          __typename
-          resource {
-            __typename
-            ... on MediaImage {
-              id
-              source(bestFit: $mediaImagePreferredBestFit) {
-                url
-              }
-              ...MediaImagePartialContent
-            }
-          }
-        }
       }
     }
     totalCount
@@ -8853,8 +8803,7 @@ export const ListItinerariesDocument = `
     }
   }
 }
-    ${ItinerarySearchPartialContentFragmentDoc}
-${MediaImagePartialContentFragmentDoc}`;
+    ${ItinerarySearchPartialContentFragmentDoc}`;
 export const useListItinerariesQuery = <
       TData = ListItinerariesQuery,
       TError = unknown
@@ -8869,11 +8818,11 @@ export const useListItinerariesQuery = <
       options
     );
 export const ListItineraryLocationsDocument = `
-    query listItineraryLocations($id: ID!, $first: Int!, $after: String, $includeRoutePolyline: Boolean!, $mediaImagePreferredBestFit: [Int!]) {
+    query listItineraryLocations($id: ID!, $first: Int!, $after: String, $includeRoutePolyline: Boolean!) {
   itinerary(id: $id) {
     id
     __typename
-    locations: children(first: $first, type: ItineraryLocation, after: $after) {
+    locations: children(first: $first, type: ItineraryLocation, after: $after) @connection(key: "list-itinerary-locations") {
       edges {
         location: node {
           id
@@ -8884,20 +8833,6 @@ export const ListItineraryLocationsDocument = `
               id
               __typename
               ...PlacePartialContent
-            }
-            preferredMedia {
-              id
-              __typename
-              resource {
-                __typename
-                ... on MediaImage {
-                  id
-                  source(bestFit: $mediaImagePreferredBestFit) {
-                    url
-                  }
-                  ...MediaImagePartialContent
-                }
-              }
             }
           }
         }
@@ -8930,7 +8865,6 @@ export const ListItineraryLocationsDocument = `
 }
     ${ItineraryLocationPartialContentFragmentDoc}
 ${PlacePartialContentFragmentDoc}
-${MediaImagePartialContentFragmentDoc}
 ${ItineraryDirectionsPartialContentFragmentDoc}`;
 export const useListItineraryLocationsQuery = <
       TData = ListItineraryLocationsQuery,
@@ -9147,24 +9081,9 @@ export const GetPlaceDocument = `
     id
     __typename
     ...PlaceContent
-    preferredMedia {
-      id
-      __typename
-      resource {
-        __typename
-        ... on MediaImage {
-          id
-          source(bestFit: $mediaImagePreferredBestFit) {
-            url
-          }
-          ...MediaImagePartialContent
-        }
-      }
-    }
   }
 }
-    ${PlaceContentFragmentDoc}
-${MediaImagePartialContentFragmentDoc}`;
+    ${PlaceContentFragmentDoc}`;
 export const useGetPlaceQuery = <
       TData = GetPlaceQuery,
       TError = unknown

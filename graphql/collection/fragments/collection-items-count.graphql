@@ -1,6 +1,6 @@
 fragment CollectionItemsCount on Collection {
   # Count the items
-  items(first: 0) {
+  items(first: 0) @connection(key: "collection-items-count") {
     totalCount
   }
 }

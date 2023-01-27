@@ -11,24 +11,5 @@ query getPlace($id: ID!, $mediaImagePreferredBestFit: [Int!]) {
 
     # Load in information about the place
     ...PlaceContent
-
-    # Select preferred media
-    preferredMedia {
-      id
-      __typename
-
-      resource {
-        __typename
-
-        ... on MediaImage {
-          id
-          source(bestFit: $mediaImagePreferredBestFit) {
-            url
-          }
-
-          ...MediaImagePartialContent
-        }
-      }
-    }
   }
 }

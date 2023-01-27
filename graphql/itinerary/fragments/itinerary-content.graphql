@@ -5,6 +5,8 @@ fragment ItineraryContent on Itinerary {
   tags
 
   created
+  modified
+  published
 
   autoRoute {
     defaultMode

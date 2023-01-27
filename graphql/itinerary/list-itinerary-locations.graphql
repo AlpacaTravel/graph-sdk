@@ -20,7 +20,8 @@ query listItineraryLocations(
     __typename
 
     # Read in the immediate children locations
-    locations: children(first: $first, type: ItineraryLocation, after: $after) {
+    locations: children(first: $first, type: ItineraryLocation, after: $after)
+      @connection(key: "list-itinerary-locations") {
       edges {
         location: node {
           id

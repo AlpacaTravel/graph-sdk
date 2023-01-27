@@ -4,4 +4,6 @@ fragment ItineraryPartialContent on Itinerary {
   tags
 
   created
+  modified
+  published
 }
