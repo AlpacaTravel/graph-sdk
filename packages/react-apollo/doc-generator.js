@@ -1,10 +1,10 @@
-const glob = require('glob');
-const fs = require('fs');
-const path = require('path');
+const glob = require("glob");
+const fs = require("fs");
+const path = require("path");
 
-const graphqlRoot = path.resolve(__dirname, '../../graphql');
+const graphqlRoot = path.resolve(__dirname, "../../graphql");
 
-glob('../../graphql/**/*.graphql', (er, files) => {
+glob("../../graphql/**/*.graphql", (er, files) => {
   const structures = files
     .filter((f) => !/fragment/.test(f))
     .map(info)
@@ -20,7 +20,9 @@ for use with Apollo and React.
 - See [Installation and Getting Started](https://alpacatravel.github.io/graph-sdk/packages/react-apollo/)
   `;
   const footer = ``;
-  const sections = Object.keys(structures).map((key) => section(key, structures));
+  const sections = Object.keys(structures).map((key) =>
+    section(key, structures)
+  );
 
   // Table of contents
   const doc = [
@@ -35,14 +37,14 @@ for use with Apollo and React.
           }
           return c;
         }, []);
-        const sectionDoc = [sectionStart, ...sectionMiddle].join('');
+        const sectionDoc = [sectionStart, ...sectionMiddle].join("");
         return sectionDoc;
       })
-      .join('\n\n'),
+      .join("\n\n"),
     footer,
-  ].join('\n\n');
+  ].join("\n\n");
 
-  fs.writeFileSync(path.resolve(__dirname, './api.md'), doc);
+  fs.writeFileSync(path.resolve(__dirname, "./api.md"), doc);
 });
 
 function section(key, structures) {
@@ -50,7 +52,7 @@ function section(key, structures) {
     const first = structures[key][0];
     const isParentDifferent = first.dirParent !== first.dir;
     if (!isParentDifferent) {
-      return [null, 'View other SDK Capabilities', '/graphql'];
+      return [null, "View other SDK Capabilities", "/graphql"];
     }
     return [
       first.dirParent,
@@ -65,13 +67,13 @@ function section(key, structures) {
     title: formatString(key),
     toc: structures[key]
       .map((p) => `- **[${p.title}](${p.link})**\n  ${p.comment.trim()}`)
-      .join('\n'),
+      .join("\n"),
     parent: [parent, parentText, parentLink],
   };
 }
 
 function info(input) {
-  const minimal = input.replace('../../graphql/', '');
+  const minimal = input.replace("../../graphql/", "");
 
   // Split out title
   const [dir, file] = rsplit(minimal);
@@ -79,22 +81,24 @@ function info(input) {
   // Create a title
 
   // Target the comments at the start of the graphql query
-  const contents = fs.readFileSync(path.resolve(__dirname, input), 'utf-8');
+  const contents = fs.readFileSync(path.resolve(__dirname, input), "utf-8");
   const [pre] = contents.split(/(query|mutation) (\w+) ?{/);
   const isQuery = /\nquery /.test(contents);
   const comment = pre
-    .replace(/#import.+\n/g, '')
-    .replace(/\n/g, '')
-    .replace(/# /g, ' ')
-    .replace(/\..+/, '');
+    .replace(/#import.+\n/g, "")
+    .replace(/\n/g, "")
+    .replace(/# /g, " ")
+    .replace(/\..+/, "");
 
-  const title = `use${camelize(file.replace(/.graphql/, ''))}${isQuery ? 'Query' : 'Mutation'}`;
+  const title = `use${camelize(file.replace(/.graphql/, ""))}${
+    isQuery ? "Query" : "Mutation"
+  }`;
 
-  const link = `https://alpacatravel.github.io/graph-sdk/packages/react-apollo/docs/modules.html#${title}`;
+  const link = `https://alpacatravel.github.io/graph-sdk/packages/react-apollo/docs/functions/${title}.html`;
 
   return {
     dirParent: dir[0],
-    dir: dir.join('/'),
+    dir: dir.join("/"),
     title,
     path: minimal,
     comment,
@@ -104,12 +108,12 @@ function info(input) {
 
 function formatString(string) {
   switch (string.toLowerCase()) {
-    case 'place/atdw':
-      return 'Place Provider: Australian Tourism Data Warehouse';
+    case "place/atdw":
+      return "Place Provider: Australian Tourism Data Warehouse";
     default:
       break;
   }
-  return string.split('/').map(upperCaseFirst).join(' ');
+  return string.split("/").map(upperCaseFirst).join(" ");
 }
 
 function upperCaseFirst(input) {
@@ -117,7 +121,7 @@ function upperCaseFirst(input) {
 }
 
 function rsplit(input) {
-  const split = input.split('/');
+  const split = input.split("/");
   return [split.slice(0, -1), split.slice(-1)[0]];
 }
 
