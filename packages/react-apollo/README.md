@@ -27,7 +27,7 @@ You'll need to establish your client and provide it to the application.
 
 ```javascript
 import React from 'react';
-import { render } from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import { ApolloClient, InMemoryCache } from '@apollo/client';
 
 const client = new ApolloClient({
@@ -44,11 +44,12 @@ function App() {
   );
 }
 
-render(
+const container = document.getElementById('app');
+const root = createRoot(container); // createRoot(container!) if you use TypeScript
+root.render(
   <ApolloProvider client={client}>
     <App />
   </ApolloProvider>,
-  document.getElementById('root'),
 );
 ```
 
@@ -62,12 +63,15 @@ as lazy loading.
 
 ```javascript
 import React from 'react';
-import { render } from 'react-dom';
-import { useGetItineraryQuery } from '@alpaca-travel/graph-sdk-react-apollo';
+import * as alpaca from '@alpaca-travel/graph-sdk-react-apollo';
 
 function MyComponent() {
   // Leverage an SDK function as a hook
-  const [data, loading, error] = useGetItineraryQuery({ id: 'itinerary/123' });
+  const [data, loading, error] = alpaca.useGetItineraryQuery({
+    variables: {
+      id: 'itinerary/123',
+    },
+  });
 
   // Loading state...
   if (loading) {

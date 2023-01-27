@@ -28,7 +28,7 @@ to your application.
 
 ```javascript
 import React from 'react';
-import { render } from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import { QueryClient, QueryClientProvider } from 'react-query';
 
 // Create a react-query Query Client
@@ -42,11 +42,12 @@ function App() {
   );
 }
 
-render(
+const container = document.getElementById('app');
+const root = createRoot(container); // createRoot(container!) if you use TypeScript
+root.render(
   <QueryClientProvider client={queryClient}>
     <App />
   </QueryClientProvider>,
-  document.getElementById('root'),
 );
 ```
 
