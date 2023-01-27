@@ -1,6 +1,6 @@
 {
   "name": "@alpaca-travel/graph-sdk-graphql-request",
-  "version": "1.0.0",
+  "version": "1.0.0-alpha.0",
   "author": "Tom Manderson <tom@alpaca.travel>",
   "homepage": "https://alpacatravel.github.io/graph-sdk/packages/graphql-request/",
   "main": "dist/cjs/index.js",
@@ -26,7 +26,6 @@
     "graphql-request": "^3.4.0",
     "graphql-tag": "^2.0.0"
   },
-  "dependencies": {},
   "env": {
     "jest": true
   },
