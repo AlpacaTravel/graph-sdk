@@ -1,24 +1,57 @@
-# Alpaca Travel GraphQL SDK for React with Apollo
+# React and Apollo SDK for Alpaca Travel
 
-> This package assist with a basic SDK for developing applications on top of
-> Alpaca Travel GraphQL API via React/Apollo.
+![npm](https://img.shields.io/npm/v/@alpaca-travel/graph-sdk-react-apollo)![npm bundle size](https://img.shields.io/bundlephobia/minzip/@alpaca-travel/graph-sdk-react-apollo)![NPM](https://img.shields.io/npm/l/@alpaca-travel/graph-sdk-react-apollo)
+
+The Alpaca Travel platform offers a GraphQL API that provides developers with 
+easy access to itinerary content for use in interactive applications and user 
+interfaces. It includes features such as itinerary management, guide and 
+directory creation, location search, and place information loading to enhance 
+the functionality of travel-related applications and websites.
+
+> Simplify integration of Alpaca Travel GraphQL API into React and Apollo-based 
+> projects using pre-built functionality and type-safe hooks.
+
+The **@alpaca-travel/graph-sdk-react-apollo** package is an npm package for 
+developers who are using React and Apollo GraphQL to build travel-related 
+websites and applications. The package includes an SDK that utilizes Apollo 
+clients to connect to the Alpaca Travel GraphQL API, providing developers with a
+prebuilt set of standard functionality without the need to write their own 
+GraphQL operations. 
+
+Additionally, the package includes examples of how to use code generation to 
+construct type-safe hooks based on the Alpaca Travel GraphQL schema, which can 
+assist in validating operations and simplifying integration. This package may be
+useful for developers who are looking to efficiently integrate the Alpaca Travel
+GraphQL API into their React and Apollo-based projects.
 
 - [SDK API Documentation](https://alpacatravel.github.io/graph-sdk/packages/react-apollo/docs)
 - [Alpaca Travel GraphQL Documentation](https://github.com/AlpacaTravel/graphql-docs)
 - [Alternative SDK Versions](/README.md)
 
+## Getting Started
+
+This SDK is for applications or websites that are built using React along with
+the Apollo Client.
+
+This guide assumes that you have you React application already installed and
+running. 
+
 ## Installation
+
+### Apollo Client
+
+If you haven't done so already, you'll also need to install the Apollo Client.
+
+```shell
+npm install @apollo/client graphql --save
+```
+
+### Install the Alpaca Travel SDK
 
 Via NPM:
 
 ```
-npm install @apollo/client graphql @alpaca-travel/graph-sdk-react-apollo --save
-```
-
-Via Yarn:
-
-```
-yarn add @apollo/client graphql @alpaca-travel/graph-sdk-react-apollo
+npm install @alpaca-travel/graph-sdk-react-apollo --save
 ```
 
 ## Getting Started
