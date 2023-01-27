@@ -1,108 +1,152 @@
 # React and Apollo SDK for Alpaca Travel
 
-![npm](https://img.shields.io/npm/v/@alpaca-travel/graph-sdk-react-apollo)![npm bundle size](https://img.shields.io/bundlephobia/minzip/@alpaca-travel/graph-sdk-react-apollo)![NPM](https://img.shields.io/npm/l/@alpaca-travel/graph-sdk-react-apollo)
+![npm](https://img.shields.io/npm/v/@alpaca-travel/graph-sdk-react-apollo)![npm bundle size](https://img.shields.io/bundlephobia/minzip/@alpaca-travel/graph-sdk-react-apollo)![NPM](https://img.shields.io/npm/l/@alpaca-travel/graph-sdk-react-apollo)![npm type definitions](https://img.shields.io/npm/types/@alpaca-travel/graph-sdk-react-apollo)
 
-The Alpaca Travel platform offers a GraphQL API that provides developers with 
-easy access to itinerary content for use in interactive applications and user 
-interfaces. It includes features such as itinerary management, guide and 
-directory creation, location search, and place information loading to enhance 
+The Alpaca Travel platform offers a GraphQL API that provides developers with
+easy access to itinerary content for use in interactive applications and user
+interfaces. It includes features such as itinerary management, guide and
+directory creation, location search, and place information loading to enhance
 the functionality of travel-related applications and websites.
 
-> Simplify integration of Alpaca Travel GraphQL API into React and Apollo-based 
+> Simplify integration of Alpaca Travel GraphQL API into React and Apollo-based
 > projects using pre-built functionality and type-safe hooks.
 
-The **@alpaca-travel/graph-sdk-react-apollo** package is an npm package for 
-developers who are using React and Apollo GraphQL to build travel-related 
-websites and applications. The package includes an SDK that utilizes Apollo 
-clients to connect to the Alpaca Travel GraphQL API, providing developers with a
-prebuilt set of standard functionality without the need to write their own 
-GraphQL operations. 
+The
+**[@alpaca-travel/graph-sdk-react-apollo](https://www.npmjs.com/package/@alpaca-travel/graph-sdk-react-apollo)**
+package is an npm package for developers who are using React and Apollo GraphQL
+to build travel-related websites and applications. The package includes an SDK
+that utilizes Apollo clients to connect to the Alpaca Travel GraphQL API,
+providing developers with a prebuilt set of standard functionality without the
+need to write their own GraphQL operations.
 
-Additionally, the package includes examples of how to use code generation to 
-construct type-safe hooks based on the Alpaca Travel GraphQL schema, which can 
+Additionally, the package includes examples of how to use code generation to
+construct type-safe hooks based on the Alpaca Travel GraphQL schema, which can
 assist in validating operations and simplifying integration. This package may be
 useful for developers who are looking to efficiently integrate the Alpaca Travel
 GraphQL API into their React and Apollo-based projects.
 
+- [NPM Package](https://www.npmjs.com/package/@alpaca-travel/graph-sdk-react-apollo)
 - [SDK API Documentation](https://alpacatravel.github.io/graph-sdk/packages/react-apollo/docs)
 - [Alpaca Travel GraphQL Documentation](https://github.com/AlpacaTravel/graphql-docs)
 - [Alternative SDK Versions](/README.md)
 
-## Getting Started
+## Setup
 
 This SDK is for applications or websites that are built using React along with
 the Apollo Client.
 
 This guide assumes that you have you React application already installed and
-running. 
+running.
 
-## Installation
+- Create a production website with [Next.js](https://nextjs.org/), or
+- Create a new React project locally with
+  [Create React App](https://reactjs.org/docs/create-a-new-react-app.html), or
+- Create a new React sandbox on [CodeSandbox](https://codesandbox.io/)
+
+## Install dependencies
 
 ### Apollo Client
 
 If you haven't done so already, you'll also need to install the Apollo Client.
 
+Apollo Client requires two top-level dependencies of `@apollo/client` and
+`graphql`.
+
 ```shell
 npm install @apollo/client graphql --save
 ```
 
-### Install the Alpaca Travel SDK
+For this you can use an install like below, or refer to the
+[Apollo Client](https://www.apollographql.com/docs/react/) documentation.
 
-Via NPM:
+### Alpaca Travel React/Apollo SDK
 
-```
+Intalling the Alpaca Travel SDK requires one top-level dependency added to the
+project.
+
+```shell
 npm install @alpaca-travel/graph-sdk-react-apollo --save
 ```
 
-## Getting Started
+This single package exposes a number of React hooks and GraphQL documents
+providing the basis of the Alpaca Travel SDK.
+
+### Initialize the ApolloClient
 
 You'll need to establish your client and provide it to the application.
 
-```javascript
-import React from 'react';
-import { createRoot } from 'react-dom/client';
-import { ApolloClient, InMemoryCache } from '@apollo/client';
+Create a module called `client.js` and add the following Apollo Client
+configuration:
 
+```javascript
+import { ApolloClient, InMemoryCache } from "@apollo/client";
+
+// Recommend this is an environment variable
+const accessToken = "ADD_YOUR_TOKEN_HERE";
+
+// Create a new Apollo Client
 const client = new ApolloClient({
   // Substitute in your API Key
   uri: `https://withalpaca.com/api/graphql?accessToken=xxx`,
   cache: new InMemoryCache(),
 });
+```
+
+- `uri` specifies apollo to connect to the Alpaca Travel GraphQL endpoint
+- `cache` is an instance of `InMemoryCache`, which Apollo client uses to cache
+  results after fetching them.
+
+Remember to update the code with your Access Token.
+
+See More:
+
+- Alpaca Travel GraphQL API
+  [Token Authorization](https://github.com/AlpacaTravel/graphql-docs/tree/master/topics/graphql/Token%20Authorization)
+- Alpaca Travel GraphQL API
+  [Apollo Client](https://github.com/AlpacaTravel/graphql-docs/tree/master/topics/javascript/react/Apollo%20Client)
+  Topic
+
+### Connect your client to React
+
+In your application component, you can provide the Apollo Client to wrap your
+application using the `ApolloProvider`.
+
+We suggest putting the `ApolloProvider` somewhere high in your app, above any
+component that might need to use the SDK.
+
+```javascript
+import React from "react";
+import { ApolloProvider } from "@apollo/client";
+
+// Import the client from above
+import client from "./client";
 
 function App() {
   return (
-    <div>
+    <ApolloProvider client={client}>
       <h2>My first Apollo app 🚀</h2>
-    </div>
+    </ApolloProvider>
   );
 }
 
-const container = document.getElementById('app');
-const root = createRoot(container); // createRoot(container!) if you use TypeScript
-root.render(
-  <ApolloProvider client={client}>
-    <App />
-  </ApolloProvider>,
-);
+export default App;
 ```
 
-> [Getting Started with Apollo Client](https://www.apollographql.com/docs/react/)
+### Fetch data with the SDK
 
-### Using a SDK Function
-
-The below provides an example of using the 'getItinerary' SDK query, which
-is exposed as `useGetItineraryQuery`. You also have access to variations, such
-as lazy loading.
+The below provides an example of using the 'getItinerary' SDK query, which is
+exposed as `useGetItineraryQuery`. You also have access to variations, such as
+lazy loading.
 
 ```javascript
-import React from 'react';
-import * as alpaca from '@alpaca-travel/graph-sdk-react-apollo';
+// Import the SDK function
+import * as alpaca from "@alpaca-travel/graph-sdk-react-apollo";
 
 function MyComponent() {
   // Leverage an SDK function as a hook
   const [data, loading, error] = alpaca.useGetItineraryQuery({
     variables: {
-      id: 'itinerary/123',
+      id: "itinerary/123",
     },
   });
 
@@ -126,19 +170,32 @@ function MyComponent() {
 }
 ```
 
-## API Documentation
+## Reference
+
+You can refer to this
+[CodeSandbox example](https://codesandbox.io/s/alpaca-travel-typescript-sdk-react-apollo-e958zh?file=/src/App.tsx)
+which shows a React v18 application using Apollo to query the Alpaca Travel API
+via the SDK.
+
+## SDK API Documentation
 
 The capabilities of the API are documented using typedoc.
 
-See [API Documentation](https://alpacatravel.github.io/graph-sdk/packages/react-apollo/docs)
+See
+[API Documentation](https://alpacatravel.github.io/graph-sdk/packages/react-apollo/docs)
 
 ### Extending using your own GraphQL Queries
 
 You have options on how you would like extend your queries.
 
-- Use the `useQuery` or `useMutation` hooks review the [provided GraphQL documents](/graphql) (simple)
-- Write your GraphQL documents and leverage `graphql-codegen` to generate your apollo hooks
-- Fork the SDK and modify as suits (more advanced, but can simply modify graphql docs and then rerun the code generation)
+- Use the Apollo `useQuery` or `useMutation` from Apollo Client and refer to the
+  [Alpaca Travel GraphQL documentation](https://github.com/AlpacaTravel/graphql-docs)
+  for example operations
+- Write your GraphQL documents and leverage `graphql-codegen` to generate your
+  apollo hooks
+
+As an alternative option, you can review this package for a reference of
+implementating your own SDK modifications.
 
 #### Using Apollo `useQuery`
 
@@ -146,7 +203,7 @@ Apollo makes it easy for you to create your own GraphQL documents that connect
 to Alpaca and then execute your queries and mutations.
 
 ```javascript
-import { gql, useQuery } from '@apollo/client';
+import { gql, useQuery } from "@apollo/client";
 
 const GET_AUTHORIZED_PROFILES = gql`
   query getAuthorizedProfiles($first: Int!) {
@@ -179,7 +236,8 @@ function Profiles() {
 ```
 
 - See [Apollo Queries](https://www.apollographql.com/docs/react/data/queries/)
-- See [Apollo Mutations](https://www.apollographql.com/docs/react/data/mutations/)
+- See
+  [Apollo Mutations](https://www.apollographql.com/docs/react/data/mutations/)
 
 #### Using graphql-codegen
 
@@ -192,13 +250,17 @@ Install graphql-codegen and the related libraries to your project
 npm install -D @graphql-codegen/cli @graphql-codegen/fragment-matcher @graphql-codegen/introspection @graphql-codegen/jsdoc @graphql-codegen/typescript @graphql-codegen/typescript-operations @graphql-codegen/typescript-react-apollo
 ```
 
-See the [graphql-codegen configuration](./codegen-typescript-example.yml) for an example of
-the configuration used for generating out the SDK.
+See the
+[graphql-codegen configuration](/packages/react-apollo/codegen-typescript-example.yml)
+for an example of the configuration used for generating out the SDK.
 
-1. Copy the `codegen-typescript-example.yml` file as `codegen.yml` in your workspace
+1. Copy the `codegen-typescript-example.yml` file as `codegen.yml` in your
+   workspace
 2. Create the folder in `src/graphql` and place in your graphql operations
-3. Add the script `"graphql-codegen": "graphql-codegen --config codegen.yml"` to your package.json "scripts" section
-4. Run `npm run graphql-codegen` to generate your own `src/graphql/index.ts` file
+3. Add the script `"graphql-codegen": "graphql-codegen --config codegen.yml"` to
+   your package.json "scripts" section
+4. Run `npm run graphql-codegen` to generate your own `src/graphql/index.ts`
+   file
 
 The benefit of using graphql-codegen is that your Typescript types will be
 created, as well as providing the API surface for you to call without embedding
