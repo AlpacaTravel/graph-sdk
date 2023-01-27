@@ -31,6 +31,9 @@
   "env": {
     "jest": true
   },
+  "files": [
+    "dist"
+  ],
   "devDependencies": {
     "@apollo/client": "^3.4.7",
     "@graphql-codegen/cli": "^2.0.1",

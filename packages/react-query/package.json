@@ -30,6 +30,9 @@
     "jest": true,
     "browser": true
   },
+  "files": [
+    "dist"
+  ],
   "devDependencies": {
     "@graphql-codegen/cli": "^2.0.1",
     "@graphql-codegen/fragment-matcher": "^3.0.0",
