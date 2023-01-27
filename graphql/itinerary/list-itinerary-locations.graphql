@@ -1,7 +1,6 @@
 #import "./fragments/itinerary-location-partial-content.graphql"
 #import "./fragments/itinerary-directions-partial-content.graphql"
 #import "./../place/fragments/place-partial-content.graphql"
-#import "./../media/fragments/media-image-partial-content.graphql"
 
 # Lists in itinerary locations for a provided Itinerary.
 
@@ -10,7 +9,6 @@ query listItineraryLocations(
   $first: Int!
   $after: String
   $includeRoutePolyline: Boolean!
-  $mediaImagePreferredBestFit: [Int!]
 ) {
   # Use the itinerary() query operation
   itinerary(
@@ -38,25 +36,6 @@ query listItineraryLocations(
               __typename
 
               ...PlacePartialContent
-            }
-
-            # Load in a preferred media size
-            preferredMedia {
-              id
-              __typename
-
-              resource {
-                __typename
-
-                ... on MediaImage {
-                  id
-                  source(bestFit: $mediaImagePreferredBestFit) {
-                    url
-                  }
-
-                  ...MediaImagePartialContent
-                }
-              }
             }
           }
         }

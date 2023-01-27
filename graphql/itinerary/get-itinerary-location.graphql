@@ -1,10 +1,9 @@
 #import "./fragments/itinerary-location-content.graphql"
 #import "./../place/fragments/place-content.graphql"
-#import "./../media/fragments/media-image-partial-content.graphql"
 
 # Loads information about an itinerary location.
 
-query getItineraryLocation($id: ID!, $mediaImagePreferredBestFit: [Int!]) {
+query getItineraryLocation($id: ID!) {
   # Use the node() to query any type
   node(id: $id) {
     id
@@ -20,23 +19,6 @@ query getItineraryLocation($id: ID!, $mediaImagePreferredBestFit: [Int!]) {
         __typename
 
         ...PlaceContent
-      }
-
-      # Select preferred media
-      preferredMedia {
-        id
-        __typename
-
-        resource {
-          __typename
-          ... on MediaImage {
-            id
-            source(bestFit: $mediaImagePreferredBestFit) {
-              url
-            }
-            ...MediaImagePartialContent
-          }
-        }
       }
     }
   }
