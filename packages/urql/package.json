@@ -1,6 +1,6 @@
 {
   "name": "@alpaca-travel/graph-sdk-urql",
-  "version": "1.0.2-alpha.0",
+  "version": "2.0.0",
   "author": "Tom Manderson <tom@alpaca.travel>",
   "homepage": "https://alpacatravel.github.io/graph-sdk/packages/urql/",
   "main": "dist/cjs/index.js",
