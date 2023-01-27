@@ -7429,11 +7429,10 @@ export type CollectionPartialContentFragment = { __typename?: 'Collection', titl
 
 export type GetCollectionLocationQueryVariables = Exact<{
   id: Scalars['ID'];
-  mediaImagePreferredBestFit?: InputMaybe<Array<Scalars['Int']> | Scalars['Int']>;
 }>;
 
 
-export type GetCollectionLocationQuery = { __typename?: 'Query', collectionItem?: { __typename: 'CollectionLocation', id: string, title?: string | null, synopsis?: string | null, description?: string | null, tags: Array<string>, readMoreUrl?: string | null, websiteUrl?: string | null, place: { __typename: 'Place', id: string, name?: string | null, synopsis?: string | null, maki?: string | null, position: { __typename?: 'Position', lon: number, lat: number }, address: { __typename?: 'PlaceAddress', addressLineOne?: string | null, addressLineTwo?: string | null, addressLineThree?: string | null, locality?: string | null, region?: string | null, regionCode?: string | null, country?: string | null, countryCode?: string | null }, layers: Array<{ __typename: 'PlaceLayer', id: string, name?: string | null }> }, preferredMedia?: { __typename: 'MediaContainer', id: string, resource: { __typename: 'MediaImage', id?: string | null, caption?: string | null, copyright?: string | null, attribution?: string | null, altText?: string | null, source?: { __typename?: 'MediaImageSource', url: string } | null } | { __typename: 'MediaResourceFailedToLoad' } } | null, position: { __typename?: 'Position', lon: number, lat: number } } | null };
+export type GetCollectionLocationQuery = { __typename?: 'Query', collectionItem?: { __typename: 'CollectionLocation', id: string, title?: string | null, synopsis?: string | null, description?: string | null, tags: Array<string>, readMoreUrl?: string | null, websiteUrl?: string | null, place: { __typename: 'Place', id: string, name?: string | null, synopsis?: string | null, maki?: string | null, position: { __typename?: 'Position', lon: number, lat: number }, address: { __typename?: 'PlaceAddress', addressLineOne?: string | null, addressLineTwo?: string | null, addressLineThree?: string | null, locality?: string | null, region?: string | null, regionCode?: string | null, country?: string | null, countryCode?: string | null }, layers: Array<{ __typename: 'PlaceLayer', id: string, name?: string | null }> }, position: { __typename?: 'Position', lon: number, lat: number } } | null };
 
 export type GetCollectionQueryVariables = Exact<{
   id: Scalars['ID'];
@@ -7661,7 +7660,6 @@ export type PlaceSearchContentFragment = { __typename?: 'PlaceSearchNode', name?
 
 export type GetPlaceQueryVariables = Exact<{
   id: Scalars['ID'];
-  mediaImagePreferredBestFit?: InputMaybe<Array<Scalars['Int']> | Scalars['Int']>;
 }>;
 
 
@@ -8267,7 +8265,7 @@ export const useFindCollectionLocationsByTagQuery = <
       options
     );
 export const GetCollectionLocationDocument = `
-    query getCollectionLocation($id: ID!, $mediaImagePreferredBestFit: [Int!]) {
+    query getCollectionLocation($id: ID!) {
   collectionItem(id: $id) {
     id
     __typename
@@ -8277,23 +8275,6 @@ export const GetCollectionLocationDocument = `
         id
         __typename
         ...PlacePartialContent
-      }
-      preferredMedia {
-        id
-        __typename
-        resource {
-          __typename
-          ... on MediaImage {
-            id
-            source(bestFit: $mediaImagePreferredBestFit) {
-              url
-            }
-            caption
-            copyright
-            attribution
-            altText
-          }
-        }
       }
     }
   }
@@ -9076,7 +9057,7 @@ export const useAutocompleteSearchPlaceQuery = <
       options
     );
 export const GetPlaceDocument = `
-    query getPlace($id: ID!, $mediaImagePreferredBestFit: [Int!]) {
+    query getPlace($id: ID!) {
   place(id: $id) {
     id
     __typename

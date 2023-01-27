@@ -3,7 +3,7 @@
 
 # Obtain informationa bout a collection location.
 
-query getCollectionLocation($id: ID!, $mediaImagePreferredBestFit: [Int!]) {
+query getCollectionLocation($id: ID!) {
   collectionItem(
     # Provide the individual collection item ID
     id: $id
@@ -21,27 +21,6 @@ query getCollectionLocation($id: ID!, $mediaImagePreferredBestFit: [Int!]) {
         __typename
 
         ...PlacePartialContent
-      }
-
-      # Select preferred media
-      preferredMedia {
-        id
-        __typename
-
-        resource {
-          __typename
-
-          ... on MediaImage {
-            id
-            source(bestFit: $mediaImagePreferredBestFit) {
-              url
-            }
-            caption
-            copyright
-            attribution
-            altText
-          }
-        }
       }
     }
   }

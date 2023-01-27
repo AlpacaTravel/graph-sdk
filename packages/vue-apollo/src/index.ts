@@ -7408,11 +7408,10 @@ export type CollectionPartialContentFragment = { __typename?: 'Collection', titl
 
 export type GetCollectionLocationQueryVariables = Exact<{
   id: Scalars['ID'];
-  mediaImagePreferredBestFit?: Maybe<Array<Scalars['Int']> | Scalars['Int']>;
 }>;
 
 
-export type GetCollectionLocationQuery = { __typename?: 'Query', collectionItem?: Maybe<{ __typename: 'CollectionLocation', id: string, title?: Maybe<string>, synopsis?: Maybe<string>, description?: Maybe<string>, tags: Array<string>, readMoreUrl?: Maybe<string>, websiteUrl?: Maybe<string>, place: { __typename: 'Place', id: string, name?: Maybe<string>, synopsis?: Maybe<string>, maki?: Maybe<string>, position: { __typename?: 'Position', lon: number, lat: number }, address: { __typename?: 'PlaceAddress', addressLineOne?: Maybe<string>, addressLineTwo?: Maybe<string>, addressLineThree?: Maybe<string>, locality?: Maybe<string>, region?: Maybe<string>, regionCode?: Maybe<string>, country?: Maybe<string>, countryCode?: Maybe<string> }, layers: Array<{ __typename: 'PlaceLayer', id: string, name?: Maybe<string> }> }, preferredMedia?: Maybe<{ __typename: 'MediaContainer', id: string, resource: { __typename: 'MediaImage', id?: Maybe<string>, caption?: Maybe<string>, copyright?: Maybe<string>, attribution?: Maybe<string>, altText?: Maybe<string>, source?: Maybe<{ __typename?: 'MediaImageSource', url: string }> } | { __typename: 'MediaResourceFailedToLoad' } }>, position: { __typename?: 'Position', lon: number, lat: number } }> };
+export type GetCollectionLocationQuery = { __typename?: 'Query', collectionItem?: Maybe<{ __typename: 'CollectionLocation', id: string, title?: Maybe<string>, synopsis?: Maybe<string>, description?: Maybe<string>, tags: Array<string>, readMoreUrl?: Maybe<string>, websiteUrl?: Maybe<string>, place: { __typename: 'Place', id: string, name?: Maybe<string>, synopsis?: Maybe<string>, maki?: Maybe<string>, position: { __typename?: 'Position', lon: number, lat: number }, address: { __typename?: 'PlaceAddress', addressLineOne?: Maybe<string>, addressLineTwo?: Maybe<string>, addressLineThree?: Maybe<string>, locality?: Maybe<string>, region?: Maybe<string>, regionCode?: Maybe<string>, country?: Maybe<string>, countryCode?: Maybe<string> }, layers: Array<{ __typename: 'PlaceLayer', id: string, name?: Maybe<string> }> }, position: { __typename?: 'Position', lon: number, lat: number } }> };
 
 export type GetCollectionQueryVariables = Exact<{
   id: Scalars['ID'];
@@ -7640,7 +7639,6 @@ export type PlaceSearchContentFragment = { __typename?: 'PlaceSearchNode', name?
 
 export type GetPlaceQueryVariables = Exact<{
   id: Scalars['ID'];
-  mediaImagePreferredBestFit?: Maybe<Array<Scalars['Int']> | Scalars['Int']>;
 }>;
 
 
@@ -8311,7 +8309,7 @@ export function useFindCollectionLocationsByTagQuery(variables: FindCollectionLo
 }
 export type FindCollectionLocationsByTagQueryCompositionFunctionResult = VueApolloComposable.UseQueryReturn<FindCollectionLocationsByTagQuery, FindCollectionLocationsByTagQueryVariables>;
 export const GetCollectionLocationDocument = gql`
-    query getCollectionLocation($id: ID!, $mediaImagePreferredBestFit: [Int!]) {
+    query getCollectionLocation($id: ID!) {
   collectionItem(id: $id) {
     id
     __typename
@@ -8321,23 +8319,6 @@ export const GetCollectionLocationDocument = gql`
         id
         __typename
         ...PlacePartialContent
-      }
-      preferredMedia {
-        id
-        __typename
-        resource {
-          __typename
-          ... on MediaImage {
-            id
-            source(bestFit: $mediaImagePreferredBestFit) {
-              url
-            }
-            caption
-            copyright
-            attribution
-            altText
-          }
-        }
       }
     }
   }
@@ -8358,7 +8339,6 @@ ${PlacePartialContentFragmentDoc}`;
  * @example
  * const { result, loading, error } = useGetCollectionLocationQuery({
  *   id: // value for 'id'
- *   mediaImagePreferredBestFit: // value for 'mediaImagePreferredBestFit'
  * });
  */
 export function useGetCollectionLocationQuery(variables: GetCollectionLocationQueryVariables | VueCompositionApi.Ref<GetCollectionLocationQueryVariables> | ReactiveFunction<GetCollectionLocationQueryVariables>, options: VueApolloComposable.UseQueryOptions<GetCollectionLocationQuery, GetCollectionLocationQueryVariables> | VueCompositionApi.Ref<VueApolloComposable.UseQueryOptions<GetCollectionLocationQuery, GetCollectionLocationQueryVariables>> | ReactiveFunction<VueApolloComposable.UseQueryOptions<GetCollectionLocationQuery, GetCollectionLocationQueryVariables>> = {}) {
@@ -9376,7 +9356,7 @@ export function useAutocompleteSearchPlaceQuery(variables: AutocompleteSearchPla
 }
 export type AutocompleteSearchPlaceQueryCompositionFunctionResult = VueApolloComposable.UseQueryReturn<AutocompleteSearchPlaceQuery, AutocompleteSearchPlaceQueryVariables>;
 export const GetPlaceDocument = gql`
-    query getPlace($id: ID!, $mediaImagePreferredBestFit: [Int!]) {
+    query getPlace($id: ID!) {
   place(id: $id) {
     id
     __typename
@@ -9398,7 +9378,6 @@ export const GetPlaceDocument = gql`
  * @example
  * const { result, loading, error } = useGetPlaceQuery({
  *   id: // value for 'id'
- *   mediaImagePreferredBestFit: // value for 'mediaImagePreferredBestFit'
  * });
  */
 export function useGetPlaceQuery(variables: GetPlaceQueryVariables | VueCompositionApi.Ref<GetPlaceQueryVariables> | ReactiveFunction<GetPlaceQueryVariables>, options: VueApolloComposable.UseQueryOptions<GetPlaceQuery, GetPlaceQueryVariables> | VueCompositionApi.Ref<VueApolloComposable.UseQueryOptions<GetPlaceQuery, GetPlaceQueryVariables>> | ReactiveFunction<VueApolloComposable.UseQueryOptions<GetPlaceQuery, GetPlaceQueryVariables>> = {}) {
