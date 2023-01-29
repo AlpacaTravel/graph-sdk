@@ -7,6 +7,8 @@ typescript: &typescript
     - typescript-operations
     - fragment-matcher
     - typescript-react-apollo
+    - typescript-apollo-client-helpers
+    - type-policies.js
   config:
     withRefetchQuery: true
     preResolveTypes: true
@@ -15,7 +17,7 @@ typescript: &typescript
 
 # GraphQL Codegen
 # Generate the schema at the top level by running npm run graphql-codegen first!
-schema: '../../graphql.schema.json'
+schema: "../../graphql.schema.json"
 generates:
   src/index.ts:
     documents: ../../graphql/**/*.graphql
