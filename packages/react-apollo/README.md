@@ -80,15 +80,16 @@ configuration:
 
 ```javascript
 import { ApolloClient, InMemoryCache } from "@apollo/client";
+import { typePolicies } from "@alpaca-travel/graph-sdk-react-apollo";
 
 // Recommend this is an environment variable
-const accessToken = "ADD_YOUR_TOKEN_HERE";
+const ACCESS_TOKEN = "ADD_YOUR_TOKEN_HERE";
 
 // Create a new Apollo Client
 const client = new ApolloClient({
   // Substitute in your API Key
-  uri: `https://withalpaca.com/api/graphql?accessToken=xxx`,
-  cache: new InMemoryCache(),
+  uri: `https://withalpaca.com/api/graphql?accessToken=${ACCESS_TOKEN}`,
+  cache: new InMemoryCache({ typePolicies }),
 });
 ```
 
@@ -97,6 +98,10 @@ const client = new ApolloClient({
   results after fetching them.
 
 Remember to update the code with your Access Token.
+
+Pass the InMemoryCache instance the value of `typePolicies` exported from the
+SDK, which helps configure the cache to understand how to handle SDK
+functionality, such as relay style cursor pagination.
 
 See More:
 
