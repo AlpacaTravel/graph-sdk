@@ -8889,3 +8889,9 @@ type Client<C = {}, E = unknown> = <R, V>(
   vars?: V,
   options?: C
 ) => Promise<R> | AsyncIterable<R>;
+
+
+export function getClientSdk(options: ClientOptions) {
+  const client = createClient(options);
+  return getSdk(client);
+}   

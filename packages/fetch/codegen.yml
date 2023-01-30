@@ -8,6 +8,7 @@ typescript: &typescript
     - fragment-matcher
     - typescript-generic-sdk
     - codegen-fetch-impl.js
+    - codegen-api.js
   config:
     preResolveTypes: true
     flattenGeneratedTypes: false

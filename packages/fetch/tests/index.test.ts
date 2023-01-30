@@ -1,9 +1,7 @@
-import { getSdk, createClient } from "../src/index";
+import { getClientSdk } from "../src/index";
 
 test("index creates an SDK with a configured client offering the API surface", () => {
-  const impl = createClient({ url: "https://example.com " });
-
-  const sdk = getSdk(impl);
+  const sdk = getClientSdk({ url: "https://example.com" });
 
   // Collection
   expect(typeof sdk.createCollectionLocation).toBe("function");
