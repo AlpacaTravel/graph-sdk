@@ -7769,7 +7769,7 @@ export const CollectionContentFragmentDoc = `
     `;
 export const CollectionItemsCountFragmentDoc = `
     fragment CollectionItemsCount on Collection {
-  items(first: 0) @connection(key: "collection-items-count") {
+  items(first: 0) {
     totalCount
   }
 }
@@ -7885,7 +7885,7 @@ export const ItineraryLocationPartialContentFragmentDoc = `
     `;
 export const ItineraryLocationsCountFragmentDoc = `
     fragment ItineraryLocationsCount on Itinerary {
-  locations: descendants(first: 0, type: ItineraryLocation) @connection(key: "itinerary-locations-count") {
+  locations: descendants(first: 0, type: ItineraryLocation) {
     totalCount
   }
 }
@@ -8803,7 +8803,7 @@ export const ListItineraryLocationsDocument = `
   itinerary(id: $id) {
     id
     __typename
-    locations: children(first: $first, type: ItineraryLocation, after: $after) @connection(key: "list-itinerary-locations") {
+    locations: children(first: $first, type: ItineraryLocation, after: $after) {
       edges {
         location: node {
           id

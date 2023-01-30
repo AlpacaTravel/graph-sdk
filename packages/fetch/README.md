@@ -6,14 +6,11 @@ A basic fetch based SDK for use in the browser.
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Parcel Sandbox</title>
-    <meta charset="UTF-8" />
+    <!-- Include the script in your head -->
     <script src="https://unpkg.com/@alpaca-travel/graph-sdk-fetch@latest/dist/umd/graph-sdk.min.js"></script>
   </head>
 
   <body>
-    <div id="app"></div>
-
     <script type="text/javascript">
       // Update below
       const ACCESS_TOKEN = "UPDATE_WITH_YOUR_ACCESS_TOKEN";
@@ -24,6 +21,7 @@ A basic fetch based SDK for use in the browser.
       });
 
       // Perform a SDK function
+      // See the rest of the api
       sdk
         .getItinerary({
           id: "itinerary/0mttpRn7spYNDIV979fHbE",

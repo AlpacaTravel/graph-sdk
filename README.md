@@ -4,9 +4,9 @@
 
 ## Alpaca Travel GraphQL JavaScript SDK
 
-> [Alpaca Travel](https://alpaca.travel) offers an SDK to assist developers
-> with building travel applications and websites. The SDK provides some 'out of
-> the box' functionality that can accelerate the adoption of developers without
+> [Alpaca Travel](https://alpaca.travel) offers an SDK to assist developers with
+> building travel applications and websites. The SDK provides some 'out of the
+> box' functionality that can accelerate the adoption of developers without
 > involving making GraphQL calls themselves.
 
 Alpaca Travel offer an extensive managed GraphQL API that developers can easily
@@ -25,8 +25,9 @@ preferences of developers.
 The SDK offers a set of basic capabilities for working with common use cases,
 such as creating and editing itineraries or displaying collections of places.
 
-The SDK leverages a series of [GraphQL documents](/graphql) that are built
-based on the [Alpaca GraphQL Documentation](https://github.com/AlpacaTravel/graphql-docs).
+The SDK leverages a series of [GraphQL documents](/graphql) that are built based
+on the
+[Alpaca GraphQL Documentation](https://github.com/AlpacaTravel/graphql-docs).
 
 The SDK leverages the Alpaca GraphQL API which operates as a SaaS platform,
 offering all required services such as place provider integration, route and
@@ -40,10 +41,11 @@ developers use.
 
 | GraphQL Client                                      |                                                                                                      |
 | --------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| [fetch](packages/fetch)                             | Basic fetch SDK for minimal dependency execution in browser                                          |
 | [graphql-request](packages/graphql-request)         | Minimal GraphQL client supporting Node and browsers for scripts or simple apps                       |
-| [urql](packages/urql)                               | A versatile GraphQL client for developing with React/Preact, Vue or Svelte                           |
-| [react-query](packages/react-query)                 | SDK driven by performant and powerful data synchronization for react                                 |
 | [react-apollo](packages/react-apollo) (recommended) | Full featured GraphQL development client including powerful caching and state management for React   |
+| [react-query](packages/react-query)                 | SDK driven by performant and powerful data synchronization for react                                 |
+| [react-urql](packages/react-urql)                   | A versatile GraphQL client for developing with React/Preact, Vue or Svelte                           |
 | [vue-apollo](packages/vue-apollo)                   | Full featured GraphQL development client including powerful caching and state management for Vue     |
 | [stencil-apollo](packages/stencil-apollo)           | Full featured GraphQL development client including powerful caching and state management for Stencil |
 
