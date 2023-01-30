@@ -1,5 +1,7 @@
 # Alpaca Travel GraphQL SDK for fetch
 
+![npm](https://img.shields.io/npm/v/@alpaca-travel/graph-sdk-fetch)![npm bundle size](https://img.shields.io/bundlephobia/minzip/@alpaca-travel/graph-sdk-fetch)![NPM](https://img.shields.io/npm/l/@alpaca-travel/graph-sdk-fetch)
+
 A basic fetch based SDK for use in the browser.
 
 See More:
