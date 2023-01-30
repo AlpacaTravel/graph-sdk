@@ -1,98 +1,104 @@
-# API Documentation
+# API Summary
 
-Welcome to the API Documentation for the Alpaca Travel GraphQL JavaScript SDK
-for use with browser based fetch.
+```html
+<script src="https://unpkg.com/@alpaca-travel/graph-sdk-fetch@latest/dist/umd/graph-sdk.min.js"></script>
 
-- See [Installation and Getting Started](https://alpacatravel.github.io/graph-sdk/packages/fetch/)
+<script type="text/javascript">
+// Create the SDK
+const sdk = alpacaGraphSdk.getClientSdk({
+  url: 'https://withalpaca.com/api/graphql?accessToken=UPDATE_WITH_YOUR_ACCESS_TOKEN',
+});
+</script>
+```
   
 
 ## Collection
 
-- **[useCreateCollectionLocationMutation](https://alpacatravel.github.io/graph-sdk/packages/react-apollo/docs/functions/useCreateCollectionLocationMutation.html)**
+- **[sdk.createCollectionLocation(...)](https://alpacatravel.github.io/graph-sdk/packages/fetch/docs/modules.html#getSdk)**
   Creates an collection location within the provided collection
-- **[useDeleteCollectionLocationMutation](https://alpacatravel.github.io/graph-sdk/packages/react-apollo/docs/functions/useDeleteCollectionLocationMutation.html)**
+- **[sdk.deleteCollectionLocation(...)](https://alpacatravel.github.io/graph-sdk/packages/fetch/docs/modules.html#getSdk)**
   Removes a collection location from a collection
-- **[useFindCollectionLocationIdsByExternalQuery](https://alpacatravel.github.io/graph-sdk/packages/react-apollo/docs/functions/useFindCollectionLocationIdsByExternalQuery.html)**
+- **[sdk.findCollectionLocationIdsByExternal(...)](https://alpacatravel.github.io/graph-sdk/packages/fetch/docs/modules.html#getSdk)**
   Find collection location IDs by external identifiers
-- **[useFindCollectionLocationIdsByTagQuery](https://alpacatravel.github.io/graph-sdk/packages/react-apollo/docs/functions/useFindCollectionLocationIdsByTagQuery.html)**
+- **[sdk.findCollectionLocationIdsByTag(...)](https://alpacatravel.github.io/graph-sdk/packages/fetch/docs/modules.html#getSdk)**
   Find collection location IDs by a specific tag
-- **[useFindCollectionLocationsByExternalQuery](https://alpacatravel.github.io/graph-sdk/packages/react-apollo/docs/functions/useFindCollectionLocationsByExternalQuery.html)**
+- **[sdk.findCollectionLocationsByExternal(...)](https://alpacatravel.github.io/graph-sdk/packages/fetch/docs/modules.html#getSdk)**
   Find collection location IDs by an external ID
-- **[useFindCollectionLocationsByTagQuery](https://alpacatravel.github.io/graph-sdk/packages/react-apollo/docs/functions/useFindCollectionLocationsByTagQuery.html)**
+- **[sdk.findCollectionLocationsByTag(...)](https://alpacatravel.github.io/graph-sdk/packages/fetch/docs/modules.html#getSdk)**
   Find collection locations by a specific tag
-- **[useGetCollectionLocationQuery](https://alpacatravel.github.io/graph-sdk/packages/react-apollo/docs/functions/useGetCollectionLocationQuery.html)**
+- **[sdk.getCollectionLocation(...)](https://alpacatravel.github.io/graph-sdk/packages/fetch/docs/modules.html#getSdk)**
   Obtain informationa bout a collection location
-- **[useGetCollectionQuery](https://alpacatravel.github.io/graph-sdk/packages/react-apollo/docs/functions/useGetCollectionQuery.html)**
+- **[sdk.getCollection(...)](https://alpacatravel.github.io/graph-sdk/packages/fetch/docs/modules.html#getSdk)**
   Obtains information about a collection
-- **[useListCollectionsQuery](https://alpacatravel.github.io/graph-sdk/packages/react-apollo/docs/functions/useListCollectionsQuery.html)**
+- **[sdk.listCollections(...)](https://alpacatravel.github.io/graph-sdk/packages/fetch/docs/modules.html#getSdk)**
   Obtain a listing of the collections for a profile
-- **[useUpdateCollectionLocationMutation](https://alpacatravel.github.io/graph-sdk/packages/react-apollo/docs/functions/useUpdateCollectionLocationMutation.html)**
+- **[sdk.updateCollectionLocation(...)](https://alpacatravel.github.io/graph-sdk/packages/fetch/docs/modules.html#getSdk)**
   Update the collection location
 
 ## Itinerary
 
-- **[useCreateItineraryDirectionsMutation](https://alpacatravel.github.io/graph-sdk/packages/react-apollo/docs/functions/useCreateItineraryDirectionsMutation.html)**
+- **[sdk.createItineraryDirections(...)](https://alpacatravel.github.io/graph-sdk/packages/fetch/docs/modules.html#getSdk)**
   Creates itinerary directions for between locations in an itinerary manually
-- **[useCreateItineraryLocationMutation](https://alpacatravel.github.io/graph-sdk/packages/react-apollo/docs/functions/useCreateItineraryLocationMutation.html)**
+- **[sdk.createItineraryLocation(...)](https://alpacatravel.github.io/graph-sdk/packages/fetch/docs/modules.html#getSdk)**
   Creates a new Itinerary Location, which can contain place information
-- **[useCreateItineraryMutation](https://alpacatravel.github.io/graph-sdk/packages/react-apollo/docs/functions/useCreateItineraryMutation.html)**
+- **[sdk.createItinerary(...)](https://alpacatravel.github.io/graph-sdk/packages/fetch/docs/modules.html#getSdk)**
   Creates a new Itinerary data structure for organising an itinerary
-- **[useDeleteItineraryLocationMutation](https://alpacatravel.github.io/graph-sdk/packages/react-apollo/docs/functions/useDeleteItineraryLocationMutation.html)**
+- **[sdk.deleteItineraryLocation(...)](https://alpacatravel.github.io/graph-sdk/packages/fetch/docs/modules.html#getSdk)**
   Removes an itinerary location from an itinerary
-- **[useDeleteItineraryMutation](https://alpacatravel.github.io/graph-sdk/packages/react-apollo/docs/functions/useDeleteItineraryMutation.html)**
+- **[sdk.deleteItinerary(...)](https://alpacatravel.github.io/graph-sdk/packages/fetch/docs/modules.html#getSdk)**
   Removes an itinerary
-- **[useDisableItineraryAutoRouteMutation](https://alpacatravel.github.io/graph-sdk/packages/react-apollo/docs/functions/useDisableItineraryAutoRouteMutation.html)**
+- **[sdk.disableItineraryAutoRoute(...)](https://alpacatravel.github.io/graph-sdk/packages/fetch/docs/modules.html#getSdk)**
   Modifies an itinerary to disable the automatic routing feature, which will turn off determining the directions between the sequence of locations that the itinerary contains
-- **[useEnableItineraryAutoRouteMutation](https://alpacatravel.github.io/graph-sdk/packages/react-apollo/docs/functions/useEnableItineraryAutoRouteMutation.html)**
+- **[sdk.enableItineraryAutoRoute(...)](https://alpacatravel.github.io/graph-sdk/packages/fetch/docs/modules.html#getSdk)**
   Modifies an itinerary to enable a feature that will automatically determine directions between a sequence of itinerary locations at the top level
-- **[useFindItineraryLocationIdsByPlaceIdQuery](https://alpacatravel.github.io/graph-sdk/packages/react-apollo/docs/functions/useFindItineraryLocationIdsByPlaceIdQuery.html)**
+- **[sdk.findItineraryLocationIdsByPlaceId(...)](https://alpacatravel.github.io/graph-sdk/packages/fetch/docs/modules.html#getSdk)**
   Checks whether a place has been added to an itinerary, for creating a button state on an "Add to Itinerary" button
-- **[useFindItineraryLocationsByPlaceIdQuery](https://alpacatravel.github.io/graph-sdk/packages/react-apollo/docs/functions/useFindItineraryLocationsByPlaceIdQuery.html)**
+- **[sdk.findItineraryLocationsByPlaceId(...)](https://alpacatravel.github.io/graph-sdk/packages/fetch/docs/modules.html#getSdk)**
   Checks whether a place has been added to an itinerary, for creating a button state on an "Add to Itinerary" button
-- **[useGetItineraryDirectionsQuery](https://alpacatravel.github.io/graph-sdk/packages/react-apollo/docs/functions/useGetItineraryDirectionsQuery.html)**
+- **[sdk.getItineraryDirections(...)](https://alpacatravel.github.io/graph-sdk/packages/fetch/docs/modules.html#getSdk)**
   Obtains an itinerary directions item
-- **[useGetItineraryLocationQuery](https://alpacatravel.github.io/graph-sdk/packages/react-apollo/docs/functions/useGetItineraryLocationQuery.html)**
+- **[sdk.getItineraryLocation(...)](https://alpacatravel.github.io/graph-sdk/packages/fetch/docs/modules.html#getSdk)**
   Loads information about an itinerary location
-- **[useGetItineraryQuery](https://alpacatravel.github.io/graph-sdk/packages/react-apollo/docs/functions/useGetItineraryQuery.html)**
+- **[sdk.getItinerary(...)](https://alpacatravel.github.io/graph-sdk/packages/fetch/docs/modules.html#getSdk)**
   Loads information about an individual itinerary
-- **[useListItinerariesQuery](https://alpacatravel.github.io/graph-sdk/packages/react-apollo/docs/functions/useListItinerariesQuery.html)**
+- **[sdk.listItineraries(...)](https://alpacatravel.github.io/graph-sdk/packages/fetch/docs/modules.html#getSdk)**
   Query a list of itineraries from an associated profile
-- **[useListItineraryLocationsQuery](https://alpacatravel.github.io/graph-sdk/packages/react-apollo/docs/functions/useListItineraryLocationsQuery.html)**
+- **[sdk.listItineraryLocations(...)](https://alpacatravel.github.io/graph-sdk/packages/fetch/docs/modules.html#getSdk)**
   Lists in itinerary locations for a provided Itinerary
-- **[useMoveItineraryLocationAfterMutation](https://alpacatravel.github.io/graph-sdk/packages/react-apollo/docs/functions/useMoveItineraryLocationAfterMutation.html)**
+- **[sdk.moveItineraryLocationAfter(...)](https://alpacatravel.github.io/graph-sdk/packages/fetch/docs/modules.html#getSdk)**
   Moves an itinerary location after another itinerary location
-- **[useMoveItineraryLocationToStartMutation](https://alpacatravel.github.io/graph-sdk/packages/react-apollo/docs/functions/useMoveItineraryLocationToStartMutation.html)**
+- **[sdk.moveItineraryLocationToStart(...)](https://alpacatravel.github.io/graph-sdk/packages/fetch/docs/modules.html#getSdk)**
   Moves an itinerary location ahead of other itinerary locations
-- **[useUpdateItineraryLocationIsOptionalMutation](https://alpacatravel.github.io/graph-sdk/packages/react-apollo/docs/functions/useUpdateItineraryLocationIsOptionalMutation.html)**
+- **[sdk.updateItineraryLocationIsOptional(...)](https://alpacatravel.github.io/graph-sdk/packages/fetch/docs/modules.html#getSdk)**
   Marks an itinerary location whether it is an optional stop
-- **[useUpdateItineraryLocationMutation](https://alpacatravel.github.io/graph-sdk/packages/react-apollo/docs/functions/useUpdateItineraryLocationMutation.html)**
+- **[sdk.updateItineraryLocation(...)](https://alpacatravel.github.io/graph-sdk/packages/fetch/docs/modules.html#getSdk)**
   Updates the itinerary location
-- **[useUpdateItineraryMutation](https://alpacatravel.github.io/graph-sdk/packages/react-apollo/docs/functions/useUpdateItineraryMutation.html)**
+- **[sdk.updateItinerary(...)](https://alpacatravel.github.io/graph-sdk/packages/fetch/docs/modules.html#getSdk)**
   Updates an itinerary
 
 ## Media
 
-- **[useGetMediaImageQuery](https://alpacatravel.github.io/graph-sdk/packages/react-apollo/docs/functions/useGetMediaImageQuery.html)**
+- **[sdk.getMediaImage(...)](https://alpacatravel.github.io/graph-sdk/packages/fetch/docs/modules.html#getSdk)**
   Loads information about a media
 
 ## Place
 
-- **[useAutocompleteSearchPlaceQuery](https://alpacatravel.github.io/graph-sdk/packages/react-apollo/docs/functions/useAutocompleteSearchPlaceQuery.html)**
+- **[sdk.autocompleteSearchPlace(...)](https://alpacatravel.github.io/graph-sdk/packages/fetch/docs/modules.html#getSdk)**
   Searches for places using Autocomplete search term
-- **[useGetPlaceQuery](https://alpacatravel.github.io/graph-sdk/packages/react-apollo/docs/functions/useGetPlaceQuery.html)**
+- **[sdk.getPlace(...)](https://alpacatravel.github.io/graph-sdk/packages/fetch/docs/modules.html#getSdk)**
   Gets a place based on the provided place ID
-- **[useReverseSearchPlaceByPositionQuery](https://alpacatravel.github.io/graph-sdk/packages/react-apollo/docs/functions/useReverseSearchPlaceByPositionQuery.html)**
+- **[sdk.reverseSearchPlaceByPosition(...)](https://alpacatravel.github.io/graph-sdk/packages/fetch/docs/modules.html#getSdk)**
   Queries a position and returns with matching places
 
 ## Profile
 
-- **[useGetProfileQuery](https://alpacatravel.github.io/graph-sdk/packages/react-apollo/docs/functions/useGetProfileQuery.html)**
+- **[sdk.getProfile(...)](https://alpacatravel.github.io/graph-sdk/packages/fetch/docs/modules.html#getSdk)**
   Obtains the profile by the provided ID
-- **[useListAuthorizedProfilesQuery](https://alpacatravel.github.io/graph-sdk/packages/react-apollo/docs/functions/useListAuthorizedProfilesQuery.html)**
+- **[sdk.listAuthorizedProfiles(...)](https://alpacatravel.github.io/graph-sdk/packages/fetch/docs/modules.html#getSdk)**
   Obtains a list of the authorized profiles for the current access token
 
 ## Route
 
-- **[useSearchRoutesBetweenPositionsQuery](https://alpacatravel.github.io/graph-sdk/packages/react-apollo/docs/functions/useSearchRoutesBetweenPositionsQuery.html)**
+- **[sdk.searchRoutesBetweenPositions(...)](https://alpacatravel.github.io/graph-sdk/packages/fetch/docs/modules.html#getSdk)**
   Searches for routes between provided positions
 

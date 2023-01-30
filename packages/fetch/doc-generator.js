@@ -12,12 +12,18 @@ glob("../../graphql/**/*.graphql", (er, files) => {
       return Object.assign({}, c, { [t.dir]: (c[t.dir] || []).concat(t) });
     }, {});
 
-  const title = `# API Documentation
+  const title = `# API Summary
 
-Welcome to the API Documentation for the Alpaca Travel GraphQL JavaScript SDK
-for use with browser based fetch.
+\`\`\`html
+<script src="https://unpkg.com/@alpaca-travel/graph-sdk-fetch@latest/dist/umd/graph-sdk.min.js"></script>
 
-- See [Installation and Getting Started](https://alpacatravel.github.io/graph-sdk/packages/fetch/)
+<script type="text/javascript">
+// Create the SDK
+const sdk = alpacaGraphSdk.getClientSdk({
+  url: 'https://withalpaca.com/api/graphql?accessToken=UPDATE_WITH_YOUR_ACCESS_TOKEN',
+});
+</script>
+\`\`\`
   `;
   const footer = ``;
   const sections = Object.keys(structures).map((key) =>
@@ -79,22 +85,18 @@ function info(input) {
   const [dir, file] = rsplit(minimal);
 
   // Create a title
+  const title = `sdk.${camelize(file.replace(/.graphql/, ""))}(...)`;
 
   // Target the comments at the start of the graphql query
   const contents = fs.readFileSync(path.resolve(__dirname, input), "utf-8");
   const [pre] = contents.split(/(query|mutation) (\w+) ?{/);
-  const isQuery = /\nquery /.test(contents);
   const comment = pre
     .replace(/#import.+\n/g, "")
     .replace(/\n/g, "")
     .replace(/# /g, " ")
     .replace(/\..+/, "");
 
-  const title = `use${camelize(file.replace(/.graphql/, ""))}${
-    isQuery ? "Query" : "Mutation"
-  }`;
-
-  const link = `https://alpacatravel.github.io/graph-sdk/packages/react-apollo/docs/functions/${title}.html`;
+  const link = `https://alpacatravel.github.io/graph-sdk/packages/fetch/docs/modules.html#getSdk`;
 
   return {
     dirParent: dir[0],
@@ -125,7 +127,4 @@ function rsplit(input) {
   return [split.slice(0, -1), split.slice(-1)[0]];
 }
 
-const camelize = (s) => {
-  const string = s.replace(/-./g, (x) => x.toUpperCase()[1]);
-  return string.charAt(0).toUpperCase() + string.slice(1);
-};
+const camelize = (s) => s.replace(/-./g, (x) => x.toUpperCase()[1]);
