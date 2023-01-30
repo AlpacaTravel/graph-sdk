@@ -1,17 +1,8 @@
-import { DocumentNode } from "graphql";
-import { getSdk } from "../src/index";
-
-export type Requester<C = {}, E = unknown> = <R, V>(
-  doc: DocumentNode,
-  vars?: V,
-  options?: C
-) => Promise<R> | AsyncIterable<R>;
-
-function impl<R, V>(): Promise<R> {
-  return Promise.resolve({}) as Promise<R>;
-}
+import { getSdk, createClient } from "../src/index";
 
 test("index creates an SDK with a configured client offering the API surface", () => {
+  const impl = createClient({ url: "https://example.com " });
+
   const sdk = getSdk(impl);
 
   // Collection
