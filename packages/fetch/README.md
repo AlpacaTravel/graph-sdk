@@ -2,6 +2,12 @@
 
 A basic fetch based SDK for use in the browser.
 
+See More:
+
+- [API Documentation](https://alpacatravel.github.io/graph-sdk/packages/fetch/docs/)
+
+## Example HTML
+
 ```html
 <!DOCTYPE html>
 <html>
@@ -21,12 +27,14 @@ A basic fetch based SDK for use in the browser.
       });
 
       // Perform a SDK function
-      // See the rest of the api
+      // See the rest of the API Documentation
+      // https://alpacatravel.github.io/graph-sdk/packages/fetch/docs/
       sdk
         .getItinerary({
           id: "itinerary/0mttpRn7spYNDIV979fHbE",
         })
-        .then(({ data }) => console.log(data));
+        .then(({ data }) => console.log(data))
+        .catch(console.error);
     </script>
   </body>
 </html>
