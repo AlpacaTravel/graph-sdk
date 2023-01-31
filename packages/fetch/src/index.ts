@@ -1,10 +1,16 @@
-import { DocumentNode } from 'graphql';
-import gql from 'graphql-tag';
+import { DocumentNode } from "graphql";
+import gql from "graphql-tag";
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
-export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
-export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
-export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
+export type Exact<T extends { [key: string]: unknown }> = {
+  [K in keyof T]: T[K];
+};
+export type MakeOptional<T, K extends keyof T> = Omit<T, K> & {
+  [SubKey in K]?: Maybe<T[SubKey]>;
+};
+export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & {
+  [SubKey in K]: Maybe<T[SubKey]>;
+};
 /**
  * Angle unit
  * @typedef {("Degrees"|"Radians")} AngleUnit
@@ -21,14 +27,14 @@ export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Mayb
 /**
  * Additional data defined on a resource
  * @typedef {Object} Attribute
- * @property {string} id - 
+ * @property {string} id -
  * The attribute identifier
- * 
+ *
  * Has the form "{{resource_type}}/{{attribute_name}}"
  * eg: The "title" attribute on an item will have the id: "item/title"
- * 
+ *
  * Custom attributes have the form "custom/{{attribute_name}}"
- * 
+ *
  * @property {string} [locale] - Optional string representing the locale of the attribute value
  * @property {JSON} [meta] - Optional attribute metadata, can be any JSON-serialisable type
  * @property {JSON} [value] - The attribute value, can be any JSON-serialisable type
@@ -1529,11 +1535,11 @@ export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Mayb
  * @typedef {Object} PlaceHours
  * @property {string} [comment] - Look up the place hours comment (if any) for the current time or a given datetime.
  * @property {Array<PlaceHoursForDay>} forDays - Look up the opening hours for a specific day. Days are calculated according to the local time of the place.
- * 
+ *
  * Will return a maximum of 90 days.
  * @property {PlaceHoursIntervalConnection} intervals - Look up intervals where the opening hours status/comment for the place changes
  * @property {string} osmTag - The opening hours formatted in the OpenStreetMap opening_hours tag format.
- * 
+ *
  * See: <https://wiki.openstreetmap.org/wiki/Key:opening_hours/specification>
  * @property {PlaceHoursStatus} status - Look up the open/closed status of the place for the current time or a given datetime.
  * @property {boolean} weekStable - Whether or not the hours are the same each week.
@@ -1554,7 +1560,7 @@ export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Mayb
  * @property {string} [comment] - The place hours comment (if any) during this interval
  * @property {string} from - The starting datetime of this interval
  * @property {Array<PlaceHoursIntervalHoliday>} publicHolidays - The holidays that occur during this interval
- * 
+ *
  * Note: Will return holidays up to a maximum of one year from the "from" date
  * @property {PlaceHoursStatus} status - The open/closed status of the place during this interval
  * @property {string} [to] - The ending datetime of this interval, will be null if there is no following interval and the status/comment will no longer change
@@ -2192,13 +2198,13 @@ export type Scalars = {
 
 /** Angle unit */
 export enum AngleUnit {
-  Degrees = 'Degrees',
-  Radians = 'Radians'
+  Degrees = "Degrees",
+  Radians = "Radians",
 }
 
 /** Result of approving a follow request */
 export type ApproveProfileFollowPayload = {
-  __typename?: 'ApproveProfileFollowPayload';
+  __typename?: "ApproveProfileFollowPayload";
   /** The follower profile */
   fromProfile: Profile;
   /** The status of the follow request */
@@ -2209,7 +2215,7 @@ export type ApproveProfileFollowPayload = {
 
 /** Additional data defined on a resource */
 export type Attribute = {
-  __typename?: 'Attribute';
+  __typename?: "Attribute";
   /**
    *
    * The attribute identifier
@@ -2220,18 +2226,18 @@ export type Attribute = {
    * Custom attributes have the form "custom/{{attribute_name}}"
    *
    */
-  id: Scalars['ID'];
+  id: Scalars["ID"];
   /** Optional string representing the locale of the attribute value */
-  locale?: Maybe<Scalars['String']>;
+  locale?: Maybe<Scalars["String"]>;
   /** Optional attribute metadata, can be any JSON-serialisable type */
-  meta?: Maybe<Scalars['JSON']>;
+  meta?: Maybe<Scalars["JSON"]>;
   /** The attribute value, can be any JSON-serialisable type */
-  value?: Maybe<Scalars['JSON']>;
+  value?: Maybe<Scalars["JSON"]>;
 };
 
 /** Connection of Attributes */
 export type AttributeConnection = {
-  __typename?: 'AttributeConnection';
+  __typename?: "AttributeConnection";
   /** All the edges in this page of the connection */
   edges: Array<AttributeEdge>;
   /** Shortcut for edges[].node */
@@ -2239,14 +2245,14 @@ export type AttributeConnection = {
   /** Details regarding the current page of the connnection */
   pageInfo: PageInfo;
   /** The total number of items in the connection (in all pages) */
-  totalCount: Scalars['Int'];
+  totalCount: Scalars["Int"];
 };
 
 /** Edge containing a Attribute */
 export type AttributeEdge = {
-  __typename?: 'AttributeEdge';
+  __typename?: "AttributeEdge";
   /** The cursor string pointing to this item */
-  cursor: Scalars['String'];
+  cursor: Scalars["String"];
   /** The item */
   node: Attribute;
 };
@@ -2254,81 +2260,81 @@ export type AttributeEdge = {
 /** A selector for an attribute */
 export type AttributeIdentifierInput = {
   /** The attribute identifier */
-  id: Scalars['ID'];
+  id: Scalars["ID"];
   /** The locale of the attribute */
-  locale?: InputMaybe<Scalars['String']>;
+  locale?: InputMaybe<Scalars["String"]>;
 };
 
 /** Defines an attribute */
 export type AttributeInput = {
   /** The attribute identifier */
-  id: Scalars['ID'];
+  id: Scalars["ID"];
   /** Optional string representing the locale of the attribute value */
-  locale?: InputMaybe<Scalars['String']>;
+  locale?: InputMaybe<Scalars["String"]>;
   /** Optional attribute metadata, can be any JSON-serialisable type */
-  meta?: InputMaybe<Scalars['JSON']>;
+  meta?: InputMaybe<Scalars["JSON"]>;
   /** The attribute value, can be any JSON-serialisable type */
-  value: Scalars['JSON'];
+  value: Scalars["JSON"];
 };
 
 /** The address field of a BillingDetails object */
 export type BillingAddress = {
-  __typename?: 'BillingAddress';
-  addressLineOne: Scalars['String'];
-  addressLineTwo?: Maybe<Scalars['String']>;
-  countryCode: Scalars['String'];
-  locality: Scalars['String'];
-  postalCode?: Maybe<Scalars['String']>;
-  region: Scalars['String'];
+  __typename?: "BillingAddress";
+  addressLineOne: Scalars["String"];
+  addressLineTwo?: Maybe<Scalars["String"]>;
+  countryCode: Scalars["String"];
+  locality: Scalars["String"];
+  postalCode?: Maybe<Scalars["String"]>;
+  region: Scalars["String"];
 };
 
 /** Fields for update billing address field */
 export type BillingAddressInput = {
-  addressLineOne: Scalars['String'];
-  addressLineTwo?: InputMaybe<Scalars['String']>;
-  countryCode: Scalars['String'];
-  locality: Scalars['String'];
-  postalCode?: InputMaybe<Scalars['String']>;
-  region: Scalars['String'];
+  addressLineOne: Scalars["String"];
+  addressLineTwo?: InputMaybe<Scalars["String"]>;
+  countryCode: Scalars["String"];
+  locality: Scalars["String"];
+  postalCode?: InputMaybe<Scalars["String"]>;
+  region: Scalars["String"];
 };
 
 /** Billing details associated with a profile */
 export type BillingDetails = {
-  __typename?: 'BillingDetails';
+  __typename?: "BillingDetails";
   /** The billing address */
   address: BillingAddress;
   /** The email address */
-  emailAddress: Scalars['String'];
+  emailAddress: Scalars["String"];
   /** The family name */
-  familyName: Scalars['String'];
+  familyName: Scalars["String"];
   /** The given name */
-  givenName: Scalars['String'];
+  givenName: Scalars["String"];
   /** The optional organization name */
-  organization?: Maybe<Scalars['String']>;
+  organization?: Maybe<Scalars["String"]>;
   /** Profile that these billing details apply to */
   profile: Profile;
 };
 
 /** A billing plan */
 export type BillingPlan = {
-  __typename?: 'BillingPlan';
+  __typename?: "BillingPlan";
   /** The identifier for this plan */
-  id: Scalars['ID'];
+  id: Scalars["ID"];
   /** The price of this plan */
   price?: Maybe<BillingPrice>;
   /** The quantity */
-  quantity: Scalars['Int'];
+  quantity: Scalars["Int"];
 };
 
 /** A price available for a billing plan */
 export type BillingPrice = {
-  __typename?: 'BillingPrice';
+  __typename?: "BillingPrice";
   /** The amount of this price */
-  amount: Scalars['Int'];
+  amount: Scalars["Int"];
   /** The currency used for this price */
-  currency: Scalars['String'];
+  currency: Scalars["String"];
   /** The unique id for this price */
-  id: Scalars['ID'];
+  id: Scalars["ID"];
   /** The product corres */
   product: BillingProduct;
   /** Recurrence details of the price */
@@ -2337,7 +2343,7 @@ export type BillingPrice = {
 
 /** Connection of BillingPrices */
 export type BillingPriceConnection = {
-  __typename?: 'BillingPriceConnection';
+  __typename?: "BillingPriceConnection";
   /** All the edges in this page of the connection */
   edges: Array<BillingPriceEdge>;
   /** Shortcut for edges[].node */
@@ -2345,14 +2351,14 @@ export type BillingPriceConnection = {
   /** Details regarding the current page of the connnection */
   pageInfo: PageInfo;
   /** The total number of items in the connection (in all pages) */
-  totalCount: Scalars['Int'];
+  totalCount: Scalars["Int"];
 };
 
 /** Edge containing a BillingPrice */
 export type BillingPriceEdge = {
-  __typename?: 'BillingPriceEdge';
+  __typename?: "BillingPriceEdge";
   /** The cursor string pointing to this item */
-  cursor: Scalars['String'];
+  cursor: Scalars["String"];
   /** The item */
   node: BillingPrice;
 };
@@ -2360,48 +2366,48 @@ export type BillingPriceEdge = {
 /** The billing price to use */
 export type BillingPriceInput = {
   /** The ID of a BillingPrice */
-  priceId: Scalars['String'];
+  priceId: Scalars["String"];
   /** The quantity, defaults to 1 */
-  quantity?: InputMaybe<Scalars['Int']>;
+  quantity?: InputMaybe<Scalars["Int"]>;
 };
 
 /** The recurrence details for a BillingPrice */
 export type BillingPriceRecurring = {
-  __typename?: 'BillingPriceRecurring';
+  __typename?: "BillingPriceRecurring";
   /** The number of interval per recurrence */
-  count: Scalars['Int'];
+  count: Scalars["Int"];
   /** The interval type */
   interval: BillingPriceRecurringInterval;
 };
 
 /** The interval type */
 export enum BillingPriceRecurringInterval {
-  Day = 'Day',
-  Month = 'Month',
-  Week = 'Week',
-  Year = 'Year'
+  Day = "Day",
+  Month = "Month",
+  Week = "Week",
+  Year = "Year",
 }
 
 /** A product corresponding to a price */
 export type BillingProduct = {
-  __typename?: 'BillingProduct';
+  __typename?: "BillingProduct";
   /** The description for this product */
-  description?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars["String"]>;
   /** The unique id for this product */
-  id: Scalars['ID'];
+  id: Scalars["ID"];
   /** The name of this product */
-  name: Scalars['String'];
+  name: Scalars["String"];
 };
 
 /** A billing subscription */
 export type BillingSubscription = {
-  __typename?: 'BillingSubscription';
+  __typename?: "BillingSubscription";
   /** The date when the subscription was created */
-  created: Scalars['String'];
+  created: Scalars["String"];
   /** The unique id for this subscription */
-  id: Scalars['ID'];
+  id: Scalars["ID"];
   /** The date when the subscription was last modified */
-  modified: Scalars['String'];
+  modified: Scalars["String"];
   /** The plans attached to this subscription */
   plans: Array<BillingPlan>;
   /** Profile that this billing subscription belongs to */
@@ -2410,27 +2416,25 @@ export type BillingSubscription = {
   status: BillingSubscriptionStatus;
 };
 
-
 /** A billing subscription */
 export type BillingSubscriptionCreatedArgs = {
-  format?: InputMaybe<Scalars['String']>;
-  locale?: InputMaybe<Scalars['String']>;
-  relativeTo?: InputMaybe<Scalars['String']>;
-  timeZone?: InputMaybe<Scalars['String']>;
+  format?: InputMaybe<Scalars["String"]>;
+  locale?: InputMaybe<Scalars["String"]>;
+  relativeTo?: InputMaybe<Scalars["String"]>;
+  timeZone?: InputMaybe<Scalars["String"]>;
 };
-
 
 /** A billing subscription */
 export type BillingSubscriptionModifiedArgs = {
-  format?: InputMaybe<Scalars['String']>;
-  locale?: InputMaybe<Scalars['String']>;
-  relativeTo?: InputMaybe<Scalars['String']>;
-  timeZone?: InputMaybe<Scalars['String']>;
+  format?: InputMaybe<Scalars["String"]>;
+  locale?: InputMaybe<Scalars["String"]>;
+  relativeTo?: InputMaybe<Scalars["String"]>;
+  timeZone?: InputMaybe<Scalars["String"]>;
 };
 
 /** Connection of BillingSubscriptions */
 export type BillingSubscriptionConnection = {
-  __typename?: 'BillingSubscriptionConnection';
+  __typename?: "BillingSubscriptionConnection";
   /** All the edges in this page of the connection */
   edges: Array<BillingSubscriptionEdge>;
   /** Shortcut for edges[].node */
@@ -2438,45 +2442,45 @@ export type BillingSubscriptionConnection = {
   /** Details regarding the current page of the connnection */
   pageInfo: PageInfo;
   /** The total number of items in the connection (in all pages) */
-  totalCount: Scalars['Int'];
+  totalCount: Scalars["Int"];
 };
 
 /** Edge containing a BillingSubscription */
 export type BillingSubscriptionEdge = {
-  __typename?: 'BillingSubscriptionEdge';
+  __typename?: "BillingSubscriptionEdge";
   /** The cursor string pointing to this item */
-  cursor: Scalars['String'];
+  cursor: Scalars["String"];
   /** The item */
   node: BillingSubscription;
 };
 
 /** The status of a BillingSubscription */
 export enum BillingSubscriptionStatus {
-  Active = 'Active',
-  Cancelled = 'Cancelled',
-  Expired = 'Expired',
-  Inactive = 'Inactive'
+  Active = "Active",
+  Cancelled = "Cancelled",
+  Expired = "Expired",
+  Inactive = "Inactive",
 }
 
 /** A bounding box on a map defined by two positions (opposite corners of the box) */
 export type Bounds = {
-  __typename?: 'Bounds';
+  __typename?: "Bounds";
   /** The east-most longitude of the bounding box */
-  e: Scalars['Float'];
+  e: Scalars["Float"];
   /** The north-east point of the bounding box in the form: [east, north] */
-  en: Array<Scalars['Float']>;
+  en: Array<Scalars["Float"]>;
   /** The minimum and maximum points of the bounding box in the form: [minimum, maximum] */
-  minMax: Array<Array<Scalars['Float']>>;
+  minMax: Array<Array<Scalars["Float"]>>;
   /** The north-most latitude of the bounding box */
-  n: Scalars['Float'];
+  n: Scalars["Float"];
   /** The south-most latitude of the bounding box */
-  s: Scalars['Float'];
+  s: Scalars["Float"];
   /** The west-most longitude of the bounding box */
-  w: Scalars['Float'];
+  w: Scalars["Float"];
   /** The south-west point of the bounding box in the form: [west, south] */
-  ws: Array<Scalars['Float']>;
+  ws: Array<Scalars["Float"]>;
   /** The south-west and north-east points of the bounding box in the form: [west, south, east, north] */
-  wsen: Array<Scalars['Float']>;
+  wsen: Array<Scalars["Float"]>;
 };
 
 /** A bounding circle on a map defined by a center positions and a radius */
@@ -2484,59 +2488,59 @@ export type BoundsCircleInput = {
   /** The center position of the circle */
   position: PositionInput;
   /** The radius of the bounding circle */
-  radius: Scalars['Float'];
+  radius: Scalars["Float"];
 };
 
 /** A bounding box on a map defined by two positions (opposite corners of the box) */
 export type BoundsInput = {
   /** The east-most longitude of the bounding box */
-  e: Scalars['Float'];
+  e: Scalars["Float"];
   /** The north-most latitude of the bounding box */
-  n: Scalars['Float'];
+  n: Scalars["Float"];
   /** The south-most latitude of the bounding box */
-  s: Scalars['Float'];
+  s: Scalars["Float"];
   /** The west-most longitude of the bounding box */
-  w: Scalars['Float'];
+  w: Scalars["Float"];
 };
 
 /** The result of Mutation.captureMarketingInformation */
 export type CaptureMarketingInformationPayload = {
-  __typename?: 'CaptureMarketingInformationPayload';
+  __typename?: "CaptureMarketingInformationPayload";
   /** The ID of the profile that the information is associated against */
-  profileId?: Maybe<Scalars['ID']>;
+  profileId?: Maybe<Scalars["ID"]>;
 };
 
 /** Response to Mutation.changeItineraryDefaultLocale */
 export type ChangeItineraryDefaultLocalePayload = {
-  __typename?: 'ChangeItineraryDefaultLocalePayload';
+  __typename?: "ChangeItineraryDefaultLocalePayload";
   /** The changed itinerary */
   itinerary?: Maybe<Itinerary>;
 };
 
 /** Response of claiming a handle */
 export type ClaimProfileHandlePayload = {
-  __typename?: 'ClaimProfileHandlePayload';
+  __typename?: "ClaimProfileHandlePayload";
   /** The profile that will claim the handle */
   profile?: Maybe<Profile>;
 };
 
 /** A collection type is used to group together a unordered set of items */
 export type Collection = Node & {
-  __typename?: 'Collection';
+  __typename?: "Collection";
   /** Arbitrary JSON value stored on this resource, keyed by an id */
   attr?: Maybe<Attribute>;
   /** Shortcut for the attr.value, returns null if the attribute doesn't exist */
-  attrValue?: Maybe<Scalars['JSON']>;
+  attrValue?: Maybe<Scalars["JSON"]>;
   /** Query multiple attributes optionally filtering by id and/or locale */
   attrs: AttributeConnection;
   /** The date when the collection was created */
-  created?: Maybe<Scalars['String']>;
+  created?: Maybe<Scalars["String"]>;
   /** A longer text description */
-  description?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars["String"]>;
   /** A label used to differentiate types of collections */
-  discriminator: Scalars['String'];
+  discriminator: Scalars["String"];
   /** The Globally Unique ID of the object. */
-  id: Scalars['ID'];
+  id: Scalars["ID"];
   /** Returns an item belonging to this collection by id */
   item?: Maybe<CollectionItemEmbedded>;
   /** Retrieve multiple collection-items belonging to this collection */
@@ -2549,103 +2553,94 @@ export type Collection = Node & {
   /** List of MediaContainers containing images or other media */
   mediaContainers: MediaContainerConnection;
   /** The date when the collection was last modified */
-  modified?: Maybe<Scalars['String']>;
+  modified?: Maybe<Scalars["String"]>;
   /** A single MediaContainer representing the preferred media to use */
   preferredMedia?: Maybe<MediaContainer>;
   /** Profile that owns this collection */
   profile: Profile;
   /** Alias for the read-more attribute */
-  readMoreUrl?: Maybe<Scalars['String']>;
+  readMoreUrl?: Maybe<Scalars["String"]>;
   /** A short text summary */
-  synopsis?: Maybe<Scalars['String']>;
+  synopsis?: Maybe<Scalars["String"]>;
   /** A series of strings applied to label this item */
-  tags: Array<Scalars['String']>;
+  tags: Array<Scalars["String"]>;
   /** A supplied title for this collection */
-  title?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars["String"]>;
   /** Alias for the website-url attribute */
-  websiteUrl?: Maybe<Scalars['String']>;
+  websiteUrl?: Maybe<Scalars["String"]>;
 };
-
 
 /** A collection type is used to group together a unordered set of items */
 export type CollectionAttrArgs = {
-  id: Scalars['ID'];
-  locale?: InputMaybe<Scalars['String']>;
+  id: Scalars["ID"];
+  locale?: InputMaybe<Scalars["String"]>;
 };
-
 
 /** A collection type is used to group together a unordered set of items */
 export type CollectionAttrValueArgs = {
-  id: Scalars['ID'];
-  locale?: InputMaybe<Scalars['String']>;
+  id: Scalars["ID"];
+  locale?: InputMaybe<Scalars["String"]>;
 };
-
 
 /** A collection type is used to group together a unordered set of items */
 export type CollectionAttrsArgs = {
-  after?: InputMaybe<Scalars['String']>;
-  first: Scalars['Int'];
-  id?: InputMaybe<Scalars['ID']>;
-  includeNoLocale?: InputMaybe<Scalars['Boolean']>;
-  locale?: InputMaybe<Scalars['String']>;
+  after?: InputMaybe<Scalars["String"]>;
+  first: Scalars["Int"];
+  id?: InputMaybe<Scalars["ID"]>;
+  includeNoLocale?: InputMaybe<Scalars["Boolean"]>;
+  locale?: InputMaybe<Scalars["String"]>;
 };
-
 
 /** A collection type is used to group together a unordered set of items */
 export type CollectionCreatedArgs = {
-  format?: InputMaybe<Scalars['String']>;
-  locale?: InputMaybe<Scalars['String']>;
-  relativeTo?: InputMaybe<Scalars['String']>;
-  timeZone?: InputMaybe<Scalars['String']>;
+  format?: InputMaybe<Scalars["String"]>;
+  locale?: InputMaybe<Scalars["String"]>;
+  relativeTo?: InputMaybe<Scalars["String"]>;
+  timeZone?: InputMaybe<Scalars["String"]>;
 };
-
 
 /** A collection type is used to group together a unordered set of items */
 export type CollectionItemArgs = {
-  id: Scalars['ID'];
+  id: Scalars["ID"];
 };
-
 
 /** A collection type is used to group together a unordered set of items */
 export type CollectionItemsArgs = {
-  after?: InputMaybe<Scalars['String']>;
+  after?: InputMaybe<Scalars["String"]>;
   bounds?: InputMaybe<BoundsInput>;
   boundsCircle?: InputMaybe<BoundsCircleInput>;
-  externalIds?: InputMaybe<Array<Scalars['ID']>>;
-  externalSources?: InputMaybe<Array<Scalars['ID']>>;
-  first: Scalars['Int'];
-  keyword?: InputMaybe<Scalars['String']>;
-  resourceIds?: InputMaybe<Array<Scalars['ID']>>;
-  sectionIds?: InputMaybe<Array<Scalars['ID']>>;
+  externalIds?: InputMaybe<Array<Scalars["ID"]>>;
+  externalSources?: InputMaybe<Array<Scalars["ID"]>>;
+  first: Scalars["Int"];
+  keyword?: InputMaybe<Scalars["String"]>;
+  resourceIds?: InputMaybe<Array<Scalars["ID"]>>;
+  sectionIds?: InputMaybe<Array<Scalars["ID"]>>;
   sort?: InputMaybe<Array<CollectionItemsSort>>;
-  tags?: InputMaybe<Array<Scalars['String']>>;
+  tags?: InputMaybe<Array<Scalars["String"]>>;
 };
-
 
 /** A collection type is used to group together a unordered set of items */
 export type CollectionMediaArgs = {
-  limit?: Scalars['Int'];
+  limit?: Scalars["Int"];
 };
-
 
 /** A collection type is used to group together a unordered set of items */
 export type CollectionMediaContainersArgs = {
-  after?: InputMaybe<Scalars['String']>;
-  first: Scalars['Int'];
+  after?: InputMaybe<Scalars["String"]>;
+  first: Scalars["Int"];
 };
-
 
 /** A collection type is used to group together a unordered set of items */
 export type CollectionModifiedArgs = {
-  format?: InputMaybe<Scalars['String']>;
-  locale?: InputMaybe<Scalars['String']>;
-  relativeTo?: InputMaybe<Scalars['String']>;
-  timeZone?: InputMaybe<Scalars['String']>;
+  format?: InputMaybe<Scalars["String"]>;
+  locale?: InputMaybe<Scalars["String"]>;
+  relativeTo?: InputMaybe<Scalars["String"]>;
+  timeZone?: InputMaybe<Scalars["String"]>;
 };
 
 /** Connection of Collections */
 export type CollectionConnection = {
-  __typename?: 'CollectionConnection';
+  __typename?: "CollectionConnection";
   /** All the edges in this page of the connection */
   edges: Array<CollectionEdge>;
   /** Shortcut for edges[].node */
@@ -2653,20 +2648,20 @@ export type CollectionConnection = {
   /** Details regarding the current page of the connnection */
   pageInfo: PageInfo;
   /** The total number of items in the connection (in all pages) */
-  totalCount: Scalars['Int'];
+  totalCount: Scalars["Int"];
 };
 
 /** All possible collection discriminators */
 export enum CollectionDiscriminator {
-  Collection = 'Collection',
-  Locale = 'Locale'
+  Collection = "Collection",
+  Locale = "Locale",
 }
 
 /** Edge containing a Collection */
 export type CollectionEdge = {
-  __typename?: 'CollectionEdge';
+  __typename?: "CollectionEdge";
   /** The cursor string pointing to this item */
-  cursor: Scalars['String'];
+  cursor: Scalars["String"];
   /** The item */
   node: Collection;
 };
@@ -2676,19 +2671,19 @@ export type CollectionItem = {
   /** Arbitrary JSON value stored on this resource, keyed by an id */
   attr?: Maybe<Attribute>;
   /** Shortcut for the attr.value, returns null if the attribute doesn't exist */
-  attrValue?: Maybe<Scalars['JSON']>;
+  attrValue?: Maybe<Scalars["JSON"]>;
   /** Query multiple attributes optionally filtering by id and/or locale */
   attrs: AttributeConnection;
   /** The date when the collection-item was created */
-  created?: Maybe<Scalars['String']>;
+  created?: Maybe<Scalars["String"]>;
   /** A longer text description */
-  description?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars["String"]>;
   /** Identifier from an external source this item is associated with */
-  externalId?: Maybe<Scalars['ID']>;
+  externalId?: Maybe<Scalars["ID"]>;
   /** The source of the item's externalId */
-  externalSource?: Maybe<Scalars['ID']>;
+  externalSource?: Maybe<Scalars["ID"]>;
   /** The unique identifier, taking the shape of item/XYZ */
-  id: Scalars['ID'];
+  id: Scalars["ID"];
   /**
    * List of MediaContainers containing images or other media
    * @deprecated use mediaContainers instead
@@ -2697,83 +2692,76 @@ export type CollectionItem = {
   /** List of MediaContainers containing images or other media */
   mediaContainers: MediaContainerConnection;
   /** The date when the collection-item was last modified */
-  modified?: Maybe<Scalars['String']>;
+  modified?: Maybe<Scalars["String"]>;
   /** The preferred MediaContainer to use */
   preferredMedia?: Maybe<MediaContainer>;
   /** The associated profile owner */
   profile: Profile;
   /** Alias for the read-more attribute */
-  readMoreUrl?: Maybe<Scalars['String']>;
+  readMoreUrl?: Maybe<Scalars["String"]>;
   /** One or more sections this item belongs to */
-  sectionIds: Array<Scalars['ID']>;
+  sectionIds: Array<Scalars["ID"]>;
   /** A short text summary */
-  synopsis?: Maybe<Scalars['String']>;
+  synopsis?: Maybe<Scalars["String"]>;
   /** A series of strings applied to label this item */
-  tags: Array<Scalars['String']>;
+  tags: Array<Scalars["String"]>;
   /** The supplied title */
-  title?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars["String"]>;
   /** Alias for the website-url attribute */
-  websiteUrl?: Maybe<Scalars['String']>;
+  websiteUrl?: Maybe<Scalars["String"]>;
 };
-
 
 /** A collection item contains data about a single entity and is assigned within a collection */
 export type CollectionItemAttrArgs = {
-  id: Scalars['ID'];
-  locale?: InputMaybe<Scalars['String']>;
+  id: Scalars["ID"];
+  locale?: InputMaybe<Scalars["String"]>;
 };
-
 
 /** A collection item contains data about a single entity and is assigned within a collection */
 export type CollectionItemAttrValueArgs = {
-  id: Scalars['ID'];
-  locale?: InputMaybe<Scalars['String']>;
+  id: Scalars["ID"];
+  locale?: InputMaybe<Scalars["String"]>;
 };
-
 
 /** A collection item contains data about a single entity and is assigned within a collection */
 export type CollectionItemAttrsArgs = {
-  after?: InputMaybe<Scalars['String']>;
-  first: Scalars['Int'];
-  id?: InputMaybe<Scalars['ID']>;
-  includeNoLocale?: InputMaybe<Scalars['Boolean']>;
-  locale?: InputMaybe<Scalars['String']>;
+  after?: InputMaybe<Scalars["String"]>;
+  first: Scalars["Int"];
+  id?: InputMaybe<Scalars["ID"]>;
+  includeNoLocale?: InputMaybe<Scalars["Boolean"]>;
+  locale?: InputMaybe<Scalars["String"]>;
 };
-
 
 /** A collection item contains data about a single entity and is assigned within a collection */
 export type CollectionItemCreatedArgs = {
-  format?: InputMaybe<Scalars['String']>;
-  locale?: InputMaybe<Scalars['String']>;
-  relativeTo?: InputMaybe<Scalars['String']>;
-  timeZone?: InputMaybe<Scalars['String']>;
+  format?: InputMaybe<Scalars["String"]>;
+  locale?: InputMaybe<Scalars["String"]>;
+  relativeTo?: InputMaybe<Scalars["String"]>;
+  timeZone?: InputMaybe<Scalars["String"]>;
 };
-
 
 /** A collection item contains data about a single entity and is assigned within a collection */
 export type CollectionItemMediaArgs = {
-  limit?: Scalars['Int'];
+  limit?: Scalars["Int"];
 };
-
 
 /** A collection item contains data about a single entity and is assigned within a collection */
 export type CollectionItemMediaContainersArgs = {
-  after?: InputMaybe<Scalars['String']>;
-  first: Scalars['Int'];
+  after?: InputMaybe<Scalars["String"]>;
+  first: Scalars["Int"];
 };
-
 
 /** A collection item contains data about a single entity and is assigned within a collection */
 export type CollectionItemModifiedArgs = {
-  format?: InputMaybe<Scalars['String']>;
-  locale?: InputMaybe<Scalars['String']>;
-  relativeTo?: InputMaybe<Scalars['String']>;
-  timeZone?: InputMaybe<Scalars['String']>;
+  format?: InputMaybe<Scalars["String"]>;
+  locale?: InputMaybe<Scalars["String"]>;
+  relativeTo?: InputMaybe<Scalars["String"]>;
+  timeZone?: InputMaybe<Scalars["String"]>;
 };
 
 /** Connection of CollectionItems */
 export type CollectionItemConnection = {
-  __typename?: 'CollectionItemConnection';
+  __typename?: "CollectionItemConnection";
   /** All the edges in this page of the connection */
   edges: Array<CollectionItemEdge>;
   /** Shortcut for edges[].node */
@@ -2781,26 +2769,28 @@ export type CollectionItemConnection = {
   /** Details regarding the current page of the connnection */
   pageInfo: PageInfo;
   /** The total number of items in the connection (in all pages) */
-  totalCount: Scalars['Int'];
+  totalCount: Scalars["Int"];
 };
 
 /** Edge containing a CollectionItem */
 export type CollectionItemEdge = {
-  __typename?: 'CollectionItemEdge';
+  __typename?: "CollectionItemEdge";
   /** The cursor string pointing to this item */
-  cursor: Scalars['String'];
+  cursor: Scalars["String"];
   /** The item */
   node: CollectionItem;
 };
 
 /** A CollectionItem that's embedded in another resource */
-export type CollectionItemEmbedded = CollectionItemFailedToLoad | CollectionLocation;
+export type CollectionItemEmbedded =
+  | CollectionItemFailedToLoad
+  | CollectionLocation;
 
 /** Represents an embedded CollectionItem that failed to load */
 export type CollectionItemFailedToLoad = Node & {
-  __typename?: 'CollectionItemFailedToLoad';
+  __typename?: "CollectionItemFailedToLoad";
   /** The Globally Unique ID of the object. */
-  id: Scalars['ID'];
+  id: Scalars["ID"];
 };
 
 /** Determine how to sort CollectionItems when listing */
@@ -2814,114 +2804,108 @@ export type CollectionItemsSort = {
 };
 
 /** A CollectionItem used to represents a single location association to a place. */
-export type CollectionLocation = CollectionItem & Node & {
-  __typename?: 'CollectionLocation';
-  /** Address information for the collection location */
-  address: PlaceAddress;
-  /** Arbitrary JSON value stored on this resource, keyed by an id */
-  attr?: Maybe<Attribute>;
-  /** Shortcut for the attr.value, returns null if the attribute doesn't exist */
-  attrValue?: Maybe<Scalars['JSON']>;
-  /** Query multiple attributes optionally filtering by id and/or locale */
-  attrs: AttributeConnection;
-  /** The bounding box around the collection-location (derived from place if not overridden) */
-  bounds?: Maybe<Bounds>;
-  /** Contact information for the collection location */
-  contact: PlaceContact;
-  /** The date when the collection-item was created */
-  created?: Maybe<Scalars['String']>;
-  /** A longer text description */
-  description?: Maybe<Scalars['String']>;
-  /** Identifier from an external source this item is associated with */
-  externalId?: Maybe<Scalars['ID']>;
-  /** The source of the item's externalId */
-  externalSource?: Maybe<Scalars['ID']>;
-  /** The unique identifier, taking the shape of item/XYZ */
-  id: Scalars['ID'];
-  /**
-   * List of MediaContainers containing images or other media
-   * @deprecated use mediaContainers instead
-   */
-  media: Array<MediaContainer>;
-  /** List of MediaContainers containing images or other media */
-  mediaContainers: MediaContainerConnection;
-  /** The date when the collection-item was last modified */
-  modified?: Maybe<Scalars['String']>;
-  /** The associated place information for this location */
-  place: Place;
-  /** The position of the collection-location (derived from place if not overridden) */
-  position: Position;
-  /** The preferred MediaContainer to use */
-  preferredMedia?: Maybe<MediaContainer>;
-  /** The associated profile owner */
-  profile: Profile;
-  /** Alias for the read-more attribute */
-  readMoreUrl?: Maybe<Scalars['String']>;
-  /** One or more sections this item belongs to */
-  sectionIds: Array<Scalars['ID']>;
-  /** A short text summary */
-  synopsis?: Maybe<Scalars['String']>;
-  /** A series of strings applied to label this item */
-  tags: Array<Scalars['String']>;
-  /** The supplied title */
-  title?: Maybe<Scalars['String']>;
-  /** Alias for the website-url attribute */
-  websiteUrl?: Maybe<Scalars['String']>;
-};
-
+export type CollectionLocation = CollectionItem &
+  Node & {
+    __typename?: "CollectionLocation";
+    /** Address information for the collection location */
+    address: PlaceAddress;
+    /** Arbitrary JSON value stored on this resource, keyed by an id */
+    attr?: Maybe<Attribute>;
+    /** Shortcut for the attr.value, returns null if the attribute doesn't exist */
+    attrValue?: Maybe<Scalars["JSON"]>;
+    /** Query multiple attributes optionally filtering by id and/or locale */
+    attrs: AttributeConnection;
+    /** The bounding box around the collection-location (derived from place if not overridden) */
+    bounds?: Maybe<Bounds>;
+    /** Contact information for the collection location */
+    contact: PlaceContact;
+    /** The date when the collection-item was created */
+    created?: Maybe<Scalars["String"]>;
+    /** A longer text description */
+    description?: Maybe<Scalars["String"]>;
+    /** Identifier from an external source this item is associated with */
+    externalId?: Maybe<Scalars["ID"]>;
+    /** The source of the item's externalId */
+    externalSource?: Maybe<Scalars["ID"]>;
+    /** The unique identifier, taking the shape of item/XYZ */
+    id: Scalars["ID"];
+    /**
+     * List of MediaContainers containing images or other media
+     * @deprecated use mediaContainers instead
+     */
+    media: Array<MediaContainer>;
+    /** List of MediaContainers containing images or other media */
+    mediaContainers: MediaContainerConnection;
+    /** The date when the collection-item was last modified */
+    modified?: Maybe<Scalars["String"]>;
+    /** The associated place information for this location */
+    place: Place;
+    /** The position of the collection-location (derived from place if not overridden) */
+    position: Position;
+    /** The preferred MediaContainer to use */
+    preferredMedia?: Maybe<MediaContainer>;
+    /** The associated profile owner */
+    profile: Profile;
+    /** Alias for the read-more attribute */
+    readMoreUrl?: Maybe<Scalars["String"]>;
+    /** One or more sections this item belongs to */
+    sectionIds: Array<Scalars["ID"]>;
+    /** A short text summary */
+    synopsis?: Maybe<Scalars["String"]>;
+    /** A series of strings applied to label this item */
+    tags: Array<Scalars["String"]>;
+    /** The supplied title */
+    title?: Maybe<Scalars["String"]>;
+    /** Alias for the website-url attribute */
+    websiteUrl?: Maybe<Scalars["String"]>;
+  };
 
 /** A CollectionItem used to represents a single location association to a place. */
 export type CollectionLocationAttrArgs = {
-  id: Scalars['ID'];
-  locale?: InputMaybe<Scalars['String']>;
+  id: Scalars["ID"];
+  locale?: InputMaybe<Scalars["String"]>;
 };
-
 
 /** A CollectionItem used to represents a single location association to a place. */
 export type CollectionLocationAttrValueArgs = {
-  id: Scalars['ID'];
-  locale?: InputMaybe<Scalars['String']>;
+  id: Scalars["ID"];
+  locale?: InputMaybe<Scalars["String"]>;
 };
-
 
 /** A CollectionItem used to represents a single location association to a place. */
 export type CollectionLocationAttrsArgs = {
-  after?: InputMaybe<Scalars['String']>;
-  first: Scalars['Int'];
-  id?: InputMaybe<Scalars['ID']>;
-  includeNoLocale?: InputMaybe<Scalars['Boolean']>;
-  locale?: InputMaybe<Scalars['String']>;
+  after?: InputMaybe<Scalars["String"]>;
+  first: Scalars["Int"];
+  id?: InputMaybe<Scalars["ID"]>;
+  includeNoLocale?: InputMaybe<Scalars["Boolean"]>;
+  locale?: InputMaybe<Scalars["String"]>;
 };
-
 
 /** A CollectionItem used to represents a single location association to a place. */
 export type CollectionLocationCreatedArgs = {
-  format?: InputMaybe<Scalars['String']>;
-  locale?: InputMaybe<Scalars['String']>;
-  relativeTo?: InputMaybe<Scalars['String']>;
-  timeZone?: InputMaybe<Scalars['String']>;
+  format?: InputMaybe<Scalars["String"]>;
+  locale?: InputMaybe<Scalars["String"]>;
+  relativeTo?: InputMaybe<Scalars["String"]>;
+  timeZone?: InputMaybe<Scalars["String"]>;
 };
-
 
 /** A CollectionItem used to represents a single location association to a place. */
 export type CollectionLocationMediaArgs = {
-  limit?: Scalars['Int'];
+  limit?: Scalars["Int"];
 };
-
 
 /** A CollectionItem used to represents a single location association to a place. */
 export type CollectionLocationMediaContainersArgs = {
-  after?: InputMaybe<Scalars['String']>;
-  first: Scalars['Int'];
+  after?: InputMaybe<Scalars["String"]>;
+  first: Scalars["Int"];
 };
-
 
 /** A CollectionItem used to represents a single location association to a place. */
 export type CollectionLocationModifiedArgs = {
-  format?: InputMaybe<Scalars['String']>;
-  locale?: InputMaybe<Scalars['String']>;
-  relativeTo?: InputMaybe<Scalars['String']>;
-  timeZone?: InputMaybe<Scalars['String']>;
+  format?: InputMaybe<Scalars["String"]>;
+  locale?: InputMaybe<Scalars["String"]>;
+  relativeTo?: InputMaybe<Scalars["String"]>;
+  timeZone?: InputMaybe<Scalars["String"]>;
 };
 
 /** Determine how to sort Collections when listing */
@@ -2936,31 +2920,31 @@ export type CollectionsSort = {
 
 /** Points on the compass rose */
 export enum CompassPoint {
-  E = 'E',
-  N = 'N',
-  Ne = 'NE',
-  Nw = 'NW',
-  S = 'S',
-  Se = 'SE',
-  Sw = 'SW',
-  W = 'W'
+  E = "E",
+  N = "N",
+  Ne = "NE",
+  Nw = "NW",
+  S = "S",
+  Se = "SE",
+  Sw = "SW",
+  W = "W",
 }
 
 /** Connected apps stored in the profile */
 export type ConnectedApp = Node & {
-  __typename?: 'ConnectedApp';
+  __typename?: "ConnectedApp";
   /** Depending on the authentication method, this can highlight the authenticated application method (e.g. OAuth) */
   authType?: Maybe<ConnectedAppAuthType>;
   /** The Globally Unique ID of the object. */
-  id: Scalars['ID'];
+  id: Scalars["ID"];
   /** Private configuration information as encrypted JSON */
-  privateConfiguration?: Maybe<Scalars['JSON']>;
+  privateConfiguration?: Maybe<Scalars["JSON"]>;
   /** The profile associated with this connected app */
   profile?: Maybe<Profile>;
   /** A 3rd party ID or Account ID, this does not affect any of the Alpaca ID naming - for instance, if we are connecting to an Identity in OAUTH, this is the OAUTH Identity ID - This is just a place to store data */
-  publicId?: Maybe<Scalars['ID']>;
+  publicId?: Maybe<Scalars["ID"]>;
   /** Any specific scope that has been granted to the 3rd party application */
-  scope?: Maybe<Scalars['String']>;
+  scope?: Maybe<Scalars["String"]>;
   /** This is the key relating to the service - it identifies the "App" we are connecting to */
   serviceKey: ConnectedAppServiceKey;
   /** A key to describe the type of connection to the application */
@@ -2969,14 +2953,14 @@ export type ConnectedApp = Node & {
 
 /** Possible auth types for a ConnectedApp */
 export enum ConnectedAppAuthType {
-  Credentials = 'Credentials',
-  Oauth = 'Oauth',
-  Tokens = 'Tokens'
+  Credentials = "Credentials",
+  Oauth = "Oauth",
+  Tokens = "Tokens",
 }
 
 /** Connection of ConnectedApps */
 export type ConnectedAppConnection = {
-  __typename?: 'ConnectedAppConnection';
+  __typename?: "ConnectedAppConnection";
   /** All the edges in this page of the connection */
   edges: Array<ConnectedAppEdge>;
   /** Shortcut for edges[].node */
@@ -2984,46 +2968,46 @@ export type ConnectedAppConnection = {
   /** Details regarding the current page of the connnection */
   pageInfo: PageInfo;
   /** The total number of items in the connection (in all pages) */
-  totalCount: Scalars['Int'];
+  totalCount: Scalars["Int"];
 };
 
 /** Edge containing a ConnectedApp */
 export type ConnectedAppEdge = {
-  __typename?: 'ConnectedAppEdge';
+  __typename?: "ConnectedAppEdge";
   /** The cursor string pointing to this item */
-  cursor: Scalars['String'];
+  cursor: Scalars["String"];
   /** The item */
   node: ConnectedApp;
 };
 
 /** The key of the service for a ConnectedApp */
 export enum ConnectedAppServiceKey {
-  AlpacaLegacy = 'AlpacaLegacy',
-  AustralianTourismDataWarehouse = 'AustralianTourismDataWarehouse',
-  CrowdriffApi = 'CrowdriffApi',
-  GoogleAnalytics4 = 'GoogleAnalytics4',
-  ShopifyApi = 'ShopifyApi'
+  AlpacaLegacy = "AlpacaLegacy",
+  AustralianTourismDataWarehouse = "AustralianTourismDataWarehouse",
+  CrowdriffApi = "CrowdriffApi",
+  GoogleAnalytics4 = "GoogleAnalytics4",
+  ShopifyApi = "ShopifyApi",
 }
 
 /** Possible types of ConnectedApp */
 export enum ConnectedAppType {
-  Api = 'Api',
-  Configuration = 'Configuration',
-  Credentials = 'Credentials'
+  Api = "Api",
+  Configuration = "Configuration",
+  Credentials = "Credentials",
 }
 
 /** The output after creating a billing checkout session */
 export type CreateBillingCheckoutSessionOutput = {
-  __typename?: 'CreateBillingCheckoutSessionOutput';
+  __typename?: "CreateBillingCheckoutSessionOutput";
   /** The url for the checkout session */
-  url: Scalars['String'];
+  url: Scalars["String"];
 };
 
 /** The output after creating a billing portal session */
 export type CreateBillingPortalSessionOutput = {
-  __typename?: 'CreateBillingPortalSessionOutput';
+  __typename?: "CreateBillingPortalSessionOutput";
   /** The url for the portal session */
-  url: Scalars['String'];
+  url: Scalars["String"];
 };
 
 /** Creates a collection */
@@ -3031,21 +3015,21 @@ export type CreateCollectionInput = {
   /** Additional data defined on the collection */
   attrs?: InputMaybe<Array<AttributeInput>>;
   /** A longer text description */
-  description?: InputMaybe<Scalars['String']>;
+  description?: InputMaybe<Scalars["String"]>;
   /** A label used to differentiate types of collections */
   discriminator?: CollectionDiscriminator;
   /** The list of MediaContainers to add to the new Collection */
   media?: InputMaybe<Array<CreateMediaContainerInput>>;
   /** Alias for the read-more attribute */
-  readMoreUrl?: InputMaybe<Scalars['String']>;
+  readMoreUrl?: InputMaybe<Scalars["String"]>;
   /** A short text summary */
-  synopsis?: InputMaybe<Scalars['String']>;
+  synopsis?: InputMaybe<Scalars["String"]>;
   /** A series of strings applied to label the collection */
-  tags?: InputMaybe<Array<Scalars['String']>>;
+  tags?: InputMaybe<Array<Scalars["String"]>>;
   /** Title of the collection */
-  title?: InputMaybe<Scalars['String']>;
+  title?: InputMaybe<Scalars["String"]>;
   /** Alias for the website-url attribute */
-  websiteUrl?: InputMaybe<Scalars['String']>;
+  websiteUrl?: InputMaybe<Scalars["String"]>;
 };
 
 /** The input to create a collection location */
@@ -3053,11 +3037,11 @@ export type CreateCollectionLocationInput = {
   /** Additional data defined on this CollectionLocation */
   attrs?: InputMaybe<Array<AttributeInput>>;
   /** A longer description content for the new item */
-  description?: InputMaybe<Scalars['String']>;
+  description?: InputMaybe<Scalars["String"]>;
   /** Identifier from an external source this new item is associated with */
-  externalId?: InputMaybe<Scalars['ID']>;
+  externalId?: InputMaybe<Scalars["ID"]>;
   /** The source of this item's externalId */
-  externalSource?: InputMaybe<Scalars['ID']>;
+  externalSource?: InputMaybe<Scalars["ID"]>;
   /** The list of MediaContainers to add to the new CollectionLocation */
   media?: InputMaybe<Array<CreateMediaContainerInput>>;
   /** The associated place record for this location */
@@ -3065,29 +3049,29 @@ export type CreateCollectionLocationInput = {
   /** Override for the place's position */
   position?: InputMaybe<PositionInput>;
   /** Alias for the read-more attribute */
-  readMoreUrl?: InputMaybe<Scalars['String']>;
+  readMoreUrl?: InputMaybe<Scalars["String"]>;
   /** One or more sections for this new item */
-  sectionIds?: InputMaybe<Array<Scalars['ID']>>;
+  sectionIds?: InputMaybe<Array<Scalars["ID"]>>;
   /** A short summary text content for the new item */
-  synopsis?: InputMaybe<Scalars['String']>;
+  synopsis?: InputMaybe<Scalars["String"]>;
   /** A collection of strings used to label the new item */
-  tags?: InputMaybe<Array<Scalars['String']>>;
+  tags?: InputMaybe<Array<Scalars["String"]>>;
   /** Title for the new item */
-  title?: InputMaybe<Scalars['String']>;
+  title?: InputMaybe<Scalars["String"]>;
   /** Alias for the website-url attribute */
-  websiteUrl?: InputMaybe<Scalars['String']>;
+  websiteUrl?: InputMaybe<Scalars["String"]>;
 };
 
 /** The fields available to return after creating a new collection location */
 export type CreateCollectionLocationPayload = {
-  __typename?: 'CreateCollectionLocationPayload';
+  __typename?: "CreateCollectionLocationPayload";
   /** The created collection location */
   location?: Maybe<CollectionLocation>;
 };
 
 /** The return fields avaialble after creating a collection */
 export type CreateCollectionPayload = {
-  __typename?: 'CreateCollectionPayload';
+  __typename?: "CreateCollectionPayload";
   /** The newly created collection */
   collection?: Maybe<Collection>;
 };
@@ -3097,11 +3081,11 @@ export type CreateConnectedAppInput = {
   /** The authenticated application method */
   authType?: InputMaybe<ConnectedAppAuthType>;
   /** Encrypted JSON */
-  privateConfiguration?: InputMaybe<Scalars['JSON']>;
+  privateConfiguration?: InputMaybe<Scalars["JSON"]>;
   /** 3rd party ID or account ID */
-  publicId?: InputMaybe<Scalars['ID']>;
+  publicId?: InputMaybe<Scalars["ID"]>;
   /** Any specific scope that has been granted to the 3rd party application */
-  scope?: InputMaybe<Scalars['String']>;
+  scope?: InputMaybe<Scalars["String"]>;
   /** Identifies the service being connected to */
   serviceKey: ConnectedAppServiceKey;
   /** The type of the connected-app */
@@ -3110,7 +3094,7 @@ export type CreateConnectedAppInput = {
 
 /** The return fields available after creating a connected app */
 export type CreateConnectedAppPayload = {
-  __typename?: 'CreateConnectedAppPayload';
+  __typename?: "CreateConnectedAppPayload";
   /** The newly created connected-app */
   connectedApp?: Maybe<ConnectedApp>;
 };
@@ -3118,17 +3102,17 @@ export type CreateConnectedAppPayload = {
 /** Create an IconComposition */
 export type CreateIconCompositionInput = {
   /** Optional fill color for the icon */
-  iconFill?: InputMaybe<Scalars['String']>;
+  iconFill?: InputMaybe<Scalars["String"]>;
   /** A name for this IconComposition, should be unique across the itinerary */
-  name: Scalars['String'];
+  name: Scalars["String"];
   /** ID to the Icon used by this IconComposition */
-  resourceId: Scalars['ID'];
+  resourceId: Scalars["ID"];
   /** Optional fill color for the shield */
-  shieldFill?: InputMaybe<Scalars['String']>;
+  shieldFill?: InputMaybe<Scalars["String"]>;
   /** Indicates which shield to use */
-  shieldKey?: InputMaybe<Scalars['String']>;
+  shieldKey?: InputMaybe<Scalars["String"]>;
   /** Optional stroke color for the shield */
-  shieldStroke?: InputMaybe<Scalars['String']>;
+  shieldStroke?: InputMaybe<Scalars["String"]>;
 };
 
 /** Fields for a new IconSilhouette */
@@ -3136,16 +3120,16 @@ export type CreateIconSilhouetteInput = {
   /** Additional data defined on the icon */
   attrs?: InputMaybe<Array<AttributeInput>>;
   /** The name of the icon, key will be generated from this value and so should be unique across the profile */
-  name: Scalars['String'];
+  name: Scalars["String"];
   /** SVG path data for this icon, eg: "M 100 .." */
-  paths: Array<Scalars['String']>;
+  paths: Array<Scalars["String"]>;
   /** Optional SVG viewBox for this icon */
-  viewBox?: InputMaybe<Scalars['String']>;
+  viewBox?: InputMaybe<Scalars["String"]>;
 };
 
 /** The response after creating an IconSilhouette */
 export type CreateIconSilhouettePayload = {
-  __typename?: 'CreateIconSilhouettePayload';
+  __typename?: "CreateIconSilhouettePayload";
   /** The newly created IconSilhouette */
   icon?: Maybe<IconSilhouette>;
 };
@@ -3155,7 +3139,7 @@ export type CreateItineraryCollectionInput = {
   /** Additional data defined on the collection */
   attrs?: InputMaybe<Array<AttributeInput>>;
   /** The description for the new itinerary-collection */
-  description?: InputMaybe<Scalars['String']>;
+  description?: InputMaybe<Scalars["String"]>;
   /** The list of MediaContainers to add to the new ItineraryCollection */
   media?: InputMaybe<Array<CreateMediaContainerInput>>;
   /** Create the item positioned after the given sibling */
@@ -3169,20 +3153,20 @@ export type CreateItineraryCollectionInput = {
   /** Create the item at last position of the last itinerary-collection item */
   positionOnLastCollection?: InputMaybe<ItineraryItemPositionOnLastCollection>;
   /** Alias for the read-more attribute */
-  readMoreUrl?: InputMaybe<Scalars['String']>;
+  readMoreUrl?: InputMaybe<Scalars["String"]>;
   /** The synopsis for the new itinerary-collection */
-  synopsis?: InputMaybe<Scalars['String']>;
+  synopsis?: InputMaybe<Scalars["String"]>;
   /** The tags for the new itinerary-collection */
-  tags?: InputMaybe<Array<Scalars['String']>>;
+  tags?: InputMaybe<Array<Scalars["String"]>>;
   /** The title for the new itinerary-collection */
-  title?: InputMaybe<Scalars['String']>;
+  title?: InputMaybe<Scalars["String"]>;
   /** Alias for the website-url attribute */
-  websiteUrl?: InputMaybe<Scalars['String']>;
+  websiteUrl?: InputMaybe<Scalars["String"]>;
 };
 
 /** The fields available after creating an itinerary collection */
 export type CreateItineraryCollectionPayload = {
-  __typename?: 'CreateItineraryCollectionPayload';
+  __typename?: "CreateItineraryCollectionPayload";
   /** Other changes to the itinerary caused by the creation of the itinerary-collection */
   cascaded: ItineraryItemCascadedChanges;
   /** The created itinerary collection */
@@ -3196,9 +3180,9 @@ export type CreateItineraryDirectionsInput = {
   /** Additional data on the new itinerary */
   attrs?: InputMaybe<Array<AttributeInput>>;
   /** The description for the new itinerary-directions */
-  description?: InputMaybe<Scalars['String']>;
+  description?: InputMaybe<Scalars["String"]>;
   /** The distance of the new itinerary-directions */
-  distance?: InputMaybe<Scalars['Float']>;
+  distance?: InputMaybe<Scalars["Float"]>;
   /** The duration details of the new itinerary-directions */
   durations?: InputMaybe<Array<ItineraryDirectionsDurationsInput>>;
   /** The elevation details of the new itinerary-directions */
@@ -3206,7 +3190,7 @@ export type CreateItineraryDirectionsInput = {
   /** The list of MediaContainers to add to the new ItineraryDirections */
   media?: InputMaybe<Array<CreateMediaContainerInput>>;
   /** The origin itinerary location item, in the form of item/XYZ */
-  originId?: InputMaybe<Scalars['ID']>;
+  originId?: InputMaybe<Scalars["ID"]>;
   /** Creates the itinerary-directions after the given sibling */
   positionAfterSibling?: InputMaybe<ItineraryItemPositionAfterSibling>;
   /** Creates the itinerary-directions to be after all its siblings */
@@ -3218,22 +3202,22 @@ export type CreateItineraryDirectionsInput = {
   /** Creates the itinerary-directions at the last position of the last itinerary-collection item */
   positionOnLastCollection?: InputMaybe<ItineraryItemPositionOnLastCollection>;
   /** Alias for the read-more attribute */
-  readMoreUrl?: InputMaybe<Scalars['String']>;
+  readMoreUrl?: InputMaybe<Scalars["String"]>;
   /** The route of this item, must include at least one route segment */
   route: RouteInput;
   /** The synopsis for the new itinerary-directions */
-  synopsis?: InputMaybe<Scalars['String']>;
+  synopsis?: InputMaybe<Scalars["String"]>;
   /** The tags for the new itinerary-directions */
-  tags?: InputMaybe<Array<Scalars['String']>>;
+  tags?: InputMaybe<Array<Scalars["String"]>>;
   /** The title for the new itinerary-directions */
-  title?: InputMaybe<Scalars['String']>;
+  title?: InputMaybe<Scalars["String"]>;
   /** Alias for the website-url attribute */
-  websiteUrl?: InputMaybe<Scalars['String']>;
+  websiteUrl?: InputMaybe<Scalars["String"]>;
 };
 
 /** The itinerary directions return fields available after creating the itinerary directions */
 export type CreateItineraryDirectionsPayload = {
-  __typename?: 'CreateItineraryDirectionsPayload';
+  __typename?: "CreateItineraryDirectionsPayload";
   /** Other changes to the itinerary caused by the creation of the itinerary-directions */
   cascaded: ItineraryItemCascadedChanges;
   /** The created itinerary directions item */
@@ -3249,9 +3233,9 @@ export type CreateItineraryInput = {
   /** Enable auto routing, or set to null to disable */
   autoRoute?: InputMaybe<ItineraryAutoRouteInput>;
   /** The default locale of this itinerary's content */
-  defaultLocale?: InputMaybe<Scalars['String']>;
+  defaultLocale?: InputMaybe<Scalars["String"]>;
   /** The description for the new itinerary */
-  description?: InputMaybe<Scalars['String']>;
+  description?: InputMaybe<Scalars["String"]>;
   /** Elevation data of the new itinerary */
   elevation?: InputMaybe<ElevationInput>;
   /** The list of IconCompositions to add to the new Itinerary */
@@ -3259,15 +3243,15 @@ export type CreateItineraryInput = {
   /** The list of MediaContainers to add to the new Itinerary */
   media?: InputMaybe<Array<CreateMediaContainerInput>>;
   /** Alias for the read-more attribute */
-  readMoreUrl?: InputMaybe<Scalars['String']>;
+  readMoreUrl?: InputMaybe<Scalars["String"]>;
   /** The synopsis for the new itinerary */
-  synopsis?: InputMaybe<Scalars['String']>;
+  synopsis?: InputMaybe<Scalars["String"]>;
   /** The tags for the new itinerary */
-  tags?: InputMaybe<Array<Scalars['String']>>;
+  tags?: InputMaybe<Array<Scalars["String"]>>;
   /** The title for the new itinerary */
-  title?: InputMaybe<Scalars['String']>;
+  title?: InputMaybe<Scalars["String"]>;
   /** Alias for the website-url attribute */
-  websiteUrl?: InputMaybe<Scalars['String']>;
+  websiteUrl?: InputMaybe<Scalars["String"]>;
 };
 
 /** The fields to create an itinerary location */
@@ -3277,13 +3261,13 @@ export type CreateItineraryLocationInput = {
   /** The bounds of the itinerary-location */
   bounds?: InputMaybe<BoundsInput>;
   /** The description for the new itinerary-location */
-  description?: InputMaybe<Scalars['String']>;
+  description?: InputMaybe<Scalars["String"]>;
   /** Set the optional icon, passed ID must exist in the Itinerary.icons */
-  icon?: InputMaybe<Scalars['ID']>;
+  icon?: InputMaybe<Scalars["ID"]>;
   /** The list of MediaContainers to add to the new ItineraryLocation */
   media?: InputMaybe<Array<CreateMediaContainerInput>>;
   /** Whether this is an optional location on the itinerary */
-  optional?: InputMaybe<Scalars['Boolean']>;
+  optional?: InputMaybe<Scalars["Boolean"]>;
   /** The place for this new itinerary-location */
   place: PlaceInput;
   /** The position of the itinerary-location */
@@ -3299,20 +3283,20 @@ export type CreateItineraryLocationInput = {
   /** Create the item at last position of the last itinerary-collection item */
   positionOnLastCollection?: InputMaybe<ItineraryItemPositionOnLastCollection>;
   /** Alias for the read-more attribute */
-  readMoreUrl?: InputMaybe<Scalars['String']>;
+  readMoreUrl?: InputMaybe<Scalars["String"]>;
   /** The synopsis for the new itinerary-location */
-  synopsis?: InputMaybe<Scalars['String']>;
+  synopsis?: InputMaybe<Scalars["String"]>;
   /** The tags for the new itinerary-location */
-  tags?: InputMaybe<Array<Scalars['String']>>;
+  tags?: InputMaybe<Array<Scalars["String"]>>;
   /** The title for the new itinerary-location */
-  title?: InputMaybe<Scalars['String']>;
+  title?: InputMaybe<Scalars["String"]>;
   /** Alias for the website-url attribute */
-  websiteUrl?: InputMaybe<Scalars['String']>;
+  websiteUrl?: InputMaybe<Scalars["String"]>;
 };
 
 /** The fields available after creating an itinerary location */
 export type CreateItineraryLocationPayload = {
-  __typename?: 'CreateItineraryLocationPayload';
+  __typename?: "CreateItineraryLocationPayload";
   /** Other changes to the itinerary caused by the creation of the itinerary-location */
   cascaded: ItineraryItemCascadedChanges;
   /** The modified itinerary */
@@ -3323,7 +3307,7 @@ export type CreateItineraryLocationPayload = {
 
 /** The fields available after creating an itinerary */
 export type CreateItineraryPayload = {
-  __typename?: 'CreateItineraryPayload';
+  __typename?: "CreateItineraryPayload";
   /** The newly created itinerary */
   itinerary?: Maybe<Itinerary>;
 };
@@ -3339,7 +3323,7 @@ export type CreateMediaContainerInput = {
   /** Add the MediaContainer before another container in the list */
   positionBefore?: InputMaybe<MediaContainerPositionBefore>;
   /** ID to a MediaResource to contain */
-  resourceId: Scalars['String'];
+  resourceId: Scalars["String"];
 };
 
 /** Input object to Mutation.createProfile */
@@ -3347,22 +3331,22 @@ export type CreateProfileInput = {
   /** Additional data defined on the profile */
   attrs?: InputMaybe<Array<AttributeInput>>;
   /** If follow requests should be automatically approved for this profile */
-  autoApproveFollows?: InputMaybe<Scalars['Boolean']>;
+  autoApproveFollows?: InputMaybe<Scalars["Boolean"]>;
   /** The avatar image */
   avatar?: InputMaybe<MediaContainerInput>;
   /** A short biography */
-  bio?: InputMaybe<Scalars['String']>;
+  bio?: InputMaybe<Scalars["String"]>;
   /** The name of the profile */
-  name: Scalars['String'];
+  name: Scalars["String"];
   /** The type of profile */
   type: ProfileType;
   /** The website url */
-  websiteUrl?: InputMaybe<Scalars['String']>;
+  websiteUrl?: InputMaybe<Scalars["String"]>;
 };
 
 /** Response payload to Mutation.createProfile */
 export type CreateProfilePayload = {
-  __typename?: 'CreateProfilePayload';
+  __typename?: "CreateProfilePayload";
   /** The newly created profile */
   profile?: Maybe<Profile>;
 };
@@ -3370,12 +3354,12 @@ export type CreateProfilePayload = {
 /** Input object to Mutation.createUserAgreement */
 export type CreateUserAgreementInput = {
   /** The type of agreement */
-  type: Scalars['String'];
+  type: Scalars["String"];
 };
 
 /** The return fields available after creating a user agreement */
 export type CreateUserAgreementPayload = {
-  __typename?: 'CreateUserAgreementPayload';
+  __typename?: "CreateUserAgreementPayload";
   /** The newly created user agreement */
   userAgreement?: Maybe<UserAgreement>;
 };
@@ -3383,77 +3367,77 @@ export type CreateUserAgreementPayload = {
 /** An offset in date and/or time represented as integer differences for each datetime field */
 export type DatetimeOffset = {
   /** Positive or negative difference for days */
-  days?: InputMaybe<Scalars['Int']>;
+  days?: InputMaybe<Scalars["Int"]>;
   /** Positive or negative difference for hours */
-  hours?: InputMaybe<Scalars['Int']>;
+  hours?: InputMaybe<Scalars["Int"]>;
   /** Positive or negative difference for minutes */
-  minutes?: InputMaybe<Scalars['Int']>;
+  minutes?: InputMaybe<Scalars["Int"]>;
   /** Positive or negative difference for months */
-  months?: InputMaybe<Scalars['Int']>;
+  months?: InputMaybe<Scalars["Int"]>;
   /** Positive or negative difference for seconds */
-  seconds?: InputMaybe<Scalars['Int']>;
+  seconds?: InputMaybe<Scalars["Int"]>;
   /** Positive or negative difference for weeks */
-  weeks?: InputMaybe<Scalars['Int']>;
+  weeks?: InputMaybe<Scalars["Int"]>;
   /** Positive or negative difference for years */
-  years?: InputMaybe<Scalars['Int']>;
+  years?: InputMaybe<Scalars["Int"]>;
 };
 
 /** The fields available after deleting a collection */
 export type DeleteCollectionItemPayload = {
-  __typename?: 'DeleteCollectionItemPayload';
+  __typename?: "DeleteCollectionItemPayload";
   /** The ID of the collection, in the form of collection/XYZ */
-  id?: Maybe<Scalars['ID']>;
+  id?: Maybe<Scalars["ID"]>;
 };
 
 /** The available payload after performing a delete collection */
 export type DeleteCollectionPayload = {
-  __typename?: 'DeleteCollectionPayload';
+  __typename?: "DeleteCollectionPayload";
   /** The ID of the deleted collection */
-  id?: Maybe<Scalars['ID']>;
+  id?: Maybe<Scalars["ID"]>;
 };
 
 /** The available payload after performing a delete connected app */
 export type DeleteConnectedAppPayload = {
-  __typename?: 'DeleteConnectedAppPayload';
+  __typename?: "DeleteConnectedAppPayload";
   /** The ID of the deleted connected app */
-  id?: Maybe<Scalars['ID']>;
+  id?: Maybe<Scalars["ID"]>;
 };
 
 /** The response after deleting an icon */
 export type DeleteIconResourcePayload = {
-  __typename?: 'DeleteIconResourcePayload';
+  __typename?: "DeleteIconResourcePayload";
   /** The ID of the deleted icon */
-  id?: Maybe<Scalars['ID']>;
+  id?: Maybe<Scalars["ID"]>;
 };
 
 /** Deletes a itinerary item */
 export type DeleteItineraryItemPayload = {
-  __typename?: 'DeleteItineraryItemPayload';
+  __typename?: "DeleteItineraryItemPayload";
   /** Other changes to the itinerary that caused by deleting the itinerary-item */
   cascaded: ItineraryItemCascadedChanges;
   /** The itinerary item identifier, in the form of item/XYZ */
-  id?: Maybe<Scalars['ID']>;
+  id?: Maybe<Scalars["ID"]>;
   /** The modified itinerary */
   itinerary: Itinerary;
 };
 
 /** The result of deleting an itinerary */
 export type DeleteItineraryPayload = {
-  __typename?: 'DeleteItineraryPayload';
+  __typename?: "DeleteItineraryPayload";
   /** The ID of the deleted itinerary */
-  id?: Maybe<Scalars['ID']>;
+  id?: Maybe<Scalars["ID"]>;
 };
 
 /** The result of deleting a profile */
 export type DeleteProfilePayload = {
-  __typename?: 'DeleteProfilePayload';
+  __typename?: "DeleteProfilePayload";
   /** The ID of the profile itinerary */
-  id?: Maybe<Scalars['ID']>;
+  id?: Maybe<Scalars["ID"]>;
 };
 
 /** Result of denying a follow request */
 export type DenyProfileFollowPayload = {
-  __typename?: 'DenyProfileFollowPayload';
+  __typename?: "DenyProfileFollowPayload";
   /** The follower profile */
   fromProfile: Profile;
   /** The status of the follow request */
@@ -3464,57 +3448,53 @@ export type DenyProfileFollowPayload = {
 
 /** Distance unit */
 export enum DistanceUnit {
-  Feet = 'Feet',
-  Kilometers = 'Kilometers',
-  Meters = 'Meters',
-  Miles = 'Miles'
+  Feet = "Feet",
+  Kilometers = "Kilometers",
+  Meters = "Meters",
+  Miles = "Miles",
 }
 
 /** Response to Mutation.duplicateItinerary */
 export type DuplicateItineraryPayload = {
-  __typename?: 'DuplicateItineraryPayload';
+  __typename?: "DuplicateItineraryPayload";
   /** The newly duplicated itinerary */
   itinerary?: Maybe<Itinerary>;
 };
 
 /** Duration unit */
 export enum DurationUnit {
-  Hours = 'Hours',
-  Minutes = 'Minutes',
-  Seconds = 'Seconds'
+  Hours = "Hours",
+  Minutes = "Minutes",
+  Seconds = "Seconds",
 }
 
 /** Elevation data */
 export type Elevation = {
-  __typename?: 'Elevation';
+  __typename?: "Elevation";
   /** The cumulative elevation gain */
-  gain?: Maybe<Scalars['Float']>;
+  gain?: Maybe<Scalars["Float"]>;
   /** The cumulative elevation loss */
-  loss?: Maybe<Scalars['Float']>;
+  loss?: Maybe<Scalars["Float"]>;
   /** The maximum elevation */
-  max?: Maybe<Scalars['Float']>;
+  max?: Maybe<Scalars["Float"]>;
   /** The minimum elevation */
-  min?: Maybe<Scalars['Float']>;
+  min?: Maybe<Scalars["Float"]>;
 };
-
 
 /** Elevation data */
 export type ElevationGainArgs = {
   unit?: DistanceUnit;
 };
 
-
 /** Elevation data */
 export type ElevationLossArgs = {
   unit?: DistanceUnit;
 };
 
-
 /** Elevation data */
 export type ElevationMaxArgs = {
   unit?: DistanceUnit;
 };
-
 
 /** Elevation data */
 export type ElevationMinArgs = {
@@ -3524,32 +3504,32 @@ export type ElevationMinArgs = {
 /** Input elevation data */
 export type ElevationInput = {
   /** The cumulative elevation gain */
-  gain?: InputMaybe<Scalars['Float']>;
+  gain?: InputMaybe<Scalars["Float"]>;
   /** The cumulative elevation loss */
-  loss?: InputMaybe<Scalars['Float']>;
+  loss?: InputMaybe<Scalars["Float"]>;
   /** The maximum elevation */
-  max?: InputMaybe<Scalars['Float']>;
+  max?: InputMaybe<Scalars["Float"]>;
   /** The minimum elevation */
-  min?: InputMaybe<Scalars['Float']>;
+  min?: InputMaybe<Scalars["Float"]>;
 };
 
 /** Uploads a media resource */
 export type FinalizeMediaUploadInput = {
   /** Text attribution for the source of the new media-resource */
-  attribution?: InputMaybe<Scalars['String']>;
+  attribution?: InputMaybe<Scalars["String"]>;
   /** Additional data to define on the new media-resource */
   attrs?: InputMaybe<Array<AttributeInput>>;
   /** Text caption for the new media-resource */
-  caption?: InputMaybe<Scalars['String']>;
+  caption?: InputMaybe<Scalars["String"]>;
   /** Copyright details of the new media-resource */
-  copyright?: InputMaybe<Scalars['String']>;
+  copyright?: InputMaybe<Scalars["String"]>;
   /** List of labels to apply to the new media-resource */
-  tags?: InputMaybe<Array<Scalars['String']>>;
+  tags?: InputMaybe<Array<Scalars["String"]>>;
 };
 
 /** Result of finalizing a media upload */
 export type FinalizeMediaUploadPayload = {
-  __typename?: 'FinalizeMediaUploadPayload';
+  __typename?: "FinalizeMediaUploadPayload";
   /** The newly created media-resource */
   resource?: Maybe<MediaResource>;
   /** The status of this media upload */
@@ -3558,7 +3538,7 @@ export type FinalizeMediaUploadPayload = {
 
 /** Result of creating a follow request */
 export type FollowProfilePayload = {
-  __typename?: 'FollowProfilePayload';
+  __typename?: "FollowProfilePayload";
   /** The follower profile */
   fromProfile: Profile;
   /** The status of the follow request */
@@ -3576,57 +3556,55 @@ export type GeoJsonSimplification = {
 /** The Ramer-Douglas-Peucker algorithm */
 export type GeoJsonSimplificationRamerDouglasPeucker = {
   /** Modify the algorithm to be slower by produce higher quality results */
-  highQuality?: InputMaybe<Scalars['Boolean']>;
+  highQuality?: InputMaybe<Scalars["Boolean"]>;
   /** The amount of application applied, higher values result in more simplification */
-  tolerance?: InputMaybe<Scalars['Float']>;
+  tolerance?: InputMaybe<Scalars["Float"]>;
 };
 
 /** An icon with styles for use in an Itinerary */
 export type IconComposition = Node & {
-  __typename?: 'IconComposition';
+  __typename?: "IconComposition";
   /** The date when the IconComposition was created */
-  created: Scalars['String'];
+  created: Scalars["String"];
   /** Optional fill color for the icon */
-  iconFill?: Maybe<Scalars['String']>;
+  iconFill?: Maybe<Scalars["String"]>;
   /** The Globally Unique ID of the object. */
-  id: Scalars['ID'];
+  id: Scalars["ID"];
   /** A key for this IconComposition. Derived from the name */
-  key: Scalars['String'];
+  key: Scalars["String"];
   /** The date when the IconComposition was last modified */
-  modified: Scalars['String'];
+  modified: Scalars["String"];
   /** A name for this IconComposition, should be unique across the itinerary */
-  name: Scalars['String'];
+  name: Scalars["String"];
   /** The Icon used by this IconComposition */
   resource: IconResourceEmbedded;
   /** Optional fill color for the shield */
-  shieldFill?: Maybe<Scalars['String']>;
+  shieldFill?: Maybe<Scalars["String"]>;
   /** Indicates which shield to use */
-  shieldKey?: Maybe<Scalars['String']>;
+  shieldKey?: Maybe<Scalars["String"]>;
   /** Optional stroke color for the shield */
-  shieldStroke?: Maybe<Scalars['String']>;
+  shieldStroke?: Maybe<Scalars["String"]>;
 };
-
 
 /** An icon with styles for use in an Itinerary */
 export type IconCompositionCreatedArgs = {
-  format?: InputMaybe<Scalars['String']>;
-  locale?: InputMaybe<Scalars['String']>;
-  relativeTo?: InputMaybe<Scalars['String']>;
-  timeZone?: InputMaybe<Scalars['String']>;
+  format?: InputMaybe<Scalars["String"]>;
+  locale?: InputMaybe<Scalars["String"]>;
+  relativeTo?: InputMaybe<Scalars["String"]>;
+  timeZone?: InputMaybe<Scalars["String"]>;
 };
-
 
 /** An icon with styles for use in an Itinerary */
 export type IconCompositionModifiedArgs = {
-  format?: InputMaybe<Scalars['String']>;
-  locale?: InputMaybe<Scalars['String']>;
-  relativeTo?: InputMaybe<Scalars['String']>;
-  timeZone?: InputMaybe<Scalars['String']>;
+  format?: InputMaybe<Scalars["String"]>;
+  locale?: InputMaybe<Scalars["String"]>;
+  relativeTo?: InputMaybe<Scalars["String"]>;
+  timeZone?: InputMaybe<Scalars["String"]>;
 };
 
 /** Connection of IconCompositions */
 export type IconCompositionConnection = {
-  __typename?: 'IconCompositionConnection';
+  __typename?: "IconCompositionConnection";
   /** All the edges in this page of the connection */
   edges: Array<IconCompositionEdge>;
   /** Shortcut for edges[].node */
@@ -3634,14 +3612,14 @@ export type IconCompositionConnection = {
   /** Details regarding the current page of the connnection */
   pageInfo: PageInfo;
   /** The total number of items in the connection (in all pages) */
-  totalCount: Scalars['Int'];
+  totalCount: Scalars["Int"];
 };
 
 /** Edge containing a IconComposition */
 export type IconCompositionEdge = {
-  __typename?: 'IconCompositionEdge';
+  __typename?: "IconCompositionEdge";
   /** The cursor string pointing to this item */
-  cursor: Scalars['String'];
+  cursor: Scalars["String"];
   /** The item */
   node: IconComposition;
 };
@@ -3651,68 +3629,63 @@ export type IconResource = {
   /** Arbitrary JSON value stored on this resource, keyed by an id */
   attr?: Maybe<Attribute>;
   /** Shortcut for the attr.value, returns null if the attribute doesn't exist */
-  attrValue?: Maybe<Scalars['JSON']>;
+  attrValue?: Maybe<Scalars["JSON"]>;
   /** Query multiple attributes optionally filtering by id and/or locale */
   attrs: AttributeConnection;
   /** The date when the icon was created */
-  created?: Maybe<Scalars['String']>;
+  created?: Maybe<Scalars["String"]>;
   /** The Globally Unique ID of the object. */
-  id: Scalars['ID'];
+  id: Scalars["ID"];
   /** The key of the icon, unique across the profile */
-  key: Scalars['String'];
+  key: Scalars["String"];
   /** The date when the icon was last modified */
-  modified?: Maybe<Scalars['String']>;
+  modified?: Maybe<Scalars["String"]>;
   /** The supplied name for this icon */
-  name: Scalars['String'];
+  name: Scalars["String"];
   /** The profile associated with this icon */
   profile: Profile;
 };
 
-
 /** An icon for use in the UI or Map */
 export type IconResourceAttrArgs = {
-  id: Scalars['ID'];
-  locale?: InputMaybe<Scalars['String']>;
+  id: Scalars["ID"];
+  locale?: InputMaybe<Scalars["String"]>;
 };
-
 
 /** An icon for use in the UI or Map */
 export type IconResourceAttrValueArgs = {
-  id: Scalars['ID'];
-  locale?: InputMaybe<Scalars['String']>;
+  id: Scalars["ID"];
+  locale?: InputMaybe<Scalars["String"]>;
 };
-
 
 /** An icon for use in the UI or Map */
 export type IconResourceAttrsArgs = {
-  after?: InputMaybe<Scalars['String']>;
-  first: Scalars['Int'];
-  id?: InputMaybe<Scalars['ID']>;
-  includeNoLocale?: InputMaybe<Scalars['Boolean']>;
-  locale?: InputMaybe<Scalars['String']>;
+  after?: InputMaybe<Scalars["String"]>;
+  first: Scalars["Int"];
+  id?: InputMaybe<Scalars["ID"]>;
+  includeNoLocale?: InputMaybe<Scalars["Boolean"]>;
+  locale?: InputMaybe<Scalars["String"]>;
 };
-
 
 /** An icon for use in the UI or Map */
 export type IconResourceCreatedArgs = {
-  format?: InputMaybe<Scalars['String']>;
-  locale?: InputMaybe<Scalars['String']>;
-  relativeTo?: InputMaybe<Scalars['String']>;
-  timeZone?: InputMaybe<Scalars['String']>;
+  format?: InputMaybe<Scalars["String"]>;
+  locale?: InputMaybe<Scalars["String"]>;
+  relativeTo?: InputMaybe<Scalars["String"]>;
+  timeZone?: InputMaybe<Scalars["String"]>;
 };
-
 
 /** An icon for use in the UI or Map */
 export type IconResourceModifiedArgs = {
-  format?: InputMaybe<Scalars['String']>;
-  locale?: InputMaybe<Scalars['String']>;
-  relativeTo?: InputMaybe<Scalars['String']>;
-  timeZone?: InputMaybe<Scalars['String']>;
+  format?: InputMaybe<Scalars["String"]>;
+  locale?: InputMaybe<Scalars["String"]>;
+  relativeTo?: InputMaybe<Scalars["String"]>;
+  timeZone?: InputMaybe<Scalars["String"]>;
 };
 
 /** Connection of IconResources */
 export type IconResourceConnection = {
-  __typename?: 'IconResourceConnection';
+  __typename?: "IconResourceConnection";
   /** All the edges in this page of the connection */
   edges: Array<IconResourceEdge>;
   /** Shortcut for edges[].node */
@@ -3720,14 +3693,14 @@ export type IconResourceConnection = {
   /** Details regarding the current page of the connnection */
   pageInfo: PageInfo;
   /** The total number of items in the connection (in all pages) */
-  totalCount: Scalars['Int'];
+  totalCount: Scalars["Int"];
 };
 
 /** Edge containing a IconResource */
 export type IconResourceEdge = {
-  __typename?: 'IconResourceEdge';
+  __typename?: "IconResourceEdge";
   /** The cursor string pointing to this item */
-  cursor: Scalars['String'];
+  cursor: Scalars["String"];
   /** The item */
   node: IconResource;
 };
@@ -3737,101 +3710,95 @@ export type IconResourceEmbedded = IconResourceFailedToLoad | IconSilhouette;
 
 /** Represents an embedded IconResource that failed to load */
 export type IconResourceFailedToLoad = Node & {
-  __typename?: 'IconResourceFailedToLoad';
+  __typename?: "IconResourceFailedToLoad";
   /** The Globally Unique ID of the object. */
-  id: Scalars['ID'];
+  id: Scalars["ID"];
 };
 
 /** SVG path based IconResource */
-export type IconSilhouette = IconResource & Node & {
-  __typename?: 'IconSilhouette';
-  /** Arbitrary JSON value stored on this resource, keyed by an id */
-  attr?: Maybe<Attribute>;
-  /** Shortcut for the attr.value, returns null if the attribute doesn't exist */
-  attrValue?: Maybe<Scalars['JSON']>;
-  /** Query multiple attributes optionally filtering by id and/or locale */
-  attrs: AttributeConnection;
-  /** The date when the icon was created */
-  created?: Maybe<Scalars['String']>;
-  /** The Globally Unique ID of the object. */
-  id: Scalars['ID'];
-  /** The key of the icon, unique across the profile */
-  key: Scalars['String'];
-  /** The date when the icon was last modified */
-  modified?: Maybe<Scalars['String']>;
-  /** The supplied name for this icon */
-  name: Scalars['String'];
-  /** SVG path data for this icon, eg: "M 100 .." */
-  paths: Array<Scalars['String']>;
-  /** The profile associated with this icon */
-  profile: Profile;
-  /** Optional SVG viewBox for this icon */
-  viewBox?: Maybe<Scalars['String']>;
-};
-
+export type IconSilhouette = IconResource &
+  Node & {
+    __typename?: "IconSilhouette";
+    /** Arbitrary JSON value stored on this resource, keyed by an id */
+    attr?: Maybe<Attribute>;
+    /** Shortcut for the attr.value, returns null if the attribute doesn't exist */
+    attrValue?: Maybe<Scalars["JSON"]>;
+    /** Query multiple attributes optionally filtering by id and/or locale */
+    attrs: AttributeConnection;
+    /** The date when the icon was created */
+    created?: Maybe<Scalars["String"]>;
+    /** The Globally Unique ID of the object. */
+    id: Scalars["ID"];
+    /** The key of the icon, unique across the profile */
+    key: Scalars["String"];
+    /** The date when the icon was last modified */
+    modified?: Maybe<Scalars["String"]>;
+    /** The supplied name for this icon */
+    name: Scalars["String"];
+    /** SVG path data for this icon, eg: "M 100 .." */
+    paths: Array<Scalars["String"]>;
+    /** The profile associated with this icon */
+    profile: Profile;
+    /** Optional SVG viewBox for this icon */
+    viewBox?: Maybe<Scalars["String"]>;
+  };
 
 /** SVG path based IconResource */
 export type IconSilhouetteAttrArgs = {
-  id: Scalars['ID'];
-  locale?: InputMaybe<Scalars['String']>;
+  id: Scalars["ID"];
+  locale?: InputMaybe<Scalars["String"]>;
 };
-
 
 /** SVG path based IconResource */
 export type IconSilhouetteAttrValueArgs = {
-  id: Scalars['ID'];
-  locale?: InputMaybe<Scalars['String']>;
+  id: Scalars["ID"];
+  locale?: InputMaybe<Scalars["String"]>;
 };
-
 
 /** SVG path based IconResource */
 export type IconSilhouetteAttrsArgs = {
-  after?: InputMaybe<Scalars['String']>;
-  first: Scalars['Int'];
-  id?: InputMaybe<Scalars['ID']>;
-  includeNoLocale?: InputMaybe<Scalars['Boolean']>;
-  locale?: InputMaybe<Scalars['String']>;
+  after?: InputMaybe<Scalars["String"]>;
+  first: Scalars["Int"];
+  id?: InputMaybe<Scalars["ID"]>;
+  includeNoLocale?: InputMaybe<Scalars["Boolean"]>;
+  locale?: InputMaybe<Scalars["String"]>;
 };
-
 
 /** SVG path based IconResource */
 export type IconSilhouetteCreatedArgs = {
-  format?: InputMaybe<Scalars['String']>;
-  locale?: InputMaybe<Scalars['String']>;
-  relativeTo?: InputMaybe<Scalars['String']>;
-  timeZone?: InputMaybe<Scalars['String']>;
+  format?: InputMaybe<Scalars["String"]>;
+  locale?: InputMaybe<Scalars["String"]>;
+  relativeTo?: InputMaybe<Scalars["String"]>;
+  timeZone?: InputMaybe<Scalars["String"]>;
 };
-
 
 /** SVG path based IconResource */
 export type IconSilhouetteModifiedArgs = {
-  format?: InputMaybe<Scalars['String']>;
-  locale?: InputMaybe<Scalars['String']>;
-  relativeTo?: InputMaybe<Scalars['String']>;
-  timeZone?: InputMaybe<Scalars['String']>;
+  format?: InputMaybe<Scalars["String"]>;
+  locale?: InputMaybe<Scalars["String"]>;
+  relativeTo?: InputMaybe<Scalars["String"]>;
+  timeZone?: InputMaybe<Scalars["String"]>;
 };
 
 /** Isochrone for the given position with duration and vehicle */
 export type Isochrone = {
-  __typename?: 'Isochrone';
+  __typename?: "Isochrone";
   /** A bounding box around the isochrone */
   bounds: Bounds;
   /** Copyright details of the isochrone */
-  copyrights: Array<Scalars['String']>;
+  copyrights: Array<Scalars["String"]>;
   /** The duration of the isochrone */
-  duration?: Maybe<Scalars['Float']>;
+  duration?: Maybe<Scalars["Float"]>;
   /** The mode of transport of the isochrone */
   mode: IsochroneMode;
   /** The isochrone as a geojson polygon */
-  polygon: Scalars['JSON'];
+  polygon: Scalars["JSON"];
 };
-
 
 /** Isochrone for the given position with duration and vehicle */
 export type IsochroneDurationArgs = {
   unit?: DurationUnit;
 };
-
 
 /** Isochrone for the given position with duration and vehicle */
 export type IsochronePolygonArgs = {
@@ -3840,9 +3807,9 @@ export type IsochronePolygonArgs = {
 
 /** Mode of transport for an isochrone */
 export enum IsochroneMode {
-  Bike = 'Bike',
-  Car = 'Car',
-  Foot = 'Foot'
+  Bike = "Bike",
+  Car = "Car",
+  Foot = "Foot",
 }
 
 /** Determine how to sort Itineraries when listing */
@@ -3857,11 +3824,11 @@ export type ItinerariesSort = {
 
 /** An itinerary type is used to structure a series of items representing a travel itinerary */
 export type Itinerary = Node & {
-  __typename?: 'Itinerary';
+  __typename?: "Itinerary";
   /** Arbitrary JSON value stored on this resource, keyed by an id */
   attr?: Maybe<Attribute>;
   /** Shortcut for the attr.value, returns null if the attribute doesn't exist */
-  attrValue?: Maybe<Scalars['JSON']>;
+  attrValue?: Maybe<Scalars["JSON"]>;
   /** Query multiple attributes optionally filtering by id and/or locale */
   attrs: AttributeConnection;
   /** If true, itinerary-directions will be created to automatically route between itinerary-locations */
@@ -3871,25 +3838,25 @@ export type Itinerary = Node & {
   /** The immediate associated children itinerary items */
   children: ItineraryItemConnection;
   /** The date when the itinerary was created */
-  created?: Maybe<Scalars['String']>;
+  created?: Maybe<Scalars["String"]>;
   /** The default locale of this itinerary's content */
-  defaultLocale?: Maybe<Scalars['String']>;
+  defaultLocale?: Maybe<Scalars["String"]>;
   /** The descending items within this itinerary item */
   descendants: ItineraryItemConnection;
   /** A longer text description */
-  description?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars["String"]>;
   /** Elevation data of the itinerary */
   elevation: Elevation;
   /** Icons that are used in this itinerary */
   icons: IconCompositionConnection;
   /** The Globally Unique ID of the object. */
-  id: Scalars['ID'];
+  id: Scalars["ID"];
   /** Returns a single item from this itinerary by id */
   item?: Maybe<ItineraryItem>;
   /** The date when the draft version was last modified */
-  lastDraft?: Maybe<Scalars['String']>;
+  lastDraft?: Maybe<Scalars["String"]>;
   /** The date when the itinerary was last published */
-  lastPublished?: Maybe<Scalars['String']>;
+  lastPublished?: Maybe<Scalars["String"]>;
   /**
    * List of MediaContainers containing images or other media
    * @deprecated use mediaContainers instead
@@ -3898,146 +3865,132 @@ export type Itinerary = Node & {
   /** List of MediaContainers containing images or other media */
   mediaContainers: MediaContainerConnection;
   /** The date when the itinerary was last modified */
-  modified?: Maybe<Scalars['String']>;
+  modified?: Maybe<Scalars["String"]>;
   /** The preferred MediaContainer to use */
   preferredMedia?: Maybe<MediaContainer>;
   /** Profile that owns this itinerary */
   profile?: Maybe<Profile>;
   /** The date when this itinerary was last published. Will be null on draft versions */
-  published?: Maybe<Scalars['String']>;
+  published?: Maybe<Scalars["String"]>;
   /** Alias for the read-more attribute */
-  readMoreUrl?: Maybe<Scalars['String']>;
+  readMoreUrl?: Maybe<Scalars["String"]>;
   /** A short text summary */
-  synopsis?: Maybe<Scalars['String']>;
+  synopsis?: Maybe<Scalars["String"]>;
   /** A series of strings applied to label this item */
-  tags: Array<Scalars['String']>;
+  tags: Array<Scalars["String"]>;
   /** The supplied title */
-  title?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars["String"]>;
   /** Alias for the website-url attribute */
-  websiteUrl?: Maybe<Scalars['String']>;
+  websiteUrl?: Maybe<Scalars["String"]>;
 };
-
 
 /** An itinerary type is used to structure a series of items representing a travel itinerary */
 export type ItineraryAttrArgs = {
-  id: Scalars['ID'];
-  locale?: InputMaybe<Scalars['String']>;
+  id: Scalars["ID"];
+  locale?: InputMaybe<Scalars["String"]>;
 };
-
 
 /** An itinerary type is used to structure a series of items representing a travel itinerary */
 export type ItineraryAttrValueArgs = {
-  id: Scalars['ID'];
-  locale?: InputMaybe<Scalars['String']>;
+  id: Scalars["ID"];
+  locale?: InputMaybe<Scalars["String"]>;
 };
-
 
 /** An itinerary type is used to structure a series of items representing a travel itinerary */
 export type ItineraryAttrsArgs = {
-  after?: InputMaybe<Scalars['String']>;
-  first: Scalars['Int'];
-  id?: InputMaybe<Scalars['ID']>;
-  includeNoLocale?: InputMaybe<Scalars['Boolean']>;
-  locale?: InputMaybe<Scalars['String']>;
+  after?: InputMaybe<Scalars["String"]>;
+  first: Scalars["Int"];
+  id?: InputMaybe<Scalars["ID"]>;
+  includeNoLocale?: InputMaybe<Scalars["Boolean"]>;
+  locale?: InputMaybe<Scalars["String"]>;
 };
-
 
 /** An itinerary type is used to structure a series of items representing a travel itinerary */
 export type ItineraryChildrenArgs = {
-  after?: InputMaybe<Scalars['String']>;
-  first: Scalars['Int'];
-  placeIds?: InputMaybe<Array<Scalars['ID']>>;
-  segmentIds?: InputMaybe<Array<Scalars['ID']>>;
+  after?: InputMaybe<Scalars["String"]>;
+  first: Scalars["Int"];
+  placeIds?: InputMaybe<Array<Scalars["ID"]>>;
+  segmentIds?: InputMaybe<Array<Scalars["ID"]>>;
   type?: InputMaybe<ItineraryItemType>;
 };
-
 
 /** An itinerary type is used to structure a series of items representing a travel itinerary */
 export type ItineraryCreatedArgs = {
-  format?: InputMaybe<Scalars['String']>;
-  locale?: InputMaybe<Scalars['String']>;
-  relativeTo?: InputMaybe<Scalars['String']>;
-  timeZone?: InputMaybe<Scalars['String']>;
+  format?: InputMaybe<Scalars["String"]>;
+  locale?: InputMaybe<Scalars["String"]>;
+  relativeTo?: InputMaybe<Scalars["String"]>;
+  timeZone?: InputMaybe<Scalars["String"]>;
 };
-
 
 /** An itinerary type is used to structure a series of items representing a travel itinerary */
 export type ItineraryDescendantsArgs = {
-  after?: InputMaybe<Scalars['String']>;
-  depthMax?: InputMaybe<Scalars['Int']>;
-  depthMin?: InputMaybe<Scalars['Int']>;
-  first: Scalars['Int'];
+  after?: InputMaybe<Scalars["String"]>;
+  depthMax?: InputMaybe<Scalars["Int"]>;
+  depthMin?: InputMaybe<Scalars["Int"]>;
+  first: Scalars["Int"];
   parentType?: InputMaybe<ItineraryItemType>;
-  placeIds?: InputMaybe<Array<Scalars['ID']>>;
-  segmentIds?: InputMaybe<Array<Scalars['ID']>>;
+  placeIds?: InputMaybe<Array<Scalars["ID"]>>;
+  segmentIds?: InputMaybe<Array<Scalars["ID"]>>;
   type?: InputMaybe<ItineraryItemType>;
 };
 
-
 /** An itinerary type is used to structure a series of items representing a travel itinerary */
 export type ItineraryIconsArgs = {
-  after?: InputMaybe<Scalars['String']>;
-  first: Scalars['Int'];
+  after?: InputMaybe<Scalars["String"]>;
+  first: Scalars["Int"];
 };
-
 
 /** An itinerary type is used to structure a series of items representing a travel itinerary */
 export type ItineraryItemArgs = {
-  id: Scalars['ID'];
+  id: Scalars["ID"];
 };
-
 
 /** An itinerary type is used to structure a series of items representing a travel itinerary */
 export type ItineraryLastDraftArgs = {
-  format?: InputMaybe<Scalars['String']>;
-  locale?: InputMaybe<Scalars['String']>;
-  relativeTo?: InputMaybe<Scalars['String']>;
-  timeZone?: InputMaybe<Scalars['String']>;
+  format?: InputMaybe<Scalars["String"]>;
+  locale?: InputMaybe<Scalars["String"]>;
+  relativeTo?: InputMaybe<Scalars["String"]>;
+  timeZone?: InputMaybe<Scalars["String"]>;
 };
-
 
 /** An itinerary type is used to structure a series of items representing a travel itinerary */
 export type ItineraryLastPublishedArgs = {
-  format?: InputMaybe<Scalars['String']>;
-  locale?: InputMaybe<Scalars['String']>;
-  relativeTo?: InputMaybe<Scalars['String']>;
-  timeZone?: InputMaybe<Scalars['String']>;
+  format?: InputMaybe<Scalars["String"]>;
+  locale?: InputMaybe<Scalars["String"]>;
+  relativeTo?: InputMaybe<Scalars["String"]>;
+  timeZone?: InputMaybe<Scalars["String"]>;
 };
-
 
 /** An itinerary type is used to structure a series of items representing a travel itinerary */
 export type ItineraryMediaArgs = {
-  limit?: Scalars['Int'];
+  limit?: Scalars["Int"];
 };
-
 
 /** An itinerary type is used to structure a series of items representing a travel itinerary */
 export type ItineraryMediaContainersArgs = {
-  after?: InputMaybe<Scalars['String']>;
-  first: Scalars['Int'];
+  after?: InputMaybe<Scalars["String"]>;
+  first: Scalars["Int"];
 };
-
 
 /** An itinerary type is used to structure a series of items representing a travel itinerary */
 export type ItineraryModifiedArgs = {
-  format?: InputMaybe<Scalars['String']>;
-  locale?: InputMaybe<Scalars['String']>;
-  relativeTo?: InputMaybe<Scalars['String']>;
-  timeZone?: InputMaybe<Scalars['String']>;
+  format?: InputMaybe<Scalars["String"]>;
+  locale?: InputMaybe<Scalars["String"]>;
+  relativeTo?: InputMaybe<Scalars["String"]>;
+  timeZone?: InputMaybe<Scalars["String"]>;
 };
-
 
 /** An itinerary type is used to structure a series of items representing a travel itinerary */
 export type ItineraryPublishedArgs = {
-  format?: InputMaybe<Scalars['String']>;
-  locale?: InputMaybe<Scalars['String']>;
-  relativeTo?: InputMaybe<Scalars['String']>;
-  timeZone?: InputMaybe<Scalars['String']>;
+  format?: InputMaybe<Scalars["String"]>;
+  locale?: InputMaybe<Scalars["String"]>;
+  relativeTo?: InputMaybe<Scalars["String"]>;
+  timeZone?: InputMaybe<Scalars["String"]>;
 };
 
 /** Automatically generate ItineraryDirections that connect sibling ItineraryLocations */
 export type ItineraryAutoRoute = {
-  __typename?: 'ItineraryAutoRoute';
+  __typename?: "ItineraryAutoRoute";
   /** The default mode of transport to use for the generated ItineraryDirections */
   defaultMode: RouteMode;
 };
@@ -4049,368 +4002,343 @@ export type ItineraryAutoRouteInput = {
 };
 
 /** An itinerary item representing a collection of other itinerary items */
-export type ItineraryCollection = ItineraryItem & Node & {
-  __typename?: 'ItineraryCollection';
-  /** The sibling item that comes after this item */
-  after?: Maybe<ItineraryItem>;
-  /** All ancestors of the itinerary-item */
-  ancestors: ItineraryItemConnection;
-  /** Arbitrary JSON value stored on this resource, keyed by an id */
-  attr?: Maybe<Attribute>;
-  /** Shortcut for the attr.value, returns null if the attribute doesn't exist */
-  attrValue?: Maybe<Scalars['JSON']>;
-  /** Query multiple attributes optionally filtering by id and/or locale */
-  attrs: AttributeConnection;
-  /** The sibling item that comes before this item */
-  before?: Maybe<ItineraryItem>;
-  /** Bounds for the itinerary item */
-  bounds?: Maybe<Bounds>;
-  /** All the direct children of the itinerary-item */
-  children: ItineraryItemConnection;
-  /** All the descendants of the itinerary-item in depth-first-search order */
-  descendants: ItineraryItemConnection;
-  /** A longer text description */
-  description?: Maybe<Scalars['String']>;
-  /** Unique identifier for the itinerary-item */
-  id: Scalars['ID'];
-  /** The itinerary this item belongs to */
-  itinerary: Itinerary;
-  /**
-   * List of MediaContainers containing images or other media
-   * @deprecated use mediaContainers instead
-   */
-  media: Array<MediaContainer>;
-  /** List of MediaContainers containing images or other media */
-  mediaContainers: MediaContainerConnection;
-  /** The parent item of this item */
-  parent?: Maybe<ItineraryItem>;
-  /** The preferred MediaContainer to use */
-  preferredMedia?: Maybe<MediaContainer>;
-  /** Alias for the read-more attribute */
-  readMoreUrl?: Maybe<Scalars['String']>;
-  /** A number corresponding to the item's position compared to it's siblings. */
-  siblingPositionNumber?: Maybe<Scalars['Float']>;
-  /** A short text summary */
-  synopsis?: Maybe<Scalars['String']>;
-  /** A series of strings applied to label this item */
-  tags: Array<Scalars['String']>;
-  /** The supplied title */
-  title?: Maybe<Scalars['String']>;
-  /** Alias for the website-url attribute */
-  websiteUrl?: Maybe<Scalars['String']>;
-};
-
+export type ItineraryCollection = ItineraryItem &
+  Node & {
+    __typename?: "ItineraryCollection";
+    /** The sibling item that comes after this item */
+    after?: Maybe<ItineraryItem>;
+    /** All ancestors of the itinerary-item */
+    ancestors: ItineraryItemConnection;
+    /** Arbitrary JSON value stored on this resource, keyed by an id */
+    attr?: Maybe<Attribute>;
+    /** Shortcut for the attr.value, returns null if the attribute doesn't exist */
+    attrValue?: Maybe<Scalars["JSON"]>;
+    /** Query multiple attributes optionally filtering by id and/or locale */
+    attrs: AttributeConnection;
+    /** The sibling item that comes before this item */
+    before?: Maybe<ItineraryItem>;
+    /** Bounds for the itinerary item */
+    bounds?: Maybe<Bounds>;
+    /** All the direct children of the itinerary-item */
+    children: ItineraryItemConnection;
+    /** All the descendants of the itinerary-item in depth-first-search order */
+    descendants: ItineraryItemConnection;
+    /** A longer text description */
+    description?: Maybe<Scalars["String"]>;
+    /** Unique identifier for the itinerary-item */
+    id: Scalars["ID"];
+    /** The itinerary this item belongs to */
+    itinerary: Itinerary;
+    /**
+     * List of MediaContainers containing images or other media
+     * @deprecated use mediaContainers instead
+     */
+    media: Array<MediaContainer>;
+    /** List of MediaContainers containing images or other media */
+    mediaContainers: MediaContainerConnection;
+    /** The parent item of this item */
+    parent?: Maybe<ItineraryItem>;
+    /** The preferred MediaContainer to use */
+    preferredMedia?: Maybe<MediaContainer>;
+    /** Alias for the read-more attribute */
+    readMoreUrl?: Maybe<Scalars["String"]>;
+    /** A number corresponding to the item's position compared to it's siblings. */
+    siblingPositionNumber?: Maybe<Scalars["Float"]>;
+    /** A short text summary */
+    synopsis?: Maybe<Scalars["String"]>;
+    /** A series of strings applied to label this item */
+    tags: Array<Scalars["String"]>;
+    /** The supplied title */
+    title?: Maybe<Scalars["String"]>;
+    /** Alias for the website-url attribute */
+    websiteUrl?: Maybe<Scalars["String"]>;
+  };
 
 /** An itinerary item representing a collection of other itinerary items */
 export type ItineraryCollectionAfterArgs = {
   parentType?: InputMaybe<ItineraryItemType>;
-  placeIds?: InputMaybe<Array<Scalars['ID']>>;
-  segmentIds?: InputMaybe<Array<Scalars['ID']>>;
+  placeIds?: InputMaybe<Array<Scalars["ID"]>>;
+  segmentIds?: InputMaybe<Array<Scalars["ID"]>>;
   type?: InputMaybe<ItineraryItemType>;
 };
-
 
 /** An itinerary item representing a collection of other itinerary items */
 export type ItineraryCollectionAncestorsArgs = {
-  after?: InputMaybe<Scalars['String']>;
-  first: Scalars['Int'];
+  after?: InputMaybe<Scalars["String"]>;
+  first: Scalars["Int"];
   parentType?: InputMaybe<ItineraryItemType>;
-  placeIds?: InputMaybe<Array<Scalars['ID']>>;
-  segmentIds?: InputMaybe<Array<Scalars['ID']>>;
+  placeIds?: InputMaybe<Array<Scalars["ID"]>>;
+  segmentIds?: InputMaybe<Array<Scalars["ID"]>>;
   type?: InputMaybe<ItineraryItemType>;
 };
 
-
 /** An itinerary item representing a collection of other itinerary items */
 export type ItineraryCollectionAttrArgs = {
-  id: Scalars['ID'];
-  locale?: InputMaybe<Scalars['String']>;
+  id: Scalars["ID"];
+  locale?: InputMaybe<Scalars["String"]>;
 };
-
 
 /** An itinerary item representing a collection of other itinerary items */
 export type ItineraryCollectionAttrValueArgs = {
-  id: Scalars['ID'];
-  locale?: InputMaybe<Scalars['String']>;
+  id: Scalars["ID"];
+  locale?: InputMaybe<Scalars["String"]>;
 };
-
 
 /** An itinerary item representing a collection of other itinerary items */
 export type ItineraryCollectionAttrsArgs = {
-  after?: InputMaybe<Scalars['String']>;
-  first: Scalars['Int'];
-  id?: InputMaybe<Scalars['ID']>;
-  includeNoLocale?: InputMaybe<Scalars['Boolean']>;
-  locale?: InputMaybe<Scalars['String']>;
+  after?: InputMaybe<Scalars["String"]>;
+  first: Scalars["Int"];
+  id?: InputMaybe<Scalars["ID"]>;
+  includeNoLocale?: InputMaybe<Scalars["Boolean"]>;
+  locale?: InputMaybe<Scalars["String"]>;
 };
-
 
 /** An itinerary item representing a collection of other itinerary items */
 export type ItineraryCollectionBeforeArgs = {
   parentType?: InputMaybe<ItineraryItemType>;
-  placeIds?: InputMaybe<Array<Scalars['ID']>>;
-  segmentIds?: InputMaybe<Array<Scalars['ID']>>;
+  placeIds?: InputMaybe<Array<Scalars["ID"]>>;
+  segmentIds?: InputMaybe<Array<Scalars["ID"]>>;
   type?: InputMaybe<ItineraryItemType>;
 };
-
 
 /** An itinerary item representing a collection of other itinerary items */
 export type ItineraryCollectionChildrenArgs = {
-  after?: InputMaybe<Scalars['String']>;
-  first: Scalars['Int'];
+  after?: InputMaybe<Scalars["String"]>;
+  first: Scalars["Int"];
   parentType?: InputMaybe<ItineraryItemType>;
-  placeIds?: InputMaybe<Array<Scalars['ID']>>;
-  segmentIds?: InputMaybe<Array<Scalars['ID']>>;
+  placeIds?: InputMaybe<Array<Scalars["ID"]>>;
+  segmentIds?: InputMaybe<Array<Scalars["ID"]>>;
   type?: InputMaybe<ItineraryItemType>;
 };
-
 
 /** An itinerary item representing a collection of other itinerary items */
 export type ItineraryCollectionDescendantsArgs = {
-  after?: InputMaybe<Scalars['String']>;
-  depthMax?: InputMaybe<Scalars['Int']>;
-  depthMin?: InputMaybe<Scalars['Int']>;
-  first: Scalars['Int'];
+  after?: InputMaybe<Scalars["String"]>;
+  depthMax?: InputMaybe<Scalars["Int"]>;
+  depthMin?: InputMaybe<Scalars["Int"]>;
+  first: Scalars["Int"];
   parentType?: InputMaybe<ItineraryItemType>;
-  placeIds?: InputMaybe<Array<Scalars['ID']>>;
-  segmentIds?: InputMaybe<Array<Scalars['ID']>>;
+  placeIds?: InputMaybe<Array<Scalars["ID"]>>;
+  segmentIds?: InputMaybe<Array<Scalars["ID"]>>;
   type?: InputMaybe<ItineraryItemType>;
 };
 
-
 /** An itinerary item representing a collection of other itinerary items */
 export type ItineraryCollectionMediaArgs = {
-  limit?: Scalars['Int'];
+  limit?: Scalars["Int"];
 };
-
 
 /** An itinerary item representing a collection of other itinerary items */
 export type ItineraryCollectionMediaContainersArgs = {
-  after?: InputMaybe<Scalars['String']>;
-  first: Scalars['Int'];
+  after?: InputMaybe<Scalars["String"]>;
+  first: Scalars["Int"];
 };
-
 
 /** An itinerary item representing a collection of other itinerary items */
 export type ItineraryCollectionParentArgs = {
   parentType?: InputMaybe<ItineraryItemType>;
-  placeIds?: InputMaybe<Array<Scalars['ID']>>;
-  segmentIds?: InputMaybe<Array<Scalars['ID']>>;
+  placeIds?: InputMaybe<Array<Scalars["ID"]>>;
+  segmentIds?: InputMaybe<Array<Scalars["ID"]>>;
   type?: InputMaybe<ItineraryItemType>;
 };
 
-
 /** An itinerary item representing a collection of other itinerary items */
 export type ItineraryCollectionSiblingPositionNumberArgs = {
-  skipOmitList?: Scalars['Boolean'];
-  skipOptional?: Scalars['Boolean'];
+  skipOmitList?: Scalars["Boolean"];
+  skipOptional?: Scalars["Boolean"];
   type?: InputMaybe<ItineraryItemType>;
 };
 
 /** An itinerary item representing directions from an origin location to the parent location. This item encapsulates modes of transport and routes. */
-export type ItineraryDirections = ItineraryItem & Node & {
-  __typename?: 'ItineraryDirections';
-  /** The sibling item that comes after this item */
-  after?: Maybe<ItineraryItem>;
-  /** All ancestors of the itinerary-item */
-  ancestors: ItineraryItemConnection;
-  /** Arbitrary JSON value stored on this resource, keyed by an id */
-  attr?: Maybe<Attribute>;
-  /** Shortcut for the attr.value, returns null if the attribute doesn't exist */
-  attrValue?: Maybe<Scalars['JSON']>;
-  /** Query multiple attributes optionally filtering by id and/or locale */
-  attrs: AttributeConnection;
-  /** The sibling item that comes before this item */
-  before?: Maybe<ItineraryItem>;
-  /** Bounds for the itinerary-directions and it's descendants */
-  bounds?: Maybe<Bounds>;
-  /** All the direct children of the itinerary-item */
-  children: ItineraryItemConnection;
-  /** All the descendants of the itinerary-item in depth-first-search order */
-  descendants: ItineraryItemConnection;
-  /** A longer text description */
-  description?: Maybe<Scalars['String']>;
-  /** The itinerary-location that is the ending point of the directions */
-  destination?: Maybe<ItineraryLocation>;
-  /** The estimated distance of this itinerary-directions */
-  distance?: Maybe<Scalars['Float']>;
-  /** The maximum duration of this itinerary-directions */
-  durationMax?: Maybe<Scalars['Float']>;
-  /** The minimum duration of this itinerary-directions */
-  durationMin?: Maybe<Scalars['Float']>;
-  /** The duration of this itinerary-directions */
-  durations: Array<ItineraryDirectionsDurations>;
-  /** The elevation details of this itinerary-directions */
-  elevation: Elevation;
-  /** Unique identifier for the itinerary-item */
-  id: Scalars['ID'];
-  /** The itinerary this item belongs to */
-  itinerary: Itinerary;
-  /**
-   * List of MediaContainers containing images or other media
-   * @deprecated use mediaContainers instead
-   */
-  media: Array<MediaContainer>;
-  /** List of MediaContainers containing images or other media */
-  mediaContainers: MediaContainerConnection;
-  /** The itinerary-location that is the starting point of the directions */
-  origin?: Maybe<ItineraryLocation>;
-  /** The parent item of this item */
-  parent?: Maybe<ItineraryItem>;
-  /** The preferred MediaContainer to use */
-  preferredMedia?: Maybe<MediaContainer>;
-  /** Alias for the read-more attribute */
-  readMoreUrl?: Maybe<Scalars['String']>;
-  /** The route details of this directions item */
-  route: Route;
-  /** A number corresponding to the item's position compared to it's siblings. */
-  siblingPositionNumber?: Maybe<Scalars['Float']>;
-  /** A short text summary */
-  synopsis?: Maybe<Scalars['String']>;
-  /** A series of strings applied to label this item */
-  tags: Array<Scalars['String']>;
-  /** The supplied title */
-  title?: Maybe<Scalars['String']>;
-  /** Alias for the website-url attribute */
-  websiteUrl?: Maybe<Scalars['String']>;
-};
-
+export type ItineraryDirections = ItineraryItem &
+  Node & {
+    __typename?: "ItineraryDirections";
+    /** The sibling item that comes after this item */
+    after?: Maybe<ItineraryItem>;
+    /** All ancestors of the itinerary-item */
+    ancestors: ItineraryItemConnection;
+    /** Arbitrary JSON value stored on this resource, keyed by an id */
+    attr?: Maybe<Attribute>;
+    /** Shortcut for the attr.value, returns null if the attribute doesn't exist */
+    attrValue?: Maybe<Scalars["JSON"]>;
+    /** Query multiple attributes optionally filtering by id and/or locale */
+    attrs: AttributeConnection;
+    /** The sibling item that comes before this item */
+    before?: Maybe<ItineraryItem>;
+    /** Bounds for the itinerary-directions and it's descendants */
+    bounds?: Maybe<Bounds>;
+    /** All the direct children of the itinerary-item */
+    children: ItineraryItemConnection;
+    /** All the descendants of the itinerary-item in depth-first-search order */
+    descendants: ItineraryItemConnection;
+    /** A longer text description */
+    description?: Maybe<Scalars["String"]>;
+    /** The itinerary-location that is the ending point of the directions */
+    destination?: Maybe<ItineraryLocation>;
+    /** The estimated distance of this itinerary-directions */
+    distance?: Maybe<Scalars["Float"]>;
+    /** The maximum duration of this itinerary-directions */
+    durationMax?: Maybe<Scalars["Float"]>;
+    /** The minimum duration of this itinerary-directions */
+    durationMin?: Maybe<Scalars["Float"]>;
+    /** The duration of this itinerary-directions */
+    durations: Array<ItineraryDirectionsDurations>;
+    /** The elevation details of this itinerary-directions */
+    elevation: Elevation;
+    /** Unique identifier for the itinerary-item */
+    id: Scalars["ID"];
+    /** The itinerary this item belongs to */
+    itinerary: Itinerary;
+    /**
+     * List of MediaContainers containing images or other media
+     * @deprecated use mediaContainers instead
+     */
+    media: Array<MediaContainer>;
+    /** List of MediaContainers containing images or other media */
+    mediaContainers: MediaContainerConnection;
+    /** The itinerary-location that is the starting point of the directions */
+    origin?: Maybe<ItineraryLocation>;
+    /** The parent item of this item */
+    parent?: Maybe<ItineraryItem>;
+    /** The preferred MediaContainer to use */
+    preferredMedia?: Maybe<MediaContainer>;
+    /** Alias for the read-more attribute */
+    readMoreUrl?: Maybe<Scalars["String"]>;
+    /** The route details of this directions item */
+    route: Route;
+    /** A number corresponding to the item's position compared to it's siblings. */
+    siblingPositionNumber?: Maybe<Scalars["Float"]>;
+    /** A short text summary */
+    synopsis?: Maybe<Scalars["String"]>;
+    /** A series of strings applied to label this item */
+    tags: Array<Scalars["String"]>;
+    /** The supplied title */
+    title?: Maybe<Scalars["String"]>;
+    /** Alias for the website-url attribute */
+    websiteUrl?: Maybe<Scalars["String"]>;
+  };
 
 /** An itinerary item representing directions from an origin location to the parent location. This item encapsulates modes of transport and routes. */
 export type ItineraryDirectionsAfterArgs = {
   parentType?: InputMaybe<ItineraryItemType>;
-  placeIds?: InputMaybe<Array<Scalars['ID']>>;
-  segmentIds?: InputMaybe<Array<Scalars['ID']>>;
+  placeIds?: InputMaybe<Array<Scalars["ID"]>>;
+  segmentIds?: InputMaybe<Array<Scalars["ID"]>>;
   type?: InputMaybe<ItineraryItemType>;
 };
-
 
 /** An itinerary item representing directions from an origin location to the parent location. This item encapsulates modes of transport and routes. */
 export type ItineraryDirectionsAncestorsArgs = {
-  after?: InputMaybe<Scalars['String']>;
-  first: Scalars['Int'];
+  after?: InputMaybe<Scalars["String"]>;
+  first: Scalars["Int"];
   parentType?: InputMaybe<ItineraryItemType>;
-  placeIds?: InputMaybe<Array<Scalars['ID']>>;
-  segmentIds?: InputMaybe<Array<Scalars['ID']>>;
+  placeIds?: InputMaybe<Array<Scalars["ID"]>>;
+  segmentIds?: InputMaybe<Array<Scalars["ID"]>>;
   type?: InputMaybe<ItineraryItemType>;
 };
 
-
 /** An itinerary item representing directions from an origin location to the parent location. This item encapsulates modes of transport and routes. */
 export type ItineraryDirectionsAttrArgs = {
-  id: Scalars['ID'];
-  locale?: InputMaybe<Scalars['String']>;
+  id: Scalars["ID"];
+  locale?: InputMaybe<Scalars["String"]>;
 };
-
 
 /** An itinerary item representing directions from an origin location to the parent location. This item encapsulates modes of transport and routes. */
 export type ItineraryDirectionsAttrValueArgs = {
-  id: Scalars['ID'];
-  locale?: InputMaybe<Scalars['String']>;
+  id: Scalars["ID"];
+  locale?: InputMaybe<Scalars["String"]>;
 };
-
 
 /** An itinerary item representing directions from an origin location to the parent location. This item encapsulates modes of transport and routes. */
 export type ItineraryDirectionsAttrsArgs = {
-  after?: InputMaybe<Scalars['String']>;
-  first: Scalars['Int'];
-  id?: InputMaybe<Scalars['ID']>;
-  includeNoLocale?: InputMaybe<Scalars['Boolean']>;
-  locale?: InputMaybe<Scalars['String']>;
+  after?: InputMaybe<Scalars["String"]>;
+  first: Scalars["Int"];
+  id?: InputMaybe<Scalars["ID"]>;
+  includeNoLocale?: InputMaybe<Scalars["Boolean"]>;
+  locale?: InputMaybe<Scalars["String"]>;
 };
-
 
 /** An itinerary item representing directions from an origin location to the parent location. This item encapsulates modes of transport and routes. */
 export type ItineraryDirectionsBeforeArgs = {
   parentType?: InputMaybe<ItineraryItemType>;
-  placeIds?: InputMaybe<Array<Scalars['ID']>>;
-  segmentIds?: InputMaybe<Array<Scalars['ID']>>;
+  placeIds?: InputMaybe<Array<Scalars["ID"]>>;
+  segmentIds?: InputMaybe<Array<Scalars["ID"]>>;
   type?: InputMaybe<ItineraryItemType>;
 };
-
 
 /** An itinerary item representing directions from an origin location to the parent location. This item encapsulates modes of transport and routes. */
 export type ItineraryDirectionsChildrenArgs = {
-  after?: InputMaybe<Scalars['String']>;
-  first: Scalars['Int'];
+  after?: InputMaybe<Scalars["String"]>;
+  first: Scalars["Int"];
   parentType?: InputMaybe<ItineraryItemType>;
-  placeIds?: InputMaybe<Array<Scalars['ID']>>;
-  segmentIds?: InputMaybe<Array<Scalars['ID']>>;
+  placeIds?: InputMaybe<Array<Scalars["ID"]>>;
+  segmentIds?: InputMaybe<Array<Scalars["ID"]>>;
   type?: InputMaybe<ItineraryItemType>;
 };
-
 
 /** An itinerary item representing directions from an origin location to the parent location. This item encapsulates modes of transport and routes. */
 export type ItineraryDirectionsDescendantsArgs = {
-  after?: InputMaybe<Scalars['String']>;
-  depthMax?: InputMaybe<Scalars['Int']>;
-  depthMin?: InputMaybe<Scalars['Int']>;
-  first: Scalars['Int'];
+  after?: InputMaybe<Scalars["String"]>;
+  depthMax?: InputMaybe<Scalars["Int"]>;
+  depthMin?: InputMaybe<Scalars["Int"]>;
+  first: Scalars["Int"];
   parentType?: InputMaybe<ItineraryItemType>;
-  placeIds?: InputMaybe<Array<Scalars['ID']>>;
-  segmentIds?: InputMaybe<Array<Scalars['ID']>>;
+  placeIds?: InputMaybe<Array<Scalars["ID"]>>;
+  segmentIds?: InputMaybe<Array<Scalars["ID"]>>;
   type?: InputMaybe<ItineraryItemType>;
 };
-
 
 /** An itinerary item representing directions from an origin location to the parent location. This item encapsulates modes of transport and routes. */
 export type ItineraryDirectionsDistanceArgs = {
   unit?: DistanceUnit;
 };
 
-
 /** An itinerary item representing directions from an origin location to the parent location. This item encapsulates modes of transport and routes. */
 export type ItineraryDirectionsDurationMaxArgs = {
   unit?: DurationUnit;
 };
-
 
 /** An itinerary item representing directions from an origin location to the parent location. This item encapsulates modes of transport and routes. */
 export type ItineraryDirectionsDurationMinArgs = {
   unit?: DurationUnit;
 };
 
-
 /** An itinerary item representing directions from an origin location to the parent location. This item encapsulates modes of transport and routes. */
 export type ItineraryDirectionsMediaArgs = {
-  limit?: Scalars['Int'];
+  limit?: Scalars["Int"];
 };
-
 
 /** An itinerary item representing directions from an origin location to the parent location. This item encapsulates modes of transport and routes. */
 export type ItineraryDirectionsMediaContainersArgs = {
-  after?: InputMaybe<Scalars['String']>;
-  first: Scalars['Int'];
+  after?: InputMaybe<Scalars["String"]>;
+  first: Scalars["Int"];
 };
-
 
 /** An itinerary item representing directions from an origin location to the parent location. This item encapsulates modes of transport and routes. */
 export type ItineraryDirectionsParentArgs = {
   parentType?: InputMaybe<ItineraryItemType>;
-  placeIds?: InputMaybe<Array<Scalars['ID']>>;
-  segmentIds?: InputMaybe<Array<Scalars['ID']>>;
+  placeIds?: InputMaybe<Array<Scalars["ID"]>>;
+  segmentIds?: InputMaybe<Array<Scalars["ID"]>>;
   type?: InputMaybe<ItineraryItemType>;
 };
 
-
 /** An itinerary item representing directions from an origin location to the parent location. This item encapsulates modes of transport and routes. */
 export type ItineraryDirectionsSiblingPositionNumberArgs = {
-  skipOmitList?: Scalars['Boolean'];
-  skipOptional?: Scalars['Boolean'];
+  skipOmitList?: Scalars["Boolean"];
+  skipOptional?: Scalars["Boolean"];
   type?: InputMaybe<ItineraryItemType>;
 };
 
 /** The method to determine if an ItineraryDirections is related to an ItineraryLocation */
 export enum ItineraryDirectionsAccuracy {
   /** Consider itinerary-directions related if the itinerary-location matches */
-  Location = 'Location',
+  Location = "Location",
   /** Consider itinerary-directions related if the place inside the itinerary-location matches */
-  Place = 'Place'
+  Place = "Place",
 }
 
 /** Connection of ItineraryDirectionss */
 export type ItineraryDirectionsConnection = {
-  __typename?: 'ItineraryDirectionsConnection';
+  __typename?: "ItineraryDirectionsConnection";
   /** All the edges in this page of the connection */
   edges: Array<ItineraryDirectionsEdge>;
   /** Shortcut for edges[].node */
@@ -4418,26 +4346,25 @@ export type ItineraryDirectionsConnection = {
   /** Details regarding the current page of the connnection */
   pageInfo: PageInfo;
   /** The total number of items in the connection (in all pages) */
-  totalCount: Scalars['Int'];
+  totalCount: Scalars["Int"];
 };
 
 /** Whether or not an ItineraryDirections is inbound or outbound relative to an ItineraryLocation */
 export enum ItineraryDirectionsDirection {
-  Inbound = 'Inbound',
-  Outbound = 'Outbound'
+  Inbound = "Inbound",
+  Outbound = "Outbound",
 }
 
 /** An itinerary-directions duration value */
 export type ItineraryDirectionsDurations = {
-  __typename?: 'ItineraryDirectionsDurations';
+  __typename?: "ItineraryDirectionsDurations";
   /** The duration value */
-  duration: Scalars['Float'];
+  duration: Scalars["Float"];
   /** Unique identifier for this duration */
-  id: Scalars['ID'];
+  id: Scalars["ID"];
   /** Label for the duration */
-  label?: Maybe<Scalars['String']>;
+  label?: Maybe<Scalars["String"]>;
 };
-
 
 /** An itinerary-directions duration value */
 export type ItineraryDirectionsDurationsDurationArgs = {
@@ -4447,16 +4374,16 @@ export type ItineraryDirectionsDurationsDurationArgs = {
 /** Input an ItineraryDirections duration value */
 export type ItineraryDirectionsDurationsInput = {
   /** The duration value */
-  duration: Scalars['Float'];
+  duration: Scalars["Float"];
   /** Label for the duration */
-  label?: InputMaybe<Scalars['String']>;
+  label?: InputMaybe<Scalars["String"]>;
 };
 
 /** Edge containing a ItineraryDirections */
 export type ItineraryDirectionsEdge = {
-  __typename?: 'ItineraryDirectionsEdge';
+  __typename?: "ItineraryDirectionsEdge";
   /** The cursor string pointing to this item */
-  cursor: Scalars['String'];
+  cursor: Scalars["String"];
   /** Whether this itinerary-directions is inbound or outbound from the itinerary-location */
   direction: ItineraryDirectionsDirection;
   /** The item */
@@ -4466,7 +4393,7 @@ export type ItineraryDirectionsEdge = {
 /** Restricts search for directions to a portion of an Itinerary */
 export enum ItineraryDirectionsRestrict {
   /** Restrict results to include directions that are descendants of the parent item */
-  ParentDescendants = 'ParentDescendants'
+  ParentDescendants = "ParentDescendants",
 }
 
 /** An item in an itinerary as part of the tree */
@@ -4478,7 +4405,7 @@ export type ItineraryItem = {
   /** Arbitrary JSON value stored on this resource, keyed by an id */
   attr?: Maybe<Attribute>;
   /** Shortcut for the attr.value, returns null if the attribute doesn't exist */
-  attrValue?: Maybe<Scalars['JSON']>;
+  attrValue?: Maybe<Scalars["JSON"]>;
   /** Query multiple attributes optionally filtering by id and/or locale */
   attrs: AttributeConnection;
   /** The sibling item that comes before this item */
@@ -4490,9 +4417,9 @@ export type ItineraryItem = {
   /** All the descendants of the itinerary-item in depth-first-search order */
   descendants: ItineraryItemConnection;
   /** A longer text description */
-  description?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars["String"]>;
   /** Unique identifier for the itinerary-item */
-  id: Scalars['ID'];
+  id: Scalars["ID"];
   /** The itinerary this item belongs to */
   itinerary: Itinerary;
   /**
@@ -4507,140 +4434,128 @@ export type ItineraryItem = {
   /** The preferred MediaContainer to use */
   preferredMedia?: Maybe<MediaContainer>;
   /** Alias for the read-more attribute */
-  readMoreUrl?: Maybe<Scalars['String']>;
+  readMoreUrl?: Maybe<Scalars["String"]>;
   /** A number corresponding to the item's position compared to it's siblings. */
-  siblingPositionNumber?: Maybe<Scalars['Float']>;
+  siblingPositionNumber?: Maybe<Scalars["Float"]>;
   /** A short text summary */
-  synopsis?: Maybe<Scalars['String']>;
+  synopsis?: Maybe<Scalars["String"]>;
   /** A series of strings applied to label this item */
-  tags: Array<Scalars['String']>;
+  tags: Array<Scalars["String"]>;
   /** The supplied title */
-  title?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars["String"]>;
   /** Alias for the website-url attribute */
-  websiteUrl?: Maybe<Scalars['String']>;
+  websiteUrl?: Maybe<Scalars["String"]>;
 };
-
 
 /** An item in an itinerary as part of the tree */
 export type ItineraryItemAfterArgs = {
   parentType?: InputMaybe<ItineraryItemType>;
-  placeIds?: InputMaybe<Array<Scalars['ID']>>;
-  segmentIds?: InputMaybe<Array<Scalars['ID']>>;
+  placeIds?: InputMaybe<Array<Scalars["ID"]>>;
+  segmentIds?: InputMaybe<Array<Scalars["ID"]>>;
   type?: InputMaybe<ItineraryItemType>;
 };
-
 
 /** An item in an itinerary as part of the tree */
 export type ItineraryItemAncestorsArgs = {
-  after?: InputMaybe<Scalars['String']>;
-  first: Scalars['Int'];
+  after?: InputMaybe<Scalars["String"]>;
+  first: Scalars["Int"];
   parentType?: InputMaybe<ItineraryItemType>;
-  placeIds?: InputMaybe<Array<Scalars['ID']>>;
-  segmentIds?: InputMaybe<Array<Scalars['ID']>>;
+  placeIds?: InputMaybe<Array<Scalars["ID"]>>;
+  segmentIds?: InputMaybe<Array<Scalars["ID"]>>;
   type?: InputMaybe<ItineraryItemType>;
 };
 
-
 /** An item in an itinerary as part of the tree */
 export type ItineraryItemAttrArgs = {
-  id: Scalars['ID'];
-  locale?: InputMaybe<Scalars['String']>;
+  id: Scalars["ID"];
+  locale?: InputMaybe<Scalars["String"]>;
 };
-
 
 /** An item in an itinerary as part of the tree */
 export type ItineraryItemAttrValueArgs = {
-  id: Scalars['ID'];
-  locale?: InputMaybe<Scalars['String']>;
+  id: Scalars["ID"];
+  locale?: InputMaybe<Scalars["String"]>;
 };
-
 
 /** An item in an itinerary as part of the tree */
 export type ItineraryItemAttrsArgs = {
-  after?: InputMaybe<Scalars['String']>;
-  first: Scalars['Int'];
-  id?: InputMaybe<Scalars['ID']>;
-  includeNoLocale?: InputMaybe<Scalars['Boolean']>;
-  locale?: InputMaybe<Scalars['String']>;
+  after?: InputMaybe<Scalars["String"]>;
+  first: Scalars["Int"];
+  id?: InputMaybe<Scalars["ID"]>;
+  includeNoLocale?: InputMaybe<Scalars["Boolean"]>;
+  locale?: InputMaybe<Scalars["String"]>;
 };
-
 
 /** An item in an itinerary as part of the tree */
 export type ItineraryItemBeforeArgs = {
   parentType?: InputMaybe<ItineraryItemType>;
-  placeIds?: InputMaybe<Array<Scalars['ID']>>;
-  segmentIds?: InputMaybe<Array<Scalars['ID']>>;
+  placeIds?: InputMaybe<Array<Scalars["ID"]>>;
+  segmentIds?: InputMaybe<Array<Scalars["ID"]>>;
   type?: InputMaybe<ItineraryItemType>;
 };
-
 
 /** An item in an itinerary as part of the tree */
 export type ItineraryItemChildrenArgs = {
-  after?: InputMaybe<Scalars['String']>;
-  first: Scalars['Int'];
+  after?: InputMaybe<Scalars["String"]>;
+  first: Scalars["Int"];
   parentType?: InputMaybe<ItineraryItemType>;
-  placeIds?: InputMaybe<Array<Scalars['ID']>>;
-  segmentIds?: InputMaybe<Array<Scalars['ID']>>;
+  placeIds?: InputMaybe<Array<Scalars["ID"]>>;
+  segmentIds?: InputMaybe<Array<Scalars["ID"]>>;
   type?: InputMaybe<ItineraryItemType>;
 };
-
 
 /** An item in an itinerary as part of the tree */
 export type ItineraryItemDescendantsArgs = {
-  after?: InputMaybe<Scalars['String']>;
-  depthMax?: InputMaybe<Scalars['Int']>;
-  depthMin?: InputMaybe<Scalars['Int']>;
-  first: Scalars['Int'];
+  after?: InputMaybe<Scalars["String"]>;
+  depthMax?: InputMaybe<Scalars["Int"]>;
+  depthMin?: InputMaybe<Scalars["Int"]>;
+  first: Scalars["Int"];
   parentType?: InputMaybe<ItineraryItemType>;
-  placeIds?: InputMaybe<Array<Scalars['ID']>>;
-  segmentIds?: InputMaybe<Array<Scalars['ID']>>;
+  placeIds?: InputMaybe<Array<Scalars["ID"]>>;
+  segmentIds?: InputMaybe<Array<Scalars["ID"]>>;
   type?: InputMaybe<ItineraryItemType>;
 };
 
-
 /** An item in an itinerary as part of the tree */
 export type ItineraryItemMediaArgs = {
-  limit?: Scalars['Int'];
+  limit?: Scalars["Int"];
 };
-
 
 /** An item in an itinerary as part of the tree */
 export type ItineraryItemMediaContainersArgs = {
-  after?: InputMaybe<Scalars['String']>;
-  first: Scalars['Int'];
+  after?: InputMaybe<Scalars["String"]>;
+  first: Scalars["Int"];
 };
-
 
 /** An item in an itinerary as part of the tree */
 export type ItineraryItemParentArgs = {
   parentType?: InputMaybe<ItineraryItemType>;
-  placeIds?: InputMaybe<Array<Scalars['ID']>>;
-  segmentIds?: InputMaybe<Array<Scalars['ID']>>;
+  placeIds?: InputMaybe<Array<Scalars["ID"]>>;
+  segmentIds?: InputMaybe<Array<Scalars["ID"]>>;
   type?: InputMaybe<ItineraryItemType>;
 };
 
-
 /** An item in an itinerary as part of the tree */
 export type ItineraryItemSiblingPositionNumberArgs = {
-  skipOmitList?: Scalars['Boolean'];
-  skipOptional?: Scalars['Boolean'];
+  skipOmitList?: Scalars["Boolean"];
+  skipOptional?: Scalars["Boolean"];
   type?: InputMaybe<ItineraryItemType>;
 };
 
 /** Changes to an itinerary caused by a mutation */
 export type ItineraryItemCascadedChanges = {
-  __typename?: 'ItineraryItemCascadedChanges';
+  __typename?: "ItineraryItemCascadedChanges";
   /** Itinerary-items that were created due to the mutation */
   created: Array<ItineraryItem>;
   /** Itinerary-items that were deleted due to the mutation */
-  deletedIds: Array<Scalars['ID']>;
+  deletedIds: Array<Scalars["ID"]>;
   /** Itinerary-items that were updated due to the mutation */
   updated: Array<ItineraryItem>;
 };
 
 /** Connection of ItineraryItems */
 export type ItineraryItemConnection = {
-  __typename?: 'ItineraryItemConnection';
+  __typename?: "ItineraryItemConnection";
   /** All the edges in this page of the connection */
   edges: Array<ItineraryItemEdge>;
   /** Shortcut for edges[].node */
@@ -4648,270 +4563,255 @@ export type ItineraryItemConnection = {
   /** Details regarding the current page of the connnection */
   pageInfo: PageInfo;
   /** The total number of items in the connection (in all pages) */
-  totalCount: Scalars['Int'];
+  totalCount: Scalars["Int"];
 };
 
 /** Edge containing a ItineraryItem */
 export type ItineraryItemEdge = {
-  __typename?: 'ItineraryItemEdge';
+  __typename?: "ItineraryItemEdge";
   /** The cursor string pointing to this item */
-  cursor: Scalars['String'];
+  cursor: Scalars["String"];
   /** List itinerary-directions connecting this node to other nodes in the connection */
   directions: ItineraryDirectionsConnection;
   /** A number corresponding to the item's position in the connection. */
-  edgePositionNumber?: Maybe<Scalars['Float']>;
+  edgePositionNumber?: Maybe<Scalars["Float"]>;
   /** The item */
   node: ItineraryItem;
 };
 
-
 /** Edge containing a ItineraryItem */
 export type ItineraryItemEdgeDirectionsArgs = {
-  after?: InputMaybe<Scalars['String']>;
+  after?: InputMaybe<Scalars["String"]>;
   direction?: InputMaybe<ItineraryDirectionsDirection>;
-  first: Scalars['Int'];
-  limitImmediate?: Scalars['Boolean'];
-  skipOptional?: Scalars['Boolean'];
+  first: Scalars["Int"];
+  limitImmediate?: Scalars["Boolean"];
+  skipOptional?: Scalars["Boolean"];
 };
-
 
 /** Edge containing a ItineraryItem */
 export type ItineraryItemEdgeEdgePositionNumberArgs = {
-  skipOmitList?: Scalars['Boolean'];
-  skipOptional?: Scalars['Boolean'];
+  skipOmitList?: Scalars["Boolean"];
+  skipOptional?: Scalars["Boolean"];
   type?: InputMaybe<ItineraryItemType>;
 };
 
 /** Positions the item after a sibling */
 export type ItineraryItemPositionAfterSibling = {
   /** The sibling itinerary item identifier, in the form of item/XYZ */
-  siblingId?: InputMaybe<Scalars['ID']>;
+  siblingId?: InputMaybe<Scalars["ID"]>;
 };
 
 /** Positions the item at the end position of its siblings */
 export type ItineraryItemPositionAtEnd = {
   /** The parent itinerary item identifier, in the form of item/XYZ */
-  parentId?: InputMaybe<Scalars['ID']>;
+  parentId?: InputMaybe<Scalars["ID"]>;
 };
 
 /** Positions the item at the start position of its siblings */
 export type ItineraryItemPositionAtStart = {
   /** The parent itinerary item identifier, in the form of item/XYZ */
-  parentId?: InputMaybe<Scalars['ID']>;
+  parentId?: InputMaybe<Scalars["ID"]>;
 };
 
 /** Positions the item before a sibling */
 export type ItineraryItemPositionBeforeSibling = {
   /** The sibling itinerary item identifier, in the form of item/XYZ */
-  siblingId?: InputMaybe<Scalars['ID']>;
+  siblingId?: InputMaybe<Scalars["ID"]>;
 };
 
 /** Positions the itinerary item to the last position of the last itinerary collection item */
 export type ItineraryItemPositionOnLastCollection = {
   /** The itinerary item identifier to limit descendent searching withing */
-  searchUnder?: InputMaybe<Scalars['ID']>;
+  searchUnder?: InputMaybe<Scalars["ID"]>;
 };
 
 /** Possible types of ItineraryItem */
 export enum ItineraryItemType {
-  ItineraryCollection = 'ItineraryCollection',
-  ItineraryDirections = 'ItineraryDirections',
-  ItineraryLocation = 'ItineraryLocation'
+  ItineraryCollection = "ItineraryCollection",
+  ItineraryDirections = "ItineraryDirections",
+  ItineraryLocation = "ItineraryLocation",
 }
 
 /** An itinerary item representing a location with an associated place in the itinerary */
-export type ItineraryLocation = ItineraryItem & Node & {
-  __typename?: 'ItineraryLocation';
-  /** Address information for the itinerary location */
-  address: PlaceAddress;
-  /** The sibling item that comes after this item */
-  after?: Maybe<ItineraryItem>;
-  /** All ancestors of the itinerary-item */
-  ancestors: ItineraryItemConnection;
-  /** Arbitrary JSON value stored on this resource, keyed by an id */
-  attr?: Maybe<Attribute>;
-  /** Shortcut for the attr.value, returns null if the attribute doesn't exist */
-  attrValue?: Maybe<Scalars['JSON']>;
-  /** Query multiple attributes optionally filtering by id and/or locale */
-  attrs: AttributeConnection;
-  /** The sibling item that comes before this item */
-  before?: Maybe<ItineraryItem>;
-  /** Bounds for the itinerary-location and it's descendants */
-  bounds?: Maybe<Bounds>;
-  /** All the direct children of the itinerary-item */
-  children: ItineraryItemConnection;
-  /** Contact information for the itinerary location */
-  contact: PlaceContact;
-  /** All the descendants of the itinerary-item in depth-first-search order */
-  descendants: ItineraryItemConnection;
-  /** A longer text description */
-  description?: Maybe<Scalars['String']>;
-  /** Retrieves itinerary-directions associated with this itinerary-location */
-  directions: ItineraryDirectionsConnection;
-  /** The IconComposition used by the this ItineraryLocation */
-  icon?: Maybe<IconComposition>;
-  /** Unique identifier for the itinerary-item */
-  id: Scalars['ID'];
-  /** The itinerary this item belongs to */
-  itinerary: Itinerary;
-  /**
-   * List of MediaContainers containing images or other media
-   * @deprecated use mediaContainers instead
-   */
-  media: Array<MediaContainer>;
-  /** List of MediaContainers containing images or other media */
-  mediaContainers: MediaContainerConnection;
-  /** Whether the location is an optional stop */
-  optional: Scalars['Boolean'];
-  /** The parent item of this item */
-  parent?: Maybe<ItineraryItem>;
-  /** The place details of this location */
-  place: Place;
-  /** The position of the collection-location (derived from place if not overridden) */
-  position: Position;
-  /** The preferred MediaContainer to use */
-  preferredMedia?: Maybe<MediaContainer>;
-  /** Alias for the read-more attribute */
-  readMoreUrl?: Maybe<Scalars['String']>;
-  /** A number corresponding to the item's position compared to it's siblings. */
-  siblingPositionNumber?: Maybe<Scalars['Float']>;
-  /** A short text summary */
-  synopsis?: Maybe<Scalars['String']>;
-  /** A series of strings applied to label this item */
-  tags: Array<Scalars['String']>;
-  /** The supplied title */
-  title?: Maybe<Scalars['String']>;
-  /** Alias for the website-url attribute */
-  websiteUrl?: Maybe<Scalars['String']>;
-};
-
+export type ItineraryLocation = ItineraryItem &
+  Node & {
+    __typename?: "ItineraryLocation";
+    /** Address information for the itinerary location */
+    address: PlaceAddress;
+    /** The sibling item that comes after this item */
+    after?: Maybe<ItineraryItem>;
+    /** All ancestors of the itinerary-item */
+    ancestors: ItineraryItemConnection;
+    /** Arbitrary JSON value stored on this resource, keyed by an id */
+    attr?: Maybe<Attribute>;
+    /** Shortcut for the attr.value, returns null if the attribute doesn't exist */
+    attrValue?: Maybe<Scalars["JSON"]>;
+    /** Query multiple attributes optionally filtering by id and/or locale */
+    attrs: AttributeConnection;
+    /** The sibling item that comes before this item */
+    before?: Maybe<ItineraryItem>;
+    /** Bounds for the itinerary-location and it's descendants */
+    bounds?: Maybe<Bounds>;
+    /** All the direct children of the itinerary-item */
+    children: ItineraryItemConnection;
+    /** Contact information for the itinerary location */
+    contact: PlaceContact;
+    /** All the descendants of the itinerary-item in depth-first-search order */
+    descendants: ItineraryItemConnection;
+    /** A longer text description */
+    description?: Maybe<Scalars["String"]>;
+    /** Retrieves itinerary-directions associated with this itinerary-location */
+    directions: ItineraryDirectionsConnection;
+    /** The IconComposition used by the this ItineraryLocation */
+    icon?: Maybe<IconComposition>;
+    /** Unique identifier for the itinerary-item */
+    id: Scalars["ID"];
+    /** The itinerary this item belongs to */
+    itinerary: Itinerary;
+    /**
+     * List of MediaContainers containing images or other media
+     * @deprecated use mediaContainers instead
+     */
+    media: Array<MediaContainer>;
+    /** List of MediaContainers containing images or other media */
+    mediaContainers: MediaContainerConnection;
+    /** Whether the location is an optional stop */
+    optional: Scalars["Boolean"];
+    /** The parent item of this item */
+    parent?: Maybe<ItineraryItem>;
+    /** The place details of this location */
+    place: Place;
+    /** The position of the collection-location (derived from place if not overridden) */
+    position: Position;
+    /** The preferred MediaContainer to use */
+    preferredMedia?: Maybe<MediaContainer>;
+    /** Alias for the read-more attribute */
+    readMoreUrl?: Maybe<Scalars["String"]>;
+    /** A number corresponding to the item's position compared to it's siblings. */
+    siblingPositionNumber?: Maybe<Scalars["Float"]>;
+    /** A short text summary */
+    synopsis?: Maybe<Scalars["String"]>;
+    /** A series of strings applied to label this item */
+    tags: Array<Scalars["String"]>;
+    /** The supplied title */
+    title?: Maybe<Scalars["String"]>;
+    /** Alias for the website-url attribute */
+    websiteUrl?: Maybe<Scalars["String"]>;
+  };
 
 /** An itinerary item representing a location with an associated place in the itinerary */
 export type ItineraryLocationAfterArgs = {
   parentType?: InputMaybe<ItineraryItemType>;
-  placeIds?: InputMaybe<Array<Scalars['ID']>>;
-  segmentIds?: InputMaybe<Array<Scalars['ID']>>;
+  placeIds?: InputMaybe<Array<Scalars["ID"]>>;
+  segmentIds?: InputMaybe<Array<Scalars["ID"]>>;
   type?: InputMaybe<ItineraryItemType>;
 };
-
 
 /** An itinerary item representing a location with an associated place in the itinerary */
 export type ItineraryLocationAncestorsArgs = {
-  after?: InputMaybe<Scalars['String']>;
-  first: Scalars['Int'];
+  after?: InputMaybe<Scalars["String"]>;
+  first: Scalars["Int"];
   parentType?: InputMaybe<ItineraryItemType>;
-  placeIds?: InputMaybe<Array<Scalars['ID']>>;
-  segmentIds?: InputMaybe<Array<Scalars['ID']>>;
+  placeIds?: InputMaybe<Array<Scalars["ID"]>>;
+  segmentIds?: InputMaybe<Array<Scalars["ID"]>>;
   type?: InputMaybe<ItineraryItemType>;
 };
 
-
 /** An itinerary item representing a location with an associated place in the itinerary */
 export type ItineraryLocationAttrArgs = {
-  id: Scalars['ID'];
-  locale?: InputMaybe<Scalars['String']>;
+  id: Scalars["ID"];
+  locale?: InputMaybe<Scalars["String"]>;
 };
-
 
 /** An itinerary item representing a location with an associated place in the itinerary */
 export type ItineraryLocationAttrValueArgs = {
-  id: Scalars['ID'];
-  locale?: InputMaybe<Scalars['String']>;
+  id: Scalars["ID"];
+  locale?: InputMaybe<Scalars["String"]>;
 };
-
 
 /** An itinerary item representing a location with an associated place in the itinerary */
 export type ItineraryLocationAttrsArgs = {
-  after?: InputMaybe<Scalars['String']>;
-  first: Scalars['Int'];
-  id?: InputMaybe<Scalars['ID']>;
-  includeNoLocale?: InputMaybe<Scalars['Boolean']>;
-  locale?: InputMaybe<Scalars['String']>;
+  after?: InputMaybe<Scalars["String"]>;
+  first: Scalars["Int"];
+  id?: InputMaybe<Scalars["ID"]>;
+  includeNoLocale?: InputMaybe<Scalars["Boolean"]>;
+  locale?: InputMaybe<Scalars["String"]>;
 };
-
 
 /** An itinerary item representing a location with an associated place in the itinerary */
 export type ItineraryLocationBeforeArgs = {
   parentType?: InputMaybe<ItineraryItemType>;
-  placeIds?: InputMaybe<Array<Scalars['ID']>>;
-  segmentIds?: InputMaybe<Array<Scalars['ID']>>;
+  placeIds?: InputMaybe<Array<Scalars["ID"]>>;
+  segmentIds?: InputMaybe<Array<Scalars["ID"]>>;
   type?: InputMaybe<ItineraryItemType>;
 };
-
 
 /** An itinerary item representing a location with an associated place in the itinerary */
 export type ItineraryLocationBoundsArgs = {
-  raw?: Scalars['Boolean'];
+  raw?: Scalars["Boolean"];
 };
-
 
 /** An itinerary item representing a location with an associated place in the itinerary */
 export type ItineraryLocationChildrenArgs = {
-  after?: InputMaybe<Scalars['String']>;
-  first: Scalars['Int'];
+  after?: InputMaybe<Scalars["String"]>;
+  first: Scalars["Int"];
   parentType?: InputMaybe<ItineraryItemType>;
-  placeIds?: InputMaybe<Array<Scalars['ID']>>;
-  segmentIds?: InputMaybe<Array<Scalars['ID']>>;
+  placeIds?: InputMaybe<Array<Scalars["ID"]>>;
+  segmentIds?: InputMaybe<Array<Scalars["ID"]>>;
   type?: InputMaybe<ItineraryItemType>;
 };
-
 
 /** An itinerary item representing a location with an associated place in the itinerary */
 export type ItineraryLocationDescendantsArgs = {
-  after?: InputMaybe<Scalars['String']>;
-  depthMax?: InputMaybe<Scalars['Int']>;
-  depthMin?: InputMaybe<Scalars['Int']>;
-  first: Scalars['Int'];
+  after?: InputMaybe<Scalars["String"]>;
+  depthMax?: InputMaybe<Scalars["Int"]>;
+  depthMin?: InputMaybe<Scalars["Int"]>;
+  first: Scalars["Int"];
   parentType?: InputMaybe<ItineraryItemType>;
-  placeIds?: InputMaybe<Array<Scalars['ID']>>;
-  segmentIds?: InputMaybe<Array<Scalars['ID']>>;
+  placeIds?: InputMaybe<Array<Scalars["ID"]>>;
+  segmentIds?: InputMaybe<Array<Scalars["ID"]>>;
   type?: InputMaybe<ItineraryItemType>;
 };
-
 
 /** An itinerary item representing a location with an associated place in the itinerary */
 export type ItineraryLocationDirectionsArgs = {
   accuracy?: InputMaybe<ItineraryDirectionsAccuracy>;
-  after?: InputMaybe<Scalars['String']>;
+  after?: InputMaybe<Scalars["String"]>;
   direction?: InputMaybe<ItineraryDirectionsDirection>;
-  first: Scalars['Int'];
+  first: Scalars["Int"];
   restrict?: InputMaybe<ItineraryDirectionsRestrict>;
-  segmentIds?: InputMaybe<Array<Scalars['ID']>>;
+  segmentIds?: InputMaybe<Array<Scalars["ID"]>>;
 };
-
 
 /** An itinerary item representing a location with an associated place in the itinerary */
 export type ItineraryLocationMediaArgs = {
-  limit?: Scalars['Int'];
+  limit?: Scalars["Int"];
 };
-
 
 /** An itinerary item representing a location with an associated place in the itinerary */
 export type ItineraryLocationMediaContainersArgs = {
-  after?: InputMaybe<Scalars['String']>;
-  first: Scalars['Int'];
+  after?: InputMaybe<Scalars["String"]>;
+  first: Scalars["Int"];
 };
-
 
 /** An itinerary item representing a location with an associated place in the itinerary */
 export type ItineraryLocationParentArgs = {
   parentType?: InputMaybe<ItineraryItemType>;
-  placeIds?: InputMaybe<Array<Scalars['ID']>>;
-  segmentIds?: InputMaybe<Array<Scalars['ID']>>;
+  placeIds?: InputMaybe<Array<Scalars["ID"]>>;
+  segmentIds?: InputMaybe<Array<Scalars["ID"]>>;
   type?: InputMaybe<ItineraryItemType>;
 };
 
-
 /** An itinerary item representing a location with an associated place in the itinerary */
 export type ItineraryLocationSiblingPositionNumberArgs = {
-  skipOmitList?: Scalars['Boolean'];
-  skipOptional?: Scalars['Boolean'];
+  skipOmitList?: Scalars["Boolean"];
+  skipOptional?: Scalars["Boolean"];
   type?: InputMaybe<ItineraryItemType>;
 };
 
 /** Connection of ItinerarySearchs */
 export type ItinerarySearchConnection = {
-  __typename?: 'ItinerarySearchConnection';
+  __typename?: "ItinerarySearchConnection";
   /** All the edges in this page of the connection */
   edges: Array<ItinerarySearchEdge>;
   /** Shortcut for edges[].node */
@@ -4919,122 +4819,117 @@ export type ItinerarySearchConnection = {
   /** Details regarding the current page of the connnection */
   pageInfo: PageInfo;
   /** The total number of items in the connection (in all pages) */
-  totalCount: Scalars['Int'];
+  totalCount: Scalars["Int"];
 };
 
 /** Edge containing a ItinerarySearch */
 export type ItinerarySearchEdge = {
-  __typename?: 'ItinerarySearchEdge';
+  __typename?: "ItinerarySearchEdge";
   /** The cursor string pointing to this item */
-  cursor: Scalars['String'];
+  cursor: Scalars["String"];
   /** The item */
   node: ItinerarySearchNode;
 };
 
 /** A result from an itinerary search */
 export type ItinerarySearchNode = {
-  __typename?: 'ItinerarySearchNode';
+  __typename?: "ItinerarySearchNode";
   /** Bounds for the itinerary item */
   bounds?: Maybe<Bounds>;
   /** The date when the itinerary was created */
-  created?: Maybe<Scalars['String']>;
+  created?: Maybe<Scalars["String"]>;
   /** The default locale of this itinerary's content */
-  defaultLocale?: Maybe<Scalars['String']>;
+  defaultLocale?: Maybe<Scalars["String"]>;
   /** A longer text description */
-  description?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars["String"]>;
   /** Identifier from an external source this itinerary is associated with */
-  externalId?: Maybe<Scalars['ID']>;
+  externalId?: Maybe<Scalars["ID"]>;
   /** The source of this itinerary's externalId */
-  externalSource?: Maybe<Scalars['ID']>;
+  externalSource?: Maybe<Scalars["ID"]>;
   /** The genres of this Itinerary */
-  genres?: Maybe<Array<Scalars['String']>>;
+  genres?: Maybe<Array<Scalars["String"]>>;
   /** The Globally Unique ID of the itinerary. */
-  id: Scalars['ID'];
+  id: Scalars["ID"];
   /** The full itinerary */
   itinerary: Itinerary;
   /** The date when the draft version was last modified */
-  lastDraft?: Maybe<Scalars['String']>;
+  lastDraft?: Maybe<Scalars["String"]>;
   /** The date when the itinerary was last published */
-  lastPublished?: Maybe<Scalars['String']>;
+  lastPublished?: Maybe<Scalars["String"]>;
   /** Whether this itinerary is publically listed */
-  listed?: Maybe<Scalars['Boolean']>;
+  listed?: Maybe<Scalars["Boolean"]>;
   /** The date when the itinerary was last modified */
-  modified?: Maybe<Scalars['String']>;
+  modified?: Maybe<Scalars["String"]>;
   /** The preferred MediaContainer to use */
   preferredMedia?: Maybe<MediaContainer>;
   /** Profile that owns this itinerary */
   profile?: Maybe<Profile>;
   /** The date when this itinerary was last published. Will be null on draft versions */
-  published?: Maybe<Scalars['String']>;
+  published?: Maybe<Scalars["String"]>;
   /** A short text summary */
-  synopsis?: Maybe<Scalars['String']>;
+  synopsis?: Maybe<Scalars["String"]>;
   /** A series of strings applied to label this item */
-  tags: Array<Scalars['String']>;
+  tags: Array<Scalars["String"]>;
   /** The supplied title */
-  title?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars["String"]>;
   /** Total number of ItineraryLocations inside this Itinerary */
-  totalLocations: Scalars['Int'];
+  totalLocations: Scalars["Int"];
   /** The type of itinerary */
-  type?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars["String"]>;
 };
-
 
 /** A result from an itinerary search */
 export type ItinerarySearchNodeCreatedArgs = {
-  format?: InputMaybe<Scalars['String']>;
-  locale?: InputMaybe<Scalars['String']>;
-  relativeTo?: InputMaybe<Scalars['String']>;
-  timeZone?: InputMaybe<Scalars['String']>;
+  format?: InputMaybe<Scalars["String"]>;
+  locale?: InputMaybe<Scalars["String"]>;
+  relativeTo?: InputMaybe<Scalars["String"]>;
+  timeZone?: InputMaybe<Scalars["String"]>;
 };
-
 
 /** A result from an itinerary search */
 export type ItinerarySearchNodeLastDraftArgs = {
-  format?: InputMaybe<Scalars['String']>;
-  locale?: InputMaybe<Scalars['String']>;
-  relativeTo?: InputMaybe<Scalars['String']>;
-  timeZone?: InputMaybe<Scalars['String']>;
+  format?: InputMaybe<Scalars["String"]>;
+  locale?: InputMaybe<Scalars["String"]>;
+  relativeTo?: InputMaybe<Scalars["String"]>;
+  timeZone?: InputMaybe<Scalars["String"]>;
 };
-
 
 /** A result from an itinerary search */
 export type ItinerarySearchNodeLastPublishedArgs = {
-  format?: InputMaybe<Scalars['String']>;
-  locale?: InputMaybe<Scalars['String']>;
-  relativeTo?: InputMaybe<Scalars['String']>;
-  timeZone?: InputMaybe<Scalars['String']>;
+  format?: InputMaybe<Scalars["String"]>;
+  locale?: InputMaybe<Scalars["String"]>;
+  relativeTo?: InputMaybe<Scalars["String"]>;
+  timeZone?: InputMaybe<Scalars["String"]>;
 };
-
 
 /** A result from an itinerary search */
 export type ItinerarySearchNodeModifiedArgs = {
-  format?: InputMaybe<Scalars['String']>;
-  locale?: InputMaybe<Scalars['String']>;
-  relativeTo?: InputMaybe<Scalars['String']>;
-  timeZone?: InputMaybe<Scalars['String']>;
+  format?: InputMaybe<Scalars["String"]>;
+  locale?: InputMaybe<Scalars["String"]>;
+  relativeTo?: InputMaybe<Scalars["String"]>;
+  timeZone?: InputMaybe<Scalars["String"]>;
 };
-
 
 /** A result from an itinerary search */
 export type ItinerarySearchNodePublishedArgs = {
-  format?: InputMaybe<Scalars['String']>;
-  locale?: InputMaybe<Scalars['String']>;
-  relativeTo?: InputMaybe<Scalars['String']>;
-  timeZone?: InputMaybe<Scalars['String']>;
+  format?: InputMaybe<Scalars["String"]>;
+  locale?: InputMaybe<Scalars["String"]>;
+  relativeTo?: InputMaybe<Scalars["String"]>;
+  timeZone?: InputMaybe<Scalars["String"]>;
 };
 
 /** A container for a MediaResource */
 export type MediaContainer = {
-  __typename?: 'MediaContainer';
+  __typename?: "MediaContainer";
   /** Unique identifier for this container */
-  id: Scalars['ID'];
+  id: Scalars["ID"];
   /** The MediaResource inside this container */
   resource: MediaResourceEmbedded;
 };
 
 /** Connection of MediaContainers */
 export type MediaContainerConnection = {
-  __typename?: 'MediaContainerConnection';
+  __typename?: "MediaContainerConnection";
   /** All the edges in this page of the connection */
   edges: Array<MediaContainerEdge>;
   /** Shortcut for edges[].node */
@@ -5042,14 +4937,14 @@ export type MediaContainerConnection = {
   /** Details regarding the current page of the connnection */
   pageInfo: PageInfo;
   /** The total number of items in the connection (in all pages) */
-  totalCount: Scalars['Int'];
+  totalCount: Scalars["Int"];
 };
 
 /** Edge containing a MediaContainer */
 export type MediaContainerEdge = {
-  __typename?: 'MediaContainerEdge';
+  __typename?: "MediaContainerEdge";
   /** The cursor string pointing to this item */
-  cursor: Scalars['String'];
+  cursor: Scalars["String"];
   /** The item */
   node: MediaContainer;
 };
@@ -5057,192 +4952,183 @@ export type MediaContainerEdge = {
 /** Set a singular MediaContainer */
 export type MediaContainerInput = {
   /** ID to a MediaResource to contain */
-  resourceId: Scalars['String'];
+  resourceId: Scalars["String"];
 };
 
 /** Positions the MediaContainer after a sibling MediaContainer */
 export type MediaContainerPositionAfter = {
   /** The sibling MediaContainer identifier, if null it means the top of the list (ie. before the first sibling) */
-  id?: InputMaybe<Scalars['ID']>;
+  id?: InputMaybe<Scalars["ID"]>;
 };
 
 /** Positions the MediaContainer at the end of the list */
 export type MediaContainerPositionAtEnd = {
   /** Ignored, required by GraphQL which does not allow empty input objects */
-  _?: InputMaybe<Scalars['Int']>;
+  _?: InputMaybe<Scalars["Int"]>;
 };
 
 /** Positions the MediaContainer at the start of the list */
 export type MediaContainerPositionAtStart = {
   /** Ignored, required by GraphQL which does not allow empty input objects */
-  _?: InputMaybe<Scalars['Int']>;
+  _?: InputMaybe<Scalars["Int"]>;
 };
 
 /** Positions the MediaContainer before a sibling MediaContainer */
 export type MediaContainerPositionBefore = {
   /** The sibling MediaContainer identifier, if null it means the bottom of the list (ie. after the last sibling) */
-  id?: InputMaybe<Scalars['ID']>;
+  id?: InputMaybe<Scalars["ID"]>;
 };
 
 /** A MediaResource representing an image */
 export type MediaImage = MediaResource & {
-  __typename?: 'MediaImage';
+  __typename?: "MediaImage";
   /** Alternative text for the media-resource */
-  altText?: Maybe<Scalars['String']>;
+  altText?: Maybe<Scalars["String"]>;
   /** Arbitrary JSON value stored on this resource, keyed by an id */
   attr?: Maybe<Attribute>;
   /** Shortcut for the attr.value, returns null if the attribute doesn't exist */
-  attrValue?: Maybe<Scalars['JSON']>;
+  attrValue?: Maybe<Scalars["JSON"]>;
   /** Text attribution for the source of the media-resource */
-  attribution?: Maybe<Scalars['String']>;
+  attribution?: Maybe<Scalars["String"]>;
   /** Query multiple attributes optionally filtering by id and/or locale */
   attrs: AttributeConnection;
   /** Text caption for the media-resource */
-  caption?: Maybe<Scalars['String']>;
+  caption?: Maybe<Scalars["String"]>;
   /** Copyright details of the media-resource */
-  copyright?: Maybe<Scalars['String']>;
+  copyright?: Maybe<Scalars["String"]>;
   /** Look up one exif value in this media-image by id */
   exif?: Maybe<MediaImageExif>;
   /** Ids of all exif data in this media-image */
-  exifIds: Array<Scalars['ID']>;
+  exifIds: Array<Scalars["ID"]>;
   /** Will be true if the resource has a caption, attribution or copyright */
-  hasContent: Scalars['Boolean'];
+  hasContent: Scalars["Boolean"];
   /** Unique identifier for the media-resource */
-  id?: Maybe<Scalars['ID']>;
+  id?: Maybe<Scalars["ID"]>;
   /** The original width and height of the image */
-  originalSize?: Maybe<Array<Scalars['Int']>>;
+  originalSize?: Maybe<Array<Scalars["Int"]>>;
   /** The associated profile owner */
   profile?: Maybe<Profile>;
   /** The provider for the media */
-  provider: Scalars['String'];
+  provider: Scalars["String"];
   /** Provides a specific source for the media, based often on different encoding or different sizing */
   source?: Maybe<MediaImageSource>;
   /** A collection of sources for the media */
   sources: Array<MediaImageSource>;
   /** A series of strings representing applied labels to the media */
-  tags: Array<Scalars['String']>;
+  tags: Array<Scalars["String"]>;
   /** Provides the URL of the media */
-  url?: Maybe<Scalars['String']>;
+  url?: Maybe<Scalars["String"]>;
 };
-
 
 /** A MediaResource representing an image */
 export type MediaImageAttrArgs = {
-  id: Scalars['ID'];
-  locale?: InputMaybe<Scalars['String']>;
+  id: Scalars["ID"];
+  locale?: InputMaybe<Scalars["String"]>;
 };
-
 
 /** A MediaResource representing an image */
 export type MediaImageAttrValueArgs = {
-  id: Scalars['ID'];
-  locale?: InputMaybe<Scalars['String']>;
+  id: Scalars["ID"];
+  locale?: InputMaybe<Scalars["String"]>;
 };
-
 
 /** A MediaResource representing an image */
 export type MediaImageAttrsArgs = {
-  after?: InputMaybe<Scalars['String']>;
-  first: Scalars['Int'];
-  id?: InputMaybe<Scalars['ID']>;
-  includeNoLocale?: InputMaybe<Scalars['Boolean']>;
-  locale?: InputMaybe<Scalars['String']>;
+  after?: InputMaybe<Scalars["String"]>;
+  first: Scalars["Int"];
+  id?: InputMaybe<Scalars["ID"]>;
+  includeNoLocale?: InputMaybe<Scalars["Boolean"]>;
+  locale?: InputMaybe<Scalars["String"]>;
 };
-
 
 /** A MediaResource representing an image */
 export type MediaImageExifArgs = {
-  id: Scalars['ID'];
+  id: Scalars["ID"];
 };
-
 
 /** A MediaResource representing an image */
 export type MediaImageSourceArgs = {
-  bestFit?: InputMaybe<Array<Scalars['Int']>>;
-  id?: InputMaybe<Scalars['String']>;
+  bestFit?: InputMaybe<Array<Scalars["Int"]>>;
+  id?: InputMaybe<Scalars["String"]>;
 };
-
 
 /** A MediaResource representing an image */
 export type MediaImageUrlArgs = {
-  bestFit?: InputMaybe<Array<Scalars['Int']>>;
-  id?: InputMaybe<Scalars['String']>;
+  bestFit?: InputMaybe<Array<Scalars["Int"]>>;
+  id?: InputMaybe<Scalars["String"]>;
 };
 
 /** One exif datum on a media-image */
 export type MediaImageExif = {
-  __typename?: 'MediaImageExif';
+  __typename?: "MediaImageExif";
   /** Unique identifier of this exif datum */
-  id: Scalars['ID'];
+  id: Scalars["ID"];
   /** The exif value */
-  value: Scalars['JSON'];
+  value: Scalars["JSON"];
 };
 
 /** An source for a media image */
 export type MediaImageSource = {
-  __typename?: 'MediaImageSource';
+  __typename?: "MediaImageSource";
   /** The height of the media */
-  height?: Maybe<Scalars['Int']>;
+  height?: Maybe<Scalars["Int"]>;
   /** A optional identifier for the source */
-  id?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars["String"]>;
   /** The content-type of the media source */
-  type: Scalars['String'];
+  type: Scalars["String"];
   /** The URL to the media source */
-  url: Scalars['String'];
+  url: Scalars["String"];
   /** The width of the media */
-  width?: Maybe<Scalars['Int']>;
+  width?: Maybe<Scalars["Int"]>;
 };
 
 /** Representing media such as images/photos as well as other types such as video or audio */
 export type MediaResource = {
   /** Alternative text for the media-resource */
-  altText?: Maybe<Scalars['String']>;
+  altText?: Maybe<Scalars["String"]>;
   /** Arbitrary JSON value stored on this resource, keyed by an id */
   attr?: Maybe<Attribute>;
   /** Shortcut for the attr.value, returns null if the attribute doesn't exist */
-  attrValue?: Maybe<Scalars['JSON']>;
+  attrValue?: Maybe<Scalars["JSON"]>;
   /** Text attribution for the source of the media-resource */
-  attribution?: Maybe<Scalars['String']>;
+  attribution?: Maybe<Scalars["String"]>;
   /** Query multiple attributes optionally filtering by id and/or locale */
   attrs: AttributeConnection;
   /** Text caption for the media-resource */
-  caption?: Maybe<Scalars['String']>;
+  caption?: Maybe<Scalars["String"]>;
   /** Copyright details of the media-resource */
-  copyright?: Maybe<Scalars['String']>;
+  copyright?: Maybe<Scalars["String"]>;
   /** Will be true if the resource has a caption, attribution or copyright */
-  hasContent: Scalars['Boolean'];
+  hasContent: Scalars["Boolean"];
   /** Unique identifier for the media-resource */
-  id?: Maybe<Scalars['ID']>;
+  id?: Maybe<Scalars["ID"]>;
   /** The associated profile owner */
   profile?: Maybe<Profile>;
   /** The provider for the media */
-  provider: Scalars['String'];
+  provider: Scalars["String"];
   /** A series of strings representing applied labels to the media */
-  tags: Array<Scalars['String']>;
+  tags: Array<Scalars["String"]>;
 };
-
 
 /** Representing media such as images/photos as well as other types such as video or audio */
 export type MediaResourceAttrArgs = {
-  id: Scalars['ID'];
-  locale?: InputMaybe<Scalars['String']>;
+  id: Scalars["ID"];
+  locale?: InputMaybe<Scalars["String"]>;
 };
-
 
 /** Representing media such as images/photos as well as other types such as video or audio */
 export type MediaResourceAttrValueArgs = {
-  id: Scalars['ID'];
-  locale?: InputMaybe<Scalars['String']>;
+  id: Scalars["ID"];
+  locale?: InputMaybe<Scalars["String"]>;
 };
-
 
 /** Representing media such as images/photos as well as other types such as video or audio */
 export type MediaResourceAttrsArgs = {
-  after?: InputMaybe<Scalars['String']>;
-  first: Scalars['Int'];
-  id?: InputMaybe<Scalars['ID']>;
-  includeNoLocale?: InputMaybe<Scalars['Boolean']>;
-  locale?: InputMaybe<Scalars['String']>;
+  after?: InputMaybe<Scalars["String"]>;
+  first: Scalars["Int"];
+  id?: InputMaybe<Scalars["ID"]>;
+  includeNoLocale?: InputMaybe<Scalars["Boolean"]>;
+  locale?: InputMaybe<Scalars["String"]>;
 };
 
 /** A MediaResource embedded in another resource */
@@ -5250,22 +5136,22 @@ export type MediaResourceEmbedded = MediaImage | MediaResourceFailedToLoad;
 
 /** Represents an embedded MediaResource that failed to load */
 export type MediaResourceFailedToLoad = Node & {
-  __typename?: 'MediaResourceFailedToLoad';
+  __typename?: "MediaResourceFailedToLoad";
   /** The Globally Unique ID of the object. */
-  id: Scalars['ID'];
+  id: Scalars["ID"];
 };
 
 /** The status of a Media upload process */
 export enum MediaUploadStatus {
-  AwaitingUpload = 'AwaitingUpload',
-  Complete = 'Complete',
-  Processing = 'Processing',
-  ProcessingFailed = 'ProcessingFailed'
+  AwaitingUpload = "AwaitingUpload",
+  Complete = "Complete",
+  Processing = "Processing",
+  ProcessingFailed = "ProcessingFailed",
 }
 
 /** Moves the itinerary item */
 export type MoveItineraryItemPayload = {
-  __typename?: 'MoveItineraryItemPayload';
+  __typename?: "MoveItineraryItemPayload";
   /** Other changes to the itinerary that caused by moving the itinerary-item */
   cascaded: ItineraryItemCascadedChanges;
   /** The fields for the item */
@@ -5277,7 +5163,7 @@ export type MoveItineraryItemPayload = {
 /** Move a MediaContainer within a list, exactly one of the position arguments is required. */
 export type MoveMediaContainerInput = {
   /** ID to the Container to update */
-  id: Scalars['String'];
+  id: Scalars["String"];
   /** Move the MediaContainer after another container in the list */
   positionAfter?: InputMaybe<MediaContainerPositionAfter>;
   /** Move the MediaContainer at the end of the list */
@@ -5289,7 +5175,7 @@ export type MoveMediaContainerInput = {
 };
 
 export type Mutation = {
-  __typename?: 'Mutation';
+  __typename?: "Mutation";
   /** Approve a follow request between two profiles */
   approveProfileFollow: ApproveProfileFollowPayload;
   /** Capture marketing information against the given profile */
@@ -5378,302 +5264,259 @@ export type Mutation = {
   updateProfile: UpdateProfilePayload;
 };
 
-
 export type MutationApproveProfileFollowArgs = {
-  fromProfileId: Scalars['ID'];
-  toProfileId: Scalars['ID'];
+  fromProfileId: Scalars["ID"];
+  toProfileId: Scalars["ID"];
 };
-
 
 export type MutationCaptureMarketingInformationArgs = {
-  intendedUses?: InputMaybe<Scalars['String']>;
-  leadSource?: InputMaybe<Scalars['String']>;
-  name?: InputMaybe<Scalars['String']>;
-  organizationType?: InputMaybe<Scalars['String']>;
-  profileId: Scalars['ID'];
+  intendedUses?: InputMaybe<Scalars["String"]>;
+  leadSource?: InputMaybe<Scalars["String"]>;
+  name?: InputMaybe<Scalars["String"]>;
+  organizationType?: InputMaybe<Scalars["String"]>;
+  profileId: Scalars["ID"];
 };
-
 
 export type MutationChangeItineraryDefaultLocaleArgs = {
-  defaultLocale: Scalars['String'];
-  id: Scalars['ID'];
+  defaultLocale: Scalars["String"];
+  id: Scalars["ID"];
 };
-
 
 export type MutationClaimProfileHandleArgs = {
-  handle: Scalars['String'];
-  id: Scalars['ID'];
+  handle: Scalars["String"];
+  id: Scalars["ID"];
 };
-
 
 export type MutationCreateBillingCheckoutSessionArgs = {
-  cancelUrl: Scalars['String'];
+  cancelUrl: Scalars["String"];
   prices: Array<BillingPriceInput>;
-  profileId: Scalars['ID'];
-  successUrl: Scalars['String'];
+  profileId: Scalars["ID"];
+  successUrl: Scalars["String"];
 };
-
 
 export type MutationCreateBillingPortalSessionArgs = {
-  profileId: Scalars['ID'];
-  returnUrl: Scalars['String'];
+  profileId: Scalars["ID"];
+  returnUrl: Scalars["String"];
 };
-
 
 export type MutationCreateCollectionArgs = {
   collection: CreateCollectionInput;
-  profileId: Scalars['ID'];
+  profileId: Scalars["ID"];
 };
 
-
 export type MutationCreateCollectionLocationArgs = {
-  collectionId: Scalars['ID'];
+  collectionId: Scalars["ID"];
   location: CreateCollectionLocationInput;
 };
 
-
 export type MutationCreateConnectedAppArgs = {
   connectedApp: CreateConnectedAppInput;
-  profileId: Scalars['ID'];
+  profileId: Scalars["ID"];
 };
-
 
 export type MutationCreateIconSilhouetteArgs = {
   icon: CreateIconSilhouetteInput;
-  profileId: Scalars['ID'];
+  profileId: Scalars["ID"];
 };
-
 
 export type MutationCreateItineraryArgs = {
   itinerary: CreateItineraryInput;
-  profileId?: InputMaybe<Scalars['ID']>;
-  publish?: Scalars['Boolean'];
+  profileId?: InputMaybe<Scalars["ID"]>;
+  publish?: Scalars["Boolean"];
 };
-
 
 export type MutationCreateItineraryCollectionArgs = {
   collection: CreateItineraryCollectionInput;
-  itineraryId: Scalars['ID'];
-  publish?: Scalars['Boolean'];
+  itineraryId: Scalars["ID"];
+  publish?: Scalars["Boolean"];
 };
-
 
 export type MutationCreateItineraryDirectionsArgs = {
   directions: CreateItineraryDirectionsInput;
-  itineraryId: Scalars['ID'];
-  publish?: Scalars['Boolean'];
+  itineraryId: Scalars["ID"];
+  publish?: Scalars["Boolean"];
 };
-
 
 export type MutationCreateItineraryLocationArgs = {
   autoRoute?: InputMaybe<RouteSegmentInput>;
-  itineraryId: Scalars['ID'];
+  itineraryId: Scalars["ID"];
   location: CreateItineraryLocationInput;
-  publish?: Scalars['Boolean'];
+  publish?: Scalars["Boolean"];
 };
-
 
 export type MutationCreateProfileArgs = {
   profile: CreateProfileInput;
 };
 
-
 export type MutationCreateUserAgreementArgs = {
-  profileId?: InputMaybe<Scalars['ID']>;
+  profileId?: InputMaybe<Scalars["ID"]>;
   userAgreement: CreateUserAgreementInput;
 };
 
-
 export type MutationDeleteCollectionArgs = {
-  id: Scalars['ID'];
+  id: Scalars["ID"];
 };
-
 
 export type MutationDeleteCollectionItemArgs = {
-  id: Scalars['ID'];
+  id: Scalars["ID"];
 };
-
 
 export type MutationDeleteConnectedAppArgs = {
-  id: Scalars['ID'];
+  id: Scalars["ID"];
 };
-
 
 export type MutationDeleteIconResourceArgs = {
-  id: Scalars['ID'];
+  id: Scalars["ID"];
 };
-
 
 export type MutationDeleteItineraryArgs = {
-  id: Scalars['ID'];
+  id: Scalars["ID"];
 };
-
 
 export type MutationDeleteItineraryItemArgs = {
-  id: Scalars['ID'];
-  publish?: Scalars['Boolean'];
+  id: Scalars["ID"];
+  publish?: Scalars["Boolean"];
 };
-
 
 export type MutationDeleteProfileArgs = {
-  id: Scalars['ID'];
+  id: Scalars["ID"];
 };
-
 
 export type MutationDenyProfileFollowArgs = {
-  fromProfileId: Scalars['ID'];
-  toProfileId: Scalars['ID'];
+  fromProfileId: Scalars["ID"];
+  toProfileId: Scalars["ID"];
 };
-
 
 export type MutationDuplicateItineraryArgs = {
-  id: Scalars['ID'];
+  id: Scalars["ID"];
 };
-
 
 export type MutationFinalizeMediaUploadArgs = {
-  profileId?: InputMaybe<Scalars['ID']>;
+  profileId?: InputMaybe<Scalars["ID"]>;
   resource?: InputMaybe<FinalizeMediaUploadInput>;
-  token: Scalars['String'];
+  token: Scalars["String"];
 };
-
 
 export type MutationFollowProfileArgs = {
-  fromProfileId: Scalars['ID'];
-  toProfileId: Scalars['ID'];
+  fromProfileId: Scalars["ID"];
+  toProfileId: Scalars["ID"];
 };
 
-
 export type MutationMoveItineraryItemArgs = {
-  id: Scalars['ID'];
+  id: Scalars["ID"];
   positionAfterSibling?: InputMaybe<ItineraryItemPositionAfterSibling>;
   positionAtEnd?: InputMaybe<ItineraryItemPositionAtEnd>;
   positionAtStart?: InputMaybe<ItineraryItemPositionAtStart>;
   positionBeforeSibling?: InputMaybe<ItineraryItemPositionBeforeSibling>;
   positionOnLastCollection?: InputMaybe<ItineraryItemPositionOnLastCollection>;
-  publish?: Scalars['Boolean'];
+  publish?: Scalars["Boolean"];
 };
-
 
 export type MutationPublishItineraryArgs = {
-  id: Scalars['ID'];
+  id: Scalars["ID"];
 };
-
 
 export type MutationRevertItineraryArgs = {
-  id: Scalars['ID'];
+  id: Scalars["ID"];
 };
-
 
 export type MutationStartMediaUploadArgs = {
-  contentType?: InputMaybe<Scalars['String']>;
-  filename: Scalars['String'];
+  contentType?: InputMaybe<Scalars["String"]>;
+  filename: Scalars["String"];
 };
-
 
 export type MutationUnfollowProfileArgs = {
-  fromProfileId: Scalars['ID'];
-  toProfileId: Scalars['ID'];
+  fromProfileId: Scalars["ID"];
+  toProfileId: Scalars["ID"];
 };
-
 
 export type MutationUpdateBillingDetailsArgs = {
   billingDetails: UpdateBillingDetailsInput;
-  profileId: Scalars['ID'];
+  profileId: Scalars["ID"];
 };
-
 
 export type MutationUpdateCollectionArgs = {
   collection: UpdateCollectionInput;
-  id: Scalars['ID'];
+  id: Scalars["ID"];
 };
 
-
 export type MutationUpdateCollectionLocationArgs = {
-  id: Scalars['ID'];
+  id: Scalars["ID"];
   location: UpdateCollectionLocationInput;
 };
 
-
 export type MutationUpdateConnectedAppArgs = {
   connectedApp: UpdateConnectedAppInput;
-  id: Scalars['ID'];
+  id: Scalars["ID"];
 };
-
 
 export type MutationUpdateIconSilhouetteArgs = {
   icon: UpdateIconSilhouetteInput;
-  id: Scalars['ID'];
+  id: Scalars["ID"];
 };
-
 
 export type MutationUpdateItineraryArgs = {
-  id: Scalars['ID'];
+  id: Scalars["ID"];
   itinerary: UpdateItineraryInput;
-  publish?: Scalars['Boolean'];
+  publish?: Scalars["Boolean"];
 };
-
 
 export type MutationUpdateItineraryCollectionArgs = {
   collection: UpdateItineraryCollectionInput;
-  id: Scalars['ID'];
-  publish?: Scalars['Boolean'];
+  id: Scalars["ID"];
+  publish?: Scalars["Boolean"];
 };
-
 
 export type MutationUpdateItineraryDirectionsArgs = {
   directions: UpdateItineraryDirectionsInput;
-  id: Scalars['ID'];
-  publish?: Scalars['Boolean'];
+  id: Scalars["ID"];
+  publish?: Scalars["Boolean"];
 };
-
 
 export type MutationUpdateItineraryLocationArgs = {
-  id: Scalars['ID'];
+  id: Scalars["ID"];
   location: UpdateItineraryLocationInput;
-  publish?: Scalars['Boolean'];
+  publish?: Scalars["Boolean"];
 };
 
-
 export type MutationUpdateMediaResourceArgs = {
-  id: Scalars['ID'];
+  id: Scalars["ID"];
   resource: UpdateMediaResourceInput;
 };
 
-
 export type MutationUpdateProfileArgs = {
-  id: Scalars['ID'];
+  id: Scalars["ID"];
   profile: UpdateProfileInput;
 };
 
 /** An object with a Globally Unique ID */
 export type Node = {
   /** The Globally Unique ID of the object. */
-  id: Scalars['ID'];
+  id: Scalars["ID"];
 };
 
 /** Details regarding a page in a connnection */
 export type PageInfo = {
-  __typename?: 'PageInfo';
+  __typename?: "PageInfo";
   /** The cursor of the last edge in this page */
-  endCursor?: Maybe<Scalars['String']>;
+  endCursor?: Maybe<Scalars["String"]>;
   /** True if there is a page after this one */
-  hasNextPage: Scalars['Boolean'];
+  hasNextPage: Scalars["Boolean"];
   /** True if there is a page before this one */
-  hasPreviousPage: Scalars['Boolean'];
+  hasPreviousPage: Scalars["Boolean"];
   /** The cursor of the first edge in this page */
-  startCursor?: Maybe<Scalars['String']>;
+  startCursor?: Maybe<Scalars["String"]>;
 };
 
 /** A defined location in the world */
 export type Place = Node & {
-  __typename?: 'Place';
+  __typename?: "Place";
   /** The address of the place */
   address: PlaceAddress;
   /** Arbitrary JSON value stored on this resource, keyed by an id */
   attr?: Maybe<Attribute>;
   /** Shortcut for the attr.value, returns null if the attribute doesn't exist */
-  attrValue?: Maybe<Scalars['JSON']>;
+  attrValue?: Maybe<Scalars["JSON"]>;
   /** The required attribution required when using this place information */
   attribution: Array<PlaceAttribution>;
   /** Query multiple attributes optionally filtering by id and/or locale */
@@ -5683,17 +5526,17 @@ export type Place = Node & {
   /** Contact information supplied for this place */
   contact: PlaceContact;
   /** Source of the place data */
-  contributor?: Maybe<Scalars['String']>;
+  contributor?: Maybe<Scalars["String"]>;
   /** A longer description */
-  description?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars["String"]>;
   /** The operating hours for this place, as encoded in OpenStreetMap hours specification */
   hours?: Maybe<PlaceHours>;
   /** The Globally Unique ID of the object. */
-  id: Scalars['ID'];
+  id: Scalars["ID"];
   /** Layers associated to this place */
   layers: Array<PlaceLayer>;
   /** The maki icon for this place */
-  maki?: Maybe<Scalars['String']>;
+  maki?: Maybe<Scalars["String"]>;
   /**
    * List of MediaContainers supplied with the place information, such as images of the places
    * @deprecated use mediaContainers instead
@@ -5702,72 +5545,65 @@ export type Place = Node & {
   /** List of MediaContainers supplied with the place information, such as images of the places */
   mediaContainers: MediaContainerConnection;
   /** The name of the place */
-  name?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars["String"]>;
   /** A url displaying how to navigate to this place */
-  navigationUrl: Scalars['String'];
+  navigationUrl: Scalars["String"];
   /** The position of the place */
   position: Position;
   /** The preferred MediaContainer to use */
   preferredMedia?: Maybe<MediaContainer>;
   /** Alias for the read-more attribute */
-  readMoreUrl?: Maybe<Scalars['String']>;
+  readMoreUrl?: Maybe<Scalars["String"]>;
   /** If non-null, an error occured while resolving this place and only a subset of data will be accessible */
   resolutionError?: Maybe<ResolutionError>;
   /** A short summary */
-  synopsis?: Maybe<Scalars['String']>;
+  synopsis?: Maybe<Scalars["String"]>;
   /** A collection of strings used to label this place */
-  tags: Array<Scalars['String']>;
+  tags: Array<Scalars["String"]>;
   /** Alias for `Place.name` */
-  title?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars["String"]>;
   /** Calculate distance and bearing information from the specified positions to this place */
   towards: Array<PlaceTowards>;
   /** Alias for the website-url attribute */
-  websiteUrl?: Maybe<Scalars['String']>;
+  websiteUrl?: Maybe<Scalars["String"]>;
 };
-
 
 /** A defined location in the world */
 export type PlaceAttrArgs = {
-  id: Scalars['ID'];
-  locale?: InputMaybe<Scalars['String']>;
+  id: Scalars["ID"];
+  locale?: InputMaybe<Scalars["String"]>;
 };
-
 
 /** A defined location in the world */
 export type PlaceAttrValueArgs = {
-  id: Scalars['ID'];
-  locale?: InputMaybe<Scalars['String']>;
+  id: Scalars["ID"];
+  locale?: InputMaybe<Scalars["String"]>;
 };
-
 
 /** A defined location in the world */
 export type PlaceAttrsArgs = {
-  after?: InputMaybe<Scalars['String']>;
-  first: Scalars['Int'];
-  id?: InputMaybe<Scalars['ID']>;
-  includeNoLocale?: InputMaybe<Scalars['Boolean']>;
-  locale?: InputMaybe<Scalars['String']>;
+  after?: InputMaybe<Scalars["String"]>;
+  first: Scalars["Int"];
+  id?: InputMaybe<Scalars["ID"]>;
+  includeNoLocale?: InputMaybe<Scalars["Boolean"]>;
+  locale?: InputMaybe<Scalars["String"]>;
 };
-
 
 /** A defined location in the world */
 export type PlaceMediaArgs = {
-  limit?: Scalars['Int'];
+  limit?: Scalars["Int"];
 };
-
 
 /** A defined location in the world */
 export type PlaceMediaContainersArgs = {
-  after?: InputMaybe<Scalars['String']>;
-  first: Scalars['Int'];
+  after?: InputMaybe<Scalars["String"]>;
+  first: Scalars["Int"];
 };
-
 
 /** A defined location in the world */
 export type PlaceNavigationUrlArgs = {
   provider: PlaceNavigationUrlProvider;
 };
-
 
 /** A defined location in the world */
 export type PlaceTowardsArgs = {
@@ -5776,60 +5612,60 @@ export type PlaceTowardsArgs = {
 
 /** The address data of a place */
 export type PlaceAddress = {
-  __typename?: 'PlaceAddress';
-  addressLineOne?: Maybe<Scalars['String']>;
-  addressLineThree?: Maybe<Scalars['String']>;
-  addressLineTwo?: Maybe<Scalars['String']>;
-  administrativeGroup?: Maybe<Scalars['String']>;
-  area?: Maybe<Scalars['String']>;
-  country?: Maybe<Scalars['String']>;
-  countryCode?: Maybe<Scalars['String']>;
-  crossStreet?: Maybe<Scalars['String']>;
-  locality?: Maybe<Scalars['String']>;
-  postalCode?: Maybe<Scalars['String']>;
-  region?: Maybe<Scalars['String']>;
-  regionCode?: Maybe<Scalars['String']>;
+  __typename?: "PlaceAddress";
+  addressLineOne?: Maybe<Scalars["String"]>;
+  addressLineThree?: Maybe<Scalars["String"]>;
+  addressLineTwo?: Maybe<Scalars["String"]>;
+  administrativeGroup?: Maybe<Scalars["String"]>;
+  area?: Maybe<Scalars["String"]>;
+  country?: Maybe<Scalars["String"]>;
+  countryCode?: Maybe<Scalars["String"]>;
+  crossStreet?: Maybe<Scalars["String"]>;
+  locality?: Maybe<Scalars["String"]>;
+  postalCode?: Maybe<Scalars["String"]>;
+  region?: Maybe<Scalars["String"]>;
+  regionCode?: Maybe<Scalars["String"]>;
 };
 
 /** Describes the attribution requirements associated with the place. */
 export type PlaceAttribution = {
-  __typename?: 'PlaceAttribution';
+  __typename?: "PlaceAttribution";
   /** Specific licensing information for this place if known */
-  license?: Maybe<Scalars['String']>;
+  license?: Maybe<Scalars["String"]>;
   /** A link required for this place */
-  link?: Maybe<Scalars['String']>;
+  link?: Maybe<Scalars["String"]>;
   /** Any media to be used in attribution, such as watermarks */
   mediaResource?: Maybe<MediaResourceEmbedded>;
   /** The required tracking pixel */
-  pixel?: Maybe<Scalars['String']>;
+  pixel?: Maybe<Scalars["String"]>;
   /** Text Attribution required for this place */
-  text?: Maybe<Scalars['String']>;
+  text?: Maybe<Scalars["String"]>;
 };
 
 /** Contact information for a Place */
 export type PlaceContact = {
-  __typename?: 'PlaceContact';
+  __typename?: "PlaceContact";
   /** Booking url for this place */
-  bookingUrl?: Maybe<Scalars['String']>;
+  bookingUrl?: Maybe<Scalars["String"]>;
   /** Email address for this place */
-  emailAddress?: Maybe<Scalars['String']>;
+  emailAddress?: Maybe<Scalars["String"]>;
   /** Facebook page for this place */
-  facebookUrl?: Maybe<Scalars['String']>;
+  facebookUrl?: Maybe<Scalars["String"]>;
   /** Instagram for this place */
-  instagramUrl?: Maybe<Scalars['String']>;
+  instagramUrl?: Maybe<Scalars["String"]>;
   /** Phone number for this place */
-  phoneNumber?: Maybe<Scalars['String']>;
+  phoneNumber?: Maybe<Scalars["String"]>;
   /** Twitter for this place */
-  twitterUrl?: Maybe<Scalars['String']>;
+  twitterUrl?: Maybe<Scalars["String"]>;
   /** Contact website for this place */
-  websiteUrl?: Maybe<Scalars['String']>;
+  websiteUrl?: Maybe<Scalars["String"]>;
 };
 
 /** The opening hours for a place */
 export type PlaceHours = {
-  __typename?: 'PlaceHours';
+  __typename?: "PlaceHours";
   /** Look up the place hours comment (if any) for the current time or a given datetime. */
-  comment?: Maybe<Scalars['String']>;
+  comment?: Maybe<Scalars["String"]>;
   /**
    * Look up the opening hours for a specific day. Days are calculated according to the local time of the place.
    *
@@ -5843,68 +5679,62 @@ export type PlaceHours = {
    *
    * See: <https://wiki.openstreetmap.org/wiki/Key:opening_hours/specification>
    */
-  osmTag: Scalars['String'];
+  osmTag: Scalars["String"];
   /** Look up the open/closed status of the place for the current time or a given datetime. */
   status: PlaceHoursStatus;
   /** Whether or not the hours are the same each week. */
-  weekStable: Scalars['Boolean'];
+  weekStable: Scalars["Boolean"];
 };
-
 
 /** The opening hours for a place */
 export type PlaceHoursCommentArgs = {
-  datetime?: InputMaybe<Scalars['String']>;
+  datetime?: InputMaybe<Scalars["String"]>;
 };
-
 
 /** The opening hours for a place */
 export type PlaceHoursForDaysArgs = {
-  days?: InputMaybe<Array<Scalars['String']>>;
-  from?: InputMaybe<Scalars['String']>;
+  days?: InputMaybe<Array<Scalars["String"]>>;
+  from?: InputMaybe<Scalars["String"]>;
   offset?: InputMaybe<DatetimeOffset>;
-  to?: InputMaybe<Scalars['String']>;
+  to?: InputMaybe<Scalars["String"]>;
 };
-
 
 /** The opening hours for a place */
 export type PlaceHoursIntervalsArgs = {
-  after?: InputMaybe<Scalars['String']>;
-  first: Scalars['Int'];
-  from?: InputMaybe<Scalars['String']>;
+  after?: InputMaybe<Scalars["String"]>;
+  first: Scalars["Int"];
+  from?: InputMaybe<Scalars["String"]>;
   offset?: InputMaybe<DatetimeOffset>;
   status?: InputMaybe<PlaceHoursStatus>;
-  to?: InputMaybe<Scalars['String']>;
+  to?: InputMaybe<Scalars["String"]>;
 };
-
 
 /** The opening hours for a place */
 export type PlaceHoursStatusArgs = {
-  datetime?: InputMaybe<Scalars['String']>;
+  datetime?: InputMaybe<Scalars["String"]>;
 };
 
 /** The opening hour for a place on a specific day */
 export type PlaceHoursForDay = {
-  __typename?: 'PlaceHoursForDay';
+  __typename?: "PlaceHoursForDay";
   /**
    * The date of the day.
    * A full ISO 8061 formatted datetime corresponding to 12:00 am local time.
    */
-  date: Scalars['String'];
+  date: Scalars["String"];
   /** The opening hour intervals for this day. */
   intervals: Array<PlaceHoursInterval>;
   /** The name of any public holidays on this day. */
-  publicHolidays: Array<Scalars['String']>;
+  publicHolidays: Array<Scalars["String"]>;
 };
-
 
 /** The opening hour for a place on a specific day */
 export type PlaceHoursForDayDateArgs = {
-  format?: InputMaybe<Scalars['String']>;
-  locale?: InputMaybe<Scalars['String']>;
-  relativeTo?: InputMaybe<Scalars['String']>;
-  timeZone?: InputMaybe<Scalars['String']>;
+  format?: InputMaybe<Scalars["String"]>;
+  locale?: InputMaybe<Scalars["String"]>;
+  relativeTo?: InputMaybe<Scalars["String"]>;
+  timeZone?: InputMaybe<Scalars["String"]>;
 };
-
 
 /** The opening hour for a place on a specific day */
 export type PlaceHoursForDayIntervalsArgs = {
@@ -5913,11 +5743,11 @@ export type PlaceHoursForDayIntervalsArgs = {
 
 /** The opening hours for a place during the interval between two datetimes */
 export type PlaceHoursInterval = {
-  __typename?: 'PlaceHoursInterval';
+  __typename?: "PlaceHoursInterval";
   /** The place hours comment (if any) during this interval */
-  comment?: Maybe<Scalars['String']>;
+  comment?: Maybe<Scalars["String"]>;
   /** The starting datetime of this interval */
-  from: Scalars['String'];
+  from: Scalars["String"];
   /**
    * The holidays that occur during this interval
    *
@@ -5927,30 +5757,28 @@ export type PlaceHoursInterval = {
   /** The open/closed status of the place during this interval */
   status: PlaceHoursStatus;
   /** The ending datetime of this interval, will be null if there is no following interval and the status/comment will no longer change */
-  to?: Maybe<Scalars['String']>;
+  to?: Maybe<Scalars["String"]>;
 };
-
 
 /** The opening hours for a place during the interval between two datetimes */
 export type PlaceHoursIntervalFromArgs = {
-  format?: InputMaybe<Scalars['String']>;
-  locale?: InputMaybe<Scalars['String']>;
-  relativeTo?: InputMaybe<Scalars['String']>;
-  timeZone?: InputMaybe<Scalars['String']>;
+  format?: InputMaybe<Scalars["String"]>;
+  locale?: InputMaybe<Scalars["String"]>;
+  relativeTo?: InputMaybe<Scalars["String"]>;
+  timeZone?: InputMaybe<Scalars["String"]>;
 };
-
 
 /** The opening hours for a place during the interval between two datetimes */
 export type PlaceHoursIntervalToArgs = {
-  format?: InputMaybe<Scalars['String']>;
-  locale?: InputMaybe<Scalars['String']>;
-  relativeTo?: InputMaybe<Scalars['String']>;
-  timeZone?: InputMaybe<Scalars['String']>;
+  format?: InputMaybe<Scalars["String"]>;
+  locale?: InputMaybe<Scalars["String"]>;
+  relativeTo?: InputMaybe<Scalars["String"]>;
+  timeZone?: InputMaybe<Scalars["String"]>;
 };
 
 /** Connection of PlaceHoursIntervals */
 export type PlaceHoursIntervalConnection = {
-  __typename?: 'PlaceHoursIntervalConnection';
+  __typename?: "PlaceHoursIntervalConnection";
   /** All the edges in this page of the connection */
   edges: Array<PlaceHoursIntervalEdge>;
   /** Shortcut for edges[].node */
@@ -5961,67 +5789,66 @@ export type PlaceHoursIntervalConnection = {
 
 /** Edge containing a PlaceHoursInterval */
 export type PlaceHoursIntervalEdge = {
-  __typename?: 'PlaceHoursIntervalEdge';
+  __typename?: "PlaceHoursIntervalEdge";
   /** The cursor string pointing to this item */
-  cursor: Scalars['String'];
+  cursor: Scalars["String"];
   /** The item */
   node: PlaceHoursInterval;
 };
 
 /** A holiday that occurs during an interval */
 export type PlaceHoursIntervalHoliday = {
-  __typename?: 'PlaceHoursIntervalHoliday';
+  __typename?: "PlaceHoursIntervalHoliday";
   /**
    * The date of the holiday.
    * A full ISO 8061 formatted datetime corresponding to 12:00 am local time.
    */
-  date: Scalars['String'];
+  date: Scalars["String"];
   /** The name of the holiday. */
-  name: Scalars['String'];
+  name: Scalars["String"];
 };
-
 
 /** A holiday that occurs during an interval */
 export type PlaceHoursIntervalHolidayDateArgs = {
-  format?: InputMaybe<Scalars['String']>;
-  locale?: InputMaybe<Scalars['String']>;
-  relativeTo?: InputMaybe<Scalars['String']>;
-  timeZone?: InputMaybe<Scalars['String']>;
+  format?: InputMaybe<Scalars["String"]>;
+  locale?: InputMaybe<Scalars["String"]>;
+  relativeTo?: InputMaybe<Scalars["String"]>;
+  timeZone?: InputMaybe<Scalars["String"]>;
 };
 
 /** Whether a place is open/closed or if the status is unknown */
 export enum PlaceHoursStatus {
-  Closed = 'Closed',
-  Open = 'Open',
-  Unknown = 'Unknown'
+  Closed = "Closed",
+  Open = "Open",
+  Unknown = "Unknown",
 }
 
 /** Create a new place or refer to an existing place */
 export type PlaceInput = {
   /** Unique place identifier */
-  id?: InputMaybe<Scalars['ID']>;
+  id?: InputMaybe<Scalars["ID"]>;
   /** The position of the place */
   position: PositionInput;
 };
 
 /** A layer on a Place */
 export type PlaceLayer = {
-  __typename?: 'PlaceLayer';
+  __typename?: "PlaceLayer";
   /** Unique identifier for this place layer */
-  id: Scalars['ID'];
+  id: Scalars["ID"];
   /** Name for this place layer */
-  name?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars["String"]>;
 };
 
 /** Navigation service provider */
 export enum PlaceNavigationUrlProvider {
-  Apple = 'Apple',
-  Google = 'Google'
+  Apple = "Apple",
+  Google = "Google",
 }
 
 /** Connection of PlaceSearchs */
 export type PlaceSearchConnection = {
-  __typename?: 'PlaceSearchConnection';
+  __typename?: "PlaceSearchConnection";
   /** All the edges in this page of the connection */
   edges: Array<PlaceSearchEdge>;
   /** Shortcut for edges[].node */
@@ -6032,9 +5859,9 @@ export type PlaceSearchConnection = {
 
 /** Edge containing a PlaceSearch */
 export type PlaceSearchEdge = {
-  __typename?: 'PlaceSearchEdge';
+  __typename?: "PlaceSearchEdge";
   /** The cursor string pointing to this item */
-  cursor: Scalars['String'];
+  cursor: Scalars["String"];
   /** The main line of the two line search result */
   main: TextSearchResult;
   /** The item */
@@ -6047,61 +5874,59 @@ export type PlaceSearchEdge = {
 
 /** A result from a place search */
 export type PlaceSearchNode = {
-  __typename?: 'PlaceSearchNode';
+  __typename?: "PlaceSearchNode";
   /** The address of the place */
   address: PlaceAddress;
   /** Source of the place data */
-  contributor?: Maybe<Scalars['String']>;
+  contributor?: Maybe<Scalars["String"]>;
   /** A longer description */
-  description?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars["String"]>;
   /** The Globally Unique ID of the place. */
-  id: Scalars['ID'];
+  id: Scalars["ID"];
   /** Layers associated to this place */
   layers: Array<PlaceLayer>;
   /** The maki icon for this place */
-  maki?: Maybe<Scalars['String']>;
+  maki?: Maybe<Scalars["String"]>;
   /** The name of the place */
-  name?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars["String"]>;
   /** The position of the place */
   position: Position;
   /** A short summary */
-  synopsis?: Maybe<Scalars['String']>;
+  synopsis?: Maybe<Scalars["String"]>;
   /** Alias for `Place.name` */
-  title?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars["String"]>;
 };
 
 /** Where to search for place information */
 export enum PlaceSearchSource {
-  AustralianTourismDataWarehouse = 'AustralianTourismDataWarehouse',
-  Facebook = 'Facebook',
-  Geonames = 'Geonames',
-  OpenAddresses = 'OpenAddresses',
-  OpenStreetMap = 'OpenStreetMap',
-  TripAdvisor = 'TripAdvisor',
-  WhosOnFirst = 'WhosOnFirst',
-  Yelp = 'Yelp',
-  Zomato = 'Zomato'
+  AustralianTourismDataWarehouse = "AustralianTourismDataWarehouse",
+  Facebook = "Facebook",
+  Geonames = "Geonames",
+  OpenAddresses = "OpenAddresses",
+  OpenStreetMap = "OpenStreetMap",
+  TripAdvisor = "TripAdvisor",
+  WhosOnFirst = "WhosOnFirst",
+  Yelp = "Yelp",
+  Zomato = "Zomato",
 }
 
 /** Place bearing and distance information towards point */
 export type PlaceTowards = {
-  __typename?: 'PlaceTowards';
+  __typename?: "PlaceTowards";
   /** The bearing angle from the place to the point */
-  bearing: Scalars['Float'];
+  bearing: Scalars["Float"];
   /** Compass point towards given point */
   compass: CompassPoint;
   /** The distance from the place to the point */
-  distance: Scalars['Float'];
+  distance: Scalars["Float"];
   /** The point */
   position: Position;
 };
-
 
 /** Place bearing and distance information towards point */
 export type PlaceTowardsBearingArgs = {
   unit?: AngleUnit;
 };
-
 
 /** Place bearing and distance information towards point */
 export type PlaceTowardsDistanceArgs = {
@@ -6110,70 +5935,67 @@ export type PlaceTowardsDistanceArgs = {
 
 /** A position on a map with a longitude and latitude */
 export type Position = {
-  __typename?: 'Position';
+  __typename?: "Position";
   /** Arbitrary JSON value stored on this resource, keyed by an id */
   attr?: Maybe<Attribute>;
   /** Shortcut for the attr.value, returns null if the attribute doesn't exist */
-  attrValue?: Maybe<Scalars['JSON']>;
+  attrValue?: Maybe<Scalars["JSON"]>;
   /** Query multiple attributes optionally filtering by id and/or locale */
   attrs: AttributeConnection;
   /** Identifier for the Position type useful for client-side caching */
-  id: Scalars['ID'];
+  id: Scalars["ID"];
   /** The position's latitude */
-  lat: Scalars['Float'];
+  lat: Scalars["Float"];
   /** The position in the form: [latitude, longitude] */
-  latLon: Array<Scalars['Float']>;
+  latLon: Array<Scalars["Float"]>;
   /** PlaceLayers associated to this position */
   layers: Array<PlaceLayer>;
   /** The position's longitude */
-  lon: Scalars['Float'];
+  lon: Scalars["Float"];
   /** The position in the form: [longitude, latitude] */
-  lonLat: Array<Scalars['Float']>;
+  lonLat: Array<Scalars["Float"]>;
 };
-
 
 /** A position on a map with a longitude and latitude */
 export type PositionAttrArgs = {
-  id: Scalars['ID'];
-  locale?: InputMaybe<Scalars['String']>;
+  id: Scalars["ID"];
+  locale?: InputMaybe<Scalars["String"]>;
 };
-
 
 /** A position on a map with a longitude and latitude */
 export type PositionAttrValueArgs = {
-  id: Scalars['ID'];
-  locale?: InputMaybe<Scalars['String']>;
+  id: Scalars["ID"];
+  locale?: InputMaybe<Scalars["String"]>;
 };
-
 
 /** A position on a map with a longitude and latitude */
 export type PositionAttrsArgs = {
-  after?: InputMaybe<Scalars['String']>;
-  first: Scalars['Int'];
-  id?: InputMaybe<Scalars['ID']>;
-  includeNoLocale?: InputMaybe<Scalars['Boolean']>;
-  locale?: InputMaybe<Scalars['String']>;
+  after?: InputMaybe<Scalars["String"]>;
+  first: Scalars["Int"];
+  id?: InputMaybe<Scalars["ID"]>;
+  includeNoLocale?: InputMaybe<Scalars["Boolean"]>;
+  locale?: InputMaybe<Scalars["String"]>;
 };
 
 /** A position on a map with a longitude and latitude */
 export type PositionInput = {
   /** The latitude */
-  lat: Scalars['Float'];
+  lat: Scalars["Float"];
   /** The longitude */
-  lon: Scalars['Float'];
+  lon: Scalars["Float"];
 };
 
 /** Profile */
 export type Profile = Node & {
-  __typename?: 'Profile';
+  __typename?: "Profile";
   /** Arbitrary JSON value stored on this resource, keyed by an id */
   attr?: Maybe<Attribute>;
   /** Shortcut for the attr.value, returns null if the attribute doesn't exist */
-  attrValue?: Maybe<Scalars['JSON']>;
+  attrValue?: Maybe<Scalars["JSON"]>;
   /** Query multiple attributes optionally filtering by id and/or locale */
   attrs: AttributeConnection;
   /** Indicates if follows on this profile are automatically approved */
-  autoApproveFollows: Scalars['Boolean'];
+  autoApproveFollows: Scalars["Boolean"];
   /** The avatar */
   avatar?: Maybe<MediaContainer>;
   /** Fetch billing details associated with this profile */
@@ -6181,7 +6003,7 @@ export type Profile = Node & {
   /** Fetch billing subscriptions associated with a profile */
   billingSubscriptions: BillingSubscriptionConnection;
   /** A short biography */
-  bio?: Maybe<Scalars['String']>;
+  bio?: Maybe<Scalars["String"]>;
   /** Fetch connected-apps associated with this profile */
   connectedApps: ConnectedAppConnection;
   /** Profiles that follow this profile */
@@ -6189,81 +6011,74 @@ export type Profile = Node & {
   /** Profiles that this profile follows */
   following: ProfileFollowConnection;
   /** The (optional) unique handle of the profile */
-  handle?: Maybe<Scalars['String']>;
+  handle?: Maybe<Scalars["String"]>;
   /** The Globally Unique ID of the object. */
-  id: Scalars['ID'];
+  id: Scalars["ID"];
   /** The name of the profile */
-  name: Scalars['String'];
+  name: Scalars["String"];
   /** The type of the profile */
   type: ProfileType;
   /** The Website URL */
-  websiteUrl?: Maybe<Scalars['String']>;
+  websiteUrl?: Maybe<Scalars["String"]>;
 };
-
 
 /** Profile */
 export type ProfileAttrArgs = {
-  id: Scalars['ID'];
-  locale?: InputMaybe<Scalars['String']>;
+  id: Scalars["ID"];
+  locale?: InputMaybe<Scalars["String"]>;
 };
-
 
 /** Profile */
 export type ProfileAttrValueArgs = {
-  id: Scalars['ID'];
-  locale?: InputMaybe<Scalars['String']>;
+  id: Scalars["ID"];
+  locale?: InputMaybe<Scalars["String"]>;
 };
-
 
 /** Profile */
 export type ProfileAttrsArgs = {
-  after?: InputMaybe<Scalars['String']>;
-  first: Scalars['Int'];
-  id?: InputMaybe<Scalars['ID']>;
-  includeNoLocale?: InputMaybe<Scalars['Boolean']>;
-  locale?: InputMaybe<Scalars['String']>;
+  after?: InputMaybe<Scalars["String"]>;
+  first: Scalars["Int"];
+  id?: InputMaybe<Scalars["ID"]>;
+  includeNoLocale?: InputMaybe<Scalars["Boolean"]>;
+  locale?: InputMaybe<Scalars["String"]>;
 };
-
 
 /** Profile */
 export type ProfileBillingSubscriptionsArgs = {
-  after?: InputMaybe<Scalars['String']>;
-  first: Scalars['Int'];
+  after?: InputMaybe<Scalars["String"]>;
+  first: Scalars["Int"];
 };
-
 
 /** Profile */
 export type ProfileConnectedAppsArgs = {
-  after?: InputMaybe<Scalars['String']>;
+  after?: InputMaybe<Scalars["String"]>;
   authType?: InputMaybe<ConnectedAppAuthType>;
-  deleted?: InputMaybe<Scalars['Boolean']>;
-  expired?: InputMaybe<Scalars['Boolean']>;
-  first: Scalars['Int'];
+  deleted?: InputMaybe<Scalars["Boolean"]>;
+  expired?: InputMaybe<Scalars["Boolean"]>;
+  first: Scalars["Int"];
   serviceKey?: InputMaybe<ConnectedAppServiceKey>;
   type?: InputMaybe<ConnectedAppType>;
 };
 
-
 /** Profile */
 export type ProfileFollowersArgs = {
-  after?: InputMaybe<Scalars['String']>;
-  first: Scalars['Int'];
-  handle?: InputMaybe<Scalars['String']>;
+  after?: InputMaybe<Scalars["String"]>;
+  first: Scalars["Int"];
+  handle?: InputMaybe<Scalars["String"]>;
   status?: InputMaybe<ProfileFollowStatus>;
 };
 
-
 /** Profile */
 export type ProfileFollowingArgs = {
-  after?: InputMaybe<Scalars['String']>;
-  first: Scalars['Int'];
-  handle?: InputMaybe<Scalars['String']>;
+  after?: InputMaybe<Scalars["String"]>;
+  first: Scalars["Int"];
+  handle?: InputMaybe<Scalars["String"]>;
   status?: InputMaybe<ProfileFollowStatus>;
 };
 
 /** Connection of Profiles */
 export type ProfileConnection = {
-  __typename?: 'ProfileConnection';
+  __typename?: "ProfileConnection";
   /** All the edges in this page of the connection */
   edges: Array<ProfileEdge>;
   /** Shortcut for edges[].node */
@@ -6271,21 +6086,21 @@ export type ProfileConnection = {
   /** Details regarding the current page of the connnection */
   pageInfo: PageInfo;
   /** The total number of items in the connection (in all pages) */
-  totalCount: Scalars['Int'];
+  totalCount: Scalars["Int"];
 };
 
 /** Edge containing a Profile */
 export type ProfileEdge = {
-  __typename?: 'ProfileEdge';
+  __typename?: "ProfileEdge";
   /** The cursor string pointing to this item */
-  cursor: Scalars['String'];
+  cursor: Scalars["String"];
   /** The item */
   node: Profile;
 };
 
 /** Connection of ProfileFollows */
 export type ProfileFollowConnection = {
-  __typename?: 'ProfileFollowConnection';
+  __typename?: "ProfileFollowConnection";
   /** All the edges in this page of the connection */
   edges: Array<ProfileFollowEdge>;
   /** Shortcut for edges[].node */
@@ -6293,14 +6108,14 @@ export type ProfileFollowConnection = {
   /** Details regarding the current page of the connnection */
   pageInfo: PageInfo;
   /** The total number of items in the connection (in all pages) */
-  totalCount: Scalars['Int'];
+  totalCount: Scalars["Int"];
 };
 
 /** Edge containing a ProfileFollow */
 export type ProfileFollowEdge = {
-  __typename?: 'ProfileFollowEdge';
+  __typename?: "ProfileFollowEdge";
   /** The cursor string pointing to this item */
-  cursor: Scalars['String'];
+  cursor: Scalars["String"];
   /** The item */
   node: Profile;
   /** The status of the follow request */
@@ -6309,26 +6124,26 @@ export type ProfileFollowEdge = {
 
 /** Profile follow status */
 export enum ProfileFollowStatus {
-  Approved = 'Approved',
-  Denied = 'Denied',
-  Pending = 'Pending'
+  Approved = "Approved",
+  Denied = "Denied",
+  Pending = "Pending",
 }
 
 /** Profile type */
 export enum ProfileType {
-  Individual = 'Individual',
-  Organization = 'Organization'
+  Individual = "Individual",
+  Organization = "Organization",
 }
 
 /** Response to Mutation.publishItinerary */
 export type PublishItineraryPayload = {
-  __typename?: 'PublishItineraryPayload';
+  __typename?: "PublishItineraryPayload";
   /** The published itinerary */
   itinerary?: Maybe<Itinerary>;
 };
 
 export type Query = {
-  __typename?: 'Query';
+  __typename?: "Query";
   /** Look up all authorised profiles */
   authorizedProfiles: ProfileConnection;
   /** Fetch billing details associated with a profile */
@@ -6389,246 +6204,217 @@ export type Query = {
   userAgreements: UserAgreementConnection;
 };
 
-
 export type QueryAuthorizedProfilesArgs = {
-  after?: InputMaybe<Scalars['String']>;
-  first: Scalars['Int'];
+  after?: InputMaybe<Scalars["String"]>;
+  first: Scalars["Int"];
 };
-
 
 export type QueryBillingDetailsArgs = {
-  profileId: Scalars['ID'];
+  profileId: Scalars["ID"];
 };
-
 
 export type QueryBillingPricesArgs = {
-  after?: InputMaybe<Scalars['String']>;
-  first: Scalars['Int'];
+  after?: InputMaybe<Scalars["String"]>;
+  first: Scalars["Int"];
 };
-
 
 export type QueryBillingSubscriptionsArgs = {
-  after?: InputMaybe<Scalars['String']>;
-  first: Scalars['Int'];
-  profileId: Scalars['ID'];
+  after?: InputMaybe<Scalars["String"]>;
+  first: Scalars["Int"];
+  profileId: Scalars["ID"];
 };
-
 
 export type QueryCollectionArgs = {
-  id: Scalars['ID'];
+  id: Scalars["ID"];
 };
-
 
 export type QueryCollectionItemArgs = {
-  id: Scalars['ID'];
+  id: Scalars["ID"];
 };
-
 
 export type QueryCollectionItemsArgs = {
-  after?: InputMaybe<Scalars['String']>;
+  after?: InputMaybe<Scalars["String"]>;
   bounds?: InputMaybe<BoundsInput>;
   boundsCircle?: InputMaybe<BoundsCircleInput>;
-  collectionIds?: InputMaybe<Array<Scalars['ID']>>;
-  externalIds?: InputMaybe<Array<Scalars['ID']>>;
-  externalSources?: InputMaybe<Array<Scalars['ID']>>;
-  first: Scalars['Int'];
-  keyword?: InputMaybe<Scalars['String']>;
-  placeIds?: InputMaybe<Array<Scalars['ID']>>;
-  profileId?: InputMaybe<Scalars['ID']>;
-  resourceIds?: InputMaybe<Array<Scalars['ID']>>;
-  sectionIds?: InputMaybe<Array<Scalars['ID']>>;
+  collectionIds?: InputMaybe<Array<Scalars["ID"]>>;
+  externalIds?: InputMaybe<Array<Scalars["ID"]>>;
+  externalSources?: InputMaybe<Array<Scalars["ID"]>>;
+  first: Scalars["Int"];
+  keyword?: InputMaybe<Scalars["String"]>;
+  placeIds?: InputMaybe<Array<Scalars["ID"]>>;
+  profileId?: InputMaybe<Scalars["ID"]>;
+  resourceIds?: InputMaybe<Array<Scalars["ID"]>>;
+  sectionIds?: InputMaybe<Array<Scalars["ID"]>>;
   sort?: InputMaybe<Array<CollectionItemsSort>>;
-  tags?: InputMaybe<Array<Scalars['String']>>;
+  tags?: InputMaybe<Array<Scalars["String"]>>;
 };
 
-
 export type QueryCollectionsArgs = {
-  after?: InputMaybe<Scalars['String']>;
-  discriminator?: InputMaybe<Scalars['String']>;
-  first: Scalars['Int'];
-  profileId: Scalars['ID'];
+  after?: InputMaybe<Scalars["String"]>;
+  discriminator?: InputMaybe<Scalars["String"]>;
+  first: Scalars["Int"];
+  profileId: Scalars["ID"];
   sort?: InputMaybe<Array<CollectionsSort>>;
 };
 
-
 export type QueryConnectedAppArgs = {
-  id: Scalars['ID'];
+  id: Scalars["ID"];
 };
 
-
 export type QueryConnectedAppsArgs = {
-  after?: InputMaybe<Scalars['String']>;
+  after?: InputMaybe<Scalars["String"]>;
   authType?: InputMaybe<ConnectedAppAuthType>;
-  deleted?: InputMaybe<Scalars['Boolean']>;
-  expired?: InputMaybe<Scalars['Boolean']>;
-  first: Scalars['Int'];
-  profileId: Scalars['ID'];
+  deleted?: InputMaybe<Scalars["Boolean"]>;
+  expired?: InputMaybe<Scalars["Boolean"]>;
+  first: Scalars["Int"];
+  profileId: Scalars["ID"];
   serviceKey?: InputMaybe<ConnectedAppServiceKey>;
   type?: InputMaybe<ConnectedAppType>;
 };
 
-
 export type QueryIconResourceArgs = {
-  id: Scalars['ID'];
+  id: Scalars["ID"];
 };
-
 
 export type QueryIconResourcesArgs = {
-  after?: InputMaybe<Scalars['String']>;
-  first: Scalars['Int'];
-  profileId: Scalars['ID'];
+  after?: InputMaybe<Scalars["String"]>;
+  first: Scalars["Int"];
+  profileId: Scalars["ID"];
 };
-
 
 export type QueryIsochroneArgs = {
   center: PositionInput;
-  duration: Scalars['Int'];
+  duration: Scalars["Int"];
   mode: IsochroneMode;
 };
 
-
 export type QueryItinerariesArgs = {
-  after?: InputMaybe<Scalars['String']>;
-  first: Scalars['Int'];
-  keyword?: InputMaybe<Scalars['String']>;
-  profileId: Scalars['ID'];
+  after?: InputMaybe<Scalars["String"]>;
+  first: Scalars["Int"];
+  keyword?: InputMaybe<Scalars["String"]>;
+  profileId: Scalars["ID"];
   sort?: InputMaybe<Array<ItinerariesSort>>;
 };
 
-
 export type QueryItineraryArgs = {
-  id: Scalars['ID'];
+  id: Scalars["ID"];
 };
-
 
 export type QueryMediaContainerArgs = {
-  id: Scalars['ID'];
+  id: Scalars["ID"];
 };
-
 
 export type QueryMediaResourceArgs = {
-  id: Scalars['ID'];
+  id: Scalars["ID"];
 };
-
 
 export type QueryNodeArgs = {
-  id: Scalars['ID'];
+  id: Scalars["ID"];
 };
-
 
 export type QueryPlaceArgs = {
-  id: Scalars['ID'];
+  id: Scalars["ID"];
 };
-
 
 export type QueryPlaceAddressSearchArgs = {
-  after?: InputMaybe<Scalars['String']>;
-  borough?: InputMaybe<Scalars['String']>;
-  country?: InputMaybe<Scalars['String']>;
-  county?: InputMaybe<Scalars['String']>;
-  first: Scalars['Int'];
-  layers?: InputMaybe<Array<Scalars['String']>>;
-  locality?: InputMaybe<Scalars['String']>;
-  maxLabelLength?: InputMaybe<Scalars['Int']>;
-  neighbourhood?: InputMaybe<Scalars['String']>;
-  postalCode?: InputMaybe<Scalars['String']>;
-  region?: InputMaybe<Scalars['String']>;
+  after?: InputMaybe<Scalars["String"]>;
+  borough?: InputMaybe<Scalars["String"]>;
+  country?: InputMaybe<Scalars["String"]>;
+  county?: InputMaybe<Scalars["String"]>;
+  first: Scalars["Int"];
+  layers?: InputMaybe<Array<Scalars["String"]>>;
+  locality?: InputMaybe<Scalars["String"]>;
+  maxLabelLength?: InputMaybe<Scalars["Int"]>;
+  neighbourhood?: InputMaybe<Scalars["String"]>;
+  postalCode?: InputMaybe<Scalars["String"]>;
+  region?: InputMaybe<Scalars["String"]>;
   sources?: InputMaybe<Array<PlaceSearchSource>>;
-  streetAddress?: InputMaybe<Scalars['String']>;
-  thirdPartyQuery?: InputMaybe<Scalars['JSON']>;
+  streetAddress?: InputMaybe<Scalars["String"]>;
+  thirdPartyQuery?: InputMaybe<Scalars["JSON"]>;
 };
-
 
 export type QueryPlaceAutocompleteSearchArgs = {
-  after?: InputMaybe<Scalars['String']>;
+  after?: InputMaybe<Scalars["String"]>;
   bounds?: InputMaybe<BoundsInput>;
-  first: Scalars['Int'];
+  first: Scalars["Int"];
   focus?: InputMaybe<PositionInput>;
-  layers?: InputMaybe<Array<Scalars['String']>>;
-  maxLabelLength?: InputMaybe<Scalars['Int']>;
+  layers?: InputMaybe<Array<Scalars["String"]>>;
+  maxLabelLength?: InputMaybe<Scalars["Int"]>;
   sources?: InputMaybe<Array<PlaceSearchSource>>;
-  text: Scalars['String'];
-  thirdPartyQuery?: InputMaybe<Scalars['JSON']>;
+  text: Scalars["String"];
+  thirdPartyQuery?: InputMaybe<Scalars["JSON"]>;
 };
-
 
 export type QueryPlaceReverseSearchArgs = {
-  after?: InputMaybe<Scalars['String']>;
-  first: Scalars['Int'];
+  after?: InputMaybe<Scalars["String"]>;
+  first: Scalars["Int"];
   focus: PositionInput;
-  layers?: InputMaybe<Array<Scalars['String']>>;
-  maxLabelLength?: InputMaybe<Scalars['Int']>;
+  layers?: InputMaybe<Array<Scalars["String"]>>;
+  maxLabelLength?: InputMaybe<Scalars["Int"]>;
   sources?: InputMaybe<Array<PlaceSearchSource>>;
-  thirdPartyQuery?: InputMaybe<Scalars['JSON']>;
+  thirdPartyQuery?: InputMaybe<Scalars["JSON"]>;
 };
-
 
 export type QueryPlaceSearchArgs = {
-  after?: InputMaybe<Scalars['String']>;
+  after?: InputMaybe<Scalars["String"]>;
   bounds?: InputMaybe<BoundsInput>;
-  first: Scalars['Int'];
+  first: Scalars["Int"];
   focus?: InputMaybe<PositionInput>;
-  layers?: InputMaybe<Array<Scalars['String']>>;
-  maxLabelLength?: InputMaybe<Scalars['Int']>;
+  layers?: InputMaybe<Array<Scalars["String"]>>;
+  maxLabelLength?: InputMaybe<Scalars["Int"]>;
   sources?: InputMaybe<Array<PlaceSearchSource>>;
-  text?: InputMaybe<Scalars['String']>;
-  thirdPartyQuery?: InputMaybe<Scalars['JSON']>;
+  text?: InputMaybe<Scalars["String"]>;
+  thirdPartyQuery?: InputMaybe<Scalars["JSON"]>;
 };
-
 
 export type QueryPlacesArgs = {
-  ids: Array<Scalars['ID']>;
+  ids: Array<Scalars["ID"]>;
 };
-
 
 export type QueryProfileArgs = {
-  id: Scalars['ID'];
+  id: Scalars["ID"];
 };
-
 
 export type QueryProfileByHandleArgs = {
-  handle: Scalars['String'];
+  handle: Scalars["String"];
 };
-
 
 export type QueryProfilesArgs = {
-  after?: InputMaybe<Scalars['String']>;
-  first: Scalars['Int'];
-  handle: Scalars['String'];
+  after?: InputMaybe<Scalars["String"]>;
+  first: Scalars["Int"];
+  handle: Scalars["String"];
 };
 
-
 export type QueryRoutesArgs = {
-  after?: InputMaybe<Scalars['String']>;
-  first: Scalars['Int'];
+  after?: InputMaybe<Scalars["String"]>;
+  first: Scalars["Int"];
   mode?: RouteSearchableMode;
   positions: Array<PositionInput>;
 };
 
-
 export type QueryUserAgreementsArgs = {
-  after?: InputMaybe<Scalars['String']>;
-  first: Scalars['Int'];
-  profileId?: InputMaybe<Scalars['ID']>;
+  after?: InputMaybe<Scalars["String"]>;
+  first: Scalars["Int"];
+  profileId?: InputMaybe<Scalars["ID"]>;
 };
 
 /** Error which occurred while resolving an ID */
 export type ResolutionError = {
-  __typename?: 'ResolutionError';
+  __typename?: "ResolutionError";
   /** Human readable error message */
-  message: Scalars['String'];
+  message: Scalars["String"];
 };
 
 /** Response to Mutation.revertItinerary */
 export type RevertItineraryPayload = {
-  __typename?: 'RevertItineraryPayload';
+  __typename?: "RevertItineraryPayload";
   /** The reverted itinerary */
   itinerary?: Maybe<Itinerary>;
 };
 
 /** The representation of a route path taken */
 export type Route = {
-  __typename?: 'Route';
+  __typename?: "Route";
   /** The set of all RouteModes used by all the segments */
   modes: Array<RouteMode>;
   /** The segments of this route */
@@ -6637,7 +6423,7 @@ export type Route = {
 
 /** Connection of Routes */
 export type RouteConnection = {
-  __typename?: 'RouteConnection';
+  __typename?: "RouteConnection";
   /** All the edges in this page of the connection */
   edges: Array<RouteEdge>;
   /** Shortcut for edges[].node */
@@ -6648,9 +6434,9 @@ export type RouteConnection = {
 
 /** Edge containing a Route */
 export type RouteEdge = {
-  __typename?: 'RouteEdge';
+  __typename?: "RouteEdge";
   /** The cursor string pointing to this item */
-  cursor: Scalars['String'];
+  cursor: Scalars["String"];
   /** The item */
   node: Route;
 };
@@ -6663,165 +6449,161 @@ export type RouteInput = {
 
 /** Modes of transport */
 export enum RouteMode {
-  Abseiling = 'Abseiling',
-  AdventureBike = 'AdventureBike',
-  AerialLift = 'AerialLift',
-  AlpineSki = 'AlpineSki',
-  BackcountrySki = 'BackcountrySki',
-  Barge = 'Barge',
-  Bike = 'Bike',
-  Boat = 'Boat',
-  Bus = 'Bus',
-  CableCar = 'CableCar',
-  Camel = 'Camel',
-  Canoe = 'Canoe',
-  Car = 'Car',
-  Caving = 'Caving',
-  Chairlift = 'Chairlift',
-  CrossCountrySky = 'CrossCountrySky',
-  Cruise = 'Cruise',
-  Cycling = 'Cycling',
-  Dirtbike = 'Dirtbike',
-  Dive = 'Dive',
-  DogSled = 'DogSled',
-  ElectricCar = 'ElectricCar',
-  ElectricMotorbike = 'ElectricMotorbike',
-  Ferry = 'Ferry',
-  Foot = 'Foot',
-  FourWheelDriving = 'FourWheelDriving',
-  Funicular = 'Funicular',
-  Geocaching = 'Geocaching',
-  Glider = 'Glider',
-  Golfcar = 'Golfcar',
-  Gondola = 'Gondola',
-  HandGliding = 'HandGliding',
-  Handcycle = 'Handcycle',
-  Helicopter = 'Helicopter',
-  Hike = 'Hike',
-  Hitchhiking = 'Hitchhiking',
-  Horse = 'Horse',
-  HorseAndCart = 'HorseAndCart',
-  HotAirBaloon = 'HotAirBaloon',
-  IceSkate = 'IceSkate',
-  InlineSkate = 'InlineSkate',
-  JetBoat = 'JetBoat',
-  Jetski = 'Jetski',
-  Kayak = 'Kayak',
-  Kitesurf = 'Kitesurf',
-  LightAircraft = 'LightAircraft',
-  LightRail = 'LightRail',
-  Minibus = 'Minibus',
-  Monorail = 'Monorail',
-  Motorcycle = 'Motorcycle',
-  MountainBike = 'MountainBike',
-  Mountaineering = 'Mountaineering',
-  NordicSki = 'NordicSki',
-  NordicWalking = 'NordicWalking',
-  Orienteering = 'Orienteering',
-  Plane = 'Plane',
-  Quadbike = 'Quadbike',
-  Rickshaw = 'Rickshaw',
-  RockClimbing = 'RockClimbing',
-  Row = 'Row',
-  Rowboat = 'Rowboat',
-  Run = 'Run',
-  Sail = 'Sail',
-  Scooter = 'Scooter',
-  Skateboarding = 'Skateboarding',
-  Skydive = 'Skydive',
-  Snorkel = 'Snorkel',
-  Snowboard = 'Snowboard',
-  Snowshoe = 'Snowshoe',
-  StandUpPaddleBoard = 'StandUpPaddleBoard',
-  Surf = 'Surf',
-  Swim = 'Swim',
-  TaxiOrRideshare = 'TaxiOrRideshare',
-  TrailRun = 'TrailRun',
-  Train = 'Train',
-  Transit = 'Transit',
-  Trekking = 'Trekking',
-  Tubing = 'Tubing',
-  WalkOrRide = 'WalkOrRide',
-  WaterSki = 'WaterSki',
-  WaterTaxi = 'WaterTaxi',
-  Wheelchair = 'Wheelchair',
-  WhiteWaterRafting = 'WhiteWaterRafting',
-  Windsurf = 'Windsurf',
-  ZipLine = 'ZipLine'
+  Abseiling = "Abseiling",
+  AdventureBike = "AdventureBike",
+  AerialLift = "AerialLift",
+  AlpineSki = "AlpineSki",
+  BackcountrySki = "BackcountrySki",
+  Barge = "Barge",
+  Bike = "Bike",
+  Boat = "Boat",
+  Bus = "Bus",
+  CableCar = "CableCar",
+  Camel = "Camel",
+  Canoe = "Canoe",
+  Car = "Car",
+  Caving = "Caving",
+  Chairlift = "Chairlift",
+  CrossCountrySky = "CrossCountrySky",
+  Cruise = "Cruise",
+  Cycling = "Cycling",
+  Dirtbike = "Dirtbike",
+  Dive = "Dive",
+  DogSled = "DogSled",
+  ElectricCar = "ElectricCar",
+  ElectricMotorbike = "ElectricMotorbike",
+  Ferry = "Ferry",
+  Foot = "Foot",
+  FourWheelDriving = "FourWheelDriving",
+  Funicular = "Funicular",
+  Geocaching = "Geocaching",
+  Glider = "Glider",
+  Golfcar = "Golfcar",
+  Gondola = "Gondola",
+  HandGliding = "HandGliding",
+  Handcycle = "Handcycle",
+  Helicopter = "Helicopter",
+  Hike = "Hike",
+  Hitchhiking = "Hitchhiking",
+  Horse = "Horse",
+  HorseAndCart = "HorseAndCart",
+  HotAirBaloon = "HotAirBaloon",
+  IceSkate = "IceSkate",
+  InlineSkate = "InlineSkate",
+  JetBoat = "JetBoat",
+  Jetski = "Jetski",
+  Kayak = "Kayak",
+  Kitesurf = "Kitesurf",
+  LightAircraft = "LightAircraft",
+  LightRail = "LightRail",
+  Minibus = "Minibus",
+  Monorail = "Monorail",
+  Motorcycle = "Motorcycle",
+  MountainBike = "MountainBike",
+  Mountaineering = "Mountaineering",
+  NordicSki = "NordicSki",
+  NordicWalking = "NordicWalking",
+  Orienteering = "Orienteering",
+  Plane = "Plane",
+  Quadbike = "Quadbike",
+  Rickshaw = "Rickshaw",
+  RockClimbing = "RockClimbing",
+  Row = "Row",
+  Rowboat = "Rowboat",
+  Run = "Run",
+  Sail = "Sail",
+  Scooter = "Scooter",
+  Skateboarding = "Skateboarding",
+  Skydive = "Skydive",
+  Snorkel = "Snorkel",
+  Snowboard = "Snowboard",
+  Snowshoe = "Snowshoe",
+  StandUpPaddleBoard = "StandUpPaddleBoard",
+  Surf = "Surf",
+  Swim = "Swim",
+  TaxiOrRideshare = "TaxiOrRideshare",
+  TrailRun = "TrailRun",
+  Train = "Train",
+  Transit = "Transit",
+  Trekking = "Trekking",
+  Tubing = "Tubing",
+  WalkOrRide = "WalkOrRide",
+  WaterSki = "WaterSki",
+  WaterTaxi = "WaterTaxi",
+  Wheelchair = "Wheelchair",
+  WhiteWaterRafting = "WhiteWaterRafting",
+  Windsurf = "Windsurf",
+  ZipLine = "ZipLine",
 }
 
 /** Subset of RouteModes supporting route search */
 export enum RouteSearchableMode {
-  Bike = 'Bike',
-  Bus = 'Bus',
-  Camel = 'Camel',
-  Car = 'Car',
-  Cycling = 'Cycling',
-  ElectricCar = 'ElectricCar',
-  ElectricMotorbike = 'ElectricMotorbike',
-  Foot = 'Foot',
-  FourWheelDriving = 'FourWheelDriving',
-  Hike = 'Hike',
-  Hitchhiking = 'Hitchhiking',
-  Horse = 'Horse',
-  HorseAndCart = 'HorseAndCart',
-  InlineSkate = 'InlineSkate',
-  Minibus = 'Minibus',
-  Motorcycle = 'Motorcycle',
-  MountainBike = 'MountainBike',
-  NordicWalking = 'NordicWalking',
-  Rickshaw = 'Rickshaw',
-  Run = 'Run',
-  Scooter = 'Scooter',
-  Snowshoe = 'Snowshoe',
-  TaxiOrRideshare = 'TaxiOrRideshare',
-  TrailRun = 'TrailRun',
-  Trekking = 'Trekking',
-  WalkOrRide = 'WalkOrRide',
-  Wheelchair = 'Wheelchair'
+  Bike = "Bike",
+  Bus = "Bus",
+  Camel = "Camel",
+  Car = "Car",
+  Cycling = "Cycling",
+  ElectricCar = "ElectricCar",
+  ElectricMotorbike = "ElectricMotorbike",
+  Foot = "Foot",
+  FourWheelDriving = "FourWheelDriving",
+  Hike = "Hike",
+  Hitchhiking = "Hitchhiking",
+  Horse = "Horse",
+  HorseAndCart = "HorseAndCart",
+  InlineSkate = "InlineSkate",
+  Minibus = "Minibus",
+  Motorcycle = "Motorcycle",
+  MountainBike = "MountainBike",
+  NordicWalking = "NordicWalking",
+  Rickshaw = "Rickshaw",
+  Run = "Run",
+  Scooter = "Scooter",
+  Snowshoe = "Snowshoe",
+  TaxiOrRideshare = "TaxiOrRideshare",
+  TrailRun = "TrailRun",
+  Trekking = "Trekking",
+  WalkOrRide = "WalkOrRide",
+  Wheelchair = "Wheelchair",
 }
 
 /** One segment of a Route */
 export type RouteSegment = {
-  __typename?: 'RouteSegment';
+  __typename?: "RouteSegment";
   /** The estimated distance for this path */
-  distance?: Maybe<Scalars['Float']>;
+  distance?: Maybe<Scalars["Float"]>;
   /** The estimated duration for this path */
-  duration?: Maybe<Scalars['Float']>;
+  duration?: Maybe<Scalars["Float"]>;
   /** The estimated elevation details of this route */
   elevation: Elevation;
   /** The representation of this path as encoded as geojson FeatureCollection type */
-  geoJson?: Maybe<Scalars['JSON']>;
+  geoJson?: Maybe<Scalars["JSON"]>;
   /** WARNING: this ID is unstable, modifying the route might change the ID */
-  id: Scalars['ID'];
+  id: Scalars["ID"];
   /** The mode of transport to be taken. eg: car, walk, kayak, etc */
   mode: RouteMode;
   /** The path representation as encoded as a polyline format */
-  polyline?: Maybe<Scalars['String']>;
+  polyline?: Maybe<Scalars["String"]>;
   /** The way positions along this route */
   positions?: Maybe<Array<Position>>;
   /** Whether this route was searched for */
-  useRouteSearching: Scalars['Boolean'];
+  useRouteSearching: Scalars["Boolean"];
 };
-
 
 /** One segment of a Route */
 export type RouteSegmentDistanceArgs = {
   unit?: DistanceUnit;
 };
 
-
 /** One segment of a Route */
 export type RouteSegmentDurationArgs = {
   unit?: DurationUnit;
 };
 
-
 /** One segment of a Route */
 export type RouteSegmentGeoJsonArgs = {
   simplify?: InputMaybe<GeoJsonSimplification>;
 };
-
 
 /** One segment of a Route */
 export type RouteSegmentPolylineArgs = {
@@ -6831,57 +6613,57 @@ export type RouteSegmentPolylineArgs = {
 /** Create a RouteSegment */
 export type RouteSegmentInput = {
   /** The distance for this route segment */
-  distance?: InputMaybe<Scalars['Float']>;
+  distance?: InputMaybe<Scalars["Float"]>;
   /** The duration for this route segment */
-  duration?: InputMaybe<Scalars['Float']>;
+  duration?: InputMaybe<Scalars["Float"]>;
   /** The mode of transport to be taken on this segment, defaults to Car */
   mode?: InputMaybe<RouteMode>;
   /** The way positions along this route */
   positions?: InputMaybe<Array<PositionInput>>;
   /** Whether to plan out a route using the positions. Defaults to true if the mode is searchable and otherwise will be set to false */
-  useRouteSearching?: InputMaybe<Scalars['Boolean']>;
+  useRouteSearching?: InputMaybe<Scalars["Boolean"]>;
 };
 
 /** Determines which order a specific field will be ordered in */
 export enum SortDirection {
   /** Sort in ascending order */
-  Asc = 'Asc',
+  Asc = "Asc",
   /** Sort in descending order */
-  Desc = 'Desc'
+  Desc = "Desc",
 }
 
 /** Result of starting a media upload */
 export type StartMediaUploadPayload = {
-  __typename?: 'StartMediaUploadPayload';
+  __typename?: "StartMediaUploadPayload";
   /** Data to pass with the upload */
-  fields: Scalars['JSON'];
+  fields: Scalars["JSON"];
   /** The upload token, required when finalising the upload */
-  token: Scalars['String'];
+  token: Scalars["String"];
   /** The url to upload media to (via HTTP POST) */
-  url: Scalars['String'];
+  url: Scalars["String"];
 };
 
 /** A text search result with a label and matches to highlight */
 export type TextSearchResult = {
-  __typename?: 'TextSearchResult';
+  __typename?: "TextSearchResult";
   /** Search result label */
-  label: Scalars['String'];
+  label: Scalars["String"];
   /** Text substring matches in the label text */
   matches: Array<TextSearchResultMatch>;
 };
 
 /** A details of a single result from a text search */
 export type TextSearchResultMatch = {
-  __typename?: 'TextSearchResultMatch';
+  __typename?: "TextSearchResultMatch";
   /** Length of the match */
-  length: Scalars['Int'];
+  length: Scalars["Int"];
   /** Start of the match */
-  offset: Scalars['Int'];
+  offset: Scalars["Int"];
 };
 
 /** Result of unfollowing a profile */
 export type UnfollowProfilePayload = {
-  __typename?: 'UnfollowProfilePayload';
+  __typename?: "UnfollowProfilePayload";
   /** The follower profile */
   fromProfile: Profile;
   /** The status of the follow request */
@@ -6895,18 +6677,18 @@ export type UpdateBillingDetailsInput = {
   /** The billing address */
   address: BillingAddressInput;
   /** The email address */
-  emailAddress: Scalars['String'];
+  emailAddress: Scalars["String"];
   /** The family name */
-  familyName: Scalars['String'];
+  familyName: Scalars["String"];
   /** The given name */
-  givenName: Scalars['String'];
+  givenName: Scalars["String"];
   /** The optional organization name */
-  organization?: InputMaybe<Scalars['String']>;
+  organization?: InputMaybe<Scalars["String"]>;
 };
 
 /** The output after updating the billing details */
 export type UpdateBillingDetailsOutput = {
-  __typename?: 'UpdateBillingDetailsOutput';
+  __typename?: "UpdateBillingDetailsOutput";
   /** The updated billing details */
   billingDetails: BillingDetails;
 };
@@ -6918,25 +6700,25 @@ export type UpdateCollectionInput = {
   /** Delete attributes to the collection */
   deleteAttrs?: InputMaybe<Array<AttributeIdentifierInput>>;
   /** Delete one or move MediaContainers */
-  deleteMedia?: InputMaybe<Array<Scalars['ID']>>;
+  deleteMedia?: InputMaybe<Array<Scalars["ID"]>>;
   /** The description for the collection */
-  description?: InputMaybe<Scalars['String']>;
+  description?: InputMaybe<Scalars["String"]>;
   /** Move one or move MediaContainers */
   moveMedia?: InputMaybe<Array<MoveMediaContainerInput>>;
   /** Alias for the read-more attribute */
-  readMoreUrl?: InputMaybe<Scalars['String']>;
+  readMoreUrl?: InputMaybe<Scalars["String"]>;
   /** The synopsis for the collection */
-  synopsis?: InputMaybe<Scalars['String']>;
+  synopsis?: InputMaybe<Scalars["String"]>;
   /** The tags for the collection */
-  tags?: InputMaybe<Array<Scalars['String']>>;
+  tags?: InputMaybe<Array<Scalars["String"]>>;
   /** The title for the collection */
-  title?: InputMaybe<Scalars['String']>;
+  title?: InputMaybe<Scalars["String"]>;
   /** Update one or move MediaContainers */
   updateMedia?: InputMaybe<Array<UpdateMediaContainerInput>>;
   /** Insert or update attributes to the collection */
   upsertAttrs?: InputMaybe<Array<AttributeInput>>;
   /** Alias for the website-url attribute */
-  websiteUrl?: InputMaybe<Scalars['String']>;
+  websiteUrl?: InputMaybe<Scalars["String"]>;
 };
 
 /** The fields for the collection location to update */
@@ -6946,13 +6728,13 @@ export type UpdateCollectionLocationInput = {
   /** Delete attributes to the collection */
   deleteAttrs?: InputMaybe<Array<AttributeIdentifierInput>>;
   /** Delete one or move MediaContainers */
-  deleteMedia?: InputMaybe<Array<Scalars['ID']>>;
+  deleteMedia?: InputMaybe<Array<Scalars["ID"]>>;
   /** A longer description content for this item */
-  description?: InputMaybe<Scalars['String']>;
+  description?: InputMaybe<Scalars["String"]>;
   /** Identifier from an external source this item is associated with */
-  externalId?: InputMaybe<Scalars['ID']>;
+  externalId?: InputMaybe<Scalars["ID"]>;
   /** The source of this item's externalId */
-  externalSource?: InputMaybe<Scalars['ID']>;
+  externalSource?: InputMaybe<Scalars["ID"]>;
   /** Move one or move MediaContainers */
   moveMedia?: InputMaybe<Array<MoveMediaContainerInput>>;
   /** The associated place information for this item */
@@ -6960,33 +6742,33 @@ export type UpdateCollectionLocationInput = {
   /** Override for the place's position */
   position?: InputMaybe<PositionInput>;
   /** Shortcut for setting the read-more attribute */
-  readMoreUrl?: InputMaybe<Scalars['String']>;
+  readMoreUrl?: InputMaybe<Scalars["String"]>;
   /** One or more sections for this item */
-  sectionIds?: InputMaybe<Array<Scalars['ID']>>;
+  sectionIds?: InputMaybe<Array<Scalars["ID"]>>;
   /** A longer description content for this item */
-  synopsis?: InputMaybe<Scalars['String']>;
+  synopsis?: InputMaybe<Scalars["String"]>;
   /** A collection of strings used to label this item */
-  tags?: InputMaybe<Array<Scalars['String']>>;
+  tags?: InputMaybe<Array<Scalars["String"]>>;
   /** Title for this item */
-  title?: InputMaybe<Scalars['String']>;
+  title?: InputMaybe<Scalars["String"]>;
   /** Update one or move MediaContainers */
   updateMedia?: InputMaybe<Array<UpdateMediaContainerInput>>;
   /** Insert or update attributes to the collection */
   upsertAttrs?: InputMaybe<Array<AttributeInput>>;
   /** Shortcut for setting the website-url attribute */
-  websiteUrl?: InputMaybe<Scalars['String']>;
+  websiteUrl?: InputMaybe<Scalars["String"]>;
 };
 
 /** The fields available after the collection location has been updated */
 export type UpdateCollectionLocationPayload = {
-  __typename?: 'UpdateCollectionLocationPayload';
+  __typename?: "UpdateCollectionLocationPayload";
   /** The collection location that was updated */
   location?: Maybe<CollectionLocation>;
 };
 
 /** The available fields after updating a collection */
 export type UpdateCollectionPayload = {
-  __typename?: 'UpdateCollectionPayload';
+  __typename?: "UpdateCollectionPayload";
   /** The updated collection */
   collection?: Maybe<Collection>;
 };
@@ -6996,16 +6778,16 @@ export type UpdateConnectedAppInput = {
   /** The type of the connected-app */
   authType?: InputMaybe<ConnectedAppAuthType>;
   /** Encrypted JSON */
-  privateConfiguration?: InputMaybe<Scalars['String']>;
+  privateConfiguration?: InputMaybe<Scalars["String"]>;
   /** 3rd party ID or account ID */
-  publicId?: InputMaybe<Scalars['ID']>;
+  publicId?: InputMaybe<Scalars["ID"]>;
   /** Any specific scope that has been granted to the 3rd party application */
-  scope?: InputMaybe<Scalars['String']>;
+  scope?: InputMaybe<Scalars["String"]>;
 };
 
 /** The available fields after updating a connected app */
 export type UpdateConnectedAppPayload = {
-  __typename?: 'UpdateConnectedAppPayload';
+  __typename?: "UpdateConnectedAppPayload";
   /** The updated connected app */
   connectedApp?: Maybe<ConnectedApp>;
 };
@@ -7013,19 +6795,19 @@ export type UpdateConnectedAppPayload = {
 /** Update an IconComposition */
 export type UpdateIconCompositionInput = {
   /** Change the fill color for the icon, set to null to remove the fill */
-  iconFill?: InputMaybe<Scalars['String']>;
+  iconFill?: InputMaybe<Scalars["String"]>;
   /** ID of the IconComposition to update */
-  id: Scalars['String'];
+  id: Scalars["String"];
   /** Change the name */
-  name?: InputMaybe<Scalars['String']>;
+  name?: InputMaybe<Scalars["String"]>;
   /** Change the Icon used by this IconComposition */
-  resourceId?: InputMaybe<Scalars['ID']>;
+  resourceId?: InputMaybe<Scalars["ID"]>;
   /** Change the fill color for the shield, set to null to remove the fill */
-  shieldFill?: InputMaybe<Scalars['String']>;
+  shieldFill?: InputMaybe<Scalars["String"]>;
   /** Change which shield to use for the icon, set to null to clear the shieldFill and shieldStroke as well */
-  shieldKey?: InputMaybe<Scalars['String']>;
+  shieldKey?: InputMaybe<Scalars["String"]>;
   /** Change the stroke color for the shield, set to null to remove the stroke */
-  shieldStroke?: InputMaybe<Scalars['String']>;
+  shieldStroke?: InputMaybe<Scalars["String"]>;
 };
 
 /** Fields for updating an IconSilhouette */
@@ -7033,18 +6815,18 @@ export type UpdateIconSilhouetteInput = {
   /** Delete attributes to the icon */
   deleteAttrs?: InputMaybe<Array<AttributeIdentifierInput>>;
   /** Change the name of this icon */
-  name?: InputMaybe<Scalars['String']>;
+  name?: InputMaybe<Scalars["String"]>;
   /** SVG path data for this icon, eg: "M 100 .." */
-  paths?: InputMaybe<Array<Scalars['String']>>;
+  paths?: InputMaybe<Array<Scalars["String"]>>;
   /** Insert or update attributes to the icon */
   upsertAttrs?: InputMaybe<Array<AttributeInput>>;
   /** Optional SVG viewBox for this icon */
-  viewBox?: InputMaybe<Scalars['String']>;
+  viewBox?: InputMaybe<Scalars["String"]>;
 };
 
 /** The response after updating an icon */
 export type UpdateIconSilhouettePayload = {
-  __typename?: 'UpdateIconSilhouettePayload';
+  __typename?: "UpdateIconSilhouettePayload";
   /** The updated icon */
   icon?: Maybe<IconSilhouette>;
 };
@@ -7056,30 +6838,30 @@ export type UpdateItineraryCollectionInput = {
   /** Delete attributes to the itinerary-collection */
   deleteAttrs?: InputMaybe<Array<AttributeIdentifierInput>>;
   /** Delete one or move MediaContainers */
-  deleteMedia?: InputMaybe<Array<Scalars['ID']>>;
+  deleteMedia?: InputMaybe<Array<Scalars["ID"]>>;
   /** The description for the itinerary-collection */
-  description?: InputMaybe<Scalars['String']>;
+  description?: InputMaybe<Scalars["String"]>;
   /** Move one or move MediaContainers */
   moveMedia?: InputMaybe<Array<MoveMediaContainerInput>>;
   /** Alias for the read-more attribute */
-  readMoreUrl?: InputMaybe<Scalars['String']>;
+  readMoreUrl?: InputMaybe<Scalars["String"]>;
   /** The synopsis for the itinerary-collection */
-  synopsis?: InputMaybe<Scalars['String']>;
+  synopsis?: InputMaybe<Scalars["String"]>;
   /** The tags for the itinerary-collection */
-  tags?: InputMaybe<Array<Scalars['String']>>;
+  tags?: InputMaybe<Array<Scalars["String"]>>;
   /** The title for the itinerary-collection */
-  title?: InputMaybe<Scalars['String']>;
+  title?: InputMaybe<Scalars["String"]>;
   /** Update one or move MediaContainers */
   updateMedia?: InputMaybe<Array<UpdateMediaContainerInput>>;
   /** Insert or update attributes to the itinerary-collection */
   upsertAttrs?: InputMaybe<Array<AttributeInput>>;
   /** Alias for the website-url attribute */
-  websiteUrl?: InputMaybe<Scalars['String']>;
+  websiteUrl?: InputMaybe<Scalars["String"]>;
 };
 
 /** The fields available after updating the itinerary collection */
 export type UpdateItineraryCollectionPayload = {
-  __typename?: 'UpdateItineraryCollectionPayload';
+  __typename?: "UpdateItineraryCollectionPayload";
   /** Other changes to the itinerary that caused by deleting the itinerary-item */
   cascaded: ItineraryItemCascadedChanges;
   /** The itinerary collection that was created */
@@ -7095,11 +6877,11 @@ export type UpdateItineraryDirectionsInput = {
   /** Delete attributes to the collection */
   deleteAttrs?: InputMaybe<Array<AttributeIdentifierInput>>;
   /** Delete one or move MediaContainers */
-  deleteMedia?: InputMaybe<Array<Scalars['ID']>>;
+  deleteMedia?: InputMaybe<Array<Scalars["ID"]>>;
   /** The description for the itinerary-directions */
-  description?: InputMaybe<Scalars['String']>;
+  description?: InputMaybe<Scalars["String"]>;
   /** The distance of the itinerary-directions */
-  distance?: InputMaybe<Scalars['Float']>;
+  distance?: InputMaybe<Scalars["Float"]>;
   /** The duration details of the new itinerary-directions */
   durations?: InputMaybe<Array<ItineraryDirectionsDurationsInput>>;
   /** The elevation details of the new itinerary-directions */
@@ -7107,28 +6889,28 @@ export type UpdateItineraryDirectionsInput = {
   /** Move one or move MediaContainers */
   moveMedia?: InputMaybe<Array<MoveMediaContainerInput>>;
   /** The origin/starting itinerary location item, in the form of item/XYZ */
-  originId?: InputMaybe<Scalars['ID']>;
+  originId?: InputMaybe<Scalars["ID"]>;
   /** Alias for the read-more attribute */
-  readMoreUrl?: InputMaybe<Scalars['String']>;
+  readMoreUrl?: InputMaybe<Scalars["String"]>;
   /** The route of this item, must include at least one route segment */
   route?: InputMaybe<RouteInput>;
   /** The synopsis for the itinerary-directions */
-  synopsis?: InputMaybe<Scalars['String']>;
+  synopsis?: InputMaybe<Scalars["String"]>;
   /** The tags for the itinerary-directions */
-  tags?: InputMaybe<Array<Scalars['String']>>;
+  tags?: InputMaybe<Array<Scalars["String"]>>;
   /** The title for the itinerary directions */
-  title?: InputMaybe<Scalars['String']>;
+  title?: InputMaybe<Scalars["String"]>;
   /** Update one or move MediaContainers */
   updateMedia?: InputMaybe<Array<UpdateMediaContainerInput>>;
   /** Insert or update attributes to the collection */
   upsertAttrs?: InputMaybe<Array<AttributeInput>>;
   /** Alias for the website-url attribute */
-  websiteUrl?: InputMaybe<Scalars['String']>;
+  websiteUrl?: InputMaybe<Scalars["String"]>;
 };
 
 /** The fields available after updating the itinerary directions item */
 export type UpdateItineraryDirectionsPayload = {
-  __typename?: 'UpdateItineraryDirectionsPayload';
+  __typename?: "UpdateItineraryDirectionsPayload";
   /** Other changes to the itinerary that caused by deleting the itinerary-item */
   cascaded: ItineraryItemCascadedChanges;
   /** The updated itinerary directions item */
@@ -7142,33 +6924,33 @@ export type UpdateItineraryInput = {
   /** Enable auto routing, or set to null to disable */
   autoRoute?: InputMaybe<ItineraryAutoRouteInput>;
   /** Remove any routes that were created with auto routing */
-  autoRouteRemoveExisting?: InputMaybe<Scalars['Boolean']>;
+  autoRouteRemoveExisting?: InputMaybe<Scalars["Boolean"]>;
   /** Add new IconCompositions to the itinerary */
   createIcons?: InputMaybe<Array<CreateIconCompositionInput>>;
   /** Add multiple Media with MediaResources */
   createMedia?: InputMaybe<Array<CreateMediaContainerInput>>;
   /** The default locale of this itinerary's content */
-  defaultLocale?: InputMaybe<Scalars['String']>;
+  defaultLocale?: InputMaybe<Scalars["String"]>;
   /** Delete attributes to the collection */
   deleteAttrs?: InputMaybe<Array<AttributeIdentifierInput>>;
   /** Delete one or move IconCompositions */
-  deleteIcons?: InputMaybe<Array<Scalars['ID']>>;
+  deleteIcons?: InputMaybe<Array<Scalars["ID"]>>;
   /** Delete one or move MediaContainers */
-  deleteMedia?: InputMaybe<Array<Scalars['ID']>>;
+  deleteMedia?: InputMaybe<Array<Scalars["ID"]>>;
   /** The description for the itinerary */
-  description?: InputMaybe<Scalars['String']>;
+  description?: InputMaybe<Scalars["String"]>;
   /** Elevation data of the new itinerary */
   elevation?: InputMaybe<ElevationInput>;
   /** Move one or move MediaContainers */
   moveMedia?: InputMaybe<Array<MoveMediaContainerInput>>;
   /** Alias for the read-more attribute */
-  readMoreUrl?: InputMaybe<Scalars['String']>;
+  readMoreUrl?: InputMaybe<Scalars["String"]>;
   /** The synopsis for the itinerary */
-  synopsis?: InputMaybe<Scalars['String']>;
+  synopsis?: InputMaybe<Scalars["String"]>;
   /** The tags for the itinerary */
-  tags?: InputMaybe<Array<Scalars['String']>>;
+  tags?: InputMaybe<Array<Scalars["String"]>>;
   /** The title for the itinerary */
-  title?: InputMaybe<Scalars['String']>;
+  title?: InputMaybe<Scalars["String"]>;
   /** Update IconCompositions in the itinerary */
   updateIcons?: InputMaybe<Array<UpdateIconCompositionInput>>;
   /** Update one or move MediaContainers */
@@ -7176,7 +6958,7 @@ export type UpdateItineraryInput = {
   /** Insert or update attributes to the collection */
   upsertAttrs?: InputMaybe<Array<AttributeInput>>;
   /** Alias for the website-url attribute */
-  websiteUrl?: InputMaybe<Scalars['String']>;
+  websiteUrl?: InputMaybe<Scalars["String"]>;
 };
 
 /** The fields to update on an itinerary location */
@@ -7188,38 +6970,38 @@ export type UpdateItineraryLocationInput = {
   /** Delete attributes to the itinerary-collection */
   deleteAttrs?: InputMaybe<Array<AttributeIdentifierInput>>;
   /** Delete one or move MediaContainers */
-  deleteMedia?: InputMaybe<Array<Scalars['ID']>>;
+  deleteMedia?: InputMaybe<Array<Scalars["ID"]>>;
   /** The description for the itinerary-location */
-  description?: InputMaybe<Scalars['String']>;
+  description?: InputMaybe<Scalars["String"]>;
   /** Set or remove the optional icon, passed ID must exist in the Itinerary.icons */
-  icon?: InputMaybe<Scalars['ID']>;
+  icon?: InputMaybe<Scalars["ID"]>;
   /** Move one or move MediaContainers */
   moveMedia?: InputMaybe<Array<MoveMediaContainerInput>>;
   /** Whether the location specified is optional on the itinerary */
-  optional?: InputMaybe<Scalars['Boolean']>;
+  optional?: InputMaybe<Scalars["Boolean"]>;
   /** The place for this itinerary-location */
   place?: InputMaybe<PlaceInput>;
   /** The place for this itinerary-location */
   position?: InputMaybe<PositionInput>;
   /** Alias for the read-more attribute */
-  readMoreUrl?: InputMaybe<Scalars['String']>;
+  readMoreUrl?: InputMaybe<Scalars["String"]>;
   /** The synopsis for the itinerary-location */
-  synopsis?: InputMaybe<Scalars['String']>;
+  synopsis?: InputMaybe<Scalars["String"]>;
   /** The tags for the itinerary-location */
-  tags?: InputMaybe<Array<Scalars['String']>>;
+  tags?: InputMaybe<Array<Scalars["String"]>>;
   /** The title for the itinerary-location */
-  title?: InputMaybe<Scalars['String']>;
+  title?: InputMaybe<Scalars["String"]>;
   /** Update one or move MediaContainers */
   updateMedia?: InputMaybe<Array<UpdateMediaContainerInput>>;
   /** Insert or update attributes to the itinerary-collection */
   upsertAttrs?: InputMaybe<Array<AttributeInput>>;
   /** Alias for the website-url attribute */
-  websiteUrl?: InputMaybe<Scalars['String']>;
+  websiteUrl?: InputMaybe<Scalars["String"]>;
 };
 
 /** The fields available after updating a location */
 export type UpdateItineraryLocationPayload = {
-  __typename?: 'UpdateItineraryLocationPayload';
+  __typename?: "UpdateItineraryLocationPayload";
   /** Other changes to the itinerary that caused by deleting the itinerary-item */
   cascaded: ItineraryItemCascadedChanges;
   /** The modified itinerary */
@@ -7230,7 +7012,7 @@ export type UpdateItineraryLocationPayload = {
 
 /** The available fields after updating a itinerary */
 export type UpdateItineraryPayload = {
-  __typename?: 'UpdateItineraryPayload';
+  __typename?: "UpdateItineraryPayload";
   /** Other changes to the itinerary that caused by updating the itinerary */
   cascaded: ItineraryItemCascadedChanges;
   /** The updated itinerary */
@@ -7240,30 +7022,30 @@ export type UpdateItineraryPayload = {
 /** Update a MediaContainer in a MediaContainer list */
 export type UpdateMediaContainerInput = {
   /** ID to the MediaContainer to update */
-  id: Scalars['String'];
+  id: Scalars["String"];
   /** ID to a MediaResource */
-  resourceId?: InputMaybe<Scalars['String']>;
+  resourceId?: InputMaybe<Scalars["String"]>;
 };
 
 /** Updates a media resource */
 export type UpdateMediaResourceInput = {
   /** Text attribution for the source of the media-resource */
-  attribution?: InputMaybe<Scalars['String']>;
+  attribution?: InputMaybe<Scalars["String"]>;
   /** Text caption for the media-resource */
-  caption?: InputMaybe<Scalars['String']>;
+  caption?: InputMaybe<Scalars["String"]>;
   /** Copyright details of the media-resource */
-  copyright?: InputMaybe<Scalars['String']>;
+  copyright?: InputMaybe<Scalars["String"]>;
   /** Delete attributes to the media-resource */
   deleteAttrs?: InputMaybe<Array<AttributeIdentifierInput>>;
   /** List of labels to apply to the media-resource */
-  tags?: InputMaybe<Array<Scalars['String']>>;
+  tags?: InputMaybe<Array<Scalars["String"]>>;
   /** Insert or update attributes to the media-resource */
   upsertAttrs?: InputMaybe<Array<AttributeInput>>;
 };
 
 /** Response payload to Mutation.updateMediaResource */
 export type UpdateMediaResourcePayload = {
-  __typename?: 'UpdateMediaResourcePayload';
+  __typename?: "UpdateMediaResourcePayload";
   /** The updated media-resource */
   resource: MediaResource;
 };
@@ -7271,55 +7053,54 @@ export type UpdateMediaResourcePayload = {
 /** Input object to Mutation.updateProfile */
 export type UpdateProfileInput = {
   /** If follow requests should be automatically approved for this profile */
-  autoApproveFollows?: InputMaybe<Scalars['Boolean']>;
+  autoApproveFollows?: InputMaybe<Scalars["Boolean"]>;
   /** The avatar image */
   avatar?: InputMaybe<MediaContainerInput>;
   /** A short biography */
-  bio?: InputMaybe<Scalars['String']>;
+  bio?: InputMaybe<Scalars["String"]>;
   /** Delete attributes to the profile */
   deleteAttrs?: InputMaybe<Array<AttributeIdentifierInput>>;
   /** The name of the profile */
-  name?: InputMaybe<Scalars['String']>;
+  name?: InputMaybe<Scalars["String"]>;
   /** The type of profile */
   type?: InputMaybe<ProfileType>;
   /** Insert or update attributes to the profile */
   upsertAttrs?: InputMaybe<Array<AttributeInput>>;
   /** The website url */
-  websiteUrl?: InputMaybe<Scalars['String']>;
+  websiteUrl?: InputMaybe<Scalars["String"]>;
 };
 
 /** Response payload to Mutation.updateProfile */
 export type UpdateProfilePayload = {
-  __typename?: 'UpdateProfilePayload';
+  __typename?: "UpdateProfilePayload";
   /** The updated profile */
   profile?: Maybe<Profile>;
 };
 
 /** An agreement made by a user */
 export type UserAgreement = Node & {
-  __typename?: 'UserAgreement';
+  __typename?: "UserAgreement";
   /** The date when the agreement was made */
-  date?: Maybe<Scalars['String']>;
+  date?: Maybe<Scalars["String"]>;
   /** The Globally Unique ID of the object. */
-  id: Scalars['ID'];
+  id: Scalars["ID"];
   /** Profile that associated with this agreement */
   profile?: Maybe<Profile>;
   /** The type of agreement */
-  type: Scalars['String'];
+  type: Scalars["String"];
 };
-
 
 /** An agreement made by a user */
 export type UserAgreementDateArgs = {
-  format?: InputMaybe<Scalars['String']>;
-  locale?: InputMaybe<Scalars['String']>;
-  relativeTo?: InputMaybe<Scalars['String']>;
-  timeZone?: InputMaybe<Scalars['String']>;
+  format?: InputMaybe<Scalars["String"]>;
+  locale?: InputMaybe<Scalars["String"]>;
+  relativeTo?: InputMaybe<Scalars["String"]>;
+  timeZone?: InputMaybe<Scalars["String"]>;
 };
 
 /** Connection of UserAgreements */
 export type UserAgreementConnection = {
-  __typename?: 'UserAgreementConnection';
+  __typename?: "UserAgreementConnection";
   /** All the edges in this page of the connection */
   edges: Array<UserAgreementEdge>;
   /** Shortcut for edges[].node */
@@ -7327,398 +7108,1615 @@ export type UserAgreementConnection = {
   /** Details regarding the current page of the connnection */
   pageInfo: PageInfo;
   /** The total number of items in the connection (in all pages) */
-  totalCount: Scalars['Int'];
+  totalCount: Scalars["Int"];
 };
 
 /** Edge containing a UserAgreement */
 export type UserAgreementEdge = {
-  __typename?: 'UserAgreementEdge';
+  __typename?: "UserAgreementEdge";
   /** The cursor string pointing to this item */
-  cursor: Scalars['String'];
+  cursor: Scalars["String"];
   /** The item */
   node: UserAgreement;
 };
 
 export type CreateCollectionLocationMutationVariables = Exact<{
-  collectionId: Scalars['ID'];
+  collectionId: Scalars["ID"];
   location: CreateCollectionLocationInput;
 }>;
 
-
-export type CreateCollectionLocationMutation = { __typename?: 'Mutation', createCollectionLocation: { __typename: 'CreateCollectionLocationPayload', location?: { __typename: 'CollectionLocation', id: string, title?: string | null, synopsis?: string | null, description?: string | null, tags: Array<string>, readMoreUrl?: string | null, websiteUrl?: string | null, place: { __typename: 'Place', id: string, name?: string | null, synopsis?: string | null, maki?: string | null, position: { __typename?: 'Position', lon: number, lat: number }, address: { __typename?: 'PlaceAddress', addressLineOne?: string | null, addressLineTwo?: string | null, addressLineThree?: string | null, locality?: string | null, region?: string | null, regionCode?: string | null, country?: string | null, countryCode?: string | null }, layers: Array<{ __typename: 'PlaceLayer', id: string, name?: string | null }> }, position: { __typename?: 'Position', lon: number, lat: number } } | null } };
+export type CreateCollectionLocationMutation = {
+  __typename?: "Mutation";
+  createCollectionLocation: {
+    __typename: "CreateCollectionLocationPayload";
+    location?: {
+      __typename: "CollectionLocation";
+      id: string;
+      title?: string | null;
+      synopsis?: string | null;
+      description?: string | null;
+      tags: Array<string>;
+      readMoreUrl?: string | null;
+      websiteUrl?: string | null;
+      place: {
+        __typename: "Place";
+        id: string;
+        name?: string | null;
+        synopsis?: string | null;
+        maki?: string | null;
+        position: { __typename?: "Position"; lon: number; lat: number };
+        address: {
+          __typename?: "PlaceAddress";
+          addressLineOne?: string | null;
+          addressLineTwo?: string | null;
+          addressLineThree?: string | null;
+          locality?: string | null;
+          region?: string | null;
+          regionCode?: string | null;
+          country?: string | null;
+          countryCode?: string | null;
+        };
+        layers: Array<{
+          __typename: "PlaceLayer";
+          id: string;
+          name?: string | null;
+        }>;
+      };
+      position: { __typename?: "Position"; lon: number; lat: number };
+    } | null;
+  };
+};
 
 export type DeleteCollectionLocationMutationVariables = Exact<{
-  id: Scalars['ID'];
+  id: Scalars["ID"];
 }>;
 
-
-export type DeleteCollectionLocationMutation = { __typename?: 'Mutation', deleteCollectionItem: { __typename: 'DeleteCollectionItemPayload' } };
+export type DeleteCollectionLocationMutation = {
+  __typename?: "Mutation";
+  deleteCollectionItem: { __typename: "DeleteCollectionItemPayload" };
+};
 
 export type FindCollectionLocationIdsByExternalQueryVariables = Exact<{
-  collectionId?: InputMaybe<Array<Scalars['ID']> | Scalars['ID']>;
-  externalIds?: InputMaybe<Array<Scalars['ID']> | Scalars['ID']>;
-  externalSources?: InputMaybe<Array<Scalars['ID']> | Scalars['ID']>;
-  first: Scalars['Int'];
-  after?: InputMaybe<Scalars['String']>;
+  collectionId?: InputMaybe<Array<Scalars["ID"]> | Scalars["ID"]>;
+  externalIds?: InputMaybe<Array<Scalars["ID"]> | Scalars["ID"]>;
+  externalSources?: InputMaybe<Array<Scalars["ID"]> | Scalars["ID"]>;
+  first: Scalars["Int"];
+  after?: InputMaybe<Scalars["String"]>;
 }>;
 
-
-export type FindCollectionLocationIdsByExternalQuery = { __typename?: 'Query', collectionItems: { __typename: 'CollectionItemConnection', totalCount: number, edges: Array<{ __typename?: 'CollectionItemEdge', cursor: string, node: { __typename: 'CollectionLocation', id: string, place: { __typename: 'Place', id: string } } }>, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: string | null, endCursor?: string | null } } };
+export type FindCollectionLocationIdsByExternalQuery = {
+  __typename?: "Query";
+  collectionItems: {
+    __typename: "CollectionItemConnection";
+    totalCount: number;
+    edges: Array<{
+      __typename?: "CollectionItemEdge";
+      cursor: string;
+      node: {
+        __typename: "CollectionLocation";
+        id: string;
+        place: { __typename: "Place"; id: string };
+      };
+    }>;
+    pageInfo: {
+      __typename?: "PageInfo";
+      hasNextPage: boolean;
+      hasPreviousPage: boolean;
+      startCursor?: string | null;
+      endCursor?: string | null;
+    };
+  };
+};
 
 export type FindCollectionLocationIdsByTagQueryVariables = Exact<{
-  collectionId?: InputMaybe<Array<Scalars['ID']> | Scalars['ID']>;
-  tags?: InputMaybe<Array<Scalars['String']> | Scalars['String']>;
-  first: Scalars['Int'];
-  after?: InputMaybe<Scalars['String']>;
+  collectionId?: InputMaybe<Array<Scalars["ID"]> | Scalars["ID"]>;
+  tags?: InputMaybe<Array<Scalars["String"]> | Scalars["String"]>;
+  first: Scalars["Int"];
+  after?: InputMaybe<Scalars["String"]>;
 }>;
 
-
-export type FindCollectionLocationIdsByTagQuery = { __typename?: 'Query', collectionItems: { __typename: 'CollectionItemConnection', totalCount: number, edges: Array<{ __typename?: 'CollectionItemEdge', cursor: string, node: { __typename: 'CollectionLocation', id: string, place: { __typename: 'Place', id: string } } }>, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: string | null, endCursor?: string | null } } };
+export type FindCollectionLocationIdsByTagQuery = {
+  __typename?: "Query";
+  collectionItems: {
+    __typename: "CollectionItemConnection";
+    totalCount: number;
+    edges: Array<{
+      __typename?: "CollectionItemEdge";
+      cursor: string;
+      node: {
+        __typename: "CollectionLocation";
+        id: string;
+        place: { __typename: "Place"; id: string };
+      };
+    }>;
+    pageInfo: {
+      __typename?: "PageInfo";
+      hasNextPage: boolean;
+      hasPreviousPage: boolean;
+      startCursor?: string | null;
+      endCursor?: string | null;
+    };
+  };
+};
 
 export type FindCollectionLocationsByExternalQueryVariables = Exact<{
-  collectionId?: InputMaybe<Array<Scalars['ID']> | Scalars['ID']>;
-  externalIds?: InputMaybe<Array<Scalars['ID']> | Scalars['ID']>;
-  externalSources?: InputMaybe<Array<Scalars['ID']> | Scalars['ID']>;
-  first: Scalars['Int'];
-  after?: InputMaybe<Scalars['String']>;
+  collectionId?: InputMaybe<Array<Scalars["ID"]> | Scalars["ID"]>;
+  externalIds?: InputMaybe<Array<Scalars["ID"]> | Scalars["ID"]>;
+  externalSources?: InputMaybe<Array<Scalars["ID"]> | Scalars["ID"]>;
+  first: Scalars["Int"];
+  after?: InputMaybe<Scalars["String"]>;
 }>;
 
-
-export type FindCollectionLocationsByExternalQuery = { __typename?: 'Query', collectionItems: { __typename: 'CollectionItemConnection', totalCount: number, edges: Array<{ __typename?: 'CollectionItemEdge', cursor: string, node: { __typename: 'CollectionLocation', id: string, title?: string | null, synopsis?: string | null, tags: Array<string>, readMoreUrl?: string | null, place: { __typename: 'Place', id: string, name?: string | null, synopsis?: string | null, maki?: string | null, position: { __typename?: 'Position', lon: number, lat: number }, address: { __typename?: 'PlaceAddress', addressLineOne?: string | null, addressLineTwo?: string | null, addressLineThree?: string | null, locality?: string | null, region?: string | null, regionCode?: string | null, country?: string | null, countryCode?: string | null }, layers: Array<{ __typename: 'PlaceLayer', id: string, name?: string | null }> }, position: { __typename?: 'Position', lon: number, lat: number }, externalId?: { __typename?: 'Attribute', value?: any | null } | null, externalSource?: { __typename?: 'Attribute', value?: any | null } | null } }>, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: string | null, endCursor?: string | null } } };
+export type FindCollectionLocationsByExternalQuery = {
+  __typename?: "Query";
+  collectionItems: {
+    __typename: "CollectionItemConnection";
+    totalCount: number;
+    edges: Array<{
+      __typename?: "CollectionItemEdge";
+      cursor: string;
+      node: {
+        __typename: "CollectionLocation";
+        id: string;
+        title?: string | null;
+        synopsis?: string | null;
+        tags: Array<string>;
+        readMoreUrl?: string | null;
+        place: {
+          __typename: "Place";
+          id: string;
+          name?: string | null;
+          synopsis?: string | null;
+          maki?: string | null;
+          position: { __typename?: "Position"; lon: number; lat: number };
+          address: {
+            __typename?: "PlaceAddress";
+            addressLineOne?: string | null;
+            addressLineTwo?: string | null;
+            addressLineThree?: string | null;
+            locality?: string | null;
+            region?: string | null;
+            regionCode?: string | null;
+            country?: string | null;
+            countryCode?: string | null;
+          };
+          layers: Array<{
+            __typename: "PlaceLayer";
+            id: string;
+            name?: string | null;
+          }>;
+        };
+        position: { __typename?: "Position"; lon: number; lat: number };
+        externalId?: { __typename?: "Attribute"; value?: any | null } | null;
+        externalSource?: {
+          __typename?: "Attribute";
+          value?: any | null;
+        } | null;
+      };
+    }>;
+    pageInfo: {
+      __typename?: "PageInfo";
+      hasNextPage: boolean;
+      hasPreviousPage: boolean;
+      startCursor?: string | null;
+      endCursor?: string | null;
+    };
+  };
+};
 
 export type FindCollectionLocationsByTagQueryVariables = Exact<{
-  collectionId?: InputMaybe<Array<Scalars['ID']> | Scalars['ID']>;
-  tags?: InputMaybe<Array<Scalars['String']> | Scalars['String']>;
-  first: Scalars['Int'];
-  after?: InputMaybe<Scalars['String']>;
+  collectionId?: InputMaybe<Array<Scalars["ID"]> | Scalars["ID"]>;
+  tags?: InputMaybe<Array<Scalars["String"]> | Scalars["String"]>;
+  first: Scalars["Int"];
+  after?: InputMaybe<Scalars["String"]>;
 }>;
 
+export type FindCollectionLocationsByTagQuery = {
+  __typename?: "Query";
+  collectionItems: {
+    __typename: "CollectionItemConnection";
+    totalCount: number;
+    edges: Array<{
+      __typename?: "CollectionItemEdge";
+      cursor: string;
+      node: {
+        __typename: "CollectionLocation";
+        id: string;
+        title?: string | null;
+        synopsis?: string | null;
+        tags: Array<string>;
+        readMoreUrl?: string | null;
+        place: {
+          __typename: "Place";
+          id: string;
+          name?: string | null;
+          synopsis?: string | null;
+          maki?: string | null;
+          position: { __typename?: "Position"; lon: number; lat: number };
+          address: {
+            __typename?: "PlaceAddress";
+            addressLineOne?: string | null;
+            addressLineTwo?: string | null;
+            addressLineThree?: string | null;
+            locality?: string | null;
+            region?: string | null;
+            regionCode?: string | null;
+            country?: string | null;
+            countryCode?: string | null;
+          };
+          layers: Array<{
+            __typename: "PlaceLayer";
+            id: string;
+            name?: string | null;
+          }>;
+        };
+        position: { __typename?: "Position"; lon: number; lat: number };
+        externalId?: { __typename?: "Attribute"; value?: any | null } | null;
+        externalSource?: {
+          __typename?: "Attribute";
+          value?: any | null;
+        } | null;
+      };
+    }>;
+    pageInfo: {
+      __typename?: "PageInfo";
+      hasNextPage: boolean;
+      hasPreviousPage: boolean;
+      startCursor?: string | null;
+      endCursor?: string | null;
+    };
+  };
+};
 
-export type FindCollectionLocationsByTagQuery = { __typename?: 'Query', collectionItems: { __typename: 'CollectionItemConnection', totalCount: number, edges: Array<{ __typename?: 'CollectionItemEdge', cursor: string, node: { __typename: 'CollectionLocation', id: string, title?: string | null, synopsis?: string | null, tags: Array<string>, readMoreUrl?: string | null, place: { __typename: 'Place', id: string, name?: string | null, synopsis?: string | null, maki?: string | null, position: { __typename?: 'Position', lon: number, lat: number }, address: { __typename?: 'PlaceAddress', addressLineOne?: string | null, addressLineTwo?: string | null, addressLineThree?: string | null, locality?: string | null, region?: string | null, regionCode?: string | null, country?: string | null, countryCode?: string | null }, layers: Array<{ __typename: 'PlaceLayer', id: string, name?: string | null }> }, position: { __typename?: 'Position', lon: number, lat: number }, externalId?: { __typename?: 'Attribute', value?: any | null } | null, externalSource?: { __typename?: 'Attribute', value?: any | null } | null } }>, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: string | null, endCursor?: string | null } } };
+export type CollectionContentFragment = {
+  __typename?: "Collection";
+  title?: string | null;
+  synopsis?: string | null;
+  description?: string | null;
+  discriminator: string;
+  readMoreUrl?: string | null;
+};
 
-export type CollectionContentFragment = { __typename?: 'Collection', title?: string | null, synopsis?: string | null, description?: string | null, discriminator: string, readMoreUrl?: string | null };
+export type CollectionItemsCountFragment = {
+  __typename?: "Collection";
+  items: { __typename?: "CollectionItemConnection"; totalCount: number };
+};
 
-export type CollectionItemsCountFragment = { __typename?: 'Collection', items: { __typename?: 'CollectionItemConnection', totalCount: number } };
+export type CollectionLocationContentFragment = {
+  __typename?: "CollectionLocation";
+  title?: string | null;
+  synopsis?: string | null;
+  description?: string | null;
+  tags: Array<string>;
+  readMoreUrl?: string | null;
+  websiteUrl?: string | null;
+  position: { __typename?: "Position"; lon: number; lat: number };
+};
 
-export type CollectionLocationContentFragment = { __typename?: 'CollectionLocation', title?: string | null, synopsis?: string | null, description?: string | null, tags: Array<string>, readMoreUrl?: string | null, websiteUrl?: string | null, position: { __typename?: 'Position', lon: number, lat: number } };
+export type CollectionLocationExternalRefsFragment = {
+  __typename?: "CollectionLocation";
+  externalId?: { __typename?: "Attribute"; value?: any | null } | null;
+  externalSource?: { __typename?: "Attribute"; value?: any | null } | null;
+};
 
-export type CollectionLocationExternalRefsFragment = { __typename?: 'CollectionLocation', externalId?: { __typename?: 'Attribute', value?: any | null } | null, externalSource?: { __typename?: 'Attribute', value?: any | null } | null };
+export type CollectionLocationPartialContentFragment = {
+  __typename?: "CollectionLocation";
+  title?: string | null;
+  synopsis?: string | null;
+  tags: Array<string>;
+  readMoreUrl?: string | null;
+  position: { __typename?: "Position"; lon: number; lat: number };
+};
 
-export type CollectionLocationPartialContentFragment = { __typename?: 'CollectionLocation', title?: string | null, synopsis?: string | null, tags: Array<string>, readMoreUrl?: string | null, position: { __typename?: 'Position', lon: number, lat: number } };
-
-export type CollectionPartialContentFragment = { __typename?: 'Collection', title?: string | null, synopsis?: string | null, readMoreUrl?: string | null };
+export type CollectionPartialContentFragment = {
+  __typename?: "Collection";
+  title?: string | null;
+  synopsis?: string | null;
+  readMoreUrl?: string | null;
+};
 
 export type GetCollectionLocationQueryVariables = Exact<{
-  id: Scalars['ID'];
+  id: Scalars["ID"];
 }>;
 
-
-export type GetCollectionLocationQuery = { __typename?: 'Query', collectionItem?: { __typename: 'CollectionLocation', id: string, title?: string | null, synopsis?: string | null, description?: string | null, tags: Array<string>, readMoreUrl?: string | null, websiteUrl?: string | null, place: { __typename: 'Place', id: string, name?: string | null, synopsis?: string | null, maki?: string | null, position: { __typename?: 'Position', lon: number, lat: number }, address: { __typename?: 'PlaceAddress', addressLineOne?: string | null, addressLineTwo?: string | null, addressLineThree?: string | null, locality?: string | null, region?: string | null, regionCode?: string | null, country?: string | null, countryCode?: string | null }, layers: Array<{ __typename: 'PlaceLayer', id: string, name?: string | null }> }, position: { __typename?: 'Position', lon: number, lat: number } } | null };
+export type GetCollectionLocationQuery = {
+  __typename?: "Query";
+  collectionItem?: {
+    __typename: "CollectionLocation";
+    id: string;
+    title?: string | null;
+    synopsis?: string | null;
+    description?: string | null;
+    tags: Array<string>;
+    readMoreUrl?: string | null;
+    websiteUrl?: string | null;
+    place: {
+      __typename: "Place";
+      id: string;
+      name?: string | null;
+      synopsis?: string | null;
+      maki?: string | null;
+      position: { __typename?: "Position"; lon: number; lat: number };
+      address: {
+        __typename?: "PlaceAddress";
+        addressLineOne?: string | null;
+        addressLineTwo?: string | null;
+        addressLineThree?: string | null;
+        locality?: string | null;
+        region?: string | null;
+        regionCode?: string | null;
+        country?: string | null;
+        countryCode?: string | null;
+      };
+      layers: Array<{
+        __typename: "PlaceLayer";
+        id: string;
+        name?: string | null;
+      }>;
+    };
+    position: { __typename?: "Position"; lon: number; lat: number };
+  } | null;
+};
 
 export type GetCollectionQueryVariables = Exact<{
-  id: Scalars['ID'];
+  id: Scalars["ID"];
 }>;
 
-
-export type GetCollectionQuery = { __typename?: 'Query', collection?: { __typename: 'Collection', id: string, title?: string | null, synopsis?: string | null, description?: string | null, discriminator: string, readMoreUrl?: string | null, items: { __typename?: 'CollectionItemConnection', totalCount: number } } | null };
+export type GetCollectionQuery = {
+  __typename?: "Query";
+  collection?: {
+    __typename: "Collection";
+    id: string;
+    title?: string | null;
+    synopsis?: string | null;
+    description?: string | null;
+    discriminator: string;
+    readMoreUrl?: string | null;
+    items: { __typename?: "CollectionItemConnection"; totalCount: number };
+  } | null;
+};
 
 export type ListCollectionsQueryVariables = Exact<{
-  profileId: Scalars['ID'];
-  first: Scalars['Int'];
-  after?: InputMaybe<Scalars['String']>;
-  discriminator?: InputMaybe<Scalars['String']>;
+  profileId: Scalars["ID"];
+  first: Scalars["Int"];
+  after?: InputMaybe<Scalars["String"]>;
+  discriminator?: InputMaybe<Scalars["String"]>;
 }>;
 
-
-export type ListCollectionsQuery = { __typename?: 'Query', collections: { __typename: 'CollectionConnection', totalCount: number, edges: Array<{ __typename?: 'CollectionEdge', node: { __typename: 'Collection', id: string, title?: string | null, synopsis?: string | null, readMoreUrl?: string | null, items: { __typename?: 'CollectionItemConnection', totalCount: number } } }>, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: string | null, endCursor?: string | null } } };
+export type ListCollectionsQuery = {
+  __typename?: "Query";
+  collections: {
+    __typename: "CollectionConnection";
+    totalCount: number;
+    edges: Array<{
+      __typename?: "CollectionEdge";
+      node: {
+        __typename: "Collection";
+        id: string;
+        title?: string | null;
+        synopsis?: string | null;
+        readMoreUrl?: string | null;
+        items: { __typename?: "CollectionItemConnection"; totalCount: number };
+      };
+    }>;
+    pageInfo: {
+      __typename?: "PageInfo";
+      hasNextPage: boolean;
+      hasPreviousPage: boolean;
+      startCursor?: string | null;
+      endCursor?: string | null;
+    };
+  };
+};
 
 export type UpdateCollectionLocationMutationVariables = Exact<{
-  id: Scalars['ID'];
+  id: Scalars["ID"];
   location: UpdateCollectionLocationInput;
 }>;
 
-
-export type UpdateCollectionLocationMutation = { __typename?: 'Mutation', updateCollectionLocation: { __typename: 'UpdateCollectionLocationPayload', location?: { __typename: 'CollectionLocation', id: string, title?: string | null, synopsis?: string | null, description?: string | null, tags: Array<string>, readMoreUrl?: string | null, websiteUrl?: string | null, position: { __typename?: 'Position', lon: number, lat: number } } | null } };
+export type UpdateCollectionLocationMutation = {
+  __typename?: "Mutation";
+  updateCollectionLocation: {
+    __typename: "UpdateCollectionLocationPayload";
+    location?: {
+      __typename: "CollectionLocation";
+      id: string;
+      title?: string | null;
+      synopsis?: string | null;
+      description?: string | null;
+      tags: Array<string>;
+      readMoreUrl?: string | null;
+      websiteUrl?: string | null;
+      position: { __typename?: "Position"; lon: number; lat: number };
+    } | null;
+  };
+};
 
 export type CreateItineraryDirectionsMutationVariables = Exact<{
-  itineraryId: Scalars['ID'];
+  itineraryId: Scalars["ID"];
   directions: CreateItineraryDirectionsInput;
 }>;
 
-
-export type CreateItineraryDirectionsMutation = { __typename?: 'Mutation', createItineraryDirections: { __typename: 'CreateItineraryDirectionsPayload', directions?: { __typename: 'ItineraryDirections', id: string, durationMin?: number | null, distance?: number | null } | null, cascaded: { __typename?: 'ItineraryItemCascadedChanges', deletedIds: Array<string>, created: Array<{ __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', id: string }>, updated: Array<{ __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', id: string }> } } };
+export type CreateItineraryDirectionsMutation = {
+  __typename?: "Mutation";
+  createItineraryDirections: {
+    __typename: "CreateItineraryDirectionsPayload";
+    directions?: {
+      __typename: "ItineraryDirections";
+      id: string;
+      durationMin?: number | null;
+      distance?: number | null;
+    } | null;
+    cascaded: {
+      __typename?: "ItineraryItemCascadedChanges";
+      deletedIds: Array<string>;
+      created: Array<
+        | { __typename: "ItineraryCollection"; id: string }
+        | { __typename: "ItineraryDirections"; id: string }
+        | { __typename: "ItineraryLocation"; id: string }
+      >;
+      updated: Array<
+        | { __typename: "ItineraryCollection"; id: string }
+        | { __typename: "ItineraryDirections"; id: string }
+        | { __typename: "ItineraryLocation"; id: string }
+      >;
+    };
+  };
+};
 
 export type CreateItineraryLocationMutationVariables = Exact<{
-  itineraryId: Scalars['ID'];
+  itineraryId: Scalars["ID"];
   location: CreateItineraryLocationInput;
 }>;
 
-
-export type CreateItineraryLocationMutation = { __typename?: 'Mutation', createItineraryLocation: { __typename: 'CreateItineraryLocationPayload', location?: { __typename: 'ItineraryLocation', id: string, title?: string | null, synopsis?: string | null, description?: string | null, tags: Array<string>, optional: boolean, readMoreUrl?: string | null, itinerary: { __typename: 'Itinerary', id: string, locations: { __typename?: 'ItineraryItemConnection', totalCount: number } }, place: { __typename: 'Place', id: string, name?: string | null, synopsis?: string | null, maki?: string | null, position: { __typename?: 'Position', lon: number, lat: number }, address: { __typename?: 'PlaceAddress', addressLineOne?: string | null, addressLineTwo?: string | null, addressLineThree?: string | null, locality?: string | null, region?: string | null, regionCode?: string | null, country?: string | null, countryCode?: string | null }, layers: Array<{ __typename: 'PlaceLayer', id: string, name?: string | null }> }, position: { __typename?: 'Position', lon: number, lat: number } } | null, cascaded: { __typename?: 'ItineraryItemCascadedChanges', deletedIds: Array<string>, created: Array<{ __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', id: string }>, updated: Array<{ __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', id: string }> } } };
+export type CreateItineraryLocationMutation = {
+  __typename?: "Mutation";
+  createItineraryLocation: {
+    __typename: "CreateItineraryLocationPayload";
+    location?: {
+      __typename: "ItineraryLocation";
+      id: string;
+      title?: string | null;
+      synopsis?: string | null;
+      description?: string | null;
+      tags: Array<string>;
+      optional: boolean;
+      readMoreUrl?: string | null;
+      itinerary: {
+        __typename: "Itinerary";
+        id: string;
+        locations: {
+          __typename?: "ItineraryItemConnection";
+          totalCount: number;
+        };
+      };
+      place: {
+        __typename: "Place";
+        id: string;
+        name?: string | null;
+        synopsis?: string | null;
+        maki?: string | null;
+        position: { __typename?: "Position"; lon: number; lat: number };
+        address: {
+          __typename?: "PlaceAddress";
+          addressLineOne?: string | null;
+          addressLineTwo?: string | null;
+          addressLineThree?: string | null;
+          locality?: string | null;
+          region?: string | null;
+          regionCode?: string | null;
+          country?: string | null;
+          countryCode?: string | null;
+        };
+        layers: Array<{
+          __typename: "PlaceLayer";
+          id: string;
+          name?: string | null;
+        }>;
+      };
+      position: { __typename?: "Position"; lon: number; lat: number };
+    } | null;
+    cascaded: {
+      __typename?: "ItineraryItemCascadedChanges";
+      deletedIds: Array<string>;
+      created: Array<
+        | { __typename: "ItineraryCollection"; id: string }
+        | { __typename: "ItineraryDirections"; id: string }
+        | { __typename: "ItineraryLocation"; id: string }
+      >;
+      updated: Array<
+        | { __typename: "ItineraryCollection"; id: string }
+        | { __typename: "ItineraryDirections"; id: string }
+        | { __typename: "ItineraryLocation"; id: string }
+      >;
+    };
+  };
+};
 
 export type CreateItineraryMutationVariables = Exact<{
   itinerary: CreateItineraryInput;
-  profileId?: InputMaybe<Scalars['ID']>;
+  profileId?: InputMaybe<Scalars["ID"]>;
 }>;
 
-
-export type CreateItineraryMutation = { __typename?: 'Mutation', createItinerary: { __typename: 'CreateItineraryPayload', itinerary?: { __typename: 'Itinerary', id: string, title?: string | null, synopsis?: string | null, description?: string | null, tags: Array<string>, created?: string | null, modified?: string | null, published?: string | null, autoRoute?: { __typename?: 'ItineraryAutoRoute', defaultMode: RouteMode } | null, locations: { __typename?: 'ItineraryItemConnection', totalCount: number } } | null } };
+export type CreateItineraryMutation = {
+  __typename?: "Mutation";
+  createItinerary: {
+    __typename: "CreateItineraryPayload";
+    itinerary?: {
+      __typename: "Itinerary";
+      id: string;
+      title?: string | null;
+      synopsis?: string | null;
+      description?: string | null;
+      tags: Array<string>;
+      created?: string | null;
+      modified?: string | null;
+      published?: string | null;
+      autoRoute?: {
+        __typename?: "ItineraryAutoRoute";
+        defaultMode: RouteMode;
+      } | null;
+      locations: { __typename?: "ItineraryItemConnection"; totalCount: number };
+    } | null;
+  };
+};
 
 export type DeleteItineraryLocationMutationVariables = Exact<{
-  id: Scalars['ID'];
+  id: Scalars["ID"];
 }>;
 
-
-export type DeleteItineraryLocationMutation = { __typename?: 'Mutation', deleteItineraryItem: { __typename: 'DeleteItineraryItemPayload', itinerary: { __typename: 'Itinerary', id: string, locations: { __typename?: 'ItineraryItemConnection', totalCount: number } }, cascaded: { __typename?: 'ItineraryItemCascadedChanges', deletedIds: Array<string>, created: Array<{ __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', id: string }>, updated: Array<{ __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', id: string }> } } };
+export type DeleteItineraryLocationMutation = {
+  __typename?: "Mutation";
+  deleteItineraryItem: {
+    __typename: "DeleteItineraryItemPayload";
+    itinerary: {
+      __typename: "Itinerary";
+      id: string;
+      locations: { __typename?: "ItineraryItemConnection"; totalCount: number };
+    };
+    cascaded: {
+      __typename?: "ItineraryItemCascadedChanges";
+      deletedIds: Array<string>;
+      created: Array<
+        | { __typename: "ItineraryCollection"; id: string }
+        | { __typename: "ItineraryDirections"; id: string }
+        | { __typename: "ItineraryLocation"; id: string }
+      >;
+      updated: Array<
+        | { __typename: "ItineraryCollection"; id: string }
+        | { __typename: "ItineraryDirections"; id: string }
+        | { __typename: "ItineraryLocation"; id: string }
+      >;
+    };
+  };
+};
 
 export type DeleteItineraryMutationVariables = Exact<{
-  id: Scalars['ID'];
+  id: Scalars["ID"];
 }>;
 
-
-export type DeleteItineraryMutation = { __typename?: 'Mutation', deleteItinerary: { __typename: 'DeleteItineraryPayload' } };
+export type DeleteItineraryMutation = {
+  __typename?: "Mutation";
+  deleteItinerary: { __typename: "DeleteItineraryPayload" };
+};
 
 export type DisableItineraryAutoRouteMutationVariables = Exact<{
-  id: Scalars['ID'];
+  id: Scalars["ID"];
 }>;
 
-
-export type DisableItineraryAutoRouteMutation = { __typename?: 'Mutation', updateItinerary: { __typename: 'UpdateItineraryPayload', itinerary?: { __typename: 'Itinerary', id: string, autoRoute?: { __typename?: 'ItineraryAutoRoute', defaultMode: RouteMode } | null } | null, cascaded: { __typename?: 'ItineraryItemCascadedChanges', deletedIds: Array<string>, created: Array<{ __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', id: string }>, updated: Array<{ __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', id: string }> } } };
+export type DisableItineraryAutoRouteMutation = {
+  __typename?: "Mutation";
+  updateItinerary: {
+    __typename: "UpdateItineraryPayload";
+    itinerary?: {
+      __typename: "Itinerary";
+      id: string;
+      autoRoute?: {
+        __typename?: "ItineraryAutoRoute";
+        defaultMode: RouteMode;
+      } | null;
+    } | null;
+    cascaded: {
+      __typename?: "ItineraryItemCascadedChanges";
+      deletedIds: Array<string>;
+      created: Array<
+        | { __typename: "ItineraryCollection"; id: string }
+        | { __typename: "ItineraryDirections"; id: string }
+        | { __typename: "ItineraryLocation"; id: string }
+      >;
+      updated: Array<
+        | { __typename: "ItineraryCollection"; id: string }
+        | { __typename: "ItineraryDirections"; id: string }
+        | { __typename: "ItineraryLocation"; id: string }
+      >;
+    };
+  };
+};
 
 export type EnableItineraryAutoRouteMutationVariables = Exact<{
-  id: Scalars['ID'];
+  id: Scalars["ID"];
   defaultMode: RouteMode;
 }>;
 
-
-export type EnableItineraryAutoRouteMutation = { __typename?: 'Mutation', updateItinerary: { __typename: 'UpdateItineraryPayload', itinerary?: { __typename: 'Itinerary', id: string, autoRoute?: { __typename?: 'ItineraryAutoRoute', defaultMode: RouteMode } | null } | null, cascaded: { __typename?: 'ItineraryItemCascadedChanges', deletedIds: Array<string>, created: Array<{ __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', id: string }>, updated: Array<{ __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', id: string }> } } };
+export type EnableItineraryAutoRouteMutation = {
+  __typename?: "Mutation";
+  updateItinerary: {
+    __typename: "UpdateItineraryPayload";
+    itinerary?: {
+      __typename: "Itinerary";
+      id: string;
+      autoRoute?: {
+        __typename?: "ItineraryAutoRoute";
+        defaultMode: RouteMode;
+      } | null;
+    } | null;
+    cascaded: {
+      __typename?: "ItineraryItemCascadedChanges";
+      deletedIds: Array<string>;
+      created: Array<
+        | { __typename: "ItineraryCollection"; id: string }
+        | { __typename: "ItineraryDirections"; id: string }
+        | { __typename: "ItineraryLocation"; id: string }
+      >;
+      updated: Array<
+        | { __typename: "ItineraryCollection"; id: string }
+        | { __typename: "ItineraryDirections"; id: string }
+        | { __typename: "ItineraryLocation"; id: string }
+      >;
+    };
+  };
+};
 
 export type FindItineraryLocationIdsByPlaceIdQueryVariables = Exact<{
-  itineraryId: Scalars['ID'];
-  placeId: Scalars['ID'];
-  first: Scalars['Int'];
-  after?: InputMaybe<Scalars['String']>;
+  itineraryId: Scalars["ID"];
+  placeId: Scalars["ID"];
+  first: Scalars["Int"];
+  after?: InputMaybe<Scalars["String"]>;
 }>;
 
-
-export type FindItineraryLocationIdsByPlaceIdQuery = { __typename?: 'Query', itinerary?: { __typename?: 'Itinerary', descendants: { __typename: 'ItineraryItemConnection', totalCount: number, edges: Array<{ __typename?: 'ItineraryItemEdge', node: { __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', id: string, place: { __typename: 'Place', id: string } } }>, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: string | null, endCursor?: string | null } } } | null };
+export type FindItineraryLocationIdsByPlaceIdQuery = {
+  __typename?: "Query";
+  itinerary?: {
+    __typename?: "Itinerary";
+    descendants: {
+      __typename: "ItineraryItemConnection";
+      totalCount: number;
+      edges: Array<{
+        __typename?: "ItineraryItemEdge";
+        node:
+          | { __typename: "ItineraryCollection"; id: string }
+          | { __typename: "ItineraryDirections"; id: string }
+          | {
+              __typename: "ItineraryLocation";
+              id: string;
+              place: { __typename: "Place"; id: string };
+            };
+      }>;
+      pageInfo: {
+        __typename?: "PageInfo";
+        hasNextPage: boolean;
+        hasPreviousPage: boolean;
+        startCursor?: string | null;
+        endCursor?: string | null;
+      };
+    };
+  } | null;
+};
 
 export type FindItineraryLocationsByPlaceIdQueryVariables = Exact<{
-  itineraryId: Scalars['ID'];
-  placeId: Scalars['ID'];
-  first: Scalars['Int'];
-  after?: InputMaybe<Scalars['String']>;
+  itineraryId: Scalars["ID"];
+  placeId: Scalars["ID"];
+  first: Scalars["Int"];
+  after?: InputMaybe<Scalars["String"]>;
 }>;
 
+export type FindItineraryLocationsByPlaceIdQuery = {
+  __typename?: "Query";
+  itinerary?: {
+    __typename?: "Itinerary";
+    descendants: {
+      __typename: "ItineraryItemConnection";
+      totalCount: number;
+      edges: Array<{
+        __typename?: "ItineraryItemEdge";
+        node:
+          | { __typename: "ItineraryCollection"; id: string }
+          | { __typename: "ItineraryDirections"; id: string }
+          | {
+              __typename: "ItineraryLocation";
+              id: string;
+              title?: string | null;
+              synopsis?: string | null;
+              tags: Array<string>;
+              optional: boolean;
+              readMoreUrl?: string | null;
+              place: {
+                __typename: "Place";
+                id: string;
+                name?: string | null;
+                synopsis?: string | null;
+                maki?: string | null;
+                position: { __typename?: "Position"; lon: number; lat: number };
+                address: {
+                  __typename?: "PlaceAddress";
+                  addressLineOne?: string | null;
+                  addressLineTwo?: string | null;
+                  addressLineThree?: string | null;
+                  locality?: string | null;
+                  region?: string | null;
+                  regionCode?: string | null;
+                  country?: string | null;
+                  countryCode?: string | null;
+                };
+                layers: Array<{
+                  __typename: "PlaceLayer";
+                  id: string;
+                  name?: string | null;
+                }>;
+              };
+              position: { __typename?: "Position"; lon: number; lat: number };
+            };
+      }>;
+      pageInfo: {
+        __typename?: "PageInfo";
+        hasNextPage: boolean;
+        hasPreviousPage: boolean;
+        startCursor?: string | null;
+        endCursor?: string | null;
+      };
+    };
+  } | null;
+};
 
-export type FindItineraryLocationsByPlaceIdQuery = { __typename?: 'Query', itinerary?: { __typename?: 'Itinerary', descendants: { __typename: 'ItineraryItemConnection', totalCount: number, edges: Array<{ __typename?: 'ItineraryItemEdge', node: { __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', id: string, title?: string | null, synopsis?: string | null, tags: Array<string>, optional: boolean, readMoreUrl?: string | null, place: { __typename: 'Place', id: string, name?: string | null, synopsis?: string | null, maki?: string | null, position: { __typename?: 'Position', lon: number, lat: number }, address: { __typename?: 'PlaceAddress', addressLineOne?: string | null, addressLineTwo?: string | null, addressLineThree?: string | null, locality?: string | null, region?: string | null, regionCode?: string | null, country?: string | null, countryCode?: string | null }, layers: Array<{ __typename: 'PlaceLayer', id: string, name?: string | null }> }, position: { __typename?: 'Position', lon: number, lat: number } } }>, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: string | null, endCursor?: string | null } } } | null };
+export type ItineraryCascadedChangesFragment = {
+  __typename?: "ItineraryItemCascadedChanges";
+  deletedIds: Array<string>;
+  created: Array<
+    | { __typename: "ItineraryCollection"; id: string }
+    | { __typename: "ItineraryDirections"; id: string }
+    | { __typename: "ItineraryLocation"; id: string }
+  >;
+  updated: Array<
+    | { __typename: "ItineraryCollection"; id: string }
+    | { __typename: "ItineraryDirections"; id: string }
+    | { __typename: "ItineraryLocation"; id: string }
+  >;
+};
 
-export type ItineraryCascadedChangesFragment = { __typename?: 'ItineraryItemCascadedChanges', deletedIds: Array<string>, created: Array<{ __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', id: string }>, updated: Array<{ __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', id: string }> };
+export type ItineraryContentFragment = {
+  __typename?: "Itinerary";
+  title?: string | null;
+  synopsis?: string | null;
+  description?: string | null;
+  tags: Array<string>;
+  created?: string | null;
+  modified?: string | null;
+  published?: string | null;
+  autoRoute?: {
+    __typename?: "ItineraryAutoRoute";
+    defaultMode: RouteMode;
+  } | null;
+};
 
-export type ItineraryContentFragment = { __typename?: 'Itinerary', title?: string | null, synopsis?: string | null, description?: string | null, tags: Array<string>, created?: string | null, modified?: string | null, published?: string | null, autoRoute?: { __typename?: 'ItineraryAutoRoute', defaultMode: RouteMode } | null };
+export type ItineraryDirectionsContentFragment = {
+  __typename?: "ItineraryDirections";
+  durationMin?: number | null;
+  distance?: number | null;
+};
 
-export type ItineraryDirectionsContentFragment = { __typename?: 'ItineraryDirections', durationMin?: number | null, distance?: number | null };
+export type ItineraryDirectionsPartialContentFragment = {
+  __typename?: "ItineraryDirections";
+  durationMin?: number | null;
+  distance?: number | null;
+};
 
-export type ItineraryDirectionsPartialContentFragment = { __typename?: 'ItineraryDirections', durationMin?: number | null, distance?: number | null };
+export type ItineraryLocationContentFragment = {
+  __typename?: "ItineraryLocation";
+  title?: string | null;
+  synopsis?: string | null;
+  description?: string | null;
+  tags: Array<string>;
+  optional: boolean;
+  readMoreUrl?: string | null;
+  position: { __typename?: "Position"; lon: number; lat: number };
+};
 
-export type ItineraryLocationContentFragment = { __typename?: 'ItineraryLocation', title?: string | null, synopsis?: string | null, description?: string | null, tags: Array<string>, optional: boolean, readMoreUrl?: string | null, position: { __typename?: 'Position', lon: number, lat: number } };
+export type ItineraryLocationPartialContentFragment = {
+  __typename?: "ItineraryLocation";
+  title?: string | null;
+  synopsis?: string | null;
+  tags: Array<string>;
+  optional: boolean;
+  readMoreUrl?: string | null;
+  position: { __typename?: "Position"; lon: number; lat: number };
+};
 
-export type ItineraryLocationPartialContentFragment = { __typename?: 'ItineraryLocation', title?: string | null, synopsis?: string | null, tags: Array<string>, optional: boolean, readMoreUrl?: string | null, position: { __typename?: 'Position', lon: number, lat: number } };
+export type ItineraryLocationsCountFragment = {
+  __typename?: "Itinerary";
+  locations: { __typename?: "ItineraryItemConnection"; totalCount: number };
+};
 
-export type ItineraryLocationsCountFragment = { __typename?: 'Itinerary', locations: { __typename?: 'ItineraryItemConnection', totalCount: number } };
+export type ItineraryPartialContentFragment = {
+  __typename?: "Itinerary";
+  title?: string | null;
+  synopsis?: string | null;
+  tags: Array<string>;
+  created?: string | null;
+  modified?: string | null;
+  published?: string | null;
+};
 
-export type ItineraryPartialContentFragment = { __typename?: 'Itinerary', title?: string | null, synopsis?: string | null, tags: Array<string>, created?: string | null, modified?: string | null, published?: string | null };
-
-export type ItinerarySearchPartialContentFragment = { __typename?: 'ItinerarySearchNode', title?: string | null, synopsis?: string | null, tags: Array<string>, created?: string | null, published?: string | null };
+export type ItinerarySearchPartialContentFragment = {
+  __typename?: "ItinerarySearchNode";
+  title?: string | null;
+  synopsis?: string | null;
+  tags: Array<string>;
+  created?: string | null;
+  published?: string | null;
+};
 
 export type GetItineraryDirectionsQueryVariables = Exact<{
-  id: Scalars['ID'];
-  includeRoutePolyline: Scalars['Boolean'];
+  id: Scalars["ID"];
+  includeRoutePolyline: Scalars["Boolean"];
 }>;
 
-
-export type GetItineraryDirectionsQuery = { __typename?: 'Query', node?: { __typename: 'Collection', id: string } | { __typename: 'CollectionItemFailedToLoad', id: string } | { __typename: 'CollectionLocation', id: string } | { __typename: 'ConnectedApp', id: string } | { __typename: 'IconComposition', id: string } | { __typename: 'IconResourceFailedToLoad', id: string } | { __typename: 'IconSilhouette', id: string } | { __typename: 'Itinerary', id: string } | { __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string, durationMin?: number | null, distance?: number | null, route: { __typename?: 'Route', segments: Array<{ __typename: 'RouteSegment', id: string, mode: RouteMode, polyline?: string | null }> } } | { __typename: 'ItineraryLocation', id: string } | { __typename: 'MediaResourceFailedToLoad', id: string } | { __typename: 'Place', id: string } | { __typename: 'Profile', id: string } | { __typename: 'UserAgreement', id: string } | null };
+export type GetItineraryDirectionsQuery = {
+  __typename?: "Query";
+  node?:
+    | { __typename: "Collection"; id: string }
+    | { __typename: "CollectionItemFailedToLoad"; id: string }
+    | { __typename: "CollectionLocation"; id: string }
+    | { __typename: "ConnectedApp"; id: string }
+    | { __typename: "IconComposition"; id: string }
+    | { __typename: "IconResourceFailedToLoad"; id: string }
+    | { __typename: "IconSilhouette"; id: string }
+    | { __typename: "Itinerary"; id: string }
+    | { __typename: "ItineraryCollection"; id: string }
+    | {
+        __typename: "ItineraryDirections";
+        id: string;
+        durationMin?: number | null;
+        distance?: number | null;
+        route: {
+          __typename?: "Route";
+          segments: Array<{
+            __typename: "RouteSegment";
+            id: string;
+            mode: RouteMode;
+            polyline?: string | null;
+          }>;
+        };
+      }
+    | { __typename: "ItineraryLocation"; id: string }
+    | { __typename: "MediaResourceFailedToLoad"; id: string }
+    | { __typename: "Place"; id: string }
+    | { __typename: "Profile"; id: string }
+    | { __typename: "UserAgreement"; id: string }
+    | null;
+};
 
 export type GetItineraryLocationQueryVariables = Exact<{
-  id: Scalars['ID'];
+  id: Scalars["ID"];
 }>;
 
-
-export type GetItineraryLocationQuery = { __typename?: 'Query', node?: { __typename: 'Collection', id: string } | { __typename: 'CollectionItemFailedToLoad', id: string } | { __typename: 'CollectionLocation', id: string } | { __typename: 'ConnectedApp', id: string } | { __typename: 'IconComposition', id: string } | { __typename: 'IconResourceFailedToLoad', id: string } | { __typename: 'IconSilhouette', id: string } | { __typename: 'Itinerary', id: string } | { __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', id: string, title?: string | null, synopsis?: string | null, description?: string | null, tags: Array<string>, optional: boolean, readMoreUrl?: string | null, place: { __typename: 'Place', id: string, name?: string | null, synopsis?: string | null, description?: string | null, maki?: string | null, position: { __typename?: 'Position', lon: number, lat: number }, address: { __typename?: 'PlaceAddress', addressLineOne?: string | null, addressLineTwo?: string | null, addressLineThree?: string | null, locality?: string | null, region?: string | null, regionCode?: string | null, country?: string | null, countryCode?: string | null }, contact: { __typename?: 'PlaceContact', phoneNumber?: string | null, emailAddress?: string | null, websiteUrl?: string | null, bookingUrl?: string | null, facebookUrl?: string | null, instagramUrl?: string | null, twitterUrl?: string | null }, layers: Array<{ __typename: 'PlaceLayer', id: string, name?: string | null }> }, position: { __typename?: 'Position', lon: number, lat: number } } | { __typename: 'MediaResourceFailedToLoad', id: string } | { __typename: 'Place', id: string } | { __typename: 'Profile', id: string } | { __typename: 'UserAgreement', id: string } | null };
+export type GetItineraryLocationQuery = {
+  __typename?: "Query";
+  node?:
+    | { __typename: "Collection"; id: string }
+    | { __typename: "CollectionItemFailedToLoad"; id: string }
+    | { __typename: "CollectionLocation"; id: string }
+    | { __typename: "ConnectedApp"; id: string }
+    | { __typename: "IconComposition"; id: string }
+    | { __typename: "IconResourceFailedToLoad"; id: string }
+    | { __typename: "IconSilhouette"; id: string }
+    | { __typename: "Itinerary"; id: string }
+    | { __typename: "ItineraryCollection"; id: string }
+    | { __typename: "ItineraryDirections"; id: string }
+    | {
+        __typename: "ItineraryLocation";
+        id: string;
+        title?: string | null;
+        synopsis?: string | null;
+        description?: string | null;
+        tags: Array<string>;
+        optional: boolean;
+        readMoreUrl?: string | null;
+        place: {
+          __typename: "Place";
+          id: string;
+          name?: string | null;
+          synopsis?: string | null;
+          description?: string | null;
+          maki?: string | null;
+          position: { __typename?: "Position"; lon: number; lat: number };
+          address: {
+            __typename?: "PlaceAddress";
+            addressLineOne?: string | null;
+            addressLineTwo?: string | null;
+            addressLineThree?: string | null;
+            locality?: string | null;
+            region?: string | null;
+            regionCode?: string | null;
+            country?: string | null;
+            countryCode?: string | null;
+          };
+          contact: {
+            __typename?: "PlaceContact";
+            phoneNumber?: string | null;
+            emailAddress?: string | null;
+            websiteUrl?: string | null;
+            bookingUrl?: string | null;
+            facebookUrl?: string | null;
+            instagramUrl?: string | null;
+            twitterUrl?: string | null;
+          };
+          layers: Array<{
+            __typename: "PlaceLayer";
+            id: string;
+            name?: string | null;
+          }>;
+        };
+        position: { __typename?: "Position"; lon: number; lat: number };
+      }
+    | { __typename: "MediaResourceFailedToLoad"; id: string }
+    | { __typename: "Place"; id: string }
+    | { __typename: "Profile"; id: string }
+    | { __typename: "UserAgreement"; id: string }
+    | null;
+};
 
 export type GetItineraryQueryVariables = Exact<{
-  id: Scalars['ID'];
+  id: Scalars["ID"];
 }>;
 
-
-export type GetItineraryQuery = { __typename?: 'Query', itinerary?: { __typename: 'Itinerary', id: string, title?: string | null, synopsis?: string | null, description?: string | null, tags: Array<string>, created?: string | null, modified?: string | null, published?: string | null, profile?: { __typename: 'Profile', id: string, name: string, handle?: string | null } | null, autoRoute?: { __typename?: 'ItineraryAutoRoute', defaultMode: RouteMode } | null, locations: { __typename?: 'ItineraryItemConnection', totalCount: number } } | null };
+export type GetItineraryQuery = {
+  __typename?: "Query";
+  itinerary?: {
+    __typename: "Itinerary";
+    id: string;
+    title?: string | null;
+    synopsis?: string | null;
+    description?: string | null;
+    tags: Array<string>;
+    created?: string | null;
+    modified?: string | null;
+    published?: string | null;
+    profile?: {
+      __typename: "Profile";
+      id: string;
+      name: string;
+      handle?: string | null;
+    } | null;
+    autoRoute?: {
+      __typename?: "ItineraryAutoRoute";
+      defaultMode: RouteMode;
+    } | null;
+    locations: { __typename?: "ItineraryItemConnection"; totalCount: number };
+  } | null;
+};
 
 export type ListItinerariesQueryVariables = Exact<{
-  profileId: Scalars['ID'];
-  first: Scalars['Int'];
-  after?: InputMaybe<Scalars['String']>;
+  profileId: Scalars["ID"];
+  first: Scalars["Int"];
+  after?: InputMaybe<Scalars["String"]>;
 }>;
 
-
-export type ListItinerariesQuery = { __typename?: 'Query', itineraries: { __typename: 'ItinerarySearchConnection', totalCount: number, edges: Array<{ __typename?: 'ItinerarySearchEdge', node: { __typename: 'ItinerarySearchNode', id: string, title?: string | null, synopsis?: string | null, tags: Array<string>, created?: string | null, published?: string | null } }>, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: string | null, endCursor?: string | null } } };
+export type ListItinerariesQuery = {
+  __typename?: "Query";
+  itineraries: {
+    __typename: "ItinerarySearchConnection";
+    totalCount: number;
+    edges: Array<{
+      __typename?: "ItinerarySearchEdge";
+      node: {
+        __typename: "ItinerarySearchNode";
+        id: string;
+        title?: string | null;
+        synopsis?: string | null;
+        tags: Array<string>;
+        created?: string | null;
+        published?: string | null;
+      };
+    }>;
+    pageInfo: {
+      __typename?: "PageInfo";
+      hasNextPage: boolean;
+      hasPreviousPage: boolean;
+      startCursor?: string | null;
+      endCursor?: string | null;
+    };
+  };
+};
 
 export type ListItineraryLocationsQueryVariables = Exact<{
-  id: Scalars['ID'];
-  first: Scalars['Int'];
-  after?: InputMaybe<Scalars['String']>;
-  includeRoutePolyline: Scalars['Boolean'];
+  id: Scalars["ID"];
+  first: Scalars["Int"];
+  after?: InputMaybe<Scalars["String"]>;
+  includeRoutePolyline: Scalars["Boolean"];
 }>;
 
-
-export type ListItineraryLocationsQuery = { __typename?: 'Query', itinerary?: { __typename: 'Itinerary', id: string, locations: { __typename?: 'ItineraryItemConnection', totalCount: number, edges: Array<{ __typename?: 'ItineraryItemEdge', location: { __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', id: string, title?: string | null, synopsis?: string | null, tags: Array<string>, optional: boolean, readMoreUrl?: string | null, place: { __typename: 'Place', id: string, name?: string | null, synopsis?: string | null, maki?: string | null, position: { __typename?: 'Position', lon: number, lat: number }, address: { __typename?: 'PlaceAddress', addressLineOne?: string | null, addressLineTwo?: string | null, addressLineThree?: string | null, locality?: string | null, region?: string | null, regionCode?: string | null, country?: string | null, countryCode?: string | null }, layers: Array<{ __typename: 'PlaceLayer', id: string, name?: string | null }> }, position: { __typename?: 'Position', lon: number, lat: number } }, arrival: { __typename?: 'ItineraryDirectionsConnection', totalCount: number, directions: Array<{ __typename: 'ItineraryDirections', id: string, durationMin?: number | null, distance?: number | null, route: { __typename?: 'Route', segments: Array<{ __typename: 'RouteSegment', id: string, mode: RouteMode, polyline?: string | null }> } }> } }>, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: string | null, endCursor?: string | null } } } | null };
+export type ListItineraryLocationsQuery = {
+  __typename?: "Query";
+  itinerary?: {
+    __typename: "Itinerary";
+    id: string;
+    locations: {
+      __typename?: "ItineraryItemConnection";
+      totalCount: number;
+      edges: Array<{
+        __typename?: "ItineraryItemEdge";
+        location:
+          | { __typename: "ItineraryCollection"; id: string }
+          | { __typename: "ItineraryDirections"; id: string }
+          | {
+              __typename: "ItineraryLocation";
+              id: string;
+              title?: string | null;
+              synopsis?: string | null;
+              tags: Array<string>;
+              optional: boolean;
+              readMoreUrl?: string | null;
+              place: {
+                __typename: "Place";
+                id: string;
+                name?: string | null;
+                synopsis?: string | null;
+                maki?: string | null;
+                position: { __typename?: "Position"; lon: number; lat: number };
+                address: {
+                  __typename?: "PlaceAddress";
+                  addressLineOne?: string | null;
+                  addressLineTwo?: string | null;
+                  addressLineThree?: string | null;
+                  locality?: string | null;
+                  region?: string | null;
+                  regionCode?: string | null;
+                  country?: string | null;
+                  countryCode?: string | null;
+                };
+                layers: Array<{
+                  __typename: "PlaceLayer";
+                  id: string;
+                  name?: string | null;
+                }>;
+              };
+              position: { __typename?: "Position"; lon: number; lat: number };
+            };
+        arrival: {
+          __typename?: "ItineraryDirectionsConnection";
+          totalCount: number;
+          directions: Array<{
+            __typename: "ItineraryDirections";
+            id: string;
+            durationMin?: number | null;
+            distance?: number | null;
+            route: {
+              __typename?: "Route";
+              segments: Array<{
+                __typename: "RouteSegment";
+                id: string;
+                mode: RouteMode;
+                polyline?: string | null;
+              }>;
+            };
+          }>;
+        };
+      }>;
+      pageInfo: {
+        __typename?: "PageInfo";
+        hasNextPage: boolean;
+        hasPreviousPage: boolean;
+        startCursor?: string | null;
+        endCursor?: string | null;
+      };
+    };
+  } | null;
+};
 
 export type MoveItineraryLocationAfterMutationVariables = Exact<{
-  id: Scalars['ID'];
-  siblingId: Scalars['ID'];
+  id: Scalars["ID"];
+  siblingId: Scalars["ID"];
 }>;
 
-
-export type MoveItineraryLocationAfterMutation = { __typename?: 'Mutation', moveItineraryItem: { __typename: 'MoveItineraryItemPayload', cascaded: { __typename?: 'ItineraryItemCascadedChanges', deletedIds: Array<string>, created: Array<{ __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', id: string }>, updated: Array<{ __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', id: string }> } } };
+export type MoveItineraryLocationAfterMutation = {
+  __typename?: "Mutation";
+  moveItineraryItem: {
+    __typename: "MoveItineraryItemPayload";
+    cascaded: {
+      __typename?: "ItineraryItemCascadedChanges";
+      deletedIds: Array<string>;
+      created: Array<
+        | { __typename: "ItineraryCollection"; id: string }
+        | { __typename: "ItineraryDirections"; id: string }
+        | { __typename: "ItineraryLocation"; id: string }
+      >;
+      updated: Array<
+        | { __typename: "ItineraryCollection"; id: string }
+        | { __typename: "ItineraryDirections"; id: string }
+        | { __typename: "ItineraryLocation"; id: string }
+      >;
+    };
+  };
+};
 
 export type MoveItineraryLocationToStartMutationVariables = Exact<{
-  id: Scalars['ID'];
+  id: Scalars["ID"];
 }>;
 
-
-export type MoveItineraryLocationToStartMutation = { __typename?: 'Mutation', moveItineraryItem: { __typename: 'MoveItineraryItemPayload', cascaded: { __typename?: 'ItineraryItemCascadedChanges', deletedIds: Array<string>, created: Array<{ __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', id: string }>, updated: Array<{ __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', id: string }> } } };
+export type MoveItineraryLocationToStartMutation = {
+  __typename?: "Mutation";
+  moveItineraryItem: {
+    __typename: "MoveItineraryItemPayload";
+    cascaded: {
+      __typename?: "ItineraryItemCascadedChanges";
+      deletedIds: Array<string>;
+      created: Array<
+        | { __typename: "ItineraryCollection"; id: string }
+        | { __typename: "ItineraryDirections"; id: string }
+        | { __typename: "ItineraryLocation"; id: string }
+      >;
+      updated: Array<
+        | { __typename: "ItineraryCollection"; id: string }
+        | { __typename: "ItineraryDirections"; id: string }
+        | { __typename: "ItineraryLocation"; id: string }
+      >;
+    };
+  };
+};
 
 export type UpdateItineraryLocationIsOptionalMutationVariables = Exact<{
-  id: Scalars['ID'];
-  optional: Scalars['Boolean'];
+  id: Scalars["ID"];
+  optional: Scalars["Boolean"];
 }>;
 
-
-export type UpdateItineraryLocationIsOptionalMutation = { __typename?: 'Mutation', updateItineraryLocation: { __typename: 'UpdateItineraryLocationPayload', location?: { __typename: 'ItineraryLocation', id: string, optional: boolean } | null, cascaded: { __typename?: 'ItineraryItemCascadedChanges', deletedIds: Array<string>, created: Array<{ __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', id: string }>, updated: Array<{ __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', id: string }> } } };
+export type UpdateItineraryLocationIsOptionalMutation = {
+  __typename?: "Mutation";
+  updateItineraryLocation: {
+    __typename: "UpdateItineraryLocationPayload";
+    location?: {
+      __typename: "ItineraryLocation";
+      id: string;
+      optional: boolean;
+    } | null;
+    cascaded: {
+      __typename?: "ItineraryItemCascadedChanges";
+      deletedIds: Array<string>;
+      created: Array<
+        | { __typename: "ItineraryCollection"; id: string }
+        | { __typename: "ItineraryDirections"; id: string }
+        | { __typename: "ItineraryLocation"; id: string }
+      >;
+      updated: Array<
+        | { __typename: "ItineraryCollection"; id: string }
+        | { __typename: "ItineraryDirections"; id: string }
+        | { __typename: "ItineraryLocation"; id: string }
+      >;
+    };
+  };
+};
 
 export type UpdateItineraryLocationMutationVariables = Exact<{
-  id: Scalars['ID'];
+  id: Scalars["ID"];
   location: UpdateItineraryLocationInput;
 }>;
 
-
-export type UpdateItineraryLocationMutation = { __typename?: 'Mutation', updateItineraryLocation: { __typename: 'UpdateItineraryLocationPayload', location?: { __typename: 'ItineraryLocation', id: string, title?: string | null, synopsis?: string | null, description?: string | null, tags: Array<string>, optional: boolean, readMoreUrl?: string | null, position: { __typename?: 'Position', lon: number, lat: number } } | null, cascaded: { __typename?: 'ItineraryItemCascadedChanges', deletedIds: Array<string>, created: Array<{ __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', id: string }>, updated: Array<{ __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', id: string }> } } };
+export type UpdateItineraryLocationMutation = {
+  __typename?: "Mutation";
+  updateItineraryLocation: {
+    __typename: "UpdateItineraryLocationPayload";
+    location?: {
+      __typename: "ItineraryLocation";
+      id: string;
+      title?: string | null;
+      synopsis?: string | null;
+      description?: string | null;
+      tags: Array<string>;
+      optional: boolean;
+      readMoreUrl?: string | null;
+      position: { __typename?: "Position"; lon: number; lat: number };
+    } | null;
+    cascaded: {
+      __typename?: "ItineraryItemCascadedChanges";
+      deletedIds: Array<string>;
+      created: Array<
+        | { __typename: "ItineraryCollection"; id: string }
+        | { __typename: "ItineraryDirections"; id: string }
+        | { __typename: "ItineraryLocation"; id: string }
+      >;
+      updated: Array<
+        | { __typename: "ItineraryCollection"; id: string }
+        | { __typename: "ItineraryDirections"; id: string }
+        | { __typename: "ItineraryLocation"; id: string }
+      >;
+    };
+  };
+};
 
 export type UpdateItineraryMutationVariables = Exact<{
-  id: Scalars['ID'];
+  id: Scalars["ID"];
   itinerary: UpdateItineraryInput;
 }>;
 
+export type UpdateItineraryMutation = {
+  __typename?: "Mutation";
+  updateItinerary: {
+    __typename: "UpdateItineraryPayload";
+    itinerary?: {
+      __typename: "Itinerary";
+      id: string;
+      title?: string | null;
+      synopsis?: string | null;
+      description?: string | null;
+      tags: Array<string>;
+      created?: string | null;
+      modified?: string | null;
+      published?: string | null;
+      autoRoute?: {
+        __typename?: "ItineraryAutoRoute";
+        defaultMode: RouteMode;
+      } | null;
+    } | null;
+    cascaded: {
+      __typename?: "ItineraryItemCascadedChanges";
+      deletedIds: Array<string>;
+      created: Array<
+        | { __typename: "ItineraryCollection"; id: string }
+        | { __typename: "ItineraryDirections"; id: string }
+        | { __typename: "ItineraryLocation"; id: string }
+      >;
+      updated: Array<
+        | { __typename: "ItineraryCollection"; id: string }
+        | { __typename: "ItineraryDirections"; id: string }
+        | { __typename: "ItineraryLocation"; id: string }
+      >;
+    };
+  };
+};
 
-export type UpdateItineraryMutation = { __typename?: 'Mutation', updateItinerary: { __typename: 'UpdateItineraryPayload', itinerary?: { __typename: 'Itinerary', id: string, title?: string | null, synopsis?: string | null, description?: string | null, tags: Array<string>, created?: string | null, modified?: string | null, published?: string | null, autoRoute?: { __typename?: 'ItineraryAutoRoute', defaultMode: RouteMode } | null } | null, cascaded: { __typename?: 'ItineraryItemCascadedChanges', deletedIds: Array<string>, created: Array<{ __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', id: string }>, updated: Array<{ __typename: 'ItineraryCollection', id: string } | { __typename: 'ItineraryDirections', id: string } | { __typename: 'ItineraryLocation', id: string }> } } };
+export type MediaImageContentFragment = {
+  __typename?: "MediaImage";
+  provider: string;
+  copyright?: string | null;
+  altText?: string | null;
+  attribution?: string | null;
+  caption?: string | null;
+};
 
-export type MediaImageContentFragment = { __typename?: 'MediaImage', provider: string, copyright?: string | null, altText?: string | null, attribution?: string | null, caption?: string | null };
-
-export type MediaImagePartialContentFragment = { __typename?: 'MediaImage', provider: string, hasContent: boolean };
+export type MediaImagePartialContentFragment = {
+  __typename?: "MediaImage";
+  provider: string;
+  hasContent: boolean;
+};
 
 export type GetMediaImageQueryVariables = Exact<{
-  id: Scalars['ID'];
-  smallBestFit?: InputMaybe<Array<Scalars['Int']> | Scalars['Int']>;
-  mediumBestFit?: InputMaybe<Array<Scalars['Int']> | Scalars['Int']>;
-  largeBestFit?: InputMaybe<Array<Scalars['Int']> | Scalars['Int']>;
+  id: Scalars["ID"];
+  smallBestFit?: InputMaybe<Array<Scalars["Int"]> | Scalars["Int"]>;
+  mediumBestFit?: InputMaybe<Array<Scalars["Int"]> | Scalars["Int"]>;
+  largeBestFit?: InputMaybe<Array<Scalars["Int"]> | Scalars["Int"]>;
 }>;
 
-
-export type GetMediaImageQuery = { __typename?: 'Query', mediaResource?: { __typename: 'MediaImage', id?: string | null, provider: string, copyright?: string | null, altText?: string | null, attribution?: string | null, caption?: string | null, small?: { __typename?: 'MediaImageSource', url: string } | null, medium?: { __typename?: 'MediaImageSource', url: string } | null, large?: { __typename?: 'MediaImageSource', url: string } | null } | null };
+export type GetMediaImageQuery = {
+  __typename?: "Query";
+  mediaResource?: {
+    __typename: "MediaImage";
+    id?: string | null;
+    provider: string;
+    copyright?: string | null;
+    altText?: string | null;
+    attribution?: string | null;
+    caption?: string | null;
+    small?: { __typename?: "MediaImageSource"; url: string } | null;
+    medium?: { __typename?: "MediaImageSource"; url: string } | null;
+    large?: { __typename?: "MediaImageSource"; url: string } | null;
+  } | null;
+};
 
 export type AutocompleteSearchPlaceQueryVariables = Exact<{
-  text: Scalars['String'];
+  text: Scalars["String"];
   source: PlaceSearchSource;
 }>;
 
+export type AutocompleteSearchPlaceQuery = {
+  __typename?: "Query";
+  placeAutocompleteSearch: {
+    __typename: "PlaceSearchConnection";
+    edges: Array<{
+      __typename?: "PlaceSearchEdge";
+      node: {
+        __typename: "PlaceSearchNode";
+        id: string;
+        name?: string | null;
+        maki?: string | null;
+        position: { __typename?: "Position"; lon: number; lat: number };
+        address: {
+          __typename?: "PlaceAddress";
+          addressLineOne?: string | null;
+          addressLineTwo?: string | null;
+          addressLineThree?: string | null;
+          locality?: string | null;
+          region?: string | null;
+          regionCode?: string | null;
+          country?: string | null;
+          countryCode?: string | null;
+        };
+        layers: Array<{
+          __typename: "PlaceLayer";
+          id: string;
+          name?: string | null;
+        }>;
+      };
+      main: {
+        __typename?: "TextSearchResult";
+        label: string;
+        matches: Array<{
+          __typename?: "TextSearchResultMatch";
+          offset: number;
+          length: number;
+        }>;
+      };
+      secondary: {
+        __typename?: "TextSearchResult";
+        label: string;
+        matches: Array<{
+          __typename?: "TextSearchResultMatch";
+          offset: number;
+          length: number;
+        }>;
+      };
+    }>;
+  };
+};
 
-export type AutocompleteSearchPlaceQuery = { __typename?: 'Query', placeAutocompleteSearch: { __typename: 'PlaceSearchConnection', edges: Array<{ __typename?: 'PlaceSearchEdge', node: { __typename: 'PlaceSearchNode', id: string, name?: string | null, maki?: string | null, position: { __typename?: 'Position', lon: number, lat: number }, address: { __typename?: 'PlaceAddress', addressLineOne?: string | null, addressLineTwo?: string | null, addressLineThree?: string | null, locality?: string | null, region?: string | null, regionCode?: string | null, country?: string | null, countryCode?: string | null }, layers: Array<{ __typename: 'PlaceLayer', id: string, name?: string | null }> }, main: { __typename?: 'TextSearchResult', label: string, matches: Array<{ __typename?: 'TextSearchResultMatch', offset: number, length: number }> }, secondary: { __typename?: 'TextSearchResult', label: string, matches: Array<{ __typename?: 'TextSearchResultMatch', offset: number, length: number }> } }> } };
+export type PlaceContentFragment = {
+  __typename?: "Place";
+  name?: string | null;
+  synopsis?: string | null;
+  description?: string | null;
+  maki?: string | null;
+  position: { __typename?: "Position"; lon: number; lat: number };
+  address: {
+    __typename?: "PlaceAddress";
+    addressLineOne?: string | null;
+    addressLineTwo?: string | null;
+    addressLineThree?: string | null;
+    locality?: string | null;
+    region?: string | null;
+    regionCode?: string | null;
+    country?: string | null;
+    countryCode?: string | null;
+  };
+  contact: {
+    __typename?: "PlaceContact";
+    phoneNumber?: string | null;
+    emailAddress?: string | null;
+    websiteUrl?: string | null;
+    bookingUrl?: string | null;
+    facebookUrl?: string | null;
+    instagramUrl?: string | null;
+    twitterUrl?: string | null;
+  };
+  layers: Array<{ __typename: "PlaceLayer"; id: string; name?: string | null }>;
+};
 
-export type PlaceContentFragment = { __typename?: 'Place', name?: string | null, synopsis?: string | null, description?: string | null, maki?: string | null, position: { __typename?: 'Position', lon: number, lat: number }, address: { __typename?: 'PlaceAddress', addressLineOne?: string | null, addressLineTwo?: string | null, addressLineThree?: string | null, locality?: string | null, region?: string | null, regionCode?: string | null, country?: string | null, countryCode?: string | null }, contact: { __typename?: 'PlaceContact', phoneNumber?: string | null, emailAddress?: string | null, websiteUrl?: string | null, bookingUrl?: string | null, facebookUrl?: string | null, instagramUrl?: string | null, twitterUrl?: string | null }, layers: Array<{ __typename: 'PlaceLayer', id: string, name?: string | null }> };
+export type PlacePartialContentFragment = {
+  __typename?: "Place";
+  name?: string | null;
+  synopsis?: string | null;
+  maki?: string | null;
+  position: { __typename?: "Position"; lon: number; lat: number };
+  address: {
+    __typename?: "PlaceAddress";
+    addressLineOne?: string | null;
+    addressLineTwo?: string | null;
+    addressLineThree?: string | null;
+    locality?: string | null;
+    region?: string | null;
+    regionCode?: string | null;
+    country?: string | null;
+    countryCode?: string | null;
+  };
+  layers: Array<{ __typename: "PlaceLayer"; id: string; name?: string | null }>;
+};
 
-export type PlacePartialContentFragment = { __typename?: 'Place', name?: string | null, synopsis?: string | null, maki?: string | null, position: { __typename?: 'Position', lon: number, lat: number }, address: { __typename?: 'PlaceAddress', addressLineOne?: string | null, addressLineTwo?: string | null, addressLineThree?: string | null, locality?: string | null, region?: string | null, regionCode?: string | null, country?: string | null, countryCode?: string | null }, layers: Array<{ __typename: 'PlaceLayer', id: string, name?: string | null }> };
-
-export type PlaceSearchContentFragment = { __typename?: 'PlaceSearchNode', name?: string | null, maki?: string | null, position: { __typename?: 'Position', lon: number, lat: number }, address: { __typename?: 'PlaceAddress', addressLineOne?: string | null, addressLineTwo?: string | null, addressLineThree?: string | null, locality?: string | null, region?: string | null, regionCode?: string | null, country?: string | null, countryCode?: string | null }, layers: Array<{ __typename: 'PlaceLayer', id: string, name?: string | null }> };
+export type PlaceSearchContentFragment = {
+  __typename?: "PlaceSearchNode";
+  name?: string | null;
+  maki?: string | null;
+  position: { __typename?: "Position"; lon: number; lat: number };
+  address: {
+    __typename?: "PlaceAddress";
+    addressLineOne?: string | null;
+    addressLineTwo?: string | null;
+    addressLineThree?: string | null;
+    locality?: string | null;
+    region?: string | null;
+    regionCode?: string | null;
+    country?: string | null;
+    countryCode?: string | null;
+  };
+  layers: Array<{ __typename: "PlaceLayer"; id: string; name?: string | null }>;
+};
 
 export type GetPlaceQueryVariables = Exact<{
-  id: Scalars['ID'];
+  id: Scalars["ID"];
 }>;
 
-
-export type GetPlaceQuery = { __typename?: 'Query', place?: { __typename: 'Place', id: string, name?: string | null, synopsis?: string | null, description?: string | null, maki?: string | null, position: { __typename?: 'Position', lon: number, lat: number }, address: { __typename?: 'PlaceAddress', addressLineOne?: string | null, addressLineTwo?: string | null, addressLineThree?: string | null, locality?: string | null, region?: string | null, regionCode?: string | null, country?: string | null, countryCode?: string | null }, contact: { __typename?: 'PlaceContact', phoneNumber?: string | null, emailAddress?: string | null, websiteUrl?: string | null, bookingUrl?: string | null, facebookUrl?: string | null, instagramUrl?: string | null, twitterUrl?: string | null }, layers: Array<{ __typename: 'PlaceLayer', id: string, name?: string | null }> } | null };
+export type GetPlaceQuery = {
+  __typename?: "Query";
+  place?: {
+    __typename: "Place";
+    id: string;
+    name?: string | null;
+    synopsis?: string | null;
+    description?: string | null;
+    maki?: string | null;
+    position: { __typename?: "Position"; lon: number; lat: number };
+    address: {
+      __typename?: "PlaceAddress";
+      addressLineOne?: string | null;
+      addressLineTwo?: string | null;
+      addressLineThree?: string | null;
+      locality?: string | null;
+      region?: string | null;
+      regionCode?: string | null;
+      country?: string | null;
+      countryCode?: string | null;
+    };
+    contact: {
+      __typename?: "PlaceContact";
+      phoneNumber?: string | null;
+      emailAddress?: string | null;
+      websiteUrl?: string | null;
+      bookingUrl?: string | null;
+      facebookUrl?: string | null;
+      instagramUrl?: string | null;
+      twitterUrl?: string | null;
+    };
+    layers: Array<{
+      __typename: "PlaceLayer";
+      id: string;
+      name?: string | null;
+    }>;
+  } | null;
+};
 
 export type ReverseSearchPlaceByPositionQueryVariables = Exact<{
   focus: PositionInput;
   sources: Array<PlaceSearchSource> | PlaceSearchSource;
-  first: Scalars['Int'];
+  first: Scalars["Int"];
 }>;
 
+export type ReverseSearchPlaceByPositionQuery = {
+  __typename?: "Query";
+  placeReverseSearch: {
+    __typename: "PlaceSearchConnection";
+    places: Array<{
+      __typename: "PlaceSearchNode";
+      id: string;
+      name?: string | null;
+      maki?: string | null;
+      position: { __typename?: "Position"; lon: number; lat: number };
+      address: {
+        __typename?: "PlaceAddress";
+        addressLineOne?: string | null;
+        addressLineTwo?: string | null;
+        addressLineThree?: string | null;
+        locality?: string | null;
+        region?: string | null;
+        regionCode?: string | null;
+        country?: string | null;
+        countryCode?: string | null;
+      };
+      layers: Array<{
+        __typename: "PlaceLayer";
+        id: string;
+        name?: string | null;
+      }>;
+    }>;
+  };
+};
 
-export type ReverseSearchPlaceByPositionQuery = { __typename?: 'Query', placeReverseSearch: { __typename: 'PlaceSearchConnection', places: Array<{ __typename: 'PlaceSearchNode', id: string, name?: string | null, maki?: string | null, position: { __typename?: 'Position', lon: number, lat: number }, address: { __typename?: 'PlaceAddress', addressLineOne?: string | null, addressLineTwo?: string | null, addressLineThree?: string | null, locality?: string | null, region?: string | null, regionCode?: string | null, country?: string | null, countryCode?: string | null }, layers: Array<{ __typename: 'PlaceLayer', id: string, name?: string | null }> }> } };
+export type ProfileContentFragment = {
+  __typename?: "Profile";
+  name: string;
+  handle?: string | null;
+  bio?: string | null;
+  websiteUrl?: string | null;
+};
 
-export type ProfileContentFragment = { __typename?: 'Profile', name: string, handle?: string | null, bio?: string | null, websiteUrl?: string | null };
-
-export type ProfilePartialContentFragment = { __typename?: 'Profile', name: string, handle?: string | null };
+export type ProfilePartialContentFragment = {
+  __typename?: "Profile";
+  name: string;
+  handle?: string | null;
+};
 
 export type GetProfileQueryVariables = Exact<{
-  id: Scalars['ID'];
+  id: Scalars["ID"];
 }>;
 
-
-export type GetProfileQuery = { __typename?: 'Query', profile?: { __typename: 'Profile', id: string, name: string, handle?: string | null, bio?: string | null, websiteUrl?: string | null } | null };
+export type GetProfileQuery = {
+  __typename?: "Query";
+  profile?: {
+    __typename: "Profile";
+    id: string;
+    name: string;
+    handle?: string | null;
+    bio?: string | null;
+    websiteUrl?: string | null;
+  } | null;
+};
 
 export type ListAuthorizedProfilesQueryVariables = Exact<{
-  first: Scalars['Int'];
-  after?: InputMaybe<Scalars['String']>;
+  first: Scalars["Int"];
+  after?: InputMaybe<Scalars["String"]>;
 }>;
 
-
-export type ListAuthorizedProfilesQuery = { __typename?: 'Query', authorizedProfiles: { __typename: 'ProfileConnection', totalCount: number, profiles: Array<{ __typename: 'Profile', id: string, name: string, handle?: string | null }>, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: string | null, endCursor?: string | null } } };
+export type ListAuthorizedProfilesQuery = {
+  __typename?: "Query";
+  authorizedProfiles: {
+    __typename: "ProfileConnection";
+    totalCount: number;
+    profiles: Array<{
+      __typename: "Profile";
+      id: string;
+      name: string;
+      handle?: string | null;
+    }>;
+    pageInfo: {
+      __typename?: "PageInfo";
+      hasNextPage: boolean;
+      hasPreviousPage: boolean;
+      startCursor?: string | null;
+      endCursor?: string | null;
+    };
+  };
+};
 
 export type SearchRoutesBetweenPositionsQueryVariables = Exact<{
   mode: RouteSearchableMode;
   positions: Array<PositionInput> | PositionInput;
-  first: Scalars['Int'];
-  includeRoutePolyline: Scalars['Boolean'];
+  first: Scalars["Int"];
+  includeRoutePolyline: Scalars["Boolean"];
 }>;
 
+export type SearchRoutesBetweenPositionsQuery = {
+  __typename?: "Query";
+  routes: {
+    __typename: "RouteConnection";
+    routes: Array<{
+      __typename?: "Route";
+      segments: Array<{
+        __typename?: "RouteSegment";
+        distance?: number | null;
+        duration?: number | null;
+        polyline?: string | null;
+      }>;
+    }>;
+  };
+};
 
-export type SearchRoutesBetweenPositionsQuery = { __typename?: 'Query', routes: { __typename: 'RouteConnection', routes: Array<{ __typename?: 'Route', segments: Array<{ __typename?: 'RouteSegment', distance?: number | null, duration?: number | null, polyline?: string | null }> }> } };
-
-
-      export interface PossibleTypesResultData {
-        possibleTypes: {
-          [key: string]: string[]
-        }
-      }
-      const result: PossibleTypesResultData = {
-  "possibleTypes": {
-    "CollectionItem": [
-      "CollectionLocation"
-    ],
-    "CollectionItemEmbedded": [
+export interface PossibleTypesResultData {
+  possibleTypes: {
+    [key: string]: string[];
+  };
+}
+const result: PossibleTypesResultData = {
+  possibleTypes: {
+    CollectionItem: ["CollectionLocation"],
+    CollectionItemEmbedded: [
       "CollectionItemFailedToLoad",
-      "CollectionLocation"
+      "CollectionLocation",
     ],
-    "IconResource": [
-      "IconSilhouette"
-    ],
-    "IconResourceEmbedded": [
-      "IconResourceFailedToLoad",
-      "IconSilhouette"
-    ],
-    "ItineraryItem": [
+    IconResource: ["IconSilhouette"],
+    IconResourceEmbedded: ["IconResourceFailedToLoad", "IconSilhouette"],
+    ItineraryItem: [
       "ItineraryCollection",
       "ItineraryDirections",
-      "ItineraryLocation"
+      "ItineraryLocation",
     ],
-    "MediaResource": [
-      "MediaImage"
-    ],
-    "MediaResourceEmbedded": [
-      "MediaImage",
-      "MediaResourceFailedToLoad"
-    ],
-    "Node": [
+    MediaResource: ["MediaImage"],
+    MediaResourceEmbedded: ["MediaImage", "MediaResourceFailedToLoad"],
+    Node: [
       "Collection",
       "CollectionItemFailedToLoad",
       "CollectionLocation",
@@ -7733,650 +8731,830 @@ export type SearchRoutesBetweenPositionsQuery = { __typename?: 'Query', routes: 
       "MediaResourceFailedToLoad",
       "Place",
       "Profile",
-      "UserAgreement"
-    ]
-  }
+      "UserAgreement",
+    ],
+  },
 };
-      export default result;
-    
+export default result;
+
 export const CollectionContentFragmentDoc = gql`
-    fragment CollectionContent on Collection {
-  title
-  synopsis
-  description
-  discriminator
-  readMoreUrl
-}
-    `;
+  fragment CollectionContent on Collection {
+    title
+    synopsis
+    description
+    discriminator
+    readMoreUrl
+  }
+`;
 export const CollectionItemsCountFragmentDoc = gql`
-    fragment CollectionItemsCount on Collection {
-  items(first: 0) {
-    totalCount
+  fragment CollectionItemsCount on Collection {
+    items(first: 0) {
+      totalCount
+    }
   }
-}
-    `;
+`;
 export const CollectionLocationContentFragmentDoc = gql`
-    fragment CollectionLocationContent on CollectionLocation {
-  title
-  synopsis
-  description
-  tags
-  readMoreUrl
-  websiteUrl
-  position {
-    lon
-    lat
-  }
-}
-    `;
-export const CollectionLocationExternalRefsFragmentDoc = gql`
-    fragment CollectionLocationExternalRefs on CollectionLocation {
-  externalId: attr(id: "custom/external-ref") {
-    value
-  }
-  externalSource: attr(id: "custom/external-source") {
-    value
-  }
-}
-    `;
-export const CollectionLocationPartialContentFragmentDoc = gql`
-    fragment CollectionLocationPartialContent on CollectionLocation {
-  title
-  synopsis
-  tags
-  position {
-    lon
-    lat
-  }
-  readMoreUrl
-}
-    `;
-export const CollectionPartialContentFragmentDoc = gql`
-    fragment CollectionPartialContent on Collection {
-  title
-  synopsis
-  readMoreUrl
-}
-    `;
-export const ItineraryCascadedChangesFragmentDoc = gql`
-    fragment ItineraryCascadedChanges on ItineraryItemCascadedChanges {
-  created {
-    __typename
-    id
-  }
-  updated {
-    __typename
-    id
-  }
-  deletedIds
-}
-    `;
-export const ItineraryContentFragmentDoc = gql`
-    fragment ItineraryContent on Itinerary {
-  title
-  synopsis
-  description
-  tags
-  created
-  modified
-  published
-  autoRoute {
-    defaultMode
-  }
-}
-    `;
-export const ItineraryDirectionsContentFragmentDoc = gql`
-    fragment ItineraryDirectionsContent on ItineraryDirections {
-  durationMin
-  distance
-}
-    `;
-export const ItineraryDirectionsPartialContentFragmentDoc = gql`
-    fragment ItineraryDirectionsPartialContent on ItineraryDirections {
-  durationMin
-  distance
-}
-    `;
-export const ItineraryLocationContentFragmentDoc = gql`
-    fragment ItineraryLocationContent on ItineraryLocation {
-  title
-  synopsis
-  description
-  tags
-  optional
-  readMoreUrl
-  position {
-    lon
-    lat
-  }
-}
-    `;
-export const ItineraryLocationPartialContentFragmentDoc = gql`
-    fragment ItineraryLocationPartialContent on ItineraryLocation {
-  title
-  synopsis
-  tags
-  optional
-  readMoreUrl
-  position {
-    lon
-    lat
-  }
-}
-    `;
-export const ItineraryLocationsCountFragmentDoc = gql`
-    fragment ItineraryLocationsCount on Itinerary {
-  locations: descendants(first: 0, type: ItineraryLocation) {
-    totalCount
-  }
-}
-    `;
-export const ItineraryPartialContentFragmentDoc = gql`
-    fragment ItineraryPartialContent on Itinerary {
-  title
-  synopsis
-  tags
-  created
-  modified
-  published
-}
-    `;
-export const ItinerarySearchPartialContentFragmentDoc = gql`
-    fragment ItinerarySearchPartialContent on ItinerarySearchNode {
-  title
-  synopsis
-  tags
-  created
-  published
-}
-    `;
-export const MediaImageContentFragmentDoc = gql`
-    fragment MediaImageContent on MediaImage {
-  provider
-  copyright
-  altText
-  attribution
-  caption
-}
-    `;
-export const MediaImagePartialContentFragmentDoc = gql`
-    fragment MediaImagePartialContent on MediaImage {
-  provider
-  hasContent
-}
-    `;
-export const PlaceContentFragmentDoc = gql`
-    fragment PlaceContent on Place {
-  name
-  synopsis
-  description
-  position {
-    lon
-    lat
-  }
-  maki
-  address {
-    addressLineOne
-    addressLineTwo
-    addressLineThree
-    locality
-    region
-    regionCode
-    country
-    countryCode
-  }
-  contact {
-    phoneNumber
-    emailAddress
+  fragment CollectionLocationContent on CollectionLocation {
+    title
+    synopsis
+    description
+    tags
+    readMoreUrl
     websiteUrl
-    bookingUrl
-    facebookUrl
-    instagramUrl
-    twitterUrl
+    position {
+      lon
+      lat
+    }
   }
-  layers {
-    id
-    __typename
+`;
+export const CollectionLocationExternalRefsFragmentDoc = gql`
+  fragment CollectionLocationExternalRefs on CollectionLocation {
+    externalId: attr(id: "custom/external-ref") {
+      value
+    }
+    externalSource: attr(id: "custom/external-source") {
+      value
+    }
+  }
+`;
+export const CollectionLocationPartialContentFragmentDoc = gql`
+  fragment CollectionLocationPartialContent on CollectionLocation {
+    title
+    synopsis
+    tags
+    position {
+      lon
+      lat
+    }
+    readMoreUrl
+  }
+`;
+export const CollectionPartialContentFragmentDoc = gql`
+  fragment CollectionPartialContent on Collection {
+    title
+    synopsis
+    readMoreUrl
+  }
+`;
+export const ItineraryCascadedChangesFragmentDoc = gql`
+  fragment ItineraryCascadedChanges on ItineraryItemCascadedChanges {
+    created {
+      __typename
+      id
+    }
+    updated {
+      __typename
+      id
+    }
+    deletedIds
+  }
+`;
+export const ItineraryContentFragmentDoc = gql`
+  fragment ItineraryContent on Itinerary {
+    title
+    synopsis
+    description
+    tags
+    created
+    modified
+    published
+    autoRoute {
+      defaultMode
+    }
+  }
+`;
+export const ItineraryDirectionsContentFragmentDoc = gql`
+  fragment ItineraryDirectionsContent on ItineraryDirections {
+    durationMin
+    distance
+  }
+`;
+export const ItineraryDirectionsPartialContentFragmentDoc = gql`
+  fragment ItineraryDirectionsPartialContent on ItineraryDirections {
+    durationMin
+    distance
+  }
+`;
+export const ItineraryLocationContentFragmentDoc = gql`
+  fragment ItineraryLocationContent on ItineraryLocation {
+    title
+    synopsis
+    description
+    tags
+    optional
+    readMoreUrl
+    position {
+      lon
+      lat
+    }
+  }
+`;
+export const ItineraryLocationPartialContentFragmentDoc = gql`
+  fragment ItineraryLocationPartialContent on ItineraryLocation {
+    title
+    synopsis
+    tags
+    optional
+    readMoreUrl
+    position {
+      lon
+      lat
+    }
+  }
+`;
+export const ItineraryLocationsCountFragmentDoc = gql`
+  fragment ItineraryLocationsCount on Itinerary {
+    locations: descendants(first: 0, type: ItineraryLocation) {
+      totalCount
+    }
+  }
+`;
+export const ItineraryPartialContentFragmentDoc = gql`
+  fragment ItineraryPartialContent on Itinerary {
+    title
+    synopsis
+    tags
+    created
+    modified
+    published
+  }
+`;
+export const ItinerarySearchPartialContentFragmentDoc = gql`
+  fragment ItinerarySearchPartialContent on ItinerarySearchNode {
+    title
+    synopsis
+    tags
+    created
+    published
+  }
+`;
+export const MediaImageContentFragmentDoc = gql`
+  fragment MediaImageContent on MediaImage {
+    provider
+    copyright
+    altText
+    attribution
+    caption
+  }
+`;
+export const MediaImagePartialContentFragmentDoc = gql`
+  fragment MediaImagePartialContent on MediaImage {
+    provider
+    hasContent
+  }
+`;
+export const PlaceContentFragmentDoc = gql`
+  fragment PlaceContent on Place {
     name
+    synopsis
+    description
+    position {
+      lon
+      lat
+    }
+    maki
+    address {
+      addressLineOne
+      addressLineTwo
+      addressLineThree
+      locality
+      region
+      regionCode
+      country
+      countryCode
+    }
+    contact {
+      phoneNumber
+      emailAddress
+      websiteUrl
+      bookingUrl
+      facebookUrl
+      instagramUrl
+      twitterUrl
+    }
+    layers {
+      id
+      __typename
+      name
+    }
   }
-}
-    `;
+`;
 export const PlacePartialContentFragmentDoc = gql`
-    fragment PlacePartialContent on Place {
-  name
-  synopsis
-  position {
-    lon
-    lat
-  }
-  maki
-  address {
-    addressLineOne
-    addressLineTwo
-    addressLineThree
-    locality
-    region
-    regionCode
-    country
-    countryCode
-  }
-  layers {
-    id
-    __typename
+  fragment PlacePartialContent on Place {
     name
+    synopsis
+    position {
+      lon
+      lat
+    }
+    maki
+    address {
+      addressLineOne
+      addressLineTwo
+      addressLineThree
+      locality
+      region
+      regionCode
+      country
+      countryCode
+    }
+    layers {
+      id
+      __typename
+      name
+    }
   }
-}
-    `;
+`;
 export const PlaceSearchContentFragmentDoc = gql`
-    fragment PlaceSearchContent on PlaceSearchNode {
-  name
-  position {
-    lon
-    lat
-  }
-  address {
-    addressLineOne
-    addressLineTwo
-    addressLineThree
-    locality
-    region
-    regionCode
-    country
-    countryCode
-  }
-  maki
-  layers {
-    id
-    __typename
+  fragment PlaceSearchContent on PlaceSearchNode {
     name
+    position {
+      lon
+      lat
+    }
+    address {
+      addressLineOne
+      addressLineTwo
+      addressLineThree
+      locality
+      region
+      regionCode
+      country
+      countryCode
+    }
+    maki
+    layers {
+      id
+      __typename
+      name
+    }
   }
-}
-    `;
+`;
 export const ProfileContentFragmentDoc = gql`
-    fragment ProfileContent on Profile {
-  name
-  handle
-  bio
-  websiteUrl
-}
-    `;
+  fragment ProfileContent on Profile {
+    name
+    handle
+    bio
+    websiteUrl
+  }
+`;
 export const ProfilePartialContentFragmentDoc = gql`
-    fragment ProfilePartialContent on Profile {
-  name
-  handle
-}
-    `;
+  fragment ProfilePartialContent on Profile {
+    name
+    handle
+  }
+`;
 export const CreateCollectionLocationDocument = gql`
-    mutation createCollectionLocation($collectionId: ID!, $location: CreateCollectionLocationInput!) {
-  createCollectionLocation(collectionId: $collectionId, location: $location) {
-    __typename
-    location {
-      id
+  mutation createCollectionLocation(
+    $collectionId: ID!
+    $location: CreateCollectionLocationInput!
+  ) {
+    createCollectionLocation(collectionId: $collectionId, location: $location) {
       __typename
-      ...CollectionLocationContent
-      place {
+      location {
         id
         __typename
-        ...PlacePartialContent
+        ...CollectionLocationContent
+        place {
+          id
+          __typename
+          ...PlacePartialContent
+        }
       }
     }
   }
-}
-    ${CollectionLocationContentFragmentDoc}
-${PlacePartialContentFragmentDoc}`;
+  ${CollectionLocationContentFragmentDoc}
+  ${PlacePartialContentFragmentDoc}
+`;
 export const DeleteCollectionLocationDocument = gql`
-    mutation deleteCollectionLocation($id: ID!) {
-  deleteCollectionItem(id: $id) {
-    __typename
+  mutation deleteCollectionLocation($id: ID!) {
+    deleteCollectionItem(id: $id) {
+      __typename
+    }
   }
-}
-    `;
+`;
 export const FindCollectionLocationIdsByExternalDocument = gql`
-    query findCollectionLocationIdsByExternal($collectionId: [ID!], $externalIds: [ID!], $externalSources: [ID!], $first: Int!, $after: String) {
-  collectionItems(
-    collectionIds: $collectionId
-    externalIds: $externalIds
-    externalSources: $externalSources
-    first: $first
-    after: $after
+  query findCollectionLocationIdsByExternal(
+    $collectionId: [ID!]
+    $externalIds: [ID!]
+    $externalSources: [ID!]
+    $first: Int!
+    $after: String
   ) {
-    __typename
-    edges {
-      node {
-        id
-        __typename
-        ... on CollectionLocation {
-          place {
-            id
-            __typename
+    collectionItems(
+      collectionIds: $collectionId
+      externalIds: $externalIds
+      externalSources: $externalSources
+      first: $first
+      after: $after
+    ) {
+      __typename
+      edges {
+        node {
+          id
+          __typename
+          ... on CollectionLocation {
+            place {
+              id
+              __typename
+            }
           }
         }
+        cursor
       }
-      cursor
-    }
-    totalCount
-    pageInfo {
-      hasNextPage
-      hasPreviousPage
-      startCursor
-      endCursor
+      totalCount
+      pageInfo {
+        hasNextPage
+        hasPreviousPage
+        startCursor
+        endCursor
+      }
     }
   }
-}
-    `;
+`;
 export const FindCollectionLocationIdsByTagDocument = gql`
-    query findCollectionLocationIdsByTag($collectionId: [ID!], $tags: [String!], $first: Int!, $after: String) {
-  collectionItems(
-    collectionIds: $collectionId
-    tags: $tags
-    first: $first
-    after: $after
+  query findCollectionLocationIdsByTag(
+    $collectionId: [ID!]
+    $tags: [String!]
+    $first: Int!
+    $after: String
   ) {
-    __typename
-    edges {
-      node {
-        id
-        __typename
-        ... on CollectionLocation {
-          place {
-            id
-            __typename
+    collectionItems(
+      collectionIds: $collectionId
+      tags: $tags
+      first: $first
+      after: $after
+    ) {
+      __typename
+      edges {
+        node {
+          id
+          __typename
+          ... on CollectionLocation {
+            place {
+              id
+              __typename
+            }
           }
         }
+        cursor
       }
-      cursor
-    }
-    totalCount
-    pageInfo {
-      hasNextPage
-      hasPreviousPage
-      startCursor
-      endCursor
+      totalCount
+      pageInfo {
+        hasNextPage
+        hasPreviousPage
+        startCursor
+        endCursor
+      }
     }
   }
-}
-    `;
+`;
 export const FindCollectionLocationsByExternalDocument = gql`
-    query findCollectionLocationsByExternal($collectionId: [ID!], $externalIds: [ID!], $externalSources: [ID!], $first: Int!, $after: String) {
-  collectionItems(
-    collectionIds: $collectionId
-    externalIds: $externalIds
-    externalSources: $externalSources
-    first: $first
-    after: $after
+  query findCollectionLocationsByExternal(
+    $collectionId: [ID!]
+    $externalIds: [ID!]
+    $externalSources: [ID!]
+    $first: Int!
+    $after: String
   ) {
-    __typename
-    edges {
-      node {
-        id
-        __typename
-        ... on CollectionLocation {
-          ...CollectionLocationPartialContent
-          ...CollectionLocationExternalRefs
-          place {
-            id
-            __typename
-            ...PlacePartialContent
+    collectionItems(
+      collectionIds: $collectionId
+      externalIds: $externalIds
+      externalSources: $externalSources
+      first: $first
+      after: $after
+    ) {
+      __typename
+      edges {
+        node {
+          id
+          __typename
+          ... on CollectionLocation {
+            ...CollectionLocationPartialContent
+            ...CollectionLocationExternalRefs
+            place {
+              id
+              __typename
+              ...PlacePartialContent
+            }
           }
         }
+        cursor
       }
-      cursor
-    }
-    totalCount
-    pageInfo {
-      hasNextPage
-      hasPreviousPage
-      startCursor
-      endCursor
+      totalCount
+      pageInfo {
+        hasNextPage
+        hasPreviousPage
+        startCursor
+        endCursor
+      }
     }
   }
-}
-    ${CollectionLocationPartialContentFragmentDoc}
-${CollectionLocationExternalRefsFragmentDoc}
-${PlacePartialContentFragmentDoc}`;
+  ${CollectionLocationPartialContentFragmentDoc}
+  ${CollectionLocationExternalRefsFragmentDoc}
+  ${PlacePartialContentFragmentDoc}
+`;
 export const FindCollectionLocationsByTagDocument = gql`
-    query findCollectionLocationsByTag($collectionId: [ID!], $tags: [String!], $first: Int!, $after: String) {
-  collectionItems(
-    collectionIds: $collectionId
-    tags: $tags
-    first: $first
-    after: $after
+  query findCollectionLocationsByTag(
+    $collectionId: [ID!]
+    $tags: [String!]
+    $first: Int!
+    $after: String
   ) {
-    __typename
-    edges {
-      node {
-        id
-        __typename
-        ... on CollectionLocation {
-          ...CollectionLocationPartialContent
-          ...CollectionLocationExternalRefs
-          place {
-            id
-            __typename
-            ...PlacePartialContent
+    collectionItems(
+      collectionIds: $collectionId
+      tags: $tags
+      first: $first
+      after: $after
+    ) {
+      __typename
+      edges {
+        node {
+          id
+          __typename
+          ... on CollectionLocation {
+            ...CollectionLocationPartialContent
+            ...CollectionLocationExternalRefs
+            place {
+              id
+              __typename
+              ...PlacePartialContent
+            }
           }
         }
+        cursor
       }
-      cursor
-    }
-    totalCount
-    pageInfo {
-      hasNextPage
-      hasPreviousPage
-      startCursor
-      endCursor
+      totalCount
+      pageInfo {
+        hasNextPage
+        hasPreviousPage
+        startCursor
+        endCursor
+      }
     }
   }
-}
-    ${CollectionLocationPartialContentFragmentDoc}
-${CollectionLocationExternalRefsFragmentDoc}
-${PlacePartialContentFragmentDoc}`;
+  ${CollectionLocationPartialContentFragmentDoc}
+  ${CollectionLocationExternalRefsFragmentDoc}
+  ${PlacePartialContentFragmentDoc}
+`;
 export const GetCollectionLocationDocument = gql`
-    query getCollectionLocation($id: ID!) {
-  collectionItem(id: $id) {
-    id
-    __typename
-    ... on CollectionLocation {
-      ...CollectionLocationContent
-      place {
-        id
-        __typename
-        ...PlacePartialContent
+  query getCollectionLocation($id: ID!) {
+    collectionItem(id: $id) {
+      id
+      __typename
+      ... on CollectionLocation {
+        ...CollectionLocationContent
+        place {
+          id
+          __typename
+          ...PlacePartialContent
+        }
       }
     }
   }
-}
-    ${CollectionLocationContentFragmentDoc}
-${PlacePartialContentFragmentDoc}`;
+  ${CollectionLocationContentFragmentDoc}
+  ${PlacePartialContentFragmentDoc}
+`;
 export const GetCollectionDocument = gql`
-    query getCollection($id: ID!) {
-  collection(id: $id) {
-    id
-    __typename
-    ...CollectionContent
-    ...CollectionItemsCount
+  query getCollection($id: ID!) {
+    collection(id: $id) {
+      id
+      __typename
+      ...CollectionContent
+      ...CollectionItemsCount
+    }
   }
-}
-    ${CollectionContentFragmentDoc}
-${CollectionItemsCountFragmentDoc}`;
+  ${CollectionContentFragmentDoc}
+  ${CollectionItemsCountFragmentDoc}
+`;
 export const ListCollectionsDocument = gql`
-    query listCollections($profileId: ID!, $first: Int!, $after: String, $discriminator: String) {
-  collections(
-    profileId: $profileId
-    first: $first
-    after: $after
-    discriminator: $discriminator
+  query listCollections(
+    $profileId: ID!
+    $first: Int!
+    $after: String
+    $discriminator: String
   ) {
-    __typename
-    edges {
-      node {
-        id
-        __typename
-        ...CollectionPartialContent
-        ...CollectionItemsCount
+    collections(
+      profileId: $profileId
+      first: $first
+      after: $after
+      discriminator: $discriminator
+    ) {
+      __typename
+      edges {
+        node {
+          id
+          __typename
+          ...CollectionPartialContent
+          ...CollectionItemsCount
+        }
+      }
+      totalCount
+      pageInfo {
+        hasNextPage
+        hasPreviousPage
+        startCursor
+        endCursor
       }
     }
-    totalCount
-    pageInfo {
-      hasNextPage
-      hasPreviousPage
-      startCursor
-      endCursor
-    }
   }
-}
-    ${CollectionPartialContentFragmentDoc}
-${CollectionItemsCountFragmentDoc}`;
+  ${CollectionPartialContentFragmentDoc}
+  ${CollectionItemsCountFragmentDoc}
+`;
 export const UpdateCollectionLocationDocument = gql`
-    mutation updateCollectionLocation($id: ID!, $location: UpdateCollectionLocationInput!) {
-  updateCollectionLocation(id: $id, location: $location) {
-    __typename
-    location {
-      id
-      __typename
-      ...CollectionLocationContent
-    }
-  }
-}
-    ${CollectionLocationContentFragmentDoc}`;
-export const CreateItineraryDirectionsDocument = gql`
-    mutation createItineraryDirections($itineraryId: ID!, $directions: CreateItineraryDirectionsInput!) {
-  createItineraryDirections(
-    itineraryId: "itinerary/ABC123"
-    directions: $directions
+  mutation updateCollectionLocation(
+    $id: ID!
+    $location: UpdateCollectionLocationInput!
   ) {
-    __typename
-    directions {
-      id
+    updateCollectionLocation(id: $id, location: $location) {
       __typename
-      ...ItineraryDirectionsContent
-    }
-    cascaded {
-      ...ItineraryCascadedChanges
+      location {
+        id
+        __typename
+        ...CollectionLocationContent
+      }
     }
   }
-}
-    ${ItineraryDirectionsContentFragmentDoc}
-${ItineraryCascadedChangesFragmentDoc}`;
+  ${CollectionLocationContentFragmentDoc}
+`;
+export const CreateItineraryDirectionsDocument = gql`
+  mutation createItineraryDirections(
+    $itineraryId: ID!
+    $directions: CreateItineraryDirectionsInput!
+  ) {
+    createItineraryDirections(
+      itineraryId: "itinerary/ABC123"
+      directions: $directions
+    ) {
+      __typename
+      directions {
+        id
+        __typename
+        ...ItineraryDirectionsContent
+      }
+      cascaded {
+        ...ItineraryCascadedChanges
+      }
+    }
+  }
+  ${ItineraryDirectionsContentFragmentDoc}
+  ${ItineraryCascadedChangesFragmentDoc}
+`;
 export const CreateItineraryLocationDocument = gql`
-    mutation createItineraryLocation($itineraryId: ID!, $location: CreateItineraryLocationInput!) {
-  createItineraryLocation(itineraryId: $itineraryId, location: $location) {
-    __typename
-    location {
-      id
+  mutation createItineraryLocation(
+    $itineraryId: ID!
+    $location: CreateItineraryLocationInput!
+  ) {
+    createItineraryLocation(itineraryId: $itineraryId, location: $location) {
+      __typename
+      location {
+        id
+        __typename
+        itinerary {
+          id
+          __typename
+          ...ItineraryLocationsCount
+        }
+        ...ItineraryLocationContent
+        place {
+          id
+          __typename
+          ...PlacePartialContent
+        }
+      }
+      cascaded {
+        ...ItineraryCascadedChanges
+      }
+    }
+  }
+  ${ItineraryLocationsCountFragmentDoc}
+  ${ItineraryLocationContentFragmentDoc}
+  ${PlacePartialContentFragmentDoc}
+  ${ItineraryCascadedChangesFragmentDoc}
+`;
+export const CreateItineraryDocument = gql`
+  mutation createItinerary($itinerary: CreateItineraryInput!, $profileId: ID) {
+    createItinerary(itinerary: $itinerary, profileId: $profileId) {
+      __typename
+      itinerary {
+        id
+        __typename
+        ...ItineraryContent
+        ...ItineraryLocationsCount
+      }
+    }
+  }
+  ${ItineraryContentFragmentDoc}
+  ${ItineraryLocationsCountFragmentDoc}
+`;
+export const DeleteItineraryLocationDocument = gql`
+  mutation deleteItineraryLocation($id: ID!) {
+    deleteItineraryItem(id: $id) {
       __typename
       itinerary {
         id
         __typename
         ...ItineraryLocationsCount
       }
-      ...ItineraryLocationContent
-      place {
-        id
-        __typename
-        ...PlacePartialContent
+      cascaded {
+        ...ItineraryCascadedChanges
       }
     }
-    cascaded {
-      ...ItineraryCascadedChanges
+  }
+  ${ItineraryLocationsCountFragmentDoc}
+  ${ItineraryCascadedChangesFragmentDoc}
+`;
+export const DeleteItineraryDocument = gql`
+  mutation deleteItinerary($id: ID!) {
+    deleteItinerary(id: $id) {
+      __typename
     }
   }
-}
-    ${ItineraryLocationsCountFragmentDoc}
-${ItineraryLocationContentFragmentDoc}
-${PlacePartialContentFragmentDoc}
-${ItineraryCascadedChangesFragmentDoc}`;
-export const CreateItineraryDocument = gql`
-    mutation createItinerary($itinerary: CreateItineraryInput!, $profileId: ID) {
-  createItinerary(itinerary: $itinerary, profileId: $profileId) {
-    __typename
-    itinerary {
+`;
+export const DisableItineraryAutoRouteDocument = gql`
+  mutation disableItineraryAutoRoute($id: ID!) {
+    updateItinerary(id: $id, itinerary: { autoRoute: { defaultMode: null } }) {
+      __typename
+      itinerary {
+        id
+        __typename
+        autoRoute {
+          defaultMode
+        }
+      }
+      cascaded {
+        ...ItineraryCascadedChanges
+      }
+    }
+  }
+  ${ItineraryCascadedChangesFragmentDoc}
+`;
+export const EnableItineraryAutoRouteDocument = gql`
+  mutation enableItineraryAutoRoute($id: ID!, $defaultMode: RouteMode!) {
+    updateItinerary(
+      id: $id
+      itinerary: { autoRoute: { defaultMode: $defaultMode } }
+    ) {
+      __typename
+      itinerary {
+        id
+        __typename
+        autoRoute {
+          defaultMode
+        }
+      }
+      cascaded {
+        ...ItineraryCascadedChanges
+      }
+    }
+  }
+  ${ItineraryCascadedChangesFragmentDoc}
+`;
+export const FindItineraryLocationIdsByPlaceIdDocument = gql`
+  query findItineraryLocationIdsByPlaceId(
+    $itineraryId: ID!
+    $placeId: ID!
+    $first: Int!
+    $after: String
+  ) {
+    itinerary(id: $itineraryId) {
+      descendants(
+        placeIds: [$placeId]
+        type: ItineraryLocation
+        first: $first
+        after: $after
+      ) {
+        __typename
+        edges {
+          node {
+            id
+            __typename
+            ... on ItineraryLocation {
+              place {
+                id
+                __typename
+              }
+            }
+          }
+        }
+        totalCount
+        pageInfo {
+          hasNextPage
+          hasPreviousPage
+          startCursor
+          endCursor
+        }
+      }
+    }
+  }
+`;
+export const FindItineraryLocationsByPlaceIdDocument = gql`
+  query findItineraryLocationsByPlaceId(
+    $itineraryId: ID!
+    $placeId: ID!
+    $first: Int!
+    $after: String
+  ) {
+    itinerary(id: $itineraryId) {
+      descendants(
+        placeIds: [$placeId]
+        type: ItineraryLocation
+        first: $first
+        after: $after
+      ) {
+        __typename
+        edges {
+          node {
+            id
+            __typename
+            ... on ItineraryLocation {
+              ...ItineraryLocationPartialContent
+              place {
+                id
+                __typename
+                ...PlacePartialContent
+              }
+            }
+          }
+        }
+        totalCount
+        pageInfo {
+          hasNextPage
+          hasPreviousPage
+          startCursor
+          endCursor
+        }
+      }
+    }
+  }
+  ${ItineraryLocationPartialContentFragmentDoc}
+  ${PlacePartialContentFragmentDoc}
+`;
+export const GetItineraryDirectionsDocument = gql`
+  query getItineraryDirections($id: ID!, $includeRoutePolyline: Boolean!) {
+    node(id: $id) {
+      id
+      __typename
+      ... on ItineraryDirections {
+        ...ItineraryDirectionsContent
+        route {
+          segments {
+            id
+            __typename
+            mode
+            polyline @include(if: $includeRoutePolyline)
+          }
+        }
+      }
+    }
+  }
+  ${ItineraryDirectionsContentFragmentDoc}
+`;
+export const GetItineraryLocationDocument = gql`
+  query getItineraryLocation($id: ID!) {
+    node(id: $id) {
+      id
+      __typename
+      ... on ItineraryLocation {
+        ...ItineraryLocationContent
+        place {
+          id
+          __typename
+          ...PlaceContent
+        }
+      }
+    }
+  }
+  ${ItineraryLocationContentFragmentDoc}
+  ${PlaceContentFragmentDoc}
+`;
+export const GetItineraryDocument = gql`
+  query getItinerary($id: ID!) {
+    itinerary(id: $id) {
       id
       __typename
       ...ItineraryContent
       ...ItineraryLocationsCount
-    }
-  }
-}
-    ${ItineraryContentFragmentDoc}
-${ItineraryLocationsCountFragmentDoc}`;
-export const DeleteItineraryLocationDocument = gql`
-    mutation deleteItineraryLocation($id: ID!) {
-  deleteItineraryItem(id: $id) {
-    __typename
-    itinerary {
-      id
-      __typename
-      ...ItineraryLocationsCount
-    }
-    cascaded {
-      ...ItineraryCascadedChanges
-    }
-  }
-}
-    ${ItineraryLocationsCountFragmentDoc}
-${ItineraryCascadedChangesFragmentDoc}`;
-export const DeleteItineraryDocument = gql`
-    mutation deleteItinerary($id: ID!) {
-  deleteItinerary(id: $id) {
-    __typename
-  }
-}
-    `;
-export const DisableItineraryAutoRouteDocument = gql`
-    mutation disableItineraryAutoRoute($id: ID!) {
-  updateItinerary(id: $id, itinerary: {autoRoute: {defaultMode: null}}) {
-    __typename
-    itinerary {
-      id
-      __typename
-      autoRoute {
-        defaultMode
+      profile {
+        id
+        __typename
+        ...ProfilePartialContent
       }
     }
-    cascaded {
-      ...ItineraryCascadedChanges
-    }
   }
-}
-    ${ItineraryCascadedChangesFragmentDoc}`;
-export const EnableItineraryAutoRouteDocument = gql`
-    mutation enableItineraryAutoRoute($id: ID!, $defaultMode: RouteMode!) {
-  updateItinerary(id: $id, itinerary: {autoRoute: {defaultMode: $defaultMode}}) {
-    __typename
-    itinerary {
-      id
-      __typename
-      autoRoute {
-        defaultMode
-      }
-    }
-    cascaded {
-      ...ItineraryCascadedChanges
-    }
-  }
-}
-    ${ItineraryCascadedChangesFragmentDoc}`;
-export const FindItineraryLocationIdsByPlaceIdDocument = gql`
-    query findItineraryLocationIdsByPlaceId($itineraryId: ID!, $placeId: ID!, $first: Int!, $after: String) {
-  itinerary(id: $itineraryId) {
-    descendants(
-      placeIds: [$placeId]
-      type: ItineraryLocation
-      first: $first
-      after: $after
-    ) {
+  ${ItineraryContentFragmentDoc}
+  ${ItineraryLocationsCountFragmentDoc}
+  ${ProfilePartialContentFragmentDoc}
+`;
+export const ListItinerariesDocument = gql`
+  query listItineraries($profileId: ID!, $first: Int!, $after: String) {
+    itineraries(profileId: $profileId, first: $first, after: $after) {
       __typename
       edges {
         node {
           id
           __typename
-          ... on ItineraryLocation {
-            place {
-              id
-              __typename
-            }
-          }
+          ...ItinerarySearchPartialContent
         }
       }
       totalCount
@@ -8388,31 +9566,245 @@ export const FindItineraryLocationIdsByPlaceIdDocument = gql`
       }
     }
   }
-}
-    `;
-export const FindItineraryLocationsByPlaceIdDocument = gql`
-    query findItineraryLocationsByPlaceId($itineraryId: ID!, $placeId: ID!, $first: Int!, $after: String) {
-  itinerary(id: $itineraryId) {
-    descendants(
-      placeIds: [$placeId]
-      type: ItineraryLocation
-      first: $first
-      after: $after
+  ${ItinerarySearchPartialContentFragmentDoc}
+`;
+export const ListItineraryLocationsDocument = gql`
+  query listItineraryLocations(
+    $id: ID!
+    $first: Int!
+    $after: String
+    $includeRoutePolyline: Boolean!
+  ) {
+    itinerary(id: $id) {
+      id
+      __typename
+      locations: children(
+        first: $first
+        type: ItineraryLocation
+        after: $after
+      ) {
+        edges {
+          location: node {
+            id
+            __typename
+            ... on ItineraryLocation {
+              ...ItineraryLocationPartialContent
+              place {
+                id
+                __typename
+                ...PlacePartialContent
+              }
+            }
+          }
+          arrival: directions(first: 1, direction: Inbound) {
+            directions: nodes {
+              id
+              __typename
+              ...ItineraryDirectionsPartialContent
+              route {
+                segments {
+                  id
+                  __typename
+                  mode
+                  polyline @include(if: $includeRoutePolyline)
+                }
+              }
+            }
+            totalCount
+          }
+        }
+        totalCount
+        pageInfo {
+          hasNextPage
+          hasPreviousPage
+          startCursor
+          endCursor
+        }
+      }
+    }
+  }
+  ${ItineraryLocationPartialContentFragmentDoc}
+  ${PlacePartialContentFragmentDoc}
+  ${ItineraryDirectionsPartialContentFragmentDoc}
+`;
+export const MoveItineraryLocationAfterDocument = gql`
+  mutation moveItineraryLocationAfter($id: ID!, $siblingId: ID!) {
+    moveItineraryItem(
+      id: $id
+      positionAfterSibling: { siblingId: $siblingId }
     ) {
+      __typename
+      cascaded {
+        ...ItineraryCascadedChanges
+      }
+    }
+  }
+  ${ItineraryCascadedChangesFragmentDoc}
+`;
+export const MoveItineraryLocationToStartDocument = gql`
+  mutation moveItineraryLocationToStart($id: ID!) {
+    moveItineraryItem(id: $id, positionAtStart: {}) {
+      __typename
+      cascaded {
+        ...ItineraryCascadedChanges
+      }
+    }
+  }
+  ${ItineraryCascadedChangesFragmentDoc}
+`;
+export const UpdateItineraryLocationIsOptionalDocument = gql`
+  mutation updateItineraryLocationIsOptional($id: ID!, $optional: Boolean!) {
+    updateItineraryLocation(id: $id, location: { optional: $optional }) {
+      __typename
+      location {
+        id
+        __typename
+        optional
+      }
+      cascaded {
+        ...ItineraryCascadedChanges
+      }
+    }
+  }
+  ${ItineraryCascadedChangesFragmentDoc}
+`;
+export const UpdateItineraryLocationDocument = gql`
+  mutation updateItineraryLocation(
+    $id: ID!
+    $location: UpdateItineraryLocationInput!
+  ) {
+    updateItineraryLocation(id: $id, location: $location) {
+      __typename
+      location {
+        id
+        __typename
+        ...ItineraryLocationContent
+      }
+      cascaded {
+        ...ItineraryCascadedChanges
+      }
+    }
+  }
+  ${ItineraryLocationContentFragmentDoc}
+  ${ItineraryCascadedChangesFragmentDoc}
+`;
+export const UpdateItineraryDocument = gql`
+  mutation updateItinerary($id: ID!, $itinerary: UpdateItineraryInput!) {
+    updateItinerary(id: $id, itinerary: $itinerary) {
+      __typename
+      itinerary {
+        id
+        __typename
+        ...ItineraryContent
+      }
+      cascaded {
+        ...ItineraryCascadedChanges
+      }
+    }
+  }
+  ${ItineraryContentFragmentDoc}
+  ${ItineraryCascadedChangesFragmentDoc}
+`;
+export const GetMediaImageDocument = gql`
+  query getMediaImage(
+    $id: ID!
+    $smallBestFit: [Int!]
+    $mediumBestFit: [Int!]
+    $largeBestFit: [Int!]
+  ) {
+    mediaResource(id: $id) {
+      __typename
+      ... on MediaImage {
+        id
+        ...MediaImageContent
+        small: source(bestFit: $smallBestFit) {
+          url
+        }
+        medium: source(bestFit: $mediumBestFit) {
+          url
+        }
+        large: source(bestFit: $largeBestFit) {
+          url
+        }
+      }
+    }
+  }
+  ${MediaImageContentFragmentDoc}
+`;
+export const AutocompleteSearchPlaceDocument = gql`
+  query autocompleteSearchPlace($text: String!, $source: PlaceSearchSource!) {
+    placeAutocompleteSearch(text: $text, sources: [$source], first: 10) {
       __typename
       edges {
         node {
           id
           __typename
-          ... on ItineraryLocation {
-            ...ItineraryLocationPartialContent
-            place {
-              id
-              __typename
-              ...PlacePartialContent
-            }
+          ...PlaceSearchContent
+        }
+        main {
+          label
+          matches {
+            offset
+            length
           }
         }
+        secondary {
+          label
+          matches {
+            offset
+            length
+          }
+        }
+      }
+    }
+  }
+  ${PlaceSearchContentFragmentDoc}
+`;
+export const GetPlaceDocument = gql`
+  query getPlace($id: ID!) {
+    place(id: $id) {
+      id
+      __typename
+      ...PlaceContent
+    }
+  }
+  ${PlaceContentFragmentDoc}
+`;
+export const ReverseSearchPlaceByPositionDocument = gql`
+  query reverseSearchPlaceByPosition(
+    $focus: PositionInput!
+    $sources: [PlaceSearchSource!]!
+    $first: Int!
+  ) {
+    placeReverseSearch(focus: $focus, sources: $sources, first: $first) {
+      __typename
+      places: nodes {
+        id
+        __typename
+        ...PlaceSearchContent
+      }
+    }
+  }
+  ${PlaceSearchContentFragmentDoc}
+`;
+export const GetProfileDocument = gql`
+  query getProfile($id: ID!) {
+    profile(id: $id) {
+      id
+      __typename
+      ...ProfileContent
+    }
+  }
+  ${ProfileContentFragmentDoc}
+`;
+export const ListAuthorizedProfilesDocument = gql`
+  query listAuthorizedProfiles($first: Int!, $after: String) {
+    authorizedProfiles(first: $first, after: $after) {
+      __typename
+      profiles: nodes {
+        id
+        __typename
+        ...ProfilePartialContent
       }
       totalCount
       pageInfo {
@@ -8423,421 +9815,481 @@ export const FindItineraryLocationsByPlaceIdDocument = gql`
       }
     }
   }
-}
-    ${ItineraryLocationPartialContentFragmentDoc}
-${PlacePartialContentFragmentDoc}`;
-export const GetItineraryDirectionsDocument = gql`
-    query getItineraryDirections($id: ID!, $includeRoutePolyline: Boolean!) {
-  node(id: $id) {
-    id
-    __typename
-    ... on ItineraryDirections {
-      ...ItineraryDirectionsContent
-      route {
+  ${ProfilePartialContentFragmentDoc}
+`;
+export const SearchRoutesBetweenPositionsDocument = gql`
+  query searchRoutesBetweenPositions(
+    $mode: RouteSearchableMode!
+    $positions: [PositionInput!]!
+    $first: Int!
+    $includeRoutePolyline: Boolean!
+  ) {
+    routes(mode: $mode, positions: $positions, first: $first) {
+      __typename
+      routes: nodes {
         segments {
-          id
-          __typename
-          mode
+          distance(unit: Kilometers)
+          duration(unit: Minutes)
           polyline @include(if: $includeRoutePolyline)
         }
       }
     }
   }
-}
-    ${ItineraryDirectionsContentFragmentDoc}`;
-export const GetItineraryLocationDocument = gql`
-    query getItineraryLocation($id: ID!) {
-  node(id: $id) {
-    id
-    __typename
-    ... on ItineraryLocation {
-      ...ItineraryLocationContent
-      place {
-        id
-        __typename
-        ...PlaceContent
-      }
-    }
-  }
-}
-    ${ItineraryLocationContentFragmentDoc}
-${PlaceContentFragmentDoc}`;
-export const GetItineraryDocument = gql`
-    query getItinerary($id: ID!) {
-  itinerary(id: $id) {
-    id
-    __typename
-    ...ItineraryContent
-    ...ItineraryLocationsCount
-    profile {
-      id
-      __typename
-      ...ProfilePartialContent
-    }
-  }
-}
-    ${ItineraryContentFragmentDoc}
-${ItineraryLocationsCountFragmentDoc}
-${ProfilePartialContentFragmentDoc}`;
-export const ListItinerariesDocument = gql`
-    query listItineraries($profileId: ID!, $first: Int!, $after: String) {
-  itineraries(profileId: $profileId, first: $first, after: $after) {
-    __typename
-    edges {
-      node {
-        id
-        __typename
-        ...ItinerarySearchPartialContent
-      }
-    }
-    totalCount
-    pageInfo {
-      hasNextPage
-      hasPreviousPage
-      startCursor
-      endCursor
-    }
-  }
-}
-    ${ItinerarySearchPartialContentFragmentDoc}`;
-export const ListItineraryLocationsDocument = gql`
-    query listItineraryLocations($id: ID!, $first: Int!, $after: String, $includeRoutePolyline: Boolean!) {
-  itinerary(id: $id) {
-    id
-    __typename
-    locations: children(first: $first, type: ItineraryLocation, after: $after) {
-      edges {
-        location: node {
-          id
-          __typename
-          ... on ItineraryLocation {
-            ...ItineraryLocationPartialContent
-            place {
-              id
-              __typename
-              ...PlacePartialContent
-            }
-          }
-        }
-        arrival: directions(first: 1, direction: Inbound) {
-          directions: nodes {
-            id
-            __typename
-            ...ItineraryDirectionsPartialContent
-            route {
-              segments {
-                id
-                __typename
-                mode
-                polyline @include(if: $includeRoutePolyline)
-              }
-            }
-          }
-          totalCount
-        }
-      }
-      totalCount
-      pageInfo {
-        hasNextPage
-        hasPreviousPage
-        startCursor
-        endCursor
-      }
-    }
-  }
-}
-    ${ItineraryLocationPartialContentFragmentDoc}
-${PlacePartialContentFragmentDoc}
-${ItineraryDirectionsPartialContentFragmentDoc}`;
-export const MoveItineraryLocationAfterDocument = gql`
-    mutation moveItineraryLocationAfter($id: ID!, $siblingId: ID!) {
-  moveItineraryItem(id: $id, positionAfterSibling: {siblingId: $siblingId}) {
-    __typename
-    cascaded {
-      ...ItineraryCascadedChanges
-    }
-  }
-}
-    ${ItineraryCascadedChangesFragmentDoc}`;
-export const MoveItineraryLocationToStartDocument = gql`
-    mutation moveItineraryLocationToStart($id: ID!) {
-  moveItineraryItem(id: $id, positionAtStart: {}) {
-    __typename
-    cascaded {
-      ...ItineraryCascadedChanges
-    }
-  }
-}
-    ${ItineraryCascadedChangesFragmentDoc}`;
-export const UpdateItineraryLocationIsOptionalDocument = gql`
-    mutation updateItineraryLocationIsOptional($id: ID!, $optional: Boolean!) {
-  updateItineraryLocation(id: $id, location: {optional: $optional}) {
-    __typename
-    location {
-      id
-      __typename
-      optional
-    }
-    cascaded {
-      ...ItineraryCascadedChanges
-    }
-  }
-}
-    ${ItineraryCascadedChangesFragmentDoc}`;
-export const UpdateItineraryLocationDocument = gql`
-    mutation updateItineraryLocation($id: ID!, $location: UpdateItineraryLocationInput!) {
-  updateItineraryLocation(id: $id, location: $location) {
-    __typename
-    location {
-      id
-      __typename
-      ...ItineraryLocationContent
-    }
-    cascaded {
-      ...ItineraryCascadedChanges
-    }
-  }
-}
-    ${ItineraryLocationContentFragmentDoc}
-${ItineraryCascadedChangesFragmentDoc}`;
-export const UpdateItineraryDocument = gql`
-    mutation updateItinerary($id: ID!, $itinerary: UpdateItineraryInput!) {
-  updateItinerary(id: $id, itinerary: $itinerary) {
-    __typename
-    itinerary {
-      id
-      __typename
-      ...ItineraryContent
-    }
-    cascaded {
-      ...ItineraryCascadedChanges
-    }
-  }
-}
-    ${ItineraryContentFragmentDoc}
-${ItineraryCascadedChangesFragmentDoc}`;
-export const GetMediaImageDocument = gql`
-    query getMediaImage($id: ID!, $smallBestFit: [Int!], $mediumBestFit: [Int!], $largeBestFit: [Int!]) {
-  mediaResource(id: $id) {
-    __typename
-    ... on MediaImage {
-      id
-      ...MediaImageContent
-      small: source(bestFit: $smallBestFit) {
-        url
-      }
-      medium: source(bestFit: $mediumBestFit) {
-        url
-      }
-      large: source(bestFit: $largeBestFit) {
-        url
-      }
-    }
-  }
-}
-    ${MediaImageContentFragmentDoc}`;
-export const AutocompleteSearchPlaceDocument = gql`
-    query autocompleteSearchPlace($text: String!, $source: PlaceSearchSource!) {
-  placeAutocompleteSearch(text: $text, sources: [$source], first: 10) {
-    __typename
-    edges {
-      node {
-        id
-        __typename
-        ...PlaceSearchContent
-      }
-      main {
-        label
-        matches {
-          offset
-          length
-        }
-      }
-      secondary {
-        label
-        matches {
-          offset
-          length
-        }
-      }
-    }
-  }
-}
-    ${PlaceSearchContentFragmentDoc}`;
-export const GetPlaceDocument = gql`
-    query getPlace($id: ID!) {
-  place(id: $id) {
-    id
-    __typename
-    ...PlaceContent
-  }
-}
-    ${PlaceContentFragmentDoc}`;
-export const ReverseSearchPlaceByPositionDocument = gql`
-    query reverseSearchPlaceByPosition($focus: PositionInput!, $sources: [PlaceSearchSource!]!, $first: Int!) {
-  placeReverseSearch(focus: $focus, sources: $sources, first: $first) {
-    __typename
-    places: nodes {
-      id
-      __typename
-      ...PlaceSearchContent
-    }
-  }
-}
-    ${PlaceSearchContentFragmentDoc}`;
-export const GetProfileDocument = gql`
-    query getProfile($id: ID!) {
-  profile(id: $id) {
-    id
-    __typename
-    ...ProfileContent
-  }
-}
-    ${ProfileContentFragmentDoc}`;
-export const ListAuthorizedProfilesDocument = gql`
-    query listAuthorizedProfiles($first: Int!, $after: String) {
-  authorizedProfiles(first: $first, after: $after) {
-    __typename
-    profiles: nodes {
-      id
-      __typename
-      ...ProfilePartialContent
-    }
-    totalCount
-    pageInfo {
-      hasNextPage
-      hasPreviousPage
-      startCursor
-      endCursor
-    }
-  }
-}
-    ${ProfilePartialContentFragmentDoc}`;
-export const SearchRoutesBetweenPositionsDocument = gql`
-    query searchRoutesBetweenPositions($mode: RouteSearchableMode!, $positions: [PositionInput!]!, $first: Int!, $includeRoutePolyline: Boolean!) {
-  routes(mode: $mode, positions: $positions, first: $first) {
-    __typename
-    routes: nodes {
-      segments {
-        distance(unit: Kilometers)
-        duration(unit: Minutes)
-        polyline @include(if: $includeRoutePolyline)
-      }
-    }
-  }
-}
-    `;
-export type Requester<C = {}, E = unknown> = <R, V>(doc: DocumentNode, vars?: V, options?: C) => Promise<R> | AsyncIterable<R>
+`;
+export type Requester<C = {}, E = unknown> = <R, V>(
+  doc: DocumentNode,
+  vars?: V,
+  options?: C
+) => Promise<R> | AsyncIterable<R>;
 export function getSdk<C, E>(requester: Requester<C, E>) {
   return {
-    createCollectionLocation(variables: CreateCollectionLocationMutationVariables, options?: C): Promise<CreateCollectionLocationMutation> {
-      return requester<CreateCollectionLocationMutation, CreateCollectionLocationMutationVariables>(CreateCollectionLocationDocument, variables, options) as Promise<CreateCollectionLocationMutation>;
+    createCollectionLocation(
+      variables: CreateCollectionLocationMutationVariables,
+      options?: C
+    ): Promise<CreateCollectionLocationMutation> {
+      return requester<
+        CreateCollectionLocationMutation,
+        CreateCollectionLocationMutationVariables
+      >(
+        CreateCollectionLocationDocument,
+        variables,
+        options
+      ) as Promise<CreateCollectionLocationMutation>;
     },
-    deleteCollectionLocation(variables: DeleteCollectionLocationMutationVariables, options?: C): Promise<DeleteCollectionLocationMutation> {
-      return requester<DeleteCollectionLocationMutation, DeleteCollectionLocationMutationVariables>(DeleteCollectionLocationDocument, variables, options) as Promise<DeleteCollectionLocationMutation>;
+    deleteCollectionLocation(
+      variables: DeleteCollectionLocationMutationVariables,
+      options?: C
+    ): Promise<DeleteCollectionLocationMutation> {
+      return requester<
+        DeleteCollectionLocationMutation,
+        DeleteCollectionLocationMutationVariables
+      >(
+        DeleteCollectionLocationDocument,
+        variables,
+        options
+      ) as Promise<DeleteCollectionLocationMutation>;
     },
-    findCollectionLocationIdsByExternal(variables: FindCollectionLocationIdsByExternalQueryVariables, options?: C): Promise<FindCollectionLocationIdsByExternalQuery> {
-      return requester<FindCollectionLocationIdsByExternalQuery, FindCollectionLocationIdsByExternalQueryVariables>(FindCollectionLocationIdsByExternalDocument, variables, options) as Promise<FindCollectionLocationIdsByExternalQuery>;
+    findCollectionLocationIdsByExternal(
+      variables: FindCollectionLocationIdsByExternalQueryVariables,
+      options?: C
+    ): Promise<FindCollectionLocationIdsByExternalQuery> {
+      return requester<
+        FindCollectionLocationIdsByExternalQuery,
+        FindCollectionLocationIdsByExternalQueryVariables
+      >(
+        FindCollectionLocationIdsByExternalDocument,
+        variables,
+        options
+      ) as Promise<FindCollectionLocationIdsByExternalQuery>;
     },
-    findCollectionLocationIdsByTag(variables: FindCollectionLocationIdsByTagQueryVariables, options?: C): Promise<FindCollectionLocationIdsByTagQuery> {
-      return requester<FindCollectionLocationIdsByTagQuery, FindCollectionLocationIdsByTagQueryVariables>(FindCollectionLocationIdsByTagDocument, variables, options) as Promise<FindCollectionLocationIdsByTagQuery>;
+    findCollectionLocationIdsByTag(
+      variables: FindCollectionLocationIdsByTagQueryVariables,
+      options?: C
+    ): Promise<FindCollectionLocationIdsByTagQuery> {
+      return requester<
+        FindCollectionLocationIdsByTagQuery,
+        FindCollectionLocationIdsByTagQueryVariables
+      >(
+        FindCollectionLocationIdsByTagDocument,
+        variables,
+        options
+      ) as Promise<FindCollectionLocationIdsByTagQuery>;
     },
-    findCollectionLocationsByExternal(variables: FindCollectionLocationsByExternalQueryVariables, options?: C): Promise<FindCollectionLocationsByExternalQuery> {
-      return requester<FindCollectionLocationsByExternalQuery, FindCollectionLocationsByExternalQueryVariables>(FindCollectionLocationsByExternalDocument, variables, options) as Promise<FindCollectionLocationsByExternalQuery>;
+    findCollectionLocationsByExternal(
+      variables: FindCollectionLocationsByExternalQueryVariables,
+      options?: C
+    ): Promise<FindCollectionLocationsByExternalQuery> {
+      return requester<
+        FindCollectionLocationsByExternalQuery,
+        FindCollectionLocationsByExternalQueryVariables
+      >(
+        FindCollectionLocationsByExternalDocument,
+        variables,
+        options
+      ) as Promise<FindCollectionLocationsByExternalQuery>;
     },
-    findCollectionLocationsByTag(variables: FindCollectionLocationsByTagQueryVariables, options?: C): Promise<FindCollectionLocationsByTagQuery> {
-      return requester<FindCollectionLocationsByTagQuery, FindCollectionLocationsByTagQueryVariables>(FindCollectionLocationsByTagDocument, variables, options) as Promise<FindCollectionLocationsByTagQuery>;
+    findCollectionLocationsByTag(
+      variables: FindCollectionLocationsByTagQueryVariables,
+      options?: C
+    ): Promise<FindCollectionLocationsByTagQuery> {
+      return requester<
+        FindCollectionLocationsByTagQuery,
+        FindCollectionLocationsByTagQueryVariables
+      >(
+        FindCollectionLocationsByTagDocument,
+        variables,
+        options
+      ) as Promise<FindCollectionLocationsByTagQuery>;
     },
-    getCollectionLocation(variables: GetCollectionLocationQueryVariables, options?: C): Promise<GetCollectionLocationQuery> {
-      return requester<GetCollectionLocationQuery, GetCollectionLocationQueryVariables>(GetCollectionLocationDocument, variables, options) as Promise<GetCollectionLocationQuery>;
+    getCollectionLocation(
+      variables: GetCollectionLocationQueryVariables,
+      options?: C
+    ): Promise<GetCollectionLocationQuery> {
+      return requester<
+        GetCollectionLocationQuery,
+        GetCollectionLocationQueryVariables
+      >(
+        GetCollectionLocationDocument,
+        variables,
+        options
+      ) as Promise<GetCollectionLocationQuery>;
     },
-    getCollection(variables: GetCollectionQueryVariables, options?: C): Promise<GetCollectionQuery> {
-      return requester<GetCollectionQuery, GetCollectionQueryVariables>(GetCollectionDocument, variables, options) as Promise<GetCollectionQuery>;
+    getCollection(
+      variables: GetCollectionQueryVariables,
+      options?: C
+    ): Promise<GetCollectionQuery> {
+      return requester<GetCollectionQuery, GetCollectionQueryVariables>(
+        GetCollectionDocument,
+        variables,
+        options
+      ) as Promise<GetCollectionQuery>;
     },
-    listCollections(variables: ListCollectionsQueryVariables, options?: C): Promise<ListCollectionsQuery> {
-      return requester<ListCollectionsQuery, ListCollectionsQueryVariables>(ListCollectionsDocument, variables, options) as Promise<ListCollectionsQuery>;
+    listCollections(
+      variables: ListCollectionsQueryVariables,
+      options?: C
+    ): Promise<ListCollectionsQuery> {
+      return requester<ListCollectionsQuery, ListCollectionsQueryVariables>(
+        ListCollectionsDocument,
+        variables,
+        options
+      ) as Promise<ListCollectionsQuery>;
     },
-    updateCollectionLocation(variables: UpdateCollectionLocationMutationVariables, options?: C): Promise<UpdateCollectionLocationMutation> {
-      return requester<UpdateCollectionLocationMutation, UpdateCollectionLocationMutationVariables>(UpdateCollectionLocationDocument, variables, options) as Promise<UpdateCollectionLocationMutation>;
+    updateCollectionLocation(
+      variables: UpdateCollectionLocationMutationVariables,
+      options?: C
+    ): Promise<UpdateCollectionLocationMutation> {
+      return requester<
+        UpdateCollectionLocationMutation,
+        UpdateCollectionLocationMutationVariables
+      >(
+        UpdateCollectionLocationDocument,
+        variables,
+        options
+      ) as Promise<UpdateCollectionLocationMutation>;
     },
-    createItineraryDirections(variables: CreateItineraryDirectionsMutationVariables, options?: C): Promise<CreateItineraryDirectionsMutation> {
-      return requester<CreateItineraryDirectionsMutation, CreateItineraryDirectionsMutationVariables>(CreateItineraryDirectionsDocument, variables, options) as Promise<CreateItineraryDirectionsMutation>;
+    createItineraryDirections(
+      variables: CreateItineraryDirectionsMutationVariables,
+      options?: C
+    ): Promise<CreateItineraryDirectionsMutation> {
+      return requester<
+        CreateItineraryDirectionsMutation,
+        CreateItineraryDirectionsMutationVariables
+      >(
+        CreateItineraryDirectionsDocument,
+        variables,
+        options
+      ) as Promise<CreateItineraryDirectionsMutation>;
     },
-    createItineraryLocation(variables: CreateItineraryLocationMutationVariables, options?: C): Promise<CreateItineraryLocationMutation> {
-      return requester<CreateItineraryLocationMutation, CreateItineraryLocationMutationVariables>(CreateItineraryLocationDocument, variables, options) as Promise<CreateItineraryLocationMutation>;
+    createItineraryLocation(
+      variables: CreateItineraryLocationMutationVariables,
+      options?: C
+    ): Promise<CreateItineraryLocationMutation> {
+      return requester<
+        CreateItineraryLocationMutation,
+        CreateItineraryLocationMutationVariables
+      >(
+        CreateItineraryLocationDocument,
+        variables,
+        options
+      ) as Promise<CreateItineraryLocationMutation>;
     },
-    createItinerary(variables: CreateItineraryMutationVariables, options?: C): Promise<CreateItineraryMutation> {
-      return requester<CreateItineraryMutation, CreateItineraryMutationVariables>(CreateItineraryDocument, variables, options) as Promise<CreateItineraryMutation>;
+    createItinerary(
+      variables: CreateItineraryMutationVariables,
+      options?: C
+    ): Promise<CreateItineraryMutation> {
+      return requester<
+        CreateItineraryMutation,
+        CreateItineraryMutationVariables
+      >(
+        CreateItineraryDocument,
+        variables,
+        options
+      ) as Promise<CreateItineraryMutation>;
     },
-    deleteItineraryLocation(variables: DeleteItineraryLocationMutationVariables, options?: C): Promise<DeleteItineraryLocationMutation> {
-      return requester<DeleteItineraryLocationMutation, DeleteItineraryLocationMutationVariables>(DeleteItineraryLocationDocument, variables, options) as Promise<DeleteItineraryLocationMutation>;
+    deleteItineraryLocation(
+      variables: DeleteItineraryLocationMutationVariables,
+      options?: C
+    ): Promise<DeleteItineraryLocationMutation> {
+      return requester<
+        DeleteItineraryLocationMutation,
+        DeleteItineraryLocationMutationVariables
+      >(
+        DeleteItineraryLocationDocument,
+        variables,
+        options
+      ) as Promise<DeleteItineraryLocationMutation>;
     },
-    deleteItinerary(variables: DeleteItineraryMutationVariables, options?: C): Promise<DeleteItineraryMutation> {
-      return requester<DeleteItineraryMutation, DeleteItineraryMutationVariables>(DeleteItineraryDocument, variables, options) as Promise<DeleteItineraryMutation>;
+    deleteItinerary(
+      variables: DeleteItineraryMutationVariables,
+      options?: C
+    ): Promise<DeleteItineraryMutation> {
+      return requester<
+        DeleteItineraryMutation,
+        DeleteItineraryMutationVariables
+      >(
+        DeleteItineraryDocument,
+        variables,
+        options
+      ) as Promise<DeleteItineraryMutation>;
     },
-    disableItineraryAutoRoute(variables: DisableItineraryAutoRouteMutationVariables, options?: C): Promise<DisableItineraryAutoRouteMutation> {
-      return requester<DisableItineraryAutoRouteMutation, DisableItineraryAutoRouteMutationVariables>(DisableItineraryAutoRouteDocument, variables, options) as Promise<DisableItineraryAutoRouteMutation>;
+    disableItineraryAutoRoute(
+      variables: DisableItineraryAutoRouteMutationVariables,
+      options?: C
+    ): Promise<DisableItineraryAutoRouteMutation> {
+      return requester<
+        DisableItineraryAutoRouteMutation,
+        DisableItineraryAutoRouteMutationVariables
+      >(
+        DisableItineraryAutoRouteDocument,
+        variables,
+        options
+      ) as Promise<DisableItineraryAutoRouteMutation>;
     },
-    enableItineraryAutoRoute(variables: EnableItineraryAutoRouteMutationVariables, options?: C): Promise<EnableItineraryAutoRouteMutation> {
-      return requester<EnableItineraryAutoRouteMutation, EnableItineraryAutoRouteMutationVariables>(EnableItineraryAutoRouteDocument, variables, options) as Promise<EnableItineraryAutoRouteMutation>;
+    enableItineraryAutoRoute(
+      variables: EnableItineraryAutoRouteMutationVariables,
+      options?: C
+    ): Promise<EnableItineraryAutoRouteMutation> {
+      return requester<
+        EnableItineraryAutoRouteMutation,
+        EnableItineraryAutoRouteMutationVariables
+      >(
+        EnableItineraryAutoRouteDocument,
+        variables,
+        options
+      ) as Promise<EnableItineraryAutoRouteMutation>;
     },
-    findItineraryLocationIdsByPlaceId(variables: FindItineraryLocationIdsByPlaceIdQueryVariables, options?: C): Promise<FindItineraryLocationIdsByPlaceIdQuery> {
-      return requester<FindItineraryLocationIdsByPlaceIdQuery, FindItineraryLocationIdsByPlaceIdQueryVariables>(FindItineraryLocationIdsByPlaceIdDocument, variables, options) as Promise<FindItineraryLocationIdsByPlaceIdQuery>;
+    findItineraryLocationIdsByPlaceId(
+      variables: FindItineraryLocationIdsByPlaceIdQueryVariables,
+      options?: C
+    ): Promise<FindItineraryLocationIdsByPlaceIdQuery> {
+      return requester<
+        FindItineraryLocationIdsByPlaceIdQuery,
+        FindItineraryLocationIdsByPlaceIdQueryVariables
+      >(
+        FindItineraryLocationIdsByPlaceIdDocument,
+        variables,
+        options
+      ) as Promise<FindItineraryLocationIdsByPlaceIdQuery>;
     },
-    findItineraryLocationsByPlaceId(variables: FindItineraryLocationsByPlaceIdQueryVariables, options?: C): Promise<FindItineraryLocationsByPlaceIdQuery> {
-      return requester<FindItineraryLocationsByPlaceIdQuery, FindItineraryLocationsByPlaceIdQueryVariables>(FindItineraryLocationsByPlaceIdDocument, variables, options) as Promise<FindItineraryLocationsByPlaceIdQuery>;
+    findItineraryLocationsByPlaceId(
+      variables: FindItineraryLocationsByPlaceIdQueryVariables,
+      options?: C
+    ): Promise<FindItineraryLocationsByPlaceIdQuery> {
+      return requester<
+        FindItineraryLocationsByPlaceIdQuery,
+        FindItineraryLocationsByPlaceIdQueryVariables
+      >(
+        FindItineraryLocationsByPlaceIdDocument,
+        variables,
+        options
+      ) as Promise<FindItineraryLocationsByPlaceIdQuery>;
     },
-    getItineraryDirections(variables: GetItineraryDirectionsQueryVariables, options?: C): Promise<GetItineraryDirectionsQuery> {
-      return requester<GetItineraryDirectionsQuery, GetItineraryDirectionsQueryVariables>(GetItineraryDirectionsDocument, variables, options) as Promise<GetItineraryDirectionsQuery>;
+    getItineraryDirections(
+      variables: GetItineraryDirectionsQueryVariables,
+      options?: C
+    ): Promise<GetItineraryDirectionsQuery> {
+      return requester<
+        GetItineraryDirectionsQuery,
+        GetItineraryDirectionsQueryVariables
+      >(
+        GetItineraryDirectionsDocument,
+        variables,
+        options
+      ) as Promise<GetItineraryDirectionsQuery>;
     },
-    getItineraryLocation(variables: GetItineraryLocationQueryVariables, options?: C): Promise<GetItineraryLocationQuery> {
-      return requester<GetItineraryLocationQuery, GetItineraryLocationQueryVariables>(GetItineraryLocationDocument, variables, options) as Promise<GetItineraryLocationQuery>;
+    getItineraryLocation(
+      variables: GetItineraryLocationQueryVariables,
+      options?: C
+    ): Promise<GetItineraryLocationQuery> {
+      return requester<
+        GetItineraryLocationQuery,
+        GetItineraryLocationQueryVariables
+      >(
+        GetItineraryLocationDocument,
+        variables,
+        options
+      ) as Promise<GetItineraryLocationQuery>;
     },
-    getItinerary(variables: GetItineraryQueryVariables, options?: C): Promise<GetItineraryQuery> {
-      return requester<GetItineraryQuery, GetItineraryQueryVariables>(GetItineraryDocument, variables, options) as Promise<GetItineraryQuery>;
+    getItinerary(
+      variables: GetItineraryQueryVariables,
+      options?: C
+    ): Promise<GetItineraryQuery> {
+      return requester<GetItineraryQuery, GetItineraryQueryVariables>(
+        GetItineraryDocument,
+        variables,
+        options
+      ) as Promise<GetItineraryQuery>;
     },
-    listItineraries(variables: ListItinerariesQueryVariables, options?: C): Promise<ListItinerariesQuery> {
-      return requester<ListItinerariesQuery, ListItinerariesQueryVariables>(ListItinerariesDocument, variables, options) as Promise<ListItinerariesQuery>;
+    listItineraries(
+      variables: ListItinerariesQueryVariables,
+      options?: C
+    ): Promise<ListItinerariesQuery> {
+      return requester<ListItinerariesQuery, ListItinerariesQueryVariables>(
+        ListItinerariesDocument,
+        variables,
+        options
+      ) as Promise<ListItinerariesQuery>;
     },
-    listItineraryLocations(variables: ListItineraryLocationsQueryVariables, options?: C): Promise<ListItineraryLocationsQuery> {
-      return requester<ListItineraryLocationsQuery, ListItineraryLocationsQueryVariables>(ListItineraryLocationsDocument, variables, options) as Promise<ListItineraryLocationsQuery>;
+    listItineraryLocations(
+      variables: ListItineraryLocationsQueryVariables,
+      options?: C
+    ): Promise<ListItineraryLocationsQuery> {
+      return requester<
+        ListItineraryLocationsQuery,
+        ListItineraryLocationsQueryVariables
+      >(
+        ListItineraryLocationsDocument,
+        variables,
+        options
+      ) as Promise<ListItineraryLocationsQuery>;
     },
-    moveItineraryLocationAfter(variables: MoveItineraryLocationAfterMutationVariables, options?: C): Promise<MoveItineraryLocationAfterMutation> {
-      return requester<MoveItineraryLocationAfterMutation, MoveItineraryLocationAfterMutationVariables>(MoveItineraryLocationAfterDocument, variables, options) as Promise<MoveItineraryLocationAfterMutation>;
+    moveItineraryLocationAfter(
+      variables: MoveItineraryLocationAfterMutationVariables,
+      options?: C
+    ): Promise<MoveItineraryLocationAfterMutation> {
+      return requester<
+        MoveItineraryLocationAfterMutation,
+        MoveItineraryLocationAfterMutationVariables
+      >(
+        MoveItineraryLocationAfterDocument,
+        variables,
+        options
+      ) as Promise<MoveItineraryLocationAfterMutation>;
     },
-    moveItineraryLocationToStart(variables: MoveItineraryLocationToStartMutationVariables, options?: C): Promise<MoveItineraryLocationToStartMutation> {
-      return requester<MoveItineraryLocationToStartMutation, MoveItineraryLocationToStartMutationVariables>(MoveItineraryLocationToStartDocument, variables, options) as Promise<MoveItineraryLocationToStartMutation>;
+    moveItineraryLocationToStart(
+      variables: MoveItineraryLocationToStartMutationVariables,
+      options?: C
+    ): Promise<MoveItineraryLocationToStartMutation> {
+      return requester<
+        MoveItineraryLocationToStartMutation,
+        MoveItineraryLocationToStartMutationVariables
+      >(
+        MoveItineraryLocationToStartDocument,
+        variables,
+        options
+      ) as Promise<MoveItineraryLocationToStartMutation>;
     },
-    updateItineraryLocationIsOptional(variables: UpdateItineraryLocationIsOptionalMutationVariables, options?: C): Promise<UpdateItineraryLocationIsOptionalMutation> {
-      return requester<UpdateItineraryLocationIsOptionalMutation, UpdateItineraryLocationIsOptionalMutationVariables>(UpdateItineraryLocationIsOptionalDocument, variables, options) as Promise<UpdateItineraryLocationIsOptionalMutation>;
+    updateItineraryLocationIsOptional(
+      variables: UpdateItineraryLocationIsOptionalMutationVariables,
+      options?: C
+    ): Promise<UpdateItineraryLocationIsOptionalMutation> {
+      return requester<
+        UpdateItineraryLocationIsOptionalMutation,
+        UpdateItineraryLocationIsOptionalMutationVariables
+      >(
+        UpdateItineraryLocationIsOptionalDocument,
+        variables,
+        options
+      ) as Promise<UpdateItineraryLocationIsOptionalMutation>;
     },
-    updateItineraryLocation(variables: UpdateItineraryLocationMutationVariables, options?: C): Promise<UpdateItineraryLocationMutation> {
-      return requester<UpdateItineraryLocationMutation, UpdateItineraryLocationMutationVariables>(UpdateItineraryLocationDocument, variables, options) as Promise<UpdateItineraryLocationMutation>;
+    updateItineraryLocation(
+      variables: UpdateItineraryLocationMutationVariables,
+      options?: C
+    ): Promise<UpdateItineraryLocationMutation> {
+      return requester<
+        UpdateItineraryLocationMutation,
+        UpdateItineraryLocationMutationVariables
+      >(
+        UpdateItineraryLocationDocument,
+        variables,
+        options
+      ) as Promise<UpdateItineraryLocationMutation>;
     },
-    updateItinerary(variables: UpdateItineraryMutationVariables, options?: C): Promise<UpdateItineraryMutation> {
-      return requester<UpdateItineraryMutation, UpdateItineraryMutationVariables>(UpdateItineraryDocument, variables, options) as Promise<UpdateItineraryMutation>;
+    updateItinerary(
+      variables: UpdateItineraryMutationVariables,
+      options?: C
+    ): Promise<UpdateItineraryMutation> {
+      return requester<
+        UpdateItineraryMutation,
+        UpdateItineraryMutationVariables
+      >(
+        UpdateItineraryDocument,
+        variables,
+        options
+      ) as Promise<UpdateItineraryMutation>;
     },
-    getMediaImage(variables: GetMediaImageQueryVariables, options?: C): Promise<GetMediaImageQuery> {
-      return requester<GetMediaImageQuery, GetMediaImageQueryVariables>(GetMediaImageDocument, variables, options) as Promise<GetMediaImageQuery>;
+    getMediaImage(
+      variables: GetMediaImageQueryVariables,
+      options?: C
+    ): Promise<GetMediaImageQuery> {
+      return requester<GetMediaImageQuery, GetMediaImageQueryVariables>(
+        GetMediaImageDocument,
+        variables,
+        options
+      ) as Promise<GetMediaImageQuery>;
     },
-    autocompleteSearchPlace(variables: AutocompleteSearchPlaceQueryVariables, options?: C): Promise<AutocompleteSearchPlaceQuery> {
-      return requester<AutocompleteSearchPlaceQuery, AutocompleteSearchPlaceQueryVariables>(AutocompleteSearchPlaceDocument, variables, options) as Promise<AutocompleteSearchPlaceQuery>;
+    autocompleteSearchPlace(
+      variables: AutocompleteSearchPlaceQueryVariables,
+      options?: C
+    ): Promise<AutocompleteSearchPlaceQuery> {
+      return requester<
+        AutocompleteSearchPlaceQuery,
+        AutocompleteSearchPlaceQueryVariables
+      >(
+        AutocompleteSearchPlaceDocument,
+        variables,
+        options
+      ) as Promise<AutocompleteSearchPlaceQuery>;
     },
-    getPlace(variables: GetPlaceQueryVariables, options?: C): Promise<GetPlaceQuery> {
-      return requester<GetPlaceQuery, GetPlaceQueryVariables>(GetPlaceDocument, variables, options) as Promise<GetPlaceQuery>;
+    getPlace(
+      variables: GetPlaceQueryVariables,
+      options?: C
+    ): Promise<GetPlaceQuery> {
+      return requester<GetPlaceQuery, GetPlaceQueryVariables>(
+        GetPlaceDocument,
+        variables,
+        options
+      ) as Promise<GetPlaceQuery>;
     },
-    reverseSearchPlaceByPosition(variables: ReverseSearchPlaceByPositionQueryVariables, options?: C): Promise<ReverseSearchPlaceByPositionQuery> {
-      return requester<ReverseSearchPlaceByPositionQuery, ReverseSearchPlaceByPositionQueryVariables>(ReverseSearchPlaceByPositionDocument, variables, options) as Promise<ReverseSearchPlaceByPositionQuery>;
+    reverseSearchPlaceByPosition(
+      variables: ReverseSearchPlaceByPositionQueryVariables,
+      options?: C
+    ): Promise<ReverseSearchPlaceByPositionQuery> {
+      return requester<
+        ReverseSearchPlaceByPositionQuery,
+        ReverseSearchPlaceByPositionQueryVariables
+      >(
+        ReverseSearchPlaceByPositionDocument,
+        variables,
+        options
+      ) as Promise<ReverseSearchPlaceByPositionQuery>;
     },
-    getProfile(variables: GetProfileQueryVariables, options?: C): Promise<GetProfileQuery> {
-      return requester<GetProfileQuery, GetProfileQueryVariables>(GetProfileDocument, variables, options) as Promise<GetProfileQuery>;
+    getProfile(
+      variables: GetProfileQueryVariables,
+      options?: C
+    ): Promise<GetProfileQuery> {
+      return requester<GetProfileQuery, GetProfileQueryVariables>(
+        GetProfileDocument,
+        variables,
+        options
+      ) as Promise<GetProfileQuery>;
     },
-    listAuthorizedProfiles(variables: ListAuthorizedProfilesQueryVariables, options?: C): Promise<ListAuthorizedProfilesQuery> {
-      return requester<ListAuthorizedProfilesQuery, ListAuthorizedProfilesQueryVariables>(ListAuthorizedProfilesDocument, variables, options) as Promise<ListAuthorizedProfilesQuery>;
+    listAuthorizedProfiles(
+      variables: ListAuthorizedProfilesQueryVariables,
+      options?: C
+    ): Promise<ListAuthorizedProfilesQuery> {
+      return requester<
+        ListAuthorizedProfilesQuery,
+        ListAuthorizedProfilesQueryVariables
+      >(
+        ListAuthorizedProfilesDocument,
+        variables,
+        options
+      ) as Promise<ListAuthorizedProfilesQuery>;
     },
-    searchRoutesBetweenPositions(variables: SearchRoutesBetweenPositionsQueryVariables, options?: C): Promise<SearchRoutesBetweenPositionsQuery> {
-      return requester<SearchRoutesBetweenPositionsQuery, SearchRoutesBetweenPositionsQueryVariables>(SearchRoutesBetweenPositionsDocument, variables, options) as Promise<SearchRoutesBetweenPositionsQuery>;
-    }
+    searchRoutesBetweenPositions(
+      variables: SearchRoutesBetweenPositionsQueryVariables,
+      options?: C
+    ): Promise<SearchRoutesBetweenPositionsQuery> {
+      return requester<
+        SearchRoutesBetweenPositionsQuery,
+        SearchRoutesBetweenPositionsQueryVariables
+      >(
+        SearchRoutesBetweenPositionsDocument,
+        variables,
+        options
+      ) as Promise<SearchRoutesBetweenPositionsQuery>;
+    },
   };
 }
 export type Sdk = ReturnType<typeof getSdk>;
@@ -8890,8 +10342,7 @@ type Client<C = {}, E = unknown> = <R, V>(
   options?: C
 ) => Promise<R> | AsyncIterable<R>;
 
-
 export function getClientSdk(options: ClientOptions) {
   const client = createClient(options);
   return getSdk(client);
-}   
+}

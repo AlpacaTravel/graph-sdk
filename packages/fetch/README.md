@@ -6,7 +6,7 @@ A basic fetch based SDK for use in the browser.
 
 See More:
 
-- [API Documentation](https://alpacatravel.github.io/graph-sdk/packages/fetch/docs/)
+- [SDK Documentation](https://alpacatravel.github.io/graph-sdk/packages/fetch/docs/)
 
 ## UNPKG CDN
 
