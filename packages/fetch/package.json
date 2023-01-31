@@ -1,6 +1,6 @@
 {
   "name": "@alpaca-travel/graph-sdk-fetch",
-  "version": "2.1.4",
+  "version": "2.1.5",
   "author": "Tom Manderson <tom@alpaca.travel>",
   "homepage": "https://alpacatravel.github.io/graph-sdk/packages/fetch/",
   "main": "dist/cjs/index.js",

@@ -1,6 +1,6 @@
 {
   "name": "@alpaca-travel/graph-sdk-stencil-apollo",
-  "version": "2.0.3",
+  "version": "2.1.5",
   "author": "Tom Manderson <tom@alpaca.travel>",
   "homepage": "https://alpacatravel.github.io/graph-sdk/packages/stencil-apollo/",
   "main": "dist/cjs/index.js",
